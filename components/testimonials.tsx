@@ -23,14 +23,14 @@ import ClientImg08 from "@/public/images/client-logo-08.svg";
 import ClientImg09 from "@/public/images/client-logo-09.svg";
 
 const testimonials = [
-  {
-  img: TestimonialImg01,
-  clientImg: ClientImg01,
-  name: "Alex T.",
-  company: "Engineering Pro",  // ← Fixed: moved "Prompt Engineering Pro" here
-  content: "As a prompt-wizard, Yskaipe's AI-O matched me into pods that supercharged my sessions. From seed input to refined outputs, it's a game-changer for vibe-aligned engineering—faster, smarter, and zero feeds!",
-  categories: [1, 3, 5],
-},
+   {
+    img: TestimonialImg02,
+    clientImg: ClientImg02,
+    name: "5",
+    company: "4",
+    content: "I've tried several content generation tools, but this AI-driven tool is by far the best. It understands my brand's voice and consistently produces content that resonates with my audience!",
+    categories: [1, 2, 4],
+  },
   {
     img: TestimonialImg02,
     clientImg: ClientImg02,
