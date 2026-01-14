@@ -27,7 +27,7 @@ const testimonials = [
     img: TestimonialImg01,
     clientImg: ClientImg01,
     name: "Alex T., AI Innovator",
-    company: " Prompt Engineering Pro",
+    company: "Prompt Engineering Pro",
     content: "As a prompt wizard, Yskaipe's AI-O matched me into pods that supercharged my sessions. From seed input to refined outputs, it's a game-changer for vibe-aligned engineering—faster, smarter, and zero feeds!",
     categories: [1, 3, 5],   // ← this comma is fine!
   },                         // ← and this one too (array trailing comma)
