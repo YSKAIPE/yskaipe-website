@@ -36,8 +36,7 @@ const testimonials = [
     clientImg: ClientImg02,
     name: "Jordan R., Tech Collective Lead",
     company: "Vibe Coding Collective",
-    content:
-      "I've tried several content generation tools, but this AI-driven tool is by far the best. It understands my brand's voice and consistently produces content that resonates with my audience!",
+    content: "I've tried several content generation tools, but this AI-driven tool is by far the best. It understands my brand's voice and consistently produces content that resonates with my audience!",
     categories: [1, 2, 4],
   },
   {
