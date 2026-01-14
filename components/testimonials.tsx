@@ -27,9 +27,9 @@ const testimonials = [
     img: TestimonialImg01,
     clientImg: ClientImg01,
     name: "MaKayla P.",
-    company: "Disney",
+    company: "Prompt Engineering Pro",
     content:
-      "As a content creator, I was always on the lookout for a tool that could help me keep up with the demand. The AI-driven content tool has been a game-changer. It generates high-quality content in a fraction of the time it used to take me.",
+      "As a prompt wizard, Yskaipe's AI-O matched me into pods that supercharged my sessions. From seed input to refined outputs, it's a game-changer for vibe-aligned engineering—faster, smarter, and zero feeds!",
     categories: [1, 3, 5],
   },
   {
