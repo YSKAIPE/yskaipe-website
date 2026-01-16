@@ -26,8 +26,8 @@ export default function ModalVideo({
 }: ModalVideoProps) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  // Optional: add ?autoplay=1 if you want video to start automatically
-  const embedUrl = `https://www.youtube.com/embed/${video}?rel=0`;
+  // Autoplay enabled: video will start automatically when the modal opens
+  const embedUrl = `https://www.youtube.com/embed/${video}?autoplay=1&rel=0`;
 
   return (
     <div className="relative">
