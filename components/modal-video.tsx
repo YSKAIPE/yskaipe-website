@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import type { StaticImageData } from "next/image";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
@@ -10,9 +10,7 @@ interface ModalVideoProps {
   thumbWidth: number;
   thumbHeight: number;
   thumbAlt: string;
-  video: string;           // ← YouTube video ID (e.g. "bImNbW_CYsi")
-  videoWidth?: number;     // optional – not really needed for iframe
-  videoHeight?: number;    // optional – not really needed for iframe
+  video: string;           // ← Just the YouTube VIDEO ID (e.g. "bImNbW_CYsi")
 }
 
 export default function ModalVideo({
@@ -20,18 +18,18 @@ export default function ModalVideo({
   thumbWidth,
   thumbHeight,
   thumbAlt,
-  video,                   // ← this should be just the video ID
-  videoWidth,
-  videoHeight,
+  video,
 }: ModalVideoProps) {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  // Optional: if you want autoplay when modal opens
-  const embedUrl = `https://www.youtube.com/embed/${video}?autoplay=1&rel=0&modestbranding=1`;
+  // Clean, reliable embed URL – add params you want
+  // autoplay=1 → auto starts (remove if you prefer manual play)
+  // rel=0 → fewer unrelated suggestions
+  const embedUrl = `https://www.youtube.com/embed/${video}?autoplay=1&rel=0&iv_load_policy=3`;
 
   return (
     <div className="relative">
-      {/* Secondary illustration - decorative background */}
+      {/* Secondary decorative illustration */}
       <div
         className="pointer-events-none absolute bottom-8 left-1/2 -z-10 -ml-28 -translate-x-1/2 translate-y-1/2"
         aria-hidden="true"
@@ -45,7 +43,7 @@ export default function ModalVideo({
         />
       </div>
 
-      {/* Video thumbnail + play button */}
+      {/* Thumbnail button with overlay */}
       <button
         className="group relative flex items-center justify-center rounded-2xl focus:outline-none focus-visible:ring-3 focus-visible:ring-indigo-200"
         onClick={() => setModalOpen(true)}
@@ -64,7 +62,7 @@ export default function ModalVideo({
           />
         </figure>
 
-        {/* Play icon + text */}
+        {/* Play icon + "Watch Demo" text */}
         <span className="pointer-events-none absolute p-2.5 before:absolute before:inset-0 before:rounded-full before:bg-gray-950/60 before:transition before:duration-300 group-hover:before:scale-110">
           <span className="relative flex items-center gap-3">
             <svg
@@ -103,7 +101,7 @@ export default function ModalVideo({
         </span>
       </button>
 
-      {/* Modal with YouTube embed */}
+      {/* Modal dialog with responsive YouTube iframe */}
       <Dialog
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -119,8 +117,14 @@ export default function ModalVideo({
             transition
             className="aspect-video w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-black shadow-2xl transition-all duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
           >
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/b1mNbQ3W_CY?si=FQV62EAy5DtLDrN1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+            <iframe
+              src={embedUrl}
+              title="YSKAIPE Demo Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="h-full w-full border-0"
+            />
           </DialogPanel>
         </div>
       </Dialog>
