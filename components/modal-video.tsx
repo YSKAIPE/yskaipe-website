@@ -119,16 +119,8 @@ export default function ModalVideo({
             transition
             className="aspect-video w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-black shadow-2xl transition-all duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
           >
-            <iframe
-              width="100%"
-              height="100%"
-              src={embedUrl}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-              className="h-full w-full border-0"
-            />
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/b1mNbQ3W_CY?si=FQV62EAy5DtLDrN1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
           </DialogPanel>
         </div>
       </Dialog>
