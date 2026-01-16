@@ -125,7 +125,7 @@ export default function ModalVideo({
                 loop
                 controls
               >
-                <source src={video} type="video/mp4" />
+                <source src={video} type="https://youtu.be/b1mNbQ3W_CY" />
                 Your browser does not support the video tag.
               </video>
             </DialogPanel>
