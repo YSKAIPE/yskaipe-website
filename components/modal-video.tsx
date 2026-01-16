@@ -120,7 +120,7 @@ export default function ModalVideo({
             className="aspect-video w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-black shadow-2xl transition-all duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
           >
             <iframe
-              src={embedUrl}
+              src="https://www.youtube.com/embed/b1mNbQ3W_CY?si=lkUJXBqQiqcJrT0O"
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
