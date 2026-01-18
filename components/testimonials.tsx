@@ -12,7 +12,7 @@ import TestimonialImg06 from "@/public/images/testimonial-06.jpg";
 import TestimonialImg07 from "@/public/images/testimonial-07.jpg";
 import TestimonialImg08 from "@/public/images/testimonial-08.jpg";
 import TestimonialImg09 from "@/public/images/testimonial-09.jpg";
-import ClientImg01 from "@/public/images/client-logo-01.svg";
+import ClientImg01 from "@/public/images/aftership.svg";
 import ClientImg02 from "@/public/images/client-logo-02.svg";
 import ClientImg03 from "@/public/images/client-logo-03.svg";
 import ClientImg04 from "@/public/images/client-logo-04.svg";
