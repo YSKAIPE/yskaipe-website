@@ -5,7 +5,7 @@ import logo from "@/public/images/yskaipe-logo-a1.jpg";
 export default function Logo() {
   return (
     <Link href="/" className="inline-flex shrink-0" aria-label="Cruip">
-      <Image src={logo} alt="YSKAIPE-LOGO" width={280} height={103} />
+      <Image src={logo} alt="YSKAIPE-LOGO" width={140} height={52} />
     </Link>
   );
 }
