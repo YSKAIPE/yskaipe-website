@@ -13,14 +13,14 @@ import TestimonialImg07 from "@/public/images/testimonial-07.jpg";
 import TestimonialImg08 from "@/public/images/testimonial-08.jpg";
 import TestimonialImg09 from "@/public/images/testimonial-09.jpg";
 import ClientImg01 from "@/public/images/aftership.svg";
-import ClientImg02 from "@/public/images/client-logo-02.svg";
-import ClientImg03 from "@/public/images/client-logo-03.svg";
-import ClientImg04 from "@/public/images/client-logo-04.svg";
-import ClientImg05 from "@/public/images/client-logo-05.svg";
-import ClientImg06 from "@/public/images/client-logo-06.svg";
-import ClientImg07 from "@/public/images/client-logo-07.svg";
-import ClientImg08 from "@/public/images/client-logo-08.svg";
-import ClientImg09 from "@/public/images/client-logo-09.svg";
+import ClientImg02 from "@/public/images/checkmk.svg";
+import ClientImg03 from "@/public/images/cheerio.svg";
+import ClientImg04 from "@/public/images/chef.svg";
+import ClientImg05 from "@/public/images/clubforce.svg";
+import ClientImg06 from "@/public/images/coderabbit.svg";
+import ClientImg07 from "@/public/images/codingninjas.svg";
+import ClientImg08 from "@/public/images/contao.svg";
+import ClientImg09 from "@/public/images/cookiecutter.svg";
 
 const testimonials = [
     {
