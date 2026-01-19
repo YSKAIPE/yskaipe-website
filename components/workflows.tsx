@@ -1,7 +1,7 @@
 import Image from "next/image";
-import WorflowImg01 from "@/public/images/workflow-01.png";
-import WorflowImg02 from "@/public/images/workflow-02.png";
-import WorflowImg03 from "@/public/images/workflow-03.png";
+import WorflowImg01 from "@/public/images/yskaipe-pe1.jpg";
+import WorflowImg02 from "@/public/images/yskaipe-pe2.jpg";
+import WorflowImg03 from "@/public/images/yskaipe-pe4.jpg.png";
 import Spotlight from "@/components/spotlight";
 
 export default function Workflows() {
