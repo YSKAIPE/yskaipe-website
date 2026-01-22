@@ -72,6 +72,14 @@ export default function Footer() {
                   User policy
                 </a>
               </li>
+              <li>
+                <a
+                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  href="/prototype.html"
+                >
+                  Prototype
+                </a>
+              </li>
             </ul>
           </div>
           {/* 2nd block */}
@@ -81,7 +89,7 @@ export default function Footer() {
               <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
-                  href="#0"
+                  href="/about.html"
                 >
                   About us
                 </a>
