@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YSKAIPE Prototype – Human Cohesive AI</title>
+  <meta name="description" content="Interactive prototype for YSKAIPE – AI-orchestrated pods for real collaboration." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            primary: '#6366f1',     // indigo-500 vibe
+            primaryDark: '#4f46e5',
+            bgLight: '#f8fafc',
+            bgDark: '#0f172a',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 text-slate-900 dark:text-slate-100 min-h-screen font-sans antialiased">
+
+  <!-- Header -->
+  <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">Y</div>
+        <h1 class="text-2xl font-semibold tracking-tight">YSKAIPE Prototype</h1>
+      </div>
+      <button id="theme-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+        <span class="sr-only">Toggle dark mode</span>
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path id="sun" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          <path id="moon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Human Cohesive AI Prototype</h2>
+      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+        Explore the interactive design for YSKAIPE – where AI orchestrates small, vibe-aligned pods to turn seed ideas into real outcomes.
+      </p>
+    </div>
+
+    <!-- Prototype Viewer -->
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
+      <div class="aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] relative">
+        <!-- Replace this src with YOUR actual Figma embed URL -->
+        <iframe 
+          id="figma-iframe"
+          src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/YOUR-FILE-KEY/YOUR-PROTO-NAME?page-id=0%3A1&node-id=1-2&viewport=..." 
+          allowfullscreen 
+          loading="lazy"
+          class="absolute inset-0 w-full h-full border-0"
+        ></iframe>
+
+        <!-- Fallback / Placeholder (shown if iframe fails or no src set) -->
+        <div id="placeholder" class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 p-8 text-center hidden">
+          <h3 class="text-2xl font-semibold mb-4 text-indigo-700 dark:text-indigo-300">Prototype Coming Soon</h3>
+          <p class="text-slate-600 dark:text-slate-300 mb-6 max-w-lg">
+            This is where your interactive Figma prototype will live. To embed:
+          </p>
+          <ol class="text-left text-sm space-y-2 max-w-md list-decimal pl-5">
+            <li>Open your Figma file → Share → Get embed code</li>
+            <li>Copy the full <code class="bg-indigo-100 dark:bg-indigo-900/50 px-1.5 py-0.5 rounded">src</code> from the iframe</li>
+            <li>Paste it into the <code>src</code> attribute above</li>
+          </ol>
+          <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
+            Current repo: <a href="https://github.com/YSKAIPE/yskaipe-website" class="text-indigo-600 dark:text-indigo-400 hover:underline" target="_blank">github.com/YSKAIPE/yskaipe-website</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center text-sm text-slate-500 dark:text-slate-400">
+      <p>Pro tip: For best experience, view on desktop. Mobile prototypes work too — just pinch & zoom.</p>
+      <p class="mt-2">Need help integrating this into Next.js? Add it as a page in <code>app/prototype/page.tsx</code> with <code>&lt;iframe /&gt;</code> inside your layout.</p>
+    </div>
+  </main>
+
+  <!-- Simple Dark Mode Toggle -->
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // Check system preference or saved
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+      document.getElementById('moon').classList.remove('hidden');
+      document.getElementById('sun').classList.add('hidden');
+    } else {
+      document.getElementById('sun').classList.remove('hidden');
+      document.getElementById('moon').classList.add('hidden');
+    }
+
+    toggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+      
+      document.getElementById('sun').classList.toggle('hidden');
+      document.getElementById('moon').classList.toggle('hidden');
+    });
+
+    // Optional: hide placeholder if iframe has valid content
+    const iframe = document.getElementById('figma-iframe');
+    if (iframe.src && iframe.src.includes('figma.com')) {
+      document.getElementById('placeholder').classList.add('hidden');
+    }
+  </script>
+
+</body>
+</html>
