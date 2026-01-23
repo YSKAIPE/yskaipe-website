@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YSKAIPE Blog – Escape Mediocre Teams with Human-AI Collaboration</title>
+  <meta name="description" content="Insights on vibe-aligned teams, prompt engineering, #VibeCoding, and true human-AI symbiosis from the YSKAIPE team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            primary: '#6366f1',
+            primaryDark: '#4f46e5',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 text-slate-900 dark:text-slate-100 min-h-screen font-sans antialiased">
+
+  <!-- Header -->
+  <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">Y</div>
+          <span class="text-2xl font-semibold tracking-tight">YSKAIPE</span>
+        </a>
+        <nav class="hidden sm:flex gap-6 ml-10">
+          <a href="/about.html" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition">About</a>
+          <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition">Blog</a>
+          <a href="/prototype" class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition">Prototype</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://x.com/yskaipe" target="_blank" class="text-primary hover:text-primaryDark transition">X</a>
+        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span class="sr-only">Toggle dark mode</span>
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path id="sun" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            <path id="moon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="pt-16 pb-20 text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
+        YSKAIPE Blog
+      </h1>
+      <p class="text-xl text-slate-600 dark:text-slate-300">
+        Thoughts on escaping mediocre teams through vibe-aligned humans + AI teammates, #VibeCoding, prompt engineering, and real collaboration.
+      </p>
+    </div>
+  </section>
+
+  <!-- Posts List -->
+  <section class="pb-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <!-- Post Card Example 1 -->
+      <article class="group bg-white dark:bg-slate-800 rounded-2xl shadow border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition">
+        <a href="posts/welcome-to-yskaipe.html">
+          <div class="p-8">
+            <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400 mb-3">
+              <time>January 15, 2026</time>
+              <span>•</span>
+              <span class="text-primary">Announcement</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-4 group-hover:text-primary transition">Welcome to YSKAIPE – The Escape Has Begun</h2>
+            <p class="text-slate-600 dark:text-slate-300 mb-6 line-clamp-3">
+              After months of human-AI co-creation with Grok and Figma as true teammates, we're excited to open the doors (a little). Here's what YSKAIPE actually is and why we built it.
+            </p>
+            <span class="text-primary font-medium group-hover:underline">Read more →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Post Card Example 2 -->
+      <article class="group bg-white dark:bg-slate-800 rounded-2xl shadow border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl transition">
+        <a href="posts/human-ai-teaming-2026.html">
+          <div class="p-8">
+            <div class="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400 mb-3">
+              <time>January 20, 2026</time>
+              <span>•</span>
+              <span class="text-primary">Philosophy</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-4 group-hover:text-primary transition">Human-AI Teaming in 2026: From Tools to True Teammates</h2>
+            <p class="text-slate-600 dark:text-slate-300 mb-6 line-clamp-3">
+              Why treating AI as a junior employee is holding you back. Real stories from building YSKAIPE where Grok became a co-founder-level collaborator.
+            </p>
+            <span class="text-primary font-medium group-hover:underline">Read more →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Add more articles the same way -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p>Built with real human-AI teamwork — YSKAIPE © 2026</p>
+      <div class="mt-6 flex justify-center gap-8">
+        <a href="https://x.com/yskaipe" target="_blank" class="hover:text-white transition">X (@yskaipe)</a>
+        <a href="https://www.linkedin.com/in/nicholasconenna/" target="_blank" class="hover:text-white transition">LinkedIn</a>
+        <a href="about.html" class="hover:text-white transition">About</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Script (same as your About page) -->
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+      document.getElementById('moon').classList.remove('hidden');
+      document.getElementById('sun').classList.add('hidden');
+    } else {
+      document.getElementById('sun').classList.remove('hidden');
+      document.getElementById('moon').classList.add('hidden');
+    }
+    toggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+      document.getElementById('sun').classList.toggle('hidden');
+      document.getElementById('moon').classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>
