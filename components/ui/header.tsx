@@ -1,44 +1,27 @@
-// components/ui/header.tsx
-
+// components/ui/header.tsx - FULL REPLACEMENT
 import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md">
+    <header className="fixed top-0 left-0 right-0 z-[999] bg-gray-950/90 backdrop-blur-md border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo: text fallback (safe if image missing) */}
-        <Link href="/" className="flex items-center text-2xl font-bold text-blue-600 dark:text-blue-400">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold text-blue-400">
           YSKAIPE
-          {/* Uncomment and adjust if you have a logo image in /public/ */}
-          {/* <img src="/images/logo.svg" alt="YSKAIPE" className="h-10 w-auto ml-2" /> */}
         </Link>
 
-        {/* Navigation + Login/Sign Up buttons – always visible */}
-        <nav className="flex items-center space-x-8">
-          <Link
-            href="/prototype"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-600 font-medium transition"
-          >
+        {/* Nav + Buttons */}
+        <nav className="flex items-center gap-8">
+          <Link href="/prototype" className="text-gray-300 hover:text-white transition">
             Prototype
           </Link>
-          <Link
-            href="/about"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-600 font-medium transition"
-          >
+          <Link href="/about" className="text-gray-300 hover:text-white transition">
             About
           </Link>
-
-          {/* Login & Sign Up – forced visible, no conditionals */}
-          <Link
-            href="/login"
-            className="text-gray-800 dark:text-gray-200 hover:text-blue-600 font-medium transition"
-          >
+          <Link href="/login" className="text-gray-300 hover:text-white transition">
             Login
           </Link>
-          <Link
-            href="/signup"
-            className="bg-blue-600 text-white px-6 py-2.5 rounded-md hover:bg-blue-700 font-medium transition"
-          >
+          <Link href="/signup" className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">
             Sign Up
           </Link>
         </nav>
