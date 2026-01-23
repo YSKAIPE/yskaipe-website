@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "./yskaipe-logo-a1.jpg";
+import Logo from "./logo"; 
 
 export default function Header() {
   return (
