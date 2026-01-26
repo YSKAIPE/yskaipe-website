@@ -240,7 +240,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
        .then(response => response.json())
        .then(data => {
          if (data.result === 'success') {
-           alert('Thanks! You\'re on the waitlist 🚀');
+           alert('Thanks for Contacting Us! 🚀');
            form.reset(); // clear the input
          } else {
            alert('Something went wrong: ' + (data.error || 'Try again'));
