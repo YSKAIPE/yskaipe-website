@@ -224,33 +224,31 @@ document.getElementById('contact-form').addEventListener('submit', async functio
       <a href="/contact" class="hover:text-white">Contact</a>
     </div>
   </footer>
-
-
-     <script>
-     document.querySelector('form').addEventListener('submit', function(e) {
-       e.preventDefault(); // prevent page reload
-
-       const form = this;
-       const formData = new FormData(form);
-
-       fetch(form.action, {
-         method: 'POST',
-         body: formData
-       })
-       .then(response => response.json())
-       .then(data => {
-         if (data.result === 'success') {
-           alert('Thanks for Contacting Us! 🚀');
-           form.reset(); // clear the input
-         } else {
-           alert('Something went wrong: ' + (data.error || 'Try again'));
-         }
-       })
-       .catch(err => {
-         alert('Network error: ' + err);
-       });
-     });
-   </script>
-  
+  <!-- Remove the duplicate script below -->
+  <!-- 
+  <script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault(); // prevent page reload
+      const form = this;
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.result === 'success') {
+          alert('Thanks for Contacting Us! 🚀');
+          form.reset(); // clear the input
+        } else {
+          alert('Something went wrong: ' + (data.error || 'Try again'));
+        }
+      })
+      .catch(err => {
+        alert('Network error: ' + err);
+      });
+    });
+  </script>
+  -->
 </body>
 </html>
