@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing - YSKAIPE | AI-Orchestrated Project Teams</title>
+  <meta name="description" content="Choose the plan that fits your AI-powered project orchestration needs. Start free and scale with premium features and powerful partnerships."/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',     // Indigo-500
+            primaryDark: '#4f46e5', // Indigo-600
+            accent: '#8b5cf6',      // Violet-500
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Optional: Google Fonts for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+  <!-- Header / Hero -->
+  <header class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white py-20 px-6 text-center">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Simple, powerful pricing</h1>
+      <p class="text-xl md:text-2xl opacity-90 mb-8 max-w-3xl mx-auto">
+        Start building AI-orchestrated teams for free. Upgrade for unlimited projects, advanced matching, partner integrations, and enterprise-grade orchestration.
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <button class="bg-white text-indigo-700 font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-gray-100 transition text-lg">
+          Get Started Free
+        </button>
+        <a href="#compare" class="border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition text-lg">
+          Compare Plans
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Billing Toggle -->
+  <section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center bg-gray-100 rounded-full p-1.5 shadow-inner">
+        <button class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 bg-white shadow text-gray-900" id="monthly-btn">
+          Monthly
+        </button>
+        <button class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-gray-600 hover:text-gray-900" id="yearly-btn">
+          Yearly <span class="text-green-600 font-semibold">— Save 20%</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 lg:gap-10">
+      
+      <!-- Free Tier -->
+      <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col h-full">
+        <div class="p-8 pb-6 bg-gradient-to-br from-gray-50 to-white">
+          <h3 class="text-2xl font-bold mb-2">Free</h3>
+          <p class="text-gray-600 mb-6">Perfect for exploring AI team orchestration</p>
+          <div class="text-5xl font-bold mb-1">$0</div>
+          <p class="text-gray-500 text-sm">forever</p>
+        </div>
+        <div class="p-8 flex-grow flex flex-col">
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>1 active project</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Basic team matching (up to 3 members, attitude-based)</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Standard workspace (email/chat)</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Core AI services: prompt workshops, basic prototyping</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Community access & waitlist perks</li>
+          </ul>
+          <a href="/signup" class="mt-auto block bg-indigo-600 text-white font-semibold text-center py-4 rounded-xl hover:bg-indigo-700 transition">
+            Get Started Free
+          </a>
+        </div>
+      </div>
+
+      <!-- Pro Tier (Recommended) -->
+      <div class="bg-gradient-to-br from-indigo-50 to-violet-50 rounded-2xl shadow-2xl border-2 border-indigo-200 overflow-hidden flex flex-col h-full relative scale-105 z-10">
+        <div class="absolute top-0 right-0 bg-indigo-600 text-white text-xs font-bold px-4 py-1 rounded-bl-lg">Recommended</div>
+        <div class="p-8 pb-6 bg-gradient-to-br from-indigo-600 to-violet-700 text-white">
+          <h3 class="text-2xl font-bold mb-2">Pro</h3>
+          <p class="opacity-90 mb-6">For creators & small teams scaling fast</p>
+          <div class="text-5xl font-bold mb-1" id="pro-price">$9.99</div>
+          <p class="opacity-80 text-sm" id="pro-billing">/month</p>
+        </div>
+        <div class="p-8 flex-grow flex flex-col">
+          <p class="text-indigo-700 font-semibold mb-4">Everything in Free, plus:</p>
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Unlimited active projects</li>
+            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Advanced matching (up to 10 members, interest & vibe)</li>
+            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Partner integrations (Slack, Figma, GitHub, OpenAI credits)</li>
+            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>$10/month partner credit bundle</li>
+            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Priority AI + 1 human adjustment per project</li>
+            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Premium services: strategy sprints, vibe coding</li>
+          </ul>
+          <a href="/signup?plan=pro" class="mt-auto block bg-indigo-700 text-white font-semibold text-center py-4 rounded-xl hover:bg-indigo-800 transition shadow-lg">
+            Start Pro Trial
+          </a>
+        </div>
+      </div>
+
+      <!-- Enterprise Tier -->
+      <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col h-full">
+        <div class="p-8 pb-6 bg-gradient-to-br from-gray-800 to-gray-900 text-white">
+          <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+          <p class="opacity-90 mb-6">For organizations & complex initiatives</p>
+          <div class="text-4xl font-bold mb-1">Custom</div>
+          <p class="opacity-80 text-sm">Contact us</p>
+        </div>
+        <div class="p-8 flex-grow flex flex-col">
+          <p class="text-gray-700 font-semibold mb-4">Everything in Pro, plus:</p>
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Unlimited team sizes & multi-pod orchestration</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Unlimited human prompt engineer support</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Advanced analytics & ROI tracking</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Exclusive partner bundles (Eventbrite, custom Slack, OpenAI)</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>API access & custom integrations</li>
+            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Dedicated manager & white-label options</li>
+          </ul>
+          <a href="/contact-sales" class="mt-auto block bg-gray-900 text-white font-semibold text-center py-4 rounded-xl hover:bg-black transition">
+            Contact Sales
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section id="compare" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Compare Plans</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="p-6 font-semibold text-lg">Feature</th>
+              <th class="p-6 text-center font-bold text-indigo-700 text-xl">Free</th>
+              <th class="p-6 text-center font-bold text-indigo-700 text-xl bg-indigo-50">Pro</th>
+              <th class="p-6 text-center font-bold text-indigo-700 text-xl">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y">
+            <tr><td class="p-6 font-medium">Active Projects</td><td class="p-6 text-center">1</td><td class="p-6 text-center bg-indigo-50">Unlimited</td><td class="p-6 text-center">Unlimited</td></tr>
+            <tr><td class="p-6 font-medium">Team Size per Pod</td><td class="p-6 text-center">Up to 3</td><td class="p-6 text-center bg-indigo-50">Up to 10</td><td class="p-6 text-center">Unlimited</td></tr>
+            <tr><td class="p-6 font-medium">Matching Algorithms</td><td class="p-6 text-center">Basic (attitude)</td><td class="p-6 text-center bg-indigo-50">Advanced (interest + vibe)</td><td class="p-6 text-center">Full + custom</td></tr>
+            <tr><td class="p-6 font-medium">Partner Integrations & Credits</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">$10/mo bundle</td><td class="p-6 text-center">Exclusive bundles</td></tr>
+            <tr><td class="p-6 font-medium">Human Prompt Engineer Support</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">1 per project</td><td class="p-6 text-center">Unlimited</td></tr>
+            <tr><td class="p-6 font-medium">Advanced Analytics & ROI</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">—</td><td class="p-6 text-center">Full access</td></tr>
+            <tr><td class="p-6 font-medium">API Access & White-Label</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">—</td><td class="p-6 text-center">Yes</td></tr>
+            <tr><td class="p-6 font-medium">Dedicated Support</td><td class="p-6 text-center">Community</td><td class="p-6 text-center bg-indigo-50">Priority</td><td class="p-6 text-center">Account Manager</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Footer -->
+  <section class="bg-gradient-to-br from-indigo-700 to-violet-800 text-white py-20 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to orchestrate your next big project?</h2>
+      <p class="text-xl opacity-90 mb-10">Join thousands building smarter teams with AI. Start free — no credit card required.</p>
+      <a href="/signup" class="inline-block bg-white text-indigo-700 font-bold px-10 py-5 rounded-xl text-xl shadow-2xl hover:bg-gray-100 transition transform hover:scale-105">
+        Create Your Free Account
+      </a>
+    </div>
+  </section>
+
+  <!-- Simple Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-12 px-6 text-center">
+    <p>&copy; 2026 YSKAIPE. All rights reserved.</p>
+    <div class="mt-4 space-x-6">
+      <a href="/privacy" class="hover:text-white">Privacy</a>
+      <a href="/terms" class="hover:text-white">Terms</a>
+      <a href="/contact" class="hover:text-white">Contact</a>
+    </div>
+  </footer>
+
+  <!-- Basic JS for toggle -->
+  <script>
+    const monthlyBtn = document.getElementById('monthly-btn');
+    const yearlyBtn = document.getElementById('yearly-btn');
+    const proPrice = document.getElementById('pro-price');
+    const proBilling = document.getElementById('pro-billing');
+
+    monthlyBtn.addEventListener('click', () => {
+      monthlyBtn.classList.add('bg-white', 'shadow', 'text-gray-900');
+      monthlyBtn.classList.remove('text-gray-600');
+      yearlyBtn.classList.remove('bg-white', 'shadow', 'text-gray-900');
+      yearlyBtn.classList.add('text-gray-600');
+      proPrice.textContent = '$9.99';
+      proBilling.textContent = '/month';
+    });
+
+    yearlyBtn.addEventListener('click', () => {
+      yearlyBtn.classList.add('bg-white', 'shadow', 'text-gray-900');
+      yearlyBtn.classList.remove('text-gray-600');
+      monthlyBtn.classList.remove('bg-white', 'shadow', 'text-gray-900');
+      monthlyBtn.classList.add('text-gray-600');
+      proPrice.textContent = '$99';
+      proBilling.textContent = '/year';
+    });
+  </script>
+
+</body>
+</html>
