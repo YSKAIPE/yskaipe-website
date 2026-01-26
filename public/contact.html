@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - YSKAIPE | AI-Orchestrated Project Teams</title>
+  <meta name="description" content="Get in touch with the YSKAIPE team. Whether you're interested in joining the waitlist, have questions about the platform, partnerships, press, or careers — we're here to help."/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',     // Indigo-500
+            primaryDark: '#4f46e5', // Indigo-600
+            accent: '#8b5cf6',      // Violet-500
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+  <!-- Hero / Header -->
+  <header class="bg-gradient-to-br from-indigo-700 via-indigo-800 to-violet-900 text-white py-20 px-6 text-center">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Get in Touch</h1>
+      <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+        We're a small, determined team building the future of AI-powered collaboration. Reach out — we'd love to hear from you.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Contact Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+
+      <!-- Contact Options -->
+      <div>
+        <h2 class="text-3xl font-bold mb-8">Ways to Reach Us</h2>
+
+        <div class="space-y-10">
+
+          <!-- General / Questions -->
+          <div class="flex items-start">
+            <div class="text-4xl mr-6">✉️</div>
+            <div>
+              <h3 class="text-2xl font-bold mb-2">General Inquiries & Platform Questions</h3>
+              <p class="text-gray-700 mb-3">
+                Curious about how YSKAIPE works, want to join the waitlist early, or have feedback on the vision?
+              </p>
+              <a href="mailto:hello@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
+                hello@yskaipe.com
+              </a>
+            </div>
+          </div>
+
+          <!-- Careers / Joining -->
+          <div class="flex items-start">
+            <div class="text-4xl mr-6">🚀</div>
+            <div>
+              <h3 class="text-2xl font-bold mb-2">Careers & Early Team Opportunities</h3>
+              <p class="text-gray-700 mb-3">
+                Interested in being a founding engineer, growth builder, or early contributor? Check our <a href="/careers" class="text-indigo-600 hover:underline">Careers page</a> first.
+              </p>
+              <a href="mailto:careers@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
+                careers@yskaipe.com
+              </a>
+            </div>
+          </div>
+
+          <!-- Privacy & Legal -->
+          <div class="flex items-start">
+            <div class="text-4xl mr-6">🔒</div>
+            <div>
+              <h3 class="text-2xl font-bold mb-2">Privacy, Legal, or Data Requests</h3>
+              <p class="text-gray-700 mb-3">
+                Questions about our Privacy Policy, Terms of Service, or data access/deletion requests.
+              </p>
+              <a href="mailto:privacy@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
+                privacy@yskaipe.com (for privacy)<br>
+                legal@yskaipe.com (for legal/terms)
+              </a>
+            </div>
+          </div>
+
+          <!-- Partnerships & Press -->
+          <div class="flex items-start">
+            <div class="text-4xl mr-6">🤝</div>
+            <div>
+              <h3 class="text-2xl font-bold mb-2">Partnerships, Press, or Collaborations</h3>
+              <p class="text-gray-700 mb-3">
+                Interested in integrating with YSKAIPE, co-marketing, press coverage, or community partnerships?
+              </p>
+              <a href="mailto:partnerships@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
+                partnerships@yskaipe.com
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Form + Social / Location -->
+      <div class="bg-gradient-to-br from-indigo-50 to-violet-50 rounded-2xl p-8 shadow-lg border border-indigo-100">
+        <h2 class="text-3xl font-bold mb-6">Quick Message</h2>
+        <p class="text-gray-700 mb-8">
+          Drop us a line below — we'll get back to you as soon as possible (usually within 1–2 business days).
+        </p>
+
+        <!-- Simple static form placeholder (replace with real form backend later) -->
+        <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Jane Doe"/>
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="jane@example.com"/>
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" placeholder="Tell us what's on your mind..."></textarea>
+          </div>
+          <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-4 rounded-xl hover:bg-indigo-700 transition shadow-md">
+            Send Message
+          </button>
+        </form>
+
+        <div class="mt-10 pt-8 border-t border-indigo-200 text-center">
+          <p class="text-gray-600 mb-4">We're based in Davidson, North Carolina (remote-first team)</p>
+          <div class="flex justify-center space-x-6">
+            <a href="https://x.com/yskaipe" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 text-2xl">
+              𝕏
+            </a>
+            <!-- Add LinkedIn, Discord, etc. when available -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="bg-gradient-to-br from-indigo-600 to-violet-800 text-white py-20 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">Excited about the future of collaboration?</h2>
+      <p class="text-xl opacity-90 mb-10">Whether you're a creator, engineer, partner, or just curious — let's talk.</p>
+      <a href="mailto:hello@yskaipe.com" class="inline-block bg-white text-indigo-700 font-bold px-12 py-6 rounded-xl text-xl shadow-2xl hover:bg-gray-100 transition transform hover:scale-105">
+        Email Us Today
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-12 px-6 text-center">
+    <p>&copy; 2026 YSKAIPE. All rights reserved.</p>
+    <div class="mt-4 space-x-6">
+      <a href="/privacy" class="hover:text-white">Privacy Policy</a>
+      <a href="/terms" class="hover:text-white">Terms of Service</a>
+      <a href="/careers" class="hover:text-white">Careers</a>
+      <a href="/contact" class="hover:text-white">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
