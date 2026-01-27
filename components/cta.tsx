@@ -1,7 +1,7 @@
 import Image from "next/image";
-import WorflowImg01 from "@/public/images/yskaipe-pe1.jpg";
-import WorflowImg02 from "@/public/images/yskaipe-pe2.jpg";
-import WorflowImg03 from "@/public/images/yskaipe-pe4.jpg";
+import WorflowImg01 from "@/public/images/yskaipe-the-paradox.jpg";
+import WorflowImg02 from "@/public/images/yskaipe-the-paradox.jpg";
+import WorflowImg03 from "@/public/images/yskaipe-the-paradox.jpg";
 import Spotlight from "@/components/spotlight";
 
 export default function Workflows() {
@@ -18,10 +18,9 @@ export default function Workflows() {
             </div>
             <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
               Everything changes. Nothing changes.
-              AI races exponentially forward while the human soul asks the same ancient questions.
             </h2>
             <p className="text-lg text-indigo-200/65">
-              Everything changes. Nothing changes. AI races exponentially forward while the human soul asks the same ancient questions. 
+              AI races exponentially forward while the human soul asks the same ancient questions. 
             </p>
           </div>
           <div data-aos="fade-up" data-aos-delay={600}>
@@ -70,13 +69,13 @@ export default function Workflows() {
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,--theme(--color-gray-700/.15),--theme(--color-gray-700/.5))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-gray-800/60">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                        Initiate & Match
+                        A
                       </span>
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    "Kickstart with SEED INPUT and AI Matching"
-Description: AI-O analyzes your prompt to build a full plan with milestones, then uses algorithms like cosine similarity to find the best team based on attitudes and interests.
+                    "a"
+123
                   </p>
                 </div>
               </div>
@@ -117,14 +116,13 @@ Description: AI-O analyzes your prompt to build a full plan with milestones, the
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,--theme(--color-gray-700/.15),--theme(--color-gray-700/.5))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-gray-800/60">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                        Procure & Design
+                        B
                       </span>
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    "Assemble and Set Up Your Pod"
-Description: AI-O sends personalized invitations for onboarding, then creates a tailored workspace with communications, processes, and integrations to your code and tools.
-                  </p>
+                    "b"
+123                  </p>
                 </div>
               </div>
             </a>
@@ -164,14 +162,13 @@ Description: AI-O sends personalized invitations for onboarding, then creates a 
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,--theme(--color-gray-700/.15),--theme(--color-gray-700/.5))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-gray-800/60">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                        Run & Refine
+                        C
                       </span>
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    "Guide to Completion with Adjustments"
-Description: AI-O manages the group through real-time monitoring and dynamic tweaks, backed by prompt engineers for complex needs, ensuring success from start to finish.
-                  </p>
+                    "c"
+123                  </p>
                 </div>
               </div>
             </a>
