@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BannerImage from "@/public/images/*yskaipe-the-paradox.jpg";
+import BannerImage from "@/public/images/yskaipe-the-paradox.jpg";
 
 export default function HeroHome() {
   return (
@@ -22,7 +22,7 @@ export default function HeroHome() {
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                {`Everything changes. Nothing changes.
+                Everything changes. Nothing changes.
 AI races exponentially forward while the human soul asks the same ancient questions.`}
               </p>
 
