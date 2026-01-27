@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BannerImage from "@/public/images/*yskaipe-the-paraxox.jpg";
+import BannerImage from "@/public/images/*yskaipe-the-paradox.jpg";
 
 export default function HeroHome() {
   return (
