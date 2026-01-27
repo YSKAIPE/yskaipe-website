@@ -1,7 +1,7 @@
 import Image from "next/image";
 import WorflowImg01 from "@/public/images/yskaipe-the-paradox.jpg";
-import WorflowImg02 from "@/public/images/yskaipe-the-paradox.jpg";
-import WorflowImg03 from "@/public/images/yskaipe-the-paradox.jpg";
+import WorflowImg02 from "@/public/images/yskaipe-themes-1.jpg";
+import WorflowImg03 from "@/public/images/yskaipe-the-paradox-2.jpg";
 import Spotlight from "@/components/spotlight";
 
 export default function Workflows() {
@@ -21,16 +21,11 @@ export default function Workflows() {
             </h2>
             <p className="text-lg text-indigo-200/65">
               AI races exponentially forward while the human soul asks the same ancient questions. 
+              Humans remain meaning-seeking, values-driven, and psychologically ancient. 
+              The site isn’t just pitching AI as a tool—it’s framing AI as a force that reorganizes how humans work together.
             </p>
           </div>
-          <div data-aos="fade-up" data-aos-delay={600}>
-                  <a
-                    className="btn relative w-full bg-linear-to-b from-gray-800 to-gray-800/60 bg-[length:100%_100%] bg-[bottom] text-gray-300 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_right,var(--color-gray-800),var(--color-gray-700),var(--color-gray-800))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-[length:100%_150%] sm:ml-4 sm:w-auto"
-                    href="/about.html"
-                  >
-                    About YSKAIPE
-                  </a>
-          </div>
+     
           {/* Spotlight items */}
           <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
             {/* Card 1 */}
@@ -69,13 +64,13 @@ export default function Workflows() {
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,--theme(--color-gray-700/.15),--theme(--color-gray-700/.5))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-gray-800/60">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                        A
+                        AI as organizational gravity
                       </span>
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    "a"
-123
+                    Teams naturally orbit a clear objective
+
                   </p>
                 </div>
               </div>
@@ -116,13 +111,12 @@ export default function Workflows() {
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,--theme(--color-gray-700/.15),--theme(--color-gray-700/.5))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-gray-800/60">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                        B
+                        Humans as moral and narrative anchors
                       </span>
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    "b"
-123                  </p>
+                    AI for the Benefit of Humans        </p>
                 </div>
               </div>
             </a>
@@ -162,13 +156,12 @@ export default function Workflows() {
                   <div className="mb-3">
                     <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(to_bottom,--theme(--color-gray-700/.15),--theme(--color-gray-700/.5))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)] hover:bg-gray-800/60">
                       <span className="bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                        C
+                        Human-cohesive AI maintains coherence.
                       </span>
                     </span>
                   </div>
                   <p className="text-indigo-200/65">
-                    "c"
-123                  </p>
+                    Its about moving forward together.                </p>
                 </div>
               </div>
             </a>
