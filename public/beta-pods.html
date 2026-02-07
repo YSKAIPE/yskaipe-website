@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YSKAIPE Beta Pods — Join Synergistic Teams</title>
+  <meta name="description" content="Explore YSKAIPE's top beta pods. AI-matched, human-cohesive teams turning seed ideas into real-world outcomes."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1117;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #22d3ee;
+      --accent-dark: #0891b2;
+      --card: #1e293b;
+      --card-hover: #334155;
+      --gradient: linear-gradient(135deg, #22d3ee, #8b5cf6);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    header {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(34, 211, 238, 0.08), transparent);
+    }
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .subtitle {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--gradient);
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
+    }
+    .cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(34, 211, 238, 0.3);
+    }
+    .pods-section {
+      padding: 4rem 0 6rem;
+    }
+    .pods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+    .pod-card {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 2rem 1.75rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(34, 211, 238, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .pod-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient);
+      opacity: 0.7;
+    }
+    .pod-card:hover {
+      transform: translateY(-8px);
+      background: var(--card-hover);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .pod-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    .pod-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.8rem; }
+      header { padding: 4rem 0 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>YSKAIPE Beta Pods</h1>
+      <p class="subtitle">
+        AI-orchestrated, human-first teams turning seed ideas into real-world impact.<br>
+        Our current top 10 active pods — ready for super users to join and shape.
+      </p>
+      <a href="#waitlist" class="cta">Join the Waitlist →</a>
+    </div>
+  </header>
+
+  <section class="pods-section">
+    <div class="container">
+      <div class="pods-grid">
+        
+        <div class="pod-card">
+          <h2 class="pod-title">Bitcoin</h2>
+          <p class="pod-desc">Deep dives into BTC protocol, scaling, custody, Lightning, and on-chain innovation. Build tools, discuss sovereignty, and prototype next-gen wallets or nodes.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">BreadCraft</h2>
+          <p class="pod-desc">Artisanal sourdough, fermentation science, flavor experiments, and home bakery builds. From perfect levain to scoring techniques and pop-up bakery ideas.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Cars</h2>
+          <p class="pod-desc">Enthusiast builds, EV conversions, tuning, restoration, autonomous tech, and car culture. Track days, wrenching sessions, and dream garage planning.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Disc Golfing</h2>
+          <p class="pod-desc">Course strategy, disc tech, tournament prep, course design, and community events. Skill clinics, bag optimization, and new plastic testing.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Dogs</h2>
+          <p class="pod-desc">Training, nutrition, behavior, adventure gear, breeding ethics, and canine enrichment. Trail runs, agility, and building better human-dog bonds.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Fire and Wine</h2>
+          <p class="pod-desc">Open-fire cooking, grilling mastery, wood types, wine pairings, and outdoor entertaining. Recipes, fire safety, and vineyard-to-table experiences.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Gardening</h2>
+          <p class="pod-desc">Permaculture, urban plots, heirloom seeds, soil biology, composting, and seasonal harvests. Greenhouse builds, native plants, and food forest design.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Homes</h2>
+          <p class="pod-desc">Tiny houses, renovations, smart homes, off-grid systems, interior design, and real estate hacks. Blueprints, material deep-dives, and dream-home visioning.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Mountaineering</h2>
+          <p class="pod-desc">Alpine climbing, expedition planning, gear reviews, risk management, and high-altitude skills. Route beta, training, and epic peak stories.</p>
+        </div>
+
+        <div class="pod-card">
+          <h2 class="pod-title">Vibe Coding</h2>
+          <p class="pod-desc">Creative coding, lo-fi dev sessions, aesthetic UIs, generative art, music + code, and chill hackathons. Focus on flow-state programming and beautiful code.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 YSKAIPE. Human Cohesive AI — Pods powered by super users.</p>
+      <p><a href="/" style="color: var(--accent); text-decoration: none;">Back to yskaipe.com</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
