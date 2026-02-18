@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BetaPodsImg01 from "@/public/images/yskaipe-beta-pods-1.jpg"; // ← replace with your actual image
+import BetaPodsImg01 from "@/public/images/yskaipe-beta-pods-1.jpg"; 
 import BetaPodsImg02 from "@/public/images/yskaipe-beta-pods-2.jpg";
 import BetaPodsImg03 from "@/public/images/yskaipe-beta-pods-3.jpg";
 import Spotlight from "@/components/spotlight";
