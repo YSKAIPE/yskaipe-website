@@ -4,7 +4,7 @@ import WorflowImg02 from "@/public/images/yskaipe-beta-pods-2.jpg";
 import WorflowImg03 from "@/public/images/yskaipe-beta-pods-3.jpg";
 import Spotlight from "@/components/spotlight";
 
-export default function Workflows() {
+export default function BetaPods() {
   return (
     <section>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
