@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibe Coding Beta Pod • YSKAIPE</title>
+  <meta name="description" content="Natural-language to code. Agentic flows. Forget the syntax exists. Human taste guides exponential creation in the Vibe Coding Beta Pod."/>
+  
+  <!-- Tailwind CDN (compile your own in production) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            nacelle: ['Nacelle', 'serif'],
+          },
+          colors: {
+            indigo: {
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              500: '#6366f1',
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-gray-50: #f9fafb;
+      --color-gray-200: #e5e7eb;
+      --color-gray-800: #1f2937;
+      --color-gray-900: #111827;
+      --color-gray-950: #030712;
+    }
+    body {
+      @apply bg-gray-950 text-gray-100;
+    }
+    .bg-gradient-to-r {
+      background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    }
+    .animate-gradient {
+      animation: gradient 6s linear infinite;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Header / Hero -->
+  <header class="relative overflow-hidden border-b border-indigo-500/20">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950/30 via-gray-950 to-gray-950"></div>
+    <div class="relative mx-auto max-w-6xl px-6 py-24 md:py-32 text-center">
+      <div class="inline-flex items-center gap-3 pb-4">
+        <span class="text-sm font-medium uppercase tracking-wider bg-gradient-to-r from-indigo-400 to-indigo-200 bg-clip-text text-transparent">
+          BETA POD
+        </span>
+      </div>
+      <h1 class="animate-gradient bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-6 font-nacelle text-5xl font-bold text-transparent md:text-7xl">
+        Vibe Coding
+      </h1>
+      <p class="mx-auto max-w-3xl text-xl text-indigo-200/70 md:text-2xl">
+        Describe the dream. Let the model write the code.<br/>
+        Humans hold the taste, the direction, the veto.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <!-- Philosophy -->
+    <section class="mb-20 text-center">
+      <h2 class="mb-6 text-4xl font-semibold">Everything flows. Nothing is written in stone.</h2>
+      <p class="mx-auto max-w-3xl text-lg leading-relaxed text-indigo-200/65">
+        Code used to be syntax-first. Now it's intention-first.<br/><br/>
+        In the Vibe Coding Beta Pod we fully embrace the exponential: prompt in plain language, accept the output, iterate via conversation, forget the boilerplate exists. Tools like Cursor, Aider, Claude, Gemini — agents that build, refactor, debug in real time.<br/><br/>
+        But the human never disappears. We steer the vibe: aesthetics, ethics, coherence, when to throw it all away and start fresh. AI is the perfect pair programmer; humans are still the soul.
+      </p>
+    </section>
+
+    <!-- Key Focus Areas (Cards) -->
+    <section class="grid gap-8 md:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
+        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
+          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Intention → Execution Loops</h3>
+          <p class="text-indigo-200/70">
+            High-level prompts → agent builds MVP. Follow-up vibes refine. Zero syntax fights. Rapid throwaway weekends become throwaway hours.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
+        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
+          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Toolchain Experiments</h3>
+          <p class="text-indigo-200/70">
+            Cursor agents, Aider in terminal, Claude artifacts, Gemini in AI Studio. Compare autonomy, hallucination resistance, production readiness. Build rules files for vibe safety.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
+        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
+          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Human Taste & Phase Shifts</h3>
+          <p class="text-indigo-200/70">
+            When does "good enough" become dangerous? Train taste for spotting spaghetti, security holes, maintainability debt. Prototype → polish → production gates.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="mt-20 text-center">
+      <a 
+        href="/beta-pods.html#waitlist" 
+        class="inline-block rounded-full bg-gradient-to-r from-indigo-600 to-indigo-400 px-10 py-5 text-lg font-semibold text-white shadow-lg transition hover:scale-105 hover:shadow-indigo-500/30"
+      >
+        Join the Vibe Coding Pod Waitlist →
+      </a>
+      <p class="mt-6 text-sm text-indigo-200/50">
+        Limited spots. High-signal creators & coders only. Bring your weirdest ideas.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-800/50 py-12 text-center text-sm text-gray-400">
+    <p>© 2026 YSKAIPE • Small groups. Big phase shifts.</p>
+  </footer>
+
+</body>
+</html>
