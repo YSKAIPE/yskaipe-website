@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BreadCraft Beta Pod • YSKAIPE</title>
+  <meta name="description" content="Artisanal sourdough, fermentation science, flavor experiments, and home bakery builds — human hands + AI co-creation in the BreadCraft Beta Pod."/>
+  
+  <!-- Tailwind CDN (for rapid styling; replace with your built CSS in production) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            nacelle: ['Nacelle', 'serif'], // assuming you have this font loaded
+          },
+          colors: {
+            indigo: {
+              200: '#c7d2fe',
+              300: '#a5b4fc',
+              500: '#6366f1',
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts or your custom font loader -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-gray-50: #f9fafb;
+      --color-gray-200: #e5e7eb;
+      --color-gray-800: #1f2937;
+      --color-gray-900: #111827;
+      --color-gray-950: #030712;
+    }
+    body {
+      @apply bg-gray-950 text-gray-100;
+    }
+    .bg-gradient-to-r {
+      background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    }
+    .animate-gradient {
+      animation: gradient 6s linear infinite;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Header / Hero -->
+  <header class="relative overflow-hidden border-b border-indigo-500/20">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950/30 via-gray-950 to-gray-950"></div>
+    <div class="relative mx-auto max-w-6xl px-6 py-24 md:py-32 text-center">
+      <div class="inline-flex items-center gap-3 pb-4">
+        <span class="text-sm font-medium uppercase tracking-wider bg-gradient-to-r from-indigo-400 to-indigo-200 bg-clip-text text-transparent">
+          BETA POD
+        </span>
+      </div>
+      <h1 class="animate-gradient bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-6 font-nacelle text-5xl font-bold text-transparent md:text-7xl">
+        BreadCraft
+      </h1>
+      <p class="mx-auto max-w-3xl text-xl text-indigo-200/70 md:text-2xl">
+        Artisanal sourdough. Fermentation science. Flavor alchemy.<br/>
+        Where patient human craft meets exponential simulation.
+      </p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <!-- Philosophy -->
+    <section class="mb-20 text-center">
+      <h2 class="mb-6 text-4xl font-semibold">Everything ferments. Nothing stays the same.</h2>
+      <p class="mx-auto max-w-3xl text-lg leading-relaxed text-indigo-200/65">
+        Bread is ancient alchemy: flour, water, time, and wild yeast performing miracles no single ingredient could achieve alone.<br/><br/>
+        In the BreadCraft Beta Pod we treat AI the same way — not as a replacement for the baker’s intuition, but as the perfect levain: accelerating proofs, modeling flavor cascades, suggesting hydration curves, and stress-testing scoring patterns at speeds no human lifetime could match.<br/><br/>
+        Humans still smell, taste, feel the crumb. Humans decide when it’s <em>right</em>.
+      </p>
+    </section>
+
+    <!-- Key Focus Areas (Cards) -->
+    <section class="grid gap-8 md:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
+        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
+          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Sourdough Mastery & AI Modeling</h3>
+          <p class="text-indigo-200/70">
+            Train models on your starter’s behavior. Predict peak fermentation windows. Simulate 10,000 hydration experiments overnight.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
+        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
+          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Flavor & Ingredient Experiments</h3>
+          <p class="text-indigo-200/70">
+            Use AI to profile ancient grains, heirloom wheats, inclusions (seeds, herbs, fruits). Generate novel scoring designs and bake logs.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
+        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
+          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Home Bakery Builds & Pop-ups</h3>
+          <p class="text-indigo-200/70">
+            Prototype ovens, proofing boxes, scoring tools. Plan micro-bakeries, community bakes, or full pop-up events with shared logistics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="mt-20 text-center">
+      <a 
+        href="/beta-pods.html#waitlist" 
+        class="inline-block rounded-full bg-gradient-to-r from-indigo-600 to-indigo-400 px-10 py-5 text-lg font-semibold text-white shadow-lg transition hover:scale-105 hover:shadow-indigo-500/30"
+      >
+        Join the BreadCraft Pod Waitlist →
+      </a>
+      <p class="mt-6 text-sm text-indigo-200/50">
+        Super users get priority access. Limited spots. High signal only.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-800/50 py-12 text-center text-sm text-gray-400">
+    <p>© 2026 YSKAIPE • Small groups. Big phase shifts.</p>
+  </footer>
+
+</body>
+</html>
