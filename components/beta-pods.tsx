@@ -72,8 +72,7 @@ Spots are limited for the current beta cohort.
                   <p className="text-indigo-200/65">
                     Deep dives into BTC protocol, scaling, custody, Lightning, and on-chain innovation. Build tools, discuss sovereignty, and prototype next-gen wallets or nodes.
 <a
-  href="/public/beta-pods.html"
-  target="_blank"
+  href="beta-pods.html"
   rel="noopener noreferrer"
   className="inline-flex items-center justify-center rounded-2xl bg-black px-6 py-3 text-white text-lg font-semibold shadow-lg transition-all duration-300 hover:bg-gray-900 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
 >
