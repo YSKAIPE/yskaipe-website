@@ -78,6 +78,16 @@ export default function Footer() {
                   About us
                 </a>
               </li>
+              
+              <li>
+                <a
+                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  href="https://www.yskaipe.com/applied-ai"
+                >
+                  Applied AI
+                </a>
+              </li>
+              
               <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
