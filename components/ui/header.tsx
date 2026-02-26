@@ -1,15 +1,4 @@
-Here's a **simplified, low-complexity version** of your header based directly on the **original working code** you provided. It adds a basic responsive navigation bar without introducing heavy state management, extra dependencies (no lucide-react needed), or complex mobile panels.
 
-Key changes (keeping it minimal):
-- Adds main nav links as text links (hidden on mobile by default)
-- Uses a very simple **CSS-only hamburger menu** via checkbox hack (no JS/react state → zero runtime complexity)
-- Keeps your exact glassy/blurred style, logo placement, and Sign In/Register buttons
-- Nav items focused on your goals: beta traction, public building, collaboration, resources, roadmap, socials, and personal/about story
-- No mobile dropdown overlay — on small screens it just shows a basic stacked list below the bar (clean & fast)
-
-Paste this directly into `components/ui/header.tsx`:
-
-```tsx
 "use client";
 
 import Link from "next/link";
@@ -128,20 +117,4 @@ export default function Header() {
     </header>
   );
 }
-```
 
-### Why this version?
-- **Build-safe** — no extra imports beyond what you already have (Link + Logo)
-- **No React state** → avoids any client-side bugs or hydration issues
-- **Low complexity** — CSS checkbox hack for toggle (very common pattern, zero JS overhead)
-- **Fits your goals** — links emphasize beta, public progress, contribs, funding/roadmap, socials + About (for your story/skills/opportunities)
-- **Responsive** — desktop: horizontal nav + auth buttons; mobile: hamburger → stacked list
-
-### Next Steps
-1. Replace your current `header.tsx` with this.
-2. Add `pt-20` (or `pt-24`) to your main content wrapper in `layout.tsx` or page to avoid overlap with the header.
-3. Test locally: `pnpm dev`
-4. Build: `pnpm build` — should pass now since it's structurally identical to your original (just with more content).
-5. If you later want a smoother mobile experience (slide-in sidebar), we can add minimal JS then.
-
-This keeps things simple while giving you a proper nav bar. If you need tweaks (e.g., fewer links, different labels), just say! 🚀
