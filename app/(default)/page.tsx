@@ -18,11 +18,13 @@ export default function Home() {
     <>
       <PageIllustration />
       <Hero />
-      <Workflows />
+      <BuildInPublic />
       <BetaPods />
+      <Workflows />
       <Features />
       <Testimonials />
       <Cta />
     </>
+
   );
 }
