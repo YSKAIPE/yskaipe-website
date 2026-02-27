@@ -20,13 +20,13 @@ export default function Header() {
             <Link href="/beta-pods.html" className="text-gray-300 hover:text-white transition-colors">
               Beta Pods
             </Link>
-            <Link href="/build-log" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/yskaipe-build-log" className="text-gray-300 hover:text-white transition-colors">
               Build Log
             </Link>
             <Link href="/build-in-public.html" className="text-gray-300 hover:text-white transition-colors">
               Collaborate
             </Link>
-            <Link href="/roadmap" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/roadmap.html" className="text-gray-300 hover:text-white transition-colors">
               Roadmap
             </Link>
             <a 
