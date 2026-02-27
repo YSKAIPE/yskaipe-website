@@ -1,7 +1,7 @@
 import Image from "next/image";
 import WorflowImg01 from "/public/images/yskaipe-webstack.jpg";
 import WorflowImg02 from "/public/images/yskaipe-wednesdays.jpg";
-import WorflowImg03 from "/public/images/yskaipe-webstack.jpg";
+import WorflowImg03 from "/public/images/yskaipe-fridays.jpg";
 import Spotlight from "@/components/spotlight";
 
 export default function BuildInPublic() {
