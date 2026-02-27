@@ -21,7 +21,7 @@ export default function HeroHome() {
                 data-aos="fade-up"
                 data-aos-delay={200}
               >
-                YSKAIPE AI makes and manages small real-world project teams using SEED INPUT from an YSKAIPE SUPER USER.
+                From ONE PROMPT to A TEAM THAT SHIPS
               </p>
             <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
               <div data-aos="fade-up" data-aos-delay={400}>
