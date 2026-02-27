@@ -20,7 +20,7 @@ export default function Header() {
             <Link href="/beta-pods.html" className="text-gray-300 hover:text-white transition-colors">
               Beta Pods
             </Link>
-            <Link href="/yskaipe-build-log" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/yskaipe-build-log.html" className="text-gray-300 hover:text-white transition-colors">
               Build Log
             </Link>
             <Link href="/build-in-public.html" className="text-gray-300 hover:text-white transition-colors">
@@ -80,16 +80,16 @@ export default function Header() {
         <input type="checkbox" id="mobile-menu" className="hidden peer" />
         <div className="md:hidden peer-checked:block bg-gray-900/95 border-t border-gray-800 backdrop-blur-sm mt-2 rounded-b-xl overflow-hidden">
           <nav className="flex flex-col px-6 py-4 space-y-4 text-base">
-            <Link href="/beta-pods" className="text-gray-300 hover:text-white">
+            <Link href="/beta-pods.html" className="text-gray-300 hover:text-white">
               Beta Pods
             </Link>
-            <Link href="/build-log" className="text-gray-300 hover:text-white">
+            <Link href="/yskaipe-build-log.html" className="text-gray-300 hover:text-white">
               Build Log
             </Link>
-            <Link href="/collaborate" className="text-gray-300 hover:text-white">
+            <Link href="/build-in-public.html" className="text-gray-300 hover:text-white">
               Collaborate
             </Link>
-            <Link href="/roadmap" className="text-gray-300 hover:text-white">
+            <Link href="/roadmap.html" className="text-gray-300 hover:text-white">
               Roadmap
             </Link>
             <a href="https://x.com/yskaipe" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
@@ -98,7 +98,7 @@ export default function Header() {
             <a href="https://github.com/yskaipe" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
               GitHub
             </a>
-            <Link href="/about" className="text-gray-300 hover:text-white">
+            <Link href="/about.html" className="text-gray-300 hover:text-white">
               About
             </Link>
 
