@@ -17,13 +17,13 @@ export default function Header() {
 
           {/* Desktop Nav + Auth */}
           <div className="hidden md:flex md:items-center md:gap-6 lg:gap-8 text-sm font-medium">
-            <Link href="/beta-pods" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/beta-pods.html" className="text-gray-300 hover:text-white transition-colors">
               Beta Pods
             </Link>
             <Link href="/build-log" className="text-gray-300 hover:text-white transition-colors">
               Build Log
             </Link>
-            <Link href="/collaborate" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/build-in-public.html" className="text-gray-300 hover:text-white transition-colors">
               Collaborate
             </Link>
             <Link href="/roadmap" className="text-gray-300 hover:text-white transition-colors">
@@ -45,7 +45,7 @@ export default function Header() {
             >
               GitHub
             </a>
-            <Link href="/about" className="text-gray-300 hover:text-white transition-colors">
+            <Link href="/about.html" className="text-gray-300 hover:text-white transition-colors">
               About
             </Link>
           </div>
