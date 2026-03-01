@@ -18,7 +18,7 @@ export default function Header() {
       <div className="flex space-x-4">
         <a href="https://x.com/yskaipe" target="_blank">X</a>
         <a href="https://github.com/YSKAIPE" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/nickconenna" target="_blank">LinkedIn</a>
+        <a href="https://www.linkedin.com/company/yskaipe" target="_blank">LinkedIn</a>
         <a href="https://calendly.com/yskaipe" target="_blank">Calendar</a>
       </div>
       {/* Add mobile menu toggle here if needed */}
