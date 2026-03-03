@@ -68,6 +68,31 @@
   <section class="py-16 lg:py-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
 
+      <!-- Newest entry at top – add right after intro or before Week 9 -->
+<h3>March 3, 2026 – Deep Work Block (10:30 AM – 1:30 PM EST): CrewAI Bitcoin Pod Kickoff</h3>
+
+<p><strong>Progress:</strong></p>
+<ul>
+  <li>Created & shipped new public repo: <a href="https://github.com/yskaipe/crewai-bitcoin-pod">github.com/yskaipe/crewai-bitcoin-pod</a> — first dedicated CrewAI + Python multi-agent space for Bitcoin pod orchestration (native handling of sats, nodes, Lightning).</li>
+  <li>Initial crew script (<code>bitcoin_crew.py</code>): Defined agents (Bitcoin Protocol Expert + AI Agent Orchestrator) and tasks — research open-source Bitcoin RPC/node interaction + design autonomous pod flows for monitoring/alerting/invoicing.</li>
+  <li>Fixed setup bugs: Path error resolved (correct cd + file location); Pydantic validation error fixed by changing <code>Crew(verbose=2)</code> → <code>verbose=True</code> (CrewAI now enforces boolean, not int levels).</li>
+  <li>First execution: Crew launched successfully (execution ID: fde65623-...), Bitcoin Researcher agent started research task — detailed logs showed startup and task begin.</li>
+  <li>Blocker: LLM call failed mid-task due to <strong>Invalid Groq API Key</strong> (GroqException via litellm: 401 Unauthorized / "Invalid API Key"). Crew execution halted.</li>
+  <li>GitHub profile polish: Added consistent topics (<code>crewai</code>, <code>ai-agents</code>, <code>bitcoin</code>, <code>python</code>, <code>human-cohesive-ai</code>, <code>fastapi</code>) across active repos.</li>
+</ul>
+
+<p><strong>Learnings:</strong></p>
+<ul>
+  <li>CrewAI evolves fast — verbosity/logging params changed (int levels → bool flag); always verify against current version/docs.</li>
+  <li>Groq integration tip: Double-check <code>os.environ["GROQ_API_KEY"] = "gsk_..."</code> (regen fresh key from console.groq.com if invalid/expired). Quick fallback: Use local Ollama (<code>llm = "ollama/llama3.2"</code>) for cost-free iteration.</li>
+  <li>Portfolio value: Shipping real multi-agent code + public debugging trail (path fix → verbose fix → API auth debug) — strong signal for applied AI roles in 2026.</li>
+</ul>
+
+<p><strong>Next Steps:</strong> Regen/validate Groq key (or switch to Ollama local), re-run full crew → capture Bitcoin research summary + proposed orchestration structure. Integrate real tools (e.g., bitcoinrpc wrapper). Prep March 4 Wednesday live session: Demo initial CrewAI crew + Bitcoin pod integration progress. #HumanCohesiveAI #VibeCoding #CrewAI</p>
+
+<hr style="margin: 2rem 0; border-color: #444;">
+
+      
       <!-- Most Recent Entry (example – update weekly) -->
       <article class="relative">
         <div class="flex items-center gap-4 mb-4">
