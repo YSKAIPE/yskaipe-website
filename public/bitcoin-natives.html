@@ -1,0 +1,355 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Natives • YSKAIPE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        :root {
+            --bitcoin-orange: #f7931a;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 100%);
+        }
+
+        .bitcoin-accent {
+            color: #f7931a;
+        }
+
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #f7931a;
+            transform: translateY(-2px);
+        }
+
+        .section-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .section-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .glow-orange {
+            box-shadow: 0 0 25px -5px rgb(247 147 26 / 0.3);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200">
+    <!-- HEADER -->
+    <header class="border-b border-zinc-800 bg-zinc-950 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl">₿</div>
+                <a href="https://www.yskaipe.com" class="heading-font text-3xl font-semibold tracking-tighter">YSKAIPE</a>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="https://www.yskaipe.com" class="nav-link">Home</a>
+                <a href="beta-pods.html" class="nav-link">Beta Pods</a>
+                <a href="#" class="nav-link text-orange-400">Bitcoin</a>
+                <a href="#" class="nav-link">BreadCraft</a>
+                <a href="#" class="nav-link">Vibe Coding</a>
+                <a href="https://x.com/yskaipe" target="_blank" class="nav-link flex items-center gap-x-1">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    Join X
+                </a>
+            </nav>
+
+            <div class="flex items-center gap-x-4">
+                <a href="https://github.com/yskaipe" target="_blank" 
+                   class="px-5 py-2.5 text-sm font-semibold border border-zinc-700 hover:border-orange-500 rounded-3xl transition-colors flex items-center gap-x-2">
+                    <i class="fa-brands fa-github"></i>
+                    GitHub
+                </a>
+                <a href="#join" 
+                   class="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-black font-semibold rounded-3xl transition-all">
+                    Build Your Node
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-bg pt-20 pb-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-zinc-900 border border-orange-500/30 rounded-3xl text-orange-400 text-xs font-medium tracking-widest mb-6">
+                <i class="fa-solid fa-bolt"></i>
+                YSKAIPE BITCOIN DIVISION
+            </div>
+            
+            <h1 class="heading-font text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+                BITCOIN<br>NATIVES
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-xl text-zinc-400 mb-10">
+                Summarizing <span class="font-semibold text-orange-400">@Bitcoin_Natives</span> — where every human learns to hold the most ideal form of digital value ever created.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="https://x.com/Bitcoin_Natives" target="_blank"
+                   class="flex items-center gap-x-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 px-8 py-4 rounded-3xl transition-all group">
+                    <img src="https://pbs.twimg.com/profile_images/2025959361898553344/j7iqePh7.jpg" 
+                         alt="@Bitcoin_Natives" 
+                         class="w-10 h-10 rounded-2xl border-2 border-orange-500">
+                    <div class="text-left">
+                        <div class="font-semibold">@Bitcoin_Natives</div>
+                        <div class="text-xs text-zinc-500">Nick Conenna • Follow</div>
+                    </div>
+                </a>
+                
+                <div class="text-sm text-zinc-500 flex items-center gap-x-2">
+                    <div class="w-px h-6 bg-zinc-700"></div>
+                    Bio: “₿itcoin represents an opportunity for every human to share in the most ideal form of digital value ever created.”
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCOUNT SUMMARY -->
+    <section class="max-w-5xl mx-auto px-6 py-20 border-b border-zinc-800">
+        <div class="grid md:grid-cols-12 gap-16">
+            <div class="md:col-span-5">
+                <div class="sticky top-28">
+                    <span class="px-4 py-2 bg-orange-500/10 text-orange-400 text-xs font-mono rounded-full">EST. 2025 • ACTIVE DAILY</span>
+                    <h2 class="heading-font text-5xl font-semibold tracking-tighter mt-6 leading-none">
+                        The Voice of Bitcoin Natives
+                    </h2>
+                    <p class="mt-8 text-lg text-zinc-400">
+                        @Bitcoin_Natives (run by Nick Conenna) is your direct line to Bitcoin-first thinking. 
+                        No hype. No custodians. Just pure protocol education, decentralization reminders, 
+                        and calls for regulatory clarity so every human can participate equally.
+                    </p>
+                    <div class="mt-10 flex items-center gap-x-8 text-sm">
+                        <div>
+                            <div class="font-mono text-orange-400">21M</div>
+                            <div class="text-xs text-zinc-500">Fixed Supply Mindset</div>
+                        </div>
+                        <div>
+                            <div class="font-mono text-orange-400">Nodes</div>
+                            <div class="text-xs text-zinc-500">Rule Enforcers</div>
+                        </div>
+                        <div>
+                            <div class="font-mono text-orange-400">HODL</div>
+                            <div class="text-xs text-zinc-500">Forever Savings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-7 space-y-8 text-zinc-300">
+                <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 glow-orange">
+                    <div class="flex items-start gap-x-4">
+                        <i class="fa-solid fa-quote-left text-5xl text-orange-500/30"></i>
+                        <div>
+                            <p class="italic text-lg">"#Bitcoin is DECENTRALIZED — so the system works the same way for all participants — max supply of 21M — mining blocks and sending transactions using the same rules for all participants — all based on energy ⚡️ and math"</p>
+                            <div class="mt-6 text-xs flex items-center gap-x-2 text-zinc-500">
+                                <span>@Bitcoin_Natives</span> 
+                                <span class="w-1 h-1 bg-zinc-700 rounded-full"></span> 
+                                <span>March 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-lg leading-relaxed">
+                    Recent threads from @Bitcoin_Natives hammer home three truths: 
+                    <span class="bitcoin-accent">nodes enforce the rules</span>, 
+                    <span class="bitcoin-accent">self-custody is non-negotiable</span>, 
+                    and Bitcoin is the perfect collateral for the coming AI-agent economy.
+                </p>
+                
+                <div class="flex gap-x-6 text-sm pt-6 border-t border-zinc-800">
+                    <a href="https://x.com/Bitcoin_Natives" target="_blank" 
+                       class="flex-1 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-3xl py-6 px-6 flex items-center justify-center gap-x-3 transition-colors">
+                        <i class="fa-brands fa-x-twitter text-xl"></i>
+                        <span class="font-medium">Follow @Bitcoin_Natives</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY COMPETENCIES -->
+    <section class="max-w-5xl mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <span class="text-orange-400 text-sm tracking-[2px] font-medium">THE BITCOIN NATIVE STACK</span>
+            <h2 class="heading-font text-5xl font-semibold tracking-tighter mt-3">Four Competencies That Define a Native</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Node Running -->
+            <div class="section-card bg-zinc-900 border border-zinc-800 rounded-3xl p-10">
+                <div class="w-14 h-14 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-network-wired text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-semibold mb-4">Node Running</h3>
+                <p class="text-zinc-400 mb-6">
+                    Bitcoin natives don’t trust — they verify. Running your own node (Umbrel, RaspiBlitz, or Start9) makes you a first-class citizen of the network. 
+                    You validate every block, enforce the 21 million cap, and help secure the entire system.
+                </p>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Full validation of the 21M supply rule</li>
+                    <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Private mempool — no censorship</li>
+                    <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-emerald-400"></i> Lightning channel management from home</li>
+                </ul>
+                <div class="mt-10 pt-6 border-t border-zinc-800 text-xs text-emerald-400 font-medium flex items-center gap-x-2">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    YSKAIPE AI pods can spin up your node prototype in one prompt
+                </div>
+            </div>
+
+            <!-- Cold Storage -->
+            <div class="section-card bg-zinc-900 border border-zinc-800 rounded-3xl p-10">
+                <div class="w-14 h-14 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-vault text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-semibold mb-4">Cold Storage</h3>
+                <p class="text-zinc-400 mb-6">
+                    Your keys, your coins — forever. Bitcoin natives keep the vast majority of their stack offline in air-gapped hardware wallets (Coldcard, Trezor, Ledger) using multisig and seed backups etched in metal.
+                </p>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-blue-400"></i> Zero counterparty risk</li>
+                    <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-blue-400"></i> Survives blackouts, seizures, and disasters</li>
+                    <li class="flex items-center gap-x-3"><i class="fa-solid fa-check text-blue-400"></i> Cost of holding = literally $0</li>
+                </ul>
+                <div class="mt-8 bg-zinc-950 border border-zinc-800 rounded-2xl p-5 text-xs">
+                    <div class="font-mono text-orange-300">Pro tip from @Bitcoin_Natives community:</div>
+                    <div class="mt-2">"Once in cold storage, Bitcoin costs absolutely nothing to keep there indefinitely."</div>
+                </div>
+            </div>
+
+            <!-- HODL-Minded -->
+            <div class="section-card bg-zinc-900 border border-zinc-800 rounded-3xl p-10">
+                <div class="w-14 h-14 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-hand-holding-dollar text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-semibold mb-4">HODL-Minded</h3>
+                <p class="text-zinc-400 mb-6">
+                    Bitcoin natives treat BTC as savings technology, not a trading asset. We stack sats, never sell for fiat, and let time + scarcity do the work. No leverage. No FOMO. Just patience and conviction.
+                </p>
+                <div class="bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/30 rounded-2xl p-6 text-center">
+                    <div class="text-4xl font-mono font-bold text-amber-300">∞</div>
+                    <div class="text-xs tracking-widest mt-2 text-amber-400">TIME IN THE MARKET</div>
+                </div>
+            </div>
+
+            <!-- Digital Gold Impact -->
+            <div class="section-card bg-zinc-900 border border-zinc-800 rounded-3xl p-10">
+                <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-coins text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-semibold mb-4">Digital Gold Impact</h3>
+                <p class="text-zinc-400 mb-6">
+                    Harder, more portable, and more verifiable than physical gold. Bitcoin natives understand it as the first asset in history that is:
+                </p>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-zinc-950 rounded-2xl p-5">
+                        <div class="text-yellow-400 text-xs mb-1">SCARCE</div>
+                        <div class="font-medium">21 million forever</div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-2xl p-5">
+                        <div class="text-yellow-400 text-xs mb-1">PORTABLE</div>
+                        <div class="font-medium">12 words across any border</div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-2xl p-5">
+                        <div class="text-yellow-400 text-xs mb-1">VERIFIABLE</div>
+                        <div class="font-medium">Anyone can audit the ledger</div>
+                    </div>
+                    <div class="bg-zinc-950 rounded-2xl p-5">
+                        <div class="text-yellow-400 text-xs mb-1">NEUTRAL</div>
+                        <div class="font-medium">No one can dilute your share</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YSKAIPE INTEGRATION -->
+    <section class="bg-zinc-900 py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="rounded-3xl bg-gradient-to-br from-zinc-950 to-black border border-orange-500/20 p-12 flex flex-col md:flex-row gap-12 items-center">
+                <div class="flex-1">
+                    <div class="uppercase text-xs tracking-widest text-orange-400 mb-4">BUILT WITH YSKAIPE AI</div>
+                    <h2 class="heading-font text-4xl font-semibold">Turn these competencies into live prototypes in one prompt</h2>
+                    <p class="mt-6 text-zinc-400 max-w-md">
+                        Our AI orchestrators spin up full Bitcoin node teams, cold-storage simulators, Lightning testnets, and HODL dashboards — all in real time.
+                    </p>
+                    <a href="beta-pods.html" 
+                       class="mt-10 inline-flex items-center gap-x-3 group">
+                        <span class="text-sm font-semibold">Join Bitcoin Beta Pod →</span>
+                        <div class="w-8 h-px bg-orange-400 group-hover:w-12 transition-all"></div>
+                    </a>
+                </div>
+                
+                <div class="flex-1 text-sm font-mono bg-black/60 border border-zinc-800 rounded-2xl p-8">
+                    <div class="text-emerald-400 mb-3">PROMPT EXAMPLE:</div>
+                    <div class="text-zinc-300">"Build me a self-sovereign Bitcoin stack: Umbrel node + Coldcard multisig + HODL dashboard with on-chain alerts. Make it agent-native for AI payments."</div>
+                    <div class="mt-8 text-[10px] text-zinc-500">→ 47 seconds later your team ships a working repo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="join" class="max-w-5xl mx-auto px-6 py-24 text-center">
+        <div class="max-w-xl mx-auto">
+            <h2 class="heading-font text-5xl font-semibold tracking-tighter">Ready to become a Bitcoin Native?</h2>
+            <p class="mt-6 text-zinc-400 text-lg">
+                Start with @Bitcoin_Natives on X, then let YSKAIPE AI accelerate your journey from theory to sovereign stack.
+            </p>
+            
+            <div class="mt-12 flex flex-wrap justify-center gap-4">
+                <a href="https://x.com/Bitcoin_Natives" target="_blank"
+                   class="px-10 py-6 bg-white text-black font-semibold rounded-3xl flex items-center gap-x-3 hover:scale-105 transition-transform">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    FOLLOW @BITCOIN_NATIVES
+                </a>
+                <a href="https://www.yskaipe.com" 
+                   class="px-10 py-6 border border-orange-500 text-orange-400 font-semibold rounded-3xl hover:bg-orange-500/10 transition-colors">
+                    BACK TO YSKAIPE HOME
+                </a>
+            </div>
+            
+            <div class="mt-16 text-xs text-zinc-500 font-mono">
+                21,000,000 • NOT FINANCIAL ADVICE • SOVEREIGNTY IS YOURS
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-zinc-900 py-16">
+        <div class="max-w-7xl mx-auto px-6 text-zinc-500 text-xs flex flex-col md:flex-row justify-between items-center gap-y-6">
+            <div>© 2026 YSKAIPE • Human Cohesive AI + Bitcoin Natives</div>
+            <div class="flex gap-x-8">
+                <a href="#" class="hover:text-zinc-300">Privacy</a>
+                <a href="#" class="hover:text-zinc-300">GitHub</a>
+                <a href="https://x.com/yskaipe" class="hover:text-zinc-300">X</a>
+            </div>
+            <div class="text-orange-400">Built live. Shipped fast. HODLed forever.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script already loaded via CDN
+        console.log('%cBitcoin Natives page ready ⚡️', 'color:#f7931a; font-family:monospace');
+    </script>
+</body>
+</html>
