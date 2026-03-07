@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peaking Waters | YSKAIPE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('D7.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .masonry {
+            column-count: 3;
+            column-gap: 1.25rem;
+        }
+        @media (max-width: 768px) {
+            .masonry { column-count: 2; }
+        }
+        .masonry img {
+            break-inside: avoid-column;
+            margin-bottom: 1.25rem;
+            border-radius: 12px;
+            width: 100%;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-stone-950 text-stone-200 font-sans leading-relaxed">
+    <!-- Navbar -->
+    <nav class="bg-black/90 backdrop-blur-lg fixed w-full z-50 border-b border-stone-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <a href="https://yskaipe.com" class="flex items-center gap-x-3 text-2xl font-bold tracking-tighter">
+                <span class="text-emerald-500">YSKAIPE</span>
+            </a>
+            <div class="flex gap-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-emerald-400 transition">ABOUT</a>
+                <a href="#improvements" class="hover:text-emerald-400 transition">IMPROVEMENTS</a>
+                <a href="#gallery" class="hover:text-emerald-400 transition">GALLERY</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-bg h-screen flex items-center justify-center text-center relative">
+        <div class="max-w-4xl px-6 pt-20">
+            <h1 class="text-7xl md:text-8xl font-bold tracking-tighter mb-4 text-white">PEAKING WATERS</h1>
+            <p class="text-3xl md:text-4xl text-emerald-300 mb-6">Blue Ridge Mountains • North Carolina</p>
+            <p class="text-xl max-w-md mx-auto text-stone-300">Steep wooded land on Ski Mountain Rd. We're building driveways, water, terraces, and walkways — one shovel and one excavator bucket at a time.</p>
+            <a href="#improvements" class="mt-12 inline-flex items-center gap-x-3 bg-emerald-600 hover:bg-emerald-700 transition px-10 py-5 rounded-full text-lg font-semibold">
+                SEE WHAT WE'VE BUILT
+                <i class="fa-solid fa-arrow-down text-xl"></i>
+            </a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-widest flex items-center gap-x-2">
+            <div class="h-px w-12 bg-stone-400"></div>
+            SCROLL FOR PROGRESS
+            <div class="h-px w-12 bg-stone-400"></div>
+        </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 bg-stone-900">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-16 items-center">
+            <div class="md:col-span-7">
+                <div class="max-w-lg">
+                    <h2 class="text-5xl font-semibold mb-8 tracking-tight">A mountain retreat in the making</h2>
+                    <div class="space-y-6 text-lg text-stone-300">
+                        <p>Peaking Waters sits on a steep, beautiful ridge near Blowing Rock/Boone, North Carolina (36°09'50"N 81°39'46"W). Rhododendrons, hardwoods, and sweeping views.</p>
+                        <p>We've been doing all the heavy lifting ourselves — clearing, grading, digging, and building the backbone so this land can become a peaceful private sanctuary and glamping spot.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-5">
+                <img src="A4.jpg" alt="Aerial view of Peaking Waters property" class="rounded-3xl shadow-2xl w-full">
+                <div class="mt-4 flex items-center gap-x-4 text-sm text-stone-400">
+                    <i class="fa-solid fa-map-location-dot text-emerald-500"></i>
+                    <span>Ski Mountain Rd / Edmisten Rd • Blowing Rock, NC</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPROVEMENTS -->
+    <section id="improvements" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="uppercase text-emerald-400 text-sm tracking-widest font-medium">Phase 1 Complete</span>
+                <h2 class="text-5xl font-semibold mt-3">What We've Built</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Driveways -->
+                <div class="bg-stone-900 rounded-3xl overflow-hidden card-hover">
+                    <img src="A28.png" alt="New driveways aerial" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold mb-3 flex items-center gap-x-2">
+                            <i class="fa-solid fa-road text-emerald-500"></i>
+                            New Driveways &amp; Roads
+                        </h3>
+                        <p class="text-stone-400">Cleared, graded, and connected new driveways and access roads across the steep terrain for year-round usability.</p>
+                    </div>
+                </div>
+
+                <!-- Well -->
+                <div class="bg-stone-900 rounded-3xl overflow-hidden card-hover">
+                    <img src="G1.jpg" alt="400ft wellhouse" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold mb-3 flex items-center gap-x-2">
+                            <i class="fa-solid fa-water text-emerald-500"></i>
+                            400-Foot Well System
+                        </h3>
+                        <p class="text-stone-400">New deep well, pump replacement, and custom wellhouse built to bring reliable water to the ridge.</p>
+                    </div>
+                </div>
+
+                <!-- Terracing -->
+                <div class="bg-stone-900 rounded-3xl overflow-hidden card-hover">
+                    <img src="B5.jpg" alt="Terracing excavation" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold mb-3 flex items-center gap-x-2">
+                            <i class="fa-solid fa-layer-group text-emerald-500"></i>
+                            Terracing &amp; Earthwork
+                        </h3>
+                        <p class="text-stone-400">Massive excavation and terracing of the steep slopes to create stable, usable pads and control erosion.</p>
+                    </div>
+                </div>
+
+                <!-- Walkways -->
+                <div class="bg-stone-900 rounded-3xl overflow-hidden card-hover">
+                    <img src="D1.jpg" alt="Wooden walkways and platforms" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-semibold mb-3 flex items-center gap-x-2">
+                            <i class="fa-solid fa-person-walking text-emerald-500"></i>
+                            Walkways &amp; Connecting Paths
+                        </h3>
+                        <p class="text-stone-400">Hand-built wooden platforms, pallet bridges, and connecting footpaths linking the site together.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center text-sm text-stone-400 flex items-center justify-center gap-x-8">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-tent text-2xl"></i>
+                    <span>Bell tent base camp</span>
+                </div>
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-house text-2xl"></i>
+                    <span>Tiny bunk cabin</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="py-24 bg-stone-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-semibold text-center mb-12">Progress in Pictures</h2>
+            
+            <div class="masonry">
+                <!-- Featured construction & progress shots -->
+                <img src="D5.jpg" alt="Bell tent with wooden platform walkway in autumn">
+                <img src="B2.jpg" alt="Excavator digging terraces">
+                <img src="F2.jpg" alt="Foggy morning with excavator and wellhouse">
+                <img src="B7.jpg" alt="Excavator working under wooden framing">
+                <img src="A.jpg" alt="Chainsaw and excavator clearing rhododendrons">
+                <img src="B5.jpg" alt="Deep soil cut from terracing">
+                <img src="1b.jpg" alt="Sunset over construction site with wellhouse">
+                <img src="F1.jpg" alt="Muddy terraced path in fog">
+                <img src="D1.jpg" alt="Pallet walkway leading to bell tent">
+                <img src="E1.jpg" alt="Tiny cabin interior with bunk beds and kitchenette">
+                <img src="G1.jpg" alt="Finished wellhouse on clear day">
+                <img src="B.jpg" alt="Bell tent nestled in green forest">
+                <img src="B12.jpg" alt="Campfire burning on the property">
+                <img src="C1.jpeg" alt="Snowy driveway and access road">
+                <img src="A32.jpg" alt="Close-up aerial of winding roads through woods">
+                <img src="A16.jpg" alt="Cleared foggy hillside">
+                <img src="B8.jpg" alt="Trail with storage bins during build">
+                <img src="A28.png" alt="Satellite view of entire property roads">
+                <img src="1.jpg" alt="Bell tent with fresh dirt work in foreground">
+                <img src="D7.jpg" alt="Large bell tent among fall trees">
+                <img src="B3.jpg" alt="Dirt piles and early site prep">
+                <img src="A4.jpg" alt="Google Earth aerial overview">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-16 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-2xl font-light tracking-widest mb-2">PEAKING WATERS</p>
+            <p class="text-stone-400">A personal mountain project by YSKAIPE • Blowing Rock, North Carolina</p>
+            <p class="text-xs text-stone-500 mt-12">All photos © YSKAIPE 2025-2026</p>
+        </div>
+    </footer>
+
+    <script>
+        tailwind.config = {
+            content: [],
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+</body>
+</html>
