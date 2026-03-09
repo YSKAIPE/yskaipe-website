@@ -15,7 +15,7 @@
         }
       
         .tail-container {
-            font-family: 'Inter', system_ui, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
         }
       
         .logo-font {
@@ -69,16 +69,28 @@
         .hero-glow {
             text-shadow: 0 0 40px rgb(0 245 255 / 0.4);
         }
-        .journey-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://thumbs.dreamstime.com/b/adventurous-person-standing-majestic-mountain-peak-scenic-view-365111149.jpg');
+        .maze-escape {
+            background-image: linear-gradient(rgba(10, 10, 10, 0.75), rgba(26, 26, 46, 0.85)),
+                              url('https://gh.cdn.sewest.net/assets/ident/news/b3f0a8f8/FF7RIntergrade_May_KeyVisual-fkl3lqa71.jpeg?quality=65');
             background-size: cover;
-            background-position: center;
+            background-position: center 40%;
+            background-attachment: fixed;
+        }
+        .escape-glow {
+            animation: glow-pulse 6s ease-in-out infinite;
+        }
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 0 30px rgba(0, 245, 255, 0.4); }
+            50% { text-shadow: 0 0 60px rgba(0, 245, 255, 0.7); }
+        }
+        .maze-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
         }
     </style>
 </head>
 <body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR (unchanged) -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-x-3">
@@ -98,7 +110,7 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO (unchanged) -->
     <section class="hero-bg min-h-screen flex items-center pt-32 pb-20">
         <div class="max-w-6xl mx-auto px-6 text-center">
             <div class="inline-flex items-center gap-x-3 px-6 py-3 rounded-full bg-cyan-400/10 text-cyan-300 text-sm font-medium mb-10 border border-cyan-400/20">
@@ -125,22 +137,55 @@
         </div>
     </section>
 
-    <!-- JOURNEY ACCENT SECTION (Adventurous back-view image) -->
-    <section class="relative h-96 md:h-[600px] overflow-hidden journey-bg">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-        <div class="absolute inset-0 flex items-center justify-center text-center px-6">
-            <div class="max-w-4xl">
-                <h2 class="text-5xl md:text-7xl font-extrabold tracking-tighter text-white drop-shadow-2xl hero-glow">
-                    The Journey<br>is the Reward
+    <!-- GLORIOUS MAZE ESCAPE SECTION -->
+    <section class="relative h-[80vh] md:h-[100vh] overflow-hidden maze-escape">
+        <div class="absolute inset-0 maze-overlay flex items-center justify-center text-center px-6">
+            <div class="max-w-5xl z-10">
+                <h2 class="text-6xl md:text-9xl font-extrabold tracking-tighter text-white escape-glow mb-6 md:mb-10 leading-none">
+                    THE JOURNEY<br>IS THE REWARD
                 </h2>
-                <p class="mt-6 text-xl md:text-2xl text-zinc-200 font-light max-w-3xl mx-auto">
-                    Every step in building, in Bitcoin, in life — it's the path itself that matters most.
+                <p class="text-xl md:text-3xl text-zinc-200 font-light max-w-4xl mx-auto leading-relaxed opacity-90">
+                    Every twist, every wall, every moment of doubt in the maze...<br>
+                    leads to the glorious break into open sky.<br>
+                    <span class="text-cyan-300 font-medium">Escape mediocre. Build with true teammates. The path itself is the prize.</span>
                 </p>
+                <div class="mt-10 md:mt-16">
+                    <a href="#how" class="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-3xl font-bold text-lg hover:scale-105 transition-transform shadow-2xl shadow-cyan-500/40">
+                        <i class="fas fa-door-open text-xl"></i>
+                        Start Your Escape
+                    </a>
+                </div>
             </div>
         </div>
+        <!-- Subtle floating cyan particles / glow effect -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-4 h-4 bg-cyan-400 rounded-full opacity-40 animate-ping-slow"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-6 h-6 bg-cyan-300 rounded-full opacity-30 animate-ping-slower"></div>
+            <div class="absolute top-2/3 left-1/2 w-5 h-5 bg-cyan-500 rounded-full opacity-50 animate-ping"></div>
+        </div>
     </section>
+    <style>
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 0.4; }
+            70% { transform: scale(2.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        @keyframes ping-slower {
+            0% { transform: scale(1); opacity: 0.3; }
+            90% { transform: scale(3); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        @keyframes ping {
+            0% { transform: scale(1); opacity: 0.5; }
+            60% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .animate-ping-slow { animation: ping-slow 8s infinite; }
+        .animate-ping-slower { animation: ping-slower 12s infinite; }
+        .animate-ping { animation: ping 6s infinite; }
+    </style>
 
-    <!-- PHILOSOPHY -->
+    <!-- PHILOSOPHY (unchanged) -->
     <section id="philosophy" class="py-32 bg-zinc-900 border-t border-white/5">
         <div class="max-w-5xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-16 items-start">
@@ -157,7 +202,7 @@
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
+    <!-- HOW IT WORKS (unchanged) -->
     <section id="how" class="py-32 bg-black">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20">
@@ -196,7 +241,7 @@
         </div>
     </section>
 
-    <!-- OUR STORY + FOUNDER -->
+    <!-- OUR STORY + FOUNDER (unchanged, male image intact) -->
     <section id="story" class="py-32 bg-zinc-900">
         <div class="max-w-5xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-16">
@@ -208,10 +253,11 @@
                     <p>Founded in 2025 in Cornelius, North Carolina, YSKAIPE was born from real frustration: mismatched teams, fragmented threads, and platforms that treat people like checklist items.</p>
                     <p>We’re proudly bootstrapped and founder-led — shipping daily and staying laser-focused on what actually makes collaboration feel magical.</p>
                     
-                    <!-- Founder Card -->
                     <div class="mt-12 glass rounded-3xl p-10 card-hover">
                         <div class="flex flex-col md:flex-row gap-8 items-center">
-                            <img src="https://picsum.photos/id/1011/400/400" alt="Nicholas Conenna" class="w-40 h-40 rounded-3xl object-cover flex-shrink-0 border border-white/20">
+                            <img src="https://thumbs.dreamstime.com/b/handsome-hiker-backpack-hiking-uphill-holding-map-1300x956.jpg" 
+                                 alt="Nicholas Conenna – Adventurous builder" 
+                                 class="w-48 h-48 rounded-3xl object-cover flex-shrink-0 border-2 border-cyan-400/30 shadow-xl shadow-cyan-500/20">
                             <div>
                                 <h4 class="text-3xl font-semibold">Nicholas Conenna</h4>
                                 <p class="text-cyan-400 font-medium">Founder & Lead Builder</p>
@@ -232,7 +278,7 @@
         </div>
     </section>
 
-    <!-- VISION CTA -->
+    <!-- VISION CTA (unchanged) -->
     <section class="py-32 border-t border-white/5 bg-black">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-5xl font-extrabold tracking-tighter mb-8">Every ambitious project deserves the right crew.</h2>
@@ -249,7 +295,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (unchanged) -->
     <footer class="bg-black py-16 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
             <div class="flex items-center justify-center gap-x-8 flex-wrap">
@@ -262,7 +308,7 @@
     </footer>
 
     <script>
-        console.log('%cYSKAIPE — Human Cohesive AI ready 🚀', 'color:#00f5ff; font-family:monospace');
+        console.log('%cYSKAIPE — Escape the maze, build with teammates 🚀', 'color:#00f5ff; font-family:monospace');
     </script>
 </body>
 </html>
