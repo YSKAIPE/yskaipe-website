@@ -7,33 +7,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
+       
         :root {
             --primary: #00f5ff;
         }
-        
+       
         .tail-container {
             font-family: 'Inter', system_ui, sans-serif;
         }
-        
+       
         .logo-font {
             font-family: 'Space Grotesk', sans-serif;
         }
-
         .hero-bg {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
         }
-
         .glass {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
         }
-
         .section-title {
             position: relative;
         }
-        
+       
         .section-title:after {
             content: '';
             position: absolute;
@@ -44,21 +41,19 @@
             left: 0;
             border-radius: 9999px;
         }
-
         .experience-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+       
         .experience-card:hover {
             transform: translateY(-12px);
             box-shadow: 0 25px 50px -12px rgb(0 245 255 / 0.15);
         }
-
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
         }
-        
+       
         .nav-link:after {
             content: '';
             position: absolute;
@@ -69,18 +64,20 @@
             background-color: #00f5ff;
             transition: width 0.3s ease;
         }
-        
+       
         .nav-link:hover:after {
             width: 100%;
         }
-
         .hero-glow {
             animation: pulse 4s ease-in-out infinite;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 0.6; }
             50% { opacity: 1; }
+        }
+        .banner {
+            background: linear-gradient(90deg, #1a1a2e, #0f172a);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.15);
         }
     </style>
 </head>
@@ -94,16 +91,16 @@
                     <span class="logo-font text-2xl font-semibold tracking-tighter">YSKAIPE</span>
                 </div>
             </div>
-            
+           
             <div class="hidden md:flex items-center gap-x-10 text-sm font-medium">
                 <a href="#about" class="nav-link text-zinc-300 hover:text-white">About</a>
                 <a href="#experience" class="nav-link text-zinc-300 hover:text-white">Experience</a>
+                <a href="#bitcoin-natives" class="nav-link text-zinc-300 hover:text-white">Bitcoin Natives</a>
                 <a href="#education" class="nav-link text-zinc-300 hover:text-white">Education</a>
                 <a href="#skills" class="nav-link text-zinc-300 hover:text-white">Skills</a>
                 <a href="#connect" class="nav-link text-zinc-300 hover:text-white">Connect</a>
             </div>
-
-            <a href="https://www.linkedin.com/in/nickconenna" target="_blank" 
+            <a href="https://www.linkedin.com/in/nickconenna" target="_blank"
                class="px-6 py-3 bg-white text-zinc-950 rounded-3xl font-semibold text-sm flex items-center gap-x-2 hover:bg-cyan-400 hover:text-white transition-all duration-300">
                 <i class="fab fa-linkedin"></i>
                 <span>LinkedIn</span>
@@ -111,42 +108,52 @@
         </div>
     </nav>
 
+    <!-- NEW BANNER with Link -->
+    <div class="banner fixed top-[4.5rem] left-0 right-0 z-40 py-3 text-center text-sm md:text-base">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-center gap-4 flex-wrap">
+            <span class="text-cyan-400 font-medium">YSKAIPE Bitcoin Division:</span>
+            <span>Exploring sovereignty, self-custody & the 21M cap mindset</span>
+            <a href="https://www.yskaipe.com/bitcoin-natives.html" target="_blank" 
+               class="inline-flex items-center gap-2 px-5 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 hover:text-white transition-all">
+                Discover Bitcoin Natives <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+        </div>
+    </div>
+
     <!-- HERO -->
-    <section class="hero-bg min-h-screen flex items-center pt-20">
+    <section class="hero-bg min-h-screen flex items-center pt-32 md:pt-20"> <!-- added extra pt for banner space -->
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="space-y-8">
                 <div class="inline-flex items-center gap-x-2 px-5 py-2 rounded-3xl bg-white/5 text-cyan-400 text-xs font-mono tracking-[2px]">
                     <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
                     CORNELIUS, NC
                 </div>
-                
+               
                 <h1 class="text-7xl md:text-8xl font-semibold tracking-tighter logo-font leading-none">
                     NICK<br>CONENNA
                 </h1>
-                
+               
                 <div class="max-w-lg">
                     <p class="text-3xl text-zinc-400 font-light leading-tight">
-                        Founder &amp; Developer @ <span class="text-white font-medium">YSKAIPE</span>
+                        Founder & Developer @ <span class="text-white font-medium">YSKAIPE</span>
                     </p>
                     <p class="text-3xl text-zinc-400 font-light leading-tight mt-1">
-                        Applied AI &amp; Human Cohesive Systems
+                        Applied AI & Human Cohesive Systems
                     </p>
                 </div>
-
                 <div class="flex flex-wrap gap-4">
-                    <a href="#about" 
+                    <a href="#about"
                        class="px-10 py-5 bg-white text-zinc-950 rounded-3xl font-semibold flex items-center gap-x-3 hover:scale-105 transition-transform duration-300">
                         <span>Meet the Founder</span>
                         <i class="fas fa-arrow-down"></i>
                     </a>
-                    
+                   
                     <a href="https://www.linkedin.com/in/nickconenna" target="_blank"
                        class="px-8 py-5 border border-white/30 hover:border-cyan-400 rounded-3xl font-medium flex items-center gap-x-3 transition-all">
                         <i class="fab fa-linkedin text-xl"></i>
                         <span>View on LinkedIn</span>
                     </a>
                 </div>
-
                 <div class="flex items-center gap-x-8 text-sm pt-8 border-t border-white/10">
                     <div>
                         <div class="text-cyan-400 text-xs tracking-widest">CURRENT ROLE</div>
@@ -155,23 +162,22 @@
                     <div class="h-8 w-px bg-white/20"></div>
                     <div>
                         <div class="text-cyan-400 text-xs tracking-widest">PREVIOUSLY</div>
-                        <div class="font-medium">Land Developer &amp; Bitcoin Specialist</div>
+                        <div class="font-medium">Land Developer & Bitcoin Specialist</div>
                     </div>
                 </div>
             </div>
-
             <!-- Hero Visual -->
             <div class="relative flex justify-center md:justify-end">
                 <div class="relative w-full max-w-md">
                     <!-- Gradient Orb -->
                     <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-blue-600/10 to-transparent rounded-[6rem] blur-3xl hero-glow"></div>
-                    
+                   
                     <!-- Profile Frame -->
                     <div class="relative rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
-                        <img src="https://picsum.photos/id/1015/800/1000" 
+                        <img src="https://picsum.photos/id/1015/800/1000"
                              alt="Nick Conenna - Founder of YSKAIPE"
                              class="w-full aspect-[4/5] object-cover grayscale-[0.3] hover:grayscale-0 transition-all duration-700">
-                        
+                       
                         <!-- Overlay badge -->
                         <div class="absolute bottom-8 left-8 right-8 glass rounded-2xl p-6">
                             <div class="flex items-center gap-x-4">
@@ -183,13 +189,12 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Floating badges -->
                     <div class="absolute -top-6 -right-6 glass px-6 py-3 rounded-3xl text-sm font-medium flex items-center gap-x-2 shadow-xl">
                         <i class="fas fa-bitcoin text-amber-400"></i>
                         <span>Bitcoiner</span>
                     </div>
-                    
+                   
                     <div class="absolute -bottom-6 -left-6 glass px-6 py-3 rounded-3xl text-sm font-medium flex items-center gap-x-2 shadow-xl">
                         <i class="fas fa-landmark text-emerald-400"></i>
                         <span>Land Developer</span>
@@ -197,7 +202,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Scroll indicator -->
         <div class="absolute bottom-12 left-1/2 flex flex-col items-center gap-y-2 text-xs tracking-widest text-zinc-500">
             <div>SCROLL FOR MORE</div>
@@ -215,18 +219,18 @@
                         <h2 class="section-title text-6xl font-semibold tracking-tighter mt-6">The Visionary Behind<br>Human Cohesive AI</h2>
                     </div>
                 </div>
-                
+               
                 <div class="md:col-span-7 text-zinc-300 text-[21px] leading-relaxed space-y-8">
                     <p>
-                        Nick Conenna is the Founder &amp; Developer of <span class="text-white font-medium">YSKAIPE</span> — a revolutionary platform that turns a single prompt into fully autonomous, collaborative human-AI teams.
+                        Nick Conenna is the Founder & Developer of <span class="text-white font-medium">YSKAIPE</span> — a revolutionary platform that turns a single prompt into fully autonomous, collaborative human-AI teams.
                     </p>
                     <p>
                         With deep roots in applied AI, blockchain, and real-world systems design, Nick builds technology that doesn't just automate — it <span class="italic">co-creates</span> with humans in cohesive, intelligent pods.
                     </p>
                     <p>
-                        Previously a land developer and Bitcoin specialist, Nick brings entrepreneurial grit and systems thinking to the frontier of human-AI collaboration.
+                        Previously a land developer and Bitcoin specialist, Nick brings entrepreneurial grit and systems thinking to the frontier of human-AI collaboration — now extending that mindset into Bitcoin sovereignty and self-custody.
                     </p>
-                    
+                   
                     <div class="pt-8 border-t border-white/10 flex gap-8">
                         <div>
                             <div class="text-cyan-400 text-sm">Currently building in</div>
@@ -250,28 +254,26 @@
                     <span class="text-xs font-mono text-cyan-400">CHAPTER 02</span>
                     <h2 class="section-title text-6xl font-semibold tracking-tighter">Experience</h2>
                 </div>
-                <a href="https://www.linkedin.com/in/nickconenna" target="_blank" 
+                <a href="https://www.linkedin.com/in/nickconenna" target="_blank"
                    class="hidden md:flex items-center gap-x-3 text-sm text-zinc-400 hover:text-white transition-colors">
-                    Full timeline on LinkedIn 
+                    Full timeline on LinkedIn
                     <span class="text-xl">↗</span>
                 </a>
             </div>
-
             <div class="space-y-8">
                 <!-- YSKAIPE -->
                 <div class="experience-card glass border border-white/10 rounded-3xl p-10 grid md:grid-cols-12 gap-10">
                     <div class="md:col-span-4">
                         <div class="text-cyan-400 text-sm font-medium">2023 — Present</div>
-                        <div class="text-3xl font-semibold mt-3">Founder &amp; Developer</div>
+                        <div class="text-3xl font-semibold mt-3">Founder & Developer</div>
                         <div class="text-2xl text-zinc-400">YSKAIPE</div>
-                        <div class="mt-8 text-xs uppercase tracking-widest text-zinc-500">Applied AI &amp; Human Cohesive Systems • Cornelius, NC</div>
+                        <div class="mt-8 text-xs uppercase tracking-widest text-zinc-500">Applied AI & Human Cohesive Systems • Cornelius, NC</div>
                     </div>
                     <div class="md:col-span-8 text-zinc-300 leading-relaxed">
-                        Building the next generation of AI that creates and orchestrates real human project teams ("Pods") from natural language prompts. 
+                        Building the next generation of AI that creates and orchestrates real human project teams ("Pods") from natural language prompts.
                         Combining CrewAI/LangGraph architectures with human-in-the-loop collaboration to solve complex real-world problems faster and smarter.
                     </div>
                 </div>
-
                 <!-- Peaking Waters -->
                 <div class="experience-card glass border border-white/10 rounded-3xl p-10 grid md:grid-cols-12 gap-10">
                     <div class="md:col-span-4">
@@ -281,21 +283,85 @@
                         <div class="mt-8 text-xs uppercase tracking-widest text-zinc-500">Land Development</div>
                     </div>
                     <div class="md:col-span-8 text-zinc-300 leading-relaxed">
-                        Led land development initiatives across the Southeast with a focus on sustainable projects and community impact. 
+                        Led land development initiatives across the Southeast with a focus on sustainable projects and community impact.
                         Advocated for progressive banking reform in the emerging industries space (SAFE Banking Act signatory).
                     </div>
                 </div>
-
                 <!-- Bitcoin Specialist -->
                 <div class="experience-card glass border border-white/10 rounded-3xl p-10 grid md:grid-cols-12 gap-10">
                     <div class="md:col-span-4">
                         <div class="text-cyan-400 text-sm font-medium">Ongoing</div>
-                        <div class="text-3xl font-semibold mt-3">Bitcoin Specialist &amp; Educator</div>
-                        <div class="text-2xl text-zinc-400">Shift Bitcoin &amp; Independent</div>
+                        <div class="text-3xl font-semibold mt-3">Bitcoin Specialist & Educator</div>
+                        <div class="text-2xl text-zinc-400">Shift Bitcoin & Independent</div>
                     </div>
                     <div class="md:col-span-8 text-zinc-300 leading-relaxed">
-                        Deeply involved in Bitcoin education, adoption, and infrastructure. Passionate about sound money principles and their intersection with emerging technology systems.
+                        Deeply involved in Bitcoin education, adoption, and infrastructure. Passionate about sound money principles and their intersection with emerging technology systems — now channeled through YSKAIPE's Bitcoin Division.
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW BITCOIN NATIVES SECTION -->
+    <section id="bitcoin-natives" class="py-28 bg-gradient-to-b from-black to-zinc-950">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <span class="text-xs font-mono text-amber-400">CHAPTER 02.5</span>
+                    <h2 class="section-title text-6xl font-semibold tracking-tighter">Bitcoin Natives</h2>
+                </div>
+                <a href="https://www.yskaipe.com/bitcoin-natives.html" target="_blank"
+                   class="flex items-center gap-x-3 text-sm text-zinc-400 hover:text-amber-300 transition-colors">
+                    Full Bitcoin Natives Overview ↗
+                </a>
+            </div>
+           
+            <div class="glass border border-white/10 rounded-3xl p-10 md:p-12">
+                <div class="max-w-4xl mx-auto space-y-10 text-zinc-200 leading-relaxed">
+                    <p class="text-2xl font-medium text-center text-amber-300">
+                        YSKAIPE Bitcoin Division — Summarizing <span class="font-bold">@Bitcoin_Natives</span><br>
+                        Where every human learns to hold the most ideal form of digital value ever created.
+                    </p>
+                   
+                    <div class="grid md:grid-cols-2 gap-10">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-cyan-400">The Voice of Bitcoin Natives</h3>
+                            <p>
+                                Run by Nick Conenna, <a href="https://x.com/Bitcoin_Natives" target="_blank" class="text-cyan-300 hover:underline">@Bitcoin_Natives</a> delivers Bitcoin-first thinking — no hype, no custodians. Focus: protocol education, decentralization reminders, regulatory clarity for equal access.
+                            </p>
+                            <p class="mt-4 italic text-zinc-400">
+                                “Bitcoin represents an opportunity for every human to share in the most ideal form of digital value ever created.” — EST. 2025 • Active Daily
+                            </p>
+                            <p class="mt-4 text-sm">
+                                Core mindset: 21M Fixed Supply • Nodes Rule Enforcers • HODL Forever Savings
+                            </p>
+                        </div>
+                       
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-cyan-400">The Bitcoin Native Stack</h3>
+                            <ul class="space-y-6 text-zinc-300">
+                                <li><strong>Node Running</strong> — Verify, don't trust. Umbrel, RaspiBlitz, Start9. YSKAIPE AI pods prototype nodes instantly.</li>
+                                <li><strong>Cold Storage</strong> — Air-gapped hardware (Coldcard, Trezor), multisig, metal backups. Zero counterparty risk.</li>
+                                <li><strong>HODL-Minded</strong> — Savings technology, not trading. Stack sats, never sell fiat. ∞ TIME IN THE MARKET.</li>
+                                <li><strong>Digital Gold Impact</strong> — Scarce, portable, verifiable, neutral. Harder money than physical gold.</li>
+                            </ul>
+                        </div>
+                    </div>
+                   
+                    <div class="pt-8 border-t border-white/10 text-center">
+                        <p class="text-xl font-medium mb-6">
+                            Built with YSKAIPE AI — Spin up sovereign Bitcoin prototypes in seconds:<br>
+                            <span class="text-amber-300">"Build a self-sovereign stack: Umbrel node + Coldcard multisig + HODL dashboard"</span>
+                        </p>
+                        <a href="https://www.yskaipe.com/bitcoin-natives.html" target="_blank"
+                           class="inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-500 hover:to-amber-700 rounded-3xl font-semibold text-lg transition-all shadow-lg shadow-amber-900/30">
+                            Explore Bitcoin Natives <i class="fas fa-bitcoin text-2xl"></i>
+                        </a>
+                    </div>
+                   
+                    <p class="text-center text-sm text-zinc-500 mt-10">
+                        21,000,000 • NOT FINANCIAL ADVICE • SOVEREIGNTY IS YOURS
+                    </p>
                 </div>
             </div>
         </div>
@@ -306,7 +372,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <span class="text-xs font-mono text-cyan-400">CHAPTER 03</span>
             <h2 class="section-title text-6xl font-semibold tracking-tighter mt-3 mb-16">Education</h2>
-            
+           
             <div class="max-w-2xl">
                 <div class="glass border border-white/10 rounded-3xl p-12">
                     <div class="flex justify-between items-start">
@@ -326,7 +392,7 @@
         </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- SKILLS (unchanged, but Bitcoin elements already fit well) -->
     <section id="skills" class="py-28 bg-black">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-20">
@@ -344,13 +410,13 @@
                             </div>
                             <div class="flex items-center gap-x-4">
                                 <div class="w-8 h-px bg-cyan-400"></div>
-                                <span class="font-medium">CrewAI &amp; LangGraph</span>
+                                <span class="font-medium">CrewAI & LangGraph</span>
                             </div>
                         </div>
                         <div class="space-y-8">
                             <div class="flex items-center gap-x-4">
                                 <div class="w-8 h-px bg-cyan-400"></div>
-                                <span class="font-medium">Bitcoin &amp; Blockchain Strategy</span>
+                                <span class="font-medium">Bitcoin & Blockchain Strategy</span>
                             </div>
                             <div class="flex items-center gap-x-4">
                                 <div class="w-8 h-px bg-cyan-400"></div>
@@ -363,7 +429,7 @@
                         </div>
                     </div>
                 </div>
-                
+               
                 <div class="glass border border-white/10 rounded-3xl p-12 self-start">
                     <div class="uppercase text-xs tracking-[1px] text-zinc-500 mb-6">Also fluent in</div>
                     <div class="flex flex-wrap gap-3">
@@ -379,12 +445,12 @@
         </div>
     </section>
 
-    <!-- CONNECT -->
+    <!-- CONNECT (unchanged) -->
     <section id="connect" class="py-28 border-t border-white/10">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <div class="text-cyan-400 text-sm font-mono tracking-widest mb-6">CHAPTER 04 • LET'S BUILD TOGETHER</div>
             <h2 class="text-7xl font-semibold tracking-tighter leading-none">Ready to co-create the<br>future of intelligent teams?</h2>
-            
+           
             <div class="mt-16 flex flex-col md:flex-row gap-6 justify-center">
                 <a href="https://www.linkedin.com/in/nickconenna" target="_blank"
                    class="group flex-1 max-w-xs mx-auto md:mx-0 bg-white text-zinc-950 hover:bg-cyan-400 hover:text-white transition-all duration-300 rounded-3xl py-8 px-10 flex items-center justify-center gap-x-6 text-left">
@@ -394,7 +460,7 @@
                         <div class="text-sm opacity-70">nickconenna</div>
                     </div>
                 </a>
-                
+               
                 <a href="https://www.instagram.com/nickconenna/" target="_blank"
                    class="group flex-1 max-w-xs mx-auto md:mx-0 border border-white/30 hover:border-white transition-all duration-300 rounded-3xl py-8 px-10 flex items-center justify-center gap-x-6 text-left">
                     <i class="fab fa-instagram text-4xl"></i>
@@ -404,7 +470,7 @@
                     </div>
                 </a>
             </div>
-            
+           
             <div class="mt-20 text-xs text-zinc-500 font-mono">
                 Built as a custom profile experience for yskaipe.com • March 2026
             </div>
@@ -417,6 +483,8 @@
             <div class="flex items-center justify-center gap-x-8">
                 <a href="https://yskaipe.com" class="hover:text-white transition-colors">YSKAIPE.com</a>
                 <span class="w-px h-3 bg-white/20"></span>
+                <a href="https://www.yskaipe.com/bitcoin-natives.html" class="hover:text-white transition-colors">Bitcoin Natives</a>
+                <span class="w-px h-3 bg-white/20"></span>
                 <span>© Nick Conenna</span>
                 <span class="w-px h-3 bg-white/20"></span>
                 <a href="#" class="hover:text-white transition-colors">Back to Top ↑</a>
@@ -425,9 +493,7 @@
     </footer>
 
     <script>
-        // Tailwind script already loaded via CDN
         function initializeTailwind() {
-            // Any additional JS if needed
             console.log('%cNick Conenna — YSKAIPE Profile ready 🚀', 'color:#00f5ff; font-family:monospace');
         }
         window.onload = initializeTailwind;
