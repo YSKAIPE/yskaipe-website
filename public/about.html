@@ -1,188 +1,248 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About YSKAIPE – Human Cohesive AI</title>
-  <meta name="description" content="YSKAIPE: Where humans and AI collaborate as true teammates to build better outcomes — faster." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-          colors: {
-            primary: '#6366f1',
-            primaryDark: '#4f46e5',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About YSKAIPE – Human Cohesive AI</title>
+    <meta name="description" content="YSKAIPE: Where humans and AI collaborate as true teammates to build better outcomes — faster.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
+      
+        :root {
+            --primary: #00f5ff;
         }
-      }
-    }
-  </script>
+      
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+      
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .section-title {
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #00f5ff, #00b8ff);
+            bottom: -12px;
+            left: 0;
+            border-radius: 9999px;
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -15px rgb(0 245 255 / 0.2);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00f5ff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        .hero-glow {
+            text-shadow: 0 0 40px rgb(0 245 255 / 0.4);
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 text-slate-900 dark:text-slate-100 min-h-screen font-sans antialiased">
+<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
 
-  <!-- Header -->
-  <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-6">
-        <a href="/" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition">
-          ← Home
-        </a>
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl">Y</div>
-          <h1 class="text-2xl font-semibold tracking-tight">About YSKAIPE</h1>
-        </div>
-      </div>
-      <button id="theme-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-        <span class="sr-only">Toggle dark mode</span>
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path id="sun" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          <path id="moon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="relative pt-16 pb-20 lg:pt-24 lg:pb-28 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-        YSKAIPE — pronounced "escape"<br>
-        <span class="text-indigo-600 dark:text-indigo-400">Human Cohesive AI</span>
-      </h2>
-      <p class="text-xl sm:text-2xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto font-medium">
-        We don't just use AI. We work alongside it.<br>
-        AI isn't a tool here — it's a teammate that thinks, designs, builds, and iterates with us.
-      </p>
-    </div>
-  </section>
-
-  <!-- Main Content -->
-  <section class="py-16 lg:py-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg dark:prose-invert prose-indigo">
-
-      <h3 class="text-3xl font-bold mb-6">Our Philosophy: Humans and AI as True Teammates</h3>
-      <p>
-        At YSKAIPE, we believe the biggest breakthroughs happen when humans and AI operate as genuine collaborators — not in a boss-and-tool dynamic, but as partners sharing the same goal, building on each other's strengths, and pushing the work forward together.
-      </p>
-      <p>
-        That's exactly how we built YSKAIPE itself.
-      </p>
-      <p>
-        We worked closely with <strong>Grok</strong> as our reasoning partner — for deep exploration of human-cohesive AI concepts, stress-testing orchestration logic, and shaping vague ideas into structured, actionable flows.
-      </p>
-      <p>
-        We relied on <strong>Figma</strong> (with AI-assisted plugins and smart layout features) as our design partner — co-creating wireframes, iterating on visuals in real time, and prototyping interfaces side by side.
-      </p>
-      <p>
-        These weren't passive tools — they were active collaborators that helped us break through bottlenecks and avoid the costly handoff gaps that slow most teams down. The result is a product born from genuine human-AI teamwork.
-      </p>
-
-      <h3 class="text-3xl font-bold mt-12 mb-6">How YSKAIPE Brings This to Life</h3>
-      <p>
-        That same dynamic powers YSKAIPE today through an intelligent <strong>AI Orchestrator (AI-O)</strong> — designed not to replace people, but to work alongside them.
-      </p>
-      <p>
-        Start with a simple <strong>SEED INPUT</strong>, and AI-O steps in as a co-founder-level collaborator:
-      </p>
-      <ul class="list-disc pl-6 space-y-3">
-        <li>Matching vibe-aligned humans using advanced similarity algorithms — including cosine similarity across attitudes, interests, and working styles</li>
-        <li>Designing tailored workspaces, tools, and workflows for each project</li>
-        <li>Running real-time monitoring, dynamic refinements, and milestone guidance throughout</li>
-        <li>Bringing in human cohesive AI specialists when complexity demands it</li>
-      </ul>
-      <p>
-        From vibe-coding jams and sustainable app prototypes to AI research pods, cohesive AI workshops, startup strategy sprints, and community event planning — AI-O assembles focused, high-output teams where humans bring creativity and domain expertise, and AI brings coordination, memory, and iteration speed. The real value lives in the partnership.
-      </p>
-
-      <h3 class="text-3xl font-bold mt-12 mb-6">Our Story</h3>
-      <p>
-        Founded in 2025 in Cornelius, North Carolina, YSKAIPE grew out of a frustration shared by a lot of builders: mismatched team dynamics, endless fragmented threads, and platforms that treat people like interchangeable checklist items.
-      </p>
-      <p>
-        YSKAIPE exists to make a better kind of collaboration accessible to every creator and builder — one where the team feels right from the start.
-      </p>
-      <p>
-        We're proudly bootstrapped and founder-led — moving fast, shipping daily, and staying focused on what actually makes collaboration work. As we grow, we're looking forward to welcoming more humans (and their AI teammates) who share the vision of escaping mediocre teams for good.
-      </p>
-
-      <!-- Founder Card -->
-      <div class="mt-12 bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-slate-200 dark:border-slate-700">
-        <div class="flex flex-col sm:flex-row items-center gap-6">
-          <img src="/images/npc-on-X.jpg" alt="Nicholas Conenna" class="w-32 h-32 rounded-full object-cover flex-shrink-0" />
-          <div>
-            <h4 class="text-2xl font-bold">Nicholas Conenna / @yskaipe</h4>
-            <p class="text-indigo-600 dark:text-indigo-400 font-medium mt-1">Founder &amp; Lead Builder</p>
-            <p class="mt-4 text-slate-600 dark:text-slate-300">
-              Applied AI engineer focused on building and deploying human-AI systems in real-world environments. Built YSKAIPE hand-in-hand with Grok — for reasoning, edge-case testing, and flow structuring — and Figma for co-creating designs and prototypes, because the best outcomes happen when AI isn't just a tool, but a real collaborator.
-            </p>
-            <p class="mt-4 text-slate-600 dark:text-slate-300">
-              My background spans a few distinct chapters. I started as a professional web developer at Dennis Interactive around the turn of the millennium, shipping early digital experiences. After completing an MBA with a focus on Management Information Systems at Hofstra, I spent over a decade in sales and account management at Quest Diagnostics and Shiel Medical Laboratory — learning to align people, solve real problems, and close loops under pressure. From there came a solopreneur stretch, deep dives into Bitcoin (both technical and financial), and work in sustainable private land development.
-            </p>
-            <p class="mt-4 text-slate-600 dark:text-slate-300">
-              About two years ago, AI became my primary medium. Through relentless, hands-on iteration — mostly alongside Grok — I learned to build just about anything. Human Cohesive AI emerged as the concept that made the most sense: teams of humans and AI that feel perfectly crewed, free from mismatched dynamics and clunky handoffs. We're bootstrapped, founder-led, and still pushing hard from Cornelius, North Carolina. If you're a builder ready to escape solo bottlenecks and mediocre collaboration, let's build together.
-            </p>
-            <div class="mt-4 flex gap-4 flex-wrap">
-              <a href="https://x.com/yskaipe" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">X (@yskaipe)</a>
-              <a href="https://x.com/Bitcoin_Natives" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">X (@Bitcoin_Natives)</a>
-              <a href="nick-conenna-yskaipe.html" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">Founder Bio</a>
-              <a href="https://github.com/yskaipe" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">GitHub</a>
-              <a href="https://www.linkedin.com/in/nickconenna/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">LinkedIn</a>
-              <a href="/cdn-cgi/l/email-protection#b8dfca80f8c1cbd3d9d1c8dd96dbd7d5" class="text-indigo-600 dark:text-indigo-400 hover:underline">Email</a>
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-2xl font-bold logo-font shadow-lg shadow-cyan-500/40">Y</div>
+                <span class="logo-font text-3xl font-semibold tracking-tighter">YSKAIPE</span>
             </div>
-          </div>
+            <div class="hidden md:flex items-center gap-x-10 text-base font-medium">
+                <a href="https://www.yskaipe.com/" class="nav-link text-zinc-300 hover:text-white">Home</a>
+                <a href="#philosophy" class="nav-link text-zinc-300 hover:text-white">Philosophy</a>
+                <a href="#how" class="nav-link text-zinc-300 hover:text-white">How It Works</a>
+                <a href="#story" class="nav-link text-zinc-300 hover:text-white">Our Story</a>
+            </div>
+            <a href="https://x.com/yskaipe" target="_blank"
+               class="px-7 py-3.5 bg-gradient-to-r from-cyan-400 to-blue-500 text-zinc-950 rounded-3xl font-semibold text-sm flex items-center gap-x-2 hover:brightness-110 transition-all shadow-md">
+                <i class="fab fa-x-twitter"></i> @yskaipe
+            </a>
         </div>
-      </div>
+    </nav>
 
-      <!-- Vision -->
-      <div class="mt-16 text-center">
-        <h3 class="text-3xl font-bold mb-6">Our Vision</h3>
-        <p class="text-xl font-medium max-w-3xl mx-auto">
-          Every ambitious project deserves the right crew — humans and AI working in seamless sync — before you even hit go.<br>
-          We escaped mediocre collaboration. Now we're helping others do the same.
-        </p>
-        <div class="mt-10 flex flex-col sm:flex-row justify-center gap-6">
-          <a href="build-in-public.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 px-10 rounded-xl transition shadow-lg">
-            Make Your YSKAIPE →
-          </a>
-          <a href="waitlist.html" class="inline-block border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950 font-semibold py-4 px-10 rounded-xl transition">
-            Join the Waitlist
-          </a>
+    <!-- HERO -->
+    <section class="hero-bg min-h-screen flex items-center pt-32 pb-20">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-x-3 px-6 py-3 rounded-full bg-cyan-400/10 text-cyan-300 text-sm font-medium mb-10 border border-cyan-400/20">
+                <i class="fas fa-robot text-xl animate-pulse"></i>
+                HUMAN COHESIVE AI
+            </div>
+            <h1 class="text-7xl md:text-8xl font-extrabold tracking-tighter logo-font leading-none hero-glow mb-8">
+                YSKAIPE<br>
+                <span class="text-cyan-400">pronounced “escape”</span>
+            </h1>
+            <p class="text-2xl md:text-3xl text-zinc-300 font-light max-w-4xl mx-auto leading-relaxed">
+                We don’t just use AI.<br>
+                We work alongside it — as true teammates.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center mt-16">
+                <a href="#philosophy" class="px-12 py-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-zinc-950 rounded-3xl font-bold text-lg flex items-center justify-center gap-x-3 hover:scale-105 transition-transform shadow-xl shadow-cyan-500/40">
+                    Meet the Philosophy
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="https://x.com/yskaipe" target="_blank" class="px-12 py-6 border-2 border-cyan-400/60 hover:border-cyan-300 rounded-3xl font-bold text-lg flex items-center justify-center gap-x-3 transition-all">
+                    <i class="fab fa-x-twitter text-xl"></i> Follow the Journey
+                </a>
+            </div>
         </div>
-      </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- PHILOSOPHY -->
+    <section id="philosophy" class="py-32 bg-zinc-900 border-t border-white/5">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-start">
+                <div class="md:col-span-5 sticky top-24">
+                    <span class="px-5 py-2 text-xs font-mono bg-cyan-400/10 text-cyan-400 rounded-full">CHAPTER 01</span>
+                    <h2 class="section-title text-6xl font-extrabold tracking-tighter mt-8">Our Philosophy</h2>
+                </div>
+                <div class="md:col-span-7 text-zinc-300 text-xl leading-relaxed space-y-10">
+                    <p>The biggest breakthroughs happen when humans and AI operate as genuine collaborators — not boss and tool, but true teammates sharing the same goal.</p>
+                    <p>That’s exactly how we built YSKAIPE itself. We worked hand-in-hand with Grok as our reasoning partner and Figma as our design partner — co-creating every wireframe, logic flow, and prototype in real time.</p>
+                    <p>These weren’t passive tools. They were active teammates that helped us break through bottlenecks and ship something truly special.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-12 text-center">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p>Built through genuine human-AI teamwork — currently in private beta, gearing up for seed acceleration.</p>
-      <div class="mt-6 flex justify-center gap-6">
-        <a href="https://x.com/yskaipe" target="_blank" class="hover:text-white transition">X (@yskaipe)</a>
-      </div>
-      <p class="mt-8 text-sm">© 2026 YSKAIPE. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- HOW IT WORKS -->
+    <section id="how" class="py-32 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <span class="text-xs font-mono text-cyan-400">CHAPTER 02</span>
+                <h2 class="section-title text-6xl font-extrabold tracking-tighter mt-6">How YSKAIPE Brings This to Life</h2>
+            </div>
+            
+            <div class="max-w-4xl mx-auto glass rounded-3xl p-12 md:p-16">
+                <p class="text-xl text-zinc-300 leading-relaxed mb-10">
+                    Our intelligent AI Orchestrator (AI-O) steps in as a co-founder-level teammate the moment you give it a simple seed input.
+                </p>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="space-y-8">
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">1</div>
+                            <div>Matches vibe-aligned humans using advanced similarity algorithms</div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">2</div>
+                            <div>Designs tailored workspaces, tools, and workflows</div>
+                        </div>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">3</div>
+                            <div>Runs real-time monitoring and dynamic refinements</div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">4</div>
+                            <div>Brings in human + AI specialists exactly when needed</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-12 text-center text-zinc-400 italic">From vibe-coding sessions to full startup strategy sprints — every pod feels perfectly crewed.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- Dark Mode Script -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    const toggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      html.classList.add('dark');
-      document.getElementById('moon').classList.remove('hidden');
-      document.getElementById('sun').classList.add('hidden');
-    } else {
-      document.getElementById('sun').classList.remove('hidden');
-      document.getElementById('moon').classList.add('hidden');
-    }
-    toggle.addEventListener('click', () => {
-      html.classList.toggle('dark');
-      localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-      document.getEle
+    <!-- OUR STORY + FOUNDER -->
+    <section id="story" class="py-32 bg-zinc-900">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16">
+                <div class="md:col-span-5">
+                    <span class="px-5 py-2 text-xs font-mono bg-cyan-400/10 text-cyan-400 rounded-full">CHAPTER 03</span>
+                    <h2 class="section-title text-6xl font-extrabold tracking-tighter mt-8">Our Story</h2>
+                </div>
+                <div class="md:col-span-7 text-zinc-300 text-lg leading-relaxed space-y-8">
+                    <p>Founded in 2025 in Cornelius, North Carolina, YSKAIPE was born from real frustration: mismatched teams, fragmented threads, and platforms that treat people like checklist items.</p>
+                    <p>We’re proudly bootstrapped and founder-led — shipping daily and staying laser-focused on what actually makes collaboration feel magical.</p>
+                    
+                    <!-- Founder Card -->
+                    <div class="mt-12 glass rounded-3xl p-10 card-hover">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <img src="https://picsum.photos/id/1011/400/400" alt="Nicholas Conenna" class="w-40 h-40 rounded-3xl object-cover flex-shrink-0 border border-white/20">
+                            <div>
+                                <h4 class="text-3xl font-semibold">Nicholas Conenna</h4>
+                                <p class="text-cyan-400 font-medium">Founder &amp; Lead Builder</p>
+                                <p class="mt-6 text-zinc-300">
+                                    Applied AI engineer who built YSKAIPE hand-in-hand with Grok and Figma — because the best outcomes happen when AI isn’t just a tool, but a real collaborator.
+                                </p>
+                                <div class="mt-8 flex flex-wrap gap-6 text-sm">
+                                    <a href="https://x.com/yskaipe" target="_blank" class="hover:text-cyan-300 transition">X (@yskaipe)</a>
+                                    <a href="https://x.com/Bitcoin_Natives" target="_blank" class="hover:text-cyan-300 transition">X (@Bitcoin_Natives)</a>
+                                    <a href="nick-conenna-yskaipe.html" class="hover:text-cyan-300 transition">Full Bio</a>
+                                    <a href="https://www.linkedin.com/in/nickconenna/" target="_blank" class="hover:text-cyan-300 transition">LinkedIn</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISION CTA -->
+    <section class="py-32 border-t border-white/5 bg-black">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-5xl font-extrabold tracking-tighter mb-8">Every ambitious project deserves the right crew.</h2>
+            <p class="text-2xl text-zinc-400 max-w-2xl mx-auto">Humans and AI working in seamless sync — before you even hit go.</p>
+            
+            <div class="mt-16 flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="build-in-public.html" class="px-14 py-7 bg-gradient-to-r from-cyan-400 to-blue-500 text-zinc-950 rounded-3xl font-bold text-xl hover:scale-105 transition-transform shadow-2xl shadow-cyan-500/30">
+                    Make Your YSKAIPE Pod →
+                </a>
+                <a href="waitlist.html" class="px-14 py-7 border-2 border-cyan-400 hover:bg-cyan-400/10 rounded-3xl font-bold text-xl transition">
+                    Join the Waitlist
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
+            <div class="flex items-center justify-center gap-x-8 flex-wrap">
+                <a href="https://www.yskaipe.com/" class="hover:text-white transition">YSKAIPE.com</a>
+                <a href="https://x.com/yskaipe" class="hover:text-white transition">X (@yskaipe)</a>
+                <a href="https://x.com/Bitcoin_Natives" class="hover:text-white transition">Bitcoin Natives</a>
+                <span>© 2026 YSKAIPE • Built with love and real AI teammates</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        console.log('%cYSKAIPE — Human Cohesive AI ready 🚀', 'color:#00f5ff; font-family:monospace');
+    </script>
+</body>
+</html>
