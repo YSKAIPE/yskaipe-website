@@ -7,203 +7,901 @@
   <meta name="description" content="Explore YSKAIPE's top beta pods. AI-matched, human-cohesive teams turning seed ideas into real-world outcomes."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f1117;
-      --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --accent: #22d3ee;
-      --accent-dark: #0891b2;
-      --card: #1e293b;
-      --card-hover: #334155;
-      --gradient: linear-gradient(135deg, #22d3ee, #8b5cf6);
+      --bg: #080a0f;
+      --surface: #0d1018;
+      --card: #101520;
+      --card-hi: #151d2e;
+      --border: rgba(255,255,255,0.06);
+      --border-hi: rgba(99,210,255,0.25);
+      --text: #e8f0ff;
+      --text-muted: #6b7fa8;
+      --text-dim: #3a4a6a;
+      --cyan: #3cd9ff;
+      --violet: #a78bfa;
+      --green: #34eca8;
+      --orange: #ff8c42;
+      --pink: #f472b6;
+      --yellow: #fbbf24;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Syne', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
     }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    /* ─── AMBIENT GLOW ─── */
+    .ambient {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+      filter: blur(120px);
+    }
+    .ambient-1 {
+      width: 600px; height: 600px;
+      top: -200px; left: -100px;
+      background: radial-gradient(circle, rgba(60,217,255,0.07) 0%, transparent 70%);
+      animation: drift1 20s ease-in-out infinite;
+    }
+    .ambient-2 {
+      width: 500px; height: 500px;
+      top: 30%; right: -100px;
+      background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);
+      animation: drift2 25s ease-in-out infinite;
+    }
+    .ambient-3 {
+      width: 400px; height: 400px;
+      bottom: 10%; left: 30%;
+      background: radial-gradient(circle, rgba(52,236,168,0.05) 0%, transparent 70%);
+      animation: drift3 18s ease-in-out infinite;
+    }
+    @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(60px, 80px); } }
+    @keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-80px, 60px); } }
+    @keyframes drift3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(40px, -60px); } }
+
+    /* ─── GRID LINES ─── */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(60,217,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(60,217,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
     }
-    header {
-      padding: 6rem 0 4rem;
-      text-align: center;
-      background: linear-gradient(to bottom, rgba(34, 211, 238, 0.08), transparent);
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8,10,15,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
-    h1 {
-      font-size: 3.5rem;
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
       font-weight: 700;
-      background: var(--gradient);
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .nav-logo span {
+      color: var(--text-muted);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--cyan);
+      color: #000;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      padding: 10rem 0 5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--cyan);
+    }
+    .eyebrow-tag {
+      background: rgba(60,217,255,0.1);
+      border: 1px solid rgba(60,217,255,0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      font-size: 0.6rem;
+      color: var(--cyan);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    h1 .line-1 { color: var(--text); }
+    h1 .line-2 {
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 1rem;
     }
-    .subtitle {
-      font-size: 1.4rem;
+
+    .header-sub {
+      max-width: 560px;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      font-weight: 400;
     }
-    .cta {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      background: var(--gradient);
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
       color: #000;
-      font-weight: 600;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-decoration: none;
-      border-radius: 9999px;
+      border-radius: 4px;
       transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
-    }
-    .cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 40px rgba(34, 211, 238, 0.3);
-    }
-    .pods-section {
-      padding: 4rem 0 6rem;
-    }
-    .pods-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.75rem;
-    }
-    .pod-card {
-      background: var(--card);
-      border-radius: 1rem;
-      padding: 2rem 1.75rem;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(34, 211, 238, 0.1);
+      box-shadow: 0 0 40px rgba(60,217,255,0.15), 0 0 80px rgba(60,217,255,0.05);
       position: relative;
       overflow: hidden;
     }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px rgba(60,217,255,0.25), 0 0 120px rgba(60,217,255,0.1);
+    }
+    .btn-primary:hover::after { opacity: 1; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-ghost svg { transition: transform 0.2s; }
+    .btn-ghost:hover svg { transform: translateX(3px); }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      display: flex;
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
+      max-width: 700px;
+    }
+    .stat {
+      flex: 1;
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-num span { color: var(--cyan); }
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .section-title span { color: var(--cyan); }
+    .section-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    /* ─── PODS GRID ─── */
+    .pods-section {
+      padding: 2rem 0 8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pods-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .pod-card {
+      background: var(--card);
+      padding: 2rem;
+      position: relative;
+      transition: background 0.3s ease;
+      cursor: default;
+      overflow: hidden;
+    }
+
+    /* Featured first 2 cards — wider */
+    .pod-card:nth-child(1),
+    .pod-card:nth-child(2) {
+      grid-column: span 6;
+    }
+
+    /* 4 medium cards */
+    .pod-card:nth-child(3),
+    .pod-card:nth-child(4),
+    .pod-card:nth-child(5),
+    .pod-card:nth-child(6) {
+      grid-column: span 3;
+    }
+
+    /* Last 4 cards */
+    .pod-card:nth-child(7),
+    .pod-card:nth-child(8),
+    .pod-card:nth-child(9),
+    .pod-card:nth-child(10) {
+      grid-column: span 3;
+    }
+
     .pod-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--gradient);
-      opacity: 0.7;
+      inset: 0;
+      background: var(--pod-color, var(--cyan));
+      opacity: 0;
+      transition: opacity 0.4s;
     }
-    .pod-card:hover {
-      transform: translateY(-8px);
-      background: var(--card-hover);
-      border-color: var(--accent);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    .pod-card:hover { background: var(--card-hi); }
+    .pod-card:hover::before { opacity: 0.04; }
+
+    .pod-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pod-color, var(--cyan)), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
     }
-    .pod-title {
-      font-size: 1.6rem;
-      font-weight: 600;
+    .pod-card:hover .pod-glow { opacity: 1; }
+
+    .pod-index {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .pod-index::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 40px;
+    }
+
+    .pod-icon {
+      font-size: 1.75rem;
       margin-bottom: 1rem;
-      color: var(--accent);
+      display: block;
+      filter: grayscale(0.3);
+      transition: filter 0.3s, transform 0.3s;
     }
+    .pod-card:hover .pod-icon {
+      filter: grayscale(0);
+      transform: scale(1.1);
+    }
+
+    .pod-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6rem;
+      transition: color 0.2s;
+    }
+    .pod-card:hover .pod-name {
+      color: var(--pod-color, var(--cyan));
+    }
+
     .pod-desc {
+      font-size: 0.85rem;
       color: var(--text-muted);
-      font-size: 1.05rem;
+      line-height: 1.65;
+      font-weight: 400;
     }
-    footer {
+
+    .pod-card:nth-child(1) .pod-desc,
+    .pod-card:nth-child(2) .pod-desc {
+      max-width: 360px;
+    }
+
+    .pod-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+    }
+    .pod-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+
+    .pod-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      color: var(--pod-color, var(--cyan));
+      transition: all 0.2s;
+    }
+    .pod-link:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: var(--pod-color, var(--cyan));
+    }
+    .pod-link .arrow {
+      transition: transform 0.2s;
+    }
+    .pod-link:hover .arrow { transform: translateX(3px); }
+
+    .pod-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+    .pod-status::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ─── BOTTOM CTA ─── */
+    .cta-section {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 0 8rem;
       text-align: center;
-      padding: 3rem 0;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(148, 163, 184, 0.1);
     }
-    @media (max-width: 768px) {
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent);
+    }
+    .cta-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .cta-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+    .cta-prompt {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      background: rgba(60,217,255,0.06);
+      border: 1px solid rgba(60,217,255,0.15);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      color: var(--cyan);
+      margin-bottom: 1.75rem;
+      text-align: left;
+      position: relative;
+    }
+    .cta-prompt::before {
+      content: '> ';
+      color: var(--text-dim);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+    .footer-back {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .footer-back:hover { color: var(--cyan); }
+
+    /* ─── REVEAL ANIMATION ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .pod-card:nth-child(n) { grid-column: span 6; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .pod-card:nth-child(n) { grid-column: span 12; }
       h1 { font-size: 2.8rem; }
-      header { padding: 4rem 0 3rem; }
+      .stats-bar { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
     }
   </style>
 </head>
 <body>
 
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+  <div class="ambient ambient-3"></div>
+  <div class="grid-bg"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">YSK<span>AIPE</span></a>
+    <ul class="nav-links">
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/beta-pods.html">Beta Pods</a></li>
+      <li><a href="/yskaipe-build-log.html">Build Log</a></li>
+      <li><a href="/roadmap.html">Roadmap</a></li>
+    </ul>
+    <a href="/waitlist.html" class="nav-cta">Join Waitlist →</a>
+  </nav>
+
+  <!-- HEADER -->
   <header>
     <div class="container">
-      <h1>YSKAIPE Beta Pods</h1>
-      <p class="subtitle">
-        AI-orchestrated, human-first teams turning seed ideas into real-world impact.<br>
-        Our current top 10 active pods — ready for super users to join and shape.
+      <p class="eyebrow reveal">
+        Human Cohesive AI
+        <span class="eyebrow-tag">BETA</span>
+        <span class="eyebrow-tag">10 ACTIVE</span>
       </p>
-      <a href="#waitlist" class="cta">Join the Waitlist →</a>
+      <h1 class="reveal reveal-delay-1">
+        <span class="line-1">One prompt.<br></span>
+        <span class="line-2">A team that ships.</span>
+      </h1>
+      <p class="header-sub reveal reveal-delay-2">
+        AI-orchestrated, human-first pods. Each one a focused execution team forming around a seed idea — real people, defined roles, outcome-driven flow.
+      </p>
+      <div class="stats-bar reveal reveal-delay-3">
+        <div class="stat">
+          <div class="stat-num"><span>10</span></div>
+          <div class="stat-label">Active Pods</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>3</span></div>
+          <div class="stat-label">Live Now</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>β</span></div>
+          <div class="stat-label">Cohort 1</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span>∞</span></div>
+          <div class="stat-label">Seed Prompts</div>
+        </div>
+      </div>
+      <div class="header-actions reveal reveal-delay-4">
+        <a href="#waitlist" class="btn-primary">
+          Join the Waitlist
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/prototype.html" class="btn-ghost">
+          View Prototype
+          <svg class="" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </header>
 
+  <!-- PODS -->
   <section class="pods-section">
     <div class="container">
-      <div class="pods-grid">
-        
-        <div class="pod-card">
-          <h2 class="pod-title">Bitcoin</h2>
+      <div class="section-header reveal">
+        <div class="section-title">Current <span>Beta Pods</span></div>
+        <div class="section-count">10 / 10 SLOTS OCCUPIED</div>
+      </div>
+      <div class="pods-grid reveal">
+
+        <!-- 1 – Bitcoin (FEATURED) -->
+        <div class="pod-card" style="--pod-color: var(--orange)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_01</div>
+          <span class="pod-icon">₿</span>
+          <div class="pod-name">Bitcoin</div>
           <p class="pod-desc">Deep dives into BTC protocol, scaling, custody, Lightning, and on-chain innovation. Build tools, discuss sovereignty, and prototype next-gen wallets or nodes.</p>
-          <a href="yskaipe-bitcoin.html" class="cta">Bitcoin Pod →</a>
+          <div class="pod-tags">
+            <span class="pod-tag">Protocol</span>
+            <span class="pod-tag">Lightning</span>
+            <span class="pod-tag">Custody</span>
+            <span class="pod-tag">On-chain</span>
+          </div>
+          <div class="pod-status">Active</div>
+          <a href="yskaipe-bitcoin.html" class="pod-link">Enter Pod <span class="arrow">→</span></a>
         </div>
 
-        <div class="pod-card">
-          <h2 class="pod-title">BreadCraft</h2>
-          <p class="pod-desc">Artisanal sourdough, fermentation science, flavor experiments, and home bakery builds. From perfect levain to scoring techniques and pop-up bakery ideas.</p>
-          <a href="yskaipe-breadcraft.html" class="cta">BreadCraft Pod →</a>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Cars</h2>
-          <p class="pod-desc">Enthusiast builds, EV conversions, tuning, restoration, autonomous tech, and car culture. Track days, wrenching sessions, and dream garage planning.</p>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Disc Golfing</h2>
-          <p class="pod-desc">Course strategy, disc tech, tournament prep, course design, and community events. Skill clinics, bag optimization, and new plastic testing.</p>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Dogs</h2>
-          <p class="pod-desc">Training, nutrition, behavior, adventure gear, breeding ethics, and canine enrichment. Trail runs, agility, and building better human-dog bonds.</p>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Fire and Wine</h2>
-          <p class="pod-desc">Open-fire cooking, grilling mastery, wood types, wine pairings, and outdoor entertaining. Recipes, fire safety, and vineyard-to-table experiences.</p>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Gardening</h2>
-          <p class="pod-desc">Permaculture, urban plots, heirloom seeds, soil biology, composting, and seasonal harvests. Greenhouse builds, native plants, and food forest design.</p>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Homes</h2>
-          <p class="pod-desc">Tiny houses, renovations, smart homes, off-grid systems, interior design, and real estate hacks. Blueprints, material deep-dives, and dream-home visioning.</p>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Mountaineering</h2>
-          <p class="pod-desc">Alpine climbing, expedition planning, gear reviews, risk management, and high-altitude skills. Route beta, training, and epic peak stories.</p>
-        </div>
-
-        <div class="pod-card">
-          <h2 class="pod-title">Vibe Coding</h2>
+        <!-- 2 – Vibe Coding (FEATURED) -->
+        <div class="pod-card" style="--pod-color: var(--violet)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_10</div>
+          <span class="pod-icon">⌨️</span>
+          <div class="pod-name">Vibe Coding</div>
           <p class="pod-desc">Creative coding, lo-fi dev sessions, aesthetic UIs, generative art, music + code, and chill hackathons. Focus on flow-state programming and beautiful code.</p>
-          <a href="yskaipe-vibe-coding.html" class="cta">Vibe Coding Pod →</a>
+          <div class="pod-tags">
+            <span class="pod-tag">Generative</span>
+            <span class="pod-tag">Aesthetic UI</span>
+            <span class="pod-tag">Flow State</span>
+            <span class="pod-tag">Hackathon</span>
+          </div>
+          <div class="pod-status">Active</div>
+          <a href="yskaipe-vibe-coding.html" class="pod-link">Enter Pod <span class="arrow">→</span></a>
+        </div>
+
+        <!-- 3 – BreadCraft -->
+        <div class="pod-card" style="--pod-color: var(--yellow)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_02</div>
+          <span class="pod-icon">🍞</span>
+          <div class="pod-name">BreadCraft</div>
+          <p class="pod-desc">Artisanal sourdough, fermentation science, flavor experiments, and home bakery builds.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">Sourdough</span>
+            <span class="pod-tag">Ferment</span>
+          </div>
+          <div class="pod-status">Active</div>
+          <a href="yskaipe-breadcraft.html" class="pod-link">Enter Pod <span class="arrow">→</span></a>
+        </div>
+
+        <!-- 4 – Cars -->
+        <div class="pod-card" style="--pod-color: var(--cyan)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_03</div>
+          <span class="pod-icon">🏎️</span>
+          <div class="pod-name">Cars</div>
+          <p class="pod-desc">Enthusiast builds, EV conversions, tuning, restoration, and autonomous tech. Track days, wrenching sessions.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">EV</span>
+            <span class="pod-tag">Tuning</span>
+          </div>
+          <div class="pod-status">Active</div>
+        </div>
+
+        <!-- 5 – Disc Golf -->
+        <div class="pod-card" style="--pod-color: var(--green)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_04</div>
+          <span class="pod-icon">🥏</span>
+          <div class="pod-name">Disc Golf</div>
+          <p class="pod-desc">Course strategy, disc tech, tournament prep, course design, and community events.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">Strategy</span>
+            <span class="pod-tag">Design</span>
+          </div>
+          <div class="pod-status">Active</div>
+        </div>
+
+        <!-- 6 – Dogs -->
+        <div class="pod-card" style="--pod-color: var(--pink)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_05</div>
+          <span class="pod-icon">🐕</span>
+          <div class="pod-name">Dogs</div>
+          <p class="pod-desc">Training, nutrition, behavior, adventure gear, and canine enrichment. Trail runs, agility, and better human-dog bonds.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">Training</span>
+            <span class="pod-tag">Enrichment</span>
+          </div>
+          <div class="pod-status">Active</div>
+        </div>
+
+        <!-- 7 – Fire & Wine -->
+        <div class="pod-card" style="--pod-color: var(--orange)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_06</div>
+          <span class="pod-icon">🔥</span>
+          <div class="pod-name">Fire & Wine</div>
+          <p class="pod-desc">Open-fire cooking, grilling mastery, wood types, wine pairings, and outdoor entertaining.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">Fire</span>
+            <span class="pod-tag">Pairing</span>
+          </div>
+          <div class="pod-status">Active</div>
+        </div>
+
+        <!-- 8 – Gardening -->
+        <div class="pod-card" style="--pod-color: var(--green)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_07</div>
+          <span class="pod-icon">🌱</span>
+          <div class="pod-name">Gardening</div>
+          <p class="pod-desc">Permaculture, urban plots, heirloom seeds, soil biology, composting, and seasonal harvests.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">Permaculture</span>
+            <span class="pod-tag">Soil</span>
+          </div>
+          <div class="pod-status">Active</div>
+        </div>
+
+        <!-- 9 – Homes -->
+        <div class="pod-card" style="--pod-color: var(--cyan)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_08</div>
+          <span class="pod-icon">🏡</span>
+          <div class="pod-name">Homes</div>
+          <p class="pod-desc">Tiny houses, renovations, smart homes, off-grid systems, and interior design hacks.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">Off-grid</span>
+            <span class="pod-tag">Smart</span>
+          </div>
+          <div class="pod-status">Active</div>
+        </div>
+
+        <!-- 10 – Mountaineering -->
+        <div class="pod-card" style="--pod-color: var(--violet)">
+          <div class="pod-glow"></div>
+          <div class="pod-index">POD_09</div>
+          <span class="pod-icon">⛰️</span>
+          <div class="pod-name">Mountaineering</div>
+          <p class="pod-desc">Alpine climbing, expedition planning, gear reviews, risk management, and high-altitude skills.</p>
+          <div class="pod-tags">
+            <span class="pod-tag">Alpine</span>
+            <span class="pod-tag">Expedition</span>
+          </div>
+          <div class="pod-status">Active</div>
         </div>
 
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
+  <section class="cta-section" id="waitlist">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="cta-title">Start with a seed prompt.</h2>
+        <p class="cta-sub">Describe what you want to build. The Orchestrator assembles your team, defines roles, and sets the execution flow. This is early access. Experimental. Real.</p>
+        <div class="cta-prompt">build a lightning payment tool for local merchants</div>
+        <a href="/waitlist.html" class="btn-primary">
+          Join the Waitlist
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 YSKAIPE. Human Cohesive AI — Pods powered by super users.</p>
-      <p><a href="/" style="color: var(--accent); text-decoration: none;">Back to yskaipe.com</a></p>
+      <div class="footer-inner">
+        <a href="/" class="footer-logo">YSKAIPE</a>
+        <p class="footer-copy">© 2026 YSKAIPE — Human Cohesive AI</p>
+        <a href="/" class="footer-back">← yskaipe.com</a>
+      </div>
     </div>
   </footer>
 
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Trigger header reveals immediately
+    document.querySelectorAll('header .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 100 + i * 100);
+    });
+  </script>
 </body>
 </html>
