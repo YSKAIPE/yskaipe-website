@@ -3,199 +3,553 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upcoming Sessions | YSKAIPE – Build in Public Schedule</title>
-  <meta name="description" content="Weekly public sessions at YSKAIPE: Wednesdays (core development & live coding) and Fridays (demos, feedback, networking). Join live to observe and contribute to AI-orchestrated human-AI teams."/>
+  <title>Upcoming Sessions — YSKAIPE | Build in Public Schedule</title>
+  <meta name="description" content="Weekly public sessions at YSKAIPE: Wednesdays (core development & live coding) and Fridays (demos, feedback, networking)."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #080a0f;
+      --surface: #0d1018;
+      --card: #101520;
+      --card-hi: #151d2e;
+      --border: rgba(255,255,255,0.06);
+      --text: #e8f0ff;
+      --text-muted: #6b7fa8;
+      --text-dim: #3a4a6a;
+      --cyan: #3cd9ff;
+      --violet: #a78bfa;
+      --green: #34eca8;
+      --orange: #ff8c42;
+      /* Session type colors */
+      --wed: #3cd9ff;   /* cyan — build day */
+      --fri: #a78bfa;   /* violet — demo day */
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-      background: #f9f9f9;
+      font-family: 'Syne', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    header {
-      text-align: center;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #eee;
+
+    /* ─── NOISE ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0; opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
     }
-    h1, h2, h3 {
-      color: #1a1a1a;
+
+    /* ─── AMBIENT ─── */
+    .ambient { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; filter: blur(130px); }
+    .a1 { width: 700px; height: 700px; top: -200px; left: -150px; background: radial-gradient(circle, rgba(60,217,255,0.06) 0%, transparent 70%); animation: d1 22s ease-in-out infinite; }
+    .a2 { width: 500px; height: 500px; top: 40%; right: -100px; background: radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 70%); animation: d2 28s ease-in-out infinite; }
+    .a3 { width: 400px; height: 400px; bottom: 15%; left: 25%; background: radial-gradient(circle, rgba(52,236,168,0.04) 0%, transparent 70%); animation: d3 20s ease-in-out infinite; }
+    @keyframes d1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,80px)} }
+    @keyframes d2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-70px,50px)} }
+    @keyframes d3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-60px)} }
+
+    /* ─── GRID BG ─── */
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(rgba(60,217,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(60,217,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,10,15,0.75); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
-    .intro {
-      font-size: 1.2rem;
-      margin: 1.5rem 0;
-      text-align: center;
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.1em; text-decoration: none; }
+    .nav-logo span { color: var(--text-muted); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; padding: 0.5rem 1.25rem; border: 1px solid var(--cyan); color: var(--cyan); text-decoration: none; border-radius: 3px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--cyan); color: #000; }
+
+    /* ─── HEADER ─── */
+    header { padding: 10rem 0 4rem; position: relative; z-index: 1; }
+    .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--cyan); flex-shrink: 0; }
+    .eyebrow-tag { background: rgba(60,217,255,0.1); border: 1px solid rgba(60,217,255,0.2); padding: 0.2rem 0.6rem; border-radius: 2px; font-size: 0.6rem; color: var(--cyan); }
+    .live-tag { background: rgba(52,236,168,0.1); border: 1px solid rgba(52,236,168,0.25); padding: 0.2rem 0.6rem; border-radius: 2px; font-size: 0.6rem; color: var(--green); display: flex; align-items: center; gap: 0.35rem; }
+    .live-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    h1 .l1 { color: var(--text); display: block; }
+    h1 .l2 { background: linear-gradient(90deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; }
+    .header-sub { max-width: 580px; margin-top: 1.25rem; font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; font-weight: 400; }
+
+    /* ─── SESSION TYPE LEGEND ─── */
+    .legend-bar {
+      display: flex; gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 2.5rem 0 0;
+      max-width: 560px;
     }
-    .schedule-grid {
+    .legend-item { flex: 1; background: var(--card); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .legend-dot.wed { background: var(--wed); box-shadow: 0 0 8px var(--wed); }
+    .legend-dot.fri { background: var(--fri); box-shadow: 0 0 8px var(--fri); }
+    .legend-text { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .legend-text strong { display: block; color: var(--text); font-weight: 700; margin-bottom: 0.1rem; }
+    .legend-text span { color: var(--text-dim); }
+
+    /* ─── SCHEDULE ─── */
+    .schedule-section { padding: 3rem 0 5rem; position: relative; z-index: 1; }
+    .section-header { margin-bottom: 2.5rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .section-title { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.01em; }
+    .section-title span { color: var(--cyan); }
+    .section-mono { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em; }
+
+    /* Weeks as a timeline-ish vertical stack */
+    .weeks { display: flex; flex-direction: column; gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+
+    .week-row {
+      background: var(--card);
       display: grid;
-      gap: 1.5rem;
-      margin: 2rem 0;
+      grid-template-columns: 100px 1fr 1fr;
+      transition: background 0.25s;
     }
-    .week-card {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    .week-row:hover { background: var(--card-hi); }
+
+    /* Week label column */
+    .week-label {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
+      position: relative;
     }
-    .week-title {
+    .week-num {
+      font-family: 'Space Mono', monospace;
       font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: #2575fc;
+      font-weight: 700;
+      color: var(--text-dim);
+      line-height: 1;
     }
-    .session {
-      margin-bottom: 1rem;
+    .week-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
     }
-    .day {
-      font-weight: bold;
+    /* Current week highlight */
+    .week-row.current .week-num { color: var(--green); }
+    .week-row.current .week-label { border-right-color: rgba(52,236,168,0.2); }
+    .week-row.current { background: rgba(52,236,168,0.03); }
+    .week-row.current:hover { background: rgba(52,236,168,0.05); }
+    .week-now-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: rgba(52,236,168,0.1);
+      border: 1px solid rgba(52,236,168,0.2);
+      padding: 0.15rem 0.4rem;
+      border-radius: 2px;
+      margin-top: 0.2rem;
     }
-    .focus {
-      color: #555;
-      font-style: italic;
+
+    /* Session cell */
+    .session-cell {
+      padding: 1.75rem 2rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
     }
-    .cta {
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.3rem;
-      margin: 3rem 0;
-      padding: 1.5rem;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
-      border-radius: 12px;
+    .session-cell:last-child { border-right: none; }
+    .session-cell::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 2px;
+      background: var(--sc, var(--wed));
+      opacity: 0.5;
     }
-    a {
-      color: #2575fc;
+    .session-cell.fri-cell::before { background: var(--fri); }
+
+    .session-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--sc, var(--wed));
+      margin-bottom: 0.3rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .session-cell.fri-cell .session-date { color: var(--fri); }
+    .session-type-chip {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.4rem;
+      border-radius: 2px;
+    }
+    .wed-chip { background: rgba(60,217,255,0.1); border: 1px solid rgba(60,217,255,0.2); color: var(--wed); }
+    .fri-chip { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); color: var(--fri); }
+
+    .session-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+    .session-focus { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; font-weight: 400; }
+
+    /* Past session styling */
+    .week-row.past { opacity: 0.5; }
+    .week-row.past .week-num { color: var(--text-dim); }
+
+    /* ─── JOIN STRIP ─── */
+    .join-strip {
+      margin-top: 1.5px;
+      background: var(--card);
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+      border-radius: 0 0 7px 7px;
+    }
+    .join-text { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; max-width: 480px; font-weight: 400; }
+    .join-text strong { color: var(--text); font-weight: 700; }
+    .join-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .join-btn {
+      font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-muted);
       text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
     }
-    a:hover {
-      text-decoration: underline;
+    .join-btn:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(60,217,255,0.05); }
+    .join-btn.primary { border-color: var(--cyan); color: var(--cyan); background: rgba(60,217,255,0.06); }
+    .join-btn.primary:hover { background: var(--cyan); color: #000; }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 3rem 0 8rem; position: relative; z-index: 1; text-align: center; }
+    .cta-inner { max-width: 640px; margin: 0 auto; padding: 3.5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); position: relative; overflow: hidden; }
+    .cta-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent); }
+    .cta-title { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .cta-sub { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; font-weight: 400; }
+    .cta-detail {
+      font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.05em;
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
-    .link-back {
-      text-align: center;
-      font-size: 1.1rem;
-      margin: 2rem 0;
+    .cta-detail-item { display: flex; align-items: center; gap: 0.4rem; }
+    .cta-detail-item::before { content: '//'; color: var(--cyan); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; background: linear-gradient(135deg, var(--cyan), var(--violet)); color: #000; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px; transition: all 0.3s; box-shadow: 0 0 40px rgba(60,217,255,0.15); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(60,217,255,0.3); }
+
+    /* ─── FOOTER ─── */
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2.5rem 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .footer-logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); }
+    .footer-link { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: var(--cyan); }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .rd1{transition-delay:0.1s} .rd2{transition-delay:0.2s} .rd3{transition-delay:0.3s}
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 800px) {
+      .week-row { grid-template-columns: 70px 1fr; }
+      .session-cell.fri-cell { grid-column: 2; border-top: 1px solid var(--border); }
+      .nav-links { display: none; }
     }
-    footer {
-      text-align: center;
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid #eee;
-      color: #666;
-      font-size: 0.9rem;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      .cta { font-size: 1.1rem; padding: 1rem; }
+    @media (max-width: 520px) {
+      .week-row { grid-template-columns: 1fr; }
+      .week-label { flex-direction: row; align-items: center; justify-content: flex-start; gap: 1rem; padding: 1rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .session-cell.fri-cell { border-top: 1px solid var(--border); }
+      h1 { font-size: 2.8rem; }
+      .legend-bar { flex-direction: column; max-width: 100%; }
     }
   </style>
 </head>
 <body>
 
+  <div class="ambient a1"></div>
+  <div class="ambient a2"></div>
+  <div class="ambient a3"></div>
+  <div class="grid-bg"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">YSK<span>AIPE</span></a>
+    <ul class="nav-links">
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/beta-pods.html">Beta Pods</a></li>
+      <li><a href="/yskaipe-build-log.html">Build Log</a></li>
+      <li><a href="/roadmap.html">Roadmap</a></li>
+    </ul>
+    <a href="/waitlist.html" class="nav-cta">Join Waitlist →</a>
+  </nav>
+
+  <!-- HEADER -->
   <header>
-    <h1>Upcoming Public Sessions</h1>
-    <p>Weekly Build in Public at YSKAIPE</p>
+    <div class="container">
+      <p class="eyebrow reveal">
+        Build in Public
+        <span class="eyebrow-tag">6-WEEK SPRINT</span>
+        <span class="eyebrow-tag">FEB–APR 2026</span>
+        <span class="live-tag">Sessions Active</span>
+      </p>
+      <h1 class="reveal rd1">
+        <span class="l1">Upcoming</span>
+        <span class="l2">Sessions.</span>
+      </h1>
+      <p class="header-sub reveal rd2">
+        Two focused public sessions every week — Wednesdays for live coding and core development, Fridays for demos, community feedback, and networking. All open. All transparent.
+      </p>
+      <div class="legend-bar reveal rd3">
+        <div class="legend-item">
+          <div class="legend-dot wed"></div>
+          <div class="legend-text"><strong>Wednesday</strong><span>Build Day</span></div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot fri"></div>
+          <div class="legend-text"><strong>Friday</strong><span>Demo Day</span></div>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <section class="intro">
-    <p>YSKAIPE hosts two focused public sessions each week: Wednesdays for core development and live coding, and Fridays for live demonstrations, community feedback, and networking.</p>
-    <p>All sessions are open to observers and contributors. Watch progress in real time, see AI orchestration in action, and participate in shaping practical human-AI collaboration tools.</p>
+  <!-- SCHEDULE -->
+  <section class="schedule-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-title">6-Week <span>Schedule</span></div>
+        <div class="section-mono">STARTING FEB 27, 2026</div>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;" class="reveal">
+        <div class="weeks">
+
+          <!-- WEEK 1 — past -->
+          <div class="week-row past">
+            <div class="week-label">
+              <div class="week-num">01</div>
+              <div class="week-tag">Week</div>
+            </div>
+            <div class="session-cell">
+              <div class="session-date">
+                Fri Feb 27, 2026
+                <span class="session-type-chip fri-chip">Demo Day</span>
+              </div>
+              <div class="session-title">Polish, Demo & Network Day</div>
+              <p class="session-focus">Live beta pod demo from community prompt + initial metrics and networking.</p>
+            </div>
+            <div class="session-cell fri-cell">
+              <div class="session-date">
+                Wed Mar 4, 2026
+                <span class="session-type-chip wed-chip">Build Day</span>
+              </div>
+              <div class="session-title">Core Development & Live Coding</div>
+              <p class="session-focus">Roadmap review + matching algorithm enhancements.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 2 — CURRENT -->
+          <div class="week-row current">
+            <div class="week-label">
+              <div class="week-num">02</div>
+              <div class="week-tag">Week</div>
+              <div class="week-now-badge">Now</div>
+            </div>
+            <div class="session-cell">
+              <div class="session-date">
+                Wed Mar 11, 2026
+                <span class="session-type-chip wed-chip">Build Day</span>
+              </div>
+              <div class="session-title">Core Development & Live Coding</div>
+              <p class="session-focus">New pod template prototyping (e.g. Sustainable App Sprint) + tool integrations.</p>
+            </div>
+            <div class="session-cell fri-cell">
+              <div class="session-date">
+                Fri Mar 13, 2026
+                <span class="session-type-chip fri-chip">Demo Day</span>
+              </div>
+              <div class="session-title">Demo & Feedback Day</div>
+              <p class="session-focus">Real-time pod execution + community voting on features.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 3 -->
+          <div class="week-row">
+            <div class="week-label">
+              <div class="week-num">03</div>
+              <div class="week-tag">Week</div>
+            </div>
+            <div class="session-cell">
+              <div class="session-date">
+                Wed Mar 18, 2026
+                <span class="session-type-chip wed-chip">Build Day</span>
+              </div>
+              <div class="session-title">Core Development & Live Coding</div>
+              <p class="session-focus">Real-time monitoring + onboarding refinements.</p>
+            </div>
+            <div class="session-cell fri-cell">
+              <div class="session-date">
+                Fri Mar 20, 2026
+                <span class="session-type-chip fri-chip">Demo Day</span>
+              </div>
+              <div class="session-title">Demo & Network Day</div>
+              <p class="session-focus">Open discussion of results + networking with AI professionals.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 4 -->
+          <div class="week-row">
+            <div class="week-label">
+              <div class="week-num">04</div>
+              <div class="week-tag">Week</div>
+            </div>
+            <div class="session-cell">
+              <div class="session-date">
+                Wed Mar 25, 2026
+                <span class="session-type-chip wed-chip">Build Day</span>
+              </div>
+              <div class="session-title">Core Development & Live Coding</div>
+              <p class="session-focus">Ethics Review Pod prototyping + orchestration logic.</p>
+            </div>
+            <div class="session-cell fri-cell">
+              <div class="session-date">
+                Fri Mar 27, 2026
+                <span class="session-type-chip fri-chip">Demo Day</span>
+              </div>
+              <div class="session-title">Demo & Feedback Day</div>
+              <p class="session-focus">Community prompt demo + transparent metrics sharing.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 5 -->
+          <div class="week-row">
+            <div class="week-label">
+              <div class="week-num">05</div>
+              <div class="week-tag">Week</div>
+            </div>
+            <div class="session-cell">
+              <div class="session-date">
+                Wed Apr 1, 2026
+                <span class="session-type-chip wed-chip">Build Day</span>
+              </div>
+              <div class="session-title">Core Development & Live Coding</div>
+              <p class="session-focus">Chemistry tool integration showcase + dynamic refinements.</p>
+            </div>
+            <div class="session-cell fri-cell">
+              <div class="session-date">
+                Fri Apr 3, 2026
+                <span class="session-type-chip fri-chip">Demo Day</span>
+              </div>
+              <div class="session-title">Demo & Network Day</div>
+              <p class="session-focus">Guest conversations + partnership discussion opportunities.</p>
+            </div>
+          </div>
+
+          <!-- WEEK 6 — milestone -->
+          <div class="week-row" style="background: rgba(167,139,250,0.03);">
+            <div class="week-label">
+              <div class="week-num" style="color: var(--violet);">06</div>
+              <div class="week-tag">Week</div>
+              <div class="week-now-badge" style="color: var(--violet); background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.25);">Final</div>
+            </div>
+            <div class="session-cell" style="--sc: var(--violet)">
+              <div class="session-date" style="color: var(--violet)">
+                Wed Apr 8, 2026
+                <span class="session-type-chip wed-chip">Build Day</span>
+              </div>
+              <div class="session-title">Core Development & Live Coding</div>
+              <p class="session-focus">Iteration on top-voted features from community feedback.</p>
+            </div>
+            <div class="session-cell fri-cell" style="--sc: var(--violet)">
+              <div class="session-date" style="color: var(--violet)">
+                Fri Apr 10, 2026
+                <span class="session-type-chip fri-chip">Demo Day</span>
+              </div>
+              <div class="session-title">6-Week Milestone Showcase</div>
+              <p class="session-focus">Full progress recap, metrics share, and what's next for YSKAIPE.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- JOIN STRIP -->
+        <div class="join-strip">
+          <div class="join-text">
+            <strong>All sessions are open.</strong> Watch AI-orchestrated teams form in real time. Participate, suggest prompts, vote on features, or simply observe — no invite needed.
+          </div>
+          <div class="join-links">
+            <a href="https://x.com/yskaipe" target="_blank" rel="noopener" class="join-btn primary">𝕏 @yskaipe</a>
+            <a href="/build-in-public.html" class="join-btn">Build Log</a>
+            <a href="https://calendly.com/yskaipe" target="_blank" rel="noopener" class="join-btn">Book a Call</a>
+            <a href="https://github.com/YSKAIPE" target="_blank" rel="noopener" class="join-btn">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="schedule-grid">
-    <h2 style="text-align: center; margin-bottom: 2rem;">6-Week Schedule (Starting February 2026)</h2>
-
-    <div class="week-card">
-      <div class="week-title">Week 1</div>
-      <div class="session">
-        <span class="day">Friday, February 27, 2026</span> – Polish, Demo & Network Day<br>
-        <span class="focus">Live beta pod demo from community prompt + initial metrics and networking</span>
-      </div>
-      <div class="session">
-        <span class="day">Wednesday, March 4, 2026</span> – Core Development & Live Coding<br>
-        <span class="focus">Roadmap review + matching algorithm enhancements</span>
-      </div>
-    </div>
-
-    <div class="week-card">
-      <div class="week-title">Week 2</div>
-      <div class="session">
-        <span class="day">Wednesday, March 11, 2026</span> – Core Development & Live Coding<br>
-        <span class="focus">New pod template prototyping (e.g., Sustainable App Sprint) + tool integrations</span>
-      </div>
-      <div class="session">
-        <span class="day">Friday, March 13, 2026</span> – Demo & Feedback Day<br>
-        <span class="focus">Real-time pod execution + community voting on features</span>
-      </div>
-    </div>
-
-    <div class="week-card">
-      <div class="week-title">Week 3</div>
-      <div class="session">
-        <span class="day">Wednesday, March 18, 2026</span> – Core Development & Live Coding<br>
-        <span class="focus">Real-time monitoring + onboarding refinements</span>
-      </div>
-      <div class="session">
-        <span class="day">Friday, March 20, 2026</span> – Demo & Network Day<br>
-        <span class="focus">Open discussion of results + networking with AI professionals</span>
-      </div>
-    </div>
-
-    <div class="week-card">
-      <div class="week-title">Week 4</div>
-      <div class="session">
-        <span class="day">Wednesday, March 25, 2026</span> – Core Development & Live Coding<br>
-        <span class="focus">Ethics Review Pod prototyping + orchestration logic</span>
-      </div>
-      <div class="session">
-        <span class="day">Friday, March 27, 2026</span> – Demo & Feedback Day<br>
-        <span class="focus">Community prompt demo + transparent metrics sharing</span>
-      </div>
-    </div>
-
-    <div class="week-card">
-      <div class="week-title">Week 5</div>
-      <div class="session">
-        <span class="day">Wednesday, April 1, 2026</span> – Core Development & Live Coding<br>
-        <span class="focus">Chemistry tool integration showcase + dynamic refinements</span>
-      </div>
-      <div class="session">
-        <span class="day">Friday, April 3, 2026</span> – Demo & Network Day<br>
-        <span class="focus">Guest conversations + partnership discussion opportunities</span>
-      </div>
-    </div>
-
-    <div class="week-card">
-      <div class="week-title">Week 6</div>
-      <div class="session">
-        <span class="day">Wednesday, April 8, 2026</span> – Core Development & Live Coding<br>
-        <span class="focus">Iteration on top-voted features from community feedback</span>
-      </div>
-      <div class="session">
-        <span class="day">Friday, April 10, 2026</span> – Demo & Feedback Day<br>
-        <span class="focus">6-week milestone showcase + progress recap</span>
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="cta-title">Join us live.</h2>
+        <p class="cta-sub">Watch AI-orchestrated teams take shape from a single seed prompt. Real orchestration, real people, real outcomes — every Wednesday and Friday.</p>
+        <div class="cta-detail">
+          <span class="cta-detail-item">Wednesdays · Build Day</span>
+          <span class="cta-detail-item">Fridays · Demo Day</span>
+          <span class="cta-detail-item">All open · No invite</span>
+        </div>
+        <a href="/build-in-public.html" class="btn-primary">
+          Full Build-in-Public Details
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <div class="cta">
-    Join live to watch AI-orchestrated teams form in real time.<br><br>
-    Participate, contribute ideas, or simply observe — all sessions are open.<br><br>
-    Full details, how to join, streams, Discord, and roadmap → <a href="/build-in-public" style="color: white; text-decoration: underline;">yskaipe.com/build-in-public</a>
-  </div>
-
-  <section class="link-back">
-    <p><strong>Follow @yskaipe on X</strong> for exact start times, announcements, and live links.<br>
-    Questions? Message @yskaipe</p>
-  </section>
-
+  <!-- FOOTER -->
   <footer>
-    <p>© 2026 YSKAIPE | <a href="https://x.com/yskaipe" target="_blank">@yskaipe</a> | Building transparent human-AI collaboration</p>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="/" class="footer-logo">YSKAIPE</a>
+        <p class="footer-copy">© 2026 YSKAIPE — Building transparent human-AI collaboration</p>
+        <a href="https://x.com/yskaipe" target="_blank" rel="noopener" class="footer-link">@yskaipe →</a>
+      </div>
+    </div>
   </footer>
 
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    document.querySelectorAll('header .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 80 + i * 100);
+    });
+  </script>
 </body>
 </html>
