@@ -1,255 +1,539 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us - YSKAIPE | AI-Orchestrated Project Teams</title>
-  <meta name="description" content="Get in touch with the YSKAIPE team. Whether you're interested in joining the waitlist, have questions about the platform, partnerships, press, or careers — we're here to help."/>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#6366f1',     // Indigo-500
-            primaryDark: '#4f46e5', // Indigo-600
-            accent: '#8b5cf6',      // Violet-500
-          }
-        }
-      }
-    }
-  </script>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <title>Contact — YSKAIPE | AI-Orchestrated Project Teams</title>
+  <meta name="description" content="Get in touch with the YSKAIPE team. Waitlist, partnerships, press, careers — we're here."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
+    :root {
+      --bg: #080a0f;
+      --surface: #0d1018;
+      --card: #101520;
+      --card-hi: #151d2e;
+      --border: rgba(255,255,255,0.06);
+      --text: #e8f0ff;
+      --text-muted: #6b7fa8;
+      --text-dim: #3a4a6a;
+      --cyan: #3cd9ff;
+      --violet: #a78bfa;
+      --green: #34eca8;
+      --orange: #ff8c42;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0; opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    /* ─── AMBIENT ─── */
+    .ambient { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; filter: blur(130px); }
+    .a1 { width: 700px; height: 700px; top: -200px; left: -150px; background: radial-gradient(circle, rgba(60,217,255,0.06) 0%, transparent 70%); animation: d1 22s ease-in-out infinite; }
+    .a2 { width: 500px; height: 500px; top: 40%; right: -100px; background: radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 70%); animation: d2 28s ease-in-out infinite; }
+    .a3 { width: 400px; height: 400px; bottom: 15%; left: 25%; background: radial-gradient(circle, rgba(52,236,168,0.04) 0%, transparent 70%); animation: d3 20s ease-in-out infinite; }
+    @keyframes d1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(60px,80px)} }
+    @keyframes d2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-70px,50px)} }
+    @keyframes d3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-60px)} }
+
+    /* ─── GRID ─── */
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: linear-gradient(rgba(60,217,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(60,217,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,10,15,0.75); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.1em; text-decoration: none; }
+    .nav-logo span { color: var(--text-muted); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; padding: 0.5rem 1.25rem; border: 1px solid var(--cyan); color: var(--cyan); text-decoration: none; border-radius: 3px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--cyan); color: #000; }
+
+    /* ─── HEADER ─── */
+    header { padding: 10rem 0 4rem; position: relative; z-index: 1; }
+    .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+    .eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--cyan); }
+    .eyebrow-tag { background: rgba(60,217,255,0.1); border: 1px solid rgba(60,217,255,0.2); padding: 0.2rem 0.6rem; border-radius: 2px; font-size: 0.6rem; color: var(--cyan); }
+    h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    h1 .l1 { color: var(--text); display: block; }
+    h1 .l2 { background: linear-gradient(90deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; }
+    .header-sub { max-width: 520px; margin-top: 1.25rem; font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; font-weight: 400; }
+
+    /* ─── MAIN GRID ─── */
+    .main-section { padding: 3rem 0 6rem; position: relative; z-index: 1; }
+    .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+
+    /* ─── CONTACT CHANNELS ─── */
+    .channels-col { background: var(--card); padding: 2.5rem; }
+    .col-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; }
+    .col-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .channel-list { display: flex; flex-direction: column; gap: 0; }
+    .channel-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: start;
+      transition: all 0.2s;
+      cursor: default;
+      position: relative;
+    }
+    .channel-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .channel-item:first-child { padding-top: 0; }
+
+    .channel-icon {
+      width: 40px; height: 40px;
+      border-radius: 6px;
+      background: var(--ci-bg, rgba(60,217,255,0.08));
+      border: 1px solid var(--ci-border, rgba(60,217,255,0.15));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .channel-item:hover .channel-icon { transform: scale(1.05); }
+
+    .channel-body {}
+    .channel-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+    .channel-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; font-weight: 400; margin-bottom: 0.6rem; }
+    .channel-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--cl, var(--cyan));
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      transition: opacity 0.2s;
+    }
+    .channel-link:hover { opacity: 0.75; }
+    .channel-link + .channel-link { display: block; margin-top: 0.25rem; }
+
+    /* ─── FORM COLUMN ─── */
+    .form-col {
+      background: var(--surface);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .form-col::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--cyan), var(--violet), rgba(167,139,250,0.1)); }
+
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .form-input, .form-textarea {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); }
+    .form-input:focus, .form-textarea:focus {
+      border-color: rgba(60,217,255,0.4);
+      box-shadow: 0 0 0 3px rgba(60,217,255,0.06);
+    }
+    .form-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+    .form-subject { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .subject-btn {
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--card);
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .subject-btn:hover, .subject-btn.active {
+      border-color: rgba(60,217,255,0.4);
+      color: var(--cyan);
+      background: rgba(60,217,255,0.06);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.9rem 2rem;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #000;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 0 40px rgba(60,217,255,0.15);
+      margin-top: 0.5rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(60,217,255,0.25); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    #form-response {
+      margin-top: 1rem;
+      padding: 0.875rem 1rem;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+      display: none;
+    }
+    #form-response.success { background: rgba(52,236,168,0.08); border: 1px solid rgba(52,236,168,0.2); color: var(--green); }
+    #form-response.error { background: rgba(255,100,80,0.08); border: 1px solid rgba(255,100,80,0.2); color: #ff6450; }
+
+    /* ─── SOCIAL STRIP ─── */
+    .social-strip {
+      margin-top: 1.5px;
+      background: var(--card);
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+      border-radius: 0 0 7px 7px;
+    }
+    .social-left { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.08em; }
+    .social-left span { color: var(--text-muted); }
+    .social-links { display: flex; gap: 0.75rem; }
+    .social-link {
+      font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.4rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-link:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(60,217,255,0.05); }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 3rem 0 8rem; position: relative; z-index: 1; text-align: center; }
+    .cta-inner { max-width: 620px; margin: 0 auto; padding: 3.5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); position: relative; overflow: hidden; }
+    .cta-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent); }
+    .cta-title { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .cta-sub { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; font-weight: 400; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; background: linear-gradient(135deg, var(--cyan), var(--violet)); color: #000; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px; transition: all 0.3s; box-shadow: 0 0 40px rgba(60,217,255,0.15); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(60,217,255,0.3); }
+
+    /* ─── FOOTER ─── */
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2.5rem 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .footer-logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .rd1{transition-delay:0.1s} .rd2{transition-delay:0.2s} .rd3{transition-delay:0.3s}
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 800px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .form-col::before { display: none; }
+      .nav-links { display: none; }
+      .form-subject { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      h1 { font-size: 2.8rem; }
+      .form-subject { grid-template-columns: 1fr; }
+      .social-strip { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased">
+<body>
 
-  <!-- Hero / Header -->
-  <header class="bg-gradient-to-br from-indigo-700 via-indigo-800 to-violet-900 text-white py-20 px-6 text-center">
-    <div class="max-w-5xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Get in Touch</h1>
-      <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
-        We're a small, determined team building the future of AI-powered collaboration. Reach out — we'd love to hear from you.
+  <div class="ambient a1"></div>
+  <div class="ambient a2"></div>
+  <div class="ambient a3"></div>
+  <div class="grid-bg"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">YSK<span>AIPE</span></a>
+    <ul class="nav-links">
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/beta-pods.html">Beta Pods</a></li>
+      <li><a href="/yskaipe-build-log.html">Build Log</a></li>
+      <li><a href="/roadmap.html">Roadmap</a></li>
+    </ul>
+    <a href="/waitlist.html" class="nav-cta">Join Waitlist →</a>
+  </nav>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <p class="eyebrow reveal">
+        Contact
+        <span class="eyebrow-tag">WE'RE HUMAN</span>
+        <span class="eyebrow-tag">1–2 DAY REPLY</span>
+      </p>
+      <h1 class="reveal rd1">
+        <span class="l1">Let's</span>
+        <span class="l2">talk.</span>
+      </h1>
+      <p class="header-sub reveal rd2">
+        Small, determined team building the future of AI-powered collaboration. We read every message — reach out about anything.
       </p>
     </div>
   </header>
 
-  <!-- Main Contact Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+  <!-- MAIN -->
+  <section class="main-section">
+    <div class="container">
+      <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;" class="reveal">
 
-      <!-- Contact Options -->
-      <div>
-        <h2 class="text-3xl font-bold mb-8">Ways to Reach Us</h2>
+        <!-- TOP ROW: channels + form -->
+        <div class="main-grid" style="border-radius: 0; border: none; border-bottom: 1.5px solid var(--border);">
 
-        <div class="space-y-10">
+          <!-- CHANNELS -->
+          <div class="channels-col">
+            <div class="col-label">Contact_Channels</div>
+            <div class="channel-list">
 
-          <!-- General / Questions -->
-          <div class="flex items-start">
-            <div class="text-4xl mr-6">✉️</div>
-            <div>
-              <h3 class="text-2xl font-bold mb-2">General Inquiries & Platform Questions</h3>
-              <p class="text-gray-700 mb-3">
-                Curious about how YSKAIPE works, want to join the waitlist early, or have feedback on the vision?
-              </p>
-              <a href="mailto:hello@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
-                hello@yskaipe.com
-              </a>
+              <div class="channel-item">
+                <div class="channel-icon" style="--ci-bg: rgba(60,217,255,0.08); --ci-border: rgba(60,217,255,0.15);">✉️</div>
+                <div class="channel-body">
+                  <div class="channel-title">General & Platform Questions</div>
+                  <p class="channel-desc">Curious how YSKAIPE works, want early waitlist access, or have feedback on the vision?</p>
+                  <a href="mailto:hello@yskaipe.com" class="channel-link" style="--cl: var(--cyan)">hello@yskaipe.com →</a>
+                  <a href="mailto:gr8@yskaipe.com" class="channel-link" style="--cl: var(--cyan)">gr8@yskaipe.com →</a>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon" style="--ci-bg: rgba(52,236,168,0.08); --ci-border: rgba(52,236,168,0.15);">🚀</div>
+                <div class="channel-body">
+                  <div class="channel-title">Careers & Early Team</div>
+                  <p class="channel-desc">Founding engineer, growth builder, or early contributor? Check <a href="/careers.html" style="color:var(--cyan); text-decoration:none;">Careers</a> first.</p>
+                  <a href="mailto:careers@yskaipe.com" class="channel-link" style="--cl: var(--green)">careers@yskaipe.com →</a>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon" style="--ci-bg: rgba(167,139,250,0.08); --ci-border: rgba(167,139,250,0.15);">🤝</div>
+                <div class="channel-body">
+                  <div class="channel-title">Partnerships & Press</div>
+                  <p class="channel-desc">Integrations, co-marketing, press coverage, or community partnerships.</p>
+                  <a href="mailto:partnerships@yskaipe.com" class="channel-link" style="--cl: var(--violet)">partnerships@yskaipe.com →</a>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon" style="--ci-bg: rgba(255,140,66,0.08); --ci-border: rgba(255,140,66,0.15);">🔒</div>
+                <div class="channel-body">
+                  <div class="channel-title">Privacy & Legal</div>
+                  <p class="channel-desc">Privacy policy, terms of service, or data access and deletion requests.</p>
+                  <a href="mailto:privacy@yskaipe.com" class="channel-link" style="--cl: var(--orange)">privacy@yskaipe.com →</a>
+                  <a href="mailto:legal@yskaipe.com" class="channel-link" style="--cl: var(--orange)">legal@yskaipe.com →</a>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <!-- Careers / Joining -->
-          <div class="flex items-start">
-            <div class="text-4xl mr-6">🚀</div>
-            <div>
-              <h3 class="text-2xl font-bold mb-2">Careers & Early Team Opportunities</h3>
-              <p class="text-gray-700 mb-3">
-                Interested in being a founding engineer, growth builder, or early contributor? Check our <a href="/careers" class="text-indigo-600 hover:underline">Careers page</a> first.
-              </p>
-              <a href="mailto:careers@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
-                careers@yskaipe.com
-              </a>
-            </div>
-          </div>
+          <!-- FORM -->
+          <div class="form-col">
+            <div class="col-label">Quick_Message</div>
 
-          <!-- Privacy & Legal -->
-          <div class="flex items-start">
-            <div class="text-4xl mr-6">🔒</div>
-            <div>
-              <h3 class="text-2xl font-bold mb-2">Privacy, Legal, or Data Requests</h3>
-              <p class="text-gray-700 mb-3">
-                Questions about our Privacy Policy, Terms of Service, or data access/deletion requests.
-              </p>
-              <a href="mailto:privacy@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
-                privacy@yskaipe.com (for privacy)<br>
-                legal@yskaipe.com (for legal/terms)
-              </a>
-            </div>
-          </div>
+            <form id="contact-form"
+                  action="https://script.google.com/macros/s/AKfycby8Wl4t-wcAeAdjjBkeaAeeFqVg-xcTxfIAJM9DgOFCZfK0lW0wK4VPGc-xktmpIFE9dw/exec"
+                  method="POST">
 
-          <!-- Partnerships & Press -->
-          <div class="flex items-start">
-            <div class="text-4xl mr-6">🤝</div>
-            <div>
-              <h3 class="text-2xl font-bold mb-2">Partnerships, Press, or Collaborations</h3>
-              <p class="text-gray-700 mb-3">
-                Interested in integrating with YSKAIPE, co-marketing, press coverage, or community partnerships?
-              </p>
-              <a href="mailto:partnerships@yskaipe.com" class="text-indigo-600 font-semibold hover:underline text-lg block">
-                partnerships@yskaipe.com
-              </a>
-            </div>
-          </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem;">
+                <div>
+                  <label class="form-label" for="name">Name</label>
+                  <input class="form-input" type="text" id="name" name="name" required placeholder="Jane Doe" />
+                </div>
+                <div>
+                  <label class="form-label" for="email">Email</label>
+                  <input class="form-input" type="email" id="email" name="email" required placeholder="jane@example.com" />
+                </div>
+              </div>
 
+              <div class="form-group">
+                <label class="form-label">Subject</label>
+                <div class="form-subject" id="subject-btns">
+                  <button type="button" class="subject-btn active" data-val="General">General</button>
+                  <button type="button" class="subject-btn" data-val="Partnership">Partnership</button>
+                  <button type="button" class="subject-btn" data-val="Careers">Careers</button>
+                  <button type="button" class="subject-btn" data-val="Press">Press</button>
+                </div>
+                <input type="hidden" id="subject" name="subject" value="General" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <textarea class="form-textarea" id="message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
+              </div>
+
+              <button class="btn-submit" type="submit" id="submit-btn">
+                Send Message
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+
+            </form>
+
+            <div id="form-response"></div>
+
+          </div>
         </div>
+
+        <!-- BOTTOM SOCIAL STRIP -->
+        <div class="social-strip">
+          <div class="social-left">
+            Based in <span>Davidson, North Carolina</span> — remote-first team
+          </div>
+          <div class="social-links">
+            <a href="https://x.com/yskaipe" target="_blank" rel="noopener" class="social-link">𝕏 Twitter</a>
+            <a href="https://linkedin.com/company/yskaipe" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+            <a href="https://github.com/YSKAIPE" target="_blank" rel="noopener" class="social-link">GitHub</a>
+            <a href="https://calendly.com/yskaipe" target="_blank" rel="noopener" class="social-link">Book a Call</a>
+          </div>
+        </div>
+
       </div>
-
-<!-- Quick Form + Social / Location -->
-<div class="bg-gradient-to-br from-indigo-50 to-violet-50 rounded-2xl p-8 shadow-lg border border-indigo-100">
-  <h2 class="text-3xl font-bold mb-6">Quick Message</h2>
-  <p class="text-gray-700 mb-8">
-    Drop us a line below — we'll get back to you as soon as possible (usually within 1–2 business days).
-  </p>
-
-  <form action="https://script.google.com/macros/s/AKfycby8Wl4t-wcAeAdjjBkeaAeeFqVg-xcTxfIAJM9DgOFCZfK0lW0wK4VPGc-xktmpIFE9dw/exec"
-        method="POST"
-        class="space-y-6"
-        id="contact-form">
-    <div>
-      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-      <input type="text" id="name" name="name" required
-             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="Jane Doe"/>
     </div>
-    <div>
-      <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-      <input type="email" id="email" name="email" required
-             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="jane@example.com"/>
-    </div>
-    <div>
-      <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
-      <textarea id="message" name="message" rows="5" required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Tell us what's on your mind..."></textarea>
-    </div>
-    <button type="submit"
-            class="w-full bg-indigo-600 text-white font-semibold py-4 rounded-xl hover:bg-indigo-700 transition shadow-md"
-            id="submit-btn">
-      Send Message
-    </button>
-  </form>
+  </section>
 
-  <!-- Feedback area – now styled more prominently -->
-  <div id="form-response" class="mt-6 p-4 rounded-lg text-center font-medium hidden transition-all duration-300">
-    <!-- Content will be inserted here -->
-  </div>
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="cta-title">Excited about what's coming?</h2>
+        <p class="cta-sub">Whether you're a creator, engineer, partner, or just curious about human-cohesive AI — the waitlist is the fastest way in.</p>
+        <a href="/waitlist.html" class="btn-primary">
+          Join the Waitlist
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="/" class="footer-logo">YSKAIPE</a>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <p class="footer-copy">© 2026 YSKAIPE</p>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    // Handle form submission without page reload
+    // Reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    document.querySelectorAll('header .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 80 + i * 100);
+    });
+
+    // Subject toggle
+    document.getElementById('subject-btns').addEventListener('click', e => {
+      const btn = e.target.closest('.subject-btn');
+      if (!btn) return;
+      document.querySelectorAll('.subject-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('subject').value = btn.dataset.val;
+    });
+
+    // Form submit
     document.getElementById('contact-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       const form = e.target;
       const btn = document.getElementById('submit-btn');
       const responseDiv = document.getElementById('form-response');
 
-      // Disable button & show sending state
       btn.disabled = true;
-      btn.textContent = 'Sending...';
-      responseDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
-      responseDiv.textContent = '';
+      btn.innerHTML = 'Sending... <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>';
+      responseDiv.style.display = 'none';
+      responseDiv.className = '';
 
       try {
         const formData = new FormData(form);
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: formData
-        });
-
+        const res = await fetch(form.action, { method: 'POST', body: formData });
         const data = await res.json();
 
-        if (data.status === 'success' || res.ok) {  // some Google Scripts return different keys
-          responseDiv.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-300');
-          responseDiv.innerHTML = 'Thank you for contacting us!<br>We\'ll get back to you soon 🚀';
-          form.reset(); // clear the form
+        if (data.status === 'success' || res.ok) {
+          responseDiv.className = 'success';
+          responseDiv.innerHTML = '// message received — we\'ll be in touch within 1–2 days 🚀';
+          responseDiv.style.display = 'block';
+          form.reset();
+          document.querySelectorAll('.subject-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
+          document.getElementById('subject').value = 'General';
         } else {
-          responseDiv.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-300');
-          responseDiv.textContent = data.message || 'Something went wrong. Please try again.';
+          throw new Error(data.message || 'Unknown error');
         }
       } catch (err) {
-        responseDiv.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-300');
-        responseDiv.textContent = 'Couldn’t connect. Please try again or email hello@yskaipe.com directly.';
+        responseDiv.className = 'error';
+        responseDiv.innerHTML = '// connection failed — email hello@yskaipe.com directly';
+        responseDiv.style.display = 'block';
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Send Message';
+        btn.innerHTML = 'Send Message <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
       }
     });
   </script>
-
-  <div class="mt-10 pt-8 border-t border-indigo-200 text-center">
-    <p class="text-gray-600 mb-4">We're based in Davidson, North Carolina (remote-first team)</p>
-    <div class="flex justify-center space-x-6">
-      <a href="https://x.com/yskaipe" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 text-2xl">
-        𝕏
-      </a>
-      <!-- Add LinkedIn, Discord, etc. when available -->
-    </div>
-  </div>
-</div>
-
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="bg-gradient-to-br from-indigo-600 to-violet-800 text-white py-20 px-6 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">Excited about the future of collaboration?</h2>
-      <p class="text-xl opacity-90 mb-10">Whether you're a creator, engineer, partner, or just curious — let's talk.</p>
-      <a href="mailto:gr8@yskaipe.com" class="inline-block bg-white text-indigo-700 font-bold px-12 py-6 rounded-xl text-xl shadow-2xl hover:bg-gray-100 transition transform hover:scale-105">
-        Email Us Today
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 py-12 px-6 text-center">
-    <p>&copy; 2026 YSKAIPE. All rights reserved.</p>
-    <div class="mt-4 space-x-6">
-      <a href="/privacy" class="hover:text-white">Privacy Policy</a>
-      <a href="/terms" class="hover:text-white">Terms of Service</a>
-      <a href="/careers" class="hover:text-white">Careers</a>
-      <a href="/contact" class="hover:text-white">Contact</a>
-    </div>
-  </footer>
-  <!-- Remove the duplicate script below -->
-  <!-- 
-  <script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault(); // prevent page reload
-      const form = this;
-      const formData = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.result === 'success') {
-          alert('Thanks for Contacting Us! 🚀');
-          form.reset(); // clear the input
-        } else {
-          alert('Something went wrong: ' + (data.error || 'Try again'));
-        }
-      })
-      .catch(err => {
-        alert('Network error: ' + err);
-      });
-    });
-  </script>
-  -->
 </body>
 </html>
