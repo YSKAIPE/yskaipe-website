@@ -96,6 +96,7 @@ export default function Footer() {
                   Careers
                 </a>
               </li>
+              
               <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
@@ -104,21 +105,17 @@ export default function Footer() {
                   Contact
                 </a>
               </li>
-             <li>
+              
+              <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
-                  href="/roadmap.html"
+                  href="nick-conenna-yskaipe.html"
                 >
-                  Roadmap
+                  Founder Bio
                 </a>
               </li>
-            </ul>
-          </div>
-          {/* 3rd block */}
-          <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-200">Trust</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
+              
+             <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
                   href="/privacy.html"
@@ -126,12 +123,36 @@ export default function Footer() {
                   Privacy
                 </a>
               </li>
+
               <li>
                 <a
                   className="text-indigo-200/65 transition hover:text-indigo-500"
                   href="/terms.html"
                 >
                   Terms
+                </a>
+              </li>
+              
+            </ul>
+          </div>
+          {/* 3rd block */}
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-gray-200">Projects</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  href="/bitcoin-natives.html"
+                >
+                  Bitcoin Natives (Bitcoiners)
+                </a>
+              </li>
+              <li>
+                <a
+                  className="text-indigo-200/65 transition hover:text-indigo-500"
+                  href="/peaking-waters.html"
+                >
+                  Peaking Waters (Sustainable Land Dev)
                 </a>
               </li>
             </ul>
