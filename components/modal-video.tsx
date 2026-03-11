@@ -39,8 +39,8 @@ export default function ModalVideo({
         <Image
           className="md:max-w-none"
           src={SecondaryIllustration}
-          width={1165}
-          height={1012}
+          width={480}
+          height={270}
           alt="Secondary illustration"
         />
       </div>
@@ -97,7 +97,7 @@ export default function ModalVideo({
             <span className="text-sm font-medium leading-tight text-gray-300">
               Watch Demo
               <span className="text-gray-600"> • </span>
-              3:47
+              2:12
             </span>
           </span>
         </span>
