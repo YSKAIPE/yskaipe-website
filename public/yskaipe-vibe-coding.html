@@ -461,6 +461,206 @@
       .road-pillars { grid-template-columns: 1fr; }
     }
 
+    /* ── PARALLEL PATHS ── */
+    #parallelpaths { background: var(--ink); position: relative; overflow: hidden; }
+    #parallelpaths::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 60% at 20% 50%, rgba(0,210,255,0.05) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 60% at 80% 50%, rgba(108,99,255,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .paths-intro {
+      font-size: 1.1rem; color: rgba(212,208,240,0.5);
+      max-width: 640px; font-style: italic; line-height: 1.8; margin-bottom: 4rem;
+    }
+    .paths-grid {
+      display: grid; grid-template-columns: 1fr 80px 1fr;
+      gap: 0; align-items: start;
+    }
+    /* the two track cards */
+    .path-card {
+      border-radius: 24px; padding: 2.8rem 2.5rem;
+      border: 1px solid; position: relative; overflow: hidden;
+    }
+    .path-card::before {
+      content: ''; position: absolute; inset: 0;
+      opacity: 0.04; pointer-events: none;
+    }
+    .path-coinbase {
+      border-color: rgba(0,210,255,0.2);
+      background: rgba(0,210,255,0.03);
+    }
+    .path-coinbase::before { background: linear-gradient(135deg, #00d2ff, transparent); }
+    .path-anthropic {
+      border-color: rgba(255,130,80,0.2);
+      background: rgba(255,130,80,0.03);
+    }
+    .path-anthropic::before { background: linear-gradient(135deg, #ff8250, transparent); }
+
+    .path-logo {
+      display: flex; align-items: center; gap: 0.9rem; margin-bottom: 2rem;
+    }
+    .path-logo-mark {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
+    }
+    .path-logo-mark.cb { background: rgba(0,210,255,0.15); }
+    .path-logo-mark.anth { background: rgba(255,130,80,0.15); }
+    .path-logo-text { display: flex; flex-direction: column; gap: 0.15rem; }
+    .path-co-name {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem;
+    }
+    .path-co-name.cb { color: #00d2ff; }
+    .path-co-name.anth { color: #ff9066; }
+    .path-co-tagline {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+    }
+
+    .path-why {
+      font-size: 1rem; color: rgba(212,208,240,0.6);
+      line-height: 1.75; font-style: italic; margin-bottom: 2rem;
+      padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .path-section-label {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 0.8rem; margin-top: 1.5rem;
+    }
+    .path-section-label:first-of-type { margin-top: 0; }
+
+    /* role pills */
+    .role-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .role-pill {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.06em; padding: 0.4rem 0.9rem;
+      border-radius: 100px; border: 1px solid;
+    }
+    .role-pill.cb { color: #00d2ff; border-color: rgba(0,210,255,0.3); background: rgba(0,210,255,0.06); }
+    .role-pill.anth { color: #ff9066; border-color: rgba(255,130,80,0.3); background: rgba(255,130,80,0.06); }
+    .role-pill.hl { font-weight: 500; }
+
+    /* stack items */
+    .path-stack { display: flex; flex-direction: column; gap: 0.5rem; }
+    .path-stack-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      font-size: 0.88rem; color: rgba(212,208,240,0.6); line-height: 1.5;
+    }
+    .path-stack-item .psi-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 0.42rem;
+    }
+    .psi-dot.cb { background: #00d2ff; }
+    .psi-dot.anth { background: #ff9066; }
+
+    /* bridge */
+    .path-bridge {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; padding-top: 9rem; gap: 0;
+    }
+    .bridge-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(212,208,240,0.08), rgba(212,208,240,0.18));
+    }
+    .bridge-node {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--zinc2);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+    }
+    .bridge-label {
+      font-family: 'DM Mono', monospace; font-size: 0.55rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-align: center; margin: 0.4rem 0;
+    }
+
+    /* overlap zone */
+    .paths-overlap {
+      margin-top: 3rem;
+      background: var(--zinc2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px; padding: 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .paths-overlap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg,
+        rgba(0,210,255,0.04) 0%, transparent 40%,
+        transparent 60%, rgba(255,130,80,0.04) 100%);
+      pointer-events: none;
+    }
+    .overlap-title {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.2rem; margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #00d2ff, var(--indigo-b), #ff9066);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .overlap-sub {
+      font-size: 0.88rem; color: var(--muted); font-style: italic;
+      margin-bottom: 1.8rem;
+    }
+    .overlap-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    }
+    .overlap-item {
+      background: var(--zinc); border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 14px; padding: 1.2rem;
+      transition: border-color 0.2s;
+    }
+    .overlap-item:hover { border-color: rgba(212,208,240,0.12); }
+    .overlap-item h5 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.9rem; margin-bottom: 0.4rem; color: var(--white);
+    }
+    .overlap-item p {
+      font-size: 0.78rem; color: var(--muted); line-height: 1.55; font-style: italic;
+    }
+
+    /* now-next bar */
+    .paths-nownext {
+      margin-top: 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    .nownext-card {
+      background: var(--zinc); border-radius: 16px; padding: 1.8rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .nownext-label {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 0.8rem; display: block;
+    }
+    .nownext-label.now { color: #6ee7b7; }
+    .nownext-label.next { color: var(--violet); }
+    .nownext-card h4 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.05rem; margin-bottom: 0.7rem;
+    }
+    .nownext-items { display: flex; flex-direction: column; gap: 0.45rem; }
+    .nownext-item {
+      font-size: 0.85rem; color: rgba(212,208,240,0.6);
+      display: flex; gap: 0.6rem; line-height: 1.5;
+    }
+    .nownext-item::before { content: '→'; color: var(--indigo-b); flex-shrink: 0; }
+
+    @media (max-width: 900px) {
+      .paths-grid { grid-template-columns: 1fr; }
+      .path-bridge { display: none; }
+      .overlap-grid { grid-template-columns: 1fr 1fr; }
+      .paths-nownext { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .overlap-grid { grid-template-columns: 1fr; }
+      .path-card { padding: 2rem 1.5rem; }
+    }
+
     /* ── FULL STACK ── */
     #fullstack { background: var(--black); position: relative; overflow: hidden; }
     #fullstack::before {
@@ -611,6 +811,7 @@
     <li><a href="https://www.yskaipe.com/">Home</a></li>
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="#fullstack">Full Stack</a></li>
+    <li><a href="#parallelpaths">Next Moves</a></li>
     <li><a href="#buildpublic">Schedule</a></li>
     <li><a href="#buildlog">Build Log</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -1271,22 +1472,233 @@
   </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- PARALLEL PATHS -->
+<section id="parallelpaths">
+  <div class="container">
+    <span class="label">Chapter 06 — Parallel Paths</span>
+    <h2 class="section-heading">While Building<br>YSKAIPE.</h2>
+    <p class="paths-intro">
+      These aren't detours — they're parallel signal. Everything being built at YSKAIPE maps directly onto what Coinbase and Anthropic actually need. The work is the portfolio.
+    </p>
+
+    <div class="paths-grid">
+
+      <!-- COINBASE -->
+      <div class="path-card path-coinbase">
+        <div class="path-logo">
+          <div class="path-logo-mark cb">🔵</div>
+          <div class="path-logo-text">
+            <span class="path-co-name cb">Coinbase</span>
+            <span class="path-co-tagline">Crypto · Agentic Finance · Developer Platform</span>
+          </div>
+        </div>
+
+        <p class="path-why">
+          Coinbase is building the financial internet — Agentic Wallets, cbBTC, x402, Base. The YSKAIPE Bitcoin Pod is already running on that exact stack. This isn't aspiration; it's active overlap.
+        </p>
+
+        <span class="path-section-label">Roles that fit naturally</span>
+        <div class="role-pills">
+          <span class="role-pill cb hl">AI/ML Product Manager</span>
+          <span class="role-pill cb hl">Developer Relations</span>
+          <span class="role-pill cb">Agentic Wallet Lead</span>
+          <span class="role-pill cb">Bitcoin Ecosystem PM</span>
+          <span class="role-pill cb">Base Protocol Advocate</span>
+          <span class="role-pill cb">Community & Ecosystem</span>
+        </div>
+
+        <span class="path-section-label">Stack I'm already running</span>
+        <div class="path-stack">
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Coinbase Agentic Wallets — integrating with YSKAIPE AI-O pods</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>cbBTC on Base — yield monitoring via CrewAI agents</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>x402 machine-to-machine payments — prototyped in pod flows</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Bitcoin Protocol deep dives — crewai-bitcoin-pod (live GitHub)</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Self-custody philosophy + Lightning Network architecture</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Taproot, Ordinals, Runes, BRC-20 research ongoing</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Multi-agent orchestration — exactly what Agentic Wallets require</div>
+        </div>
+
+        <span class="path-section-label">What I bring to the table</span>
+        <div class="path-stack">
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Public builder — every session streamed, debugged, shipped</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Human-cohesive AI lens: autonomy with guardrails, sovereignty first</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Community trust — @Bitcoin_Natives daily signal, no fluff</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Cross-discipline: product intuition + agentic engineering + BTC philosophy</div>
+        </div>
+
+        <span class="path-section-label">Skills to deepen in parallel</span>
+        <div class="path-stack">
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Solidity / EVM basics (Base chain smart contracts)</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Coinbase CDP (Commerce Developer Platform) deep dive</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Base node infrastructure + onchain data analysis</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>DeFi primitives: AMMs, lending protocols, yield strategies</div>
+          <div class="path-stack-item"><span class="psi-dot cb"></span>Compliance & regulatory framing for AI-financial agents</div>
+        </div>
+      </div>
+
+      <!-- CENTER BRIDGE -->
+      <div class="path-bridge">
+        <div class="bridge-line"></div>
+        <div class="bridge-node">Y</div>
+        <div class="bridge-label">YSKAIPE<br>is the<br>bridge</div>
+        <div class="bridge-line"></div>
+        <div class="bridge-node">🤝</div>
+        <div class="bridge-label">shared<br>stack</div>
+        <div class="bridge-line"></div>
+        <div class="bridge-node">⚡</div>
+        <div class="bridge-label">parallel<br>signal</div>
+        <div class="bridge-line"></div>
+      </div>
+
+      <!-- ANTHROPIC -->
+      <div class="path-card path-anthropic">
+        <div class="path-logo">
+          <div class="path-logo-mark anth">🟠</div>
+          <div class="path-logo-text">
+            <span class="path-co-name anth">Anthropic</span>
+            <span class="path-co-tagline">AI Safety · Claude · Constitutional AI · Research</span>
+          </div>
+        </div>
+
+        <p class="path-why">
+          Anthropic is defining what safe, beneficial AI looks like at scale. YSKAIPE's Human-Cohesive AI framework — human-in-the-loop, vibe-first, sovereignty-preserving — is built on the exact principles Anthropic cares most about.
+        </p>
+
+        <span class="path-section-label">Roles that fit naturally</span>
+        <div class="role-pills">
+          <span class="role-pill anth hl">Developer Experience / DevRel</span>
+          <span class="role-pill anth hl">Product — Claude API &amp; Agents</span>
+          <span class="role-pill anth">Prompt Engineering Lead</span>
+          <span class="role-pill anth">AI Safety Researcher (Applied)</span>
+          <span class="role-pill anth">Human-AI Interaction PM</span>
+          <span class="role-pill anth">Claude for Work / Enterprise</span>
+        </div>
+
+        <span class="path-section-label">Stack I'm already running</span>
+        <div class="path-stack">
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Claude API — primary reasoning engine in YSKAIPE pods</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Claude Code — agentic vibe coding sessions, streamed live</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Prompt engineering — system prompts, chain-of-thought, tool use</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Multi-agent orchestration with Claude as primary agent brain</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Human-in-the-loop design — "ask before acting" patterns</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Constitutional-style vibe rules files for pods</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Hallucination mitigation in CrewAI (documented publicly)</div>
+        </div>
+
+        <span class="path-section-label">What I bring to the table</span>
+        <div class="path-stack">
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Real production usage of Claude — not demo prompts, actual shipped systems</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Human-cohesive AI philosophy that aligns with Constitutional AI values</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Builder-teacher hybrid — build log + live streams educate the ecosystem</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Cross-model benchmarking: Claude vs Grok vs GPT-4o vs Gemini in real use</div>
+        </div>
+
+        <span class="path-section-label">Skills to deepen in parallel</span>
+        <div class="path-stack">
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Constitutional AI + RLHF fundamentals (reading + replication)</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Claude's extended thinking + tool use patterns at scale</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Interpretability basics: mechanistic interp papers, activation steering</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Model evaluations: building evals for YSKAIPE pod quality</div>
+          <div class="path-stack-item"><span class="psi-dot anth"></span>Fine-tuning pipelines &amp; dataset curation for vibe-matching</div>
+        </div>
+      </div>
+    </div><!-- end paths-grid -->
+
+    <!-- SHARED OVERLAP ZONE -->
+    <div class="paths-overlap">
+      <div class="overlap-title">Where Both Paths Converge — The Shared Stack</div>
+      <p class="overlap-sub">Every skill built here strengthens both tracks simultaneously. This is the leverage.</p>
+      <div class="overlap-grid">
+        <div class="overlap-item">
+          <h5>Agentic Architecture</h5>
+          <p>CrewAI, multi-agent orchestration, human-in-the-loop patterns — core to both Coinbase Agentic Wallets and Claude's agent products.</p>
+        </div>
+        <div class="overlap-item">
+          <h5>Build in Public</h5>
+          <p>Weekly streams, live debugging, public repos. The strongest signal for both DevRel and PM roles at tech-first companies.</p>
+        </div>
+        <div class="overlap-item">
+          <h5>Human-Cohesive AI</h5>
+          <p>Autonomy with guardrails, vibe-first intelligence, sovereignty preservation — resonates at Anthropic for safety and at Coinbase for user trust.</p>
+        </div>
+        <div class="overlap-item">
+          <h5>Python + FastAPI</h5>
+          <p>The backbone of every YSKAIPE pod. Directly applicable to API product work, agent tooling, and backend systems at both orgs.</p>
+        </div>
+        <div class="overlap-item">
+          <h5>Bitcoin Protocol</h5>
+          <p>Deep BTC literacy is table stakes for Coinbase. It also informs AI-financial agent safety — directly relevant to Anthropic's applied research.</p>
+        </div>
+        <div class="overlap-item">
+          <h5>Prompt Engineering</h5>
+          <p>YSKAIPE pods run on carefully crafted system prompts, tool use chains, and vibe rules. This is core craft at Anthropic and product-critical at Coinbase AI features.</p>
+        </div>
+        <div class="overlap-item">
+          <h5>Community Trust</h5>
+          <p>@Bitcoin_Natives + @yskaipe daily presence. Ecosystem credibility is everything in both crypto and AI — it compounds over time.</p>
+        </div>
+        <div class="overlap-item">
+          <h5>Cross-model Benchmarking</h5>
+          <p>Running Claude, Grok, Gemini, GPT-4o side-by-side in real production. Rare practical knowledge that both product and research teams value.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOW / NEXT -->
+    <div class="paths-nownext">
+      <div class="nownext-card">
+        <span class="nownext-label now">Doing Now — While Building YSKAIPE</span>
+        <h4>Active Parallel Work</h4>
+        <div class="nownext-items">
+          <div class="nownext-item">Ship crewai-bitcoin-pod to production — direct Coinbase signal</div>
+          <div class="nownext-item">Deepen Claude API tool use + extended thinking patterns in pods</div>
+          <div class="nownext-item">Document every build decision publicly — the portfolio builds itself</div>
+          <div class="nownext-item">Engage Coinbase developer community via Base ecosystem events</div>
+          <div class="nownext-item">Read Constitutional AI paper + write public response/application post</div>
+          <div class="nownext-item">Build vibe-match eval framework — maps to Anthropic model evals work</div>
+        </div>
+      </div>
+      <div class="nownext-card">
+        <span class="nownext-label next">Building Toward — Q2–Q3 2026</span>
+        <h4>Targeted Depth</h4>
+        <div class="nownext-items">
+          <div class="nownext-item">Coinbase CDP integration demo — agentic wallet flow end-to-end</div>
+          <div class="nownext-item">EVM / Solidity basics course (Sprint pod format, shipped live)</div>
+          <div class="nownext-item">Anthropic API — build a public Claude-powered tool with evals</div>
+          <div class="nownext-item">Interpretability intro: replicate a mechanistic interp result publicly</div>
+          <div class="nownext-item">DeFi protocol deep dive pod — document AI agent safety patterns</div>
+          <div class="nownext-item">Reach out to both DevRel orgs via built portfolio + community presence</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- CTA -->
 <section id="cta">
   <div class="container">
-    <span class="label" style="display:block; margin-bottom:2.5rem;">Simple. Intentional. Human.</span>
+    <span class="label" style="display:block; margin-bottom:2.5rem;">Build in public. Build toward something.</span>
     <p class="cta-big">
-      "Limited spots. High-signal creators &amp; coders only.<br>Bring your weirdest ideas."
+      "Every session ships signal. The pod is the portfolio.<br>
+      Coinbase, Anthropic, and a sovereign internet are all in the same direction."
     </p>
     <div class="cta-group">
       <a href="/beta-pods.html#waitlist" class="btn-primary" style="font-size:0.88rem; padding:1.1rem 2.8rem;">
-        <i class="fas fa-rocket"></i> Join the Vibe Coding Pod Waitlist
+        <i class="fas fa-rocket"></i> Join the Vibe Coding Pod
+      </a>
+      <a href="https://github.com/yskaipe" target="_blank" class="btn-ghost" style="font-size:0.88rem; padding:1.1rem 2.8rem;">
+        <i class="fab fa-github"></i> See the Work on GitHub
       </a>
       <a href="https://x.com/yskaipe" target="_blank" class="btn-ghost" style="font-size:0.88rem; padding:1.1rem 2.8rem;">
         <i class="fab fa-x-twitter"></i> Follow @yskaipe
       </a>
     </div>
-    <p class="cta-footnote">Part of YSKAIPE · Human Cohesive AI · Pods for real-world impact</p>
+    <p class="cta-footnote">YSKAIPE · Human Cohesive AI · The pod is the portfolio · Sovereignty first</p>
   </div>
 </section>
 
