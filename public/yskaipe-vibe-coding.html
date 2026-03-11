@@ -1,146 +1,1309 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vibe Coding Beta Pod • YSKAIPE</title>
-  <meta name="description" content="Natural-language to code. Agentic flows. Forget the syntax exists. Human taste guides exponential creation in the Vibe Coding Beta Pod."/>
-  
-  <!-- Tailwind CDN (compile your own in production) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            nacelle: ['Nacelle', 'serif'],
-          },
-          colors: {
-            indigo: {
-              200: '#c7d2fe',
-              300: '#a5b4fc',
-              500: '#6366f1',
-            },
-          },
-        },
-      },
-    }
-  </script>
-
-  <!-- Fonts -->
+  <title>Vibe Coding Pod • YSKAIPE</title>
+  <meta name="description" content="Natural-language to code. Agentic flows. Build in public. Human taste guides exponential creation in the Vibe Coding Beta Pod."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     :root {
-      --color-gray-50: #f9fafb;
-      --color-gray-200: #e5e7eb;
-      --color-gray-800: #1f2937;
-      --color-gray-900: #111827;
-      --color-gray-950: #030712;
+      --indigo:     #6c63ff;
+      --indigo-b:   #9b96ff;
+      --indigo-dim: #3d37cc;
+      --violet:     #a78bfa;
+      --black:      #05050a;
+      --ink:        #0c0c14;
+      --zinc:       #16161f;
+      --zinc2:      #1e1e2a;
+      --muted:      #52526a;
+      --light:      #ddd8f0;
+      --white:      #f4f1fd;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
     body {
-      @apply bg-gray-950 text-gray-100;
+      font-family: 'Instrument Serif', Georgia, serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
     }
-    .bg-gradient-to-r {
-      background-image: linear-gradient(to right, var(--tw-gradient-stops));
+
+    /* noise */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.45;
     }
-    .animate-gradient {
-      animation: gradient 6s linear infinite;
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(5,5,10,0.75);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(108,99,255,0.12);
     }
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+    .nav-logo-mark {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(108,99,255,0.4);
+    }
+    .nav-wordmark {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.35rem;
+      letter-spacing: 0.04em; color: var(--white);
+    }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--indigo-b); }
+    .nav-cta {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      color: #fff; border-radius: 100px; text-decoration: none;
+      font-weight: 500; transition: all 0.2s; white-space: nowrap;
+      box-shadow: 0 0 20px rgba(108,99,255,0.3);
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(108,99,255,0.5); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 9rem 2rem 7rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-radial {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 90% 65% at 50% 35%, rgba(108,99,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(108,99,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,99,255,0.05) 1px, transparent 1px);
+      background-size: 72px 72px; pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+    /* scanlines */
+    .hero-scan {
+      position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 3px, rgba(108,99,255,0.015) 3px, rgba(108,99,255,0.015) 4px
+      );
+    }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--indigo-b);
+      border: 1px solid rgba(108,99,255,0.3); padding: 0.4rem 1.3rem;
+      border-radius: 100px; margin-bottom: 2.5rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-title {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(4.5rem, 14vw, 11rem);
+      line-height: 0.88; letter-spacing: -0.03em;
+      background: linear-gradient(160deg, #fff 0%, var(--indigo-b) 50%, var(--violet) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 1.2rem;
+      animation: fadeUp 0.7s 0.08s ease both;
+    }
+    .hero-sub {
+      font-family: 'Syne', sans-serif; font-weight: 600;
+      font-size: clamp(1rem, 2.5vw, 1.5rem); color: var(--indigo-b);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 2.5rem; animation: fadeUp 0.7s 0.13s ease both;
+    }
+    .hero-body {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      color: rgba(212,208,240,0.62); max-width: 620px;
+      line-height: 1.75; font-weight: 400; font-style: italic;
+      margin-bottom: 3rem; animation: fadeUp 0.7s 0.18s ease both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      font-family: 'DM Mono', monospace; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      color: #fff; border-radius: 100px; text-decoration: none;
+      font-weight: 500; transition: all 0.25s;
+      box-shadow: 0 0 36px rgba(108,99,255,0.35);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 60px rgba(108,99,255,0.55); }
+    .btn-ghost {
+      font-family: 'DM Mono', monospace; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 1rem 2.5rem; border: 1px solid rgba(108,99,255,0.4);
+      color: var(--indigo-b); border-radius: 100px; text-decoration: none;
+      font-weight: 500; transition: all 0.25s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-ghost:hover { border-color: var(--indigo-b); background: rgba(108,99,255,0.08); transform: translateY(-3px); }
+
+    /* ── UTILS ── */
+    .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(108,99,255,0.18), transparent); }
+    section { padding: 7rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .label {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--indigo-b);
+      display: inline-block; margin-bottom: 1.5rem;
+    }
+    .section-heading {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1; letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+
+    /* ── PHILOSOPHY ── */
+    #philosophy { background: var(--ink); }
+    .phil-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+    .phil-sticky { position: sticky; top: 6rem; }
+    .phil-text {
+      font-size: 1.12rem; color: rgba(212,208,240,0.62);
+      line-height: 1.85; font-weight: 400;
+    }
+    .phil-text p + p { margin-top: 1.5rem; }
+    .phil-text em { color: var(--indigo-b); font-style: italic; }
+    .phil-text strong { color: var(--white); font-style: italic; font-weight: 400; }
+
+    /* ── FOCUS AREAS ── */
+    #focus { background: var(--black); }
+    .focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+    .focus-card {
+      background: var(--zinc); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px; padding: 2.5rem 2rem;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative; overflow: hidden;
+    }
+    .focus-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(108,99,255,0.1), transparent 65%);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .focus-card:hover { transform: translateY(-8px); border-color: rgba(108,99,255,0.3); }
+    .focus-card:hover::before { opacity: 1; }
+    .focus-num {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.2em; color: var(--indigo-b); margin-bottom: 1.2rem; display: block;
+    }
+    .focus-card h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.3rem; color: var(--indigo-b); margin-bottom: 0.8rem;
+    }
+    .focus-card p { font-size: 0.95rem; color: rgba(212,208,240,0.55); line-height: 1.7; font-weight: 400; }
+
+    /* ── BUILD IN PUBLIC ── */
+    #buildpublic { background: var(--ink); }
+    .bip-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      flex-wrap: wrap; gap: 2rem; margin-bottom: 3.5rem;
+    }
+    .bip-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.2rem; }
+    .badge {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.45rem 1rem; border-radius: 100px;
+      background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2);
+      color: var(--indigo-b);
+    }
+    .badge.live {
+      background: rgba(108,99,255,0.15); border-color: rgba(108,99,255,0.4);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .badge-dot {
+      width: 7px; height: 7px; background: var(--indigo-b);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    .schedule-grid { display: flex; flex-direction: column; gap: 1rem; }
+    .week-row {
+      background: var(--zinc2); border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .week-row:hover { border-color: rgba(108,99,255,0.2); }
+    .week-row.current { border-color: rgba(108,99,255,0.35); background: rgba(108,99,255,0.05); }
+    .week-header {
+      display: grid; grid-template-columns: 80px 1fr 1fr;
+      align-items: center; padding: 1.2rem 1.8rem; gap: 1.5rem;
+    }
+    .week-num {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase;
+    }
+    .week-session { display: flex; flex-direction: column; gap: 0.25rem; }
+    .session-day {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--indigo-b);
+    }
+    .session-title { font-size: 0.95rem; color: rgba(212,208,240,0.75); font-weight: 400; }
+    .session-detail { font-size: 0.82rem; color: var(--muted); margin-top: 0.1rem; font-style: italic; }
+    .now-chip {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; background: rgba(108,99,255,0.25);
+      border: 1px solid rgba(108,99,255,0.5); border-radius: 100px;
+      color: var(--indigo-b); align-self: flex-start;
+    }
+    .bip-note {
+      margin-top: 2.5rem; padding: 1.5rem 2rem;
+      background: rgba(108,99,255,0.05); border: 1px solid rgba(108,99,255,0.12);
+      border-radius: 14px; font-size: 0.9rem; color: rgba(212,208,240,0.55);
+      font-style: italic; line-height: 1.7;
+    }
+
+    /* ── BUILD LOG ── */
+    #buildlog { background: var(--black); }
+    .log-grid { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
+    .log-entry {
+      background: var(--zinc); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px; overflow: hidden; transition: border-color 0.2s;
+    }
+    .log-entry:hover { border-color: rgba(108,99,255,0.2); }
+    .log-entry.featured { border-color: rgba(108,99,255,0.25); background: rgba(108,99,255,0.04); }
+    .log-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.8rem 2.2rem 1.2rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .log-meta { display: flex; flex-direction: column; gap: 0.3rem; }
+    .log-date {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--indigo-b);
+    }
+    .log-entry h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.4rem; margin-top: 0.2rem;
+    }
+    .log-sub { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+    .log-body { padding: 0 2.2rem 1.8rem; }
+    .log-items { display: flex; flex-direction: column; gap: 0.6rem; }
+    .log-item {
+      display: flex; gap: 0.9rem; font-size: 0.9rem;
+      color: rgba(212,208,240,0.65); line-height: 1.55; font-weight: 400;
+    }
+    .log-item .icon { flex-shrink: 0; margin-top: 0.05rem; }
+    .log-item .icon.ok { color: #6ee7b7; }
+    .log-item .icon.fail { color: #f87171; }
+    .log-item .icon.learn { color: var(--indigo-b); }
+    .log-item .icon.next { color: var(--violet); }
+    .log-item a { color: var(--indigo-b); text-decoration: none; border-bottom: 1px solid rgba(108,99,255,0.3); transition: border-color 0.2s; }
+    .log-item a:hover { border-color: var(--indigo-b); }
+    .log-quote {
+      margin-top: 1.5rem; border-left: 3px solid var(--indigo);
+      padding: 1rem 1.5rem;
+      background: rgba(108,99,255,0.05); border-radius: 0 12px 12px 0;
+      font-style: italic; font-size: 1.05rem;
+      color: rgba(212,208,240,0.55); line-height: 1.7;
+    }
+    .log-quote cite {
+      display: block; font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-style: normal; color: var(--indigo-b); margin-top: 0.75rem;
+    }
+    .log-section-label {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin: 1.4rem 0 0.7rem; display: block;
+    }
+    .log-archive {
+      margin-top: 1rem; padding: 1.2rem 2rem;
+      background: var(--zinc2); border: 1px dashed rgba(108,99,255,0.15);
+      border-radius: 14px; text-align: center;
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ROADMAP ── */
+    #roadmap { background: var(--ink); }
+    .road-intro {
+      font-size: 1.1rem; color: rgba(212,208,240,0.55);
+      max-width: 580px; line-height: 1.8; font-weight: 400;
+      font-style: italic; margin-bottom: 4rem;
+    }
+    .road-pillars {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-bottom: 5rem;
+    }
+    .road-pillar {
+      background: var(--zinc2); border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 18px; padding: 2rem;
+      transition: border-color 0.2s;
+    }
+    .road-pillar:hover { border-color: rgba(108,99,255,0.2); }
+    .road-pillar-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+    .road-pillar h4 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.1rem; color: var(--indigo-b); margin-bottom: 0.6rem;
+    }
+    .road-pillar p { font-size: 0.9rem; color: rgba(212,208,240,0.5); line-height: 1.65; }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 2.5rem; position: relative; padding-bottom: 3rem;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: ''; position: absolute;
+      left: 119px; top: 12px; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, rgba(108,99,255,0.3), rgba(108,99,255,0.05));
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-left { text-align: right; padding-top: 0.2rem; }
+    .tl-phase {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--indigo-b); display: block; margin-bottom: 0.4rem;
+    }
+    .tl-dot {
+      position: absolute; left: 111px; top: 6px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--indigo), var(--violet));
+      box-shadow: 0 0 14px rgba(108,99,255,0.5);
+      border: 2px solid var(--black);
+    }
+    .tl-dot.done { background: #6ee7b7; box-shadow: 0 0 14px rgba(110,231,183,0.4); }
+    .tl-dot.future { background: var(--zinc2); border-color: rgba(108,99,255,0.3); box-shadow: none; }
+    .tl-content { padding-top: 0; }
+    .tl-content h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.4rem; margin-bottom: 1rem;
+    }
+    .tl-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .tl-list li {
+      display: flex; gap: 0.75rem; font-size: 0.9rem;
+      color: rgba(212,208,240,0.6); line-height: 1.55;
+    }
+    .tl-list li span.ic { flex-shrink: 0; }
+
+    /* ── CTA ── */
+    #cta { background: var(--black); text-align: center; padding: 8rem 2rem; }
+    .cta-big {
+      font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--indigo-b);
+      font-weight: 400; font-style: italic; max-width: 700px;
+      margin: 0 auto 4rem; line-height: 1.6;
+    }
+    .cta-group { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4.5rem; }
+    .cta-footnote {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(82,82,106,0.6);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 3rem 2rem; text-align: center;
+    }
+    .footer-links {
+      display: flex; justify-content: center; gap: 2.5rem;
+      list-style: none; margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--indigo-b); }
+    .footer-copy {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      color: rgba(82,82,106,0.5); letter-spacing: 0.1em;
+    }
+
+    /* ── ANIMS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform: scale(1); }
+      50%      { opacity:.45; transform: scale(.7); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .phil-grid, .road-pillars { grid-template-columns: 1fr; gap: 2.5rem; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .week-header { grid-template-columns: 60px 1fr; }
+      .week-header .week-session:last-child { display: none; }
+      .tl-item { grid-template-columns: 80px 1fr; gap: 1.5rem; }
+      .tl-item::before { left: 79px; }
+      .tl-dot { left: 71px; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 5rem 1.25rem; }
+      .road-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* ── FULL STACK ── */
+    #fullstack { background: var(--black); position: relative; overflow: hidden; }
+    #fullstack::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(108,99,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .stack-intro {
+      font-size: 1.1rem; color: rgba(212,208,240,0.5);
+      max-width: 600px; font-style: italic; line-height: 1.8;
+      margin-bottom: 4.5rem;
+    }
+    .stack-categories { display: flex; flex-direction: column; gap: 3rem; }
+    .stack-cat { }
+    .stack-cat-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+    .stack-cat-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .stack-cat-name {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .stack-cat-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, rgba(108,99,255,0.2), transparent);
+    }
+    .stack-pills {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .stack-pill {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 100px;
+      font-family: 'DM Mono', monospace; font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      border: 1px solid; cursor: default;
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+      position: relative; overflow: hidden;
+    }
+    .stack-pill::before {
+      content: ''; position: absolute; inset: 0;
+      background: currentColor; opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .stack-pill:hover { transform: translateY(-2px); }
+    .stack-pill:hover::before { opacity: 0.07; }
+    .stack-pill .pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor; flex-shrink: 0;
+    }
+    /* sizes */
+    .pill-xl {
+      font-size: 0.9rem; padding: 0.75rem 1.5rem;
+      font-weight: 500;
+    }
+    .pill-lg { font-size: 0.84rem; padding: 0.65rem 1.3rem; }
+    .pill-md { font-size: 0.78rem; }
+    .pill-sm { font-size: 0.72rem; padding: 0.45rem 0.9rem; opacity: 0.8; }
+    /* color themes */
+    .pill-violet  { color: #c4b5fd; border-color: rgba(196,181,253,0.3); background: rgba(196,181,253,0.06); }
+    .pill-indigo  { color: #9b96ff; border-color: rgba(155,150,255,0.3); background: rgba(155,150,255,0.06); }
+    .pill-cyan    { color: #67e8f9; border-color: rgba(103,232,249,0.25); background: rgba(103,232,249,0.05); }
+    .pill-emerald { color: #6ee7b7; border-color: rgba(110,231,183,0.25); background: rgba(110,231,183,0.05); }
+    .pill-amber   { color: #fcd34d; border-color: rgba(252,211,77,0.3);  background: rgba(252,211,77,0.06); }
+    .pill-rose    { color: #fda4af; border-color: rgba(253,164,175,0.25); background: rgba(253,164,175,0.05); }
+    .pill-sky     { color: #7dd3fc; border-color: rgba(125,211,252,0.25); background: rgba(125,211,252,0.05); }
+    .pill-orange  { color: #fdba74; border-color: rgba(253,186,116,0.25); background: rgba(253,186,116,0.05); }
+    .pill-slate   { color: #94a3b8; border-color: rgba(148,163,184,0.2);  background: rgba(148,163,184,0.04); }
+    /* bitcoin gold accent */
+    .pill-bitcoin { color: #f5a623; border-color: rgba(245,166,35,0.35); background: rgba(245,166,35,0.07); font-weight: 500; }
+    /* stack map visual */
+    .stack-map {
+      margin-top: 4.5rem;
+      background: var(--zinc);
+      border: 1px solid rgba(108,99,255,0.15);
+      border-radius: 24px;
+      padding: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .stack-map::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(108,99,255,0.07), transparent 60%);
+      pointer-events: none;
+    }
+    .stack-map-title {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.1rem; margin-bottom: 2rem; color: rgba(212,208,240,0.6);
+      letter-spacing: 0.02em;
+    }
+    .stack-flow {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 0; row-gap: 1.5rem;
+    }
+    .flow-node {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.5rem; min-width: 90px;
+    }
+    .flow-node-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--zinc2);
+      transition: all 0.2s;
+    }
+    .flow-node:hover .flow-node-icon {
+      transform: scale(1.08);
+      border-color: rgba(108,99,255,0.4);
+      box-shadow: 0 0 20px rgba(108,99,255,0.2);
+    }
+    .flow-node-label {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-align: center;
+    }
+    .flow-arrow {
+      font-family: 'DM Mono', monospace; font-size: 1rem;
+      color: rgba(108,99,255,0.4); padding: 0 0.5rem;
+      align-self: center; margin-bottom: 1.2rem;
+    }
+    @media (max-width: 900px) {
+      .stack-flow { gap: 0.5rem; }
+      .flow-node { min-width: 70px; }
+    }
+    @media (max-width: 600px) {
+      .stack-map { padding: 2rem 1.5rem; }
+      .stack-map .flow-arrow { display: none; }
     }
   </style>
 </head>
-<body class="antialiased">
+<body>
 
-  <!-- Header / Hero -->
-  <header class="relative overflow-hidden border-b border-indigo-500/20">
-    <div class="absolute inset-0 bg-gradient-to-br from-indigo-950/30 via-gray-950 to-gray-950"></div>
-    <div class="relative mx-auto max-w-6xl px-6 py-24 md:py-32 text-center">
-      <div class="inline-flex items-center gap-3 pb-4">
-        <span class="text-sm font-medium uppercase tracking-wider bg-gradient-to-r from-indigo-400 to-indigo-200 bg-clip-text text-transparent">
-          BETA POD
-        </span>
+<!-- NAV -->
+<nav>
+  <a href="https://www.yskaipe.com/" class="nav-logo">
+    <div class="nav-logo-mark">Y</div>
+    <span class="nav-wordmark">YSKAIPE</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://www.yskaipe.com/">Home</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#fullstack">Full Stack</a></li>
+    <li><a href="#buildpublic">Schedule</a></li>
+    <li><a href="#buildlog">Build Log</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+  <a href="/beta-pods.html#waitlist" class="nav-cta">Join Waitlist →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-radial"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+
+  <div class="hero-eyebrow">
+    <i class="fas fa-code" style="margin-right:0.5rem;"></i> Beta Pod · YSKAIPE
+  </div>
+  <h1 class="hero-title">Vibe<br>Coding</h1>
+  <div class="hero-sub">Intention → Execution · Build in Public · Human Taste</div>
+  <p class="hero-body">
+    Describe the dream. Let the model write the code.<br>
+    Humans hold the taste, the direction, the veto.<br>
+    Built transparently, every Wednesday and Friday, live.
+  </p>
+  <div class="hero-btns">
+    <a href="/beta-pods.html#waitlist" class="btn-primary">
+      <i class="fas fa-rocket"></i> Join the Pod Waitlist
+    </a>
+    <a href="#buildpublic" class="btn-ghost">
+      <i class="fas fa-calendar"></i> See Schedule
+    </a>
+    <a href="#buildlog" class="btn-ghost">
+      <i class="fas fa-terminal"></i> Build Log
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="container">
+    <div class="phil-grid">
+      <div class="phil-sticky">
+        <span class="label">Philosophy</span>
+        <h2 class="section-heading">Nothing is<br>written<br>in stone.</h2>
       </div>
-      <h1 class="animate-gradient bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-6 font-nacelle text-5xl font-bold text-transparent md:text-7xl">
-        Vibe Coding
-      </h1>
-      <p class="mx-auto max-w-3xl text-xl text-indigo-200/70 md:text-2xl">
-        Describe the dream. Let the model write the code.<br/>
-        Humans hold the taste, the direction, the veto.
-      </p>
+      <div class="phil-text">
+        <p>Code used to be <em>syntax-first.</em> Now it's <strong>intention-first.</strong></p>
+        <p>In the Vibe Coding Beta Pod we fully embrace the exponential: prompt in plain language, accept the output, iterate via conversation, forget the boilerplate exists. Tools like Cursor, Aider, Claude, Gemini — agents that build, refactor, debug in real time.</p>
+        <p>But the human never disappears. We steer the vibe: aesthetics, ethics, coherence, when to throw it all away and start fresh. <strong>AI is the perfect pair programmer; humans are still the soul.</strong></p>
+        <p>We build in public — every session streamed, every decision logged, every failure documented. Real orchestration, real people, real outcomes. Come watch, suggest a prompt, vote on a feature, or simply lurk. No invite needed.</p>
+      </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Main Content -->
-  <main class="mx-auto max-w-6xl px-6 py-16 md:py-24">
-    <!-- Philosophy -->
-    <section class="mb-20 text-center">
-      <h2 class="mb-6 text-4xl font-semibold">Everything flows. Nothing is written in stone.</h2>
-      <p class="mx-auto max-w-3xl text-lg leading-relaxed text-indigo-200/65">
-        Code used to be syntax-first. Now it's intention-first.<br/><br/>
-        In the Vibe Coding Beta Pod we fully embrace the exponential: prompt in plain language, accept the output, iterate via conversation, forget the boilerplate exists. Tools like Cursor, Aider, Claude, Gemini — agents that build, refactor, debug in real time.<br/><br/>
-        But the human never disappears. We steer the vibe: aesthetics, ethics, coherence, when to throw it all away and start fresh. AI is the perfect pair programmer; humans are still the soul.
-      </p>
-    </section>
+<div class="divider"></div>
 
-    <!-- Key Focus Areas (Cards) -->
-    <section class="grid gap-8 md:grid-cols-3">
-      <!-- Card 1 -->
-      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
-        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
-          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Intention → Execution Loops</h3>
-          <p class="text-indigo-200/70">
-            High-level prompts → agent builds MVP. Follow-up vibes refine. Zero syntax fights. Rapid throwaway weekends become throwaway hours.
-          </p>
+<!-- FOCUS AREAS -->
+<section id="focus">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:0.5rem;">
+      <span class="label">Chapter 01 — What We Build</span>
+      <h2 class="section-heading">Key Focus Areas</h2>
+      <p style="color:rgba(212,208,240,0.45); font-size:1rem; max-width:480px; margin:0 auto; font-style:italic;">Three lenses we use to go from vibe to shipped artifact.</p>
+    </div>
+    <div class="focus-grid">
+      <div class="focus-card">
+        <span class="focus-num">01 ——</span>
+        <h3>Intention → Execution Loops</h3>
+        <p>High-level prompts → agent builds MVP. Follow-up vibes refine. Zero syntax fights. Rapid throwaway weekends become throwaway hours.</p>
+      </div>
+      <div class="focus-card">
+        <span class="focus-num">02 ——</span>
+        <h3>Toolchain Experiments</h3>
+        <p>Cursor agents, Aider in terminal, Claude artifacts, Gemini in AI Studio. Compare autonomy, hallucination resistance, production readiness. Build rules files for vibe safety.</p>
+      </div>
+      <div class="focus-card">
+        <span class="focus-num">03 ——</span>
+        <h3>Human Taste & Phase Shifts</h3>
+        <p>When does "good enough" become dangerous? Train taste for spotting spaghetti, security holes, maintainability debt. Prototype → polish → production gates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FULL STACK -->
+<section id="fullstack">
+  <div class="container">
+    <span class="label">Chapter 02 — The Full Stack</span>
+    <h2 class="section-heading">Every Tool.<br>Every Layer.</h2>
+    <p class="stack-intro">
+      This is how YSKAIPE actually builds — the complete, honest stack. Every layer shown with proportionate weight. No black boxes. Collaborate with us knowing exactly what's under the hood.
+    </p>
+
+    <div class="stack-categories">
+
+      <!-- AI ORCHESTRATION & REASONING -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(196,181,253,0.1); color:#c4b5fd;">🧠</div>
+          <span class="stack-cat-name">AI Orchestration &amp; Reasoning — Core Engine</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-violet pill-xl"><span class="pill-dot"></span>CrewAI</span>
+          <span class="stack-pill pill-violet pill-xl"><span class="pill-dot"></span>Claude (Anthropic)</span>
+          <span class="stack-pill pill-violet pill-xl"><span class="pill-dot"></span>Grok (xAI)</span>
+          <span class="stack-pill pill-violet pill-lg"><span class="pill-dot"></span>Gemini (Google)</span>
+          <span class="stack-pill pill-violet pill-lg"><span class="pill-dot"></span>GPT-4o (OpenAI)</span>
+          <span class="stack-pill pill-violet pill-md"><span class="pill-dot"></span>LangChain</span>
+          <span class="stack-pill pill-violet pill-md"><span class="pill-dot"></span>LangGraph</span>
+          <span class="stack-pill pill-violet pill-md"><span class="pill-dot"></span>Ollama (local)</span>
+          <span class="stack-pill pill-violet pill-sm"><span class="pill-dot"></span>litellm</span>
+          <span class="stack-pill pill-violet pill-sm"><span class="pill-dot"></span>Groq Inference</span>
+          <span class="stack-pill pill-violet pill-sm"><span class="pill-dot"></span>OpenRouter</span>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
-        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
-          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Toolchain Experiments</h3>
-          <p class="text-indigo-200/70">
-            Cursor agents, Aider in terminal, Claude artifacts, Gemini in AI Studio. Compare autonomy, hallucination resistance, production readiness. Build rules files for vibe safety.
-          </p>
+      <!-- VIBE CODING TOOLS -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(155,150,255,0.1); color:#9b96ff;">⌨️</div>
+          <span class="stack-cat-name">Vibe Coding &amp; Agentic Dev — Where Code Gets Written</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-indigo pill-xl"><span class="pill-dot"></span>Cursor</span>
+          <span class="stack-pill pill-indigo pill-xl"><span class="pill-dot"></span>Claude Code</span>
+          <span class="stack-pill pill-indigo pill-lg"><span class="pill-dot"></span>Aider (terminal)</span>
+          <span class="stack-pill pill-indigo pill-lg"><span class="pill-dot"></span>GitHub Copilot</span>
+          <span class="stack-pill pill-indigo pill-md"><span class="pill-dot"></span>Windsurf</span>
+          <span class="stack-pill pill-indigo pill-md"><span class="pill-dot"></span>Replit AI</span>
+          <span class="stack-pill pill-indigo pill-md"><span class="pill-dot"></span>v0 (Vercel)</span>
+          <span class="stack-pill pill-indigo pill-sm"><span class="pill-dot"></span>Bolt.new</span>
+          <span class="stack-pill pill-indigo pill-sm"><span class="pill-dot"></span>AI Studio</span>
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="group relative overflow-hidden rounded-2xl bg-gray-800/50 p-px transition-all hover:scale-[1.02]">
-        <div class="relative h-full rounded-[inherit] bg-gradient-to-br from-gray-900 to-gray-950 p-8">
-          <h3 class="mb-4 text-2xl font-semibold text-indigo-300">Human Taste & Phase Shifts</h3>
-          <p class="text-indigo-200/70">
-            When does "good enough" become dangerous? Train taste for spotting spaghetti, security holes, maintainability debt. Prototype → polish → production gates.
-          </p>
+      <!-- BITCOIN & WEB3 -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(245,166,35,0.12); color:#f5a623;">₿</div>
+          <span class="stack-cat-name">Bitcoin &amp; Sovereign Finance — The Monetary Layer</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-bitcoin pill-xl"><span class="pill-dot"></span>Bitcoin Protocol</span>
+          <span class="stack-pill pill-bitcoin pill-xl"><span class="pill-dot"></span>Lightning Network</span>
+          <span class="stack-pill pill-bitcoin pill-lg"><span class="pill-dot"></span>CrewAI Bitcoin Pod</span>
+          <span class="stack-pill pill-bitcoin pill-lg"><span class="pill-dot"></span>Coldcard / Self-Custody</span>
+          <span class="stack-pill pill-bitcoin pill-md"><span class="pill-dot"></span>cbBTC (Coinbase)</span>
+          <span class="stack-pill pill-bitcoin pill-md"><span class="pill-dot"></span>Agentic Wallets</span>
+          <span class="stack-pill pill-bitcoin pill-md"><span class="pill-dot"></span>x402 Payments</span>
+          <span class="stack-pill pill-bitcoin pill-md"><span class="pill-dot"></span>Taproot / Ordinals</span>
+          <span class="stack-pill pill-bitcoin pill-sm"><span class="pill-dot"></span>Ark / Statechains</span>
+          <span class="stack-pill pill-bitcoin pill-sm"><span class="pill-dot"></span>CoinJoin</span>
+          <span class="stack-pill pill-bitcoin pill-sm"><span class="pill-dot"></span>Bitcoin RPC</span>
+          <span class="stack-pill pill-bitcoin pill-sm"><span class="pill-dot"></span>Runes / BRC-20</span>
         </div>
       </div>
-    </section>
 
-    <!-- Call to Action -->
-    <section class="mt-20 text-center">
-      <a 
-        href="/beta-pods.html#waitlist" 
-        class="inline-block rounded-full bg-gradient-to-r from-indigo-600 to-indigo-400 px-10 py-5 text-lg font-semibold text-white shadow-lg transition hover:scale-105 hover:shadow-indigo-500/30"
-      >
-        Join the Vibe Coding Pod Waitlist →
+      <!-- BACKEND & INFRA -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(103,232,249,0.08); color:#67e8f9;">⚙️</div>
+          <span class="stack-cat-name">Backend &amp; Infrastructure — The Engine Room</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-cyan pill-xl"><span class="pill-dot"></span>Python</span>
+          <span class="stack-pill pill-cyan pill-xl"><span class="pill-dot"></span>FastAPI</span>
+          <span class="stack-pill pill-cyan pill-lg"><span class="pill-dot"></span>PostgreSQL</span>
+          <span class="stack-pill pill-cyan pill-lg"><span class="pill-dot"></span>Supabase</span>
+          <span class="stack-pill pill-cyan pill-md"><span class="pill-dot"></span>Pydantic</span>
+          <span class="stack-pill pill-cyan pill-md"><span class="pill-dot"></span>Redis</span>
+          <span class="stack-pill pill-cyan pill-md"><span class="pill-dot"></span>Temporal Tables</span>
+          <span class="stack-pill pill-cyan pill-md"><span class="pill-dot"></span>Docker</span>
+          <span class="stack-pill pill-cyan pill-sm"><span class="pill-dot"></span>Vercel</span>
+          <span class="stack-pill pill-cyan pill-sm"><span class="pill-dot"></span>Railway</span>
+          <span class="stack-pill pill-cyan pill-sm"><span class="pill-dot"></span>Fly.io</span>
+        </div>
+      </div>
+
+      <!-- FRONTEND & DESIGN -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(253,186,116,0.08); color:#fdba74;">🎨</div>
+          <span class="stack-cat-name">Frontend &amp; Design — Human-Facing Layer</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-orange pill-xl"><span class="pill-dot"></span>Figma</span>
+          <span class="stack-pill pill-orange pill-xl"><span class="pill-dot"></span>React / Next.js</span>
+          <span class="stack-pill pill-orange pill-lg"><span class="pill-dot"></span>Tailwind CSS</span>
+          <span class="stack-pill pill-orange pill-lg"><span class="pill-dot"></span>HTML / CSS / JS</span>
+          <span class="stack-pill pill-orange pill-md"><span class="pill-dot"></span>Figma API</span>
+          <span class="stack-pill pill-orange pill-md"><span class="pill-dot"></span>Framer</span>
+          <span class="stack-pill pill-orange pill-sm"><span class="pill-dot"></span>shadcn/ui</span>
+          <span class="stack-pill pill-orange pill-sm"><span class="pill-dot"></span>Radix UI</span>
+        </div>
+      </div>
+
+      <!-- COLLABORATION & LIVE BUILDING -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(125,211,252,0.08); color:#7dd3fc;">🤝</div>
+          <span class="stack-cat-name">Collaboration &amp; Live Building — Human Cohesion Layer</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-sky pill-xl"><span class="pill-dot"></span>GitHub</span>
+          <span class="stack-pill pill-sky pill-xl"><span class="pill-dot"></span>Slack (bots &amp; agents)</span>
+          <span class="stack-pill pill-sky pill-lg"><span class="pill-dot"></span>Twitch (live builds)</span>
+          <span class="stack-pill pill-sky pill-lg"><span class="pill-dot"></span>YouTube (replays)</span>
+          <span class="stack-pill pill-sky pill-md"><span class="pill-dot"></span>Discord</span>
+          <span class="stack-pill pill-sky pill-md"><span class="pill-dot"></span>Calendly</span>
+          <span class="stack-pill pill-sky pill-md"><span class="pill-dot"></span>𝕏 / Twitter API</span>
+          <span class="stack-pill pill-sky pill-sm"><span class="pill-dot"></span>Notion</span>
+          <span class="stack-pill pill-sky pill-sm"><span class="pill-dot"></span>Linear</span>
+        </div>
+      </div>
+
+      <!-- VIBE & MATCHING INTELLIGENCE -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(110,231,183,0.08); color:#6ee7b7;">⬡</div>
+          <span class="stack-cat-name">Vibe Matching &amp; Pod Intelligence — What Makes YSKAIPE YSKAIPE</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-emerald pill-xl"><span class="pill-dot"></span>Cosine Embedding Similarity</span>
+          <span class="stack-pill pill-emerald pill-xl"><span class="pill-dot"></span>Weighted Skill + Attitude Vectors</span>
+          <span class="stack-pill pill-emerald pill-lg"><span class="pill-dot"></span>Real-time Drift Detection</span>
+          <span class="stack-pill pill-emerald pill-lg"><span class="pill-dot"></span>AI-O Nudge System</span>
+          <span class="stack-pill pill-emerald pill-md"><span class="pill-dot"></span>Pod Health Dashboard</span>
+          <span class="stack-pill pill-emerald pill-md"><span class="pill-dot"></span>Vibe Keywords Profiling</span>
+          <span class="stack-pill pill-emerald pill-md"><span class="pill-dot"></span>"Ask Before Acting" Toggle</span>
+          <span class="stack-pill pill-emerald pill-sm"><span class="pill-dot"></span>Grok Reasoning Summaries</span>
+          <span class="stack-pill pill-emerald pill-sm"><span class="pill-dot"></span>Cross-pod Shared Memory</span>
+          <span class="stack-pill pill-emerald pill-sm"><span class="pill-dot"></span>Discord → Action Items Loop</span>
+        </div>
+      </div>
+
+      <!-- OPEN SOURCE & RESEARCH -->
+      <div class="stack-cat">
+        <div class="stack-cat-header">
+          <div class="stack-cat-icon" style="background:rgba(253,164,175,0.08); color:#fda4af;">🔬</div>
+          <span class="stack-cat-name">Open Source &amp; Research — What We Ship Publicly</span>
+          <div class="stack-cat-line"></div>
+        </div>
+        <div class="stack-pills">
+          <span class="stack-pill pill-rose pill-xl"><span class="pill-dot"></span>crewai-bitcoin-pod (GitHub)</span>
+          <span class="stack-pill pill-rose pill-lg"><span class="pill-dot"></span>Human Cohesive AI (concept)</span>
+          <span class="stack-pill pill-rose pill-lg"><span class="pill-dot"></span>Vibe Coding Jams</span>
+          <span class="stack-pill pill-rose pill-md"><span class="pill-dot"></span>Weekly Build Logs</span>
+          <span class="stack-pill pill-rose pill-md"><span class="pill-dot"></span>Public Debugging Trails</span>
+          <span class="stack-pill pill-rose pill-sm"><span class="pill-dot"></span>Ethics Review Pod (WIP)</span>
+          <span class="stack-pill pill-rose pill-sm"><span class="pill-dot"></span>Sustainable App Sprint</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FLOW MAP -->
+    <div class="stack-map">
+      <div class="stack-map-title">How a pod session flows — seed to shipped</div>
+      <div class="stack-flow">
+        <div class="flow-node">
+          <div class="flow-node-icon">💡</div>
+          <span class="flow-node-label">Human Seed</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">🧠</div>
+          <span class="flow-node-label">Grok / Claude Plan</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">🤖</div>
+          <span class="flow-node-label">CrewAI Agents</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">⌨️</div>
+          <span class="flow-node-label">Cursor / Aider</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">🎨</div>
+          <span class="flow-node-label">Figma / UI</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">⚡</div>
+          <span class="flow-node-label">FastAPI Backend</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">👁️</div>
+          <span class="flow-node-label">Human Review</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">🚀</div>
+          <span class="flow-node-label">Shipped Live</span>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">
+          <div class="flow-node-icon">₿</div>
+          <span class="flow-node-label">BTC Pod Layer</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUILD IN PUBLIC / SCHEDULE -->
+<section id="buildpublic">
+  <div class="container">
+    <div class="bip-header">
+      <div>
+        <span class="label">Chapter 03 — Build in Public</span>
+        <h2 class="section-heading">6-Week Sprint<br>Schedule</h2>
+        <div class="bip-badges">
+          <span class="badge live"><span class="badge-dot"></span>Sessions Active</span>
+          <span class="badge">Feb – Apr 2026</span>
+          <span class="badge">Wed · Build Day</span>
+          <span class="badge">Fri · Demo Day</span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0.75rem; padding-top:1rem;">
+        <a href="https://twitch.tv/yskaipe" target="_blank" class="btn-ghost" style="font-size:0.72rem; padding:0.7rem 1.4rem;">
+          <i class="fab fa-twitch"></i> Watch Live
+        </a>
+        <a href="https://youtube.com/@yskaipe-artists" target="_blank" class="btn-ghost" style="font-size:0.72rem; padding:0.7rem 1.4rem;">
+          <i class="fab fa-youtube"></i> Replays
+        </a>
+      </div>
+    </div>
+
+    <div class="schedule-grid">
+
+      <!-- Week 1 -->
+      <div class="week-row">
+        <div class="week-header">
+          <span class="week-num">Week 01</span>
+          <div class="week-session">
+            <span class="session-day">Fri Feb 27</span>
+            <span class="session-title">Demo Day — Polish, Demo & Network</span>
+            <span class="session-detail">Live beta pod demo + initial metrics + networking</span>
+          </div>
+          <div class="week-session">
+            <span class="session-day">Wed Mar 4</span>
+            <span class="session-title">Build Day — Core Dev & Live Coding</span>
+            <span class="session-detail">Roadmap review + matching algorithm enhancements</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 2 CURRENT -->
+      <div class="week-row current">
+        <div class="week-header">
+          <span class="week-num">Week 02 <span class="now-chip">Now</span></span>
+          <div class="week-session">
+            <span class="session-day">Wed Mar 11</span>
+            <span class="session-title">Build Day — New Pod Template Prototyping</span>
+            <span class="session-detail">Sustainable App Sprint + tool integrations</span>
+          </div>
+          <div class="week-session">
+            <span class="session-day">Fri Mar 13</span>
+            <span class="session-title">Demo Day — Real-time Pod Execution</span>
+            <span class="session-detail">Community voting on features</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 3 -->
+      <div class="week-row">
+        <div class="week-header">
+          <span class="week-num">Week 03</span>
+          <div class="week-session">
+            <span class="session-day">Wed Mar 18</span>
+            <span class="session-title">Build Day — Monitoring & Onboarding</span>
+            <span class="session-detail">Real-time monitoring + onboarding refinements</span>
+          </div>
+          <div class="week-session">
+            <span class="session-day">Fri Mar 20</span>
+            <span class="session-title">Demo & Network Day</span>
+            <span class="session-detail">Open discussion of results + AI professionals networking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 4 -->
+      <div class="week-row">
+        <div class="week-header">
+          <span class="week-num">Week 04</span>
+          <div class="week-session">
+            <span class="session-day">Wed Mar 25</span>
+            <span class="session-title">Build Day — Ethics Review Pod</span>
+            <span class="session-detail">Ethics pod prototyping + orchestration logic</span>
+          </div>
+          <div class="week-session">
+            <span class="session-day">Fri Mar 27</span>
+            <span class="session-title">Demo & Feedback Day</span>
+            <span class="session-detail">Community prompt demo + transparent metrics</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 5 -->
+      <div class="week-row">
+        <div class="week-header">
+          <span class="week-num">Week 05</span>
+          <div class="week-session">
+            <span class="session-day">Wed Apr 1</span>
+            <span class="session-title">Build Day — Chemistry Tool Showcase</span>
+            <span class="session-detail">Chemistry integration + dynamic refinements</span>
+          </div>
+          <div class="week-session">
+            <span class="session-day">Fri Apr 3</span>
+            <span class="session-title">Demo & Network Day</span>
+            <span class="session-detail">Guest conversations + partnership discussions</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 6 FINAL -->
+      <div class="week-row">
+        <div class="week-header">
+          <span class="week-num">Week 06 <span class="now-chip" style="background:rgba(167,139,250,0.2); border-color:rgba(167,139,250,0.4); color:var(--violet);">Final</span></span>
+          <div class="week-session">
+            <span class="session-day">Wed Apr 8</span>
+            <span class="session-title">Build Day — Top-voted Features</span>
+            <span class="session-detail">Iteration on community feedback</span>
+          </div>
+          <div class="week-session">
+            <span class="session-day">Fri Apr 10</span>
+            <span class="session-title">6-Week Milestone Showcase</span>
+            <span class="session-detail">Full progress recap + metrics + what's next</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bip-note">
+      <strong style="color:var(--white); font-style:normal;">All sessions are open.</strong> Watch AI-orchestrated teams form in real time. Participate, suggest prompts, vote on features, or simply observe — no invite needed.
+      &nbsp;
+      <a href="https://x.com/yskaipe" target="_blank" style="color:var(--indigo-b); text-decoration:none;">𝕏 @yskaipe</a> ·
+      <a href="https://calendly.com/yskaipe" target="_blank" style="color:var(--indigo-b); text-decoration:none;">Book a Call</a> ·
+      <a href="https://github.com/yskaipe" target="_blank" style="color:var(--indigo-b); text-decoration:none;">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUILD LOG -->
+<section id="buildlog">
+  <div class="container">
+    <span class="label">Chapter 04 — Real-time Notes</span>
+    <h2 class="section-heading">Build Log</h2>
+    <p style="color:rgba(212,208,240,0.45); font-size:1rem; max-width:520px; font-style:italic; line-height:1.7; margin-bottom:0;">
+      Decisions made with Grok, what broke, what shipped, and how we turn Human Cohesive AI from idea into reality. New entry every Wednesday.
+    </p>
+
+    <div class="log-grid">
+
+      <!-- Entry: Mar 3 -->
+      <div class="log-entry featured">
+        <div class="log-top">
+          <div class="log-meta">
+            <span class="log-date">March 3, 2026 · 10:30 AM–1:30 PM EST</span>
+            <h3>CrewAI Bitcoin Pod Kickoff</h3>
+            <span class="log-sub">Deep Work Block · 3 hrs · Bitcoin Protocol · CrewAI · Python</span>
+          </div>
+          <span class="badge live"><span class="badge-dot"></span>Latest Entry</span>
+        </div>
+        <div class="log-body">
+          <span class="log-section-label">Progress</span>
+          <div class="log-items">
+            <div class="log-item"><span class="icon ok">✓</span><span>Created &amp; shipped public repo: <a href="https://github.com/yskaipe/crewai-bitcoin-pod" target="_blank">github.com/yskaipe/crewai-bitcoin-pod</a> — first dedicated CrewAI + Python multi-agent space for Bitcoin pod orchestration.</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>Initial crew script <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">bitcoin_crew.py</code>: defined Bitcoin Protocol Expert + AI Agent Orchestrator agents, research tasks for node interaction &amp; autonomous pod flows.</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>Fixed setup bugs: path error resolved; Pydantic validation fixed by changing <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">Crew(verbose=2)</code> → <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">verbose=True</code> (CrewAI now enforces boolean, not int levels).</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>First execution successful — Bitcoin Researcher agent launched, detailed startup and task-begin logs confirmed.</span></div>
+            <div class="log-item"><span class="icon fail">✗</span><span><strong style="color:#fca5a5; font-weight:400;">Blocker:</strong> LLM call failed mid-task — Invalid Groq API Key (GroqException 401 via litellm). Crew execution halted.</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>GitHub profile polish: consistent topics added — <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">crewai, ai-agents, bitcoin, python, human-cohesive-ai, fastapi</code>.</span></div>
+          </div>
+          <span class="log-section-label">Learnings</span>
+          <div class="log-items">
+            <div class="log-item"><span class="icon learn">◈</span><span>CrewAI evolves fast — verbosity params changed (int levels → bool flag). Always verify against current version docs before a session.</span></div>
+            <div class="log-item"><span class="icon learn">◈</span><span>Groq integration: regen fresh key at <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">console.groq.com</code> if 401. Quick fallback: <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">llm = "ollama/llama3.2"</code> for cost-free local iteration.</span></div>
+            <div class="log-item"><span class="icon learn">◈</span><span>Portfolio value: public debugging trails (path fix → verbose fix → API auth) are strong signal for applied AI roles in 2026.</span></div>
+          </div>
+          <span class="log-section-label">Next Steps</span>
+          <div class="log-items">
+            <div class="log-item"><span class="icon next">→</span><span>Regen/validate Groq key (or switch to Ollama local), re-run full crew → capture Bitcoin research summary + proposed orchestration structure.</span></div>
+            <div class="log-item"><span class="icon next">→</span><span>Integrate real tools (e.g. bitcoinrpc wrapper). Prep March 4 Wednesday live session: demo initial CrewAI crew + Bitcoin pod integration.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entry: Week 9 -->
+      <div class="log-entry">
+        <div class="log-top">
+          <div class="log-meta">
+            <span class="log-date">Week 9 · Feb 23–27, 2026</span>
+            <h3>Pod Health Monitoring & Vibe-Match Refinements</h3>
+            <span class="log-sub">Real-time drift detection + weighted matching algorithm</span>
+          </div>
+        </div>
+        <div class="log-body">
+          <div class="log-items">
+            <div class="log-item"><span class="icon ok">✓</span><span>Deployed basic pod health dashboard — real-time vibe drift detection using embedding cosine distance over time.</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>Fixed critical bug in SEED → plan generation where Grok was hallucinating unavailable tools.</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>Improved matching algorithm: added weighted skill + attitude vectors (70/30 split after A/B testing with 3 pods).</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>First automated "nudge" system — AI-O now pings humans when momentum stalls &gt;48h.</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>Re-architected workspace provisioning to use temporal tables instead of flat JSON — 10× faster queries.</span></div>
+            <div class="log-item"><span class="icon fail">✗</span><span>Initial vibe-drift model over-penalized minor disagreements → relaxed cosine threshold from <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">0.25</code> → <code style="font-family:'DM Mono',monospace; font-size:0.82em; color:var(--indigo-b);">0.18</code>.</span></div>
+            <div class="log-item"><span class="icon fail">✗</span><span>Figma API rate limits killed auto-wireframe generation mid-demo — now batching requests.</span></div>
+            <div class="log-item"><span class="icon learn">◈</span><span>Always test orchestration loops with sleep delays — real humans don't respond in 300ms.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entry: Week 8 -->
+      <div class="log-entry">
+        <div class="log-top">
+          <div class="log-meta">
+            <span class="log-date">Week 8 · Feb 16–20, 2026</span>
+            <h3>First Multi-Human Pod Orchestration</h3>
+            <span class="log-sub">3-person + AI-O pod running 72 hours</span>
+          </div>
+        </div>
+        <div class="log-body">
+          <div class="log-items">
+            <div class="log-item"><span class="icon ok">✓</span><span>Successfully ran 3-person + AI-O pod for 72 hours (Bitcoin analysis sprint).</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>Added real-time milestone checkpoints with Grok reasoning summaries.</span></div>
+            <div class="log-item"><span class="icon fail">✗</span><span>Over-eager AI intervention caused vibe friction → added "ask before acting" toggle.</span></div>
+            <div class="log-item"><span class="icon ok">✓</span><span>Pod creation form now supports optional "vibe keywords" for better matching.</span></div>
+          </div>
+          <div class="log-quote">
+            "The moment the human said 'nah, let's pivot' and Grok immediately re-planned without argument — that's when I knew we were onto something."
+            <cite>— Nicholas</cite>
+          </div>
+        </div>
+      </div>
+
+      <div class="log-archive">Weeks 1–7 archive loading soon · Logging since Jan 2026 · New entry every Wednesday</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <span class="label">Chapter 05 — Where We're Headed</span>
+    <h2 class="section-heading">Roadmap</h2>
+    <p class="road-intro">We're not building another project tool. We're creating a new paradigm where AI doesn't replace humans — it amplifies them. Every milestone brings us closer to AI that understands vibe, protects creativity, and orchestrates with genuine human cohesion.</p>
+
+    <div class="road-pillars">
+      <div class="road-pillar">
+        <span class="road-pillar-icon">🧠</span>
+        <h4>Vibe-First Intelligence</h4>
+        <p>AI that reads attitude, energy, and creative style — not just skills — to form teams that actually enjoy working together.</p>
+      </div>
+      <div class="road-pillar">
+        <span class="road-pillar-icon">🤝</span>
+        <h4>Human-in-the-Loop Orchestration</h4>
+        <p>Every AI decision can be refined by human prompt engineers. No black boxes — just transparent, collaborative magic.</p>
+      </div>
+      <div class="road-pillar">
+        <span class="road-pillar-icon">🌍</span>
+        <h4>Creativity-Protecting Autonomy</h4>
+        <p>AI handles logistics and repetition; humans keep the soul. The system gets smarter while staying profoundly human.</p>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <span class="tl-phase">Now → Q1 2026</span>
+        </div>
+        <div class="tl-dot done"></div>
+        <div class="tl-content">
+          <h3>Prototype & Private Alpha</h3>
+          <ul class="tl-list">
+            <li><span class="ic">✓</span> Waitlist onboarding with vibe profiling</li>
+            <li><span class="ic">✓</span> Basic AI matching + human prompt engineer review</li>
+            <li><span class="ic">✓</span> Integrated workspace (Slack / Figma / GitHub bots)</li>
+            <li><span class="ic">✓</span> First real projects run end-to-end by founder-selected pods</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <span class="tl-phase">Q2 2026</span>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <h3>Private Beta Launch</h3>
+          <ul class="tl-list">
+            <li><span class="ic">🚀</span> Invite-only access for waitlist members</li>
+            <li><span class="ic">🚀</span> Advanced vibe refinement + multi-pod orchestration</li>
+            <li><span class="ic">🚀</span> Pro tier with partner credits (OpenAI, Figma, etc.)</li>
+            <li><span class="ic">🚀</span> Human prompt engineer panel (real-time adjustments)</li>
+            <li><span class="ic">🚀</span> Community feedback loops shaping core AI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <span class="tl-phase">Q3–Q4 2026</span>
+        </div>
+        <div class="tl-dot future"></div>
+        <div class="tl-content">
+          <h3>Public Launch & Enterprise</h3>
+          <ul class="tl-list">
+            <li><span class="ic">🌍</span> Open sign-ups + freemium model live</li>
+            <li><span class="ic">🌍</span> Enterprise tier with white-label &amp; dedicated orchestration</li>
+            <li><span class="ic">🌍</span> API access for custom workflows</li>
+            <li><span class="ic">🌍</span> Autonomous project seeds (AI proposes full project plans)</li>
+            <li><span class="ic">🌍</span> Global community events powered by YSKAIPE pods</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <span class="tl-phase">2027 & Beyond</span>
+        </div>
+        <div class="tl-dot future"></div>
+        <div class="tl-content">
+          <h3>The Human-Cohesive Era</h3>
+          <ul class="tl-list">
+            <li><span class="ic">✨</span> Fully autonomous yet human-overridable pods</li>
+            <li><span class="ic">✨</span> Cross-platform memory (your vibe follows you everywhere)</li>
+            <li><span class="ic">✨</span> AI-mediated conflict resolution with emotional intelligence</li>
+            <li><span class="ic">✨</span> Decentralized governance of platform AI (community-owned models)</li>
+            <li><span class="ic">✨</span> Real-world impact: activist campaigns, open-source breakthroughs, new art movements</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <span class="label" style="display:block; margin-bottom:2.5rem;">Simple. Intentional. Human.</span>
+    <p class="cta-big">
+      "Limited spots. High-signal creators &amp; coders only.<br>Bring your weirdest ideas."
+    </p>
+    <div class="cta-group">
+      <a href="/beta-pods.html#waitlist" class="btn-primary" style="font-size:0.88rem; padding:1.1rem 2.8rem;">
+        <i class="fas fa-rocket"></i> Join the Vibe Coding Pod Waitlist
       </a>
-      <p class="mt-6 text-sm text-indigo-200/50">
-        Limited spots. High-signal creators & coders only. Bring your weirdest ideas.
-      </p>
-    </section>
-  </main>
+      <a href="https://x.com/yskaipe" target="_blank" class="btn-ghost" style="font-size:0.88rem; padding:1.1rem 2.8rem;">
+        <i class="fab fa-x-twitter"></i> Follow @yskaipe
+      </a>
+    </div>
+    <p class="cta-footnote">Part of YSKAIPE · Human Cohesive AI · Pods for real-world impact</p>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="border-t border-gray-800/50 py-12 text-center text-sm text-gray-400">
-    <p>© 2026 YSKAIPE • Small groups. Big phase shifts.</p>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <ul class="footer-links">
+    <li><a href="https://www.yskaipe.com/">YSKAIPE.com</a></li>
+    <li><a href="https://www.yskaipe.com/beta-pods.html">Beta Pods</a></li>
+    <li><a href="https://www.yskaipe.com/yskaipe-build-log.html">Build Log</a></li>
+    <li><a href="https://www.yskaipe.com/roadmap.html">Roadmap</a></li>
+    <li><a href="https://twitch.tv/yskaipe" target="_blank">Twitch</a></li>
+    <li><a href="https://youtube.com/@yskaipe-artists" target="_blank">YouTube</a></li>
+    <li><a href="https://github.com/yskaipe" target="_blank">GitHub</a></li>
+    <li><a href="https://x.com/yskaipe" target="_blank">@yskaipe</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 YSKAIPE — Building transparent human-AI collaboration · Small groups. Big phase shifts.</p>
+</footer>
 
 </body>
 </html>
