@@ -71,8 +71,8 @@ export default function HeroHome() {
                 thumbHeight={576}
                 thumbAlt="Human Cohesive AI – see it in action"
                 video="videos/video.mp4"
-                videoWidth={1920}
-                videoHeight={1080}
+                videoWidth={960}
+                videoHeight={540}
               />
             </div>
           </div>
