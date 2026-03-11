@@ -3,107 +3,856 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>YSKAIPE Bitcoin Pod — Deep BTC Innovation</title>
+  <title>Bitcoin Natives • YSKAIPE Bitcoin Pod</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
+    :root {
+      --gold: #f5a623;
+      --gold-bright: #ffd166;
+      --gold-dim: #b8730a;
+      --black: #050505;
+      --ink: #0d0d0d;
+      --zinc: #1a1a1a;
+      --zinc2: #252525;
+      --muted: #5a5a5a;
+      --light: #e8e0d0;
+      --white: #f9f5ef;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      line-height: 1.6;
-      color: #111;
-      background: #fff;
+      font-family: 'Fraunces', Georgia, serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
     }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      text-align: center;
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
     }
-    .tagline {
-      font-size: 1.4rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      color: #444;
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(5,5,5,0.7);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(245,166,35,0.12);
     }
-    .intro {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    .section {
-      margin: 3rem 0;
-    }
-    h2 {
-      font-size: 2.2rem;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 0.5rem;
-    }
-    ul {
-      padding-left: 1.5rem;
-    }
-    .cta {
-      text-align: center;
-      margin-top: 4rem;
-      font-size: 1.4rem;
-    }
-    a {
-      color: #0066cc;
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       text-decoration: none;
     }
-    a:hover {
-      text-decoration: underline;
+    .nav-logo-mark {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--black);
+      box-shadow: 0 0 20px rgba(245,166,35,0.35);
     }
-    hr {
-      border: none;
-      border-top: 1px solid #eee;
-      margin: 4rem 0;
+    .nav-wordmark {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.5rem;
+      background: var(--gold);
+      color: var(--black);
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-radial {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(245,166,35,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(245,166,35,0.3);
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      background: linear-gradient(170deg, #fff 0%, var(--gold-bright) 55%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero-sub {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-body {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      color: rgba(233,224,208,0.7);
+      max-width: 640px;
+      line-height: 1.7;
+      font-weight: 300;
+      font-style: italic;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .btn-primary {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+      color: var(--black);
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.25s;
+      box-shadow: 0 0 40px rgba(245,166,35,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 60px rgba(245,166,35,0.5); }
+
+    .btn-ghost {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border: 1px solid rgba(245,166,35,0.4);
+      color: var(--gold);
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); background: rgba(245,166,35,0.07); transform: translateY(-3px); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,166,35,0.2), transparent);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 7rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── MISSION ── */
+    #mission { background: var(--ink); }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .mission-sticky { position: sticky; top: 6rem; }
+    .mission-text {
+      font-size: 1.15rem;
+      color: rgba(233,224,208,0.65);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+    .mission-text p + p { margin-top: 1.5rem; }
+    .mission-text strong { color: var(--gold); font-weight: 500; font-style: italic; }
+
+    /* ── PILLARS ── */
+    #pillars { background: var(--black); }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .pillar {
+      background: var(--zinc);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(245,166,35,0.08), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .pillar:hover { transform: translateY(-8px); border-color: rgba(245,166,35,0.25); }
+    .pillar:hover::before { opacity: 1; }
+    .pillar-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .pillar h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .pillar p {
+      font-size: 0.95rem;
+      color: rgba(233,224,208,0.55);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── POD EXPLORE ── */
+    #pod { background: var(--ink); }
+    .pod-inner {
+      border: 1px solid rgba(245,166,35,0.15);
+      border-radius: 28px;
+      background: rgba(245,166,35,0.03);
+      padding: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .pod-inner::after {
+      content: '₿';
+      position: absolute;
+      right: -1rem;
+      top: -2rem;
+      font-size: 18rem;
+      opacity: 0.03;
+      line-height: 1;
+      pointer-events: none;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .pod-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+    .pod-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .pod-list li {
+      display: flex;
+      gap: 1rem;
+      font-size: 1rem;
+      color: rgba(233,224,208,0.7);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .pod-list li::before {
+      content: '→';
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .pod-right p {
+      font-size: 1.05rem;
+      color: rgba(233,224,208,0.65);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .pod-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(245,166,35,0.08);
+      border: 1px solid rgba(245,166,35,0.2);
+      padding: 0.5rem 1.1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ── SOVEREIGN INTELLIGENCE ── */
+    #intelligence { background: var(--black); }
+    .intel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+    .intel-text {
+      font-size: 1.05rem;
+      color: rgba(233,224,208,0.65);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+    .intel-text p + p { margin-top: 1.5rem; }
+    .intel-text strong { color: var(--white); font-style: italic; font-weight: 400; }
+    .intel-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .intel-list li {
+      display: flex;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--zinc2);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.95rem;
+      color: rgba(233,224,208,0.7);
+      font-weight: 300;
+      line-height: 1.5;
+      transition: border-color 0.2s;
+    }
+    .intel-list li:hover { border-color: rgba(245,166,35,0.2); }
+    .intel-list li::before {
+      content: '⬡';
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+    .intel-quote {
+      margin-top: 3rem;
+      border-left: 3px solid var(--gold);
+      padding-left: 1.5rem;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(233,224,208,0.5);
+      font-weight: 300;
+    }
+
+    /* ── COMMUNITY ── */
+    #community { background: var(--ink); }
+    .community-card {
+      border: 1px solid rgba(245,166,35,0.2);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(245,166,35,0.04) 0%, transparent 60%);
+      padding: 4rem;
+      display: flex;
+      gap: 4rem;
+      align-items: center;
+    }
+    .community-icon {
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 60px rgba(245,166,35,0.3);
+    }
+    .community-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .community-info p {
+      font-size: 1.05rem;
+      color: rgba(233,224,208,0.6);
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    .community-btns { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .community-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .community-quote {
+      margin-top: 3rem;
+      padding: 2.5rem 3rem;
+      background: rgba(245,166,35,0.04);
+      border: 1px solid rgba(245,166,35,0.1);
+      border-radius: 16px;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: rgba(233,224,208,0.65);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .community-quote cite {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-style: normal;
+      color: var(--gold);
+      margin-top: 1rem;
+    }
+
+    /* ── CTA ── */
+    #cta {
+      background: var(--black);
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+    #cta .big-quote {
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--gold);
+      font-weight: 300;
+      font-style: italic;
+      max-width: 760px;
+      margin: 0 auto 4rem;
+      line-height: 1.55;
+    }
+    #cta .cta-group {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 5rem;
+    }
+    #cta .footnote {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(90,90,90,0.7);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(90,90,90,0.5);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .mission-grid, .pod-grid, .intel-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .community-card { flex-direction: column; gap: 2rem; padding: 2.5rem; }
+      .pod-inner { padding: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      section { padding: 5rem 1.25rem; }
+      .pod-inner::after { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <h1>YSKAIPE Bitcoin Pod</h1>
-  <div class="tagline">Deep dives into BTC protocol, scaling, sovereignty, and on-chain future</div>
+<!-- NAV -->
+<nav>
+  <a href="https://www.yskaipe.com/" class="nav-logo">
+    <div class="nav-logo-mark">Y</div>
+    <span class="nav-wordmark">YSKAIPE</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://www.yskaipe.com/">Home</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#pillars">Simple Way</a></li>
+    <li><a href="#pod">Bitcoin Pod</a></li>
+    <li><a href="#intelligence">Sovereignty</a></li>
+  </ul>
+  <a href="https://x.com/Bitcoin_Natives" target="_blank" class="nav-cta">
+    <i class="fab fa-x-twitter" style="margin-right:0.5rem;"></i>@Bitcoin_Natives
+  </a>
+</nav>
 
-  <p class="intro">
-    AI-orchestrated, human-first team turning Bitcoin curiosity into real tools, prototypes, and sovereignty discussions. Perfect for builders, thinkers, and maximalists who want focused collaboration without the noise.
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-radial"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-eyebrow">
+    <i class="fas fa-bitcoin" style="margin-right:0.5rem;"></i> YSKAIPE BITCOIN
+  </div>
+
+  <h1 class="hero-title">BITCOIN<br>NATIVES</h1>
+  <div class="hero-sub">Bitcoin Pod · Community · Sovereignty</div>
+
+  <p class="hero-body">
+    Where regular people learn to simply hold the most ideal form of digital value ever created — and where builders, thinkers, and maximalists ship real tools together.
   </p>
 
-  <div class="section">
-    <h2>What We Explore & Build</h2>
-    <ul>
-      <li>Bitcoin protocol mechanics — consensus, scripting, UTXO model deep dives</li>
-      <li>Scaling solutions — Lightning Network, Ark, statechains, sidechains, rollups on Bitcoin</li>
-      <li>Custody & security — multisig, hardware wallets, inheritance planning, collaborative custody models</li>
-      <li>On-chain innovation — Ordinals, Runes, BRC-20, Taproot assets, covenants, OP_CAT proposals</li>
-      <li>Node & infrastructure — running full nodes, mining pools, satellite relays, privacy tools (e.g., CoinJoin, silent payments)</li>
-      <li>Sovereignty & philosophy — self-custody culture, energy debates, nation-state adoption, Bitcoin as money vs. store of value</li>
-      <li>Prototyping — next-gen wallets, Lightning apps, payment channels tooling, Bitcoin-backed DeFi primitives</li>
-      <li>Tool building — explorers, analyzers, privacy mixers, fee estimators, or even fun stuff like Bitcoin art generators</li>
-    </ul>
+  <div class="hero-btns">
+    <a href="#pod" class="btn-primary">
+      <i class="fas fa-rocket" style="margin-right:0.6rem;"></i>Explore the Bitcoin Pod
+    </a>
+    <a href="#pillars" class="btn-ghost">The Simple Way</a>
+    <a href="https://x.com/Bitcoin_Natives" target="_blank" class="btn-ghost">
+      <i class="fab fa-x-twitter" style="margin-right:0.5rem;"></i>Join Daily
+    </a>
   </div>
+</section>
 
-  <div class="section">
-    <h2>Who Should Join</h2>
-    <p>Bitcoin builders, core devs, Lightning contributors, hodlers who code, privacy advocates, economic thinkers, or anyone who wants to escape Twitter/X debates and actually ship or learn in a small, vibe-aligned group.</p>
-    <p>Super users: seed ideas like “build a covenant-based inheritance tool” or “prototype a silent payment mixer UI” — AI-O matches and orchestrates the pod around your input.</p>
+<div class="divider"></div>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-sticky">
+        <span class="label">Our Heart</span>
+        <h2 class="section-heading">Why<br>We're<br>Here</h2>
+      </div>
+      <div class="mission-text">
+        <p>We're just everyday folks who fell in love with Bitcoin because it's the best store of value an owner can want — <strong>pure digital gold.</strong></p>
+        <p>We keep it dead simple: <strong>HODL long-term</strong>, show up in the community every day, and keep learning the fundamentals over and over. No leverage, no trading drama.</p>
+        <p>Bitcoin is better money — global, reliable, inclusive. The ideals of real freedom and fairness matter a great deal to us, and we care deeply. That's why we're here together.</p>
+        <p>And for those who want to go deeper — we also run an <strong>AI-orchestrated Bitcoin Pod</strong> where builders, devs, and thinkers prototype real tools and explore the full frontier of the Bitcoin protocol.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="section">
-    <h2>Current Pod Status</h2>
-    <p>Active beta pod — small, focused, and evolving. We keep it high-signal: no hype, just deep technical and philosophical work with occasional memes.</p>
+<div class="divider"></div>
+
+<!-- PILLARS -->
+<section id="pillars">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:1rem;">
+      <span class="label">Chapter 01 — Keep It Real</span>
+      <h2 class="section-heading">The Simple Way</h2>
+      <p style="color:rgba(233,224,208,0.5); font-size:1.05rem; max-width:520px; margin:0 auto; font-weight:300;">Four things we live by. Nothing fancy. Just what actually works for sovereignty and peace of mind.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <span class="pillar-icon">₿</span>
+        <h3>Simple HODLing</h3>
+        <p>Stack sats quietly. Hold through everything. Let time and 21 million scarcity do the magic. Zero ongoing cost. Pure digital gold.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">👥</span>
+        <h3>Bitcoin Community</h3>
+        <p>Showing up daily. Sharing wins and lessons. Helping each other without gatekeepers. We're stronger together.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">📖</span>
+        <h3>Learning Fundamentals</h3>
+        <p>Back to basics every day: why Bitcoin is sound money, how it delivers freedom & fairness, and why it works for everyone.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🏆</span>
+        <h3>Digital Gold</h3>
+        <p>Scarcer than gold, portable in your head, verifiable by anyone, truly yours. The best long-term store of value — full stop.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="cta">
-    <strong><a href="https://www.yskaipe.com/beta-pods.html#waitlist">Join the Bitcoin Pod Waitlist →</a></strong><br>
-    (or seed your own Bitcoin-focused project via the main YSKAIPE dashboard)
+<div class="divider"></div>
+
+<!-- BITCOIN POD -->
+<section id="pod">
+  <div class="container">
+    <div class="pod-inner">
+      <span class="label">Chapter 02 — Build &amp; Explore</span>
+      <h2 class="section-heading">The Bitcoin Pod</h2>
+      <p style="font-size:1.1rem; color:rgba(233,224,208,0.55); font-weight:300; max-width:600px; line-height:1.8; font-style:italic;">
+        AI-orchestrated, human-first. Deep dives into BTC protocol, scaling, sovereignty, and on-chain futures. Perfect for builders, thinkers, and maximalists who want focused collaboration without the noise.
+      </p>
+
+      <div class="pod-status">
+        <span class="status-dot"></span>
+        Active Beta Pod
+      </div>
+
+      <div class="pod-grid">
+        <div>
+          <span class="label" style="margin-bottom:1rem;">What We Explore &amp; Build</span>
+          <ul class="pod-list">
+            <li>Bitcoin protocol mechanics — consensus, scripting, UTXO model deep dives</li>
+            <li>Scaling solutions — Lightning, Ark, statechains, sidechains, rollups</li>
+            <li>Custody &amp; security — multisig, hardware wallets, inheritance planning</li>
+            <li>On-chain innovation — Ordinals, Runes, Taproot assets, covenants, OP_CAT</li>
+            <li>Node &amp; infrastructure — full nodes, mining pools, satellite relays, CoinJoin</li>
+            <li>Sovereignty &amp; philosophy — energy debates, nation-state adoption, BTC as money</li>
+            <li>Prototyping — next-gen wallets, Lightning apps, payment channel tooling</li>
+            <li>Tool building — explorers, analyzers, fee estimators, Bitcoin art generators</li>
+          </ul>
+        </div>
+        <div class="pod-right">
+          <span class="label" style="margin-bottom:1rem;">Who Should Join</span>
+          <p>Bitcoin builders, core devs, Lightning contributors, hodlers who code, privacy advocates, economic thinkers — anyone who wants to escape debate and actually ship.</p>
+          <p>Seed ideas like <em>"build a covenant-based inheritance tool"</em> or <em>"prototype a silent payment mixer UI"</em> — AI-O matches and orchestrates the pod around your input.</p>
+          <p>High-signal only: no hype, just deep technical and philosophical work. Occasional memes permitted.</p>
+          <a href="https://www.yskaipe.com/beta-pods.html#waitlist" class="btn-primary" style="display:inline-flex; align-items:center; gap:0.6rem; margin-top:1rem;">
+            Join the Pod Waitlist <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <hr>
+<div class="divider"></div>
 
-  <p style="text-align:center; color:#777; font-size:0.9rem;">
-    Part of <a href="https://www.yskaipe.com/">YSKAIPE</a> — Human Cohesive AI • Pods for real-world impact
-  </p>
+<!-- SOVEREIGN INTELLIGENCE -->
+<section id="intelligence">
+  <div class="container">
+    <span class="label">Chapter 03 — AI Meets Sovereignty</span>
+    <h2 class="section-heading" style="max-width:600px;">Sovereign<br>Intelligence</h2>
+    <p style="font-size:1.05rem; color:rgba(233,224,208,0.5); max-width:540px; font-weight:300; font-style:italic; line-height:1.8; margin-bottom:3rem;">
+      We see Coinbase leading the ecosystem tools. Here's how we use them responsibly — with AI that never forgets who really owns the keys.
+    </p>
+    <div class="intel-grid">
+      <div class="intel-text">
+        <p>Coinbase is shipping powerful rails: <strong>Agentic Wallets</strong> (AI agents acting autonomously with guardrails), <strong>cbBTC</strong> (1:1 Bitcoin on Base for modest DeFi yield), and <strong>x402</strong> (instant machine-to-machine payments).</p>
+        <p>We love what they're building. So we built the other side with YSKAIPE AI: simple, sovereignty-first agent pods that use those tools briefly — then <strong>always auto-exit everything back to your own self-custody.</strong></p>
+        <div class="intel-quote">
+          "Use the rails briefly. Never give up the keys. Let digital gold work a little harder — sovereignty first, always."
+        </div>
+        <div style="margin-top:2.5rem;">
+          <a href="https://www.yskaipe.com/" target="_blank" class="btn-primary" style="display:inline-flex; align-items:center; gap:0.6rem;">
+            <i class="fas fa-robot"></i> Try a Sovereign Agent Pod
+          </a>
+        </div>
+      </div>
+      <div>
+        <ul class="intel-list">
+          <li>AI agent monitors cbBTC yield opportunities on Base</li>
+          <li>Executes safely inside a Coinbase Agentic Wallet with your time &amp; spend limits</li>
+          <li>Takes only modest, low-risk actions — never overleveraged</li>
+          <li>Automatically unwraps and sends everything back to your Coldcard or Lightning wallet</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="container">
+    <span class="label">Daily Bitcoin Signal</span>
+    <div class="community-card">
+      <div class="community-icon">₿</div>
+      <div class="community-info">
+        <h3>@Bitcoin_Natives</h3>
+        <p>Run by Nick Conenna. No hype, no fluff — just real, daily reminders about the Bitcoin protocol, self-custody, decentralization, and why this matters for regular people like us.</p>
+        <div class="community-btns">
+          <a href="https://x.com/Bitcoin_Natives" target="_blank" class="btn-primary">
+            <i class="fab fa-x-twitter" style="margin-right:0.5rem;"></i>Follow for Daily Truths
+          </a>
+          <span class="community-meta">EST. 2025 · Posting every day</span>
+        </div>
+      </div>
+    </div>
+    <div class="community-quote">
+      "Bitcoin is simple. It works the same for everyone. 21 million forever. Your keys, your freedom. Energy + math = sovereignty."
+      <cite>— @Bitcoin_Natives, March 2026</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <span class="label" style="display:block; margin-bottom:2.5rem;">Simple. Sovereign. Together.</span>
+    <p class="big-quote">
+      "We care deeply about freedom, fairness, and sound money. Bitcoin is our shared path forward. Let's HODL simple, stay connected, and keep learning — together."
+    </p>
+    <div class="cta-group">
+      <a href="https://x.com/Bitcoin_Natives" target="_blank" class="btn-primary" style="font-size:0.9rem; padding:1.1rem 2.8rem;">
+        <i class="fab fa-x-twitter" style="margin-right:0.6rem;"></i>Join the Bitcoin Natives Family
+      </a>
+      <a href="https://www.yskaipe.com/beta-pods.html#waitlist" class="btn-ghost" style="font-size:0.9rem; padding:1.1rem 2.8rem;">
+        Join the Pod Waitlist →
+      </a>
+    </div>
+    <p class="footnote">21,000,000 · Not financial advice · Your keys, your digital gold · Sovereignty is yours</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <ul class="footer-links">
+    <li><a href="https://www.yskaipe.com/">YSKAIPE.com</a></li>
+    <li><a href="https://x.com/Bitcoin_Natives">@Bitcoin_Natives</a></li>
+    <li><a href="https://www.linkedin.com/in/nickconenna">LinkedIn</a></li>
+    <li><a href="https://www.yskaipe.com/beta-pods.html#waitlist">Pod Waitlist</a></li>
+  </ul>
+  <p class="footer-copy">© Nick Conenna 2026 · Built with love for Bitcoin · Always sovereignty first</p>
+</footer>
 
 </body>
 </html>
