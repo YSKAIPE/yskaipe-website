@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>YSKAIPE — Human Cohesive AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF7F2;
+    --wheat: #E8D5A3;
+    --amber: #C4873A;
+    --amber-dark: #8B5E1F;
+    --char: #1A1612;
+    --smoke: #3D342A;
+    --muted: #7A6E62;
+    --rule: #D4C4A8;
+    --tag-bg: #EDE3D0;
+    --tag-text: #6B5535;
+    --green: #4A7C59;
+    --green-light: #E8F0EA;
+    --purple: #5B4A8A;
+    --purple-light: #EEEAF6;
+    --blue: #2D6A9F;
+    --blue-light: #E6EFF7;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--char);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--char);
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 28px;
+    font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .nav-links a:hover { color: var(--amber); }
+  .nav-cta {
+    font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    background: var(--amber); color: #fff;
+    padding: 7px 18px; border-radius: 3px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--amber-dark); }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 130px 2rem 80px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 9vw, 96px);
+    font-weight: 700; line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--char);
+    margin-bottom: 8px;
+  }
+  h1 em { font-style: italic; color: var(--amber); }
+
+  .hero-deck {
+    font-size: clamp(17px, 2.5vw, 21px);
+    color: var(--smoke);
+    font-weight: 300;
+    max-width: 580px;
+    margin: 24px 0 40px;
+    line-height: 1.55;
+  }
+  .hero-deck strong { font-weight: 500; color: var(--char); }
+
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+
+  .btn-primary {
+    background: var(--amber); color: #fff;
+    border: none; padding: 14px 32px;
+    font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.06em;
+    border-radius: 3px; cursor: pointer; display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--amber-dark); }
+  .btn-ghost {
+    background: transparent; color: var(--smoke);
+    border: 1px solid var(--rule); padding: 14px 32px;
+    font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.06em;
+    border-radius: 3px; cursor: pointer; display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+
+  .hero-hashtags { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hashtag {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--amber); letter-spacing: 0.04em;
+  }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--rule); }
+
+  /* ── SECTIONS ── */
+  section { padding: 64px 2rem; max-width: 800px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; line-height: 1.15; color: var(--char);
+    margin-bottom: 16px;
+  }
+  h2 em { font-style: italic; color: var(--amber); }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 400; color: var(--char);
+    margin-bottom: 8px;
+  }
+  p { color: var(--smoke); margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── WHAT IS THIS ── */
+  .what-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden; margin-top: 32px;
+  }
+  .what-card { background: var(--warm-white); padding: 32px 28px; }
+  .what-num {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px;
+  }
+  .what-card h3 { font-size: 22px; margin-bottom: 12px; }
+  .what-rule {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--green); margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--rule); letter-spacing: 0.04em;
+  }
+  @media (max-width: 560px) { .what-grid { grid-template-columns: 1fr; } }
+
+  /* ── HOW IT WORKS — 3 steps ── */
+  .how-steps { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; margin-top: 32px; }
+  .how-step {
+    background: var(--warm-white); padding: 28px 32px;
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
+  }
+  .how-step:hover { background: var(--cream); }
+  .how-num {
+    font-family: 'DM Mono', monospace; font-size: 22px;
+    color: var(--amber); font-weight: 500; padding-top: 2px;
+  }
+  .how-step h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 17px; margin-bottom: 6px; }
+  .how-step p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* ── PODS GRID ── */
+  .pods-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px; margin-top: 32px;
+  }
+  .pod-card {
+    border: 1px solid var(--rule); border-radius: 6px;
+    padding: 28px 24px; background: var(--warm-white);
+    display: flex; flex-direction: column; gap: 10px;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .pod-card:hover { border-color: var(--amber); transform: translateY(-2px); }
+  .pod-icon { font-size: 26px; }
+  .pod-card h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 17px; margin: 0; }
+  .pod-card p { font-size: 13px; color: var(--muted); margin: 0; flex: 1; }
+  .pod-tag {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+    background: var(--tag-bg); color: var(--tag-text);
+    padding: 3px 8px; border-radius: 2px; align-self: flex-start;
+  }
+  .pod-card .pod-live {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    color: var(--green); display: flex; align-items: center; gap: 6px;
+  }
+  .pod-card .pod-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+  /* ── WHO THIS IS FOR ── */
+  .who-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px;
+  }
+  .who-card { padding: 24px; background: var(--cream); border-radius: 6px; }
+  .who-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .who-card h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 16px; margin-bottom: 6px; }
+  .who-card p { font-size: 14px; color: var(--muted); margin: 0; }
+  @media (max-width: 480px) { .who-grid { grid-template-columns: 1fr; } }
+
+  /* ── THE AGREEMENT ── */
+  .contract-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden; margin-top: 32px;
+  }
+  .contract-card { background: var(--warm-white); padding: 32px 28px; }
+  .contract-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px; }
+  .contract-card h3 { font-size: 22px; margin-bottom: 12px; }
+  .contract-rule {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--green); margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--rule); letter-spacing: 0.04em;
+  }
+  @media (max-width: 560px) { .contract-grid { grid-template-columns: 1fr; } }
+
+  /* ── JOIN STEPS ── */
+  .join-steps { margin-top: 32px; }
+  .join-step {
+    display: grid; grid-template-columns: 40px 1fr;
+    gap: 20px; padding: 24px 0;
+    border-bottom: 1px solid var(--rule); align-items: start;
+  }
+  .join-step:last-child { border-bottom: none; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--amber); font-weight: 500; padding-top: 3px; }
+  .join-step h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 16px; margin-bottom: 6px; }
+  .join-step p { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* ── SESSIONS ── */
+  .sessions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+  .session-card { border: 1px solid var(--rule); border-radius: 6px; padding: 28px 24px; }
+  .session-day {
+    font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.1em;
+    color: var(--amber); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; }
+  .session-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .session-card p { font-size: 14px; color: var(--muted); }
+  @media (max-width: 520px) { .sessions-grid { grid-template-columns: 1fr; } }
+
+  /* ── PARADOX / PHILOSOPHY ── */
+  .paradox {
+    background: var(--char); color: var(--cream);
+    padding: 72px 2rem;
+  }
+  .paradox-inner { max-width: 800px; margin: 0 auto; }
+  .paradox .section-label { color: var(--muted); }
+  .paradox .section-label::after { background: #3D342A; }
+  .paradox h2 { color: var(--wheat); }
+  .paradox h2 em { color: var(--amber); }
+  .paradox p { color: #A89D8F; }
+  .paradox-pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: #2C2420;
+    border: 1px solid #2C2420; border-radius: 6px;
+    overflow: hidden; margin-top: 36px;
+  }
+  .paradox-pillar { background: var(--char); padding: 28px 24px; }
+  .paradox-pillar .pillar-icon { font-size: 20px; margin-bottom: 12px; display: block; }
+  .paradox-pillar h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15px; color: var(--wheat); margin-bottom: 8px; }
+  .paradox-pillar p { font-size: 13px; color: #7A6E62; margin: 0; }
+  @media (max-width: 600px) { .paradox-pillars { grid-template-columns: 1fr; } }
+
+  /* ── AI LAYER ── */
+  .ai-layer {
+    background: var(--cream); border-radius: 6px;
+    padding: 36px 32px; margin-top: 32px;
+    position: relative; overflow: hidden;
+  }
+  .ai-layer::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,135,58,0.1) 0%, transparent 70%);
+    transform: translate(40%,-40%);
+  }
+  .ai-layer p { font-size: 15px; margin-bottom: 20px; }
+  .ai-features {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px; margin-top: 20px;
+  }
+  .ai-feature {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--muted); padding: 10px 14px;
+    border: 1px solid var(--rule); border-radius: 4px;
+    background: var(--warm-white); letter-spacing: 0.02em;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center; padding: 80px 2rem;
+    max-width: 640px; margin: 0 auto;
+  }
+  .cta-section h2 { font-size: clamp(30px, 5vw, 52px); margin-bottom: 16px; }
+  .cta-section p { color: var(--muted); margin-bottom: 32px; font-size: 16px; }
+  .cta-note {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; color: var(--muted); margin-top: 16px;
+  }
+
+  /* ── SOCIAL ROW ── */
+  .social-row {
+    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+    padding: 32px 2rem 0;
+    font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.06em;
+  }
+  .social-link { color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .social-link:hover { color: var(--amber); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 24px 2rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted);
+    max-width: 100%;
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--amber); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.65s ease both; }
+  .hero > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero > *:nth-child(3) { animation-delay: 0.28s; }
+  .hero > *:nth-child(4) { animation-delay: 0.40s; }
+  .hero > *:nth-child(5) { animation-delay: 0.52s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">YSKAIPE</a>
+  <div class="nav-links">
+    <a href="#pods">Pods</a>
+    <a href="#how">How It Works</a>
+    <a href="#join">Join</a>
+    <a href="https://www.yskaipe.com/about.html">About</a>
+    <a href="https://www.yskaipe.com/roadmap.html">Roadmap</a>
+    <a href="https://x.com/yskaipe" class="nav-cta">✦ @yskaipe</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="dot"></span>
+    <span>Open Pods · X-Coordinated · Humans First</span>
+  </div>
+  <h1>Real people.<br/><em>Real pods.</em><br/>Real work.</h1>
+  <p class="hero-deck">
+    YSKAIPE is a new kind of social platform — one where you <strong>show up, help three people, and they help you back.</strong>
+    Small groups. Shared craft. AI coordinates after trust is earned.
+  </p>
+  <div class="hero-actions">
+    <a href="https://x.com/yskaipe" class="btn-primary">✦ Follow @yskaipe to Start</a>
+    <a href="#how" class="btn-ghost">How It Works →</a>
+  </div>
+  <div class="hero-hashtags">
+    <span class="hashtag">#ReciprocityYield</span>
+    <span class="hashtag">#HumanCohesiveAI</span>
+    <span class="hashtag">#YSKAIPE</span>
+    <span class="hashtag">#PodLife</span>
+  </div>
+</div>
+
+<hr/>
+
+<!-- WHAT IS YSKAIPE -->
+<section>
+  <div class="section-label">What Is This</div>
+  <h2>A social platform built on<br/><em>reciprocity, not algorithms</em></h2>
+  <p>Most social media rewards broadcasting. YSKAIPE rewards showing up. You join a pod — a small, focused group built around something you care about — and the deal is simple: help three people, receive help from three people, share what you make together.</p>
+  <p>It's a new kind of social network. The feed is a garden. The likes are loaves of bread and harvested grapes and shipped prototypes. The follower count is three neighbors who will actually come to your yard.</p>
+
+  <div class="what-grid">
+    <div class="what-card">
+      <div class="what-num">01</div>
+      <h3>Reciprocity</h3>
+      <p>Give hands-on help to <strong>3 other pod members.</strong> In return, expect the same from 3 people when you need it. Balanced, tit-for-tat support. No free riders. No one left alone with a problem.</p>
+      <div class="what-rule">→ Help 3. Receive from 3.</div>
+    </div>
+    <div class="what-card">
+      <div class="what-num">02</div>
+      <h3>Yield</h3>
+      <p>Share what you produce — grapes, loaves, code, knowledge, leads — with those who helped you build it. <strong>Abundance cycles outperform solo hoarding</strong> every time. What you give, compounds.</p>
+      <div class="what-rule">→ Share yield. Grow together.</div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-label">How It Works</div>
+  <h2>Three steps.<br/><em>No app download required.</em></h2>
+  <p>Everything starts on X.com — simple, open, real-time. AI enters only after the human layer is working.</p>
+
+  <div class="how-steps">
+    <div class="how-step">
+      <span class="how-num">01</span>
+      <div>
+        <h3>Follow @yskaipe and find your pod</h3>
+        <p>Browse the open pods — gardening, baking, coding, bitcoin, sustainable building — and join the one that fits. Each pod has a pinned welcome post. Reply or DM to introduce yourself. No form, no algorithm, no waitlist.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <span class="how-num">02</span>
+      <div>
+        <h3>Get matched into a triad</h3>
+        <p>The pod coordinator matches you with two or three others based on your vibe, location, and skills. That's your triad. You help them. They help you. It's a social contract, not a feature flag.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <span class="how-num">03</span>
+      <div>
+        <h3>Show up, do the work, share the yield</h3>
+        <p>Wednesday is build day — live work, real progress. Friday is demo and share — what got made, what got learned, what's next. AI coordination layers in gradually as the group establishes real trust and cadence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ACTIVE PODS -->
+<section id="pods">
+  <div class="section-label">Active Pods</div>
+  <h2>Find your people.<br/><em>Pick your pod.</em></h2>
+  <p>Each pod runs the same reciprocity protocol on a different subject. All start human. All are open to join now on X.</p>
+
+  <div class="pods-grid">
+    <a href="https://www.yskaipe.com/yskaipe-muscadine.html" class="pod-card">
+      <span class="pod-icon">🍇</span>
+      <h3>Muscadine Pod</h3>
+      <p>A mutual-aid gardening network for Lake Norman locals growing native muscadine grapes together — planting, trellising, harvesting, sharing.</p>
+      <span class="pod-tag">GARDENING · LOCAL</span>
+      <span class="pod-live">Open now · Lake Norman, NC</span>
+    </a>
+    <a href="https://www.yskaipe.com/yskaipe-breadcraft.html" class="pod-card">
+      <span class="pod-icon">🍞</span>
+      <h3>BreadCraft Pod</h3>
+      <p>A reciprocal baking network — feed each other's starters, co-bake, share loaves, build a collective Levain Library. Sourdough and beyond.</p>
+      <span class="pod-tag">BAKING · CRAFT</span>
+      <span class="pod-live">Open now · Local + Remote</span>
+    </a>
+    <a href="https://www.yskaipe.com/yskaipe-bitcoin.html" class="pod-card">
+      <span class="pod-icon">₿</span>
+      <h3>Bitcoin Pod</h3>
+      <p>Deep dives into BTC protocol, Lightning, custody, and on-chain innovation. Build tools, share sovereignty, prototype next-gen wallets and nodes.</p>
+      <span class="pod-tag">BITCOIN · TECH</span>
+      <span class="pod-live">Open now · Global</span>
+    </a>
+    <a href="https://www.yskaipe.com/beta-pods.html" class="pod-card" style="border-style:dashed;">
+      <span class="pod-icon">✦</span>
+      <h3>Propose a Pod</h3>
+      <p>Have a subject worth doing together? The pod playbook works for almost anything with a craft, a community, and something worth sharing. DM @yskaipe.</p>
+      <span class="pod-tag">OPEN PROTOCOL</span>
+      <span class="pod-live">Propose on X</span>
+    </a>
+  </div>
+</section>
+
+<hr/>
+
+<!-- WHO THIS IS FOR -->
+<section>
+  <div class="section-label">Community</div>
+  <h2>Who belongs here</h2>
+  <p>Not a platform for passive consumption. Not a broadcast channel. This is for people who want to build something with others — and are willing to show up for three of them to make it happen.</p>
+
+  <div class="who-grid">
+    <div class="who-card">
+      <span class="who-icon">🌱</span>
+      <h3>Total Beginners</h3>
+      <p>Zero experience in the pod's subject? You're exactly who we need. Pods teach each other. Showing up willing beats showing up expert.</p>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">🛠️</span>
+      <h3>Makers & Builders</h3>
+      <p>Coders, bakers, growers, tinkerers — people who make things and want collaborators who are as serious about the craft as they are.</p>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">🌍</span>
+      <h3>Local & Global</h3>
+      <p>Some pods are hyper-local (Lake Norman growers). Some are global (Bitcoin builders). The triad mechanic works at any scale.</p>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">🤝</span>
+      <h3>Reciprocity-Minded</h3>
+      <p>If you believe that helping others and sharing yield creates more abundance than hoarding — you're already thinking in YSKAIPE.</p>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- THE PHILOSOPHY -->
+<div class="paradox">
+  <div class="paradox-inner">
+    <div class="section-label">The Paradox</div>
+    <h2>Everything changes.<br/><em>Nothing changes.</em></h2>
+    <p style="max-width:560px;margin-bottom:0;">AI races exponentially forward while the human soul asks the same ancient questions. YSKAIPE isn't pitching AI as a replacement — it's using AI as the coordination layer that lets humans do more of what humans are irreplaceable at: trust, craft, reciprocity, and meaning.</p>
+
+    <div class="paradox-pillars">
+      <div class="paradox-pillar">
+        <span class="pillar-icon">🧲</span>
+        <h3>AI as coordination gravity</h3>
+        <p>Teams naturally orbit a clear objective. AI handles the logistics so humans can handle the work.</p>
+      </div>
+      <div class="paradox-pillar">
+        <span class="pillar-icon">⚖️</span>
+        <h3>Humans as moral anchors</h3>
+        <p>The baker decides when the dough is right. The grower decides when to harvest. AI never overrides human judgment.</p>
+      </div>
+      <div class="paradox-pillar">
+        <span class="pillar-icon">🔄</span>
+        <h3>Cohesion over optimization</h3>
+        <p>The goal isn't efficiency — it's a team that feels right from the start and stays right through the finish.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SESSIONS -->
+<section>
+  <div class="section-label">Weekly Cadence</div>
+  <h2>The rhythm that<br/><em>keeps pods alive</em></h2>
+  <p>Every pod runs on the same two-day weekly cadence. Consistency is the protocol. Show up twice a week and things get built.</p>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-day"><span class="live-dot"></span> WEDNESDAYS</div>
+      <h3>Build Day</h3>
+      <p>Live work sessions — baking, coding, planting, prototyping. Real-time collaboration, shared troubleshooting, active progress logs. This is where the work happens.</p>
+    </div>
+    <div class="session-card">
+      <div class="session-day"><span class="live-dot"></span> FRIDAYS</div>
+      <h3>Demo & Share</h3>
+      <p>Show what got made. Share crumbs, harvests, commits, and sketches. Metrics shared openly. Community votes on what's next. X Spaces live when there's something worth hearing.</p>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- AI LAYER -->
+<section>
+  <div class="section-label">What's Ahead</div>
+  <h2>Humans first —<br/><em>AI layers in after real roots form</em></h2>
+  <p>Every YSKAIPE pod launches fully human on X. Real triads, real work, real reciprocity. Once relationships are established and the first yield is shared, the AI coordination layer enters — handling the logistics no one wants to do manually.</p>
+
+  <div class="ai-layer">
+    <div class="section-label" style="margin-bottom:16px;">YSKAIPE AI — coming after roots form</div>
+    <p>The human layer always comes first. AI doesn't form the trust — it scales it. Once your triad is working, AI-O steps in to handle matching, scheduling, yield tracking, and pod growth so the humans can stay focused on the craft.</p>
+    <div class="ai-features">
+      <div class="ai-feature">AI triad matching</div>
+      <div class="ai-feature">Yield &amp; output logs</div>
+      <div class="ai-feature">Task reminders</div>
+      <div class="ai-feature">Smart sharing suggestions</div>
+      <div class="ai-feature">Regional pod scaling</div>
+      <div class="ai-feature">CrewAI / LangGraph flows</div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- JOIN -->
+<section id="join">
+  <div class="section-label">Get In</div>
+  <h2>How to join —<br/><em>open right now</em></h2>
+  <p>No app download. No waitlist form. No algorithm deciding if you're worthy. Everything runs on X.com for simplicity and real-time flow.</p>
+
+  <div class="join-steps">
+    <div class="join-step">
+      <span class="step-num">01</span>
+      <div>
+        <h3>Follow @yskaipe on X.com</h3>
+        <p>Follow <a href="https://x.com/yskaipe" style="color:var(--amber);">@yskaipe</a> for live pod updates, build sessions, and announcements. This is the home base.</p>
+      </div>
+    </div>
+    <div class="join-step">
+      <span class="step-num">02</span>
+      <div>
+        <h3>Find your pod in X Communities</h3>
+        <p>Search for your pod name (e.g. "Muscadine Pod Lake Norman" or "BreadCraft Pod") in X's Communities tab, or watch @yskaipe for direct links. Open membership — request to join and accept the simple reciprocity rules.</p>
+      </div>
+    </div>
+    <div class="join-step">
+      <span class="step-num">03</span>
+      <div>
+        <h3>Reply or DM to introduce yourself</h3>
+        <p>Reply to the pinned welcome post or DM @yskaipe: your name/handle, location, what you do, what you want to build, and what you can offer your first three pod members.</p>
+      </div>
+    </div>
+    <div class="join-step">
+      <span class="step-num">04</span>
+      <div>
+        <h3>Show up Wednesday and Friday</h3>
+        <p>Build Day and Demo Day. X Spaces audio sessions — live bakes, coding streams, growing updates — announced via @yskaipe. No extra app needed. Just show up.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:32px;padding:24px;background:var(--green-light);border-radius:6px;border-left:3px solid var(--green);">
+    <div class="section-label" style="margin-bottom:12px;">We'll start with</div>
+    <p style="font-size:15px;color:var(--smoke);margin-bottom:0;">
+      Shared learning via X Spaces · Pod matching into small triads · Resource sharing across the network · Photo and progress threads documenting what gets built · Collective knowledge growing in every pod's shared archive
+    </p>
+  </div>
+</section>
+
+<hr/>
+
+<!-- SOCIAL ROW -->
+<div class="social-row">
+  <a href="https://x.com/yskaipe" class="social-link">𝕏 @yskaipe</a>
+  <a href="https://github.com/YSKAIPE" class="social-link">◈ GitHub</a>
+  <a href="https://www.linkedin.com/company/yskaipe" class="social-link">in LinkedIn</a>
+  <a href="https://www.youtube.com/@yskaipe-artists" class="social-link">▶ YouTube</a>
+  <a href="https://calendly.com/yskaipe" class="social-link">◷ Book a Call</a>
+  <a href="mailto:gr8@yskaipe.com" class="social-link">✉ gr8@yskaipe.com</a>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to find<br/><em>your pod?</em></h2>
+  <p>Follow @yskaipe on X, introduce yourself, and get matched into your first triad. No form, no algorithm, no fee — just three people and the work.</p>
+  <a href="https://x.com/yskaipe" class="btn-primary">✦ Join on X Today</a>
+  <p class="cta-note">open pods · triads form on rolling basis · no cash for core help · built in Cornelius, NC</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--char);">YSKAIPE</span>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;">
+    <a href="https://www.yskaipe.com/beta-pods.html">Pods</a>
+    <a href="https://www.yskaipe.com/about.html">About</a>
+    <a href="https://www.yskaipe.com/roadmap.html">Roadmap</a>
+    <a href="https://www.yskaipe.com/pitch.html">Pitch</a>
+    <a href="https://www.yskaipe.com/privacy.html">Privacy</a>
+    <a href="https://www.yskaipe.com/terms.html">Terms</a>
+  </div>
+  <span>© 2026 YSKAIPE — Small groups. Real reciprocity.</span>
+</footer>
+
+</body>
+</html>
