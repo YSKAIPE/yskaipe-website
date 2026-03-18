@@ -1,533 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roadmap — YSKAIPE | Human-Cohesive AI Orchestration</title>
-  <meta name="description" content="YSKAIPE's public roadmap: from today's prototype to a future where AI and humans collaborate with perfect cohesion."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #080a0f;
-      --surface: #0d1018;
-      --card: #101520;
-      --card-hi: #151d2e;
-      --border: rgba(255,255,255,0.06);
-      --border-hi: rgba(99,210,255,0.2);
-      --text: #e8f0ff;
-      --text-muted: #6b7fa8;
-      --text-dim: #3a4a6a;
-      --cyan: #3cd9ff;
-      --violet: #a78bfa;
-      --green: #34eca8;
-      --orange: #ff8c42;
-      --pink: #f472b6;
-      --yellow: #fbbf24;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Roadmap — YSKAIPE — Where the escape is going.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FAF7F2;
+    --amber: #C4873A;
+    --amber-dark: #8B5E1F;
+    --char: #1A1612;
+    --smoke: #3D342A;
+    --muted: #7A6E62;
+    --rule: #D4C4A8;
+    --tag-bg: #EDE3D0;
+    --tag-text: #6B5535;
+    --green: #4A7C59;
+    --green-light: #E8F0EA;
+    --done: #4A7C59;
+    --done-light: #E8F0EA;
+    --active: #C4873A;
+    --active-light: #FDF3E6;
+    --next: #2D6A9F;
+    --next-light: #E6EFF7;
+    --future: #7A6E62;
+    --future-light: #F2EEE8;
+  }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-    body {
-      font-family: 'Syne', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+  body {
+    background: var(--warm-white);
+    color: var(--char);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  a { color: inherit; text-decoration: none; }
 
-    /* ─── NOISE ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-    }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--char); }
+  .nav-links { display: flex; align-items: center; gap: 24px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--muted); }
+  .nav-links a:hover { color: var(--amber); }
+  .nav-cta { background: var(--amber); color: #fff !important; padding: 7px 18px; border-radius: 3px; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--amber-dark) !important; }
+  @media (max-width: 640px) { .nav-links .hide-sm { display: none; } }
 
-    /* ─── AMBIENT ─── */
-    .ambient { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; filter: blur(130px); }
-    .a1 { width: 700px; height: 700px; top: -200px; left: -150px; background: radial-gradient(circle, rgba(60,217,255,0.06) 0%, transparent 70%); animation: d1 22s ease-in-out infinite; }
-    .a2 { width: 500px; height: 500px; top: 40%; right: -100px; background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%); animation: d2 28s ease-in-out infinite; }
-    .a3 { width: 400px; height: 400px; bottom: 15%; left: 25%; background: radial-gradient(circle, rgba(52,236,168,0.04) 0%, transparent 70%); animation: d3 20s ease-in-out infinite; }
-    @keyframes d1 { 0%,100%{transform:translate(0,0)}50%{transform:translate(60px,80px)} }
-    @keyframes d2 { 0%,100%{transform:translate(0,0)}50%{transform:translate(-70px,50px)} }
-    @keyframes d3 { 0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-60px)} }
+  /* ── HERO ── */
+  .hero {
+    padding: 130px 2rem 64px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); display: inline-block; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-    /* ─── GRID ─── */
-    .grid-bg {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background-image: linear-gradient(rgba(60,217,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(60,217,255,0.025) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-    }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 8vw, 84px);
+    font-weight: 700; line-height: 1.0;
+    letter-spacing: -0.025em; color: var(--char);
+    margin-bottom: 8px;
+  }
+  h1 em { font-style: italic; color: var(--amber); }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+  .hero-deck {
+    font-size: clamp(16px, 2.2vw, 20px);
+    color: var(--smoke); font-weight: 300;
+    max-width: 560px; margin: 24px 0 0;
+    line-height: 1.6;
+  }
+  .hero-deck strong { font-weight: 500; color: var(--char); }
 
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.25rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(8,10,15,0.75); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.1em; text-decoration: none; }
-    .nav-logo span { color: var(--text-muted); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--cyan); }
-    .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; padding: 0.5rem 1.25rem; border: 1px solid var(--cyan); color: var(--cyan); text-decoration: none; border-radius: 3px; transition: all 0.2s; }
-    .nav-cta:hover { background: var(--cyan); color: #000; }
+  hr { border: none; border-top: 1px solid var(--rule); }
 
-    /* ─── HEADER ─── */
-    header { padding: 10rem 0 5rem; position: relative; z-index: 1; }
-    .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
-    .eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--cyan); }
-    .eyebrow-tag { background: rgba(60,217,255,0.1); border: 1px solid rgba(60,217,255,0.2); padding: 0.2rem 0.6rem; border-radius: 2px; font-size: 0.6rem; color: var(--cyan); }
+  /* ── SECTIONS ── */
+  section { padding: 64px 2rem; max-width: 800px; margin: 0 auto; }
 
-    h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 1rem; }
-    h1 .l1 { color: var(--text); display: block; }
-    h1 .l2 { background: linear-gradient(90deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
 
-    .header-sub { max-width: 580px; margin-top: 1.5rem; font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700; line-height: 1.15; color: var(--char); margin-bottom: 16px;
+  }
+  h2 em { font-style: italic; color: var(--amber); }
+  p { color: var(--smoke); margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
 
-    .header-actions { display: flex; align-items: center; gap: 1.25rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  /* ── PHASE STATUS PILLS ── */
+  .phase-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .phase-pill .pip { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+  .pill-done   { background: var(--done-light);   color: var(--done);   }
+  .pill-done   .pip { background: var(--done); }
+  .pill-active { background: var(--active-light); color: var(--active); }
+  .pill-active .pip { background: var(--active); animation: pulse 1.5s ease-in-out infinite; }
+  .pill-next   { background: var(--next-light);   color: var(--next);   }
+  .pill-next   .pip { background: var(--next); }
+  .pill-future { background: var(--future-light); color: var(--future); }
+  .pill-future .pip { background: var(--future); }
 
-    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; background: linear-gradient(135deg, var(--cyan), var(--violet)); color: #000; font-family: 'Space Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px; transition: all 0.3s; box-shadow: 0 0 40px rgba(60,217,255,0.15); position: relative; overflow: hidden; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(60,217,255,0.3); }
+  /* ── TIMELINE ── */
+  .timeline { margin-top: 48px; position: relative; }
 
-    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    .btn-ghost:hover { color: var(--text); }
+  /* vertical spine */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 19px; top: 8px; bottom: 8px;
+    width: 1px; background: var(--rule);
+  }
 
-    /* ─── PHILOSOPHY ─── */
-    .philosophy { padding: 4rem 0; position: relative; z-index: 1; }
-    .phil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .phil-card { background: var(--card); padding: 2.25rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; }
-    .phil-card:hover { background: var(--card-hi); }
-    .phil-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--pc, var(--cyan)), transparent); opacity: 0; transition: opacity 0.4s; }
-    .phil-card:hover::before { opacity: 1; }
-    .phil-num { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.15em; margin-bottom: 1.25rem; }
-    .phil-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-    .phil-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; letter-spacing: -0.01em; }
-    .phil-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; font-weight: 400; }
+  .phase { position: relative; padding: 0 0 48px 60px; }
+  .phase:last-child { padding-bottom: 0; }
 
-    /* ─── TIMELINE ─── */
-    .timeline-section { padding: 5rem 0 6rem; position: relative; z-index: 1; }
-    .section-header { margin-bottom: 4rem; }
-    .section-title { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.01em; }
-    .section-title span { color: var(--cyan); }
-    .section-sub { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'Space Mono', monospace; }
+  /* node dot */
+  .phase-node {
+    position: absolute; left: 0; top: 4px;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    border: 1px solid var(--rule);
+  }
+  .node-done   { background: var(--done-light);   border-color: var(--done); }
+  .node-active { background: var(--active-light); border-color: var(--active); box-shadow: 0 0 0 4px rgba(196,135,58,0.12); }
+  .node-next   { background: var(--next-light);   border-color: var(--next); }
+  .node-future { background: var(--future-light); border-color: var(--future); }
 
-    /* Vertical track */
-    .timeline-track { position: relative; padding-left: 3.5rem; }
-    .timeline-track::before {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0; left: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--cyan), var(--violet), rgba(167,139,250,0.1));
-    }
+  .phase-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px; margin-bottom: 16px;
+  }
+  .phase-title-group {}
+  .phase-period {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px;
+  }
+  .phase h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; color: var(--char); margin: 0;
+  }
+  .phase h3 em { font-style: italic; color: var(--amber); }
 
-    .tl-item { position: relative; margin-bottom: 3rem; }
-    .tl-item:last-child { margin-bottom: 0; }
+  .phase-body {
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden;
+  }
 
-    /* Node dot */
-    .tl-node {
-      position: absolute;
-      left: -3.5rem;
-      top: 1.5rem;
-      width: 1px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      pointer-events: none;
-    }
-    .tl-dot {
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: var(--nd-color, var(--cyan));
-      box-shadow: 0 0 16px var(--nd-color, var(--cyan));
-      border: 2px solid var(--bg);
-      position: relative;
-      left: -6px;
-      flex-shrink: 0;
-    }
-    .tl-dot.future {
-      background: transparent;
-      border: 2px solid var(--nd-color, var(--violet));
-      box-shadow: 0 0 12px var(--nd-color, var(--violet));
-    }
+  .phase-item {
+    display: grid; grid-template-columns: 24px 1fr;
+    gap: 14px; padding: 16px 20px;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .phase-item:last-child { border-bottom: none; }
+  .item-check {
+    font-size: 14px; padding-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .item-text { font-size: 14px; color: var(--smoke); line-height: 1.5; }
+  .item-text strong { font-weight: 500; color: var(--char); }
+  .item-text .item-note {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--muted); display: block; margin-top: 3px; letter-spacing: 0.03em;
+  }
 
-    /* Connector line from dot to card */
-    .tl-connector {
-      position: absolute;
-      top: calc(1.5rem + 7px);
-      left: calc(-3.5rem + 7px + 2px);
-      height: 1px;
-      width: calc(3.5rem - 7px - 2px - 0.75rem);
-      background: linear-gradient(90deg, var(--nd-color, var(--cyan)), rgba(60,217,255,0.1));
-    }
+  /* done items get muted */
+  .phase-done .item-text { color: var(--muted); }
+  .phase-done .item-text strong { color: var(--smoke); }
 
-    /* Card */
-    .tl-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem 2.25rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .tl-card:hover { border-color: var(--nd-color, var(--border-hi)); background: var(--card-hi); }
-    .tl-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--nd-color, var(--cyan)), var(--violet), transparent); opacity: 0.6; }
+  /* ── PRINCIPLES ── */
+  .principles-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 6px; overflow: hidden;
+    margin-top: 32px;
+  }
+  .principle { background: var(--warm-white); padding: 28px 24px; }
+  .principle-icon { font-size: 22px; margin-bottom: 12px; display: block; }
+  .principle h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15px; margin-bottom: 8px; }
+  .principle p { font-size: 13px; color: var(--muted); margin: 0; }
+  @media (max-width: 600px) { .principles-grid { grid-template-columns: 1fr; } }
 
-    .tl-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
-    .tl-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nd-color, var(--cyan)); background: rgba(60,217,255,0.08); border: 1px solid rgba(60,217,255,0.15); padding: 0.2rem 0.6rem; border-radius: 2px; white-space: nowrap; }
-    .tl-status { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.35rem; }
-    .tl-status.live { color: var(--green); }
-    .tl-status.live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
-    .tl-status.upcoming { color: var(--text-dim); }
-    .tl-status.upcoming::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); border: 1px solid var(--text-dim); flex-shrink: 0; }
-    .tl-status.future { color: var(--violet); }
-    .tl-status.future::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: transparent; border: 1px solid var(--violet); flex-shrink: 0; }
+  /* ── DARK BAND ── */
+  .dark-band {
+    background: var(--char); color: var(--cream);
+    padding: 64px 2rem;
+  }
+  .dark-band-inner { max-width: 800px; margin: 0 auto; }
+  .dark-band .section-label { color: var(--muted); }
+  .dark-band .section-label::after { background: #3D342A; }
+  .dark-band h2 { color: #E8D5A3; }
+  .dark-band h2 em { color: var(--amber); }
+  .dark-band p { color: #A89D8F; max-width: 560px; }
 
-    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+  .open-now-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px;
+  }
+  .open-card {
+    background: #2C2420; border: 1px solid #3D342A;
+    border-radius: 6px; padding: 24px 22px;
+  }
+  .open-card-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+  .open-card h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 16px; color: #E8D5A3; margin-bottom: 6px; }
+  .open-card p { font-size: 13px; color: #7A6E62; margin: 0; }
+  .open-card a { color: var(--amber); }
+  .open-card a:hover { text-decoration: underline; }
+  @media (max-width: 520px) { .open-now-grid { grid-template-columns: 1fr; } }
 
-    .tl-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
-    .tl-tagline { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; font-weight: 400; }
+  /* ── FUNDING NOTE ── */
+  .funding-note {
+    background: var(--cream); border-radius: 6px;
+    padding: 32px 28px; margin-top: 32px;
+    border-left: 3px solid var(--amber);
+  }
+  .funding-note p { font-size: 15px; margin-bottom: 12px; }
 
-    .tl-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.5rem; }
-    .tl-item-row {
-      display: flex; align-items: flex-start; gap: 0.6rem;
-      font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;
-      padding: 0.6rem 0.75rem;
-      border-radius: 4px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .tl-item-row:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
-    .tl-item-check { font-size: 0.75rem; margin-top: 0.05rem; flex-shrink: 0; }
-    .tl-item-check.done { color: var(--green); }
-    .tl-item-check.soon { color: var(--cyan); }
-    .tl-item-check.far  { color: var(--violet); }
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center; padding: 80px 2rem;
+    max-width: 640px; margin: 0 auto;
+  }
+  .cta-section h2 { font-size: clamp(28px, 5vw, 50px); margin-bottom: 16px; }
+  .cta-section p { color: var(--muted); margin-bottom: 32px; }
+  .btn-primary {
+    background: var(--amber); color: #fff;
+    border: none; padding: 14px 36px;
+    font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.06em;
+    border-radius: 3px; cursor: pointer; display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--amber-dark); }
+  .btn-ghost {
+    background: transparent; color: var(--smoke);
+    border: 1px solid var(--rule); padding: 14px 36px;
+    font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.06em;
+    border-radius: 3px; cursor: pointer; display: inline-block;
+    transition: border-color 0.2s, color 0.2s; margin-left: 12px;
+  }
+  .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+  .cta-note {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em; color: var(--muted); margin-top: 16px;
+  }
 
-    /* ─── FUNDING ─── */
-    .funding-section { padding: 3rem 0 5rem; position: relative; z-index: 1; }
-    .funding-inner {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface);
-      overflow: hidden;
-      position: relative;
-    }
-    .funding-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent); }
-    .funding-grid { display: grid; grid-template-columns: 1fr 1px 1fr; }
-    .funding-divider { background: var(--border); }
-    .funding-col { padding: 3rem; }
-    .funding-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
-    .funding-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
-    .funding-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
-    .funding-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
-    .funding-item { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--text-muted); display: flex; gap: 0.6rem; align-items: flex-start; }
-    .funding-item::before { content: '—'; color: var(--cyan); flex-shrink: 0; }
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule); padding: 24px 2rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted);
+  }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--amber); }
 
-    /* ─── CTA ─── */
-    .cta-section { padding: 3rem 0 8rem; position: relative; z-index: 1; text-align: center; }
-    .cta-inner { max-width: 620px; margin: 0 auto; padding: 3.5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); position: relative; overflow: hidden; }
-    .cta-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent); }
-    .cta-title { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-    .cta-sub { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; font-weight: 400; }
-    .cta-prompt { font-family: 'Space Mono', monospace; font-size: 0.8rem; background: rgba(60,217,255,0.06); border: 1px solid rgba(60,217,255,0.15); border-radius: 4px; padding: 1rem 1.25rem; color: var(--cyan); margin-bottom: 1.75rem; text-align: left; }
-    .cta-prompt::before { content: '> '; color: var(--text-dim); }
-
-    /* ─── FOOTER ─── */
-    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2.5rem 0; }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-    .footer-logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--cyan); }
-    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.05em; }
-
-    /* ─── REVEAL ─── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .rd1 { transition-delay: 0.1s; }
-    .rd2 { transition-delay: 0.2s; }
-    .rd3 { transition-delay: 0.3s; }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .phil-grid { grid-template-columns: 1fr; }
-      .funding-grid { grid-template-columns: 1fr; }
-      .funding-divider { display: none; }
-      .nav-links { display: none; }
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 2.8rem; }
-      .tl-items { grid-template-columns: 1fr; }
-      .timeline-track { padding-left: 2.5rem; }
-      .tl-node { left: -2.5rem; }
-      .tl-connector { left: calc(-2.5rem + 7px + 2px); width: calc(2.5rem - 7px - 2px - 0.75rem); }
-    }
-  </style>
+  /* ── FADE IN ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.65s ease both; }
+  .hero > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero > *:nth-child(2) { animation-delay: 0.18s; }
+  .hero > *:nth-child(3) { animation-delay: 0.30s; }
+</style>
 </head>
 <body>
 
-  <div class="ambient a1"></div>
-  <div class="ambient a2"></div>
-  <div class="ambient a3"></div>
-  <div class="grid-bg"></div>
+<!-- NAV -->
+<nav>
+  <a href="https://www.yskaipe.com/" class="nav-logo">YSKAIPE</a>
+  <div class="nav-links">
+    <a href="https://www.yskaipe.com/beta-pods.html" class="hide-sm">Pods</a>
+    <a href="https://www.yskaipe.com/about.html" class="hide-sm">About</a>
+    <a href="https://www.yskaipe.com/pitch.html" class="hide-sm">Pitch</a>
+    <a href="https://x.com/yskaipe" class="nav-cta">✦ @yskaipe</a>
+  </div>
+</nav>
 
-  <!-- NAV -->
-  <nav>
-    <a href="/" class="nav-logo">YSK<span>AIPE</span></a>
-    <ul class="nav-links">
-      <li><a href="/about.html">About</a></li>
-      <li><a href="/beta-pods.html">Beta Pods</a></li>
-      <li><a href="/yskaipe-build-log.html">Build Log</a></li>
-      <li><a href="/roadmap.html">Roadmap</a></li>
-    </ul>
-    <a href="/waitlist.html" class="nav-cta">Join Waitlist →</a>
-  </nav>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="dot"></span>
+    <span>pronounced "escape" · living document · updated as pods grow</span>
+  </div>
+  <h1>The<br/>escape<br/><em>route.</em></h1>
+  <p class="hero-deck">
+    Where YSKAIPE — your escape into social productivity — is headed. Honest about what's done, what's running right now, and what comes next. No promises that outrun the work.
+  </p>
+</div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container">
-      <p class="eyebrow reveal">
-        Public Roadmap
-        <span class="eyebrow-tag">LIVE DOC</span>
-        <span class="eyebrow-tag">2026–∞</span>
-      </p>
-      <h1 class="reveal rd1">
-        <span class="l1">Everything changes.</span>
-        <span class="l2">Nothing changes.</span>
-      </h1>
-      <p class="header-sub reveal rd2">
-        AI races exponentially forward while the human soul asks the same ancient questions. Here's how we're building the bridge — milestone by milestone, in public.
-      </p>
-      <div class="header-actions reveal rd3">
-        <a href="#timeline" class="btn-primary">
-          See the Timeline
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="/waitlist.html" class="btn-ghost">
-          Join Waitlist →
-        </a>
-      </div>
+<hr/>
+
+<!-- PRINCIPLES -->
+<section>
+  <div class="section-label">The escape principles</div>
+  <h2>Three things that<br/><em>never change</em></h2>
+  <p>The milestones shift as pods grow. The escape principles don't.</p>
+
+  <div class="principles-grid">
+    <div class="principle">
+      <span class="principle-icon">🌱</span>
+      <h3>Humans first, always</h3>
+      <p>Every pod starts with people doing real things together. Better tools arrive once there's something worth supporting.</p>
     </div>
-  </header>
-
-  <!-- PHILOSOPHY -->
-  <section class="philosophy">
-    <div class="container">
-      <div class="phil-grid reveal">
-        <div class="phil-card" style="--pc: var(--cyan)">
-          <div class="phil-num">PRINCIPLE_01</div>
-          <span class="phil-icon">🧠</span>
-          <div class="phil-title">Vibe-First Intelligence</div>
-          <p class="phil-desc">AI that reads attitude, energy, and creative style — not just skills — to form teams that actually enjoy working together.</p>
-        </div>
-        <div class="phil-card" style="--pc: var(--violet)">
-          <div class="phil-num">PRINCIPLE_02</div>
-          <span class="phil-icon">🤝</span>
-          <div class="phil-title">Human-in-the-Loop Orchestration</div>
-          <p class="phil-desc">Every AI decision is refinable by human prompt engineers. No black boxes — transparent, collaborative flow from seed to outcome.</p>
-        </div>
-        <div class="phil-card" style="--pc: var(--green)">
-          <div class="phil-num">PRINCIPLE_03</div>
-          <span class="phil-icon">🌍</span>
-          <div class="phil-title">Creativity-Protecting Autonomy</div>
-          <p class="phil-desc">AI handles logistics and repetition; humans keep the soul. The system gets smarter while staying profoundly human.</p>
-        </div>
-      </div>
+    <div class="principle">
+      <span class="principle-icon">⚖️</span>
+      <h3>Reciprocity as the protocol</h3>
+      <p>Help three people. Receive help from three people. Share what you make. This is the foundation every feature is built on.</p>
     </div>
-  </section>
-
-  <!-- TIMELINE -->
-  <section class="timeline-section" id="timeline">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="section-title">Roadmap <span>Timeline</span></div>
-        <div class="section-sub">// four phases · one direction</div>
-      </div>
-
-      <div class="timeline-track">
-
-        <!-- Phase 1 -->
-        <div class="tl-item reveal" style="--nd-color: var(--green)">
-          <div class="tl-node">
-            <div class="tl-dot" style="--nd-color: var(--green); background: var(--green); box-shadow: 0 0 16px var(--green);"></div>
-          </div>
-          <div class="tl-connector" style="background: linear-gradient(90deg, var(--green), rgba(52,236,168,0.05));"></div>
-          <div class="tl-card" style="--nd-color: var(--green)">
-            <div class="tl-header">
-              <span class="tl-label" style="color: var(--green); background: rgba(52,236,168,0.08); border-color: rgba(52,236,168,0.2);">Now → Q1 2026</span>
-              <span class="tl-status live">Live Now</span>
-            </div>
-            <div class="tl-title">Prototype & Private Alpha</div>
-            <p class="tl-tagline">First real projects run end-to-end by founder-selected pods. AI matching meets human curation.</p>
-            <div class="tl-items">
-              <div class="tl-item-row"><span class="tl-item-check done">✓</span><span>Waitlist onboarding with vibe profiling</span></div>
-              <div class="tl-item-row"><span class="tl-item-check done">✓</span><span>Basic AI matching + human prompt engineer review</span></div>
-              <div class="tl-item-row"><span class="tl-item-check done">✓</span><span>Integrated workspace (Slack / Figma / GitHub bots)</span></div>
-              <div class="tl-item-row"><span class="tl-item-check done">✓</span><span>Beta pods live — Bitcoin, BreadCraft, Vibe Coding</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Phase 2 -->
-        <div class="tl-item reveal" style="--nd-color: var(--cyan)">
-          <div class="tl-node">
-            <div class="tl-dot" style="--nd-color: var(--cyan); background: var(--cyan); box-shadow: 0 0 16px var(--cyan);"></div>
-          </div>
-          <div class="tl-connector"></div>
-          <div class="tl-card" style="--nd-color: var(--cyan)">
-            <div class="tl-header">
-              <span class="tl-label">Q2 2026</span>
-              <span class="tl-status upcoming">Upcoming</span>
-            </div>
-            <div class="tl-title">Private Beta Launch</div>
-            <p class="tl-tagline">Invite-only access for waitlist super users. Advanced orchestration, partner credits, real-time refinement.</p>
-            <div class="tl-items">
-              <div class="tl-item-row"><span class="tl-item-check soon">→</span><span>Invite-only access for waitlist members</span></div>
-              <div class="tl-item-row"><span class="tl-item-check soon">→</span><span>Advanced vibe refinement + multi-pod orchestration</span></div>
-              <div class="tl-item-row"><span class="tl-item-check soon">→</span><span>Pro tier with partner credits (OpenAI, Figma, etc.)</span></div>
-              <div class="tl-item-row"><span class="tl-item-check soon">→</span><span>Human prompt engineer panel (real-time adjustments)</span></div>
-              <div class="tl-item-row"><span class="tl-item-check soon">→</span><span>Community feedback loops shaping core AI</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Phase 3 -->
-        <div class="tl-item reveal" style="--nd-color: var(--violet)">
-          <div class="tl-node">
-            <div class="tl-dot" style="--nd-color: var(--violet); background: transparent; border-color: var(--violet); box-shadow: 0 0 12px var(--violet);"></div>
-          </div>
-          <div class="tl-connector" style="background: linear-gradient(90deg, var(--violet), rgba(167,139,250,0.05));"></div>
-          <div class="tl-card" style="--nd-color: var(--violet)">
-            <div class="tl-header">
-              <span class="tl-label" style="color: var(--violet); background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.2);">Q3–Q4 2026</span>
-              <span class="tl-status future">Future</span>
-            </div>
-            <div class="tl-title">Public Launch & Enterprise</div>
-            <p class="tl-tagline">Open sign-ups, freemium model, enterprise tier with white-label — and AI that proposes its own project seeds.</p>
-            <div class="tl-items">
-              <div class="tl-item-row"><span class="tl-item-check far">◇</span><span>Open sign-ups + freemium model live</span></div>
-              <div class="tl-item-row"><span class="tl-item-check far">◇</span><span>Enterprise tier with white-label & dedicated orchestration</span></div>
-              <div class="tl-item-row"><span class="tl-item-check far">◇</span><span>API access for custom workflows</span></div>
-              <div class="tl-item-row"><span class="tl-item-check far">◇</span><span>Autonomous project seeds (AI proposes full plans)</span></div>
-              <div class="tl-item-row"><span class="tl-item-check far">◇</span><span>Global community events powered by YSKAIPE pods</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Phase 4 -->
-        <div class="tl-item reveal" style="--nd-color: var(--pink)">
-          <div class="tl-node">
-            <div class="tl-dot" style="--nd-color: var(--pink); background: transparent; border-color: var(--pink); box-shadow: 0 0 12px var(--pink);"></div>
-          </div>
-          <div class="tl-connector" style="background: linear-gradient(90deg, var(--pink), rgba(244,114,182,0.05));"></div>
-          <div class="tl-card" style="--nd-color: var(--pink)">
-            <div class="tl-header">
-              <span class="tl-label" style="color: var(--pink); background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.2);">2027 and Beyond</span>
-              <span class="tl-status future" style="color: var(--pink);">The Long Game</span>
-            </div>
-            <div class="tl-title">The Human-Cohesive Era</div>
-            <p class="tl-tagline">Fully autonomous yet overridable pods. Cross-platform memory. Community-owned models. AI as organizational gravity.</p>
-            <div class="tl-items">
-              <div class="tl-item-row"><span class="tl-item-check" style="color:var(--pink)">✦</span><span>Fully autonomous yet human-overridable pods</span></div>
-              <div class="tl-item-row"><span class="tl-item-check" style="color:var(--pink)">✦</span><span>Cross-platform memory — your vibe follows you everywhere</span></div>
-              <div class="tl-item-row"><span class="tl-item-check" style="color:var(--pink)">✦</span><span>AI-mediated conflict resolution with emotional intelligence</span></div>
-              <div class="tl-item-row"><span class="tl-item-check" style="color:var(--pink)">✦</span><span>Decentralized governance — community-owned models</span></div>
-              <div class="tl-item-row"><span class="tl-item-check" style="color:var(--pink)">✦</span><span>Real-world impact: activist campaigns, art movements, breakthroughs</span></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="principle">
+      <span class="principle-icon">🔍</span>
+      <h3>You stay in control</h3>
+      <p>Every suggestion from the platform can be ignored or overridden. Your judgment — on the dough, the harvest, the code — always wins.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FUNDING / BUILD IN PUBLIC -->
-  <section class="funding-section">
-    <div class="container">
-      <div class="funding-inner reveal">
-        <div class="funding-grid">
-          <div class="funding-col">
-            <div class="funding-label">Funding_Status</div>
-            <div class="funding-title">Open to Angels & Accelerators</div>
-            <p class="funding-desc">We're building YSKAIPE live and transparent — metrics, progress, and direction shared weekly. If the vision resonates, let's talk.</p>
-            <div class="funding-list">
-              <div class="funding-item">Pre-seed / angel conversations welcome</div>
-              <div class="funding-item">Live metrics shared in Build Log</div>
-              <div class="funding-item">Weekly Wednesdays + Fridays streams</div>
-            </div>
-          </div>
-          <div class="funding-divider"></div>
-          <div class="funding-col">
-            <div class="funding-label">Build_In_Public</div>
-            <div class="funding-title">Watch Us Ship, Live</div>
-            <p class="funding-desc">CrewAI / LangGraph orchestration built on stream. Suggest prompts on X, watch sessions on YouTube, contribute on GitHub.</p>
-            <div class="funding-list">
-              <div class="funding-item">Wednesday build days — live coding</div>
-              <div class="funding-item">Friday demo & collab — prompt spin-ups</div>
-              <div class="funding-item"><a href="https://calendly.com/yskaipe" style="color:var(--cyan); text-decoration:none;">Book a call via Calendly →</a></div>
-            </div>
-          </div>
+<hr/>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-label">The route</div>
+  <h2>Where we are.<br/><em>Where we're going.</em></h2>
+  <p>Phase 1 is done. Phase 2 is open — escape into it right now. Everything after depends on what Phase 2 teaches us.</p>
+
+  <div class="timeline">
+
+    <!-- PHASE 1: DONE -->
+    <div class="phase phase-done">
+      <div class="phase-node node-done">✓</div>
+      <div class="phase-header">
+        <div class="phase-title-group">
+          <div class="phase-period">NOW → Q1 2026</div>
+          <h3>Prototype &amp; <em>Private Alpha</em></h3>
+        </div>
+        <span class="phase-pill pill-done"><span class="pip"></span> Complete</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item">
+          <span class="item-check">✓</span>
+          <div class="item-text"><strong>First cohort onboarding</strong><span class="item-note">Founder-selected first members</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check">✓</span>
+          <div class="item-text"><strong>Early member matching</strong><span class="item-note">Matched by interests, location, and what members can offer each other</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check">✓</span>
+          <div class="item-text"><strong>Integrated workspace scaffolding</strong><span class="item-note">Slack / Figma / GitHub bot architecture</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check">✓</span>
+          <div class="item-text"><strong>First real pods run end-to-end</strong><span class="item-note">Muscadine Pod, BreadCraft Pod, Bitcoin Pod — humans first on X</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check">✓</span>
+          <div class="item-text"><strong>Wednesday + Friday cadence established</strong><span class="item-note">Build Day / Gather &amp; Share Day running weekly</span></div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-inner reveal">
-        <h2 class="cta-title">Be part of this future.</h2>
-        <p class="cta-sub">Join the waitlist and help shape human-cohesive AI. Early access, real pods, real outcomes.</p>
-        <div class="cta-prompt">organize a decentralized art movement across 5 cities</div>
-        <a href="/waitlist.html" class="btn-primary">
-          Get Early Access
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <a href="/" class="footer-logo">YSKAIPE</a>
-        <div class="footer-links">
-          <a href="/privacy.html">Privacy</a>
-          <a href="/terms.html">Terms</a>
-          <a href="/contact.html">Contact</a>
-          <a href="https://x.com/yskaipe">X</a>
-          <a href="https://github.com/YSKAIPE">GitHub</a>
+    <!-- PHASE 2: ACTIVE -->
+    <div class="phase">
+      <div class="phase-node node-active">🌱</div>
+      <div class="phase-header">
+        <div class="phase-title-group">
+          <div class="phase-period">Q2 2026 — NOW</div>
+          <h3>Open Pods &amp; <em>Live Triads</em></h3>
         </div>
-        <p class="footer-copy">© 2026 YSKAIPE</p>
+        <span class="phase-pill pill-active"><span class="pip"></span> Active</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--active);">→</span>
+          <div class="item-text"><strong>Open pod entry via X — no waitlist, no form</strong><span class="item-note">Follow @yskaipe, join the Community, introduce yourself, get matched</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--active);">→</span>
+          <div class="item-text"><strong>Triad matching — by hand first</strong><span class="item-note">Founder introduces members; smarter matching comes once the pattern is clear</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--active);">→</span>
+          <div class="item-text"><strong>Live X Spaces sessions per pod</strong><span class="item-note">"Muscadine 101," "Sourdough Troubleshooting," "Bitcoin Dev Deep Dive"</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--active);">→</span>
+          <div class="item-text"><strong>Yield &amp; help logs — documented publicly</strong><span class="item-note">Triads formed, tasks completed, harvests shared — the proof layer</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--active);">→</span>
+          <div class="item-text"><strong>Shared archives per pod</strong><span class="item-note">Levain Library (BreadCraft), growing logs (Muscadine), protocol notes (Bitcoin)</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--active);">→</span>
+          <div class="item-text"><strong>Build in public — weekly metrics shared openly</strong><span class="item-note">Triad count, task completion rate, yield cycles — visible on X</span></div>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => observer.observe(el));
-    document.querySelectorAll('header .reveal').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), 80 + i * 100);
-    });
-  </script>
+    <!-- PHASE 3: NEXT -->
+    <div class="phase">
+      <div class="phase-node node-next">🤖</div>
+      <div class="phase-header">
+        <div class="phase-title-group">
+          <div class="phase-period">Q3–Q4 2026 — once pods have their rhythm</div>
+          <h3>Platform <em>Tools</em></h3>
+        </div>
+        <span class="phase-pill pill-next"><span class="pip"></span> After Phase 2</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Smarter group matching</strong><span class="item-note">Suggests good matches based on interests and track record; founder approves</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Reminders &amp; tracking per pod</strong><span class="item-note">Harvest reminders (Muscadine), bake logs (BreadCraft), reading lists (Bitcoin)</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Cross-pod connections</strong><span class="item-note">Members from different pods connect when their interests overlap</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Pro tier with partner credits</strong><span class="item-note">OpenAI, Figma, and other tool credits for active pod participants</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Member feedback tools</strong><span class="item-note">Members flag what's working and what isn't; the platform adjusts</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Open API for builders</strong><span class="item-note">Developers can build tools that plug into their pod's activity</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 4: PUBLIC -->
+    <div class="phase">
+      <div class="phase-node node-next">🌍</div>
+      <div class="phase-header">
+        <div class="phase-title-group">
+          <div class="phase-period">Q4 2026 — public launch</div>
+          <h3>Open Platform &amp; <em>Enterprise</em></h3>
+        </div>
+        <span class="phase-pill pill-next"><span class="pip"></span> Coming</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Open sign-ups + freemium model live</strong><span class="item-note">Anyone can spin up a pod — core reciprocity layer always free</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Enterprise tier — private pods for organizations</strong><span class="item-note">Teams, clubs, and companies running their own internal pod networks</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Pod starter templates</strong><span class="item-note">Describe what you want to build together; get a suggested structure to start from</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--next);">◦</span>
+          <div class="item-text"><strong>Global community events powered by pods</strong><span class="item-note">Pop-up bakes, hackathons, growing days — coordinated at regional scale</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 5: FUTURE -->
+    <div class="phase">
+      <div class="phase-node node-future">✦</div>
+      <div class="phase-header">
+        <div class="phase-title-group">
+          <div class="phase-period">2027 and beyond</div>
+          <h3>The <em>Long Game</em></h3>
+        </div>
+        <span class="phase-pill pill-future"><span class="pip"></span> Long horizon</span>
+      </div>
+      <div class="phase-body">
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--future);">◌</span>
+          <div class="item-text"><strong>Pods that mostly run themselves</strong><span class="item-note">Scheduling, matching, and reminders handled automatically — members override anything, anytime</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--future);">◌</span>
+          <div class="item-text"><strong>Portable pod history</strong><span class="item-note">Your help log and reciprocity record follow you to any new pod you join</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--future);">◌</span>
+          <div class="item-text"><strong>Community-shaped platform</strong><span class="item-note">Active pods help decide how the platform grows and what gets built next</span></div>
+        </div>
+        <div class="phase-item">
+          <span class="item-check" style="color:var(--future);">◌</span>
+          <div class="item-text"><strong>Real-world impact at scale</strong><span class="item-note">Activist campaigns, open-source breakthroughs, new art movements — started in triads</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr/>
+
+<!-- OPEN NOW DARK BAND -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-label">Escape right now</div>
+    <h2>You don't need to wait<br/><em>for Phase 3.</em></h2>
+    <p>Three pods are open. The escape is live. Show up on X, introduce yourself, and your triad is waiting.</p>
+
+    <div class="open-now-grid">
+      <div class="open-card">
+        <span class="open-card-icon">🍇</span>
+        <h3>Muscadine Pod</h3>
+        <p>Lake Norman mutual-aid gardening network. Native grapes, real triads, real harvests. <a href="https://www.yskaipe.com/yskaipe-muscadine.html">Join →</a></p>
+      </div>
+      <div class="open-card">
+        <span class="open-card-icon">🍞</span>
+        <h3>BreadCraft Pod</h3>
+        <p>Reciprocal baking network — starters, loaves, co-bakes, shared Levain Library. <a href="https://www.yskaipe.com/yskaipe-breadcraft.html">Join →</a></p>
+      </div>
+      <div class="open-card">
+        <span class="open-card-icon">₿</span>
+        <h3>Bitcoin Pod</h3>
+        <p>Deep protocol dives, Lightning builds, custody tools — collaborative and sovereign. <a href="https://www.yskaipe.com/yskaipe-bitcoin.html">Join →</a></p>
+      </div>
+      <div class="open-card">
+        <span class="open-card-icon">✦</span>
+        <h3>Propose a Pod</h3>
+        <p>Have a subject worth doing together? The playbook works for almost any craft, community, or shared pursuit. <a href="https://x.com/yskaipe">DM @yskaipe →</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FUNDING / INVESTORS -->
+<section>
+  <div class="section-label">For investors &amp; accelerators</div>
+  <h2>Building in public.<br/><em>Seed acceleration welcome.</em></h2>
+  <p>YSKAIPE is bootstrapped and founder-led. Phase 2 is the proof layer — real triads, documented yield, harvest logs and what got shared published openly on X every Friday. If you're an angel, scout, or accelerator watching a new kind of social platform emerge from the ground up, the calendar is open.</p>
+
+  <div class="funding-note">
+    <p><strong>What we're looking for:</strong> a seed partner who understands that a useful social platform is built on real groups doing real things — and that better tools come after trust is earned, not before.</p>
+    <p style="margin-bottom:16px;"><strong>What you'll see by Q3 2026:</strong> triad formation rate, task completion rate, yield-sharing cycles, and cross-pod expansion from the first three pods. Those numbers are the application.</p>
+    <a href="https://calendly.com/yskaipe" style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:0.06em;color:var(--amber);">◷ Book a call with Nicholas →</a>
+  </div>
+</section>
+
+<hr/>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Make your<br/><em>escape.</em></h2>
+  <p>Follow @yskaipe on X, find your pod, and introduce yourself. The triad is waiting.</p>
+  <a href="https://x.com/yskaipe" class="btn-primary">✦ Make your escape</a>
+  <a href="https://www.yskaipe.com/beta-pods.html" class="btn-ghost">Browse Pods →</a>
+  <p class="cta-note">open pods · triads form on rolling basis · no cash for core help · built in Cornelius, NC</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--char);">YSKAIPE</span>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;">
+    <a href="https://www.yskaipe.com/">Home</a>
+    <a href="https://www.yskaipe.com/beta-pods.html">Pods</a>
+    <a href="https://www.yskaipe.com/about.html">About</a>
+    <a href="https://www.yskaipe.com/pitch.html">Pitch</a>
+    <a href="https://www.yskaipe.com/privacy.html">Privacy</a>
+    <a href="https://www.yskaipe.com/terms.html">Terms</a>
+  </div>
+  <span>© 2026 YSKAIPE — Escape into something real.</span>
+</footer>
+
 </body>
 </html>
