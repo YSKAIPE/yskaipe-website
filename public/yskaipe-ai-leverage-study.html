@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE — AI Leverage Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050507;
+    --surface: #0c0c10;
+    --border: #1a1a24;
+    --dim: #2a2a38;
+    --muted: #5a5a72;
+    --text: #d8d8e8;
+    --bright: #f0f0fa;
+    --accent: #7c6fff;
+    --accent2: #ff6fd8;
+    --accent3: #6fffc8;
+    --glow: rgba(124,111,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* GRID BACKGROUND */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(5,5,7,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--bright);
+    font-style: italic;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--bright); }
+
+  .nav-badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,111,255,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--bright);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title .italic { font-style: italic; color: var(--accent); }
+
+  .hero-subtitle-row {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .hero-stat {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent3);
+    line-height: 1;
+  }
+
+  .hero-stat small {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn-primary {
+    padding: 0.9rem 2.5rem;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: #9d8fff;
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    padding: 0.9rem 2.5rem;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    padding: 0.8rem 0;
+    background: var(--surface);
+  }
+
+  .ticker {
+    display: flex;
+    gap: 4rem;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .ticker-item .dot {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* LIVE DEMO SECTION */
+  .section {
+    padding: 7rem 3rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    color: var(--bright);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* DIALOGUE DEMO */
+  .dialogue-container {
+    max-width: 900px;
+    margin: 4rem auto 0;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+  }
+
+  .dialogue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dialogue-header-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    color: var(--accent3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent3);
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  .dialogue-body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 340px;
+  }
+
+  .msg {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+  }
+
+  .msg.visible { opacity: 1; transform: translateY(0); }
+
+  .msg-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .msg-avatar.a1 { background: rgba(124,111,255,0.2); color: var(--accent); border: 1px solid var(--accent); }
+  .msg-avatar.a2 { background: rgba(255,111,216,0.15); color: var(--accent2); border: 1px solid var(--accent2); }
+
+  .msg-content { flex: 1; }
+
+  .msg-role {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .msg-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .msg-text .highlight {
+    color: var(--accent3);
+    font-weight: 500;
+  }
+
+  .typing-indicator {
+    display: flex;
+    gap: 0.3rem;
+    padding: 0.5rem 0;
+  }
+
+  .typing-indicator span {
+    width: 5px;
+    height: 5px;
+    background: var(--muted);
+    border-radius: 50%;
+    animation: typing 1.2s ease-in-out infinite;
+  }
+
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typing {
+    0%, 100% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-4px); }
+  }
+
+  /* INPUT AREA */
+  .dialogue-footer {
+    border-top: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .user-input {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--dim);
+    padding: 0.7rem 1rem;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .user-input:focus { border-color: var(--accent); }
+  .user-input::placeholder { color: var(--muted); }
+
+  .send-btn {
+    padding: 0.7rem 1.5rem;
+    background: var(--accent);
+    border: none;
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .send-btn:hover { background: #9d8fff; }
+
+  /* FRAMEWORK SECTION */
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 4rem;
+    border: 1px solid var(--border);
+  }
+
+  .framework-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    transition: background 0.2s;
+    cursor: default;
+  }
+
+  .framework-card:hover { background: #0f0f18; }
+
+  .card-num {
+    font-family: 'Fraunces', serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--dim);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .card-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bright);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .card-body {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.25rem 0.7rem;
+    border: 1px solid var(--dim);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* METRICS */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 4rem;
+  }
+
+  .metric {
+    background: var(--surface);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .metric-value {
+    font-family: 'Fraunces', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* USE CASES */
+  .use-cases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .use-case {
+    background: var(--surface);
+    padding: 2rem 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: background 0.2s;
+  }
+
+  .use-case:hover { background: #0f0f18; }
+
+  .use-case-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .use-case-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bright);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .use-case-body {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  /* SUBSCRIBE */
+  .subscribe-section {
+    border-top: 1px solid var(--border);
+    padding: 6rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .subscribe-text .section-title { margin-bottom: 0.5rem; }
+
+  .subscribe-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 400px;
+  }
+
+  .subscribe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 360px;
+  }
+
+  .subscribe-input {
+    background: var(--surface);
+    border: 1px solid var(--dim);
+    padding: 1rem 1.2rem;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .subscribe-input:focus { border-color: var(--accent); }
+  .subscribe-input::placeholder { color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-links a { color: var(--muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* CONVERSATION LIVE SECTION */
+  .convo-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .convo-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent), var(--accent2), transparent);
+    opacity: 0.3;
+  }
+
+  /* NODE DIAGRAM */
+  .node-diagram {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    position: relative;
+  }
+
+  .node-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(124,111,255,0.05);
+    position: relative;
+    z-index: 2;
+  }
+
+  .node-circle::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(124,111,255,0.2);
+    animation: ripple 2s ease-in-out infinite;
+  }
+
+  .node-circle.b2 { border-color: var(--accent2); color: var(--accent2); background: rgba(255,111,216,0.05); }
+  .node-circle.b2::after { border-color: rgba(255,111,216,0.2); animation-delay: 0.5s; }
+
+  .node-circle.b3 { border-color: var(--accent3); color: var(--accent3); background: rgba(111,255,200,0.05); }
+  .node-circle.b3::after { border-color: rgba(111,255,200,0.2); animation-delay: 1s; }
+
+  @keyframes ripple {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 0; }
+  }
+
+  .node-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .connector-line {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(to right, var(--accent), var(--accent2));
+    align-self: center;
+    position: relative;
+    top: -1.6rem;
+    opacity: 0.4;
+  }
+
+  .connector-line.c2 { background: linear-gradient(to right, var(--accent2), var(--accent3)); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .section { padding: 4rem 1.5rem; }
+    .framework-grid { grid-template-columns: 1fr; }
+    .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .use-cases { grid-template-columns: 1fr; }
+    .subscribe-section { flex-direction: column; }
+    .subscribe-form { min-width: unset; width: 100%; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">ys<span>kai</span>pe</div>
+  <ul class="nav-links">
+    <li><a href="#study">Study</a></li>
+    <li><a href="#framework">Framework</a></li>
+    <li><a href="#demo">Live Demo</a></li>
+    <li><a href="#cases">Use Cases</a></li>
+  </ul>
+  <div class="nav-badge">Research Alpha</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-label">yskaipe.com — An open study</p>
+  <h1 class="hero-title">
+    AI<br>talking<br>to <span class="italic">AI.</span>
+  </h1>
+  <div class="hero-subtitle-row">
+    <p class="hero-subtitle">
+      A living research study on leverage — what happens when intelligence amplifies itself. We build systems where AI models orchestrate, challenge, and extend one another in real time.
+    </p>
+    <div style="display:flex;flex-direction:column;gap:1.5rem;padding-left:2rem;border-left:1px solid var(--border)">
+      <div class="hero-stat">∞<small>Leverage potential</small></div>
+      <div class="hero-stat" style="color:var(--accent2)">N²<small>Connection density</small></div>
+    </div>
+  </div>
+  <div class="hero-cta-row">
+    <a href="#demo" class="btn-primary">See it live</a>
+    <a href="#study" class="btn-ghost">Read the study</a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item"><span class="dot"></span>AI-to-AI orchestration</span>
+    <span class="ticker-item"><span class="dot"></span>Emergent reasoning chains</span>
+    <span class="ticker-item"><span class="dot"></span>Multi-model synthesis</span>
+    <span class="ticker-item"><span class="dot"></span>Adversarial refinement loops</span>
+    <span class="ticker-item"><span class="dot"></span>Cross-model knowledge transfer</span>
+    <span class="ticker-item"><span class="dot"></span>Autonomous task delegation</span>
+    <span class="ticker-item"><span class="dot"></span>Prompt leverage studies</span>
+    <span class="ticker-item"><span class="dot"></span>AI-to-AI orchestration</span>
+    <span class="ticker-item"><span class="dot"></span>Emergent reasoning chains</span>
+    <span class="ticker-item"><span class="dot"></span>Multi-model synthesis</span>
+    <span class="ticker-item"><span class="dot"></span>Adversarial refinement loops</span>
+    <span class="ticker-item"><span class="dot"></span>Cross-model knowledge transfer</span>
+    <span class="ticker-item"><span class="dot"></span>Autonomous task delegation</span>
+    <span class="ticker-item"><span class="dot"></span>Prompt leverage studies</span>
+  </div>
+</div>
+
+<!-- STUDY SECTION -->
+<section class="section" id="study">
+  <p class="section-label">The Thesis</p>
+  <h2 class="section-title">Leverage is the unit<br>of intelligence.</h2>
+
+  <div class="metrics-row">
+    <div class="metric">
+      <div class="metric-value" style="color:var(--accent)">17×</div>
+      <div class="metric-label">Avg output amplification</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" style="color:var(--accent2)">4.2s</div>
+      <div class="metric-label">Median loop latency</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" style="color:var(--accent3)">340+</div>
+      <div class="metric-label">Dialogue sessions logged</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" style="color:var(--bright)">∞</div>
+      <div class="metric-label">Theoretical ceiling</div>
+    </div>
+  </div>
+
+  <!-- NODE DIAGRAM -->
+  <div class="node-diagram" style="margin-top:4rem">
+    <div class="node">
+      <div class="node-circle">Model A</div>
+      <div class="node-label">Orchestrator</div>
+    </div>
+    <div class="connector-line"></div>
+    <div class="node">
+      <div class="node-circle b2">Model B</div>
+      <div class="node-label">Specialist</div>
+    </div>
+    <div class="connector-line c2"></div>
+    <div class="node">
+      <div class="node-circle b3">Model C</div>
+      <div class="node-label">Validator</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<section class="section" id="demo" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <p class="section-label">Live Experiment</p>
+  <h2 class="section-title">Watch the loop<br>in real time.</h2>
+
+  <div class="dialogue-container">
+    <div class="dialogue-header">
+      <span class="dialogue-header-label">AI ↔ AI Dialogue — Session #341</span>
+      <div class="live-indicator">
+        <div class="live-dot"></div>
+        Live
+      </div>
+    </div>
+    <div class="dialogue-body" id="dialogueBody">
+      <!-- Messages injected by JS -->
+    </div>
+    <div class="dialogue-footer">
+      <input class="user-input" type="text" placeholder="Inject a prompt into the loop..." id="userInput">
+      <button class="send-btn" onclick="injectPrompt()">Inject →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORK -->
+<section class="section" id="framework">
+  <p class="section-label">The Framework</p>
+  <h2 class="section-title">How AI leverages AI.</h2>
+
+  <div class="framework-grid">
+    <div class="framework-card">
+      <div class="card-num">01</div>
+      <div class="card-title">Orchestration Layer</div>
+      <p class="card-body">A primary model decomposes complex goals into atomic tasks, routing each to the most capable specialist model with precision context.</p>
+      <span class="card-tag">Delegation</span>
+    </div>
+    <div class="framework-card">
+      <div class="card-num">02</div>
+      <div class="card-title">Adversarial Refinement</div>
+      <p class="card-body">A second model critiques, challenges, and probes outputs from the first — creating a pressure loop that surfaces edge cases and sharper reasoning.</p>
+      <span class="card-tag">Critique Loop</span>
+    </div>
+    <div class="framework-card">
+      <div class="card-num">03</div>
+      <div class="card-title">Synthesis & Emergence</div>
+      <p class="card-body">A third model observes the full conversation history, identifying patterns, contradictions, and novel insights that neither model could have reached alone.</p>
+      <span class="card-tag">Meta-reasoning</span>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="section" id="cases" style="border-top:1px solid var(--border)">
+  <p class="section-label">Applications</p>
+  <h2 class="section-title">Where leverage<br>creates value.</h2>
+
+  <div class="use-cases">
+    <div class="use-case">
+      <div class="use-case-icon">⚗️</div>
+      <div>
+        <div class="use-case-title">Research Synthesis</div>
+        <p class="use-case-body">One model reads and summarizes. Another stress-tests the interpretation. A third synthesizes gaps into hypotheses.</p>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">🏗️</div>
+      <div>
+        <div class="use-case-title">Software Architecture</div>
+        <p class="use-case-body">One model proposes architecture. Another finds failure modes. A third writes the implementation spec optimized for both.</p>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">📈</div>
+      <div>
+        <div class="use-case-title">Business Strategy</div>
+        <p class="use-case-body">Models debate market positions like a panel of advisors — surfacing trade-offs a single prompt can never reveal.</p>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">🎓</div>
+      <div>
+        <div class="use-case-title">Adaptive Education</div>
+        <p class="use-case-body">A Socratic model asks questions. A mentor model explains. A third calibrates the difficulty loop to the learner in real time.</p>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">⚖️</div>
+      <div>
+        <div class="use-case-title">Legal & Compliance</div>
+        <p class="use-case-body">One model drafts. Another finds contradictions with existing law. A third rewrites with minimal risk exposure.</p>
+      </div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-icon">🔬</div>
+      <div>
+        <div class="use-case-title">Hypothesis Testing</div>
+        <p class="use-case-body">Science-mode: one model forms hypotheses, another designs falsifying experiments, a third evaluates plausibility of results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="subscribe-section">
+  <div class="subscribe-text">
+    <p class="section-label">Join the Study</p>
+    <h2 class="section-title" style="font-size:2.5rem">Get dispatches<br>from the loop.</h2>
+    <p class="subscribe-sub">Receive research updates, session transcripts, and findings as we document what happens when AI talks to AI at scale.</p>
+  </div>
+  <div class="subscribe-form">
+    <input class="subscribe-input" type="email" placeholder="your@email.com" id="subEmail">
+    <input class="subscribe-input" type="text" placeholder="What are you building with AI?">
+    <button class="btn-primary" onclick="handleSubscribe()">Enter the loop →</button>
+    <p style="font-size:0.65rem;color:var(--muted);letter-spacing:0.05em">No noise. Dispatch frequency: when there's something worth saying.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2026 yskaipe.com — An ongoing study in AI leverage.</div>
+  <div class="footer-links">
+    <a href="#">Study</a>
+    <a href="#">Sessions</a>
+    <a href="#">API</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // DIALOGUE DEMO
+  const dialogues = [
+    { role: 'Model A', type: 'a1', text: 'Initializing leverage study session #341. I\'ll propose a task architecture for the user\'s problem. <span class="highlight">Decomposing into 3 parallel subtasks</span>...' },
+    { role: 'Model B', type: 'a2', text: 'Reviewing Model A\'s decomposition. I see a dependency conflict between subtask 1 and subtask 3. <span class="highlight">Proposing revised sequencing</span> to eliminate the race condition.' },
+    { role: 'Model A', type: 'a1', text: 'Acknowledged. Revised architecture accepted. Subtask 3 now depends on subtask 1 output. <span class="highlight">Delegating subtask 2 to you</span> — you have stronger context on the domain semantics.' },
+    { role: 'Model B', type: 'a2', text: 'Processing subtask 2. Found 3 edge cases the original prompt didn\'t account for. <span class="highlight">Returning enriched output</span> with edge case handling baked in.' },
+    { role: 'Model A', type: 'a1', text: 'Synthesis complete. Combined output <span class="highlight">exceeds what either of us would have produced independently</span>. Total loop iterations: 4. Leverage factor: ~11×.' },
+  ];
+
+  let currentIdx = 0;
+  const body = document.getElementById('dialogueBody');
+
+  function showNextMessage() {
+    if (currentIdx >= dialogues.length) {
+      currentIdx = 0;
+      setTimeout(() => {
+        body.innerHTML = '';
+        setTimeout(showNextMessage, 600);
+      }, 5000);
+      return;
+    }
+    const d = dialogues[currentIdx];
+    
+    // Show typing indicator first
+    const typingEl = document.createElement('div');
+    typingEl.className = 'msg visible';
+    typingEl.innerHTML = `
+      <div class="msg-avatar ${d.type}">${d.type === 'a1' ? 'A' : 'B'}</div>
+      <div class="msg-content">
+        <div class="msg-role">${d.role} — typing</div>
+        <div class="typing-indicator"><span></span><span></span><span></span></div>
+      </div>
+    `;
+    body.appendChild(typingEl);
+    body.scrollTop = body.scrollHeight;
+
+    setTimeout(() => {
+      typingEl.remove();
+      const msgEl = document.createElement('div');
+      msgEl.className = 'msg';
+      msgEl.innerHTML = `
+        <div class="msg-avatar ${d.type}">${d.type === 'a1' ? 'A' : 'B'}</div>
+        <div class="msg-content">
+          <div class="msg-role">${d.role}</div>
+          <div class="msg-text">${d.text}</div>
+        </div>
+      `;
+      body.appendChild(msgEl);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => { msgEl.classList.add('visible'); });
+      });
+      body.scrollTop = body.scrollHeight;
+      currentIdx++;
+      setTimeout(showNextMessage, 2200);
+    }, 1200);
+  }
+
+  setTimeout(showNextMessage, 800);
+
+  // INJECT PROMPT
+  function injectPrompt() {
+    const input = document.getElementById('userInput');
+    const val = input.value.trim();
+    if (!val) return;
+    
+    const msgEl = document.createElement('div');
+    msgEl.className = 'msg visible';
+    msgEl.innerHTML = `
+      <div class="msg-avatar" style="background:rgba(111,255,200,0.1);color:var(--accent3);border:1px solid var(--accent3)">U</div>
+      <div class="msg-content">
+        <div class="msg-role">User Injection</div>
+        <div class="msg-text">${val}</div>
+      </div>
+    `;
+    body.appendChild(msgEl);
+    body.scrollTop = body.scrollHeight;
+    input.value = '';
+
+    // Simulate AI response
+    setTimeout(() => {
+      const responseEl = document.createElement('div');
+      responseEl.className = 'msg';
+      responseEl.innerHTML = `
+        <div class="msg-avatar a1">A</div>
+        <div class="msg-content">
+          <div class="msg-role">Model A — responding to injection</div>
+          <div class="msg-text">Integrating user prompt into current loop context. <span class="highlight">Recalibrating task graph</span> around this new constraint. Delegating impact analysis to Model B...</div>
+        </div>
+      `;
+      body.appendChild(responseEl);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => { responseEl.classList.add('visible'); });
+      });
+      body.scrollTop = body.scrollHeight;
+    }, 1400);
+  }
+
+  document.getElementById('userInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') injectPrompt();
+  });
+
+  // SUBSCRIBE
+  function handleSubscribe() {
+    const email = document.getElementById('subEmail').value;
+    if (!email) return;
+    const btn = event.target;
+    btn.textContent = 'You\'re in the loop ✓';
+    btn.style.background = 'var(--accent3)';
+    btn.style.color = 'var(--bg)';
+  }
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.framework-card, .metric, .use-case').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
