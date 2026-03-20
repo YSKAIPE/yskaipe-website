@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yskaipe — Human Hands. AI Power.</title>
+  <meta name="description" content="The archetype hub for skilled professionals who use AI to multiply their impact — without losing the human edge that makes them irreplaceable." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+/* =========================================
+   YSKAIPE.COM — Industrial Editorial
+   Bebas Neue + DM Serif Display + IBM Plex Mono
+   Dark base, raw textures, bold type
+   ========================================= */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink-soft: #1a1a1a;
+  --paper: #f5f2ed;
+  --paper-dark: #ece8e1;
+  --accent: #e8593c;
+  --accent-warm: #f2a623;
+  --accent-cool: #3b82d4;
+  --human: #1d9e75;
+  --ai: #7f77dd;
+  --mono: 'IBM Plex Mono', monospace;
+  --display: 'Bebas Neue', sans-serif;
+  --serif: 'DM Serif Display', serif;
+  --body: 'Instrument Sans', sans-serif;
+  --radius: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--ink);
+  color: var(--paper);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.mono { font-family: var(--mono); }
+
+/* ==================
+   NAV
+================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2.5rem;
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
+
+.nav.scrolled {
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(245,242,237,0.08);
+}
+
+.nav-logo {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  text-decoration: none;
+  line-height: 1;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,242,237,0.65);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--paper); }
+
+.nav-cta {
+  background: var(--accent) !important;
+  color: var(--paper) !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius);
+  font-weight: 600 !important;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.88 !important; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--paper);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 99;
+  background: var(--ink);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.mobile-menu.open {
+  display: flex;
+  opacity: 1;
+  pointer-events: all;
+}
+.mob-link {
+  font-family: var(--display);
+  font-size: 3rem;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mob-link:hover { color: var(--accent); }
+.mob-cta { color: var(--accent); }
+
+/* ==================
+   HERO
+================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 9rem 2.5rem 5rem;
+  overflow: hidden;
+}
+
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,242,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,242,237,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  font-size: 0.72rem;
+  font-family: var(--mono);
+  letter-spacing: 0.12em;
+  color: rgba(245,242,237,0.5);
+  animation: fadeUp 0.8s ease both;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.dot--pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,89,60,0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(232,89,60,0); }
+}
+
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+  margin-bottom: 2.5rem;
+}
+
+.line {
+  font-family: var(--display);
+  font-size: clamp(5rem, 14vw, 14rem);
+  letter-spacing: -0.01em;
+  display: block;
+  overflow: hidden;
+}
+.line-1 { animation: slideIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+.line-2 { animation: slideIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both; color: var(--accent); }
+.line-3 {
+  animation: slideIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(4rem, 11vw, 11rem);
+  color: rgba(245,242,237,0.7);
+}
+
+@keyframes slideIn {
+  from { transform: translateY(110%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.hero-sub {
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(245,242,237,0.7);
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+.hero-sub em {
+  font-style: normal;
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+  animation: fadeUp 0.8s ease 0.6s both;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  border: 1px solid rgba(245,242,237,0.1);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  animation: fadeUp 0.8s ease 0.7s both;
+}
+
+.stat {
+  flex: 1;
+  min-width: 140px;
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-right: 1px solid rgba(245,242,237,0.1);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--display);
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.7rem;
+  font-family: var(--mono);
+  color: rgba(245,242,237,0.45);
+  letter-spacing: 0.05em;
+}
+.stat-divider { display: none; }
+
+/* ==================
+   BUTTONS
+================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--body);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn--primary {
+  background: var(--accent);
+  color: var(--paper);
+}
+.btn--primary:hover {
+  background: #d44e33;
+  transform: translateY(-1px);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid rgba(245,242,237,0.25);
+}
+.btn--ghost:hover {
+  border-color: rgba(245,242,237,0.6);
+  background: rgba(245,242,237,0.05);
+}
+.btn--large {
+  padding: 1.1rem 2.5rem;
+  font-size: 1rem;
+}
+
+/* ==================
+   MARQUEE
+================== */
+.marquee-wrap {
+  border-top: 1px solid rgba(245,242,237,0.1);
+  border-bottom: 1px solid rgba(245,242,237,0.1);
+  background: rgba(245,242,237,0.03);
+  overflow: hidden;
+  padding: 1rem 0;
+}
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+.marquee-track span {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,242,237,0.35);
+}
+.marquee-track .sep {
+  color: var(--accent);
+  font-size: 0.6rem;
+  opacity: 0.6;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ==================
+   MOAT SECTION
+================== */
+.moat {
+  padding: 8rem 0;
+  background: var(--ink-soft);
+  position: relative;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(245,242,237,0.35);
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+.moat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.moat-headline {
+  font-family: var(--display);
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+.moat-headline em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+}
+
+.moat-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(245,242,237,0.65);
+  margin-bottom: 1.25rem;
+}
+
+.moat-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.moat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(245,242,237,0.04);
+  border: 1px solid rgba(245,242,237,0.08);
+  border-radius: var(--radius-md);
+  transition: border-color 0.25s, background 0.25s;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, background 0.25s;
+}
+.moat-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.moat-card:hover {
+  background: rgba(245,242,237,0.07);
+  border-color: rgba(245,242,237,0.18);
+}
+
+.moat-card-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.moat-card-text { display: flex; flex-direction: column; gap: 0.3rem; }
+.moat-card-text strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--paper);
+}
+.moat-card-text span {
+  font-size: 0.85rem;
+  color: rgba(245,242,237,0.55);
+  line-height: 1.6;
+}
+
+/* ==================
+   ARCHETYPES
+================== */
+.archetypes {
+  padding: 8rem 0;
+  background: var(--ink);
+}
+
+.section-headline {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.section-headline em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+}
+
+.section-sub {
+  font-size: 1rem;
+  color: rgba(245,242,237,0.55);
+  max-width: 560px;
+  line-height: 1.65;
+  margin-bottom: 5rem;
+}
+
+.sector {
+  margin-bottom: 5rem;
+}
+
+.sector-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(245,242,237,0.08);
+}
+.sector-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sector-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 0.2rem;
+}
+.sector-desc {
+  font-size: 0.8rem;
+  color: rgba(245,242,237,0.4);
+  font-family: var(--mono);
+}
+
+.archetype-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1px;
+  background: rgba(245,242,237,0.08);
+  border: 1px solid rgba(245,242,237,0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.archetype-card {
+  position: relative;
+  padding: 1.75rem;
+  background: var(--ink);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.archetype-card:hover {
+  background: #111;
+}
+.archetype-card:hover .arch-arrow {
+  transform: translateX(4px);
+  color: var(--accent);
+}
+
+.arch-num {
+  font-size: 0.65rem;
+  color: rgba(245,242,237,0.25);
+  letter-spacing: 0.08em;
+}
+.arch-icon { font-size: 1.6rem; margin: 0.25rem 0; }
+.archetype-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--paper);
+}
+.archetype-card p {
+  font-size: 0.82rem;
+  color: rgba(245,242,237,0.5);
+  line-height: 1.6;
+  flex: 1;
+}
+.arch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+.tag {
+  font-size: 0.65rem;
+  font-family: var(--mono);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.tag--human {
+  background: rgba(29,158,117,0.15);
+  color: #5dcaa5;
+  border: 1px solid rgba(29,158,117,0.25);
+}
+.tag--ai {
+  background: rgba(127,119,221,0.15);
+  color: #afa9ec;
+  border: 1px solid rgba(127,119,221,0.25);
+}
+.arch-arrow {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-size: 1rem;
+  color: rgba(245,242,237,0.2);
+  transition: all 0.2s;
+}
+
+/* ==================
+   HOW IT WORKS
+================== */
+.how {
+  padding: 8rem 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+.how .section-label { color: rgba(10,10,10,0.3); }
+.how .section-headline { color: var(--ink); }
+.how .section-headline em { color: var(--accent); }
+
+.how-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 4rem;
+}
+
+.how-step {
+  flex: 1;
+  padding: 2rem;
+  border: 1px solid rgba(10,10,10,0.1);
+  border-radius: var(--radius-md);
+  background: #fff;
+  position: relative;
+}
+.how-step:hover {
+  border-color: rgba(10,10,10,0.25);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.how-num {
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+.how-step h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.how-step p {
+  font-size: 0.9rem;
+  color: rgba(10,10,10,0.6);
+  line-height: 1.7;
+}
+
+.how-connector {
+  font-size: 1.5rem;
+  color: rgba(10,10,10,0.2);
+  padding: 0 1rem;
+  padding-top: 2rem;
+  flex-shrink: 0;
+}
+
+/* ==================
+   JOIN / CTA
+================== */
+.join {
+  position: relative;
+  padding: 8rem 0;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.join::before {
+  content: 'JOIN';
+  position: absolute;
+  top: -1rem;
+  right: -2rem;
+  font-family: var(--display);
+  font-size: clamp(10rem, 22vw, 22rem);
+  color: rgba(245,242,237,0.03);
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+.join-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+}
+
+.join-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(245,242,237,0.35);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.join-headline {
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+.join-headline em {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+}
+
+.join-sub {
+  max-width: 580px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(245,242,237,0.6);
+  margin-bottom: 3rem;
+}
+
+.join-form { max-width: 760px; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.join-form input,
+.join-form select {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  background: rgba(245,242,237,0.06);
+  border: 1px solid rgba(245,242,237,0.12);
+  border-radius: var(--radius);
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--paper);
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+}
+.join-form input::placeholder { color: rgba(245,242,237,0.3); }
+.join-form input:focus,
+.join-form select:focus {
+  border-color: var(--accent);
+}
+.join-form select option { background: #1a1a1a; color: var(--paper); }
+
+.join-success {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: rgba(29,158,117,0.1);
+  border: 1px solid rgba(29,158,117,0.25);
+  border-radius: var(--radius-md);
+  color: #5dcaa5;
+  font-size: 1rem;
+  max-width: 500px;
+}
+.join-success.visible { display: flex; }
+.success-icon { font-size: 1.25rem; color: var(--human); }
+
+/* ==================
+   FOOTER
+================== */
+.footer {
+  background: #060606;
+  padding: 3rem 0;
+  border-top: 1px solid rgba(245,242,237,0.06);
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-logo {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  color: rgba(245,242,237,0.5);
+}
+.footer-logo span { color: var(--accent); opacity: 0.7; }
+.footer-tagline {
+  font-size: 0.7rem;
+  color: rgba(245,242,237,0.25);
+  letter-spacing: 0.08em;
+}
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-links a {
+  font-size: 0.8rem;
+  color: rgba(245,242,237,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--paper); }
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(245,242,237,0.2);
+  letter-spacing: 0.06em;
+  width: 100%;
+}
+
+/* ==================
+   RESPONSIVE
+================== */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+
+  .moat-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .moat-left .btn { margin-top: 1rem; }
+
+  .how-grid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .how-connector {
+    transform: rotate(90deg);
+    padding: 0;
+    align-self: center;
+  }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+
+  .hero-stats { flex-direction: column; }
+  .stat { border-right: none; border-bottom: 1px solid rgba(245,242,237,0.1); }
+  .stat:last-child { border-bottom: none; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .container { padding: 0 1.25rem; }
+  .nav { padding: 1rem 1.5rem; }
+  .archetype-grid { grid-template-columns: 1fr; }
+  .how-step { padding: 1.5rem; }
+}
+
+/* ==================
+   SCROLL ANIMATIONS
+================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+  </style>
+</head>
+<body>
+
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">YSK<span>AIPE</span></a>
+    <div class="nav-links">
+      <a href="#archetypes">Archetypes</a>
+      <a href="#moat">The Moat</a>
+      <a href="#sectors">Sectors</a>
+      <a href="#join" class="nav-cta">Join the Hub</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#archetypes" class="mob-link">Archetypes</a>
+    <a href="#moat" class="mob-link">The Moat</a>
+    <a href="#sectors" class="mob-link">Sectors</a>
+    <a href="#join" class="mob-link mob-cta">Join the Hub</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-noise"></div>
+
+    <div class="hero-eyebrow">
+      <span class="dot dot--pulse"></span>
+      <span class="mono">ARCHETYPE HUB — EST. 2025</span>
+    </div>
+
+    <h1 class="hero-headline">
+      <span class="line line-1">HUMAN</span>
+      <span class="line line-2">HANDS.</span>
+      <span class="line line-3 italic">AI Power.</span>
+    </h1>
+
+    <p class="hero-sub">
+      The playbook for skilled professionals who wield AI — and can never be replaced by it.
+      Plumbers. Electricians. Surgeons. Farmers. The world runs on people who show up in person.
+      <em>We make them 10× more powerful.</em>
+    </p>
+
+    <div class="hero-actions">
+      <a href="#archetypes" class="btn btn--primary">Explore Archetypes</a>
+      <a href="#moat" class="btn btn--ghost">Why the moat holds</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">$2.1T</span>
+        <span class="stat-label">Skilled trades market</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">3.5M</span>
+        <span class="stat-label">Unfilled trade jobs today</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">0%</span>
+        <span class="stat-label">Fully automatable</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">10×</span>
+        <span class="stat-label">Productivity w/ AI augmentation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>PLUMBING</span><span class="sep">✦</span>
+      <span>ELECTRICAL</span><span class="sep">✦</span>
+      <span>HVAC</span><span class="sep">✦</span>
+      <span>ROOFING</span><span class="sep">✦</span>
+      <span>HEALTHCARE</span><span class="sep">✦</span>
+      <span>INSPECTION</span><span class="sep">✦</span>
+      <span>AGRICULTURE</span><span class="sep">✦</span>
+      <span>CONSTRUCTION</span><span class="sep">✦</span>
+      <span>EMERGENCY RESPONSE</span><span class="sep">✦</span>
+      <span>FABRICATION</span><span class="sep">✦</span>
+      <span>PLUMBING</span><span class="sep">✦</span>
+      <span>ELECTRICAL</span><span class="sep">✦</span>
+      <span>HVAC</span><span class="sep">✦</span>
+      <span>ROOFING</span><span class="sep">✦</span>
+      <span>HEALTHCARE</span><span class="sep">✦</span>
+      <span>INSPECTION</span><span class="sep">✦</span>
+      <span>AGRICULTURE</span><span class="sep">✦</span>
+      <span>CONSTRUCTION</span><span class="sep">✦</span>
+      <span>EMERGENCY RESPONSE</span><span class="sep">✦</span>
+      <span>FABRICATION</span><span class="sep">✦</span>
+    </div>
+  </div>
+
+  <!-- MOAT SECTION -->
+  <section class="moat" id="moat">
+    <div class="container">
+      <div class="section-label mono">// THE MOAT</div>
+      <div class="moat-grid">
+        <div class="moat-left">
+          <h2 class="moat-headline">AI cannot<br/><em>show up.</em></h2>
+          <p class="moat-body">
+            Every role in the Yskaipe universe shares three things: physical presence required,
+            trust earned over years, and legal accountability that no algorithm can assume.
+            That's not a weakness — it's the deepest competitive moat in the modern economy.
+          </p>
+          <p class="moat-body">
+            The electrician who also uses AI for load calculations, permit drafts, and customer follow-up
+            isn't competing with AI. They're operating at a level the AI-only solution can never reach.
+          </p>
+          <a href="#archetypes" class="btn btn--primary">See the archetypes</a>
+        </div>
+        <div class="moat-right">
+          <div class="moat-card" data-delay="0">
+            <div class="moat-card-icon">⚡</div>
+            <div class="moat-card-text">
+              <strong>Physical access</strong>
+              <span>AI cannot enter the crawl space, read the room, or smell the gas leak.</span>
+            </div>
+          </div>
+          <div class="moat-card" data-delay="100">
+            <div class="moat-card-icon">🤝</div>
+            <div class="moat-card-text">
+              <strong>Trust capital</strong>
+              <span>Relationships built over years. Referral networks. Community reputation.</span>
+            </div>
+          </div>
+          <div class="moat-card" data-delay="200">
+            <div class="moat-card-icon">⚖️</div>
+            <div class="moat-card-text">
+              <strong>Legal accountability</strong>
+              <span>Licensed. Bonded. Liable. AI signs nothing. Humans sign everything.</span>
+            </div>
+          </div>
+          <div class="moat-card" data-delay="300">
+            <div class="moat-card-icon">🧠</div>
+            <div class="moat-card-text">
+              <strong>Judgment under pressure</strong>
+              <span>When the wall opens and nothing matches the blueprint — the expert decides.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS / ARCHETYPES -->
+  <section class="archetypes" id="archetypes">
+    <div class="container">
+      <div class="section-label mono">// ARCHETYPE SECTORS</div>
+      <h2 class="section-headline">Every role. <em>Elevated.</em></h2>
+      <p class="section-sub">Click any archetype to explore how AI augments — never replaces — the skilled human at the center.</p>
+
+      <!-- SECTOR: Core Trades -->
+      <div class="sector" id="sectors">
+        <div class="sector-header">
+          <div class="sector-dot" style="background:#1D9E75;"></div>
+          <div>
+            <h3 class="sector-title">Core Trades</h3>
+            <p class="sector-desc">Licensed physical labor — impossible to offshore, impossible to automate</p>
+          </div>
+        </div>
+        <div class="archetype-grid">
+          <div class="archetype-card" data-sector="trades">
+            <div class="arch-num mono">01</div>
+            <div class="arch-icon">🔧</div>
+            <h4>Plumber</h4>
+            <p>Leak diagnosis, pipe routing, code compliance. AI handles quotes, part sourcing, and customer follow-up.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Physical access</span>
+              <span class="tag tag--ai">Quote AI</span>
+              <span class="tag tag--ai">Code lookup</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="trades">
+            <div class="arch-num mono">02</div>
+            <div class="arch-icon">⚡</div>
+            <h4>Electrician</h4>
+            <p>Panel upgrades, fault finding, EV charger installs. AI drafts load calculations and permit paperwork.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Live wire safety</span>
+              <span class="tag tag--ai">Load calc AI</span>
+              <span class="tag tag--ai">Permit drafts</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="trades">
+            <div class="arch-num mono">03</div>
+            <div class="arch-icon">❄️</div>
+            <h4>HVAC Tech</h4>
+            <p>System balancing, refrigerant handling, airflow diagnostics. AI predicts failure from sensor data.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Sensor judgment</span>
+              <span class="tag tag--ai">Predictive maint.</span>
+              <span class="tag tag--ai">Energy modeling</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="trades">
+            <div class="arch-num mono">04</div>
+            <div class="arch-icon">🏗️</div>
+            <h4>General Contractor</h4>
+            <p>Site orchestration, sub management, client trust. AI runs scheduling, cost tracking, and RFIs.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Site leadership</span>
+              <span class="tag tag--ai">Schedule AI</span>
+              <span class="tag tag--ai">Budget alerts</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="trades">
+            <div class="arch-num mono">05</div>
+            <div class="arch-icon">🔩</div>
+            <h4>Welder / Fabricator</h4>
+            <p>Custom metalwork, structural joins, aerospace precision. AI assists with blueprint reading and material specs.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Hand skill</span>
+              <span class="tag tag--ai">Blueprint AI</span>
+              <span class="tag tag--ai">Spec lookup</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="trades">
+            <div class="arch-num mono">06</div>
+            <div class="arch-icon">🏠</div>
+            <h4>Roofer</h4>
+            <p>Leak diagnosis, material selection, storm damage assessment. AI processes drone imagery and insurance docs.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Physical inspection</span>
+              <span class="tag tag--ai">Drone analysis</span>
+              <span class="tag tag--ai">Claim drafting</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTOR: Healthcare -->
+      <div class="sector">
+        <div class="sector-header">
+          <div class="sector-dot" style="background:#7F77DD;"></div>
+          <div>
+            <h3 class="sector-title">Healthcare & Body Trades</h3>
+            <p class="sector-desc">Human touch, clinical judgment, and legal accountability AI cannot assume</p>
+          </div>
+        </div>
+        <div class="archetype-grid">
+          <div class="archetype-card" data-sector="healthcare">
+            <div class="arch-num mono">07</div>
+            <div class="arch-icon">🏥</div>
+            <h4>Home Health Aide</h4>
+            <p>Patient mobility, medication reminders, daily living support. AI tracks vitals trends and flags care gaps.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Empathy + touch</span>
+              <span class="tag tag--ai">Vitals AI</span>
+              <span class="tag tag--ai">Care notes</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="healthcare">
+            <div class="arch-num mono">08</div>
+            <div class="arch-icon">💪</div>
+            <h4>Physical Therapist</h4>
+            <p>Movement assessment, hands-on treatment, recovery coaching. AI personalizes exercise programs and tracks adherence.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Hands-on treatment</span>
+              <span class="tag tag--ai">Program gen.</span>
+              <span class="tag tag--ai">Progress tracking</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="healthcare">
+            <div class="arch-num mono">09</div>
+            <div class="arch-icon">🦷</div>
+            <h4>Dental Hygienist</h4>
+            <p>Cleaning, periodontal charting, patient education. AI reads X-rays for early caries detection and schedules recalls.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Manual precision</span>
+              <span class="tag tag--ai">X-ray AI</span>
+              <span class="tag tag--ai">Recall scheduling</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="healthcare">
+            <div class="arch-num mono">10</div>
+            <div class="arch-icon">🚑</div>
+            <h4>EMT / Paramedic</h4>
+            <p>Scene triage, field intervention, patient stabilization. AI handles dispatch routing, drug dosage lookups, and handoff reports.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Scene judgment</span>
+              <span class="tag tag--ai">Route AI</span>
+              <span class="tag tag--ai">Handoff docs</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTOR: Infrastructure -->
+      <div class="sector">
+        <div class="sector-header">
+          <div class="sector-dot" style="background:#D85A30;"></div>
+          <div>
+            <h3 class="sector-title">Infrastructure & Inspection</h3>
+            <p class="sector-desc">Safety-critical roles requiring licensed judgment on-site</p>
+          </div>
+        </div>
+        <div class="archetype-grid">
+          <div class="archetype-card" data-sector="inspection">
+            <div class="arch-num mono">11</div>
+            <div class="arch-icon">🔍</div>
+            <h4>Home Inspector</h4>
+            <p>Structural, electrical, moisture assessment. AI generates the report, flags code issues, and prioritizes findings for buyers.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Physical assessment</span>
+              <span class="tag tag--ai">Report AI</span>
+              <span class="tag tag--ai">Code database</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="inspection">
+            <div class="arch-num mono">12</div>
+            <div class="arch-icon">🛢️</div>
+            <h4>Utility Inspector</h4>
+            <p>Gas, water, and power infrastructure integrity. AI processes sensor feeds and satellite imagery between physical walks.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Field verification</span>
+              <span class="tag tag--ai">Sensor AI</span>
+              <span class="tag tag--ai">Anomaly detection</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="inspection">
+            <div class="arch-num mono">13</div>
+            <div class="arch-icon">🔥</div>
+            <h4>Fire Safety Inspector</h4>
+            <p>Suppression systems, egress paths, occupancy loads. AI maps inspection history and auto-generates compliance letters.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Physical walk</span>
+              <span class="tag tag--ai">Compliance AI</span>
+              <span class="tag tag--ai">History lookup</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="inspection">
+            <div class="arch-num mono">14</div>
+            <div class="arch-icon">📐</div>
+            <h4>Land Surveyor</h4>
+            <p>Boundary determination, topographic mapping. AI processes LiDAR and drone data; human adjudicates legal boundaries.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Legal judgment</span>
+              <span class="tag tag--ai">LiDAR processing</span>
+              <span class="tag tag--ai">Deed research</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTOR: Food & Land -->
+      <div class="sector">
+        <div class="sector-header">
+          <div class="sector-dot" style="background:#BA7517;"></div>
+          <div>
+            <h3 class="sector-title">Food, Land & Living Systems</h3>
+            <p class="sector-desc">Sensory mastery, living systems, and community trust built over years</p>
+          </div>
+        </div>
+        <div class="archetype-grid">
+          <div class="archetype-card" data-sector="land">
+            <div class="arch-num mono">15</div>
+            <div class="arch-icon">👨‍🍳</div>
+            <h4>Culinary Operator</h4>
+            <p>Menu development, kitchen management, guest experience. AI handles cost engineering, inventory, and health code prep.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Sensory mastery</span>
+              <span class="tag tag--ai">Cost modeling</span>
+              <span class="tag tag--ai">Inventory AI</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="land">
+            <div class="arch-num mono">16</div>
+            <div class="arch-icon">🌳</div>
+            <h4>Arborist</h4>
+            <p>Tree health assessment, storm risk, urban canopy planning. AI identifies species and disease from photos, generates care reports.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Climb + assess</span>
+              <span class="tag tag--ai">Disease ID AI</span>
+              <span class="tag tag--ai">Risk reports</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="land">
+            <div class="arch-num mono">17</div>
+            <div class="arch-icon">🌾</div>
+            <h4>Precision Ag Operator</h4>
+            <p>Soil health, crop rotation, machinery operation. AI processes drone imagery for yield prediction and pest mapping.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Land knowledge</span>
+              <span class="tag tag--ai">Yield modeling</span>
+              <span class="tag tag--ai">Pest mapping</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="land">
+            <div class="arch-num mono">18</div>
+            <div class="arch-icon">🐛</div>
+            <h4>Pest Control Specialist</h4>
+            <p>Species identification, infestation mapping, treatment selection. AI flags chemical safety rules and treatment history per property.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Species ID</span>
+              <span class="tag tag--ai">Treatment AI</span>
+              <span class="tag tag--ai">Safety lookup</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTOR: Emerging -->
+      <div class="sector">
+        <div class="sector-header">
+          <div class="sector-dot" style="background:#D4537E;"></div>
+          <div>
+            <h3 class="sector-title">Emerging Physical-Digital Hybrids</h3>
+            <p class="sector-desc">New roles born at the exact intersection of AI capability and physical-world limits</p>
+          </div>
+        </div>
+        <div class="archetype-grid">
+          <div class="archetype-card" data-sector="hybrid">
+            <div class="arch-num mono">19</div>
+            <div class="arch-icon">📡</div>
+            <h4>Smart Home Integrator</h4>
+            <p>Physical install of AI-driven home systems — security, energy, automation. Bridges the last foot between product and homeowner trust.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Install + trust</span>
+              <span class="tag tag--ai">Config AI</span>
+              <span class="tag tag--ai">Remote monitoring</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="hybrid">
+            <div class="arch-num mono">20</div>
+            <div class="arch-icon">🚁</div>
+            <h4>Drone Ops Specialist</h4>
+            <p>Licensed flight for inspection, agriculture, construction. AI processes the imagery; human pilots and interprets edge cases.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Pilot judgment</span>
+              <span class="tag tag--ai">Image analysis</span>
+              <span class="tag tag--ai">Flight planning</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="hybrid">
+            <div class="arch-num mono">21</div>
+            <div class="arch-icon">🔋</div>
+            <h4>EV Infrastructure Tech</h4>
+            <p>EVSE installation, grid interconnection, fleet charging design. AI models load impact and generates utility applications.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Physical install</span>
+              <span class="tag tag--ai">Load modeling</span>
+              <span class="tag tag--ai">Utility docs</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+          <div class="archetype-card" data-sector="hybrid">
+            <div class="arch-num mono">22</div>
+            <div class="arch-icon">🆘</div>
+            <h4>Search & Rescue Specialist</h4>
+            <p>Life-safety operations in complex terrain. AI synthesizes sensor data and maps search grids; human makes the call.</p>
+            <div class="arch-tags">
+              <span class="tag tag--human">Terrain judgment</span>
+              <span class="tag tag--ai">Grid AI</span>
+              <span class="tag tag--ai">Sensor fusion</span>
+            </div>
+            <div class="arch-arrow">→</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-label mono">// HOW YSKAIPE WORKS</div>
+      <h2 class="section-headline">The blend is <em>the point.</em></h2>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-num mono">01</div>
+          <h3>Find your archetype</h3>
+          <p>Every profession has a tailored playbook — the exact AI tools, workflows, and leverage points for your field.</p>
+        </div>
+        <div class="how-connector">→</div>
+        <div class="how-step">
+          <div class="how-num mono">02</div>
+          <h3>Learn the stack</h3>
+          <p>Curated AI tools by sector. Not generic. Not overwhelming. Exactly what a plumber or paramedic needs — nothing else.</p>
+        </div>
+        <div class="how-connector">→</div>
+        <div class="how-step">
+          <div class="how-num mono">03</div>
+          <h3>Deploy & multiply</h3>
+          <p>Implement in your actual workflow. Earn more. Serve more. Build the practice that AI-only competitors can never touch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN CTA -->
+  <section class="join" id="join">
+    <div class="join-noise"></div>
+    <div class="container join-inner">
+      <div class="join-tag mono">// JOIN THE HUB</div>
+      <h2 class="join-headline">
+        You show up.<br/>
+        <em>We make it count.</em>
+      </h2>
+      <p class="join-sub">
+        Get early access to archetype playbooks, AI tool guides, and a community of skilled professionals
+        building the most defensible careers in the AI era.
+      </p>
+      <form class="join-form" id="joinForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your name" required autocomplete="off" />
+          <input type="email" name="email" placeholder="Work email" required autocomplete="off" />
+          <select name="archetype">
+            <option value="" disabled selected>Your trade / field</option>
+            <option>Plumbing</option>
+            <option>Electrical</option>
+            <option>HVAC</option>
+            <option>Construction / GC</option>
+            <option>Roofing</option>
+            <option>Healthcare</option>
+            <option>Inspection</option>
+            <option>Agriculture</option>
+            <option>Food & Culinary</option>
+            <option>Drone Operations</option>
+            <option>EV / Smart Home</option>
+            <option>Search & Rescue</option>
+            <option>Other skilled trade</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary btn--large">
+          Claim my archetype playbook
+        </button>
+      </form>
+      <div class="join-success" id="joinSuccess">
+        <span class="success-icon">✦</span>
+        <strong>You're in.</strong> We'll be in touch with your archetype playbook soon.
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">YSK<span>AIPE</span></div>
+      <div class="footer-tagline mono">Human hands. AI power. The moat holds.</div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="mailto:hello@yskaipe.com">Contact</a>
+      </div>
+      <div class="footer-copy mono">© 2025 Yskaipe. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+/* ==========================================
+   YSKAIPE.COM — Main JS
+   ========================================== */
+
+// ── NAV scroll effect ──────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Mobile menu ────────────────────────────
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+
+burger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+  const spans = burger.querySelectorAll('span');
+  if (menuOpen) {
+    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+});
+
+mobileMenu.querySelectorAll('.mob-link').forEach(link => {
+  link.addEventListener('click', () => {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+    const spans = burger.querySelectorAll('span');
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  });
+});
+
+// ── Intersection Observer — reveal on scroll ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Moat cards staggered reveal ────────────
+const moatObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay || 0);
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, delay);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.moat-card').forEach(el => moatObserver.observe(el));
+
+// ── Archetype card click (expandable detail) ──
+document.querySelectorAll('.archetype-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const name = card.querySelector('h4').textContent;
+    const desc = card.querySelector('p').textContent;
+    const tags = [...card.querySelectorAll('.tag')].map(t => t.textContent);
+    showModal(name, desc, tags);
+  });
+});
+
+// ── Modal ──────────────────────────────────
+function showModal(name, desc, tags) {
+  // Remove existing modal
+  const existing = document.getElementById('archModal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'archModal';
+  modal.style.cssText = `
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.75);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.25s ease;
+  `;
+
+  const humanTags = tags.filter((_, i) => i === 0);
+  const aiTags = tags.slice(1);
+
+  modal.innerHTML = `
+    <style>
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+    <div style="
+      background: #111;
+      border: 1px solid rgba(245,242,237,0.12);
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1);
+    ">
+      <button onclick="document.getElementById('archModal').remove()" style="
+        position: absolute; top: 1.25rem; right: 1.25rem;
+        background: rgba(245,242,237,0.08);
+        border: 1px solid rgba(245,242,237,0.12);
+        border-radius: 50%;
+        width: 32px; height: 32px;
+        color: rgba(245,242,237,0.6);
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.2s;
+      " onmouseover="this.style.background='rgba(245,242,237,0.14)'" onmouseout="this.style.background='rgba(245,242,237,0.08)'">✕</button>
+
+      <div style="font-size:0.65rem; font-family:'IBM Plex Mono',monospace; color:rgba(245,242,237,0.3); letter-spacing:0.12em; margin-bottom:1rem; text-transform:uppercase;">Archetype Profile</div>
+
+      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:0.04em; color:#f5f2ed; margin-bottom:1rem; line-height:1;">${name}</h2>
+
+      <p style="font-size:0.9rem; line-height:1.7; color:rgba(245,242,237,0.6); margin-bottom:2rem;">${desc}</p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem;">
+        <div style="padding:1rem; background:rgba(29,158,117,0.08); border:1px solid rgba(29,158,117,0.2); border-radius:8px;">
+          <div style="font-size:0.65rem; font-family:'IBM Plex Mono',monospace; color:#5dcaa5; letter-spacing:0.1em; margin-bottom:0.5rem;">HUMAN CORE</div>
+          ${humanTags.map(t => `<div style="font-size:0.8rem; color:rgba(245,242,237,0.75); padding:0.2rem 0;">${t}</div>`).join('')}
+        </div>
+        <div style="padding:1rem; background:rgba(127,119,221,0.08); border:1px solid rgba(127,119,221,0.2); border-radius:8px;">
+          <div style="font-size:0.65rem; font-family:'IBM Plex Mono',monospace; color:#afa9ec; letter-spacing:0.1em; margin-bottom:0.5rem;">AI AUGMENTATION</div>
+          ${aiTags.map(t => `<div style="font-size:0.8rem; color:rgba(245,242,237,0.75); padding:0.2rem 0;">${t}</div>`).join('')}
+        </div>
+      </div>
+
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <a href="#join" onclick="document.getElementById('archModal').remove()" style="
+          display:inline-flex; align-items:center; justify-content:center;
+          padding:0.8rem 1.5rem;
+          background:#e8593c; color:#f5f2ed;
+          border-radius:4px; text-decoration:none;
+          font-size:0.85rem; font-weight:600;
+          transition:opacity 0.2s;
+        " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          Get the playbook →
+        </a>
+        <button onclick="document.getElementById('archModal').remove()" style="
+          padding:0.8rem 1.5rem;
+          background:transparent; color:rgba(245,242,237,0.5);
+          border:1px solid rgba(245,242,237,0.15);
+          border-radius:4px; cursor:pointer;
+          font-size:0.85rem; font-family:'Instrument Sans',sans-serif;
+          transition:all 0.2s;
+        " onmouseover="this.style.borderColor='rgba(245,242,237,0.4)'; this.style.color='rgba(245,242,237,0.85)'" onmouseout="this.style.borderColor='rgba(245,242,237,0.15)'; this.style.color='rgba(245,242,237,0.5)'">
+          Back to all archetypes
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Close on backdrop click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.remove();
+  });
+
+  // Close on Escape
+  const esc = (e) => {
+    if (e.key === 'Escape') {
+      modal.remove();
+      document.removeEventListener('keydown', esc);
+    }
+  };
+  document.addEventListener('keydown', esc);
+}
+
+// ── Add reveal class to sections ──────────
+document.querySelectorAll('.sector, .how-step, .section-headline, .section-sub, .join-headline, .join-sub, .join-form').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+
+// ── Form submission ────────────────────────
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('joinForm');
+  const success = document.getElementById('joinSuccess');
+  form.style.opacity = '0';
+  form.style.transform = 'translateY(-10px)';
+  form.style.transition = 'all 0.3s ease';
+  setTimeout(() => {
+    form.style.display = 'none';
+    success.classList.add('visible');
+  }, 300);
+}
+
+// ── Smooth number counter for stats ────────
+function animateCounters() {
+  const stats = document.querySelectorAll('.stat-num');
+  stats.forEach(stat => {
+    stat.style.opacity = '0';
+    stat.style.transform = 'translateY(10px)';
+    stat.style.transition = 'all 0.5s ease';
+  });
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-num').forEach((el, i) => {
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, i * 100);
+        });
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) statsObserver.observe(heroStats);
+}
+
+animateCounters();
+
+  </script>
+</body>
+</html>
