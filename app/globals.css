@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-bebas: 'Bebas Neue';
+  --font-lora: 'Lora';
+  --font-jetbrains: 'JetBrains Mono';
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lora', serif;
+  background-color: #f4f0e4;
+  color: #0d0d0d;
+  overflow-x: hidden;
+}
+
+/* Ticker animation */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: ticker 38s linear infinite;
+}
+
+/* Maze card hover */
+.maze-card {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Fade in on load */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.7s ease forwards;
+}
+.fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.fade-up-delay-2 { animation-delay: 0.25s; opacity: 0; }
+.fade-up-delay-3 { animation-delay: 0.4s; opacity: 0; }
+
+/* Prompt bar input focus */
+.prompt-input:focus {
+  outline: none;
+  border-color: #00c853;
+}
