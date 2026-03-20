@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE — AI as Leverage. Life as the Reward.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0c09;
+  --bg2:#131210;
+  --bg3:#1a1916;
+  --off:#f0ece0;
+  --warm:#b5af9e;
+  --muted:#6b6660;
+  --faint:#222018;
+  --border:rgba(240,236,224,0.08);
+  --border2:rgba(240,236,224,0.18);
+  --gold:#c4a44a;
+  --gold-l:#d9bc6e;
+  --gold-dim:rgba(196,164,74,0.12);
+  --gold-border:rgba(196,164,74,0.2);
+  --gold-border2:rgba(196,164,74,0.45);
+  --green:#5a8a4a;
+  --green-dim:rgba(90,138,74,0.1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--off);overflow-x:hidden;line-height:1.6;cursor:default}
+
+/* grain */
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.032;pointer-events:none;z-index:9000}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:22px 52px;transition:all .5s;border-bottom:1px solid transparent}
+nav.s{background:rgba(13,12,9,.95);border-color:var(--border);backdrop-filter:blur(20px)}
+.logo{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.04em;color:var(--off);text-decoration:none;font-style:italic}
+.logo span{color:var(--gold);font-style:normal}
+.nav-r{display:flex;align-items:center;gap:36px}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--gold);padding:9px 22px;text-decoration:none;border:1px solid var(--gold-border2);transition:all .25s}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:0 52px;position:relative;overflow:hidden}
+.hero-center{display:flex;flex-direction:column;justify-content:center;padding-top:100px;padding-bottom:40px}
+.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:clamp(120px,20vw,280px);font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(196,164,74,0.06);white-space:nowrap;pointer-events:none;letter-spacing:-.02em;user-select:none}
+.hero-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
+.hero-h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(52px,9vw,124px);line-height:.9;letter-spacing:-.02em;margin-bottom:0;position:relative}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-h1 .line2{display:block;font-style:italic;color:var(--warm);font-size:clamp(40px,6.5vw,90px)}
+.hero-h1 .line3{display:block;font-size:clamp(24px,3.5vw,50px);font-weight:700;color:var(--muted);letter-spacing:.01em;margin-top:12px;font-style:normal;font-family:'DM Sans',sans-serif;font-weight:300}
+.hero-foot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;padding:40px 0;border-top:1px solid var(--border)}
+.hero-foot-block{display:flex;flex-direction:column;gap:8px}
+.hfb-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.hfb-val{font-size:14px;color:var(--warm);font-weight:300;line-height:1.6}
+.hfb-val strong{color:var(--off);font-weight:500}
+.hero-ctas{display:flex;gap:12px;align-items:center;justify-content:flex-end}
+.btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:12px 26px;text-decoration:none;transition:all .25s;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px}
+.btn-gold{background:var(--gold);color:var(--bg)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{background:transparent;color:var(--warm);border:1px solid var(--border2)}
+.btn-ghost:hover{color:var(--off);border-color:var(--gold-border2)}
+
+/* ── TICKER ── */
+.ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0;background:rgba(196,164,74,.025)}
+.ticker-t{display:flex;animation:tick 38s linear infinite;white-space:nowrap}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.t-item{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 40px;display:inline-flex;align-items:center;gap:12px}
+.t-item em{color:var(--gold);font-style:normal}
+
+/* ── SHARED SECTION ── */
+.wrap{max-width:1340px;margin:0 auto;padding:0 52px}
+.section{padding:108px 0}
+.slabel{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.slabel::before{content:'';width:16px;height:1px;background:var(--gold)}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,60px);font-weight:900;line-height:1.05;letter-spacing:-.02em}
+.stitle em{font-style:italic;color:var(--gold)}
+.sdivider{height:1px;background:var(--border);margin:0}
+
+/* ── THE THESIS ── */
+.thesis{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.thesis-text{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,36px);font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.thesis-text em{font-style:italic;color:var(--gold)}
+.thesis-right{display:flex;flex-direction:column;gap:28px}
+.thesis-block{padding:24px 0;border-top:1px solid var(--border)}
+.thesis-block:last-child{border-bottom:1px solid var(--border)}
+.tb-head{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.tb-body{font-size:14px;color:var(--warm);line-height:1.75;font-weight:300}
+.tb-body strong{color:var(--off);font-weight:500}
+
+/* ── LEVERAGE FRAMEWORK ── */
+.framework-wrap{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.framework{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.fw-card{background:var(--bg2);padding:44px 36px;position:relative;overflow:hidden}
+.fw-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.fw-card:hover::before{transform:scaleX(1)}
+.fw-num{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:rgba(196,164,74,.1);line-height:1;margin-bottom:20px;letter-spacing:-.03em}
+.fw-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:10px;line-height:1.2}
+.fw-title em{font-style:italic;color:var(--gold)}
+.fw-body{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:20px}
+.fw-body strong{color:var(--warm);font-weight:400}
+.fw-examples{display:flex;flex-direction:column;gap:6px}
+.fw-ex{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--muted);display:flex;align-items:flex-start;gap:8px}
+.fw-ex::before{content:'→';color:var(--gold);flex-shrink:0}
+
+/* ── PRIORITIZATION ENGINE ── */
+.engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:56px}
+.engine-card{background:var(--bg);padding:40px;display:flex;flex-direction:column;gap:16px}
+.engine-card.accent{background:var(--bg2)}
+.ec-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border:1px solid var(--gold-border2);color:var(--gold);display:inline-block;margin-bottom:4px}
+.ec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1.2}
+.ec-title em{font-style:italic;color:var(--gold)}
+.ec-body{font-size:13px;color:var(--warm);line-height:1.75;font-weight:300;flex:1}
+.ec-body strong{color:var(--off);font-weight:500}
+.ec-items{display:flex;flex-direction:column;gap:8px}
+.ec-item{font-size:13px;color:var(--warm);display:flex;gap:10px;font-weight:300;line-height:1.5}
+.ec-item span:first-child{color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;flex-shrink:0;margin-top:2px}
+
+/* ── AI NAVIGATOR TOOL ── */
+.nav-tool{border:1px solid var(--border);margin-top:56px}
+.nav-tool-header{display:grid;grid-template-columns:1fr auto;align-items:center;padding:20px 28px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.nth-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.nth-status{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.nav-tool-body{display:grid;grid-template-columns:1fr 1fr}
+.nav-intake{padding:36px 32px;border-right:1px solid var(--border)}
+.nav-output{padding:36px 32px;background:var(--bg2)}
+
+.focus-area{margin-bottom:20px}
+.focus-area label{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.focus-area input,
+.focus-area select,
+.focus-area textarea{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--off);font-family:'DM Sans',sans-serif;font-size:13px;padding:10px 14px;outline:none;transition:border-color .2s;resize:none;font-weight:300;line-height:1.5}
+.focus-area input:focus,
+.focus-area select:focus,
+.focus-area textarea:focus{border-color:var(--gold-border2)}
+.focus-area select option{background:var(--bg3)}
+.focus-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.run-btn{width:100%;background:var(--gold);color:var(--bg);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:13px;border:none;cursor:pointer;transition:background .25s;margin-top:8px}
+.run-btn:hover{background:var(--gold-l)}
+
+.out-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+.out-body{font-size:13px;color:var(--warm);line-height:1.8;font-weight:300;min-height:260px}
+.out-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:260px;gap:10px;text-align:center}
+.out-empty-glyph{font-family:'Playfair Display',serif;font-size:40px;color:rgba(196,164,74,.2);font-style:italic}
+.out-empty-text{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.out-actions{display:flex;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.out-act{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--border2);color:var(--muted);background:none;cursor:pointer;transition:all .2s}
+.out-act:hover{color:var(--gold);border-color:var(--gold-border2)}
+.out-act.prim{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.out-act.prim:hover{background:var(--gold-l)}
+
+/* paywall */
+.paywall{position:relative}
+.pw-blur{filter:blur(6px);pointer-events:none;user-select:none;opacity:.4}
+.pw-gate{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px}
+.pw-icon{font-family:'Playfair Display',serif;font-size:28px;font-style:italic;color:var(--gold)}
+.pw-text{font-size:13px;color:var(--warm);line-height:1.7;font-weight:300;max-width:260px}
+.pw-cta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--bg);padding:11px 24px;cursor:pointer;border:none;transition:background .2s;margin-top:4px}
+.pw-cta:hover{background:var(--gold-l)}
+
+/* dots anim */
+@keyframes d{0%{content:'.'}33%{content:'..'}66%{content:'...'}}
+.dots::after{content:'.';animation:d 1.4s infinite}
+
+/* ── LIFE PRINCIPLES ── */
+.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:56px}
+.principle{background:var(--bg);padding:36px 28px;display:flex;flex-direction:column;gap:12px;transition:background .3s}
+.principle:hover{background:var(--bg2)}
+.p-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;font-style:italic;color:rgba(196,164,74,.15);line-height:1}
+.p-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;line-height:1.3}
+.p-title em{font-style:italic;color:var(--gold)}
+.p-body{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300}
+
+/* ── WHAT FITS YOU ── */
+.fit-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:56px}
+.fit-intro-body{font-size:15px;color:var(--warm);line-height:1.8;font-weight:300}
+.fit-intro-body strong{color:var(--off);font-weight:500}
+.domains{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)}
+.domain{background:var(--bg);padding:36px 32px;position:relative;overflow:hidden;cursor:pointer;transition:background .3s;text-decoration:none;color:inherit;display:block}
+.domain:hover{background:var(--bg2)}
+.domain-accent{position:absolute;top:0;left:0;right:0;height:2px}
+.domain.btc .domain-accent{background:linear-gradient(90deg,#f7931a,transparent)}
+.domain.land .domain-accent{background:linear-gradient(90deg,#5a8a4a,transparent)}
+.domain.garden .domain-accent{background:linear-gradient(90deg,#7ab050,transparent)}
+.domain.ai .domain-accent{background:linear-gradient(90deg,var(--gold),transparent)}
+.domain-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.domain-glyph{font-size:28px;line-height:1}
+.domain-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:3px 10px}
+.domain-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.2}
+.domain-title em{font-style:italic;color:var(--gold)}
+.domain-body{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:20px}
+.domain-leverage{display:flex;flex-direction:column;gap:6px}
+.dl-item{font-size:12px;color:var(--warm);display:flex;gap:8px;font-weight:300}
+.dl-item span:first-child{color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;flex-shrink:0}
+.domain-exit{padding-top:16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;margin-top:4px}
+.de-l{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.de-v{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:56px}
+.price-card{background:var(--bg);padding:40px 32px;display:flex;flex-direction:column}
+.price-card.feat{background:var(--bg2);outline:1px solid var(--gold-border2)}
+.p-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-border2);padding:3px 10px;display:inline-block;margin-bottom:18px}
+.p-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:6px}
+.p-sub{font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;margin-bottom:24px}
+.p-price{margin-bottom:24px}
+.p-n{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;line-height:1;color:var(--off)}
+.p-per{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-left:6px}
+.p-div{height:1px;background:var(--border);margin-bottom:22px}
+.p-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;flex:1}
+.p-features li{font-size:13px;color:var(--warm);display:flex;align-items:flex-start;gap:8px;font-weight:300}
+.p-features li::before{content:'→';font-family:'DM Mono',monospace;color:var(--gold);flex-shrink:0}
+.p-features li.off{color:var(--muted)}
+.p-features li.off::before{content:'–';color:var(--faint)}
+.p-btn{display:block;text-align:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:12px;border:1px solid var(--border2);color:var(--warm);text-decoration:none;cursor:pointer;background:none;transition:all .25s}
+.p-btn:hover{color:var(--gold);border-color:var(--gold-border2)}
+.price-card.feat .p-btn{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.price-card.feat .p-btn:hover{background:var(--gold-l)}
+
+/* ── MANIFESTO FULL ── */
+.manifesto-full{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mf-inner{max-width:1340px;margin:0 auto;padding:100px 52px;display:grid;grid-template-columns:240px 1fr;gap:100px}
+.mf-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding-top:8px}
+.mf-body{font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,40px);font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.mf-body em{font-style:italic;color:var(--gold)}
+.mf-body p+p{margin-top:.55em}
+
+/* ── FOOTER ── */
+footer{max-width:1340px;margin:0 auto;padding:72px 52px 36px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px}
+.f-brand .logo{display:block;margin-bottom:14px;font-size:22px}
+.f-tagline{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;max-width:240px;margin-bottom:20px}
+.f-col h4{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.f-col a{font-size:13px;color:var(--warm);text-decoration:none;transition:color .2s;font-weight:300}
+.f-col a:hover{color:var(--gold)}
+.f-bot{border-top:1px solid var(--border);padding:20px 52px;max-width:1340px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.f-bot span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.09s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.27s}
+
+@media(max-width:960px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  .hero{padding:0 24px}
+  .hero-bg-text{display:none}
+  .wrap{padding:0 24px}
+  .thesis,.fit-intro,.mf-inner{grid-template-columns:1fr;gap:32px}
+  .framework{grid-template-columns:1fr}
+  .engine-grid,.domains{grid-template-columns:1fr}
+  .nav-tool-body{grid-template-columns:1fr}
+  .nav-intake{border-right:none;border-bottom:1px solid var(--border)}
+  .principles{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .hero-foot{grid-template-columns:1fr;gap:20px}
+  .hero-ctas{justify-content:flex-start}
+  footer{grid-template-columns:1fr 1fr;gap:40px;padding:48px 24px 24px}
+  .f-bot{padding:16px 24px;flex-direction:column;gap:6px;text-align:center}
+  .mf-inner{padding:72px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="#"><span>Y</span><em>SKAIPE</em></a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="#leverage">Leverage</a></li>
+      <li><a href="#domains">Your Fit</a></li>
+      <li><a href="#navigator">Navigator</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a class="nav-cta" href="#navigator">Get Your Map →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text">ESCAPE</div>
+  <div class="hero-center">
+    <div class="hero-tag">AI as leverage — life as the reward</div>
+    <h1 class="hero-h1">
+      USE AI TO<br>
+      <em class="line2">do less,</em>
+      <span class="line3">better. on purpose. with presence.</span>
+    </h1>
+  </div>
+  <div class="hero-foot">
+    <div class="hero-foot-block">
+      <div class="hfb-label">The Thesis</div>
+      <div class="hfb-val"><strong>AI isn't the destination.</strong> It's the lever that clears the path so you can actually live the journey — not just optimize it.</div>
+    </div>
+    <div class="hero-foot-block">
+      <div class="hfb-label">The Method</div>
+      <div class="hfb-val"><strong>Ruthless prioritization.</strong> Run hard at the things that fit you best. Let AI handle the rest. The goal is more life, not more output.</div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#navigator" class="btn btn-gold">Find Your Leverage →</a>
+      <a href="#leverage" class="btn btn-ghost">The Framework</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-t">
+    <span class="t-item"><em>Leverage</em> — do in 2 hours what used to take 20</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Prioritize</em> — only do what's yours to do</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Live</em> — the journey is the reward, not the exit</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Bitcoin</em> — sovereign money for the long walk</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Land</em> — grow what you eat, own what you grow</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>AI</em> — build what matters, automate what doesn't</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Leverage</em> — do in 2 hours what used to take 20</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Prioritize</em> — only do what's yours to do</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Live</em> — the journey is the reward, not the exit</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Bitcoin</em> — sovereign money for the long walk</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>Land</em> — grow what you eat, own what you grow</span>
+    <span class="t-item">✦</span>
+    <span class="t-item"><em>AI</em> — build what matters, automate what doesn't</span>
+    <span class="t-item">✦</span>
+  </div>
+</div>
+
+<!-- THESIS -->
+<div class="sdivider"></div>
+<div class="wrap">
+  <div class="section">
+    <div class="thesis rv">
+      <div>
+        <div class="slabel">The Thesis</div>
+        <div class="thesis-text">
+          Most people are using AI to <em>produce more.</em><br><br>
+          The real play is using AI to <em>live more.</em>
+        </div>
+      </div>
+      <div class="thesis-right">
+        <div class="thesis-block rv d1">
+          <div class="tb-head">The Problem with "More Output"</div>
+          <div class="tb-body">Optimizing for productivity without a north star just makes you faster at the wrong things. You end up with <strong>a very efficient life that isn't yours.</strong></div>
+        </div>
+        <div class="thesis-block rv d2">
+          <div class="tb-head">What Leverage Actually Means</div>
+          <div class="tb-body">Leverage means doing in 2 hours what used to take 20 — then using those 18 hours for what <strong>only you can do, and what only you want to live.</strong></div>
+        </div>
+        <div class="thesis-block rv d3">
+          <div class="tb-head">Ruthless Prioritization Is Love</div>
+          <div class="tb-body">Saying no to most things is an act of devotion to the few things that are truly yours. <strong>AI helps you see the list clearly. You still choose what's on it.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sdivider"></div>
+
+<!-- LEVERAGE FRAMEWORK -->
+<div class="framework-wrap" id="leverage">
+  <div class="wrap">
+    <div class="section">
+      <div class="rv">
+        <div class="slabel">The Framework</div>
+        <h2 class="stitle">Three Moves.<br><em>Infinite Leverage.</em></h2>
+      </div>
+      <div class="framework" style="margin-top:52px">
+        <div class="fw-card rv">
+          <div class="fw-num">01</div>
+          <div class="fw-title"><em>Identify</em> What's Yours</div>
+          <div class="fw-body">Before you optimize anything, get ruthlessly clear on what actually belongs to you — what fits your wiring, your values, your season of life. <strong>AI can't tell you this. But it can help you see it.</strong></div>
+          <div class="fw-examples">
+            <div class="fw-ex">Use AI to audit your week — what drained you, what lit you up</div>
+            <div class="fw-ex">Map your actual skills vs. the work you're doing</div>
+            <div class="fw-ex">Surface the 20% that produces 80% of your meaning</div>
+          </div>
+        </div>
+        <div class="fw-card rv d1">
+          <div class="fw-num">02</div>
+          <div class="fw-title"><em>Leverage</em> Everything Else</div>
+          <div class="fw-body">Once you know what's yours, everything else is either delegated, automated, or deleted. <strong>AI handles the research, the drafts, the systems, the grunt work — so you don't have to.</strong></div>
+          <div class="fw-examples">
+            <div class="fw-ex">AI writes the first draft. You make it true.</div>
+            <div class="fw-ex">AI plans the farm. You decide what to grow.</div>
+            <div class="fw-ex">AI runs the agent. You set the direction.</div>
+          </div>
+        </div>
+        <div class="fw-card rv d2">
+          <div class="fw-num">03</div>
+          <div class="fw-title"><em>Live</em> the Journey</div>
+          <div class="fw-body">The point of all this is not the exit. It's the walk. <strong>More presence at the table. More mornings on the land. More time building what matters — not maintaining what doesn't.</strong></div>
+          <div class="fw-examples">
+            <div class="fw-ex">Systems that run so you can be present</div>
+            <div class="fw-ex">Money that's sovereign so you stop worrying</div>
+            <div class="fw-ex">A life calibrated to you, not to a template</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIORITIZATION ENGINE -->
+<div class="wrap">
+  <div class="section">
+    <div class="rv">
+      <div class="slabel">Ruthless Prioritization</div>
+      <h2 class="stitle">The AI Prioritization<br><em>Engine</em></h2>
+    </div>
+    <div class="engine-grid">
+      <div class="engine-card accent rv">
+        <span class="ec-tag">The Core Question</span>
+        <div class="ec-title">What would you do<br>if you had <em>18 more hours</em><br>every week?</div>
+        <div class="ec-body">That's what leverage creates. Not more tasks — more <strong>life hours.</strong> The question is whether you know what to do with them. Ruthless prioritization answers that before you start.</div>
+      </div>
+      <div class="engine-card rv d1">
+        <span class="ec-tag">The Four Filters</span>
+        <div class="ec-title">Only what passes<br>all <em>four</em> stays.</div>
+        <div class="ec-items">
+          <div class="ec-item"><span>01</span><span><strong>Only you</strong> — Is this something only you can do, or can AI/someone else handle it?</span></div>
+          <div class="ec-item"><span>02</span><span><strong>Fits you</strong> — Does this match your actual wiring, not who you think you should be?</span></div>
+          <div class="ec-item"><span>03</span><span><strong>Season</strong> — Is this right for where you are in life right now, not where you'll be in ten years?</span></div>
+          <div class="ec-item"><span>04</span><span><strong>Journey</strong> — Is the process itself something you want to live, or are you only chasing the outcome?</span></div>
+        </div>
+      </div>
+      <div class="engine-card rv d2">
+        <span class="ec-tag">What AI Does</span>
+        <div class="ec-title">Handles the <em>99%</em><br>so you can live<br>the 1%.</div>
+        <div class="ec-items">
+          <div class="ec-item"><span>→</span><span>Research, planning, drafting, systems — AI carries these</span></div>
+          <div class="ec-item"><span>→</span><span>Strategy sessions that used to cost $500/hr — AI in minutes</span></div>
+          <div class="ec-item"><span>→</span><span>Repetitive decisions, maintenance tasks, status updates — automated</span></div>
+          <div class="ec-item"><span>→</span><span>What remains: the creative, the relational, the alive parts</span></div>
+        </div>
+      </div>
+      <div class="engine-card rv d3">
+        <span class="ec-tag">What Only You Do</span>
+        <div class="ec-title">The irreplaceable<br><em>1%.</em></div>
+        <div class="ec-items">
+          <div class="ec-item"><span>→</span><span>Decide what matters and why — values, direction, meaning</span></div>
+          <div class="ec-item"><span>→</span><span>Show up fully — for people, for work, for the land</span></div>
+          <div class="ec-item"><span>→</span><span>Create from your specific experience — no AI has lived your life</span></div>
+          <div class="ec-item"><span>→</span><span>Be present in the moments that make the journey worth it</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sdivider"></div>
+
+<!-- MANIFESTO -->
+<div class="manifesto-full">
+  <div class="mf-inner rv">
+    <div class="mf-label">The Philosophy</div>
+    <div class="mf-body">
+      <p>The journey is the reward.<br>Not the exit. Not the outcome.<br>Not the <em>optimized life.</em></p>
+      <p>AI is a lever, not a<em> destination.</em></p>
+      <p>Use it to clear the path.<br>Then walk the path <em>fully.</em></p>
+    </div>
+  </div>
+</div>
+<div class="sdivider"></div>
+
+<!-- WHAT FITS YOU -->
+<div class="wrap">
+  <div class="section" id="domains">
+    <div class="fit-intro rv">
+      <div>
+        <div class="slabel">What Fits You</div>
+        <h2 class="stitle">Run With the Things<br>That Are <em>Yours.</em></h2>
+      </div>
+      <div class="fit-intro-body">
+        <p>Not every domain is for everyone. These four areas attract people who want to <strong>live deliberately</strong> — building sovereign money, tending real land, growing their own food, and using AI to do meaningful work without trading their life for it.</p>
+        <p style="margin-top:14px">Each one is a genuine fit for some people and not others. <strong>Find the ones that are yours. Run hard at those. Let AI handle the rest.</strong></p>
+      </div>
+    </div>
+    <div class="domains">
+
+      <a class="domain ai" href="#navigator">
+        <div class="domain-accent"></div>
+        <div class="domain-top">
+          <span class="domain-glyph">⚡</span>
+          <span class="domain-tag">Leverage Domain</span>
+        </div>
+        <div class="domain-title">AI as <em>Leverage</em></div>
+        <div class="domain-body">For builders who want to do meaningful work without building a company of 40. AI agents, multi-agent pipelines, solo systems that run — so you build what matters and the machine handles what doesn't.</div>
+        <div class="domain-leverage">
+          <div class="dl-item"><span>→</span><span>Cut your workweek in half with the right agent stack</span></div>
+          <div class="dl-item"><span>→</span><span>Build revenue-generating systems that run while you sleep</span></div>
+          <div class="dl-item"><span>→</span><span>Know which 3 AI tools actually matter for your situation</span></div>
+        </div>
+        <div class="domain-exit">
+          <span class="de-l">The fit:</span>
+          <span class="de-v">Solo empire. Presence over productivity. →</span>
+        </div>
+      </a>
+
+      <a class="domain btc" href="#navigator">
+        <div class="domain-accent"></div>
+        <div class="domain-top">
+          <span class="domain-glyph">₿</span>
+          <span class="domain-tag">Sovereign Money</span>
+        </div>
+        <div class="domain-title">Bitcoin as <em>Foundation</em></div>
+        <div class="domain-body">For people who want to stop worrying about money so they can start living. Sovereign money isn't about getting rich — it's about removing the mental overhead of a system that doesn't work for you.</div>
+        <div class="domain-leverage">
+          <div class="dl-item"><span>→</span><span>AI maps your custody setup, DeFi path, volatility playbook</span></div>
+          <div class="dl-item"><span>→</span><span>Stack without panic. Yield without custodial risk.</span></div>
+          <div class="dl-item"><span>→</span><span>Money that's yours — so your mind is free for the journey</span></div>
+        </div>
+        <div class="domain-exit">
+          <span class="de-l">The fit:</span>
+          <span class="de-v">Financial peace. Long time horizon. →</span>
+        </div>
+      </a>
+
+      <a class="domain land" href="#navigator">
+        <div class="domain-accent"></div>
+        <div class="domain-top">
+          <span class="domain-glyph">🌲</span>
+          <span class="domain-tag">Land & Sovereignty</span>
+        </div>
+        <div class="domain-title">Land as <em>Anchor</em></div>
+        <div class="domain-body">For people who want their feet on something real. Not homesteading as escapism — homesteading as a chosen relationship with land, seasons, and real work that produces real things.</div>
+        <div class="domain-leverage">
+          <div class="dl-item"><span>→</span><span>AI plans your land's seasons, income streams, and infrastructure</span></div>
+          <div class="dl-item"><span>→</span><span>Christmas trees, berries, agritourism — map the right fit</span></div>
+          <div class="dl-item"><span>→</span><span>Cash flow from land without losing the reason you bought it</span></div>
+        </div>
+        <div class="domain-exit">
+          <span class="de-l">The fit:</span>
+          <span class="de-v">Soil under your feet. Seasons as rhythm. →</span>
+        </div>
+      </a>
+
+      <a class="domain garden" href="#navigator">
+        <div class="domain-accent"></div>
+        <div class="domain-top">
+          <span class="domain-glyph">🌿</span>
+          <span class="domain-tag">Food & Presence</span>
+        </div>
+        <div class="domain-title">The Garden as <em>Practice</em></div>
+        <div class="domain-body">Growing food is one of the few activities left that demands full presence. You can't think your way to a harvest. AI handles the plan so you can show up for the actual growing.</div>
+        <div class="domain-leverage">
+          <div class="dl-item"><span>→</span><span>AI generates your planting calendar — you do the planting</span></div>
+          <div class="dl-item"><span>→</span><span>Soil diagnostics, succession planting, harvest windows</span></div>
+          <div class="dl-item"><span>→</span><span>Less thinking about the garden. More being in it.</span></div>
+        </div>
+        <div class="domain-exit">
+          <span class="de-l">The fit:</span>
+          <span class="de-v">Hands in soil. Table full. Fully present. →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+<div class="sdivider"></div>
+
+<!-- AI NAVIGATOR TOOL -->
+<div style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="wrap">
+  <div class="section" id="navigator">
+    <div class="rv">
+      <div class="slabel">The Navigator</div>
+      <h2 class="stitle">Find Your Leverage.<br><em>Right Now.</em></h2>
+      <p style="font-size:14px;color:var(--muted);max-width:500px;margin-top:16px;font-weight:300;line-height:1.75">Tell the navigator where you are. Get a specific leverage plan — not generic advice, but a map built around your actual situation, wiring, and season.</p>
+    </div>
+
+    <div class="nav-tool rv" style="margin-top:48px">
+      <div class="nav-tool-header">
+        <span class="nth-label">YSKAIPE Navigator — AI Leverage Mapping</span>
+        <span class="nth-status"><span class="status-dot"></span> Live</span>
+      </div>
+      <div class="nav-tool-body">
+        <div class="nav-intake">
+          <div class="focus-row">
+            <div class="focus-area">
+              <label>Your primary domain right now</label>
+              <select id="n-domain">
+                <option value="">Select the one that fits…</option>
+                <option value="AI building and systems">⚡ AI Building</option>
+                <option value="Bitcoin and sovereign money">₿ Bitcoin / Sovereign Money</option>
+                <option value="land and homesteading">🌲 Land & Homesteading</option>
+                <option value="gardening and growing food">🌿 Gardening & Food</option>
+                <option value="all of these — I'm across multiple">All of the above</option>
+              </select>
+            </div>
+            <div class="focus-area">
+              <label>Season of life</label>
+              <select id="n-season">
+                <option value="">Select…</option>
+                <option value="building — early stage, figuring it out">Building (early)</option>
+                <option value="growing — I have traction, want to go deeper">Growing (have traction)</option>
+                <option value="established — want to do less but better">Established (simplify)</option>
+                <option value="transitioning — major life change underway">Transitioning</option>
+              </select>
+            </div>
+          </div>
+          <div class="focus-area">
+            <label>What's eating your time that shouldn't be?</label>
+            <textarea id="n-drain" rows="2" placeholder="e.g. research that takes all day, repetitive tasks, planning I keep putting off…"></textarea>
+          </div>
+          <div class="focus-area">
+            <label>What's the thing only you can do — your actual gift?</label>
+            <textarea id="n-gift" rows="2" placeholder="e.g. I'm great at relationships, creative thinking, knowing what to plant, talking to people…"></textarea>
+          </div>
+          <div class="focus-area">
+            <label>What does the journey looking good actually feel like?</label>
+            <textarea id="n-journey" rows="2" placeholder="e.g. morning on the land, building something that matters, present with my family, creative work…"></textarea>
+          </div>
+          <button class="run-btn" onclick="runNavigator()">Map My Leverage →</button>
+        </div>
+        <div class="nav-output" id="nav-out">
+          <div class="out-label">
+            <span>Your Leverage Map</span>
+            <span id="out-badge" style="color:var(--gold);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;display:none">⚡ Generated</span>
+          </div>
+          <div class="out-body" id="out-body">
+            <div class="out-empty">
+              <div class="out-empty-glyph">→</div>
+              <div class="out-empty-text">Fill in the navigator to generate your leverage map</div>
+            </div>
+          </div>
+          <div class="out-actions" id="out-acts" style="display:none">
+            <button class="out-act prim" onclick="exportMap()">Export PDF ↓</button>
+            <button class="out-act" onclick="copyMap()">Copy ↗</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- LIFE PRINCIPLES -->
+<div class="wrap">
+  <div class="section">
+    <div class="rv">
+      <div class="slabel">The Principles</div>
+      <h2 class="stitle">How We Actually<br><em>Think About This.</em></h2>
+    </div>
+    <div class="principles">
+      <div class="principle rv">
+        <div class="p-num">I</div>
+        <div class="p-title">The journey is<br>the <em>reward</em></div>
+        <div class="p-body">Not the exit. Not the outcome. Not the "financial freedom" you're supposed to be working toward. The walk itself is the thing. AI helps you walk more of it fully present.</div>
+      </div>
+      <div class="principle rv d1">
+        <div class="p-num">II</div>
+        <div class="p-title">Only do what's<br><em>yours</em> to do</div>
+        <div class="p-body">Everything else is either given to AI, delegated, or cut. This isn't laziness — it's devotion to the things that only you can do and only you want to live.</div>
+      </div>
+      <div class="principle rv d2">
+        <div class="p-num">III</div>
+        <div class="p-title">Fit matters more<br>than <em>ambition</em></div>
+        <div class="p-body">Running hard at something that isn't yours is the most exhausting thing a person can do. Find what fits your actual wiring. Then leverage ruthlessly from there.</div>
+      </div>
+      <div class="principle rv d3">
+        <div class="p-num">IV</div>
+        <div class="p-title">Sovereignty is<br>the <em>foundation</em></div>
+        <div class="p-body">Sovereign money, sovereign land, sovereign time. Not as ideology — as the practical conditions for being able to live a life that's actually yours in the AI era.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sdivider"></div>
+
+<!-- PRICING -->
+<div class="wrap">
+  <div class="section" id="pricing">
+    <div class="rv">
+      <div class="slabel">Pricing</div>
+      <h2 class="stitle">Start Navigating.<br><em>Any Level.</em></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card rv">
+        <div class="p-name">Explorer</div>
+        <div class="p-sub">One leverage map. See if the framework fits before committing.</div>
+        <div class="p-price"><span class="p-n" style="font-size:38px">Free</span></div>
+        <div class="p-div"></div>
+        <ul class="p-features">
+          <li>One full leverage map (any domain)</li>
+          <li>The four-filter prioritization framework</li>
+          <li>Basic AI output — leverage + next moves</li>
+          <li class="off">PDF export</li>
+          <li class="off">Saved maps — living navigation</li>
+          <li class="off">Deep domain intake flows</li>
+          <li class="off">Pods access</li>
+        </ul>
+        <button class="p-btn" onclick="document.getElementById('navigator').scrollIntoView({behavior:'smooth'})">Start Free →</button>
+      </div>
+      <div class="price-card feat rv d1">
+        <span class="p-badge">Most Chosen</span>
+        <div class="p-name">Navigator</div>
+        <div class="p-sub">The full framework. All four domains. Deliverables you act on.</div>
+        <div class="p-price"><span class="p-n">$19</span><span class="p-per">/month</span></div>
+        <div class="p-div"></div>
+        <ul class="p-features">
+          <li>Unlimited leverage maps across all four domains</li>
+          <li>Full deliverable docs — export to PDF</li>
+          <li>Saved sessions — living maps that update</li>
+          <li>Deep domain intake flows per area</li>
+          <li>Priority AI responses</li>
+          <li>Quarterly leverage reviews</li>
+          <li class="off">Pods access</li>
+        </ul>
+        <button class="p-btn">Get Navigator →</button>
+      </div>
+      <div class="price-card rv d2">
+        <div class="p-name">Pod</div>
+        <div class="p-sub">Navigate alongside others. AI-facilitated. Human-accountable.</div>
+        <div class="p-price"><span class="p-n">$49</span><span class="p-per">/month</span></div>
+        <div class="p-div"></div>
+        <ul class="p-features">
+          <li>Everything in Navigator</li>
+          <li>Join a domain pod — up to 8 people</li>
+          <li>AI-facilitated group sessions</li>
+          <li>Shared accountability + shared maps</li>
+          <li>Weekly AI check-ins for the group</li>
+          <li>Pod-specific leverage planning</li>
+          <li>Early access to new domains</li>
+        </ul>
+        <button class="p-btn">Join a Pod →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid var(--border)">
+<footer>
+  <div class="f-brand">
+    <a class="logo" href="#"><span>Y</span><em>SKAIPE</em></a>
+    <p class="f-tagline">AI as leverage. Life as the reward. Ruthless prioritization so you can run hard at the things that are actually yours.</p>
+    <a class="nav-cta" href="#navigator" style="font-size:10px;display:inline-block">Get Your Map →</a>
+  </div>
+  <div class="f-col">
+    <h4>The Domains</h4>
+    <ul>
+      <li><a href="#domains">⚡ AI Building</a></li>
+      <li><a href="#domains">₿ Bitcoin</a></li>
+      <li><a href="#domains">🌲 Land</a></li>
+      <li><a href="#domains">🌿 Garden</a></li>
+    </ul>
+  </div>
+  <div class="f-col">
+    <h4>The Framework</h4>
+    <ul>
+      <li><a href="#leverage">The Three Moves</a></li>
+      <li><a href="#leverage">Four Filters</a></li>
+      <li><a href="#navigator">Navigator</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+  </div>
+  <div class="f-col">
+    <h4>Community</h4>
+    <ul>
+      <li><a href="#">Pods</a></li>
+      <li><a href="#">Stories</a></li>
+      <li><a href="#">Newsletter</a></li>
+      <li><a href="https://github.com/YSKAIPE/yskaipe-website">GitHub ↗</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="f-bot">
+  <span>© 2026 YSKAIPE.COM — AI AS LEVERAGE. LIFE AS THE REWARD.</span>
+  <span>pronounced "escape"</span>
+</div>
+</div>
+
+<script>
+// nav
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s',scrollY>60));
+
+// scroll reveal
+document.querySelectorAll('.rv').forEach(el=>new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in')}}),{threshold:.1,rootMargin:'0px 0px -24px 0px'}).observe(el));
+
+// navigator
+const _used = {v:false};
+let _lastText = '';
+
+async function runNavigator(){
+  const domain = document.getElementById('n-domain').value;
+  const season = document.getElementById('n-season').value;
+  const drain  = document.getElementById('n-drain').value.trim();
+  const gift   = document.getElementById('n-gift').value.trim();
+  const journey= document.getElementById('n-journey').value.trim();
+
+  const body = document.getElementById('out-body');
+  const acts  = document.getElementById('out-acts');
+  const badge = document.getElementById('out-badge');
+
+  if(_used.v && !window.isPro){
+    body.innerHTML=`
+      <div class="paywall">
+        <div class="pw-blur">
+          <p><strong>LEVERAGE ASSESSMENT</strong><br>Based on what you've shared, your highest-leverage move is clear. The 20% you should be running hard at fits your wiring precisely — and there's at least 60% of your current week that AI can carry.</p>
+          <p style="margin-top:12px"><strong>YOUR PRIORITIZATION LIST</strong><br>What stays (only yours): Creative direction, relationships, the physical work on the land...</p>
+          <p style="margin-top:12px"><strong>THE LEVERAGE STACK</strong><br>These three tools, in this order, will give you back 15 hours per week...</p>
+        </div>
+        <div class="pw-gate">
+          <div class="pw-icon">→</div>
+          <div class="pw-text">You've used your free map.<br>Get Navigator to unlock unlimited maps,<br>full deliverables, and saved sessions.</div>
+          <button class="pw-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get Navigator — $19/mo →</button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  body.innerHTML=`<span style="color:var(--muted);font-style:italic;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em">Mapping your leverage<span class="dots"></span></span>`;
+  acts.style.display='none';
+  badge.style.display='none';
+
+  const prompt = `You are the YSKAIPE AI navigator. Your philosophy: AI is a lever, not a destination. The journey is the reward. Help this person use AI for ruthless prioritization so they can run hard at what fits them best and actually live the journey.
+
+PERSON'S SITUATION:
+- Primary domain: ${domain||'not specified'}
+- Season of life: ${season||'not specified'}
+- What's eating their time that shouldn't be: ${drain||'not specified'}
+- Their actual gift / what only they can do: ${gift||'not specified'}
+- What the journey looking good feels like to them: ${journey||'not specified'}
+
+Generate a Leverage Map with EXACTLY these sections:
+
+**LEVERAGE ASSESSMENT**
+2–3 sentences on their specific situation. Where is the leverage hiding? What's the main thing between them and more life?
+
+**RUTHLESS PRIORITIZATION**
+Apply the four filters to their situation. What stays (only theirs to do)? What goes to AI? What gets cut? Be specific and honest.
+
+**YOUR LEVERAGE STACK**
+Name 3 specific AI tools or approaches — matched to their domain and season. Not a list of everything. The three that actually matter for them right now.
+
+**THE 18-HOUR QUESTION**
+If AI gave them back 18 hours a week — based on what they shared about the journey — what would those hours actually look like? Paint it briefly.
+
+**FIRST THREE MOVES**
+Exactly what to do in the next 7 days. Specific. Actionable. No vague advice.
+
+**THE MAP:** [One sentence — what the leveraged, prioritized version of their journey looks like]
+
+Voice: Direct. Warm. No hustle culture. No toxic positivity. Honest about what fits and what doesn't. The journey is the reward — always come back to that.`;
+
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+    });
+    const data = await res.json();
+    const text = data.content?.filter(b=>b.type==='text').map(b=>b.text).join('')||'Unable to map right now. Please try again.';
+    _lastText = text;
+
+    body.innerHTML = fmt(text);
+    acts.style.display='flex';
+    badge.style.display='block';
+    _used.v=true;
+  } catch(e){
+    body.innerHTML=`<span style="color:var(--muted);font-size:13px;font-style:italic">Connection issue. Please try again.</span>`;
+  }
+}
+
+function fmt(t){
+  return '<p>'+t
+    .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--off);font-weight:500">$1</strong>')
+    .replace(/→/g,'<span style="color:var(--gold)">→</span>')
+    .replace(/THE MAP:/g,'<span style="color:var(--gold);font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase">THE MAP:</span>')
+    .replace(/\n\n/g,'</p><p style="margin-top:14px">')
+    .replace(/\n/g,'<br>')+'</p>';
+}
+
+function exportMap(){
+  if(!_lastText){return;}
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>YSKAIPE — Your Leverage Map</title><style>body{font-family:Georgia,serif;max-width:680px;margin:60px auto;color:#111;line-height:1.8;font-size:15px;padding:0 24px}h1{font-size:24px;margin-bottom:6px;font-style:italic}p.meta{color:#888;font-size:11px;font-family:monospace;margin-bottom:36px;border-bottom:1px solid #eee;padding-bottom:16px}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:15px}</style></head><body><h1>YSKAIPE — Your Leverage Map</h1><p class="meta">Generated ${new Date().toLocaleDateString()} — yskaipe.com — AI as leverage. Life as the reward.</p><pre>${_lastText.replace(/\*\*(.+?)\*\*/g,'$1')}</pre></body></html>`);
+  w.document.close();
+  setTimeout(()=>w.print(),500);
+}
+
+function copyMap(){
+  if(!_lastText){return;}
+  navigator.clipboard.writeText(_lastText).then(()=>{
+    const b=document.querySelector('.out-act:not(.prim)');
+    const orig=b.textContent;
+    b.textContent='Copied ✓';
+    setTimeout(()=>b.textContent=orig,2000);
+  });
+}
+
+window.isPro=false;
+</script>
+</body>
+</html>
