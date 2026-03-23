@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
+    "@react-pdf/renderer": "^4.3.2",
+    "@supabase/supabase-js": "^2.100.0",
+    "resend": "^6.9.4"
+  },
+  "devDependencies": {
+    "@types/react-pdf": "^6.2.0"
+  }
+}
