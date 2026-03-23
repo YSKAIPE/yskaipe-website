@@ -1,100 +1,69 @@
-# YSKAIPE — Every Maze Has an Exit
+# YSKAIPE — Human Hands. AI Power.
 
-> *pronounced "escape"*
+> The future belongs to people who can't be replaced.
 
-AI-powered navigation through the mazes of Bitcoin, Sustainability, the Garden, and AI. The maze is a puzzle, not a prison.
+YSKAIPE is a platform built for skilled trade professionals and physical-world operators — plumbers, electricians, builders, healthcare workers, and more — who want to leverage AI without being replaced by it. The moat is presence, trust, and accountability. AI sharpens it.
 
-## The Model
+---
 
-YSKAIPE is built around one idea: **every complex domain is a maze, and AI is your map.**
+## What This Is
 
-Each "maze" is a branch of the site with its own identity, color, premise quote, paths, and exit:
+A Next.js website for [yskaipe.com](https://www.yskaipe.com) — built to educate, onboard, and equip skilled professionals with the exact AI tools and workflows for their field. Not generic. Not overwhelming. Exactly what the job needs.
 
-| Maze | Color | Exit |
-|------|-------|------|
-| **YSKAIPE Bitcoin** | `#f7931a` | Generational digital wealth |
-| **YSKAIPE Sustainability** | `#3d6b2a` | Soil sovereignty + cash-flowing land |
-| **YSKAIPE the Garden** | `#a03060` | Year-round abundance from your own land |
-| **YSKAIPE AI** | `#1a3a8f` | Empire without employees |
+Key pages include:
 
-## Stack
+- **Home** — The manifesto. The moat. The archetypes.
+- **AutoQuote** — AI-powered instant standard cost estimator for trade professionals. Describe the job, get a transparent labor + materials breakdown in seconds.
+- **Sectors** — Role-by-role AI augmentation playbooks across trades, healthcare, infrastructure, food systems, and emerging physical-digital hybrids.
+- **Pitch / Roadmap / Build Log** — The story of how YSKAIPE is being built in public.
 
-- **Next.js 14** — App Router, React Server Components
-- **TypeScript** — strict mode
-- **Tailwind CSS v3** — utility classes + custom design tokens
-- **Google Fonts** — Bebas Neue (display) + Lora (body) + JetBrains Mono (UI/code)
+---
 
-## Structure
+## Tech Stack
 
-```
-app/
-  layout.tsx        # Root layout with metadata + font imports
-  page.tsx          # Homepage: Nav → Hero → Ticker → MazeGrid → Manifesto → PromptBar → Footer
-  globals.css       # Base styles, animations, font variables
-  bitcoin/page.tsx  # YSKAIPE Bitcoin maze detail page
-  sustain/page.tsx  # YSKAIPE Sustainability maze detail page
-  garden/page.tsx   # YSKAIPE the Garden maze detail page
-  ai/page.tsx       # YSKAIPE AI maze detail page
+- [Next.js](https://nextjs.org/) (App Router)
+- [Tailwind CSS](https://tailwindcss.com/)
+- TypeScript
+- Deployed on [Vercel](https://vercel.com)
 
-components/
-  Nav.tsx           # Sticky nav with maze pills + mobile menu
-  Hero.tsx          # Hero with headline + maze SVG illustration
-  Ticker.tsx        # Scrolling ticker: MAZE → path → EXIT
-  MazeGrid.tsx      # Four maze cards with hover states
-  Manifesto.tsx     # Dark band: "The maze is a puzzle, not a prison"
-  PromptBar.tsx     # "Which maze are you in?" interactive prompt section
-  MazePage.tsx      # Shared layout for all four maze detail pages
-  Footer.tsx        # Links, maze dots, copyright
-```
+---
 
 ## Getting Started
-
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-## Design System
-
-### Typography
-- **Display**: Bebas Neue — headings, CTAs, maze titles
-- **Body**: Lora (italic) — prose, premises, body copy
-- **UI/Mono**: JetBrains Mono — tags, labels, code, navigation
-
-### Colors
-```css
---ink:     #0d0d0d   /* primary text, borders */
---paper:   #f4f0e4   /* page background */
---aged:    #e8e0c8   /* section backgrounds */
---fog:     #8a8070   /* muted text */
---finance: #f7931a   /* Bitcoin maze */
---sustain: #3d6b2a   /* Sustainability maze */
---garden:  #a03060   /* Garden maze */
---ai:      #1a3a8f   /* AI maze */
---exit:    #00c853   /* exit green — the path color */
-```
-
-### Philosophy
-> *Every wall that looks like a dead end is just a turn you haven't mapped yet.*
-
-## Deploy
-
-```bash
-pnpm build
-```
-
-Deploy to Vercel with zero config — the repo is already structured for Vercel's Next.js integration.
-
-## Adding a New Maze
-
-1. Add a new entry to `mazes` array in `components/MazeGrid.tsx`
-2. Create `app/[maze-name]/page.tsx` using the `MazePage` component
-3. Add a nav pill in `components/Nav.tsx`
-4. Add to the ticker in `components/Ticker.tsx`
-5. Add to the footer links in `components/Footer.tsx`
+Open [http://localhost:3000](http://localhost:3000) to see the site.
 
 ---
 
-*The maze is a puzzle, not a prison. YSKAIPE.com*
+## Project Structure
+```
+app/          # Next.js App Router pages
+components/   # Shared UI components
+public/       # Static HTML pages (AutoQuote, sectors, etc.)
+utils/        # Utility functions
+```
+
+HTML pages in `public/` are served via rewrites configured in `next.config.js`.
+
+---
+
+## Deploying
+
+Push to `master` — Vercel auto-deploys.
+```bash
+git add .
+git commit -m "your message"
+git pull --rebase origin master
+git push
+```
+
+---
+
+## About
+
+YSKAIPE — EST. 2025  
+Human hands. AI power. The moat holds.  
+[hello@yskaipe.com](mailto:hello@yskaipe.com)
