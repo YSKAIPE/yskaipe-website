@@ -2,6 +2,7 @@
 const nextConfig = {
   async rewrites() {
     return [
+      { source: "/", destination: "/index.html" },
       { source: '/autoquote', destination: '/autoquote.html' },
       { source: '/about', destination: '/about.html' },
       { source: '/beta-pods', destination: '/beta-pods.html' },
