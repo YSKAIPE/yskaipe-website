@@ -1,7 +1,6 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { NextResponse } from 'next/server'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  const html = readFileSync(join(process.cwd(), 'public', 'index.html'), 'utf8')
-  return <div dangerouslySetInnerHTML={{ __html: html }} />
+  redirect('/index.html')
 }
