@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 
     const buffer = await renderToBuffer(createElement(QuotePDF, { quote }) as any)
 
-    return new NextResponse(buffer, {
+    return new NextResponse(new Uint8Array(buffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
