@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'quote is required' }, { status: 400 })
     }
 
-    const buffer = await renderToBuffer(createElement(QuotePDF, { quote }))
+    const buffer = await renderToBuffer(createElement(QuotePDF, { quote }) as any)
 
     return new NextResponse(buffer, {
       status: 200,
