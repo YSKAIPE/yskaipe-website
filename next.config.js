@@ -11,6 +11,8 @@ const nextConfig = {
       { source: '/careers', destination: '/careers.html' },
       { source: '/contact', destination: '/contact.html' },
       { source: '/index', destination: '/index.html' },
+      { source: '/diy', destination: '/diy.html' },
+      { source: '/docs', destination: '/docs.html' },
       { source: '/nick-conenna-yskaipe', destination: '/nick-conenna-yskaipe.html' },
       { source: '/peaking-waters', destination: '/peaking-waters.html' },
       { source: '/pitch', destination: '/pitch.html' },

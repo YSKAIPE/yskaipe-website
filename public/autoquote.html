@@ -408,6 +408,7 @@
         <button class="btn-action" onclick="downloadPDF()">Export PDF</button>
         <button class="btn-action" onclick="openEmailModal()">Email quote</button>
         <button class="btn-action" onclick="bookPro()">Book a pro →</button>
+        <button class="btn-action" onclick="openDIY()">DIY this job</button>
         <button class="btn-action btn-reset" onclick="resetForm()">New quote</button>
       </div>
       <div class="status-msg" id="statusMsg"></div>
@@ -573,6 +574,11 @@
       }
     }
 
+    function openDIY() {
+      if (!lastQuote) return
+      sessionStorage.setItem("yskaipe_diy_quote", JSON.stringify(lastQuote))
+      window.open("/diy", "_blank")
+    }
     function bookPro() {
       window.location.href = '/#join'
     }
