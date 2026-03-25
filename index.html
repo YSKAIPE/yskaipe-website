@@ -20,598 +20,185 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem;
-    height: 56px;
-    background: rgba(245,242,236,0.88);
-    backdrop-filter: blur(12px);
+    padding: 0 2rem; height: 56px;
+    background: rgba(245,242,236,0.88); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.15em;
-    color: var(--ink);
-    text-decoration: none;
-  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.15em; color: var(--ink); text-decoration: none; }
   .logo span { color: var(--accent); }
-  nav a.nav-cta {
-    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--ink); color: var(--paper);
-    padding: 0.45rem 1.1rem; border-radius: 2px;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
+  nav a.nav-cta { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 0.45rem 1.1rem; border-radius: 2px; text-decoration: none; transition: background 0.2s; }
   nav a.nav-cta:hover { background: var(--accent); }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 7rem 2rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 40%, rgba(212,80,10,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26,107,60,0.06) 0%, transparent 70%);
-  }
-
-  /* diagonal rule */
-  .hero-bg::after {
-    content: '';
-    position: absolute;
-    top: -10%; left: -5%;
-    width: 55%; height: 130%;
-    background: var(--cream);
-    transform: skewX(-4deg);
-    z-index: -1;
-  }
-
-  /* stamp/badge */
-  .stamp {
-    position: absolute; top: 6rem; right: 4rem;
-    width: 120px; height: 120px;
-    border: 2px solid var(--accent);
-    border-radius: 50%;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center;
-    animation: spin 20s linear infinite;
-    opacity: 0.55;
-  }
-  .stamp-inner {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.75rem; letter-spacing: 0.2em;
-    color: var(--accent);
-    line-height: 1.4;
-  }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 7rem 2rem 4rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(212,80,10,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26,107,60,0.06) 0%, transparent 70%); }
+  .hero-bg::after { content: ''; position: absolute; top: -10%; left: -5%; width: 55%; height: 130%; background: var(--cream); transform: skewX(-4deg); z-index: -1; }
+  .stamp { position: absolute; top: 6rem; right: 4rem; width: 120px; height: 120px; border: 2px solid var(--accent); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; animation: spin 20s linear infinite; opacity: 0.55; }
+  .stamp-inner { font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent); line-height: 1.4; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  .hero-content {
-    position: relative; z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .eyebrow::before {
-    content: '';
-    display: block; width: 28px; height: 1px;
-    background: var(--accent);
-  }
-
-  h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3.5rem, 10vw, 8rem);
-    line-height: 0.92;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-  }
-  h1 em {
-    font-style: normal;
-    color: var(--accent);
-    position: relative;
-  }
-
-  .hero-sub {
-    margin-top: 1.8rem;
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--mid);
-    max-width: 520px;
-  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; width: 100%; }
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+  .eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 10vw, 8rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--ink); }
+  h1 em { font-style: normal; color: var(--accent); position: relative; }
+  .hero-sub { margin-top: 1.8rem; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; line-height: 1.65; color: var(--mid); max-width: 520px; }
   .hero-sub strong { color: var(--ink); font-weight: 500; }
-
-  .hero-cta-row {
-    margin-top: 2.5rem;
-    display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
-  }
-  .btn-primary {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em;
-    text-transform: uppercase;
-    background: var(--accent); color: #fff;
-    padding: 0.9rem 2rem; border-radius: 2px;
-    text-decoration: none; border: none; cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    display: inline-block;
-  }
+  .hero-cta-row { margin-top: 2.5rem; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+  .btn-primary { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; display: inline-block; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,80,10,0.25); }
-
-  .scroll-hint {
-    font-size: 0.78rem; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
+  .scroll-hint { font-size: 0.78rem; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
   .scroll-hint svg { animation: bounce 1.6s ease-in-out infinite; }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
 
-  /* ── PROBLEM / SOLUTION ── */
-  .ps-section {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 5rem 2rem;
-    position: relative; overflow: hidden;
-  }
-  .ps-section::before {
-    content: 'THE PROBLEM';
-    position: absolute; top: 1rem; left: 50%; transform: translateX(-50%);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 8rem; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.04);
-    white-space: nowrap; pointer-events: none;
-  }
-
-  .ps-grid {
-    max-width: 1000px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0;
-    align-items: center;
-  }
+  .ps-section { background: var(--ink); color: var(--paper); padding: 5rem 2rem; position: relative; overflow: hidden; }
+  .ps-section::before { content: 'THE PROBLEM'; position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); font-family: 'Bebas Neue', sans-serif; font-size: 8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.04); white-space: nowrap; pointer-events: none; }
+  .ps-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; align-items: center; }
   .ps-col { padding: 2rem; }
-  .ps-divider {
-    display: flex; align-items: center; justify-content: center;
-    height: 100%;
-  }
-  .ps-divider-line {
-    width: 1px; height: 100%; background: rgba(255,255,255,0.15);
-    position: relative;
-  }
-  .ps-divider-vs {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-    background: var(--accent); color: #fff;
-    font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.1em;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .ps-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
+  .ps-divider { display: flex; align-items: center; justify-content: center; height: 100%; }
+  .ps-divider-line { width: 1px; height: 100%; background: rgba(255,255,255,0.15); position: relative; }
+  .ps-divider-vs { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--accent); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.1em; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .ps-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
   .ps-label.bad { color: #e05050; }
   .ps-label.good { color: #5ec47a; }
-
-  .ps-col h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem; letter-spacing: 0.03em;
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
+  .ps-col h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.03em; line-height: 1; margin-bottom: 1rem; }
   .ps-list { list-style: none; }
-  .ps-list li {
-    display: flex; align-items: flex-start; gap: 0.6rem;
-    font-size: 0.9rem; font-weight: 300; line-height: 1.5;
-    color: rgba(245,242,236,0.7);
-    margin-bottom: 0.7rem;
-  }
+  .ps-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; font-weight: 300; line-height: 1.5; color: rgba(245,242,236,0.7); margin-bottom: 0.7rem; }
   .ps-list li .icon { flex-shrink: 0; margin-top: 2px; font-size: 0.85rem; }
-
-  .ps-stat-row {
-    margin-top: 3rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 2.5rem;
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
-    max-width: 1000px; margin-left: auto; margin-right: auto;
-    text-align: center;
-  }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 1;
-    color: var(--gold);
-  }
+  .ps-stat-row { margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; max-width: 1000px; margin-left: auto; margin-right: auto; text-align: center; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 1; color: var(--gold); }
   .stat-label { font-size: 0.8rem; color: rgba(245,242,236,0.55); margin-top: 0.3rem; line-height: 1.3; }
 
-  /* ── HOW IT WORKS ── */
-  .hiw-section {
-    padding: 5rem 2rem;
-    background: var(--cream);
-  }
+  .hiw-section { padding: 5rem 2rem; background: var(--cream); }
   .section-header { text-align: center; margin-bottom: 3.5rem; }
-  .section-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.2rem, 5vw, 4rem);
-    letter-spacing: 0.03em; line-height: 1;
-    color: var(--ink);
-  }
-
-  .steps {
-    max-width: 860px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem;
-  }
-  .step {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: 2rem 1.5rem;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: 0.03em; line-height: 1; color: var(--ink); }
+  .steps { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 2rem 1.5rem; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
   .step:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,14,12,0.1); }
-  .step-num {
-    font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 1;
-    color: var(--accent); opacity: 0.18;
-    position: absolute; top: 0.5rem; right: 1rem;
-  }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 1; color: var(--accent); opacity: 0.18; position: absolute; top: 0.5rem; right: 1rem; }
   .step-icon { font-size: 1.8rem; margin-bottom: 1rem; }
   .step h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
   .step p { font-size: 0.85rem; color: var(--mid); line-height: 1.6; }
 
-  /* ── FORK SECTION ── */
-  .fork-section {
-    padding: 5rem 2rem;
-    background: var(--paper);
-  }
-  .fork-grid {
-    max-width: 860px; margin: 3rem auto 0;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-  }
-  .fork-card {
-    border-radius: var(--r);
-    padding: 2.5rem 2rem;
-    position: relative; overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-  }
+  .fork-section { padding: 5rem 2rem; background: var(--paper); }
+  .fork-grid { max-width: 860px; margin: 3rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .fork-card { border-radius: var(--r); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
   .fork-card:hover { transform: translateY(-5px); }
-  .fork-card.diy {
-    background: #0f2318;
-    color: var(--paper);
-    border: 1px solid rgba(94,196,122,0.2);
-  }
-  .fork-card.pro {
-    background: var(--ink);
-    color: var(--paper);
-    border: 1px solid rgba(212,80,10,0.2);
-  }
+  .fork-card.diy { background: #0f2318; color: var(--paper); border: 1px solid rgba(94,196,122,0.2); }
+  .fork-card.pro { background: var(--ink); color: var(--paper); border: 1px solid rgba(212,80,10,0.2); }
   .fork-card.diy:hover { box-shadow: 0 20px 60px rgba(26,107,60,0.3); }
   .fork-card.pro:hover { box-shadow: 0 20px 60px rgba(212,80,10,0.25); }
-
-  .fork-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    padding: 0.3rem 0.7rem; border-radius: 20px;
-    display: inline-block; margin-bottom: 1.2rem;
-  }
+  .fork-badge { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 20px; display: inline-block; margin-bottom: 1.2rem; }
   .fork-card.diy .fork-badge { background: rgba(94,196,122,0.15); color: #5ec47a; }
   .fork-card.pro .fork-badge { background: rgba(212,80,10,0.15); color: #f08060; }
-
-  .fork-card h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem; letter-spacing: 0.04em; line-height: 1;
-    margin-bottom: 1rem;
-  }
+  .fork-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.04em; line-height: 1; margin-bottom: 1rem; }
   .fork-card p { font-size: 0.88rem; line-height: 1.65; opacity: 0.7; margin-bottom: 1.5rem; }
   .fork-features { list-style: none; }
-  .fork-features li {
-    font-size: 0.82rem; opacity: 0.8;
-    padding: 0.35rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .fork-savings {
-    margin-top: 1.5rem;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem; color: #5ec47a;
-    line-height: 1;
-  }
+  .fork-features li { font-size: 0.82rem; opacity: 0.8; padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; gap: 0.5rem; }
+  .fork-savings { margin-top: 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: #5ec47a; line-height: 1; }
   .fork-savings-label { font-size: 0.75rem; opacity: 0.6; margin-top: 0.2rem; }
 
-  /* ── AUTOQUOTE EMBED ── */
-  .quote-section {
-    padding: 5rem 2rem;
-    background: var(--cream);
-  }
-  .quote-wrap {
-    max-width: 780px; margin: 0 auto;
-  }
-
-  .quote-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 4px 40px rgba(15,14,12,0.08);
-  }
-
-  .quote-header {
-    background: var(--ink);
-    padding: 1.5rem 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .quote-header-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem; letter-spacing: 0.1em;
-    color: var(--paper);
-  }
-  .live-badge {
-    display: flex; align-items: center; gap: 0.4rem;
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: #5ec47a;
-  }
-  .live-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #5ec47a;
-    animation: pulse-dot 1.6s ease-in-out infinite;
-  }
-  @keyframes pulse-dot {
-    0%,100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
-  }
-
+  .quote-section { padding: 5rem 2rem; background: var(--cream); }
+  .quote-wrap { max-width: 780px; margin: 0 auto; }
+  .quote-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 40px rgba(15,14,12,0.08); }
+  .quote-header { background: var(--ink); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .quote-header-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.1em; color: var(--paper); }
+  .live-badge { display: flex; align-items: center; gap: 0.4rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #5ec47a; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #5ec47a; animation: pulse-dot 1.6s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
   .quote-body { padding: 2rem; }
-
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
   .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
   .form-group.full { grid-column: 1/-1; }
-  label {
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--mid);
-  }
-  select, input, textarea {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: 0.6rem 0.8rem;
-    color: var(--ink);
-    transition: border-color 0.2s;
-    width: 100%;
-  }
-  select:focus, input:focus, textarea:focus {
-    outline: none; border-color: var(--accent);
-  }
+  label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+  select, input, textarea { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--paper); border: 1px solid var(--border); border-radius: var(--r); padding: 0.6rem 0.8rem; color: var(--ink); transition: border-color 0.2s; width: 100%; }
+  select:focus, input:focus, textarea:focus { outline: none; border-color: var(--accent); }
   textarea { resize: vertical; min-height: 80px; }
-
-  .divider-or {
-    text-align: center; position: relative;
-    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--mid); margin: 1rem 0;
-  }
-  .divider-or::before, .divider-or::after {
-    content: ''; position: absolute; top: 50%;
-    width: calc(50% - 2rem); height: 1px; background: var(--border);
-  }
+  .divider-or { text-align: center; position: relative; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin: 1rem 0; }
+  .divider-or::before, .divider-or::after { content: ''; position: absolute; top: 50%; width: calc(50% - 2rem); height: 1px; background: var(--border); }
   .divider-or::before { left: 0; }
   .divider-or::after { right: 0; }
-
   .optional-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
-  .optional-label {
-    grid-column: 1/-1;
-    font-size: 0.72rem; color: var(--mid); letter-spacing: 0.08em;
-  }
-
-  .btn-submit {
-    width: 100%; padding: 1rem;
-    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    background: var(--accent); color: #fff;
-    border: none; border-radius: var(--r);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
+  .btn-submit { width: 100%; padding: 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--accent); color: #fff; border: none; border-radius: var(--r); cursor: pointer; transition: background 0.2s, transform 0.15s; }
   .btn-submit:hover { background: #be4208; transform: translateY(-1px); }
   .btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-
-  .loading-bar {
-    display: none; margin-top: 1.2rem;
-    background: var(--paper); border-radius: 2px; overflow: hidden;
-    height: 3px;
-  }
+  .loading-bar { display: none; margin-top: 1.2rem; background: var(--paper); border-radius: 2px; overflow: hidden; height: 3px; }
   .loading-bar.active { display: block; }
-  .loading-fill {
-    height: 100%; width: 0;
-    background: linear-gradient(90deg, var(--accent), var(--gold));
-    animation: load-prog 2.5s ease-in-out forwards;
-  }
+  .loading-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--gold)); animation: load-prog 2.5s ease-in-out forwards; }
   @keyframes load-prog { to { width: 92%; } }
-  .loading-text {
-    display: none; text-align: center; margin-top: 0.8rem;
-    font-family: 'DM Mono', monospace; font-size: 0.75rem;
-    color: var(--mid); letter-spacing: 0.08em;
-  }
+  .loading-text { display: none; text-align: center; margin-top: 0.8rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--mid); letter-spacing: 0.08em; }
   .loading-text.active { display: block; }
 
-  /* ── RESULTS PANEL ── */
   #results { display: none; }
   #results.visible { display: block; }
-
-  .results-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 1.5rem; padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .results-header h3 {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em;
-  }
-  .verified-badge {
-    font-family: 'DM Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent2); background: rgba(26,107,60,0.08);
-    padding: 0.3rem 0.6rem; border-radius: 2px;
-  }
-
-  .cost-grid {
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 1.5rem;
-  }
-  .cost-cell {
-    background: var(--paper); border-radius: var(--r);
-    padding: 1rem; text-align: center;
-  }
+  .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .results-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; }
+  .verified-badge { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); background: rgba(26,107,60,0.08); padding: 0.3rem 0.6rem; border-radius: 2px; }
+  .cost-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .cost-cell { background: var(--paper); border-radius: var(--r); padding: 1rem; text-align: center; }
   .cost-cell.total { background: var(--ink); color: var(--paper); }
   .cost-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.6; margin-bottom: 0.3rem; }
   .cost-val { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.02em; }
   .cost-range { font-size: 0.72rem; opacity: 0.5; margin-top: 0.2rem; }
-
-  .breakdown-text {
-    font-size: 0.88rem; line-height: 1.75; color: var(--mid);
-    background: var(--paper); border-radius: var(--r);
-    padding: 1.2rem; margin-bottom: 1.5rem;
-    white-space: pre-wrap;
-  }
-
-  /* ── FORK ACTIONS ── */
-  .fork-actions {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;
-  }
-  .btn-fork {
-    padding: 1rem 1.2rem;
-    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
-    letter-spacing: 0.05em; text-transform: uppercase;
-    border-radius: var(--r); cursor: pointer; border: none;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
+  .breakdown-text { font-size: 0.88rem; line-height: 1.75; color: var(--mid); background: var(--paper); border-radius: var(--r); padding: 1.2rem; margin-bottom: 1.5rem; white-space: pre-wrap; }
+  .fork-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .btn-fork { padding: 1rem 1.2rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; border-radius: var(--r); cursor: pointer; border: none; transition: transform 0.15s, box-shadow 0.15s; }
   .btn-fork:hover { transform: translateY(-2px); }
-  .btn-diy {
-    background: #0f2318; color: #5ec47a;
-    border: 1px solid rgba(94,196,122,0.25);
-  }
+  .btn-diy { background: #0f2318; color: #5ec47a; border: 1px solid rgba(94,196,122,0.25); }
   .btn-diy:hover { box-shadow: 0 8px 24px rgba(26,107,60,0.25); }
-  .btn-pro {
-    background: var(--accent); color: #fff;
-  }
+  .btn-pro { background: var(--accent); color: #fff; }
   .btn-pro:hover { box-shadow: 0 8px 24px rgba(212,80,10,0.3); }
-
-  .btn-row-secondary {
-    display: flex; gap: 0.8rem;
-  }
-  .btn-secondary {
-    flex: 1; padding: 0.65rem;
-    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
-    background: transparent; color: var(--mid);
-    border: 1px solid var(--border); border-radius: var(--r);
-    cursor: pointer; transition: border-color 0.2s, color 0.2s;
-  }
+  .btn-row-secondary { display: flex; gap: 0.8rem; }
+  .btn-secondary { flex: 1; padding: 0.65rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; color: var(--mid); border: 1px solid var(--border); border-radius: var(--r); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
   .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
 
-  /* ── DIY PANEL ── */
   #diy-panel, #pro-panel { display: none; }
   #diy-panel.visible, #pro-panel.visible { display: block; }
-
-  .panel-header {
-    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
-    padding-bottom: 1rem; border-bottom: 1px solid var(--border);
-  }
+  .panel-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
   .panel-icon { font-size: 2rem; }
-  .panel-header h3 {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em;
-  }
-  .savings-chip {
-    margin-left: auto;
-    background: rgba(26,107,60,0.1); color: var(--accent2);
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
-    padding: 0.3rem 0.8rem; border-radius: 20px;
-  }
-
-  .diy-instructions {
-    font-size: 0.9rem; line-height: 1.8; color: var(--ink);
-    background: #f8faf9; border-left: 3px solid var(--accent2);
-    border-radius: 0 var(--r) var(--r) 0;
-    padding: 1.5rem; margin-bottom: 1.5rem;
-    white-space: pre-wrap;
-  }
-
-  .difficulty-bar {
-    background: var(--paper); border-radius: var(--r);
-    padding: 1rem; margin-bottom: 1rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
+  .panel-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; }
+  .savings-chip { margin-left: auto; background: rgba(26,107,60,0.1); color: var(--accent2); font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; padding: 0.3rem 0.8rem; border-radius: 20px; }
+  .diy-instructions { font-size: 0.9rem; line-height: 1.8; color: var(--ink); background: #f8faf9; border-left: 3px solid var(--accent2); border-radius: 0 var(--r) var(--r) 0; padding: 1.5rem; margin-bottom: 1.5rem; white-space: pre-wrap; }
+  .difficulty-bar { background: var(--paper); border-radius: var(--r); padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
   .diff-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid); min-width: 80px; }
   .diff-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .diff-fill { height: 100%; border-radius: 3px; background: var(--accent2); width: 0; transition: width 0.8s ease; }
   .diff-val { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; min-width: 60px; text-align: right; }
-
-  .warning-box {
-    background: rgba(212,80,10,0.06); border: 1px solid rgba(212,80,10,0.2);
-    border-radius: var(--r); padding: 1rem; margin-bottom: 1.5rem;
-    font-size: 0.82rem; color: var(--accent); line-height: 1.6;
-    display: none;
-  }
+  .warning-box { background: rgba(212,80,10,0.06); border: 1px solid rgba(212,80,10,0.2); border-radius: var(--r); padding: 1rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: var(--accent); line-height: 1.6; display: none; }
   .warning-box.visible { display: block; }
   .warning-box strong { display: block; margin-bottom: 0.3rem; }
 
-  /* ── PRO PANEL ── */
-  .pro-intro {
-    background: var(--ink); color: var(--paper);
-    border-radius: var(--r); padding: 1.5rem;
-    margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.7;
-    white-space: pre-wrap;
-  }
+  /* SHOP MATERIALS */
+  .shop-materials { margin-top: 1.5rem; margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+  .shop-materials-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+  .shop-materials-header h4 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); font-weight: 500; }
+  .shop-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(26,107,60,0.1); color: var(--accent2); padding: 0.2rem 0.5rem; border-radius: 2px; }
+  .shop-item { background: var(--paper); border: 1px solid var(--border); border-radius: var(--r); padding: 0.9rem 1rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .shop-item-name { flex: 1; min-width: 160px; font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+  .shop-item-cost { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent2); white-space: nowrap; }
+  .shop-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .shop-link { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.7rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.04em; border: 1px solid var(--border); border-radius: 2px; color: var(--mid); text-decoration: none; background: var(--card); transition: border-color 0.15s, color 0.15s; white-space: nowrap; }
+  .shop-link:hover { border-color: var(--ink); color: var(--ink); }
+  .shop-link svg { width: 10px; height: 10px; flex-shrink: 0; opacity: 0.5; }
+  .shop-aff-note { font-size: 0.7rem; color: var(--mid); opacity: 0.6; margin-top: 0.8rem; font-style: italic; }
+
+  .pro-intro { background: var(--ink); color: var(--paper); border-radius: var(--r); padding: 1.5rem; margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.7; white-space: pre-wrap; }
   .pro-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-  .pro-card {
-    background: var(--paper); border: 1px solid var(--border);
-    border-radius: var(--r); padding: 1.2rem;
-    transition: border-color 0.2s;
-  }
+  .pro-card { background: var(--paper); border: 1px solid var(--border); border-radius: var(--r); padding: 1.2rem; transition: border-color 0.2s; }
   .pro-card:hover { border-color: var(--accent); }
   .pro-card-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
   .pro-card-trade { font-size: 0.75rem; color: var(--mid); margin-bottom: 0.5rem; }
   .pro-card-stars { color: var(--gold); font-size: 0.8rem; }
   .pro-card-rate { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-top: 0.4rem; }
 
-  /* ── EMAIL MODAL ── */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0; z-index: 200;
-    background: rgba(15,14,12,0.6); backdrop-filter: blur(4px);
-    align-items: center; justify-content: center;
-  }
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(15,14,12,0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
   .modal-overlay.active { display: flex; }
-  .modal {
-    background: var(--card); border-radius: 6px; padding: 2rem;
-    width: 90%; max-width: 400px;
-    box-shadow: 0 20px 60px rgba(15,14,12,0.3);
-  }
+  .modal { background: var(--card); border-radius: 6px; padding: 2rem; width: 90%; max-width: 400px; box-shadow: 0 20px 60px rgba(15,14,12,0.3); }
   .modal h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; margin-bottom: 0.5rem; }
   .modal p { font-size: 0.85rem; color: var(--mid); margin-bottom: 1.2rem; }
   .modal input { margin-bottom: 1rem; }
@@ -619,29 +206,12 @@
   .btn-modal-send { flex:1; padding:0.75rem; background:var(--accent); color:#fff; font-weight:600; font-size:0.85rem; border:none; border-radius:var(--r); cursor:pointer; }
   .btn-modal-cancel { flex:1; padding:0.75rem; background:transparent; color:var(--mid); font-size:0.85rem; border:1px solid var(--border); border-radius:var(--r); cursor:pointer; }
 
-  /* ── TRUST STRIP ── */
-  .trust-strip {
-    background: var(--paper);
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 2rem;
-    display: flex; align-items: center; justify-content: center;
-    gap: 2.5rem; flex-wrap: wrap;
-  }
-  .trust-item {
-    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--mid);
-    display: flex; align-items: center; gap: 0.4rem;
-  }
+  .trust-strip { background: var(--paper); border-top: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .trust-item { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); display: flex; align-items: center; gap: 0.4rem; }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--ink); color: rgba(245,242,236,0.5);
-    padding: 2rem; text-align: center;
-    font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em;
-  }
+  footer { background: var(--ink); color: rgba(245,242,236,0.5); padding: 2rem; text-align: center; font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
   footer a { color: rgba(245,242,236,0.5); }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
     .ps-grid { grid-template-columns: 1fr; }
     .ps-divider { display: none; }
@@ -653,44 +223,34 @@
     .optional-row { grid-template-columns: 1fr; }
     .pro-cards { grid-template-columns: 1fr; }
     .stamp { display: none; }
+    .shop-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="logo">Y<span>S</span>KAIPE</a>
   <a href="#autoquote" class="nav-cta">Get My Quote</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="stamp">
-    <div class="stamp-inner">AI<br>POWERED<br>·<br>NC 2026<br>RATES</div>
-  </div>
+  <div class="stamp"><div class="stamp-inner">AI<br>POWERED<br>·<br>NC 2026<br>RATES</div></div>
   <div class="hero-content">
     <div class="eyebrow">Human Hands. AI Power. · pronounced <em style="font-style:italic;letter-spacing:0.05em;color:var(--ink);opacity:0.7">"escape"</em></div>
     <h1>DON'T<br>GET<br><em>RIPPED</em><br>OFF.</h1>
-    <p class="hero-sub">
-      Every year, homeowners overpay by <strong>thousands</strong> because they don't know the standard rate.
-      YSKAIPE — <strong>escape the cost traps</strong> — tells you <strong>exactly what a job should cost</strong>,
-      then helps you DIY it or connects you to vetted professionals who play fair.
-    </p>
+    <p class="hero-sub">Every year, homeowners overpay by <strong>thousands</strong> because they don't know the standard rate. YSKAIPE — <strong>escape the cost traps</strong> — tells you <strong>exactly what a job should cost</strong>, then helps you DIY it or connects you to vetted professionals who play fair.</p>
     <div class="hero-cta-row">
       <a href="#autoquote" class="btn-primary">Get Instant Quote →</a>
       <span class="scroll-hint">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Scroll to quote
       </span>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM / SOLUTION -->
 <section class="ps-section">
   <div class="ps-grid">
     <div class="ps-col">
@@ -704,11 +264,7 @@
         <li><span class="icon">📄</span>Zero documentation for the work done.</li>
       </ul>
     </div>
-    <div class="ps-divider">
-      <div class="ps-divider-line">
-        <div class="ps-divider-vs">VS</div>
-      </div>
-    </div>
+    <div class="ps-divider"><div class="ps-divider-line"><div class="ps-divider-vs">VS</div></div></div>
     <div class="ps-col">
       <div class="ps-label good">✓ With YSKAIPE AutoQuote</div>
       <h3>TOTAL CLARITY</h3>
@@ -722,50 +278,24 @@
     </div>
   </div>
   <div class="ps-stat-row">
-    <div>
-      <div class="stat-num">$2,400</div>
-      <div class="stat-label">avg annual overpayment<br>per US homeowner</div>
-    </div>
-    <div>
-      <div class="stat-num">62%</div>
-      <div class="stat-label">of home jobs are<br>DIY-able with guidance</div>
-    </div>
-    <div>
-      <div class="stat-num">8 sec</div>
-      <div class="stat-label">average time to<br>your standard quote</div>
-    </div>
+    <div><div class="stat-num">$2,400</div><div class="stat-label">avg annual overpayment<br>per US homeowner</div></div>
+    <div><div class="stat-num">62%</div><div class="stat-label">of home jobs are<br>DIY-able with guidance</div></div>
+    <div><div class="stat-num">8 sec</div><div class="stat-label">average time to<br>your standard quote</div></div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section class="hiw-section">
   <div class="section-header">
     <div class="section-eyebrow">The Process</div>
     <div class="section-title">THREE STEPS TO FAIR</div>
   </div>
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-icon">📝</div>
-      <h4>Describe the Job</h4>
-      <p>Tell us the trade, your location, and what needs fixing. Plain English — no technical knowledge required.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-icon">🤖</div>
-      <h4>AI Runs the Numbers</h4>
-      <p>Claude AI parses your job against verified NC 2026 industry rates — labor, materials, timeline, complexity.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-icon">🔀</div>
-      <h4>DIY or Pro — You Decide</h4>
-      <p>We show your savings if you tackle it yourself, with step-by-step guidance. Too complex? We match you with vetted pros.</p>
-    </div>
+    <div class="step"><div class="step-num">1</div><div class="step-icon">📝</div><h4>Describe the Job</h4><p>Tell us the trade, your location, and what needs fixing. Plain English — no technical knowledge required.</p></div>
+    <div class="step"><div class="step-num">2</div><div class="step-icon">🤖</div><h4>AI Runs the Numbers</h4><p>Claude AI parses your job against verified NC 2026 industry rates — labor, materials, timeline, complexity.</p></div>
+    <div class="step"><div class="step-num">3</div><div class="step-icon">🔀</div><h4>DIY or Pro — You Decide</h4><p>We show your savings if you tackle it yourself, with step-by-step guidance. Too complex? We match you with vetted pros.</p></div>
   </div>
 </section>
 
-<!-- FORK PREVIEW -->
 <section class="fork-section">
   <div class="section-header">
     <div class="section-eyebrow">After Your Quote</div>
@@ -797,47 +327,36 @@
         <li>✓ Background-checked network members</li>
         <li>✓ Quote in hand for negotiation</li>
       </ul>
-      <div style="margin-top:1.5rem; font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:#f08060;">NEGOTIATION POWER</div>
+      <div style="margin-top:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#f08060;">NEGOTIATION POWER</div>
       <div class="fork-savings-label">walk in knowing exactly what's fair</div>
     </div>
   </div>
 </section>
 
-<!-- AUTOQUOTE -->
 <section class="quote-section" id="autoquote">
   <div class="quote-wrap">
     <div class="section-header">
       <div class="section-eyebrow">AutoQuote · Live</div>
       <div class="section-title">GET YOUR NUMBER</div>
     </div>
-
     <div class="quote-card">
       <div class="quote-header">
         <div class="quote-header-title">YSKAIPE AutoQuote</div>
         <div class="live-badge"><div class="live-dot"></div> Live · AI Powered</div>
       </div>
-
       <div class="quote-body">
+
         <div id="form-section">
           <div class="form-grid">
             <div class="form-group">
               <label>Trade / Role</label>
               <select id="trade">
                 <option value="">Select trade…</option>
-                <option>Plumber</option>
-                <option>Electrician</option>
-                <option>HVAC Technician</option>
-                <option>Roofer</option>
-                <option>General Contractor</option>
-                <option>Welder / Fabricator</option>
-                <option>Home Inspector</option>
-                <option>Pest Control</option>
-                <option>Arborist</option>
-                <option>EV Infrastructure Tech</option>
-                <option>Smart Home Integrator</option>
-                <option>Landscaper</option>
-                <option>Painter</option>
-                <option>Flooring Specialist</option>
+                <option>Plumber</option><option>Electrician</option><option>HVAC Technician</option>
+                <option>Roofer</option><option>General Contractor</option><option>Welder / Fabricator</option>
+                <option>Home Inspector</option><option>Pest Control</option><option>Arborist</option>
+                <option>EV Infrastructure Tech</option><option>Smart Home Integrator</option>
+                <option>Landscaper</option><option>Painter</option><option>Flooring Specialist</option>
               </select>
             </div>
             <div class="form-group">
@@ -855,45 +374,25 @@
           </div>
           <div class="divider-or">optional — for email delivery</div>
           <div class="optional-row">
-            <div class="form-group">
-              <label>Your Name</label>
-              <input type="text" id="user-name" placeholder="Jane Smith">
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" id="user-email" placeholder="jane@email.com">
-            </div>
+            <div class="form-group"><label>Your Name</label><input type="text" id="user-name" placeholder="Jane Smith"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="user-email" placeholder="jane@email.com"></div>
           </div>
           <button class="btn-submit" id="submit-btn" onclick="getQuote()">Get Instant Standard Cost</button>
           <div class="loading-bar" id="loading-bar"><div class="loading-fill"></div></div>
           <div class="loading-text" id="loading-text">Claude is analyzing your job against verified rates…</div>
         </div>
 
-        <!-- RESULTS -->
         <div id="results">
           <div class="results-header">
             <h3>Standard Cost Estimate</h3>
             <div class="verified-badge">✓ AI + Rates Verified</div>
           </div>
           <div class="cost-grid">
-            <div class="cost-cell">
-              <div class="cost-label">Labor</div>
-              <div class="cost-val" id="res-labor">—</div>
-              <div class="cost-range" id="res-labor-range">—</div>
-            </div>
-            <div class="cost-cell">
-              <div class="cost-label">Materials</div>
-              <div class="cost-val" id="res-materials">—</div>
-              <div class="cost-range" id="res-materials-range">—</div>
-            </div>
-            <div class="cost-cell total">
-              <div class="cost-label">Total Standard</div>
-              <div class="cost-val" id="res-total">—</div>
-              <div class="cost-range" id="res-total-range">—</div>
-            </div>
+            <div class="cost-cell"><div class="cost-label">Labor</div><div class="cost-val" id="res-labor">—</div><div class="cost-range" id="res-labor-range">—</div></div>
+            <div class="cost-cell"><div class="cost-label">Materials</div><div class="cost-val" id="res-materials">—</div><div class="cost-range" id="res-materials-range">—</div></div>
+            <div class="cost-cell total"><div class="cost-label">Total Standard</div><div class="cost-val" id="res-total">—</div><div class="cost-range" id="res-total-range">—</div></div>
           </div>
           <div class="breakdown-text" id="res-breakdown">—</div>
-
           <div class="fork-actions">
             <button class="btn-fork btn-diy" onclick="showDIY()">🔧 DIY This Job →</button>
             <button class="btn-fork btn-pro" onclick="showPro()">📞 Find a Pro →</button>
@@ -905,30 +404,26 @@
           </div>
         </div>
 
-        <!-- DIY PANEL -->
         <div id="diy-panel">
           <div class="panel-header">
             <div class="panel-icon">🔧</div>
             <h3>DIY Instructions</h3>
             <div class="savings-chip" id="diy-savings-chip">Save $—</div>
           </div>
-          <div class="warning-box" id="diy-warning">
-            <strong>⚠️ Heads Up</strong>
-            <span id="diy-warning-text"></span>
-          </div>
+          <div class="warning-box" id="diy-warning"><strong>⚠️ Heads Up</strong><span id="diy-warning-text"></span></div>
           <div class="difficulty-bar">
             <div class="diff-label">Difficulty</div>
             <div class="diff-track"><div class="diff-fill" id="diff-fill"></div></div>
             <div class="diff-val" id="diff-val">—</div>
           </div>
           <div class="diy-instructions" id="diy-instructions">Loading instructions…</div>
+          <div id="shop-materials-container"></div>
           <div class="btn-row-secondary">
             <button class="btn-secondary" onclick="showResults()">← Back to Quote</button>
             <button class="btn-secondary" onclick="showPro()">Too Hard? Find a Pro →</button>
           </div>
         </div>
 
-        <!-- PRO PANEL -->
         <div id="pro-panel">
           <div class="panel-header">
             <div class="panel-icon">📞</div>
@@ -946,7 +441,6 @@
   </div>
 </section>
 
-<!-- TRUST STRIP -->
 <div class="trust-strip">
   <div class="trust-item">✓ NC 2026 verified rates</div>
   <div class="trust-item">✓ No signup required</div>
@@ -956,7 +450,6 @@
   <a href="future-of-work.html" class="trust-item" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(212,80,10,0.3);">→ Future of Work</a>
 </div>
 
-<!-- EMAIL MODAL -->
 <div class="modal-overlay" id="email-modal">
   <div class="modal">
     <h4>Email This Quote</h4>
@@ -969,9 +462,8 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  YSKAIPE · Human Hands. AI Power. · <a href="mailto:hello@yskaipe.com">hello@yskaipe.com</a><br>
+  YSKAIPE · Human Hands. AI Power. · <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a><br>
   <div style="margin-top:0.8rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
     <a href="future-of-work.html" style="color:rgba(245,242,236,0.6)">Future of Work</a>
     <a href="#" style="color:rgba(245,242,236,0.6)">Documentation</a>
@@ -982,79 +474,103 @@
 </footer>
 
 <script>
-let currentQuoteData = null;
+// ── AFFILIATE CONFIG ──────────────────────────────────────────────────────────
+// Fill these in when your accounts are approved. Links work without them too.
+const AFFILIATE = {
+  amazon:    '',   // e.g. 'yskaipe-20'
+  homedepot: '',   // e.g. 'yskaipe'
+  lowes:     ''    // e.g. 'yskaipe123'
+};
+
+function amazonURL(q) {
+  var u = 'https://www.amazon.com/s?k=' + encodeURIComponent(q);
+  return AFFILIATE.amazon ? u + '&tag=' + AFFILIATE.amazon : u;
+}
+function homedepotURL(q) {
+  var u = 'https://www.homedepot.com/s/' + encodeURIComponent(q);
+  return AFFILIATE.homedepot ? u + '?cm_mmc=afl-' + AFFILIATE.homedepot : u;
+}
+function lowesURL(q) {
+  var u = 'https://www.lowes.com/search?searchTerm=' + encodeURIComponent(q);
+  return AFFILIATE.lowes ? u + '&cm_mmc=afl-' + AFFILIATE.lowes : u;
+}
+
+function renderShopMaterials(materials) {
+  var container = document.getElementById('shop-materials-container');
+  container.innerHTML = '';
+  if (!materials || !materials.length) return;
+
+  var icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+
+  var html = '<div class="shop-materials">';
+  html += '<div class="shop-materials-header"><h4>Shop Materials</h4><span class="shop-tag">Amazon · Home Depot · Lowe\'s</span></div>';
+
+  for (var i = 0; i < materials.length; i++) {
+    var item = materials[i];
+    var label = item.qty ? item.name + ' &nbsp;&times;' + item.qty : item.name;
+    var cost = item.estimatedCost ? '<span class="shop-item-cost">~' + item.estimatedCost + '</span>' : '';
+    html += '<div class="shop-item">';
+    html += '<div class="shop-item-name">' + label + '</div>';
+    html += cost;
+    html += '<div class="shop-links">';
+    html += '<a class="shop-link" href="' + amazonURL(item.name) + '" target="_blank" rel="noopener">' + icon + 'Amazon</a>';
+    html += '<a class="shop-link" href="' + homedepotURL(item.name) + '" target="_blank" rel="noopener">' + icon + 'Home Depot</a>';
+    html += '<a class="shop-link" href="' + lowesURL(item.name) + '" target="_blank" rel="noopener">' + icon + 'Lowe\'s</a>';
+    html += '</div></div>';
+  }
+
+  html += '<p class="shop-aff-note">Links open retailer search results. Prices are estimates only.</p>';
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ── MAIN LOGIC ────────────────────────────────────────────────────────────────
+var currentQuoteData = null;
 
 async function getQuote() {
-  const trade = document.getElementById('trade').value;
-  const zip = document.getElementById('zip').value;
-  const scope = document.getElementById('scope').value;
-  const desc = document.getElementById('job-desc').value.trim();
+  var trade = document.getElementById('trade').value;
+  var zip   = document.getElementById('zip').value;
+  var scope = document.getElementById('scope').value;
+  var desc  = document.getElementById('job-desc').value.trim();
 
   if (!desc) { alert('Please describe the job.'); return; }
 
-  const btn = document.getElementById('submit-btn');
+  var btn = document.getElementById('submit-btn');
   btn.disabled = true;
   btn.textContent = 'Analyzing…';
   document.getElementById('loading-bar').classList.add('active');
   document.getElementById('loading-text').classList.add('active');
 
-  const prompt = `You are YSKAIPE AutoQuote — a home services cost estimator using verified NC 2026 industry rates (labor $95–$160/hr).
-
-Job details:
-- Trade: ${trade || 'General'}
-- ZIP: ${zip || 'NC region'}
-- Scope: ${scope || 'residential'}
-- Description: ${desc}
-
-Return ONLY valid JSON (no markdown, no extra text):
-{
-  "labor_low": number,
-  "labor_high": number,
-  "materials_low": number,
-  "materials_high": number,
-  "total_low": number,
-  "total_high": number,
-  "timeline": "string (e.g. 2–4 hours)",
-  "breakdown": "3–4 sentence plain English breakdown of the estimate, what drives cost, and any regional factors",
-  "diy_savings_low": number,
-  "diy_savings_high": number,
-  "difficulty_score": number (1–10, 1=very easy, 10=expert only),
-  "difficulty_label": "string (e.g. Moderate / Weekend Warrior)",
-  "diy_feasible": true or false,
-  "diy_warning": "string — safety or permit warning if needed, empty string if none",
-  "diy_steps": "numbered step-by-step DIY instructions and tools needed only. Do not include a materials list in this field.",
-  "diy_materials": [{ "name": "exact product name", "qty": "amount", "estimatedCost": "$X" }],
-  "pro_recommendation": "2–3 sentences: why hire a pro for this, what to look for, what questions to ask, and what a fair quote looks like",
-  "pro_keywords": ["keyword1", "keyword2"]
-}`;
+  var prompt = 'You are YSKAIPE AutoQuote — a home services cost estimator using verified NC 2026 industry rates (labor $95–$160/hr).\n\nJob details:\n- Trade: ' + (trade || 'General') + '\n- ZIP: ' + (zip || 'NC region') + '\n- Scope: ' + (scope || 'residential') + '\n- Description: ' + desc + '\n\nReturn ONLY valid JSON (no markdown, no extra text):\n{\n  "labor_low": number,\n  "labor_high": number,\n  "materials_low": number,\n  "materials_high": number,\n  "total_low": number,\n  "total_high": number,\n  "timeline": "string (e.g. 2-4 hours)",\n  "breakdown": "3-4 sentence plain English breakdown of the estimate, what drives cost, and any regional factors",\n  "diy_savings_low": number,\n  "diy_savings_high": number,\n  "difficulty_score": number,\n  "difficulty_label": "string (e.g. Moderate / Weekend Warrior)",\n  "diy_feasible": true or false,\n  "diy_warning": "string — safety or permit warning if needed, empty string if none",\n  "diy_steps": "numbered step-by-step DIY instructions and tools needed only. Do not include a materials list in this field.",\n  "diy_materials": [\n    { "name": "exact product name for retail search", "qty": "number or amount", "estimatedCost": "$X" }\n  ],\n  "pro_recommendation": "2-3 sentences: why hire a pro for this, what to look for, what questions to ask, and what a fair quote looks like",\n  "pro_keywords": ["keyword1", "keyword2"]\n}';
 
   try {
-    const res = await fetch('/api/quote', {
+    var res = await fetch('/api/quote', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
+        max_tokens: 1500,
         messages: [{ role: 'user', content: prompt }]
       })
     });
 
-    const data = await res.json();
-    const raw = data.content?.find(b => b.type === 'text')?.text || '';
-    const clean = raw.replace(/```json|```/g, '').trim();
-    const q = JSON.parse(clean);
+    var data = await res.json();
+    var raw  = data.content && data.content.find(function(b) { return b.type === 'text'; });
+    var text = raw ? raw.text : '';
+    var clean = text.replace(/```json|```/g, '').trim();
+    var q = JSON.parse(clean);
     currentQuoteData = q;
 
-    document.getElementById('res-labor').textContent = '$' + Math.round((q.labor_low + q.labor_high) / 2).toLocaleString();
-    document.getElementById('res-labor-range').textContent = `$${q.labor_low.toLocaleString()} – $${q.labor_high.toLocaleString()}`;
-    document.getElementById('res-materials').textContent = '$' + Math.round((q.materials_low + q.materials_high) / 2).toLocaleString();
-    document.getElementById('res-materials-range').textContent = `$${q.materials_low.toLocaleString()} – $${q.materials_high.toLocaleString()}`;
-    document.getElementById('res-total').textContent = '$' + Math.round((q.total_low + q.total_high) / 2).toLocaleString();
-    document.getElementById('res-total-range').textContent = `$${q.total_low.toLocaleString()} – $${q.total_high.toLocaleString()}`;
-    document.getElementById('res-breakdown').textContent = q.breakdown + '\n\nTimeline: ' + q.timeline;
+    document.getElementById('res-labor').textContent          = '$' + Math.round((q.labor_low + q.labor_high) / 2).toLocaleString();
+    document.getElementById('res-labor-range').textContent    = '$' + q.labor_low.toLocaleString() + ' – $' + q.labor_high.toLocaleString();
+    document.getElementById('res-materials').textContent      = '$' + Math.round((q.materials_low + q.materials_high) / 2).toLocaleString();
+    document.getElementById('res-materials-range').textContent = '$' + q.materials_low.toLocaleString() + ' – $' + q.materials_high.toLocaleString();
+    document.getElementById('res-total').textContent          = '$' + Math.round((q.total_low + q.total_high) / 2).toLocaleString();
+    document.getElementById('res-total-range').textContent    = '$' + q.total_low.toLocaleString() + ' – $' + q.total_high.toLocaleString();
+    document.getElementById('res-breakdown').textContent      = q.breakdown + '\n\nTimeline: ' + q.timeline;
 
     showResults();
-  } catch (e) {
+  } catch(e) {
     alert('Something went wrong. Please try again.');
     console.error(e);
   } finally {
@@ -1074,27 +590,28 @@ function showResults() {
 
 function showDIY() {
   if (!currentQuoteData) return;
-  const q = currentQuoteData;
+  var q = currentQuoteData;
 
   document.getElementById('diy-savings-chip').textContent =
-    `Save $${q.diy_savings_low.toLocaleString()}–$${q.diy_savings_high.toLocaleString()}`;
+    'Save $' + q.diy_savings_low.toLocaleString() + '–$' + q.diy_savings_high.toLocaleString();
   document.getElementById('diy-instructions').textContent = q.diy_steps;
 
-  const score = q.difficulty_score;
-  const pct = (score / 10) * 100;
-  const fill = document.getElementById('diff-fill');
+  var score = q.difficulty_score;
+  var fill  = document.getElementById('diff-fill');
   fill.style.width = '0';
   fill.style.background = score <= 4 ? '#5ec47a' : score <= 7 ? '#c8a84b' : '#e05050';
-  setTimeout(() => { fill.style.width = pct + '%'; }, 50);
+  setTimeout(function() { fill.style.width = ((score / 10) * 100) + '%'; }, 50);
   document.getElementById('diff-val').textContent = q.difficulty_label;
 
-  const warn = document.getElementById('diy-warning');
+  var warn = document.getElementById('diy-warning');
   if (q.diy_warning && q.diy_warning.length > 2) {
     document.getElementById('diy-warning-text').textContent = q.diy_warning;
     warn.classList.add('visible');
   } else {
     warn.classList.remove('visible');
   }
+
+  renderShopMaterials(q.diy_materials || []);
 
   document.getElementById('results').classList.remove('visible');
   document.getElementById('pro-panel').classList.remove('visible');
@@ -1103,28 +620,21 @@ function showDIY() {
 
 function showPro() {
   if (!currentQuoteData) return;
-  const q = currentQuoteData;
-
+  var q = currentQuoteData;
   document.getElementById('pro-intro').textContent = q.pro_recommendation;
 
-  const proNames = [
-    { name: 'Ridge & Sons', rate: '$110/hr', stars: '★★★★★', note: 'Top rated · 47 reviews' },
+  var proNames = [
+    { name: 'Ridge & Sons',            rate: '$110/hr', stars: '★★★★★', note: 'Top rated · 47 reviews' },
     { name: 'Precision Home Services', rate: '$125/hr', stars: '★★★★☆', note: 'Licensed & insured · NC' },
-    { name: 'Trademaster NC', rate: '$95/hr', stars: '★★★★★', note: 'Background checked · Fast response' },
-    { name: 'Carolina Craft Co.', rate: '$140/hr', stars: '★★★★☆', note: 'Premium finish · Warranty included' }
+    { name: 'Trademaster NC',          rate: '$95/hr',  stars: '★★★★★', note: 'Background checked · Fast response' },
+    { name: 'Carolina Craft Co.',      rate: '$140/hr', stars: '★★★★☆', note: 'Premium finish · Warranty included' }
   ];
 
-  const container = document.getElementById('pro-cards');
+  var container = document.getElementById('pro-cards');
   container.innerHTML = '';
-  const trade = document.getElementById('trade').value || 'Contractor';
-  proNames.slice(0, 4).forEach(p => {
-    container.innerHTML += `
-      <div class="pro-card">
-        <div class="pro-card-name">${p.name}</div>
-        <div class="pro-card-trade">${trade} · ${p.note}</div>
-        <div class="pro-card-stars">${p.stars}</div>
-        <div class="pro-card-rate">${p.rate} · Standard rate verified</div>
-      </div>`;
+  var trade = document.getElementById('trade').value || 'Contractor';
+  proNames.slice(0, 4).forEach(function(p) {
+    container.innerHTML += '<div class="pro-card"><div class="pro-card-name">' + p.name + '</div><div class="pro-card-trade">' + trade + ' · ' + p.note + '</div><div class="pro-card-stars">' + p.stars + '</div><div class="pro-card-rate">' + p.rate + ' · Standard rate verified</div></div>';
   });
 
   document.getElementById('results').classList.remove('visible');
@@ -1138,28 +648,22 @@ function newQuote() {
   document.getElementById('pro-panel').classList.remove('visible');
   document.getElementById('form-section').style.display = 'block';
   document.getElementById('job-desc').value = '';
+  document.getElementById('shop-materials-container').innerHTML = '';
   currentQuoteData = null;
 }
 
 function openEmailModal() {
-  const email = document.getElementById('user-email').value;
+  var email = document.getElementById('user-email').value;
   if (email) document.getElementById('modal-email').value = email;
   document.getElementById('email-modal').classList.add('active');
 }
 function closeEmailModal() { document.getElementById('email-modal').classList.remove('active'); }
-function sendEmail() {
-  alert('Quote sent! Check your inbox. (Demo mode — connect your backend to deliver.)');
-  closeEmailModal();
-}
+function sendEmail() { alert('Quote sent! Check your inbox. (Demo mode — connect your backend to deliver.)'); closeEmailModal(); }
+function exportPDF() { alert('PDF export coming soon — connect to your PDF endpoint.'); }
 
-function exportPDF() {
-  alert('PDF export coming soon — connect to your PDF endpoint. (Quote data ready in currentQuoteData.)');
-}
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(a.getAttribute('href'));
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
