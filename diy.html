@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>YSKAIPE DIY Guide</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            :root {
+                --ink: #0a0a0a;
+                --ink-soft: #1a1a1a;
+                --paper: #f5f2ed;
+                --accent: #e8593c;
+                --human: #1d9e75;
+                --warning: #e8a020;
+                --danger: #cc2222;
+                --mono: "IBM Plex Mono", monospace;
+                --display: "Bebas Neue", sans-serif;
+                --serif: "DM Serif Display", serif;
+                --body: "Instrument Sans", sans-serif;
+            }
+            body {
+                font-family: var(--body);
+                background: var(--ink);
+                color: var(--paper);
+                min-height: 100vh;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            /* NAV */
+            .nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 2.5rem;
+                border-bottom: 1px solid rgba(245, 242, 237, 0.08);
+            }
+            .nav-logo {
+                font-family: var(--display);
+                font-size: 1.5rem;
+                letter-spacing: 0.08em;
+                color: var(--paper);
+                text-decoration: none;
+            }
+            .nav-logo span {
+                color: var(--accent);
+            }
+            .nav-back {
+                font-size: 0.8rem;
+                color: rgba(245, 242, 237, 0.5);
+                text-decoration: none;
+                font-family: var(--mono);
+                letter-spacing: 0.06em;
+                transition: color 0.2s;
+            }
+            .nav-back:hover {
+                color: var(--paper);
+            }
+
+            /* LOADING */
+            .loading-screen {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 80vh;
+                gap: 1.5rem;
+            }
+            .loading-spinner {
+                width: 48px;
+                height: 48px;
+                border: 2px solid rgba(245, 242, 237, 0.1);
+                border-top-color: var(--accent);
+                border-radius: 50%;
+                animation: spin 0.8s linear infinite;
+            }
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            .loading-text {
+                font-family: var(--mono);
+                font-size: 0.8rem;
+                color: rgba(245, 242, 237, 0.4);
+                letter-spacing: 0.1em;
+            }
+
+            /* ERROR */
+            .error-screen {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 80vh;
+                gap: 1rem;
+                text-align: center;
+                padding: 2rem;
+            }
+            .error-screen h2 {
+                font-family: var(--display);
+                font-size: 3rem;
+                color: var(--accent);
+            }
+            .error-screen p {
+                color: rgba(245, 242, 237, 0.5);
+                max-width: 400px;
+            }
+
+            /* MAIN */
+            .main {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 3rem 2rem 6rem;
+                display: none;
+            }
+
+            /* HERO */
+            .diy-hero {
+                margin-bottom: 3rem;
+            }
+            .diy-eyebrow {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                letter-spacing: 0.14em;
+                color: rgba(245, 242, 237, 0.4);
+                text-transform: uppercase;
+                margin-bottom: 0.75rem;
+            }
+            .diy-trade {
+                font-family: var(--display);
+                font-size: clamp(3rem, 8vw, 6rem);
+                line-height: 0.9;
+                letter-spacing: -0.01em;
+                margin-bottom: 0.5rem;
+            }
+            .diy-desc {
+                font-size: 1rem;
+                color: rgba(245, 242, 237, 0.55);
+                max-width: 580px;
+                line-height: 1.65;
+            }
+
+            /* DIFFICULTY BADGE */
+            .difficulty-row {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin: 2rem 0;
+                flex-wrap: wrap;
+            }
+            .difficulty-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.6rem 1.25rem;
+                border-radius: 4px;
+                font-family: var(--mono);
+                font-size: 0.85rem;
+                font-weight: 500;
+                letter-spacing: 0.06em;
+            }
+            .difficulty-easy {
+                background: rgba(29, 158, 117, 0.15);
+                border: 1px solid rgba(29, 158, 117, 0.4);
+                color: #5dcaa5;
+            }
+            .difficulty-medium {
+                background: rgba(232, 160, 32, 0.15);
+                border: 1px solid rgba(232, 160, 32, 0.4);
+                color: #f0c050;
+            }
+            .difficulty-hard {
+                background: rgba(232, 89, 60, 0.15);
+                border: 1px solid rgba(232, 89, 60, 0.4);
+                color: #f08060;
+            }
+            .difficulty-dont {
+                background: rgba(204, 34, 34, 0.15);
+                border: 1px solid rgba(204, 34, 34, 0.4);
+                color: #ff6666;
+            }
+            .difficulty-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+            }
+            .difficulty-easy .difficulty-dot {
+                background: #5dcaa5;
+            }
+            .difficulty-medium .difficulty-dot {
+                background: #f0c050;
+            }
+            .difficulty-hard .difficulty-dot {
+                background: #f08060;
+            }
+            .difficulty-dont .difficulty-dot {
+                background: #ff6666;
+            }
+            .difficulty-reason {
+                font-size: 0.9rem;
+                color: rgba(245, 242, 237, 0.55);
+                max-width: 500px;
+            }
+
+            /* NOT RECOMMENDED BANNER */
+            .not-recommended {
+                background: rgba(204, 34, 34, 0.1);
+                border: 1px solid rgba(204, 34, 34, 0.3);
+                border-radius: 8px;
+                padding: 1.5rem 2rem;
+                margin-bottom: 2rem;
+            }
+            .not-recommended h3 {
+                font-family: var(--display);
+                font-size: 1.5rem;
+                color: #ff6666;
+                margin-bottom: 0.5rem;
+            }
+            .not-recommended p {
+                font-size: 0.9rem;
+                color: rgba(245, 242, 237, 0.65);
+                line-height: 1.65;
+            }
+
+            /* COST COMPARISON */
+            .cost-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1px;
+                background: rgba(245, 242, 237, 0.08);
+                border-radius: 8px;
+                overflow: hidden;
+                margin-bottom: 3rem;
+            }
+            .cost-box {
+                padding: 1.5rem;
+                background: var(--ink-soft);
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+            .cost-box.savings {
+                background: rgba(29, 158, 117, 0.1);
+            }
+            .cost-label {
+                font-family: var(--mono);
+                font-size: 0.65rem;
+                letter-spacing: 0.12em;
+                color: rgba(245, 242, 237, 0.4);
+                text-transform: uppercase;
+            }
+            .cost-value {
+                font-family: var(--display);
+                font-size: 2.5rem;
+                letter-spacing: 0.02em;
+                color: var(--paper);
+                line-height: 1;
+            }
+            .cost-box.savings .cost-value {
+                color: #5dcaa5;
+            }
+            .cost-sub {
+                font-size: 0.75rem;
+                color: rgba(245, 242, 237, 0.35);
+                font-family: var(--mono);
+            }
+
+            /* SECTIONS */
+            .section {
+                margin-bottom: 2.5rem;
+            }
+            .section-header {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                margin-bottom: 1.25rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid rgba(245, 242, 237, 0.08);
+            }
+            .section-num {
+                font-family: var(--mono);
+                font-size: 0.65rem;
+                color: var(--accent);
+                letter-spacing: 0.1em;
+            }
+            .section-title {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: var(--paper);
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+
+            /* TAGS */
+            .tag-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .tag {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                padding: 0.3rem 0.75rem;
+                background: rgba(245, 242, 237, 0.06);
+                border: 1px solid rgba(245, 242, 237, 0.1);
+                border-radius: 4px;
+                color: rgba(245, 242, 237, 0.65);
+            }
+
+            /* STEPS */
+            .steps-list {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .step-item {
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+                padding: 1rem 1.25rem;
+                background: rgba(245, 242, 237, 0.03);
+                border: 1px solid rgba(245, 242, 237, 0.07);
+                border-radius: 6px;
+            }
+            .step-num {
+                font-family: var(--mono);
+                font-size: 0.65rem;
+                color: var(--accent);
+                letter-spacing: 0.08em;
+                padding-top: 2px;
+                flex-shrink: 0;
+                min-width: 40px;
+            }
+            .step-text {
+                font-size: 0.9rem;
+                color: rgba(245, 242, 237, 0.75);
+                line-height: 1.65;
+            }
+
+            /* WARNINGS */
+            .warnings-list {
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .warning-item {
+                display: flex;
+                gap: 0.75rem;
+                align-items: flex-start;
+                padding: 0.85rem 1rem;
+                background: rgba(232, 160, 32, 0.07);
+                border: 1px solid rgba(232, 160, 32, 0.2);
+                border-radius: 6px;
+            }
+            .warning-icon {
+                color: var(--warning);
+                font-size: 0.9rem;
+                flex-shrink: 0;
+                padding-top: 1px;
+            }
+            .warning-text {
+                font-size: 0.85rem;
+                color: rgba(245, 242, 237, 0.7);
+                line-height: 1.55;
+            }
+
+            /* PERMIT */
+            .permit-box {
+                padding: 1.25rem 1.5rem;
+                background: rgba(127, 119, 221, 0.08);
+                border: 1px solid rgba(127, 119, 221, 0.25);
+                border-radius: 6px;
+                margin-bottom: 2.5rem;
+            }
+            .permit-box h4 {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                color: #afa9ec;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 0.5rem;
+            }
+            .permit-box p {
+                font-size: 0.9rem;
+                color: rgba(245, 242, 237, 0.65);
+                line-height: 1.6;
+            }
+
+            /* MATERIALS */
+            .materials-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .material-card {
+                background: rgba(245, 242, 237, 0.04);
+                border: 1px solid rgba(245, 242, 237, 0.08);
+                border-radius: 8px;
+                padding: 1.25rem 1.5rem;
+            }
+            .material-header {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 0.75rem;
+                flex-wrap: wrap;
+            }
+            .material-name {
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: var(--paper);
+            }
+            .material-cost {
+                font-family: var(--mono);
+                font-size: 0.8rem;
+                color: var(--accent);
+            }
+            .material-notes {
+                font-size: 0.8rem;
+                color: rgba(245, 242, 237, 0.45);
+                margin-bottom: 0.75rem;
+            }
+            .retailer-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .retailer-link {
+                font-family: var(--mono);
+                font-size: 0.65rem;
+                letter-spacing: 0.06em;
+                padding: 0.3rem 0.75rem;
+                background: rgba(245, 242, 237, 0.06);
+                border: 1px solid rgba(245, 242, 237, 0.12);
+                border-radius: 4px;
+                color: rgba(245, 242, 237, 0.55);
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+            .retailer-link:hover {
+                background: rgba(245, 242, 237, 0.12);
+                color: var(--paper);
+                border-color: rgba(245, 242, 237, 0.25);
+            }
+
+            /* CALL PRO BOX */
+            .call-pro-box {
+                padding: 1.5rem 2rem;
+                background: rgba(232, 89, 60, 0.08);
+                border: 1px solid rgba(232, 89, 60, 0.25);
+                border-radius: 8px;
+                margin-bottom: 3rem;
+            }
+            .call-pro-box h4 {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                color: var(--accent);
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 0.5rem;
+            }
+            .call-pro-box p {
+                font-size: 0.9rem;
+                color: rgba(245, 242, 237, 0.65);
+                line-height: 1.6;
+            }
+
+            /* ACTIONS */
+            .action-row {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            .btn-primary {
+                display: inline-flex;
+                align-items: center;
+                padding: 0.85rem 1.75rem;
+                background: var(--accent);
+                color: var(--paper);
+                font-size: 0.85rem;
+                font-weight: 600;
+                font-family: var(--body);
+                text-decoration: none;
+                border-radius: 4px;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .btn-primary:hover {
+                background: #d44e33;
+                transform: translateY(-1px);
+            }
+            .btn-ghost {
+                display: inline-flex;
+                align-items: center;
+                padding: 0.85rem 1.75rem;
+                background: transparent;
+                color: var(--paper);
+                font-size: 0.85rem;
+                font-weight: 600;
+                font-family: var(--body);
+                text-decoration: none;
+                border-radius: 4px;
+                border: 1px solid rgba(245, 242, 237, 0.2);
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .btn-ghost:hover {
+                border-color: rgba(245, 242, 237, 0.5);
+                background: rgba(245, 242, 237, 0.05);
+            }
+
+            @media (max-width: 600px) {
+                .nav {
+                    padding: 1rem 1.25rem;
+                }
+                .main {
+                    padding: 2rem 1.25rem 4rem;
+                }
+                .cost-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="nav">
+            <a href="/" class="nav-logo">YSK<span>AIPE</span></a>
+            <a href="/autoquote" class="nav-back">← Back to AutoQuote</a>
+        </nav>
+
+        <!-- LOADING -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">
+                Analyzing your job for DIY potential...
+            </div>
+        </div>
+
+        <!-- ERROR -->
+        <div class="error-screen" id="errorScreen">
+            <h2>Hmm.</h2>
+            <p>Couldn't load the DIY guide. Go back and try again.</p>
+            <a href="/autoquote" class="btn-primary" style="margin-top: 1rem"
+                >← Back to AutoQuote</a
+            >
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main" id="mainContent">
+            <div class="diy-hero">
+                <div class="diy-eyebrow">YSKAIPE DIY Guide</div>
+                <div class="diy-trade" id="diyTrade">—</div>
+                <div class="diy-desc" id="diyDesc">—</div>
+            </div>
+
+            <div class="difficulty-row">
+                <div class="difficulty-badge" id="difficultyBadge">
+                    <span class="difficulty-dot"></span>
+                    <span id="difficultyLabel">—</span>
+                </div>
+                <div class="difficulty-reason" id="difficultyReason">—</div>
+            </div>
+
+            <!-- NOT RECOMMENDED BANNER (shown if diy_possible = false) -->
+            <div
+                class="not-recommended"
+                id="notRecommendedBanner"
+                style="display: none"
+            >
+                <h3>⚠ Not recommended for DIY</h3>
+                <p id="notRecommendedReason">—</p>
+            </div>
+
+            <!-- COST COMPARISON -->
+            <div class="cost-grid" id="costGrid">
+                <div class="cost-box">
+                    <div class="cost-label">DIY Cost Estimate</div>
+                    <div class="cost-value" id="diyCost">—</div>
+                    <div class="cost-sub">materials + tools</div>
+                </div>
+                <div class="cost-box">
+                    <div class="cost-label">Pro Quote</div>
+                    <div class="cost-value" id="proCost">—</div>
+                    <div class="cost-sub">full service</div>
+                </div>
+                <div class="cost-box savings">
+                    <div class="cost-label">Potential Savings</div>
+                    <div class="cost-value" id="savings">—</div>
+                    <div class="cost-sub">if you DIY</div>
+                </div>
+            </div>
+
+            <!-- TIME + SKILLS -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-num">01</span>
+                    <span class="section-title">Time & Skills Required</span>
+                </div>
+                <div style="margin-bottom: 1rem">
+                    <div
+                        style="
+                            font-family: var(--mono);
+                            font-size: 0.7rem;
+                            color: rgba(245, 242, 237, 0.4);
+                            letter-spacing: 0.1em;
+                            text-transform: uppercase;
+                            margin-bottom: 0.5rem;
+                        "
+                    >
+                        Time Estimate
+                    </div>
+                    <div
+                        style="font-size: 1rem; color: var(--paper)"
+                        id="timeEstimate"
+                    >
+                        —
+                    </div>
+                </div>
+                <div class="tag-list" id="skillsList"></div>
+            </div>
+
+            <!-- TOOLS -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-num">02</span>
+                    <span class="section-title">Tools Needed</span>
+                </div>
+                <div class="tag-list" id="toolsList"></div>
+            </div>
+
+            <!-- STEPS -->
+            <div class="section" id="stepsSection">
+                <div class="section-header">
+                    <span class="section-num">03</span>
+                    <span class="section-title">Steps Overview</span>
+                </div>
+                <div class="steps-list" id="stepsList"></div>
+            </div>
+
+            <!-- SAFETY -->
+            <div class="section" id="safetySection">
+                <div class="section-header">
+                    <span class="section-num">04</span>
+                    <span class="section-title">Safety Warnings</span>
+                </div>
+                <div class="warnings-list" id="warningsList"></div>
+            </div>
+
+            <!-- PERMIT -->
+            <div class="permit-box" id="permitBox" style="display: none">
+                <h4>⚡ Permit Required</h4>
+                <p id="permitNote">—</p>
+            </div>
+
+            <!-- MATERIALS + PRODUCTS -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-num">05</span>
+                    <span class="section-title">Materials & Where to Buy</span>
+                </div>
+                <div class="materials-list" id="materialsList"></div>
+            </div>
+
+            <!-- WHEN TO CALL PRO -->
+            <div class="call-pro-box">
+                <h4>When to call a pro instead</h4>
+                <p id="whenToCallPro">—</p>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="action-row">
+                <a href="/autoquote" class="btn-primary"
+                    >Book a pro instead →</a
+                >
+                <a href="/autoquote" class="btn-ghost">New quote</a>
+            </div>
+        </div>
+
+        <script>
+            function formatCurrency(n) {
+                return "$" + Math.round(n).toLocaleString("en-US");
+            }
+
+            function getDifficultyClass(d) {
+                if (d === "Easy") return "difficulty-easy";
+                if (d === "Medium") return "difficulty-medium";
+                if (d === "Hard") return "difficulty-hard";
+                return "difficulty-dont";
+            }
+
+            async function loadDIY() {
+                // Get quote from sessionStorage
+                const raw = sessionStorage.getItem("yskaipe_diy_quote");
+                if (!raw) {
+                    document.getElementById("loadingScreen").style.display =
+                        "none";
+                    document.getElementById("errorScreen").style.display =
+                        "flex";
+                    return;
+                }
+
+                const quote = JSON.parse(raw);
+
+                try {
+                    const res = await fetch("/api/diy", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ quote }),
+                    });
+
+                    if (!res.ok) throw new Error("API failed");
+                    const { diy } = await res.json();
+
+                    // Populate page
+                    document.getElementById("diyTrade").textContent =
+                        quote.trade;
+                    document.getElementById("diyDesc").textContent =
+                        quote.description;
+
+                    // Difficulty
+                    const badge = document.getElementById("difficultyBadge");
+                    badge.className =
+                        "difficulty-badge " +
+                        getDifficultyClass(diy.difficulty);
+                    badge.querySelector(".difficulty-dot").style.background =
+                        window.getComputedStyle(badge).color;
+                    document.getElementById("difficultyLabel").textContent =
+                        diy.difficulty;
+                    document.getElementById("difficultyReason").textContent =
+                        diy.difficulty_reason;
+
+                    // Not recommended
+                    if (!diy.diy_possible) {
+                        document.getElementById(
+                            "notRecommendedBanner",
+                        ).style.display = "block";
+                        document.getElementById(
+                            "notRecommendedReason",
+                        ).textContent = diy.diy_not_recommended_reason;
+                    }
+
+                    // Costs
+                    document.getElementById("diyCost").textContent =
+                        formatCurrency(diy.diy_cost_estimate);
+                    document.getElementById("proCost").textContent =
+                        formatCurrency(diy.pro_cost);
+                    document.getElementById("savings").textContent =
+                        formatCurrency(diy.savings);
+
+                    // Time + skills
+                    document.getElementById("timeEstimate").textContent =
+                        diy.time_estimate;
+                    const skillsList = document.getElementById("skillsList");
+                    (diy.skill_requirements || []).forEach((s) => {
+                        const tag = document.createElement("span");
+                        tag.className = "tag";
+                        tag.textContent = s;
+                        skillsList.appendChild(tag);
+                    });
+
+                    // Tools
+                    const toolsList = document.getElementById("toolsList");
+                    (diy.tools_needed || []).forEach((t) => {
+                        const tag = document.createElement("span");
+                        tag.className = "tag";
+                        tag.textContent = t;
+                        toolsList.appendChild(tag);
+                    });
+
+                    // Steps
+                    const stepsList = document.getElementById("stepsList");
+                    (diy.steps_overview || []).forEach((step, i) => {
+                        const div = document.createElement("div");
+                        div.className = "step-item";
+                        div.innerHTML = `<div class="step-num">0${i + 1}</div><div class="step-text">${step.replace(/^Step \d+:\s*/i, "")}</div>`;
+                        stepsList.appendChild(div);
+                    });
+
+                    // Warnings
+                    const warningsList =
+                        document.getElementById("warningsList");
+                    (diy.safety_warnings || []).forEach((w) => {
+                        const div = document.createElement("div");
+                        div.className = "warning-item";
+                        div.innerHTML = `<div class="warning-icon">⚠</div><div class="warning-text">${w}</div>`;
+                        warningsList.appendChild(div);
+                    });
+
+                    // Permit
+                    if (diy.permit_required) {
+                        document.getElementById("permitBox").style.display =
+                            "block";
+                        document.getElementById("permitNote").textContent =
+                            diy.permit_note;
+                    }
+
+                    // Materials
+                    const materialsList =
+                        document.getElementById("materialsList");
+                    (diy.materials || []).forEach((m) => {
+                        const card = document.createElement("div");
+                        card.className = "material-card";
+                        const retailerLinks = (m.retailers || [])
+                            .map(
+                                (r) =>
+                                    `<a href="${r.url}" target="_blank" rel="noopener" class="retailer-link">${r.name} →</a>`,
+                            )
+                            .join("");
+                        card.innerHTML = `
+          <div class="material-header">
+            <div class="material-name">${m.name}</div>
+            <div class="material-cost">${m.estimated_cost}</div>
+          </div>
+          ${m.notes ? `<div class="material-notes">${m.notes}</div>` : ""}
+          <div class="retailer-links">${retailerLinks}</div>
+        `;
+                        materialsList.appendChild(card);
+                    });
+
+                    // When to call pro
+                    document.getElementById("whenToCallPro").textContent =
+                        diy.when_to_call_pro;
+
+                    // Show content
+                    document.getElementById("loadingScreen").style.display =
+                        "none";
+                    document.getElementById("mainContent").style.display =
+                        "block";
+                } catch (err) {
+                    console.error(err);
+                    document.getElementById("loadingScreen").style.display =
+                        "none";
+                    document.getElementById("errorScreen").style.display =
+                        "flex";
+                }
+            }
+
+            loadDIY();
+        </script>
+    </body>
+</html>
