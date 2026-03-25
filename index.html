@@ -1,2105 +1,1167 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Yskaipe — Human Hands. AI Power.</title>
-        <meta
-            name="description"
-            content="The archetype hub for skilled professionals who use AI to multiply their impact — without losing the human edge that makes them irreplaceable."
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            /* =========================================
-   YSKAIPE.COM — Industrial Editorial
-   Bebas Neue + DM Serif Display + IBM Plex Mono
-   Dark base, raw textures, bold type
-   ========================================= */
-
-            *,
-            *::before,
-            *::after {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-
-            :root {
-                --ink: #0a0a0a;
-                --ink-soft: #1a1a1a;
-                --paper: #f5f2ed;
-                --paper-dark: #ece8e1;
-                --accent: #e8593c;
-                --accent-warm: #f2a623;
-                --accent-cool: #3b82d4;
-                --human: #1d9e75;
-                --ai: #7f77dd;
-                --mono: "IBM Plex Mono", monospace;
-                --display: "Bebas Neue", sans-serif;
-                --serif: "DM Serif Display", serif;
-                --body: "Instrument Sans", sans-serif;
-                --radius: 4px;
-                --radius-md: 8px;
-                --radius-lg: 16px;
-            }
-
-            html {
-                scroll-behavior: smooth;
-            }
-
-            body {
-                font-family: var(--body);
-                background: var(--ink);
-                color: var(--paper);
-                overflow-x: hidden;
-                -webkit-font-smoothing: antialiased;
-            }
-
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 2rem;
-            }
-
-            .mono {
-                font-family: var(--mono);
-            }
-
-            /* ==================
-   NAV
-================== */
-            .nav {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 100;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 1.25rem 2.5rem;
-                transition:
-                    background 0.3s,
-                    backdrop-filter 0.3s;
-            }
-
-            .nav.scrolled {
-                background: rgba(10, 10, 10, 0.92);
-                backdrop-filter: blur(12px);
-                border-bottom: 1px solid rgba(245, 242, 237, 0.08);
-            }
-
-            .nav-logo {
-                font-family: var(--display);
-                font-size: 1.6rem;
-                letter-spacing: 0.08em;
-                color: var(--paper);
-                text-decoration: none;
-                line-height: 1;
-            }
-            .nav-logo span {
-                color: var(--accent);
-            }
-
-            .nav-links {
-                display: flex;
-                align-items: center;
-                gap: 2.5rem;
-            }
-
-            .nav-links a {
-                font-size: 0.8rem;
-                font-weight: 500;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                color: rgba(245, 242, 237, 0.65);
-                text-decoration: none;
-                transition: color 0.2s;
-            }
-            .nav-links a:hover {
-                color: var(--paper);
-            }
-
-            .nav-cta {
-                background: var(--accent) !important;
-                color: var(--paper) !important;
-                padding: 0.5rem 1.25rem;
-                border-radius: var(--radius);
-                font-weight: 600 !important;
-                transition: opacity 0.2s !important;
-            }
-            .nav-cta:hover {
-                opacity: 0.88 !important;
-            }
-
-            .nav-burger {
-                display: none;
-                flex-direction: column;
-                gap: 5px;
-                background: none;
-                border: none;
-                cursor: pointer;
-                padding: 4px;
-            }
-            .nav-burger span {
-                display: block;
-                width: 24px;
-                height: 2px;
-                background: var(--paper);
-                border-radius: 2px;
-                transition:
-                    transform 0.3s,
-                    opacity 0.3s;
-            }
-
-            /* MOBILE MENU */
-            .mobile-menu {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 99;
-                background: var(--ink);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s;
-            }
-            .mobile-menu.open {
-                display: flex;
-                opacity: 1;
-                pointer-events: all;
-            }
-            .mob-link {
-                font-family: var(--display);
-                font-size: 3rem;
-                letter-spacing: 0.06em;
-                color: var(--paper);
-                text-decoration: none;
-                transition: color 0.2s;
-            }
-            .mob-link:hover {
-                color: var(--accent);
-            }
-            .mob-cta {
-                color: var(--accent);
-            }
-
-            /* ==================
-   HERO
-================== */
-            .hero {
-                position: relative;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                padding: 9rem 2.5rem 5rem;
-                overflow: hidden;
-            }
-
-            .hero-bg-grid {
-                position: absolute;
-                inset: 0;
-                background-image:
-                    linear-gradient(
-                        rgba(245, 242, 237, 0.04) 1px,
-                        transparent 1px
-                    ),
-                    linear-gradient(
-                        90deg,
-                        rgba(245, 242, 237, 0.04) 1px,
-                        transparent 1px
-                    );
-                background-size: 60px 60px;
-                pointer-events: none;
-            }
-
-            .hero-noise {
-                position: absolute;
-                inset: 0;
-                opacity: 0.03;
-                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-                background-size: 200px 200px;
-                pointer-events: none;
-            }
-
-            .hero-eyebrow {
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-                margin-bottom: 2rem;
-                font-size: 0.72rem;
-                font-family: var(--mono);
-                letter-spacing: 0.12em;
-                color: rgba(245, 242, 237, 0.5);
-                animation: fadeUp 0.8s ease both;
-            }
-
-            .dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: var(--accent);
-                flex-shrink: 0;
-            }
-            .dot--pulse {
-                animation: pulse 2s ease-in-out infinite;
-            }
-            @keyframes pulse {
-                0%,
-                100% {
-                    box-shadow: 0 0 0 0 rgba(232, 89, 60, 0.6);
-                }
-                50% {
-                    box-shadow: 0 0 0 8px rgba(232, 89, 60, 0);
-                }
-            }
-
-            .hero-headline {
-                display: flex;
-                flex-direction: column;
-                line-height: 0.88;
-                margin-bottom: 2.5rem;
-            }
-
-            .line {
-                font-family: var(--display);
-                font-size: clamp(5rem, 14vw, 14rem);
-                letter-spacing: -0.01em;
-                display: block;
-                overflow: hidden;
-            }
-            .line-1 {
-                animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-            }
-            .line-2 {
-                animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
-                color: var(--accent);
-            }
-            .line-3 {
-                animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
-                font-family: var(--serif);
-                font-style: italic;
-                font-size: clamp(4rem, 11vw, 11rem);
-                color: rgba(245, 242, 237, 0.7);
-            }
-
-            @keyframes slideIn {
-                from {
-                    transform: translateY(110%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-            @keyframes fadeUp {
-                from {
-                    transform: translateY(20px);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-
-            .hero-sub {
-                max-width: 600px;
-                font-size: 1.1rem;
-                line-height: 1.7;
-                color: rgba(245, 242, 237, 0.7);
-                margin-bottom: 2.5rem;
-                animation: fadeUp 0.8s ease 0.5s both;
-            }
-            .hero-sub em {
-                font-style: normal;
-                color: var(--paper);
-                font-weight: 600;
-            }
-
-            .hero-actions {
-                display: flex;
-                gap: 1rem;
-                flex-wrap: wrap;
-                margin-bottom: 5rem;
-                animation: fadeUp 0.8s ease 0.6s both;
-            }
-
-            .hero-stats {
-                display: flex;
-                align-items: center;
-                gap: 0;
-                flex-wrap: wrap;
-                border: 1px solid rgba(245, 242, 237, 0.1);
-                border-radius: var(--radius-md);
-                overflow: hidden;
-                animation: fadeUp 0.8s ease 0.7s both;
-            }
-
-            .stat {
-                flex: 1;
-                min-width: 140px;
-                padding: 1.25rem 1.75rem;
-                display: flex;
-                flex-direction: column;
-                gap: 0.25rem;
-                border-right: 1px solid rgba(245, 242, 237, 0.1);
-            }
-            .stat:last-child {
-                border-right: none;
-            }
-            .stat-num {
-                font-family: var(--display);
-                font-size: 2rem;
-                letter-spacing: 0.02em;
-                color: var(--accent);
-                line-height: 1;
-            }
-            .stat-label {
-                font-size: 0.7rem;
-                font-family: var(--mono);
-                color: rgba(245, 242, 237, 0.45);
-                letter-spacing: 0.05em;
-            }
-            .stat-divider {
-                display: none;
-            }
-
-            /* ==================
-   BUTTONS
-================== */
-            .btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                padding: 0.85rem 1.75rem;
-                font-size: 0.85rem;
-                font-weight: 600;
-                font-family: var(--body);
-                letter-spacing: 0.04em;
-                text-decoration: none;
-                border-radius: var(--radius);
-                border: none;
-                cursor: pointer;
-                transition: all 0.2s;
-                white-space: nowrap;
-            }
-            .btn--primary {
-                background: var(--accent);
-                color: var(--paper);
-            }
-            .btn--primary:hover {
-                background: #d44e33;
-                transform: translateY(-1px);
-            }
-            .btn--ghost {
-                background: transparent;
-                color: var(--paper);
-                border: 1px solid rgba(245, 242, 237, 0.25);
-            }
-            .btn--ghost:hover {
-                border-color: rgba(245, 242, 237, 0.6);
-                background: rgba(245, 242, 237, 0.05);
-            }
-            .btn--large {
-                padding: 1.1rem 2.5rem;
-                font-size: 1rem;
-            }
-
-            /* ==================
-   MARQUEE
-================== */
-            .marquee-wrap {
-                border-top: 1px solid rgba(245, 242, 237, 0.1);
-                border-bottom: 1px solid rgba(245, 242, 237, 0.1);
-                background: rgba(245, 242, 237, 0.03);
-                overflow: hidden;
-                padding: 1rem 0;
-            }
-            .marquee-track {
-                display: flex;
-                gap: 2rem;
-                align-items: center;
-                white-space: nowrap;
-                animation: marquee 28s linear infinite;
-                width: max-content;
-            }
-            .marquee-track span {
-                font-family: var(--display);
-                font-size: 1.1rem;
-                letter-spacing: 0.1em;
-                color: rgba(245, 242, 237, 0.35);
-            }
-            .marquee-track .sep {
-                color: var(--accent);
-                font-size: 0.6rem;
-                opacity: 0.6;
-            }
-            @keyframes marquee {
-                from {
-                    transform: translateX(0);
-                }
-                to {
-                    transform: translateX(-50%);
-                }
-            }
-
-            /* ==================
-   MOAT SECTION
-================== */
-            .moat {
-                padding: 8rem 0;
-                background: var(--ink-soft);
-                position: relative;
-            }
-
-            .section-label {
-                font-size: 0.72rem;
-                letter-spacing: 0.14em;
-                color: rgba(245, 242, 237, 0.35);
-                margin-bottom: 3rem;
-                text-transform: uppercase;
-            }
-
-            .moat-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 6rem;
-                align-items: start;
-            }
-
-            .moat-headline {
-                font-family: var(--display);
-                font-size: clamp(3.5rem, 6vw, 6rem);
-                line-height: 0.9;
-                letter-spacing: -0.01em;
-                margin-bottom: 2rem;
-            }
-            .moat-headline em {
-                font-family: var(--serif);
-                font-style: italic;
-                color: var(--accent);
-            }
-
-            .moat-body {
-                font-size: 1rem;
-                line-height: 1.75;
-                color: rgba(245, 242, 237, 0.65);
-                margin-bottom: 1.25rem;
-            }
-
-            .moat-right {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .moat-card {
-                display: flex;
-                align-items: flex-start;
-                gap: 1rem;
-                padding: 1.25rem 1.5rem;
-                background: rgba(245, 242, 237, 0.04);
-                border: 1px solid rgba(245, 242, 237, 0.08);
-                border-radius: var(--radius-md);
-                transition:
-                    border-color 0.25s,
-                    background 0.25s;
-                opacity: 0;
-                transform: translateY(20px);
-                transition:
-                    opacity 0.5s ease,
-                    transform 0.5s ease,
-                    border-color 0.25s,
-                    background 0.25s;
-            }
-            .moat-card.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            .moat-card:hover {
-                background: rgba(245, 242, 237, 0.07);
-                border-color: rgba(245, 242, 237, 0.18);
-            }
-
-            .moat-card-icon {
-                font-size: 1.4rem;
-                flex-shrink: 0;
-                margin-top: 2px;
-            }
-            .moat-card-text {
-                display: flex;
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-            .moat-card-text strong {
-                font-size: 0.9rem;
-                font-weight: 600;
-                color: var(--paper);
-            }
-            .moat-card-text span {
-                font-size: 0.85rem;
-                color: rgba(245, 242, 237, 0.55);
-                line-height: 1.6;
-            }
-
-            /* ==================
-   Built for the Next Economy
-================== */
-            .archetypes {
-                padding: 8rem 0;
-                background: var(--ink);
-            }
-
-            .section-headline {
-                font-family: var(--display);
-                font-size: clamp(2.5rem, 5vw, 5rem);
-                line-height: 1;
-                letter-spacing: -0.01em;
-                margin-bottom: 1rem;
-            }
-            .section-headline em {
-                font-family: var(--serif);
-                font-style: italic;
-                color: var(--accent);
-            }
-
-            .section-sub {
-                font-size: 1rem;
-                color: rgba(245, 242, 237, 0.55);
-                max-width: 560px;
-                line-height: 1.65;
-                margin-bottom: 5rem;
-            }
-
-            .sector {
-                margin-bottom: 5rem;
-            }
-
-            .sector-header {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                margin-bottom: 1.75rem;
-                padding-bottom: 1rem;
-                border-bottom: 1px solid rgba(245, 242, 237, 0.08);
-            }
-            .sector-dot {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                flex-shrink: 0;
-            }
-            .sector-title {
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: var(--paper);
-                margin-bottom: 0.2rem;
-            }
-            .sector-desc {
-                font-size: 0.8rem;
-                color: rgba(245, 242, 237, 0.4);
-                font-family: var(--mono);
-            }
-
-            .archetype-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-                gap: 1px;
-                background: rgba(245, 242, 237, 0.08);
-                border: 1px solid rgba(245, 242, 237, 0.08);
-                border-radius: var(--radius-md);
-                overflow: hidden;
-            }
-
-            .archetype-card {
-                position: relative;
-                padding: 1.75rem;
-                background: var(--ink);
-                cursor: pointer;
-                transition: background 0.2s;
-                display: flex;
-                flex-direction: column;
-                gap: 0.6rem;
-            }
-            .archetype-card:hover {
-                background: #111;
-            }
-            .archetype-card:hover .arch-arrow {
-                transform: translateX(4px);
-                color: var(--accent);
-            }
-
-            .arch-num {
-                font-size: 0.65rem;
-                color: rgba(245, 242, 237, 0.25);
-                letter-spacing: 0.08em;
-            }
-            .arch-icon {
-                font-size: 1.6rem;
-                margin: 0.25rem 0;
-            }
-            .archetype-card h4 {
-                font-size: 1rem;
-                font-weight: 600;
-                color: var(--paper);
-            }
-            .archetype-card p {
-                font-size: 0.82rem;
-                color: rgba(245, 242, 237, 0.5);
-                line-height: 1.6;
-                flex: 1;
-            }
-            .arch-tags {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.4rem;
-                margin-top: 0.4rem;
-            }
-            .tag {
-                font-size: 0.65rem;
-                font-family: var(--mono);
-                padding: 0.25rem 0.6rem;
-                border-radius: var(--radius);
-                font-weight: 500;
-                letter-spacing: 0.04em;
-            }
-            .tag--human {
-                background: rgba(29, 158, 117, 0.15);
-                color: #5dcaa5;
-                border: 1px solid rgba(29, 158, 117, 0.25);
-            }
-            .tag--ai {
-                background: rgba(127, 119, 221, 0.15);
-                color: #afa9ec;
-                border: 1px solid rgba(127, 119, 221, 0.25);
-            }
-            .arch-arrow {
-                position: absolute;
-                bottom: 1.5rem;
-                right: 1.5rem;
-                font-size: 1rem;
-                color: rgba(245, 242, 237, 0.2);
-                transition: all 0.2s;
-            }
-
-            /* ==================
-   HOW IT WORKS
-================== */
-            .how {
-                padding: 8rem 0;
-                background: var(--paper);
-                color: var(--ink);
-            }
-            .how .section-label {
-                color: rgba(10, 10, 10, 0.3);
-            }
-            .how .section-headline {
-                color: var(--ink);
-            }
-            .how .section-headline em {
-                color: var(--accent);
-            }
-
-            .how-grid {
-                display: flex;
-                align-items: flex-start;
-                gap: 0;
-                margin-top: 4rem;
-            }
-
-            .how-step {
-                flex: 1;
-                padding: 2rem;
-                border: 1px solid rgba(10, 10, 10, 0.1);
-                border-radius: var(--radius-md);
-                background: #fff;
-                position: relative;
-            }
-            .how-step:hover {
-                border-color: rgba(10, 10, 10, 0.25);
-                box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-            }
-            .how-num {
-                font-size: 0.7rem;
-                color: var(--accent);
-                letter-spacing: 0.1em;
-                margin-bottom: 0.75rem;
-            }
-            .how-step h3 {
-                font-size: 1.15rem;
-                font-weight: 600;
-                color: var(--ink);
-                margin-bottom: 0.75rem;
-            }
-            .how-step p {
-                font-size: 0.9rem;
-                color: rgba(10, 10, 10, 0.6);
-                line-height: 1.7;
-            }
-
-            .how-connector {
-                font-size: 1.5rem;
-                color: rgba(10, 10, 10, 0.2);
-                padding: 0 1rem;
-                padding-top: 2rem;
-                flex-shrink: 0;
-            }
-
-            /* ==================
-   JOIN / CTA
-================== */
-            .join {
-                position: relative;
-                padding: 8rem 0;
-                background: var(--ink);
-                overflow: hidden;
-            }
-
-            .join::before {
-                content: "JOIN";
-                position: absolute;
-                top: -1rem;
-                right: -2rem;
-                font-family: var(--display);
-                font-size: clamp(10rem, 22vw, 22rem);
-                color: rgba(245, 242, 237, 0.03);
-                letter-spacing: -0.02em;
-                pointer-events: none;
-                user-select: none;
-                line-height: 1;
-            }
-
-            .join-noise {
-                position: absolute;
-                inset: 0;
-                opacity: 0.025;
-                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-                background-size: 200px 200px;
-                pointer-events: none;
-            }
-
-            .join-tag {
-                font-size: 0.72rem;
-                letter-spacing: 0.14em;
-                color: rgba(245, 242, 237, 0.35);
-                text-transform: uppercase;
-                margin-bottom: 2rem;
-            }
-
-            .join-headline {
-                font-family: var(--display);
-                font-size: clamp(3rem, 7vw, 7rem);
-                line-height: 0.9;
-                letter-spacing: -0.01em;
-                margin-bottom: 1.5rem;
-            }
-            .join-headline em {
-                font-family: var(--serif);
-                font-style: italic;
-                color: var(--accent);
-            }
-
-            .join-sub {
-                max-width: 580px;
-                font-size: 1rem;
-                line-height: 1.7;
-                color: rgba(245, 242, 237, 0.6);
-                margin-bottom: 3rem;
-            }
-
-            .join-form {
-                max-width: 760px;
-            }
-
-            .form-row {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                gap: 0.75rem;
-                margin-bottom: 1rem;
-            }
-
-            .join-form input,
-            .join-form select {
-                width: 100%;
-                padding: 0.9rem 1.1rem;
-                background: rgba(245, 242, 237, 0.06);
-                border: 1px solid rgba(245, 242, 237, 0.12);
-                border-radius: var(--radius);
-                font-family: var(--body);
-                font-size: 0.9rem;
-                color: var(--paper);
-                outline: none;
-                transition: border-color 0.2s;
-                appearance: none;
-            }
-            .join-form input::placeholder {
-                color: rgba(245, 242, 237, 0.3);
-            }
-            .join-form input:focus,
-            .join-form select:focus {
-                border-color: var(--accent);
-            }
-            .join-form select option {
-                background: #1a1a1a;
-                color: var(--paper);
-            }
-
-            .join-success {
-                display: none;
-                align-items: center;
-                gap: 1rem;
-                padding: 1.5rem 2rem;
-                background: rgba(29, 158, 117, 0.1);
-                border: 1px solid rgba(29, 158, 117, 0.25);
-                border-radius: var(--radius-md);
-                color: #5dcaa5;
-                font-size: 1rem;
-                max-width: 500px;
-            }
-            .join-success.visible {
-                display: flex;
-            }
-            .success-icon {
-                font-size: 1.25rem;
-                color: var(--human);
-            }
-
-            /* ==================
-   FOOTER
-================== */
-            .footer {
-                background: #060606;
-                padding: 3rem 0;
-                border-top: 1px solid rgba(245, 242, 237, 0.06);
-            }
-            .footer-inner {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                gap: 1.5rem;
-            }
-            .footer-logo {
-                font-family: var(--display);
-                font-size: 1.4rem;
-                letter-spacing: 0.08em;
-                color: rgba(245, 242, 237, 0.5);
-            }
-            .footer-logo span {
-                color: var(--accent);
-                opacity: 0.7;
-            }
-            .footer-tagline {
-                font-size: 0.7rem;
-                color: rgba(245, 242, 237, 0.25);
-                letter-spacing: 0.08em;
-            }
-            .footer-links {
-                display: flex;
-                gap: 1.5rem;
-            }
-            .footer-links a {
-                font-size: 0.8rem;
-                color: rgba(245, 242, 237, 0.4);
-                text-decoration: none;
-                transition: color 0.2s;
-            }
-            .footer-links a:hover {
-                color: var(--paper);
-            }
-            .footer-copy {
-                font-size: 0.7rem;
-                color: rgba(245, 242, 237, 0.2);
-                letter-spacing: 0.06em;
-                width: 100%;
-            }
-
-            /* ==================
-   RESPONSIVE
-================== */
-            @media (max-width: 900px) {
-                .nav-links {
-                    display: none;
-                }
-                .nav-burger {
-                    display: flex;
-                }
-
-                .moat-grid {
-                    grid-template-columns: 1fr;
-                    gap: 3rem;
-                }
-                .moat-left .btn {
-                    margin-top: 1rem;
-                }
-
-                .how-grid {
-                    flex-direction: column;
-                    gap: 1rem;
-                }
-                .how-connector {
-                    transform: rotate(90deg);
-                    padding: 0;
-                    align-self: center;
-                }
-
-                .form-row {
-                    grid-template-columns: 1fr;
-                }
-
-                .footer-inner {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-
-                .hero-stats {
-                    flex-direction: column;
-                }
-                .stat {
-                    border-right: none;
-                    border-bottom: 1px solid rgba(245, 242, 237, 0.1);
-                }
-                .stat:last-child {
-                    border-bottom: none;
-                }
-            }
-
-            @media (max-width: 600px) {
-                .hero {
-                    padding: 7rem 1.5rem 4rem;
-                }
-                .container {
-                    padding: 0 1.25rem;
-                }
-                .nav {
-                    padding: 1rem 1.5rem;
-                }
-                .archetype-grid {
-                    grid-template-columns: 1fr;
-                }
-                .how-step {
-                    padding: 1.5rem;
-                }
-            }
-
-            /* ==================
-   SCROLL ANIMATIONS
-================== */
-            .reveal {
-                opacity: 0;
-                transform: translateY(28px);
-                transition:
-                    opacity 0.65s ease,
-                    transform 0.65s ease;
-            }
-            .reveal.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        </style>
-    </head>
-    <body>
-        <!-- NAV -->
-        <nav class="nav" id="nav">
-            <a href="#" class="nav-logo">YSK<span>AIPE</span></a>
-            <div class="nav-links">
-                <a href="#archetypes">Built for the Next Economy</a>
-                <a href="#moat">The Moat</a>
-                <a href="#sectors">Sectors</a>
-                <a href="public/autoquote.html" class="nav-cta"
-                    >*Get an AutoQuote*</a
-                >
-                <a href="#join" class="nav-cta">Join the Hub</a>
-            </div>
-            <button class="nav-burger" id="burger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
-
-        <!-- MOBILE MENU -->
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#next-economy" class="mob-link"
-                >Built for the Next Economy</a
-            >
-            <a href="#moat" class="mob-link">The Moat</a>
-            <a href="#sectors" class="mob-link">Sectors</a>
-            <a href="#join" class="mob-link mob-cta">Join the Hub</a>
-        </div>
-
-        <!-- HERO -->
-        <section class="hero" id="hero">
-            <div class="hero-bg-grid"></div>
-            <div class="hero-noise"></div>
-
-            <div class="hero-eyebrow">
-                <span class="dot dot--pulse"></span>
-                <span class="mono">Built for the Next Economy — EST. 2025</span>
-            </div>
-
-            <h1 class="hero-headline">
-                <span class="line line-1">HUMAN</span>
-                <span class="line line-2">HANDS.</span>
-                <span class="line line-3 italic">AI Power.</span>
-            </h1>
-
-            <p class="hero-sub">
-                The future belongs to people who can’t be replaced. Plumbers.
-                Electricians. Builders. Operators. The world runs on people who
-                show up in real life. AI won’t replace them. But it will make
-                them unstoppable. We show you how. Turn your skills into income
-                AI can’t touch.
-                <em>Earn more. Stay relevant. Own your future.</em>
-            </p>
-
-            <div class="hero-actions">
-                <a href="#next-economy" class="btn btn--primary"
-                    >Explore the Next Economy</a
-                >
-                <a href="#moat" class="btn btn--ghost">Why the moat holds</a>
-            </div>
-
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-num">$2.1T</span>
-                    <span class="stat-label">Skilled trades market</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                    <span class="stat-num">3.5M</span>
-                    <span class="stat-label">Unfilled trade jobs today</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                    <span class="stat-num">0%</span>
-                    <span class="stat-label">Fully automatable</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat">
-                    <span class="stat-num">10×</span>
-                    <span class="stat-label"
-                        >Productivity w/ AI augmentation</span
-                    >
-                </div>
-            </div>
-        </section>
-
-        <!-- MARQUEE -->
-        <div class="marquee-wrap">
-            <div class="marquee-track">
-                <span>PLUMBING</span><span class="sep">✦</span>
-                <span>ELECTRICAL</span><span class="sep">✦</span>
-                <span>HVAC</span><span class="sep">✦</span> <span>ROOFING</span
-                ><span class="sep">✦</span> <span>HEALTHCARE</span
-                ><span class="sep">✦</span> <span>INSPECTION</span
-                ><span class="sep">✦</span> <span>AGRICULTURE</span
-                ><span class="sep">✦</span> <span>CONSTRUCTION</span
-                ><span class="sep">✦</span> <span>EMERGENCY RESPONSE</span
-                ><span class="sep">✦</span> <span>FABRICATION</span
-                ><span class="sep">✦</span> <span>PLUMBING</span
-                ><span class="sep">✦</span> <span>ELECTRICAL</span
-                ><span class="sep">✦</span> <span>HVAC</span
-                ><span class="sep">✦</span> <span>ROOFING</span
-                ><span class="sep">✦</span> <span>HEALTHCARE</span
-                ><span class="sep">✦</span> <span>INSPECTION</span
-                ><span class="sep">✦</span> <span>AGRICULTURE</span
-                ><span class="sep">✦</span> <span>CONSTRUCTION</span
-                ><span class="sep">✦</span> <span>EMERGENCY RESPONSE</span
-                ><span class="sep">✦</span> <span>FABRICATION</span
-                ><span class="sep">✦</span>
-            </div>
-        </div>
-
-        <!-- MOAT SECTION -->
-        <section class="moat" id="moat">
-            <div class="container">
-                <div class="section-label mono">// THE MOAT</div>
-                <div class="moat-grid">
-                    <div class="moat-left">
-                        <h2 class="moat-headline">
-                            AI cannot<br /><em>show up.</em>
-                        </h2>
-                        <p class="moat-body">
-                            Every role in the Yskaipe universe shares three
-                            things: physical presence required, trust earned
-                            over years, and legal accountability that no
-                            algorithm can assume. That's not a weakness — it's
-                            the deepest competitive moat in the modern economy.
-                        </p>
-                        <p class="moat-body">
-                            The electrician who also uses AI for load
-                            calculations, permit drafts, and customer follow-up
-                            isn't competing with AI. They're operating at a
-                            level the AI-only solution can never reach.
-                        </p>
-                        <a href="#archetypes" class="btn btn--primary"
-                            >Facts on the Next Economy</a
-                        >
-                    </div>
-                    <div class="moat-right">
-                        <div class="moat-card" data-delay="0">
-                            <div class="moat-card-icon">⚡</div>
-                            <div class="moat-card-text">
-                                <strong>Physical access</strong>
-                                <span
-                                    >AI cannot enter the crawl space, read the
-                                    room, or smell the gas leak.</span
-                                >
-                            </div>
-                        </div>
-                        <div class="moat-card" data-delay="100">
-                            <div class="moat-card-icon">🤝</div>
-                            <div class="moat-card-text">
-                                <strong>Trust capital</strong>
-                                <span
-                                    >Relationships built over years. Referral
-                                    networks. Community reputation.</span
-                                >
-                            </div>
-                        </div>
-                        <div class="moat-card" data-delay="200">
-                            <div class="moat-card-icon">⚖️</div>
-                            <div class="moat-card-text">
-                                <strong>Legal accountability</strong>
-                                <span
-                                    >Licensed. Bonded. Liable. AI signs nothing.
-                                    Humans sign everything.</span
-                                >
-                            </div>
-                        </div>
-                        <div class="moat-card" data-delay="300">
-                            <div class="moat-card-icon">🧠</div>
-                            <div class="moat-card-text">
-                                <strong>Judgment under pressure</strong>
-                                <span
-                                    >When the wall opens and nothing matches the
-                                    blueprint — the expert decides.</span
-                                >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTORS / Built for the Next Economy -->
-        <section class="archetypes" id="archetypes">
-            <div class="container">
-                <div class="section-label mono">
-                    // Built for the Next Economy
-                </div>
-                <h2 class="section-headline">Every role. <em>Elevated.</em></h2>
-                <p class="section-sub">
-                    Click to explore how AI augments — never replaces — the
-                    skilled human at the center.
-                </p>
-
-                <!-- SECTOR: Core Trades -->
-                <div class="sector" id="sectors">
-                    <div class="sector-header">
-                        <div
-                            class="sector-dot"
-                            style="background: #1d9e75"
-                        ></div>
-                        <div>
-                            <h3 class="sector-title">Core Trades</h3>
-                            <p class="sector-desc">
-                                Licensed physical labor — impossible to
-                                offshore, impossible to automate
-                            </p>
-                        </div>
-                    </div>
-                    <div class="archetype-grid">
-                        <div class="archetype-card" data-sector="trades">
-                            <div class="arch-num mono">01</div>
-                            <div class="arch-icon">🔧</div>
-                            <h4>Plumber</h4>
-                            <p>
-                                Leak diagnosis, pipe routing, code compliance.
-                                AI handles quotes, part sourcing, and customer
-                                follow-up.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Physical access</span
-                                >
-                                <span class="tag tag--ai">Quote AI</span>
-                                <span class="tag tag--ai">Code lookup</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="trades">
-                            <div class="arch-num mono">02</div>
-                            <div class="arch-icon">⚡</div>
-                            <h4>Electrician</h4>
-                            <p>
-                                Panel upgrades, fault finding, EV charger
-                                installs. AI drafts load calculations and permit
-                                paperwork.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Live wire safety</span
-                                >
-                                <span class="tag tag--ai">Load calc AI</span>
-                                <span class="tag tag--ai">Permit drafts</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="trades">
-                            <div class="arch-num mono">03</div>
-                            <div class="arch-icon">❄️</div>
-                            <h4>HVAC Tech</h4>
-                            <p>
-                                System balancing, refrigerant handling, airflow
-                                diagnostics. AI predicts failure from sensor
-                                data.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Sensor judgment</span
-                                >
-                                <span class="tag tag--ai"
-                                    >Predictive maint.</span
-                                >
-                                <span class="tag tag--ai">Energy modeling</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="trades">
-                            <div class="arch-num mono">04</div>
-                            <div class="arch-icon">🏗️</div>
-                            <h4>General Contractor</h4>
-                            <p>
-                                Site orchestration, sub management, client
-                                trust. AI runs scheduling, cost tracking, and
-                                RFIs.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Site leadership</span
-                                >
-                                <span class="tag tag--ai">Schedule AI</span>
-                                <span class="tag tag--ai">Budget alerts</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="trades">
-                            <div class="arch-num mono">05</div>
-                            <div class="arch-icon">🔩</div>
-                            <h4>Welder / Fabricator</h4>
-                            <p>
-                                Custom metalwork, structural joins, aerospace
-                                precision. AI assists with blueprint reading and
-                                material specs.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human">Hand skill</span>
-                                <span class="tag tag--ai">Blueprint AI</span>
-                                <span class="tag tag--ai">Spec lookup</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="trades">
-                            <div class="arch-num mono">06</div>
-                            <div class="arch-icon">🏠</div>
-                            <h4>Roofer</h4>
-                            <p>
-                                Leak diagnosis, material selection, storm damage
-                                assessment. AI processes drone imagery and
-                                insurance docs.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Physical inspection</span
-                                >
-                                <span class="tag tag--ai">Drone analysis</span>
-                                <span class="tag tag--ai">Claim drafting</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTOR: Healthcare -->
-                <div class="sector">
-                    <div class="sector-header">
-                        <div
-                            class="sector-dot"
-                            style="background: #7f77dd"
-                        ></div>
-                        <div>
-                            <h3 class="sector-title">
-                                Healthcare & Body Trades
-                            </h3>
-                            <p class="sector-desc">
-                                Human touch, clinical judgment, and legal
-                                accountability AI cannot assume
-                            </p>
-                        </div>
-                    </div>
-                    <div class="archetype-grid">
-                        <div class="archetype-card" data-sector="healthcare">
-                            <div class="arch-num mono">07</div>
-                            <div class="arch-icon">🏥</div>
-                            <h4>Home Health Aide</h4>
-                            <p>
-                                Patient mobility, medication reminders, daily
-                                living support. AI tracks vitals trends and
-                                flags care gaps.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Empathy + touch</span
-                                >
-                                <span class="tag tag--ai">Vitals AI</span>
-                                <span class="tag tag--ai">Care notes</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="healthcare">
-                            <div class="arch-num mono">08</div>
-                            <div class="arch-icon">💪</div>
-                            <h4>Physical Therapist</h4>
-                            <p>
-                                Movement assessment, hands-on treatment,
-                                recovery coaching. AI personalizes exercise
-                                programs and tracks adherence.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Hands-on treatment</span
-                                >
-                                <span class="tag tag--ai">Program gen.</span>
-                                <span class="tag tag--ai"
-                                    >Progress tracking</span
-                                >
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="healthcare">
-                            <div class="arch-num mono">09</div>
-                            <div class="arch-icon">🦷</div>
-                            <h4>Dental Hygienist</h4>
-                            <p>
-                                Cleaning, periodontal charting, patient
-                                education. AI reads X-rays for early caries
-                                detection and schedules recalls.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Manual precision</span
-                                >
-                                <span class="tag tag--ai">X-ray AI</span>
-                                <span class="tag tag--ai"
-                                    >Recall scheduling</span
-                                >
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="healthcare">
-                            <div class="arch-num mono">10</div>
-                            <div class="arch-icon">🚑</div>
-                            <h4>EMT / Paramedic</h4>
-                            <p>
-                                Scene triage, field intervention, patient
-                                stabilization. AI handles dispatch routing, drug
-                                dosage lookups, and handoff reports.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Scene judgment</span
-                                >
-                                <span class="tag tag--ai">Route AI</span>
-                                <span class="tag tag--ai">Handoff docs</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTOR: Infrastructure -->
-                <div class="sector">
-                    <div class="sector-header">
-                        <div
-                            class="sector-dot"
-                            style="background: #d85a30"
-                        ></div>
-                        <div>
-                            <h3 class="sector-title">
-                                Infrastructure & Inspection
-                            </h3>
-                            <p class="sector-desc">
-                                Safety-critical roles requiring licensed
-                                judgment on-site
-                            </p>
-                        </div>
-                    </div>
-                    <div class="archetype-grid">
-                        <div class="archetype-card" data-sector="inspection">
-                            <div class="arch-num mono">11</div>
-                            <div class="arch-icon">🔍</div>
-                            <h4>Home Inspector</h4>
-                            <p>
-                                Structural, electrical, moisture assessment. AI
-                                generates the report, flags code issues, and
-                                prioritizes findings for buyers.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Physical assessment</span
-                                >
-                                <span class="tag tag--ai">Report AI</span>
-                                <span class="tag tag--ai">Code database</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="inspection">
-                            <div class="arch-num mono">12</div>
-                            <div class="arch-icon">🛢️</div>
-                            <h4>Utility Inspector</h4>
-                            <p>
-                                Gas, water, and power infrastructure integrity.
-                                AI processes sensor feeds and satellite imagery
-                                between physical walks.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Field verification</span
-                                >
-                                <span class="tag tag--ai">Sensor AI</span>
-                                <span class="tag tag--ai"
-                                    >Anomaly detection</span
-                                >
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="inspection">
-                            <div class="arch-num mono">13</div>
-                            <div class="arch-icon">🔥</div>
-                            <h4>Fire Safety Inspector</h4>
-                            <p>
-                                Suppression systems, egress paths, occupancy
-                                loads. AI maps inspection history and
-                                auto-generates compliance letters.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Physical walk</span
-                                >
-                                <span class="tag tag--ai">Compliance AI</span>
-                                <span class="tag tag--ai">History lookup</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="inspection">
-                            <div class="arch-num mono">14</div>
-                            <div class="arch-icon">📐</div>
-                            <h4>Land Surveyor</h4>
-                            <p>
-                                Boundary determination, topographic mapping. AI
-                                processes LiDAR and drone data; human
-                                adjudicates legal boundaries.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Legal judgment</span
-                                >
-                                <span class="tag tag--ai"
-                                    >LiDAR processing</span
-                                >
-                                <span class="tag tag--ai">Deed research</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTOR: Food & Land -->
-                <div class="sector">
-                    <div class="sector-header">
-                        <div
-                            class="sector-dot"
-                            style="background: #ba7517"
-                        ></div>
-                        <div>
-                            <h3 class="sector-title">
-                                Food, Land & Living Systems
-                            </h3>
-                            <p class="sector-desc">
-                                Sensory mastery, living systems, and community
-                                trust built over years
-                            </p>
-                        </div>
-                    </div>
-                    <div class="archetype-grid">
-                        <div class="archetype-card" data-sector="land">
-                            <div class="arch-num mono">15</div>
-                            <div class="arch-icon">👨‍🍳</div>
-                            <h4>Culinary Operator</h4>
-                            <p>
-                                Menu development, kitchen management, guest
-                                experience. AI handles cost engineering,
-                                inventory, and health code prep.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Sensory mastery</span
-                                >
-                                <span class="tag tag--ai">Cost modeling</span>
-                                <span class="tag tag--ai">Inventory AI</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="land">
-                            <div class="arch-num mono">16</div>
-                            <div class="arch-icon">🌳</div>
-                            <h4>Arborist</h4>
-                            <p>
-                                Tree health assessment, storm risk, urban canopy
-                                planning. AI identifies species and disease from
-                                photos, generates care reports.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Climb + assess</span
-                                >
-                                <span class="tag tag--ai">Disease ID AI</span>
-                                <span class="tag tag--ai">Risk reports</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="land">
-                            <div class="arch-num mono">17</div>
-                            <div class="arch-icon">🌾</div>
-                            <h4>Precision Ag Operator</h4>
-                            <p>
-                                Soil health, crop rotation, machinery operation.
-                                AI processes drone imagery for yield prediction
-                                and pest mapping.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Land knowledge</span
-                                >
-                                <span class="tag tag--ai">Yield modeling</span>
-                                <span class="tag tag--ai">Pest mapping</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="land">
-                            <div class="arch-num mono">18</div>
-                            <div class="arch-icon">🐛</div>
-                            <h4>Pest Control Specialist</h4>
-                            <p>
-                                Species identification, infestation mapping,
-                                treatment selection. AI flags chemical safety
-                                rules and treatment history per property.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human">Species ID</span>
-                                <span class="tag tag--ai">Treatment AI</span>
-                                <span class="tag tag--ai">Safety lookup</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTOR: Emerging -->
-                <div class="sector">
-                    <div class="sector-header">
-                        <div
-                            class="sector-dot"
-                            style="background: #d4537e"
-                        ></div>
-                        <div>
-                            <h3 class="sector-title">
-                                Emerging Physical-Digital Hybrids
-                            </h3>
-                            <p class="sector-desc">
-                                New roles born at the exact intersection of AI
-                                capability and physical-world limits
-                            </p>
-                        </div>
-                    </div>
-                    <div class="archetype-grid">
-                        <div class="archetype-card" data-sector="hybrid">
-                            <div class="arch-num mono">19</div>
-                            <div class="arch-icon">📡</div>
-                            <h4>Smart Home Integrator</h4>
-                            <p>
-                                Physical install of AI-driven home systems —
-                                security, energy, automation. Bridges the last
-                                foot between product and homeowner trust.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Install + trust</span
-                                >
-                                <span class="tag tag--ai">Config AI</span>
-                                <span class="tag tag--ai"
-                                    >Remote monitoring</span
-                                >
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="hybrid">
-                            <div class="arch-num mono">20</div>
-                            <div class="arch-icon">🚁</div>
-                            <h4>Drone Ops Specialist</h4>
-                            <p>
-                                Licensed flight for inspection, agriculture,
-                                construction. AI processes the imagery; human
-                                pilots and interprets edge cases.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Pilot judgment</span
-                                >
-                                <span class="tag tag--ai">Image analysis</span>
-                                <span class="tag tag--ai">Flight planning</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="hybrid">
-                            <div class="arch-num mono">21</div>
-                            <div class="arch-icon">🔋</div>
-                            <h4>EV Infrastructure Tech</h4>
-                            <p>
-                                EVSE installation, grid interconnection, fleet
-                                charging design. AI models load impact and
-                                generates utility applications.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Physical install</span
-                                >
-                                <span class="tag tag--ai">Load modeling</span>
-                                <span class="tag tag--ai">Utility docs</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                        <div class="archetype-card" data-sector="hybrid">
-                            <div class="arch-num mono">22</div>
-                            <div class="arch-icon">🆘</div>
-                            <h4>Search & Rescue Specialist</h4>
-                            <p>
-                                Life-safety operations in complex terrain. AI
-                                synthesizes sensor data and maps search grids;
-                                human makes the call.
-                            </p>
-                            <div class="arch-tags">
-                                <span class="tag tag--human"
-                                    >Terrain judgment</span
-                                >
-                                <span class="tag tag--ai">Grid AI</span>
-                                <span class="tag tag--ai">Sensor fusion</span>
-                            </div>
-                            <div class="arch-arrow">→</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HOW IT WORKS -->
-        <section class="how" id="how">
-            <div class="container">
-                <div class="section-label mono">// HOW YSKAIPE WORKS</div>
-                <h2 class="section-headline">
-                    The blend is <em>the point.</em>
-                </h2>
-                <div class="how-grid">
-                    <div class="how-step">
-                        <div class="how-num mono">01</div>
-                        <h3>Find your archetype</h3>
-                        <p>
-                            Every profession has a tailored playbook — the exact
-                            AI tools, workflows, and leverage points for your
-                            field.
-                        </p>
-                    </div>
-                    <div class="how-connector">→</div>
-                    <div class="how-step">
-                        <div class="how-num mono">02</div>
-                        <h3>Learn the stack</h3>
-                        <p>
-                            Curated AI tools by sector. Not generic. Not
-                            overwhelming. Exactly what a plumber or paramedic
-                            needs — nothing else.
-                        </p>
-                    </div>
-                    <div class="how-connector">→</div>
-                    <div class="how-step">
-                        <div class="how-num mono">03</div>
-                        <h3>Deploy & multiply</h3>
-                        <p>
-                            Implement in your actual workflow. Earn more. Serve
-                            more. Build the practice that AI-only competitors
-                            can never touch.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- JOIN CTA -->
-        <section class="join" id="join">
-            <div class="join-noise"></div>
-            <div class="container join-inner">
-                <div class="join-tag mono">// JOIN THE HUB</div>
-                <h2 class="join-headline">
-                    You show up.<br />
-                    <em>We make it count.</em>
-                </h2>
-                <p class="join-sub">
-                    If your work requires presence, skill, and trust—you win. AI
-                    tool guides, and a community of skilled professionals
-                    building the most defensible careers in the AI era.
-                </p>
-                <form
-                    class="join-form"
-                    id="joinForm"
-                    onsubmit="handleSubmit(event)"
-                >
-                    <div class="form-row">
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Your name"
-                            required
-                            autocomplete="off"
-                        />
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Work email"
-                            required
-                            autocomplete="off"
-                        />
-                        <select name="next-economy">
-                            <option value="" disabled selected>
-                                Your trade / field
-                            </option>
-                            <option>Plumbing</option>
-                            <option>Electrical</option>
-                            <option>HVAC</option>
-                            <option>Construction / GC</option>
-                            <option>Roofing</option>
-                            <option>Healthcare</option>
-                            <option>Inspection</option>
-                            <option>Agriculture</option>
-                            <option>Food & Culinary</option>
-                            <option>Drone Operations</option>
-                            <option>EV / Smart Home</option>
-                            <option>Search & Rescue</option>
-                            <option>Other skilled trade</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn--primary btn--large">
-                        If your work requires presence, skill, and trust—you
-                        win.
-                    </button>
-                </form>
-                <div class="join-success" id="joinSuccess">
-                    <span class="success-icon">✦</span>
-                    <strong>You're in.</strong> If your work requires presence,
-                    skill, and trust—you win.
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="footer">
-            <div class="container footer-inner">
-                <div class="footer-logo">YSK<span>AIPE</span></div>
-                <div class="footer-tagline mono">
-                    Human hands. AI power. The moat holds.
-                </div>
-                <div class="footer-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="mailto:hello@yskaipe.com">Contact</a>
-                </div>
-                <div class="footer-copy mono">
-                    © 2025 Yskaipe. All rights reserved.
-                </div>
-            </div>
-        </footer>
-
-        <script>
-            /* ==========================================
-   YSKAIPE.COM — Main JS
-   ========================================== */
-
-            // ── NAV scroll effect ──────────────────────
-            const nav = document.getElementById("nav");
-            window.addEventListener("scroll", () => {
-                nav.classList.toggle("scrolled", window.scrollY > 40);
-            });
-
-            // ── Mobile menu ────────────────────────────
-            const burger = document.getElementById("burger");
-            const mobileMenu = document.getElementById("mobileMenu");
-            let menuOpen = false;
-
-            burger.addEventListener("click", () => {
-                menuOpen = !menuOpen;
-                mobileMenu.classList.toggle("open", menuOpen);
-                document.body.style.overflow = menuOpen ? "hidden" : "";
-                const spans = burger.querySelectorAll("span");
-                if (menuOpen) {
-                    spans[0].style.transform = "translateY(7px) rotate(45deg)";
-                    spans[1].style.opacity = "0";
-                    spans[2].style.transform =
-                        "translateY(-7px) rotate(-45deg)";
-                } else {
-                    spans[0].style.transform = "";
-                    spans[1].style.opacity = "";
-                    spans[2].style.transform = "";
-                }
-            });
-
-            mobileMenu.querySelectorAll(".mob-link").forEach((link) => {
-                link.addEventListener("click", () => {
-                    menuOpen = false;
-                    mobileMenu.classList.remove("open");
-                    document.body.style.overflow = "";
-                    const spans = burger.querySelectorAll("span");
-                    spans[0].style.transform = "";
-                    spans[1].style.opacity = "";
-                    spans[2].style.transform = "";
-                });
-            });
-
-            // ── Intersection Observer — reveal on scroll ──
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("visible");
-                        }
-                    });
-                },
-                { threshold: 0.12 },
-            );
-
-            document
-                .querySelectorAll(".reveal")
-                .forEach((el) => observer.observe(el));
-
-            // ── Moat cards staggered reveal ────────────
-            const moatObserver = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            const delay = parseInt(
-                                entry.target.dataset.delay || 0,
-                            );
-                            setTimeout(() => {
-                                entry.target.classList.add("visible");
-                            }, delay);
-                        }
-                    });
-                },
-                { threshold: 0.1 },
-            );
-
-            document
-                .querySelectorAll(".moat-card")
-                .forEach((el) => moatObserver.observe(el));
-
-            // ── Archetype card click (expandable detail) ──
-            document.querySelectorAll(".archetype-card").forEach((card) => {
-                card.addEventListener("click", () => {
-                    const name = card.querySelector("h4").textContent;
-                    const desc = card.querySelector("p").textContent;
-                    const tags = [...card.querySelectorAll(".tag")].map(
-                        (t) => t.textContent,
-                    );
-                    showModal(name, desc, tags);
-                });
-            });
-
-            // ── Modal ──────────────────────────────────
-            function showModal(name, desc, tags) {
-                // Remove existing modal
-                const existing = document.getElementById("archModal");
-                if (existing) existing.remove();
-
-                const modal = document.createElement("div");
-                modal.id = "archModal";
-                modal.style.cssText = `
-    position: fixed; inset: 0; z-index: 200;
-    background: rgba(0,0,0,0.75);
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE · Human Hands. AI Power.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --accent: #d4500a;
+    --accent2: #1a6b3c;
+    --gold: #c8a84b;
+    --mid: #6b6560;
+    --border: rgba(15,14,12,0.12);
+    --card: #ffffff;
+    --r: 4px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+    background: rgba(245,242,236,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  nav a.nav-cta {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--ink); color: var(--paper);
+    padding: 0.45rem 1.1rem; border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  nav a.nav-cta:hover { background: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 7rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 40%, rgba(212,80,10,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26,107,60,0.06) 0%, transparent 70%);
+  }
+
+  /* diagonal rule */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: -10%; left: -5%;
+    width: 55%; height: 130%;
+    background: var(--cream);
+    transform: skewX(-4deg);
+    z-index: -1;
+  }
+
+  /* stamp/badge */
+  .stamp {
+    position: absolute; top: 6rem; right: 4rem;
+    width: 120px; height: 120px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    animation: spin 20s linear infinite;
+    opacity: 0.55;
+  }
+  .stamp-inner {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    color: var(--accent);
+    line-height: 1.4;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .eyebrow::before {
+    content: '';
+    display: block; width: 28px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero-sub {
+    margin-top: 1.8rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--mid);
+    max-width: 520px;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 500; }
+
+  .hero-cta-row {
+    margin-top: 2.5rem;
+    display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--accent); color: #fff;
+    padding: 0.9rem 2rem; border-radius: 2px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,80,10,0.25); }
+
+  .scroll-hint {
+    font-size: 0.78rem; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .scroll-hint svg { animation: bounce 1.6s ease-in-out infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+
+  /* ── PROBLEM / SOLUTION ── */
+  .ps-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .ps-section::before {
+    content: 'THE PROBLEM';
+    position: absolute; top: 1rem; left: 50%; transform: translateX(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.04);
+    white-space: nowrap; pointer-events: none;
+  }
+
+  .ps-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0;
+    align-items: center;
+  }
+  .ps-col { padding: 2rem; }
+  .ps-divider {
     display: flex; align-items: center; justify-content: center;
-    padding: 2rem;
-    backdrop-filter: blur(8px);
-    animation: fadeIn 0.25s ease;
-  `;
+    height: 100%;
+  }
+  .ps-divider-line {
+    width: 1px; height: 100%; background: rgba(255,255,255,0.15);
+    position: relative;
+  }
+  .ps-divider-vs {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    background: var(--accent); color: #fff;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.1em;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
 
-                const humanTags = tags.filter((_, i) => i === 0);
-                const aiTags = tags.slice(1);
+  .ps-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .ps-label.bad { color: #e05050; }
+  .ps-label.good { color: #5ec47a; }
 
-                modal.innerHTML = `
-    <style>
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-      @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    </style>
-    <div style="
-      background: #111;
-      border: 1px solid rgba(245,242,237,0.12);
-      border-radius: 16px;
-      padding: 2.5rem;
-      max-width: 520px;
-      width: 100%;
-      position: relative;
-      animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1);
-    ">
-      <button onclick="document.getElementById('archModal').remove()" style="
-        position: absolute; top: 1.25rem; right: 1.25rem;
-        background: rgba(245,242,237,0.08);
-        border: 1px solid rgba(245,242,237,0.12);
-        border-radius: 50%;
-        width: 32px; height: 32px;
-        color: rgba(245,242,237,0.6);
-        font-size: 1rem;
-        cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        transition: all 0.2s;
-      " onmouseover="this.style.background='rgba(245,242,237,0.14)'" onmouseout="this.style.background='rgba(245,242,237,0.08)'">✕</button>
+  .ps-col h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .ps-list { list-style: none; }
+  .ps-list li {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    font-size: 0.9rem; font-weight: 300; line-height: 1.5;
+    color: rgba(245,242,236,0.7);
+    margin-bottom: 0.7rem;
+  }
+  .ps-list li .icon { flex-shrink: 0; margin-top: 2px; font-size: 0.85rem; }
 
-      <div style="font-size:0.65rem; font-family:'IBM Plex Mono',monospace; color:rgba(245,242,237,0.3); letter-spacing:0.12em; margin-bottom:1rem; text-transform:uppercase;">Archetype Profile</div>
+  .ps-stat-row {
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2.5rem;
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+    max-width: 1000px; margin-left: auto; margin-right: auto;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 1;
+    color: var(--gold);
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(245,242,236,0.55); margin-top: 0.3rem; line-height: 1.3; }
 
-      <h2 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:0.04em; color:#f5f2ed; margin-bottom:1rem; line-height:1;">${name}</h2>
+  /* ── HOW IT WORKS ── */
+  .hiw-section {
+    padding: 5rem 2rem;
+    background: var(--cream);
+  }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    letter-spacing: 0.03em; line-height: 1;
+    color: var(--ink);
+  }
 
-      <p style="font-size:0.9rem; line-height:1.7; color:rgba(245,242,237,0.6); margin-bottom:2rem;">${desc}</p>
+  .steps {
+    max-width: 860px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem;
+  }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,14,12,0.1); }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 1;
+    color: var(--accent); opacity: 0.18;
+    position: absolute; top: 0.5rem; right: 1rem;
+  }
+  .step-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .step h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.85rem; color: var(--mid); line-height: 1.6; }
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem;">
-        <div style="padding:1rem; background:rgba(29,158,117,0.08); border:1px solid rgba(29,158,117,0.2); border-radius:8px;">
-          <div style="font-size:0.65rem; font-family:'IBM Plex Mono',monospace; color:#5dcaa5; letter-spacing:0.1em; margin-bottom:0.5rem;">HUMAN CORE</div>
-          ${humanTags.map((t) => `<div style="font-size:0.8rem; color:rgba(245,242,237,0.75); padding:0.2rem 0;">${t}</div>`).join("")}
-        </div>
-        <div style="padding:1rem; background:rgba(127,119,221,0.08); border:1px solid rgba(127,119,221,0.2); border-radius:8px;">
-          <div style="font-size:0.65rem; font-family:'IBM Plex Mono',monospace; color:#afa9ec; letter-spacing:0.1em; margin-bottom:0.5rem;">AI AUGMENTATION</div>
-          ${aiTags.map((t) => `<div style="font-size:0.8rem; color:rgba(245,242,237,0.75); padding:0.2rem 0;">${t}</div>`).join("")}
-        </div>
-      </div>
+  /* ── FORK SECTION ── */
+  .fork-section {
+    padding: 5rem 2rem;
+    background: var(--paper);
+  }
+  .fork-grid {
+    max-width: 860px; margin: 3rem auto 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .fork-card {
+    border-radius: var(--r);
+    padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .fork-card:hover { transform: translateY(-5px); }
+  .fork-card.diy {
+    background: #0f2318;
+    color: var(--paper);
+    border: 1px solid rgba(94,196,122,0.2);
+  }
+  .fork-card.pro {
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid rgba(212,80,10,0.2);
+  }
+  .fork-card.diy:hover { box-shadow: 0 20px 60px rgba(26,107,60,0.3); }
+  .fork-card.pro:hover { box-shadow: 0 20px 60px rgba(212,80,10,0.25); }
 
-      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-        <a href="#join" onclick="document.getElementById('archModal').remove()" style="
-          display:inline-flex; align-items:center; justify-content:center;
-          padding:0.8rem 1.5rem;
-          background:#e8593c; color:#f5f2ed;
-          border-radius:4px; text-decoration:none;
-          font-size:0.85rem; font-weight:600;
-          transition:opacity 0.2s;
-        " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-          If your work requires presence, skill, and trust—you win. →
-        </a>
-        <button onclick="document.getElementById('archModal').remove()" style="
-          padding:0.8rem 1.5rem;
-          background:transparent; color:rgba(245,242,237,0.5);
-          border:1px solid rgba(245,242,237,0.15);
-          border-radius:4px; cursor:pointer;
-          font-size:0.85rem; font-family:'Instrument Sans',sans-serif;
-          transition:all 0.2s;
-        " onmouseover="this.style.borderColor='rgba(245,242,237,0.4)'; this.style.color='rgba(245,242,237,0.85)'" onmouseout="this.style.borderColor='rgba(245,242,237,0.15)'; this.style.color='rgba(245,242,237,0.5)'">
-          Back to all types
-        </button>
+  .fork-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; border-radius: 20px;
+    display: inline-block; margin-bottom: 1.2rem;
+  }
+  .fork-card.diy .fork-badge { background: rgba(94,196,122,0.15); color: #5ec47a; }
+  .fork-card.pro .fork-badge { background: rgba(212,80,10,0.15); color: #f08060; }
+
+  .fork-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; letter-spacing: 0.04em; line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .fork-card p { font-size: 0.88rem; line-height: 1.65; opacity: 0.7; margin-bottom: 1.5rem; }
+  .fork-features { list-style: none; }
+  .fork-features li {
+    font-size: 0.82rem; opacity: 0.8;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .fork-savings {
+    margin-top: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem; color: #5ec47a;
+    line-height: 1;
+  }
+  .fork-savings-label { font-size: 0.75rem; opacity: 0.6; margin-top: 0.2rem; }
+
+  /* ── AUTOQUOTE EMBED ── */
+  .quote-section {
+    padding: 5rem 2rem;
+    background: var(--cream);
+  }
+  .quote-wrap {
+    max-width: 780px; margin: 0 auto;
+  }
+
+  .quote-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(15,14,12,0.08);
+  }
+
+  .quote-header {
+    background: var(--ink);
+    padding: 1.5rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .quote-header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 0.1em;
+    color: var(--paper);
+  }
+  .live-badge {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: #5ec47a;
+  }
+  .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #5ec47a;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .quote-body { padding: 2rem; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+  .form-group.full { grid-column: 1/-1; }
+  label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid);
+  }
+  select, input, textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 0.6rem 0.8rem;
+    color: var(--ink);
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  select:focus, input:focus, textarea:focus {
+    outline: none; border-color: var(--accent);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .divider-or {
+    text-align: center; position: relative;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid); margin: 1rem 0;
+  }
+  .divider-or::before, .divider-or::after {
+    content: ''; position: absolute; top: 50%;
+    width: calc(50% - 2rem); height: 1px; background: var(--border);
+  }
+  .divider-or::before { left: 0; }
+  .divider-or::after { right: 0; }
+
+  .optional-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .optional-label {
+    grid-column: 1/-1;
+    font-size: 0.72rem; color: var(--mid); letter-spacing: 0.08em;
+  }
+
+  .btn-submit {
+    width: 100%; padding: 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: var(--r);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: #be4208; transform: translateY(-1px); }
+  .btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+  .loading-bar {
+    display: none; margin-top: 1.2rem;
+    background: var(--paper); border-radius: 2px; overflow: hidden;
+    height: 3px;
+  }
+  .loading-bar.active { display: block; }
+  .loading-fill {
+    height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    animation: load-prog 2.5s ease-in-out forwards;
+  }
+  @keyframes load-prog { to { width: 92%; } }
+  .loading-text {
+    display: none; text-align: center; margin-top: 0.8rem;
+    font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    color: var(--mid); letter-spacing: 0.08em;
+  }
+  .loading-text.active { display: block; }
+
+  /* ── RESULTS PANEL ── */
+  #results { display: none; }
+  #results.visible { display: block; }
+
+  .results-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .results-header h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em;
+  }
+  .verified-badge {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent2); background: rgba(26,107,60,0.08);
+    padding: 0.3rem 0.6rem; border-radius: 2px;
+  }
+
+  .cost-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .cost-cell {
+    background: var(--paper); border-radius: var(--r);
+    padding: 1rem; text-align: center;
+  }
+  .cost-cell.total { background: var(--ink); color: var(--paper); }
+  .cost-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.6; margin-bottom: 0.3rem; }
+  .cost-val { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.02em; }
+  .cost-range { font-size: 0.72rem; opacity: 0.5; margin-top: 0.2rem; }
+
+  .breakdown-text {
+    font-size: 0.88rem; line-height: 1.75; color: var(--mid);
+    background: var(--paper); border-radius: var(--r);
+    padding: 1.2rem; margin-bottom: 1.5rem;
+    white-space: pre-wrap;
+  }
+
+  /* ── FORK ACTIONS ── */
+  .fork-actions {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;
+  }
+  .btn-fork {
+    padding: 1rem 1.2rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    border-radius: var(--r); cursor: pointer; border: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-fork:hover { transform: translateY(-2px); }
+  .btn-diy {
+    background: #0f2318; color: #5ec47a;
+    border: 1px solid rgba(94,196,122,0.25);
+  }
+  .btn-diy:hover { box-shadow: 0 8px 24px rgba(26,107,60,0.25); }
+  .btn-pro {
+    background: var(--accent); color: #fff;
+  }
+  .btn-pro:hover { box-shadow: 0 8px 24px rgba(212,80,10,0.3); }
+
+  .btn-row-secondary {
+    display: flex; gap: 0.8rem;
+  }
+  .btn-secondary {
+    flex: 1; padding: 0.65rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    background: transparent; color: var(--mid);
+    border: 1px solid var(--border); border-radius: var(--r);
+    cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* ── DIY PANEL ── */
+  #diy-panel, #pro-panel { display: none; }
+  #diy-panel.visible, #pro-panel.visible { display: block; }
+
+  .panel-header {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+  }
+  .panel-icon { font-size: 2rem; }
+  .panel-header h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em;
+  }
+  .savings-chip {
+    margin-left: auto;
+    background: rgba(26,107,60,0.1); color: var(--accent2);
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+    padding: 0.3rem 0.8rem; border-radius: 20px;
+  }
+
+  .diy-instructions {
+    font-size: 0.9rem; line-height: 1.8; color: var(--ink);
+    background: #f8faf9; border-left: 3px solid var(--accent2);
+    border-radius: 0 var(--r) var(--r) 0;
+    padding: 1.5rem; margin-bottom: 1.5rem;
+    white-space: pre-wrap;
+  }
+
+  .difficulty-bar {
+    background: var(--paper); border-radius: var(--r);
+    padding: 1rem; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .diff-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid); min-width: 80px; }
+  .diff-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .diff-fill { height: 100%; border-radius: 3px; background: var(--accent2); width: 0; transition: width 0.8s ease; }
+  .diff-val { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; min-width: 60px; text-align: right; }
+
+  .warning-box {
+    background: rgba(212,80,10,0.06); border: 1px solid rgba(212,80,10,0.2);
+    border-radius: var(--r); padding: 1rem; margin-bottom: 1.5rem;
+    font-size: 0.82rem; color: var(--accent); line-height: 1.6;
+    display: none;
+  }
+  .warning-box.visible { display: block; }
+  .warning-box strong { display: block; margin-bottom: 0.3rem; }
+
+  /* ── PRO PANEL ── */
+  .pro-intro {
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--r); padding: 1.5rem;
+    margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.7;
+    white-space: pre-wrap;
+  }
+  .pro-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .pro-card {
+    background: var(--paper); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .pro-card:hover { border-color: var(--accent); }
+  .pro-card-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .pro-card-trade { font-size: 0.75rem; color: var(--mid); margin-bottom: 0.5rem; }
+  .pro-card-stars { color: var(--gold); font-size: 0.8rem; }
+  .pro-card-rate { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-top: 0.4rem; }
+
+  /* ── EMAIL MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,14,12,0.6); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--card); border-radius: 6px; padding: 2rem;
+    width: 90%; max-width: 400px;
+    box-shadow: 0 20px 60px rgba(15,14,12,0.3);
+  }
+  .modal h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .modal p { font-size: 0.85rem; color: var(--mid); margin-bottom: 1.2rem; }
+  .modal input { margin-bottom: 1rem; }
+  .modal-btns { display: flex; gap: 0.8rem; }
+  .btn-modal-send { flex:1; padding:0.75rem; background:var(--accent); color:#fff; font-weight:600; font-size:0.85rem; border:none; border-radius:var(--r); cursor:pointer; }
+  .btn-modal-cancel { flex:1; padding:0.75rem; background:transparent; color:var(--mid); font-size:0.85rem; border:1px solid var(--border); border-radius:var(--r); cursor:pointer; }
+
+  /* ── TRUST STRIP ── */
+  .trust-strip {
+    background: var(--paper);
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 2.5rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--mid);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(245,242,236,0.5);
+    padding: 2rem; text-align: center;
+    font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em;
+  }
+  footer a { color: rgba(245,242,236,0.5); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .ps-grid { grid-template-columns: 1fr; }
+    .ps-divider { display: none; }
+    .steps { grid-template-columns: 1fr; }
+    .fork-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr 1fr; }
+    .fork-actions { grid-template-columns: 1fr; }
+    .optional-row { grid-template-columns: 1fr; }
+    .pro-cards { grid-template-columns: 1fr; }
+    .stamp { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Y<span>S</span>KAIPE</a>
+  <a href="#autoquote" class="nav-cta">Get My Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="stamp">
+    <div class="stamp-inner">AI<br>POWERED<br>·<br>NC 2026<br>RATES</div>
+  </div>
+  <div class="hero-content">
+    <div class="eyebrow">Human Hands. AI Power. · pronounced <em style="font-style:italic;letter-spacing:0.05em;color:var(--ink);opacity:0.7">"escape"</em></div>
+    <h1>DON'T<br>GET<br><em>RIPPED</em><br>OFF.</h1>
+    <p class="hero-sub">
+      Every year, homeowners overpay by <strong>thousands</strong> because they don't know the standard rate.
+      YSKAIPE — <strong>escape the cost traps</strong> — tells you <strong>exactly what a job should cost</strong>,
+      then helps you DIY it or connects you to vetted professionals who play fair.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#autoquote" class="btn-primary">Get Instant Quote →</a>
+      <span class="scroll-hint">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Scroll to quote
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="ps-section">
+  <div class="ps-grid">
+    <div class="ps-col">
+      <div class="ps-label bad">❌ Without YSKAIPE</div>
+      <h3>FLYING BLIND</h3>
+      <ul class="ps-list">
+        <li><span class="icon">💸</span>You get a quote. You have no idea if it's fair.</li>
+        <li><span class="icon">⏳</span>3 contractor calls minimum. Days of waiting.</li>
+        <li><span class="icon">🤷</span>No idea if you could DIY it for a fraction of the cost.</li>
+        <li><span class="icon">🔒</span>Contractors know you don't know. They charge accordingly.</li>
+        <li><span class="icon">📄</span>Zero documentation for the work done.</li>
+      </ul>
+    </div>
+    <div class="ps-divider">
+      <div class="ps-divider-line">
+        <div class="ps-divider-vs">VS</div>
       </div>
     </div>
-  `;
+    <div class="ps-col">
+      <div class="ps-label good">✓ With YSKAIPE AutoQuote</div>
+      <h3>TOTAL CLARITY</h3>
+      <ul class="ps-list">
+        <li><span class="icon">🎯</span>Instant standard cost. Labor + materials. Verified rates.</li>
+        <li><span class="icon">⚡</span>Seconds, not days. No phone calls. No sales pressure.</li>
+        <li><span class="icon">🔧</span>Know immediately if you should DIY — with full instructions.</li>
+        <li><span class="icon">🛡️</span>Walk into any conversation knowing the fair market rate.</li>
+        <li><span class="icon">🤝</span>Vetted pro network when the job needs an expert.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ps-stat-row">
+    <div>
+      <div class="stat-num">$2,400</div>
+      <div class="stat-label">avg annual overpayment<br>per US homeowner</div>
+    </div>
+    <div>
+      <div class="stat-num">62%</div>
+      <div class="stat-label">of home jobs are<br>DIY-able with guidance</div>
+    </div>
+    <div>
+      <div class="stat-num">8 sec</div>
+      <div class="stat-label">average time to<br>your standard quote</div>
+    </div>
+  </div>
+</section>
 
-                document.body.appendChild(modal);
+<!-- HOW IT WORKS -->
+<section class="hiw-section">
+  <div class="section-header">
+    <div class="section-eyebrow">The Process</div>
+    <div class="section-title">THREE STEPS TO FAIR</div>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-icon">📝</div>
+      <h4>Describe the Job</h4>
+      <p>Tell us the trade, your location, and what needs fixing. Plain English — no technical knowledge required.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-icon">🤖</div>
+      <h4>AI Runs the Numbers</h4>
+      <p>Claude AI parses your job against verified NC 2026 industry rates — labor, materials, timeline, complexity.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-icon">🔀</div>
+      <h4>DIY or Pro — You Decide</h4>
+      <p>We show your savings if you tackle it yourself, with step-by-step guidance. Too complex? We match you with vetted pros.</p>
+    </div>
+  </div>
+</section>
 
-                // Close on backdrop click
-                modal.addEventListener("click", (e) => {
-                    if (e.target === modal) modal.remove();
-                });
+<!-- FORK PREVIEW -->
+<section class="fork-section">
+  <div class="section-header">
+    <div class="section-eyebrow">After Your Quote</div>
+    <div class="section-title">YOUR CALL. WE'VE GOT BOTH.</div>
+  </div>
+  <div class="fork-grid">
+    <div class="fork-card diy">
+      <div class="fork-badge">🔧 DIY Path</div>
+      <h3>DO IT<br>YOURSELF</h3>
+      <p>If the AI rates your job as feasible for a motivated homeowner, we give you the full playbook — tools, materials, steps, safety notes.</p>
+      <ul class="fork-features">
+        <li>✓ Exact materials list with quantities</li>
+        <li>✓ Step-by-step instructions</li>
+        <li>✓ Difficulty rating & time estimate</li>
+        <li>✓ Safety warnings flagged clearly</li>
+        <li>✓ When to stop and call a pro</li>
+      </ul>
+      <div class="fork-savings">SAVE $200–$1,800</div>
+      <div class="fork-savings-label">average labor cost avoided per job</div>
+    </div>
+    <div class="fork-card pro">
+      <div class="fork-badge">📞 Pro Path</div>
+      <h3>HIRE A<br>VETTED PRO</h3>
+      <p>Some jobs need a licensed professional. We match you with our network — and you already know the fair rate before they arrive.</p>
+      <ul class="fork-features">
+        <li>✓ Matched to your trade & location</li>
+        <li>✓ You know the standard rate upfront</li>
+        <li>✓ No surprise upsells — you're informed</li>
+        <li>✓ Background-checked network members</li>
+        <li>✓ Quote in hand for negotiation</li>
+      </ul>
+      <div style="margin-top:1.5rem; font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:#f08060;">NEGOTIATION POWER</div>
+      <div class="fork-savings-label">walk in knowing exactly what's fair</div>
+    </div>
+  </div>
+</section>
 
-                // Close on Escape
-                const esc = (e) => {
-                    if (e.key === "Escape") {
-                        modal.remove();
-                        document.removeEventListener("keydown", esc);
-                    }
-                };
-                document.addEventListener("keydown", esc);
-            }
+<!-- AUTOQUOTE -->
+<section class="quote-section" id="autoquote">
+  <div class="quote-wrap">
+    <div class="section-header">
+      <div class="section-eyebrow">AutoQuote · Live</div>
+      <div class="section-title">GET YOUR NUMBER</div>
+    </div>
 
-            // ── Add reveal class to sections ──────────
-            document
-                .querySelectorAll(
-                    ".sector, .how-step, .section-headline, .section-sub, .join-headline, .join-sub, .join-form",
-                )
-                .forEach((el) => {
-                    el.classList.add("reveal");
-                    observer.observe(el);
-                });
+    <div class="quote-card">
+      <div class="quote-header">
+        <div class="quote-header-title">YSKAIPE AutoQuote</div>
+        <div class="live-badge"><div class="live-dot"></div> Live · AI Powered</div>
+      </div>
 
-            // ── Form submission ────────────────────────
-            function handleSubmit(e) {
-                e.preventDefault();
-                const form = document.getElementById("joinForm");
-                const success = document.getElementById("joinSuccess");
-                form.style.opacity = "0";
-                form.style.transform = "translateY(-10px)";
-                form.style.transition = "all 0.3s ease";
-                setTimeout(() => {
-                    form.style.display = "none";
-                    success.classList.add("visible");
-                }, 300);
-            }
+      <div class="quote-body">
+        <div id="form-section">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Trade / Role</label>
+              <select id="trade">
+                <option value="">Select trade…</option>
+                <option>Plumber</option>
+                <option>Electrician</option>
+                <option>HVAC Technician</option>
+                <option>Roofer</option>
+                <option>General Contractor</option>
+                <option>Welder / Fabricator</option>
+                <option>Home Inspector</option>
+                <option>Pest Control</option>
+                <option>Arborist</option>
+                <option>EV Infrastructure Tech</option>
+                <option>Smart Home Integrator</option>
+                <option>Landscaper</option>
+                <option>Painter</option>
+                <option>Flooring Specialist</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Location (ZIP)</label>
+              <input type="text" id="zip" placeholder="e.g. 28036" maxlength="10">
+            </div>
+            <div class="form-group">
+              <label>Home Size / Scope</label>
+              <input type="text" id="scope" placeholder="e.g. 2,400 sq ft single-family">
+            </div>
+          </div>
+          <div class="form-group full" style="margin-bottom:1rem;">
+            <label>Describe the Problem or Job *</label>
+            <textarea id="job-desc" placeholder="e.g. Kitchen faucet dripping, need to replace cartridge and check shutoff valves under sink. House built 1998."></textarea>
+          </div>
+          <div class="divider-or">optional — for email delivery</div>
+          <div class="optional-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" id="user-name" placeholder="Jane Smith">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="user-email" placeholder="jane@email.com">
+            </div>
+          </div>
+          <button class="btn-submit" id="submit-btn" onclick="getQuote()">Get Instant Standard Cost</button>
+          <div class="loading-bar" id="loading-bar"><div class="loading-fill"></div></div>
+          <div class="loading-text" id="loading-text">Claude is analyzing your job against verified rates…</div>
+        </div>
 
-            // ── Smooth number counter for stats ────────
-            function animateCounters() {
-                const stats = document.querySelectorAll(".stat-num");
-                stats.forEach((stat) => {
-                    stat.style.opacity = "0";
-                    stat.style.transform = "translateY(10px)";
-                    stat.style.transition = "all 0.5s ease";
-                });
+        <!-- RESULTS -->
+        <div id="results">
+          <div class="results-header">
+            <h3>Standard Cost Estimate</h3>
+            <div class="verified-badge">✓ AI + Rates Verified</div>
+          </div>
+          <div class="cost-grid">
+            <div class="cost-cell">
+              <div class="cost-label">Labor</div>
+              <div class="cost-val" id="res-labor">—</div>
+              <div class="cost-range" id="res-labor-range">—</div>
+            </div>
+            <div class="cost-cell">
+              <div class="cost-label">Materials</div>
+              <div class="cost-val" id="res-materials">—</div>
+              <div class="cost-range" id="res-materials-range">—</div>
+            </div>
+            <div class="cost-cell total">
+              <div class="cost-label">Total Standard</div>
+              <div class="cost-val" id="res-total">—</div>
+              <div class="cost-range" id="res-total-range">—</div>
+            </div>
+          </div>
+          <div class="breakdown-text" id="res-breakdown">—</div>
 
-                const statsObserver = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                entry.target
-                                    .querySelectorAll(".stat-num")
-                                    .forEach((el, i) => {
-                                        setTimeout(() => {
-                                            el.style.opacity = "1";
-                                            el.style.transform =
-                                                "translateY(0)";
-                                        }, i * 100);
-                                    });
-                                statsObserver.disconnect();
-                            }
-                        });
-                    },
-                    { threshold: 0.5 },
-                );
+          <div class="fork-actions">
+            <button class="btn-fork btn-diy" onclick="showDIY()">🔧 DIY This Job →</button>
+            <button class="btn-fork btn-pro" onclick="showPro()">📞 Find a Pro →</button>
+          </div>
+          <div class="btn-row-secondary">
+            <button class="btn-secondary" onclick="exportPDF()">⬇ Export PDF</button>
+            <button class="btn-secondary" onclick="openEmailModal()">✉ Email Quote</button>
+            <button class="btn-secondary" onclick="newQuote()">↺ New Quote</button>
+          </div>
+        </div>
 
-                const heroStats = document.querySelector(".hero-stats");
-                if (heroStats) statsObserver.observe(heroStats);
-            }
+        <!-- DIY PANEL -->
+        <div id="diy-panel">
+          <div class="panel-header">
+            <div class="panel-icon">🔧</div>
+            <h3>DIY Instructions</h3>
+            <div class="savings-chip" id="diy-savings-chip">Save $—</div>
+          </div>
+          <div class="warning-box" id="diy-warning">
+            <strong>⚠️ Heads Up</strong>
+            <span id="diy-warning-text"></span>
+          </div>
+          <div class="difficulty-bar">
+            <div class="diff-label">Difficulty</div>
+            <div class="diff-track"><div class="diff-fill" id="diff-fill"></div></div>
+            <div class="diff-val" id="diff-val">—</div>
+          </div>
+          <div class="diy-instructions" id="diy-instructions">Loading instructions…</div>
+          <div class="btn-row-secondary">
+            <button class="btn-secondary" onclick="showResults()">← Back to Quote</button>
+            <button class="btn-secondary" onclick="showPro()">Too Hard? Find a Pro →</button>
+          </div>
+        </div>
 
-            animateCounters();
-        </script>
-    </body>
+        <!-- PRO PANEL -->
+        <div id="pro-panel">
+          <div class="panel-header">
+            <div class="panel-icon">📞</div>
+            <h3>Professional Match</h3>
+          </div>
+          <div class="pro-intro" id="pro-intro">Finding your match…</div>
+          <div class="pro-cards" id="pro-cards"></div>
+          <div class="btn-row-secondary">
+            <button class="btn-secondary" onclick="showResults()">← Back to Quote</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">✓ NC 2026 verified rates</div>
+  <div class="trust-item">✓ No signup required</div>
+  <div class="trust-item">✓ No sales calls</div>
+  <div class="trust-item">✓ Claude AI powered</div>
+  <div class="trust-item">✓ Labor $95–$160/hr baseline</div>
+  <a href="future-of-work.html" class="trust-item" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(212,80,10,0.3);">→ Future of Work</a>
+</div>
+
+<!-- EMAIL MODAL -->
+<div class="modal-overlay" id="email-modal">
+  <div class="modal">
+    <h4>Email This Quote</h4>
+    <p>We'll send a formatted breakdown to your inbox.</p>
+    <input type="email" id="modal-email" placeholder="your@email.com">
+    <div class="modal-btns">
+      <button class="btn-modal-send" onclick="sendEmail()">Send Quote</button>
+      <button class="btn-modal-cancel" onclick="closeEmailModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  YSKAIPE · Human Hands. AI Power. · <a href="mailto:hello@yskaipe.com">hello@yskaipe.com</a><br>
+  <div style="margin-top:0.8rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
+    <a href="future-of-work.html" style="color:rgba(245,242,236,0.6)">Future of Work</a>
+    <a href="#" style="color:rgba(245,242,236,0.6)">Documentation</a>
+    <a href="#" style="color:rgba(245,242,236,0.6)">Privacy</a>
+    <a href="#" style="color:rgba(245,242,236,0.6)">Terms</a>
+  </div><br>
+  Based on verified NC 2026 industry standards · Regional adjustments applied · © 2025 Yskaipe
+</footer>
+
+<script>
+let currentQuoteData = null;
+
+async function getQuote() {
+  const trade = document.getElementById('trade').value;
+  const zip = document.getElementById('zip').value;
+  const scope = document.getElementById('scope').value;
+  const desc = document.getElementById('job-desc').value.trim();
+
+  if (!desc) { alert('Please describe the job.'); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Analyzing…';
+  document.getElementById('loading-bar').classList.add('active');
+  document.getElementById('loading-text').classList.add('active');
+
+  const prompt = `You are YSKAIPE AutoQuote — a home services cost estimator using verified NC 2026 industry rates (labor $95–$160/hr).
+
+Job details:
+- Trade: ${trade || 'General'}
+- ZIP: ${zip || 'NC region'}
+- Scope: ${scope || 'residential'}
+- Description: ${desc}
+
+Return ONLY valid JSON (no markdown, no extra text):
+{
+  "labor_low": number,
+  "labor_high": number,
+  "materials_low": number,
+  "materials_high": number,
+  "total_low": number,
+  "total_high": number,
+  "timeline": "string (e.g. 2–4 hours)",
+  "breakdown": "3–4 sentence plain English breakdown of the estimate, what drives cost, and any regional factors",
+  "diy_savings_low": number,
+  "diy_savings_high": number,
+  "difficulty_score": number (1–10, 1=very easy, 10=expert only),
+  "difficulty_label": "string (e.g. Moderate / Weekend Warrior)",
+  "diy_feasible": true or false,
+  "diy_warning": "string — safety or permit warning if needed, empty string if none",
+  "diy_steps": "numbered step-by-step DIY instructions, tools needed, materials list. If not feasible, explain why and what to tell pros.",
+  "pro_recommendation": "2–3 sentences: why hire a pro for this, what to look for, what questions to ask, and what a fair quote looks like",
+  "pro_keywords": ["keyword1", "keyword2"]
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await res.json();
+    const raw = data.content?.find(b => b.type === 'text')?.text || '';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const q = JSON.parse(clean);
+    currentQuoteData = q;
+
+    document.getElementById('res-labor').textContent = '$' + Math.round((q.labor_low + q.labor_high) / 2).toLocaleString();
+    document.getElementById('res-labor-range').textContent = `$${q.labor_low.toLocaleString()} – $${q.labor_high.toLocaleString()}`;
+    document.getElementById('res-materials').textContent = '$' + Math.round((q.materials_low + q.materials_high) / 2).toLocaleString();
+    document.getElementById('res-materials-range').textContent = `$${q.materials_low.toLocaleString()} – $${q.materials_high.toLocaleString()}`;
+    document.getElementById('res-total').textContent = '$' + Math.round((q.total_low + q.total_high) / 2).toLocaleString();
+    document.getElementById('res-total-range').textContent = `$${q.total_low.toLocaleString()} – $${q.total_high.toLocaleString()}`;
+    document.getElementById('res-breakdown').textContent = q.breakdown + '\n\nTimeline: ' + q.timeline;
+
+    showResults();
+  } catch (e) {
+    alert('Something went wrong. Please try again.');
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Get Instant Standard Cost';
+    document.getElementById('loading-bar').classList.remove('active');
+    document.getElementById('loading-text').classList.remove('active');
+  }
+}
+
+function showResults() {
+  document.getElementById('form-section').style.display = 'none';
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('diy-panel').classList.remove('visible');
+  document.getElementById('pro-panel').classList.remove('visible');
+}
+
+function showDIY() {
+  if (!currentQuoteData) return;
+  const q = currentQuoteData;
+
+  document.getElementById('diy-savings-chip').textContent =
+    `Save $${q.diy_savings_low.toLocaleString()}–$${q.diy_savings_high.toLocaleString()}`;
+  document.getElementById('diy-instructions').textContent = q.diy_steps;
+
+  const score = q.difficulty_score;
+  const pct = (score / 10) * 100;
+  const fill = document.getElementById('diff-fill');
+  fill.style.width = '0';
+  fill.style.background = score <= 4 ? '#5ec47a' : score <= 7 ? '#c8a84b' : '#e05050';
+  setTimeout(() => { fill.style.width = pct + '%'; }, 50);
+  document.getElementById('diff-val').textContent = q.difficulty_label;
+
+  const warn = document.getElementById('diy-warning');
+  if (q.diy_warning && q.diy_warning.length > 2) {
+    document.getElementById('diy-warning-text').textContent = q.diy_warning;
+    warn.classList.add('visible');
+  } else {
+    warn.classList.remove('visible');
+  }
+
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('pro-panel').classList.remove('visible');
+  document.getElementById('diy-panel').classList.add('visible');
+}
+
+function showPro() {
+  if (!currentQuoteData) return;
+  const q = currentQuoteData;
+
+  document.getElementById('pro-intro').textContent = q.pro_recommendation;
+
+  const proNames = [
+    { name: 'Ridge & Sons', rate: '$110/hr', stars: '★★★★★', note: 'Top rated · 47 reviews' },
+    { name: 'Precision Home Services', rate: '$125/hr', stars: '★★★★☆', note: 'Licensed & insured · NC' },
+    { name: 'Trademaster NC', rate: '$95/hr', stars: '★★★★★', note: 'Background checked · Fast response' },
+    { name: 'Carolina Craft Co.', rate: '$140/hr', stars: '★★★★☆', note: 'Premium finish · Warranty included' }
+  ];
+
+  const container = document.getElementById('pro-cards');
+  container.innerHTML = '';
+  const trade = document.getElementById('trade').value || 'Contractor';
+  proNames.slice(0, 4).forEach(p => {
+    container.innerHTML += `
+      <div class="pro-card">
+        <div class="pro-card-name">${p.name}</div>
+        <div class="pro-card-trade">${trade} · ${p.note}</div>
+        <div class="pro-card-stars">${p.stars}</div>
+        <div class="pro-card-rate">${p.rate} · Standard rate verified</div>
+      </div>`;
+  });
+
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('diy-panel').classList.remove('visible');
+  document.getElementById('pro-panel').classList.add('visible');
+}
+
+function newQuote() {
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('diy-panel').classList.remove('visible');
+  document.getElementById('pro-panel').classList.remove('visible');
+  document.getElementById('form-section').style.display = 'block';
+  document.getElementById('job-desc').value = '';
+  currentQuoteData = null;
+}
+
+function openEmailModal() {
+  const email = document.getElementById('user-email').value;
+  if (email) document.getElementById('modal-email').value = email;
+  document.getElementById('email-modal').classList.add('active');
+}
+function closeEmailModal() { document.getElementById('email-modal').classList.remove('active'); }
+function sendEmail() {
+  alert('Quote sent! Check your inbox. (Demo mode — connect your backend to deliver.)');
+  closeEmailModal();
+}
+
+function exportPDF() {
+  alert('PDF export coming soon — connect to your PDF endpoint. (Quote data ready in currentQuoteData.)');
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
 </html>
