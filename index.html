@@ -1022,7 +1022,8 @@ Return ONLY valid JSON (no markdown, no extra text):
   "difficulty_label": "string (e.g. Moderate / Weekend Warrior)",
   "diy_feasible": true or false,
   "diy_warning": "string — safety or permit warning if needed, empty string if none",
-  "diy_steps": "numbered step-by-step DIY instructions, tools needed, materials list. If not feasible, explain why and what to tell pros.",
+  "diy_steps": "numbered step-by-step DIY instructions and tools needed only. Do not include a materials list in this field.",
+  "diy_materials": [{ "name": "exact product name", "qty": "amount", "estimatedCost": "$X" }],
   "pro_recommendation": "2–3 sentences: why hire a pro for this, what to look for, what questions to ask, and what a fair quote looks like",
   "pro_keywords": ["keyword1", "keyword2"]
 }`;
