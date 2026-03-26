@@ -35,24 +35,41 @@
   nav a.nav-cta { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 0.45rem 1.1rem; border-radius: 2px; text-decoration: none; transition: background 0.2s; }
   nav a.nav-cta:hover { background: var(--accent); }
 
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 7rem 2rem 4rem; position: relative; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(212,80,10,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26,107,60,0.06) 0%, transparent 70%); }
-  .hero-bg::after { content: ''; position: absolute; top: -10%; left: -5%; width: 55%; height: 130%; background: var(--cream); transform: skewX(-4deg); z-index: -1; }
-  .stamp { position: absolute; top: 6rem; right: 4rem; width: 120px; height: 120px; border: 2px solid var(--accent); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; animation: spin 20s linear infinite; opacity: 0.55; }
-  .stamp-inner { font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--accent); line-height: 1.4; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero { background: var(--ink); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 90% 50%, rgba(212,80,10,0.11) 0%, transparent 65%), radial-gradient(ellipse 40% 70% at 5% 85%, rgba(26,107,60,0.09) 0%, transparent 60%); pointer-events: none; }
+  .stamp { position: absolute; top: 6rem; right: 4rem; border: 1px solid rgba(245,242,236,0.09); border-radius: 6px; padding: 0.65rem 0.9rem; text-align: center; background: rgba(245,242,236,0.02); }
+  .stamp-inner { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,242,236,0.28); margin-bottom: 0.25rem; }
+  .stamp-main { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.1em; color: rgba(245,242,236,0.65); }
+  .stamp-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #5ec47a; margin-right: 4px; vertical-align: middle; animation: pulse-dot 1.6s ease-in-out infinite; }
   .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; width: 100%; }
-  .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
-  .eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
-  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 10vw, 8rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--ink); }
-  h1 em { font-style: normal; color: var(--accent); position: relative; }
-  .hero-sub { margin-top: 1.8rem; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; line-height: 1.65; color: var(--mid); max-width: 520px; }
-  .hero-sub strong { color: var(--ink); font-weight: 500; }
-  .hero-cta-row { margin-top: 2.5rem; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+  .hero-rule { width: 32px; height: 2px; background: var(--accent); margin-bottom: 1.2rem; }
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem; }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 0.91; letter-spacing: 0.02em; color: var(--paper); margin-bottom: 1.6rem; }
+  h1 .gold { color: var(--gold); }
+  h1 .ac { color: var(--accent); }
+  .hero-sub { font-size: clamp(0.9rem, 1.8vw, 1rem); font-weight: 300; line-height: 1.8; color: rgba(245,242,236,0.6); max-width: 500px; margin-bottom: 1.8rem; }
+  .hero-sub strong { color: rgba(245,242,236,0.92); font-weight: 500; }
+  .win-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; margin-bottom: 2rem; max-width: 640px; }
+  .win-card { border: 1px solid rgba(245,242,236,0.08); border-radius: var(--r); padding: 0.9rem 1rem; }
+  .win-card.wc-hw { background: rgba(26,107,60,0.07); border-color: rgba(94,196,122,0.18); }
+  .win-card.wc-pro { background: rgba(212,80,10,0.07); border-color: rgba(212,80,10,0.18); }
+  .win-card.wc-mkt { background: rgba(200,168,75,0.07); border-color: rgba(200,168,75,0.18); }
+  .wc-who { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .win-card.wc-hw .wc-who { color: #5ec47a; }
+  .win-card.wc-pro .wc-who { color: #e07050; }
+  .win-card.wc-mkt .wc-who { color: var(--gold); }
+  .wc-win { font-size: 0.82rem; font-weight: 500; color: rgba(245,242,236,0.85); line-height: 1.4; margin-bottom: 0.3rem; }
+  .wc-detail { font-size: 0.75rem; color: rgba(245,242,236,0.35); line-height: 1.5; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 2rem; }
+  .hero-pill { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.7rem; border-radius: 20px; border: 1px solid rgba(245,242,236,0.1); color: rgba(245,242,236,0.38); }
+  .hero-pill.on { border-color: rgba(26,107,60,0.45); color: #5ec47a; background: rgba(26,107,60,0.07); }
+  .hero-cta-row { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
   .btn-primary { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; display: inline-block; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,80,10,0.25); }
-  .scroll-hint { font-size: 0.78rem; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
-  .scroll-hint svg { animation: bounce 1.6s ease-in-out infinite; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,80,10,0.3); }
+  .scroll-hint { font-size: 0.75rem; color: rgba(245,242,236,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+  .hero-stat-row { display: flex; gap: 2.2rem; margin-top: 2.8rem; padding-top: 2rem; border-top: 1px solid rgba(245,242,236,0.07); flex-wrap: wrap; }
+  .hsr-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); line-height: 1; }
+  .hsr-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(245,242,236,0.28); margin-top: 0.2rem; }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
 
   .ps-section { background: var(--ink); color: var(--paper); padding: 5rem 2rem; position: relative; overflow: hidden; }
@@ -223,6 +240,8 @@
     .optional-row { grid-template-columns: 1fr; }
     .pro-cards { grid-template-columns: 1fr; }
     .stamp { display: none; }
+    .win-row { grid-template-columns: 1fr; }
+    .hero-pills { display: none; }
     .shop-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   }
 </style>
@@ -236,17 +255,55 @@
 
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="stamp"><div class="stamp-inner">AI<br>POWERED<br>·<br>NC 2026<br>RATES</div></div>
+  <div class="stamp">
+    <div class="stamp-inner">Market Intelligence</div>
+    <div class="stamp-main"><span class="stamp-dot"></span>NC 2026 · Live</div>
+  </div>
   <div class="hero-content">
-    <div class="eyebrow">Human Hands. AI Power. · pronounced <em style="font-style:italic;letter-spacing:0.05em;color:var(--ink);opacity:0.7">"escape"</em></div>
-    <h1>DON'T<br>GET<br><em>RIPPED</em><br>OFF.</h1>
-    <p class="hero-sub">Every year, homeowners overpay by <strong>thousands</strong> because they don't know the standard rate. YSKAIPE — <strong>escape the cost traps</strong> — tells you <strong>exactly what a job should cost</strong>, then helps you DIY it or connects you to vetted professionals who play fair.</p>
+    <div class="hero-rule"></div>
+    <div class="eyebrow">Home Services · Market Intelligence · pronounced &#8220;escape&#8221;</div>
+    <h1>FAIR PRICE.<br><span class="gold">SMART CHOICE.</span><br><span class="ac">EVERYBODY</span><br>WINS.</h1>
+    <p class="hero-sub">
+      The home services market works best when <strong>everyone knows the fair rate.</strong>
+      Homeowners stop overpaying. Good contractors stop losing to lowballers.
+      DIY-able jobs get done right. Complex jobs go to the pros who deserve them.<br><br>
+      YSKAIPE is market intelligence for the rest of us &#8212;
+      <strong>the number that levels the field for everyone at the table.</strong>
+    </p>
+    <div class="win-row">
+      <div class="win-card wc-hw">
+        <div class="wc-who">Homeowner wins</div>
+        <div class="wc-win">Know the fair rate before anyone arrives</div>
+        <div class="wc-detail">DIY what you can. Hire smart when you can't.</div>
+      </div>
+      <div class="win-card wc-pro">
+        <div class="wc-who">Pro wins</div>
+        <div class="wc-win">Compete on quality, not confusion</div>
+        <div class="wc-detail">Win jobs on skill. No more lowball pressure.</div>
+      </div>
+      <div class="win-card wc-mkt">
+        <div class="wc-who">Market wins</div>
+        <div class="wc-win">Transparency raises the floor</div>
+        <div class="wc-detail">Good work gets rewarded. Bad actors lose.</div>
+      </div>
+    </div>
+    <div class="hero-pills">
+      <span class="hero-pill on">&#10003; Instant standard cost</span>
+      <span class="hero-pill on">&#10003; DIY guidance + materials</span>
+      <span class="hero-pill on">&#10003; Vetted pro matching</span>
+      <span class="hero-pill">Free to use</span>
+      <span class="hero-pill">No signup</span>
+      <span class="hero-pill">Claude AI powered</span>
+    </div>
     <div class="hero-cta-row">
-      <a href="#autoquote" class="btn-primary">Get Instant Quote →</a>
-      <span class="scroll-hint">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Scroll to quote
-      </span>
+      <a href="#autoquote" class="btn-primary">Get the Fair Rate &#8594;</a>
+      <span class="scroll-hint">8 sec &middot; no account needed</span>
+    </div>
+    <div class="hero-stat-row">
+      <div><div class="hsr-num">$2,400</div><div class="hsr-label">avg annual overpayment</div></div>
+      <div><div class="hsr-num">62%</div><div class="hsr-label">of jobs are DIY-able</div></div>
+      <div><div class="hsr-num">8 sec</div><div class="hsr-label">to your estimate</div></div>
+      <div><div class="hsr-num">$0</div><div class="hsr-label">to use YSKAIPE</div></div>
     </div>
   </div>
 </section>
