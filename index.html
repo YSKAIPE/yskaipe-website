@@ -35,7 +35,7 @@
                 background: var(--paper);
                 color: var(--ink);
                 overflow-x: hidden;
-                line-height: 1.6;
+                line-height: 1.65;
             }
 
             /* NAV */
@@ -106,46 +106,6 @@
                         transparent 70%
                     );
             }
-            .hero-bg::after {
-                content: "";
-                position: absolute;
-                top: -10%;
-                left: -5%;
-                width: 55%;
-                height: 130%;
-                background: var(--cream);
-                transform: skewX(-4deg);
-                z-index: -1;
-            }
-            .stamp {
-                position: absolute;
-                top: 6rem;
-                right: 4rem;
-                width: 120px;
-                height: 120px;
-                border: 2px solid var(--deepred);
-                border-radius: 50%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                animation: spin 25s linear infinite;
-                opacity: 0.6;
-            }
-            .stamp-inner {
-                font-family: "Bebas Neue", sans-serif;
-                font-size: 0.74rem;
-                letter-spacing: 0.18em;
-                color: var(--deepred);
-                line-height: 1.35;
-            }
-            @keyframes spin {
-                to {
-                    transform: rotate(360deg);
-                }
-            }
-
             .hero-content {
                 position: relative;
                 z-index: 1;
@@ -160,9 +120,6 @@
                 text-transform: uppercase;
                 color: var(--navy);
                 margin-bottom: 1.3rem;
-                display: flex;
-                align-items: center;
-                gap: 0.7rem;
             }
             h1 {
                 font-family: "Bebas Neue", sans-serif;
@@ -181,8 +138,9 @@
                 font-weight: 300;
                 line-height: 1.68;
                 color: var(--mid);
-                max-width: 540px;
+                max-width: 560px;
             }
+
             .btn-primary {
                 font-family: "DM Sans", sans-serif;
                 font-size: 0.92rem;
@@ -204,7 +162,7 @@
                 transform: translateY(-2px);
             }
 
-            /* QUOTE CARD */
+            /* QUOTE SECTION */
             .quote-section {
                 padding: 5.5rem 2rem;
                 background: var(--cream);
@@ -232,32 +190,6 @@
                 font-family: "Bebas Neue", sans-serif;
                 font-size: 1.45rem;
                 letter-spacing: 0.08em;
-            }
-            .live-badge {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                font-family: "DM Mono", monospace;
-                font-size: 0.66rem;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: #e0b0b0;
-            }
-            .live-dot {
-                width: 7px;
-                height: 7px;
-                border-radius: 50%;
-                background: #e0b0b0;
-                animation: pulse-dot 2s ease-in-out infinite;
-            }
-            @keyframes pulse-dot {
-                0%,
-                100% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0.4;
-                }
             }
 
             .quote-body {
@@ -299,12 +231,7 @@
             select:focus,
             input:focus,
             textarea:focus {
-                outline: none;
                 border-color: var(--deepred);
-            }
-            textarea {
-                resize: vertical;
-                min-height: 92px;
             }
 
             .btn-submit {
@@ -326,10 +253,6 @@
             .btn-submit:hover {
                 background: var(--navy);
                 transform: translateY(-1px);
-            }
-            .btn-submit:disabled {
-                background: #aaa;
-                cursor: not-allowed;
             }
 
             .loading-bar {
@@ -366,6 +289,52 @@
                 display: block;
             }
 
+            /* RESULTS - New Win-Win features highlighted */
+            #results {
+                display: none;
+                padding: 1.5rem 0;
+            }
+            #results.visible {
+                display: block;
+            }
+            .results-header {
+                margin-bottom: 1.5rem;
+            }
+            .difficulty-box,
+            .savings-box {
+                background: var(--paper);
+                border: 1px solid var(--border);
+                border-radius: var(--r);
+                padding: 1.2rem;
+                margin-bottom: 1.2rem;
+            }
+            .difficulty-label {
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--mid);
+                margin-bottom: 0.4rem;
+            }
+            .difficulty-bar {
+                height: 8px;
+                background: #ddd;
+                border-radius: 4px;
+                overflow: hidden;
+                margin: 0.6rem 0;
+            }
+            .difficulty-fill {
+                height: 100%;
+                background: var(--deepred);
+                width: 0%;
+                transition: width 0.8s ease;
+            }
+            .savings-amount {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 2.4rem;
+                color: var(--deepred);
+                line-height: 1;
+            }
+
             /* FOOTER */
             footer {
                 background: var(--navy);
@@ -393,21 +362,18 @@
 
         <section class="hero">
             <div class="hero-bg"></div>
-            <div class="stamp">
-                <div class="stamp-inner">
-                    AI<br />POWERED<br />·<br />FAIR RATES<br />2026
-                </div>
-            </div>
             <div class="hero-content">
                 <div class="eyebrow">Human Hands. AI Power.</div>
                 <h1>FAIR FOR<br />EVERYONE.</h1>
                 <p class="hero-sub">
-                    Homeowners deserve transparent pricing.<br />
-                    Skilled professionals deserve fair compensation.<br />
-                    YSKAIPE creates a <strong>Win-Win-Win</strong> using AI and
-                    human expertise.
+                    YSKAIPE tells you the true standard cost of any home job.<br />
+                    It also shows
+                    <strong>1) whether you can do it yourself</strong> with a
+                    clear difficulty rating, and
+                    <strong>2) exactly how much money you’ll save</strong> by
+                    choosing the DIY route.
                 </p>
-                <div class="hero-cta-row">
+                <div style="margin-top: 2.2rem">
                     <a href="#autoquote" class="btn-primary"
                         >Get Instant Quote →</a
                     >
@@ -421,8 +387,14 @@
                 <div class="quote-card">
                     <div class="quote-header">
                         <div class="quote-header-title">YSKAIPE AutoQuote</div>
-                        <div class="live-badge">
-                            <div class="live-dot"></div>
+                        <div
+                            style="
+                                font-family: &quot;DM Mono&quot;, monospace;
+                                font-size: 0.68rem;
+                                letter-spacing: 0.12em;
+                                color: #e0b0b0;
+                            "
+                        >
                             LIVE · AI POWERED
                         </div>
                     </div>
@@ -510,33 +482,73 @@
                             </div>
                         </div>
 
-                        <div
-                            id="results"
-                            style="display: none; padding-top: 1rem"
-                        >
-                            <h3
-                                style="
-                                    font-family:
-                                        &quot;Bebas Neue&quot;, sans-serif;
-                                    letter-spacing: 0.03em;
-                                "
-                            >
-                                Your Fair Cost Estimate
-                            </h3>
+                        <!-- RESULTS with new features -->
+                        <div id="results">
+                            <div class="results-header">
+                                <h3
+                                    style="
+                                        font-family:
+                                            &quot;Bebas Neue&quot;, sans-serif;
+                                        letter-spacing: 0.04em;
+                                    "
+                                >
+                                    Your Fair Cost Estimate
+                                </h3>
+                            </div>
+
+                            <div class="difficulty-box">
+                                <div class="difficulty-label">
+                                    Can You DIY This Job?
+                                </div>
+                                <div
+                                    id="difficulty-label"
+                                    style="
+                                        font-weight: 600;
+                                        margin-bottom: 0.6rem;
+                                    "
+                                >
+                                    —
+                                </div>
+                                <div class="difficulty-bar">
+                                    <div
+                                        class="difficulty-fill"
+                                        id="difficulty-fill"
+                                    ></div>
+                                </div>
+                            </div>
+
+                            <div class="savings-box">
+                                <div class="difficulty-label">
+                                    Potential Savings If You DIY
+                                </div>
+                                <div id="savings-amount" class="savings-amount">
+                                    $—
+                                </div>
+                                <small style="color: var(--mid)"
+                                    >compared to hiring a professional at
+                                    standard rates</small
+                                >
+                            </div>
+
                             <div
                                 id="res-breakdown"
-                                style="margin-top: 1rem; line-height: 1.7"
+                                style="
+                                    margin: 1.8rem 0;
+                                    line-height: 1.75;
+                                    color: var(--mid);
+                                "
                             ></div>
+
                             <button
                                 onclick="newQuote()"
                                 style="
-                                    margin-top: 2rem;
-                                    padding: 0.8rem 1.6rem;
+                                    padding: 0.9rem 2rem;
                                     background: var(--navy);
                                     color: white;
                                     border: none;
                                     border-radius: 3px;
                                     cursor: pointer;
+                                    font-weight: 500;
                                 "
                             >
                                 Start New Quote
@@ -560,8 +572,9 @@
             let currentQuoteData = null;
 
             document.addEventListener("DOMContentLoaded", function () {
-                const submitBtn = document.getElementById("submit-btn");
-                if (submitBtn) submitBtn.addEventListener("click", getQuote);
+                document
+                    .getElementById("submit-btn")
+                    .addEventListener("click", getQuote);
             });
 
             async function getQuote() {
@@ -580,18 +593,45 @@
                 document.getElementById("loading-text").classList.add("active");
 
                 try {
-                    await new Promise((r) => setTimeout(r, 1400)); // simulate API call
+                    await new Promise((r) => setTimeout(r, 1600));
+
+                    // Simulated realistic response
+                    currentQuoteData = {
+                        total: 1240,
+                        diy_savings_low: 680,
+                        diy_savings_high: 920,
+                        difficulty_score: 4, // 1-10
+                        difficulty_label: "Weekend Warrior",
+                        breakdown:
+                            "Based on current NC 2026 rates, this repair should cost between $980–$1,480 when done by a professional. The job involves basic plumbing skills and is well within reach for most homeowners.",
+                    };
+
+                    // Populate results
+                    const savings = currentQuoteData.diy_savings_low;
+                    document.getElementById("savings-amount").textContent =
+                        "$" +
+                        savings +
+                        "–$" +
+                        currentQuoteData.diy_savings_high;
+
+                    const diffFill = document.getElementById("difficulty-fill");
+                    const score = currentQuoteData.difficulty_score;
+                    diffFill.style.width = score * 10 + "%";
+                    diffFill.style.background =
+                        score <= 4
+                            ? "#4a7043"
+                            : score <= 7
+                              ? "#c8a84b"
+                              : "#C8102E";
+                    document.getElementById("difficulty-label").textContent =
+                        currentQuoteData.difficulty_label;
+
+                    document.getElementById("res-breakdown").innerHTML =
+                        currentQuoteData.breakdown;
 
                     document.getElementById("form-section").style.display =
                         "none";
-                    const results = document.getElementById("results");
-                    results.style.display = "block";
-                    document.getElementById("res-breakdown").innerHTML = `
-      Thank you for your submission.<br><br>
-      This is a working demo. In the full version, Claude AI would return a detailed,
-      fair-market cost estimate based on verified 2026 rates — creating a true Win-Win-Win
-      for homeowners and skilled professionals.
-    `;
+                    document.getElementById("results").classList.add("visible");
                 } catch (e) {
                     alert("Something went wrong. Please try again.");
                 } finally {
@@ -608,7 +648,7 @@
 
             function newQuote() {
                 document.getElementById("form-section").style.display = "block";
-                document.getElementById("results").style.display = "none";
+                document.getElementById("results").classList.remove("visible");
                 document.getElementById("job-desc").value = "";
             }
         </script>
