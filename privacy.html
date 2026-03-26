@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy · YSKAIPE</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --accent: #d4500a;
+    --accent2: #1a6b3c;
+    --gold: #c8a84b;
+    --mid: #6b6560;
+    --border: rgba(15,14,12,0.12);
+    --card: #ffffff;
+    --r: 4px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 56px;
+    background: rgba(245,242,236,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.15em; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a.nav-back { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+  nav a.nav-back:hover { color: var(--ink); }
+
+  .page-hero {
+    background: var(--ink);
+    padding: 7rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: 'PRIVACY';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif; font-size: 12rem; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.03); white-space: nowrap; pointer-events: none;
+  }
+  .page-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .page-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--paper); margin-bottom: 1.5rem; }
+  .page-subtitle { font-size: 1rem; font-weight: 300; line-height: 1.7; color: rgba(245,242,236,0.6); max-width: 520px; }
+  .page-meta { margin-top: 2rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,242,236,0.35); }
+
+  .content-wrap { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+  .section-block { margin-bottom: 3rem; }
+  .section-block h2 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em;
+    color: var(--ink); margin-bottom: 1rem;
+    padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
+  }
+  .section-block p { font-size: 0.95rem; line-height: 1.8; color: var(--mid); margin-bottom: 1rem; }
+  .section-block p strong { color: var(--ink); font-weight: 500; }
+  .section-block ul { list-style: none; margin: 0.5rem 0 1rem; }
+  .section-block ul li { font-size: 0.92rem; line-height: 1.7; color: var(--mid); padding: 0.4rem 0; padding-left: 1.2rem; position: relative; }
+  .section-block ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
+
+  .highlight-box {
+    background: var(--cream); border-left: 3px solid var(--accent2);
+    border-radius: 0 var(--r) var(--r) 0;
+    padding: 1.2rem 1.5rem; margin: 1.5rem 0;
+    font-size: 0.9rem; line-height: 1.75; color: var(--ink);
+  }
+  .highlight-box strong { color: var(--accent2); }
+
+  .anthropic-note {
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--r); padding: 1.5rem 2rem; margin: 2rem 0;
+  }
+  .anthropic-note .an-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+  .anthropic-note p { font-size: 0.88rem; line-height: 1.75; color: rgba(245,242,236,0.75); margin: 0; }
+  .anthropic-note a { color: var(--gold); }
+
+  footer { background: var(--ink); color: rgba(245,242,236,0.5); padding: 2rem; text-align: center; font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+  footer a { color: rgba(245,242,236,0.5); }
+  .footer-links { margin-top: 0.8rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Y<span>S</span>KAIPE</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Legal · Trust</div>
+    <div class="page-title">PRIVACY<br>POLICY</div>
+    <p class="page-subtitle">We built YSKAIPE so homeowners could stop getting ripped off. That mission only works if you trust us with your information. Here's exactly how we handle it.</p>
+    <div class="page-meta">Effective date: March 26, 2026 · yskaipe.com</div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="highlight-box">
+    <strong>The short version:</strong> We collect only what we need to give you accurate quotes. We don't sell your data. We don't run ads. We don't share your information with contractors without your consent. YSKAIPE exists to give you power — not to monetize your vulnerability.
+  </div>
+
+  <div class="section-block">
+    <h2>Who We Are</h2>
+    <p>YSKAIPE ("we," "us," "our") is a home services cost intelligence platform based in North Carolina. Our mission is to give every homeowner the knowledge they need to make fair, informed decisions about home repair and improvement — without being taken advantage of.</p>
+    <p>We can be reached at <strong><a href="mailto:gr8@yskaipe.com" style="color:var(--accent);text-decoration:none;">gr8@yskaipe.com</a></strong> with any privacy-related questions.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>What We Collect</h2>
+    <p>We collect only what's necessary to deliver your quote and improve our service:</p>
+    <ul>
+      <li><strong>Job information</strong> — trade type, ZIP code, home size, and your description of the job. This is used to generate your cost estimate.</li>
+      <li><strong>Optional contact details</strong> — your name and email, only if you choose to provide them for quote delivery. Never required.</li>
+      <li><strong>Usage data</strong> — anonymized analytics about how the tool is used (page views, quote types, general usage patterns). No personal identifiers attached.</li>
+    </ul>
+    <p>We do <strong>not</strong> collect payment information, social security numbers, contractor account credentials, or any sensitive personal data.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>How We Use Your Information</h2>
+    <ul>
+      <li>To generate your instant standard cost estimate</li>
+      <li>To deliver your quote via email if you request it</li>
+      <li>To improve the accuracy of our AI-powered pricing models</li>
+      <li>To understand how people use YSKAIPE so we can make it better</li>
+    </ul>
+    <p>We will never use your information to target you with advertising, sell you additional services without your consent, or share identifiable data with third parties for marketing purposes.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Claude AI & Anthropic</h2>
+    <div class="anthropic-note">
+      <div class="an-label">Powered by Claude · Anthropic</div>
+      <p>YSKAIPE uses Claude, Anthropic's AI, as our core intelligence engine. When you submit a quote request, your job description is sent to Anthropic's API to generate pricing and DIY guidance. This data is processed under Anthropic's privacy policy and is not used to train their models without consent. We chose Claude because Anthropic's commitment to safe, honest, and beneficial AI aligns directly with YSKAIPE's mission of transparency and consumer protection. You can review Anthropic's privacy practices at <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">anthropic.com/privacy</a>.</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Data Sharing</h2>
+    <p>We do not sell, rent, or trade your personal information. Period.</p>
+    <p>We may share anonymized, aggregated data (e.g., "most common job types in NC") for industry reporting or product improvement. This data cannot be traced back to any individual.</p>
+    <p>The only circumstances under which we would share identifiable information:</p>
+    <ul>
+      <li>With your explicit consent (e.g., connecting you to a vetted pro in our network)</li>
+      <li>If required by law or valid legal process</li>
+      <li>To protect the safety of our users or the public</li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <h2>Cookies & Tracking</h2>
+    <p>We use minimal, functional cookies only — no advertising trackers, no third-party behavioral tracking pixels. We use anonymized analytics to understand general usage patterns. You can disable cookies in your browser at any time without affecting the core functionality of YSKAIPE.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Data Retention</h2>
+    <p>Quote data submitted without an email address is not stored after your session ends. If you provide an email for quote delivery, we retain your quote data for 90 days, after which it is automatically deleted. You can request deletion at any time by emailing <a href="mailto:gr8@yskaipe.com" style="color:var(--accent);text-decoration:none;">gr8@yskaipe.com</a>.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Know what data we hold about you</li>
+      <li>Request correction of inaccurate data</li>
+      <li>Request deletion of your data</li>
+      <li>Opt out of any email communications at any time</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <a href="mailto:gr8@yskaipe.com" style="color:var(--accent);text-decoration:none;">gr8@yskaipe.com</a>. We will respond within 5 business days.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Children's Privacy</h2>
+    <p>YSKAIPE is not directed at children under 13. We do not knowingly collect personal information from children. If you believe a child has submitted information through our platform, please contact us immediately.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Changes to This Policy</h2>
+    <p>If we make material changes to this policy, we will update the effective date at the top of this page and, where appropriate, notify users by email. Continued use of YSKAIPE after changes constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Contact</h2>
+    <p>Questions, concerns, or requests related to this privacy policy should be directed to:<br><br>
+    <strong>YSKAIPE</strong><br>
+    <a href="mailto:gr8@yskaipe.com" style="color:var(--accent);text-decoration:none;">gr8@yskaipe.com</a><br>
+    North Carolina, USA</p>
+  </div>
+
+</div>
+
+<footer>
+  YSKAIPE · Human Hands. AI Power. · <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="docs.html">Documentation</a>
+    <a href="privacy.html" style="color:rgba(245,242,236,0.8)">Privacy</a>
+    <a href="terms.html">Terms</a>
+    <a href="future-of-work.html">Future of Work</a>
+  </div><br>
+  Based on verified NC 2026 industry standards · © 2025 Yskaipe
+</footer>
+
+</body>
+</html>

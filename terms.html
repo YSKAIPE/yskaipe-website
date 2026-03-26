@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service · YSKAIPE</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --accent: #d4500a;
+    --accent2: #1a6b3c;
+    --gold: #c8a84b;
+    --mid: #6b6560;
+    --border: rgba(15,14,12,0.12);
+    --card: #ffffff;
+    --r: 4px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 56px;
+    background: rgba(245,242,236,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.15em; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a.nav-back { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+  nav a.nav-back:hover { color: var(--ink); }
+
+  .page-hero {
+    background: var(--cream);
+    padding: 7rem 2rem 4rem;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-hero::before {
+    content: 'TERMS';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif; font-size: 14rem; letter-spacing: 0.1em;
+    color: rgba(15,14,12,0.04); white-space: nowrap; pointer-events: none;
+  }
+  .page-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .page-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--ink); margin-bottom: 1.5rem; }
+  .page-subtitle { font-size: 1rem; font-weight: 300; line-height: 1.7; color: var(--mid); max-width: 520px; }
+  .page-meta { margin-top: 2rem; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); opacity: 0.5; }
+
+  .content-wrap { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+  .section-block { margin-bottom: 3rem; }
+  .section-block h2 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em;
+    color: var(--ink); margin-bottom: 1rem;
+    padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
+  }
+  .section-block p { font-size: 0.95rem; line-height: 1.8; color: var(--mid); margin-bottom: 1rem; }
+  .section-block p strong { color: var(--ink); font-weight: 500; }
+  .section-block ul { list-style: none; margin: 0.5rem 0 1rem; }
+  .section-block ul li { font-size: 0.92rem; line-height: 1.7; color: var(--mid); padding: 0.4rem 0; padding-left: 1.2rem; position: relative; }
+  .section-block ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 500; }
+
+  .highlight-box {
+    background: var(--ink); color: var(--paper);
+    border-radius: var(--r); padding: 1.5rem 2rem; margin: 0 0 3rem;
+  }
+  .highlight-box p { font-size: 0.9rem; line-height: 1.75; color: rgba(245,242,236,0.75); margin: 0; }
+  .highlight-box strong { color: var(--gold); }
+
+  .mission-note {
+    background: rgba(26,107,60,0.06); border: 1px solid rgba(26,107,60,0.15);
+    border-radius: var(--r); padding: 1.2rem 1.5rem; margin: 1.5rem 0;
+    font-size: 0.9rem; line-height: 1.75; color: var(--ink);
+  }
+  .mission-note strong { color: var(--accent2); }
+
+  footer { background: var(--ink); color: rgba(245,242,236,0.5); padding: 2rem; text-align: center; font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+  footer a { color: rgba(245,242,236,0.5); }
+  .footer-links { margin-top: 0.8rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Y<span>S</span>KAIPE</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Legal · Terms</div>
+    <div class="page-title">TERMS OF<br>SERVICE</div>
+    <p class="page-subtitle">Plain language. No traps. YSKAIPE was built to eliminate fine print surprises in the home services industry — our own terms reflect that same standard.</p>
+    <div class="page-meta">Effective date: March 26, 2026 · yskaipe.com</div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="highlight-box">
+    <p><strong>The honest version:</strong> YSKAIPE gives you AI-powered cost estimates based on verified NC 2026 industry rates. These are reference figures to help you make informed decisions — not binding contractor quotes. Use this information to negotiate fairly, decide whether to DIY, and avoid overpaying. By using YSKAIPE, you agree to these terms.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>What YSKAIPE Is</h2>
+    <p>YSKAIPE is a home services cost intelligence platform. We use Claude AI (by Anthropic) to generate standard cost estimates for home repair and improvement jobs based on verified North Carolina 2026 industry rates.</p>
+    <p>Our estimates are designed to give you a fair baseline — what a job <em>should</em> cost — so you can enter contractor conversations with knowledge and confidence.</p>
+    <div class="mission-note">
+      <strong>Our mission:</strong> YSKAIPE exists to level the playing field between homeowners and home service professionals. We believe everyone deserves to know the fair market rate before agreeing to any work. That belief shapes every decision we make, including these terms.
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>What YSKAIPE Is Not</h2>
+    <ul>
+      <li>A licensed contractor, home inspector, or professional trades service</li>
+      <li>A provider of binding estimates or guaranteed pricing</li>
+      <li>A substitute for professional consultation on complex, permitted, or safety-critical work</li>
+      <li>An insurance or warranty provider for any work performed</li>
+    </ul>
+    <p>Always consult a licensed professional before beginning work that involves structural, electrical, plumbing, or safety systems. YSKAIPE's estimates are reference tools, not professional opinions.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Accuracy of Estimates</h2>
+    <p>Our estimates are generated using Claude AI against verified NC 2026 industry rate data. While we work hard to keep these rates current and accurate, actual costs may vary based on:</p>
+    <ul>
+      <li>Specific job complexity or conditions not captured in your description</li>
+      <li>Material price fluctuations</li>
+      <li>Local market conditions beyond NC averages</li>
+      <li>Contractor-specific pricing, overhead, or markup</li>
+      <li>Permit fees, disposal costs, or unforeseen complications</li>
+    </ul>
+    <p>YSKAIPE estimates are provided in good faith as a starting reference. We do not guarantee that any contractor will match or accept these figures.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>DIY Guidance</h2>
+    <p>YSKAIPE provides DIY instructions for informational purposes only. Before attempting any home repair:</p>
+    <ul>
+      <li>Verify local permit requirements — many jobs require permits regardless of who performs the work</li>
+      <li>Assess your own skill level honestly — our difficulty ratings are guidelines, not guarantees</li>
+      <li>Follow all manufacturer instructions and local building codes</li>
+      <li>When in doubt, hire a licensed professional</li>
+    </ul>
+    <p>YSKAIPE is not responsible for injury, property damage, code violations, or any other outcome resulting from DIY work undertaken using our guidance.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Claude AI & Anthropic</h2>
+    <p>YSKAIPE's cost intelligence is powered by Claude, developed by Anthropic. We chose Anthropic as our AI partner because their commitment to safe, honest, and beneficial AI mirrors our own values. The estimates and guidance Claude generates through YSKAIPE reflect our data and prompts — Anthropic does not endorse or guarantee any specific output.</p>
+    <p>Use of YSKAIPE also constitutes use of Anthropic's technology. Anthropic's own terms of service apply to the underlying AI layer.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Affiliate Links & Shop Materials</h2>
+    <p>YSKAIPE's DIY reports include links to product listings on Amazon, Home Depot, and Lowe's. These links may include affiliate tracking codes that earn YSKAIPE a small commission on qualifying purchases at no additional cost to you.</p>
+    <p>Product recommendations are generated automatically based on your job description. YSKAIPE does not accept payment from manufacturers or retailers to feature specific products. Our only goal is to surface the right materials for your job at a fair price.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Pro Network</h2>
+    <p>YSKAIPE may connect users with vetted local professionals. Inclusion in our pro network does not constitute endorsement or guarantee of any contractor's work. You are responsible for verifying licenses, insurance, and references before hiring any professional. YSKAIPE is not a party to any agreement between you and a contractor.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Acceptable Use</h2>
+    <p>You agree not to use YSKAIPE to:</p>
+    <ul>
+      <li>Generate fraudulent estimates or misrepresent costs to any party</li>
+      <li>Scrape, reverse-engineer, or reproduce our rate data commercially</li>
+      <li>Submit false, misleading, or harmful job descriptions</li>
+      <li>Attempt to circumvent or abuse our AI systems</li>
+    </ul>
+    <p>We reserve the right to suspend access for any user who violates these terms or misuses the platform.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Limitation of Liability</h2>
+    <p>YSKAIPE is provided "as is." To the maximum extent permitted by law, YSKAIPE and its operators shall not be liable for any indirect, incidental, consequential, or punitive damages arising from your use of the platform, including but not limited to contractor disputes, property damage, personal injury, or financial loss based on our estimates.</p>
+    <p>Our total liability for any claim arising from use of YSKAIPE shall not exceed the amount you paid us in the 12 months preceding the claim — which in most cases is zero, as YSKAIPE is currently free to use.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Governing Law</h2>
+    <p>These terms are governed by the laws of the State of North Carolina, USA, without regard to conflict of law principles. Any disputes shall be resolved in the courts of North Carolina.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Changes to These Terms</h2>
+    <p>We may update these terms as YSKAIPE grows. Material changes will be noted by updating the effective date above. Continued use of YSKAIPE after changes constitutes acceptance of the revised terms.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Contact</h2>
+    <p>Questions about these terms should be directed to:<br><br>
+    <strong>YSKAIPE</strong><br>
+    <a href="mailto:gr8@yskaipe.com" style="color:var(--accent);text-decoration:none;">gr8@yskaipe.com</a><br>
+    North Carolina, USA</p>
+  </div>
+
+</div>
+
+<footer>
+  YSKAIPE · Human Hands. AI Power. · <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="docs.html">Documentation</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html" style="color:rgba(245,242,236,0.8)">Terms</a>
+    <a href="future-of-work.html">Future of Work</a>
+  </div><br>
+  Based on verified NC 2026 industry standards · © 2025 Yskaipe
+</footer>
+
+</body>
+</html>
