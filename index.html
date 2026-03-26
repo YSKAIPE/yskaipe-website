@@ -11,10 +11,10 @@
         <style>
             :root {
                 --ink: #0f0e0c;
-                --paper: #f8f6f0; /* warm ivory */
-                --cream: #f0ede4; /* soft ivory */
-                --navy: #002654; /* conservative French Navy */
-                --deepred: #c8102e; /* deeper, elegant French red */
+                --paper: #f8f6f0;
+                --cream: #f0ede4;
+                --navy: #002654;
+                --deepred: #c8102e;
                 --mid: #6b6560;
                 --border: rgba(15, 14, 12, 0.15);
                 --card: #ffffff;
@@ -80,13 +80,13 @@
                 background: var(--deepred);
             }
 
-            /* HERO */
+            /* HERO - More Professional Version */
             .hero {
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                padding: 7rem 2rem 4rem;
+                padding: 7rem 2rem 5rem;
                 position: relative;
                 overflow: hidden;
             }
@@ -97,69 +97,73 @@
                 background:
                     radial-gradient(
                         ellipse 60% 50% at 80% 40%,
-                        rgba(0, 38, 84, 0.07) 0%,
+                        rgba(0, 38, 84, 0.06) 0%,
                         transparent 70%
                     ),
                     radial-gradient(
                         ellipse 40% 60% at 10% 80%,
-                        rgba(200, 16, 46, 0.05) 0%,
+                        rgba(200, 16, 46, 0.04) 0%,
                         transparent 70%
                     );
             }
             .hero-content {
                 position: relative;
                 z-index: 1;
-                max-width: 920px;
+                max-width: 860px;
                 margin: 0 auto;
                 width: 100%;
             }
+
             .eyebrow {
                 font-family: "DM Mono", monospace;
-                font-size: 0.73rem;
-                letter-spacing: 0.22em;
+                font-size: 0.74rem;
+                letter-spacing: 0.25em;
                 text-transform: uppercase;
                 color: var(--navy);
-                margin-bottom: 1.3rem;
+                margin-bottom: 1.1rem;
+                font-weight: 500;
             }
             h1 {
                 font-family: "Bebas Neue", sans-serif;
-                font-size: clamp(3.4rem, 9.5vw, 7.8rem);
-                line-height: 0.93;
-                letter-spacing: 0.01em;
+                font-size: clamp(3.6rem, 9vw, 7.2rem);
+                line-height: 0.91;
+                letter-spacing: -0.02em;
                 color: var(--ink);
+                font-weight: 700;
             }
             h1 em {
                 font-style: normal;
                 color: var(--deepred);
             }
             .hero-sub {
-                margin-top: 1.9rem;
-                font-size: clamp(1.02rem, 2.1vw, 1.22rem);
-                font-weight: 300;
-                line-height: 1.68;
+                margin-top: 2rem;
+                font-size: clamp(1.05rem, 2.1vw, 1.25rem);
+                font-weight: 400;
+                line-height: 1.78;
                 color: var(--mid);
-                max-width: 560px;
+                max-width: 680px;
             }
 
             .btn-primary {
                 font-family: "DM Sans", sans-serif;
-                font-size: 0.92rem;
+                font-size: 0.93rem;
                 font-weight: 600;
-                letter-spacing: 0.06em;
+                letter-spacing: 0.08em;
                 text-transform: uppercase;
                 background: var(--deepred);
                 color: #fff;
-                padding: 0.95rem 2.1rem;
+                padding: 1rem 2.3rem;
                 border-radius: 3px;
                 text-decoration: none;
                 border: none;
                 cursor: pointer;
-                transition: all 0.2s;
+                transition: all 0.25s;
                 display: inline-block;
+                margin-top: 2.2rem;
             }
             .btn-primary:hover {
                 background: var(--navy);
-                transform: translateY(-2px);
+                transform: translateY(-3px);
             }
 
             /* QUOTE SECTION */
@@ -289,7 +293,7 @@
                 display: block;
             }
 
-            /* RESULTS - New Win-Win features highlighted */
+            /* RESULTS */
             #results {
                 display: none;
                 padding: 1.5rem 0;
@@ -297,23 +301,20 @@
             #results.visible {
                 display: block;
             }
-            .results-header {
-                margin-bottom: 1.5rem;
-            }
             .difficulty-box,
             .savings-box {
                 background: var(--paper);
                 border: 1px solid var(--border);
                 border-radius: var(--r);
-                padding: 1.2rem;
-                margin-bottom: 1.2rem;
+                padding: 1.3rem;
+                margin-bottom: 1.3rem;
             }
             .difficulty-label {
                 font-size: 0.75rem;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
                 color: var(--mid);
-                margin-bottom: 0.4rem;
+                margin-bottom: 0.5rem;
             }
             .difficulty-bar {
                 height: 8px;
@@ -366,14 +367,18 @@
                 <div class="eyebrow">Human Hands. AI Power.</div>
                 <h1>FAIR FOR<br />EVERYONE.</h1>
                 <p class="hero-sub">
-                    YSKAIPE tells you the true standard cost of any home job.<br />
-                    It also shows
-                    <strong>1) whether you can do it yourself</strong> with a
-                    clear difficulty rating, and
-                    <strong>2) exactly how much money you’ll save</strong> by
-                    choosing the DIY route.
+                    YSKAIPE delivers transparent standard costs for home
+                    services using verified 2026 rates. It clearly indicates
+                    whether a job is suitable for DIY with a precise difficulty
+                    rating, and calculates exactly how much you can save by
+                    doing it yourself.<br /><br />
+
+                    YSKAIPE also provides detailed DIY plans with shoppable
+                    materials, vetted professional referrals, and more. Our
+                    mission is to make all of these services easier and as
+                    cost-efficient as possible for everyone involved.
                 </p>
-                <div style="margin-top: 2.2rem">
+                <div>
                     <a href="#autoquote" class="btn-primary"
                         >Get Instant Quote →</a
                     >
@@ -482,7 +487,7 @@
                             </div>
                         </div>
 
-                        <!-- RESULTS with new features -->
+                        <!-- RESULTS -->
                         <div id="results">
                             <div class="results-header">
                                 <h3
@@ -595,18 +600,16 @@
                 try {
                     await new Promise((r) => setTimeout(r, 1600));
 
-                    // Simulated realistic response
                     currentQuoteData = {
                         total: 1240,
                         diy_savings_low: 680,
                         diy_savings_high: 920,
-                        difficulty_score: 4, // 1-10
+                        difficulty_score: 4,
                         difficulty_label: "Weekend Warrior",
                         breakdown:
-                            "Based on current NC 2026 rates, this repair should cost between $980–$1,480 when done by a professional. The job involves basic plumbing skills and is well within reach for most homeowners.",
+                            "Based on current NC 2026 rates, this repair should cost between $980–$1,480 when done professionally. The job is well within reach for most homeowners with basic tools and careful attention to safety.",
                     };
 
-                    // Populate results
                     const savings = currentQuoteData.diy_savings_low;
                     document.getElementById("savings-amount").textContent =
                         "$" +
