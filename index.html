@@ -1,659 +1,688 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>YSKAIPE · Human Hands. AI Power.</title>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            :root {
-                --ink: #0f0e0c;
-                --paper: #f8f6f0;
-                --cream: #f0ede4;
-                --navy: #002654;
-                --deepred: #c8102e;
-                --mid: #6b6560;
-                --border: rgba(15, 14, 12, 0.15);
-                --card: #ffffff;
-                --r: 4px;
-            }
-            *,
-            *::before,
-            *::after {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-            html {
-                scroll-behavior: smooth;
-            }
-            body {
-                font-family: "DM Sans", sans-serif;
-                background: var(--paper);
-                color: var(--ink);
-                overflow-x: hidden;
-                line-height: 1.65;
-            }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE · Home Services Market Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --accent: #d4500a;
+    --accent2: #1a6b3c;
+    --gold: #c8a84b;
+    --mid: #6b6560;
+    --border: rgba(15,14,12,0.12);
+    --card: #ffffff;
+    --r: 4px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
 
-            /* NAV */
-            nav {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 100;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0 2rem;
-                height: 56px;
-                background: rgba(248, 246, 240, 0.96);
-                backdrop-filter: blur(12px);
-                border-bottom: 1px solid var(--border);
-            }
-            .logo {
-                font-family: "Bebas Neue", sans-serif;
-                font-size: 1.55rem;
-                letter-spacing: 0.15em;
-                color: var(--ink);
-                text-decoration: none;
-            }
-            .logo span {
-                color: var(--deepred);
-            }
-            nav a.nav-cta {
-                font-size: 0.82rem;
-                font-weight: 500;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                background: var(--navy);
-                color: #fff;
-                padding: 0.5rem 1.2rem;
-                border-radius: 3px;
-                text-decoration: none;
-                transition: background 0.25s;
-            }
-            nav a.nav-cta:hover {
-                background: var(--deepred);
-            }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 56px; background: rgba(245,242,236,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.15em; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a.nav-cta { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--paper); padding: 0.45rem 1.1rem; border-radius: 2px; text-decoration: none; transition: background 0.2s; }
+  nav a.nav-cta:hover { background: var(--accent); }
 
-            /* HERO - More Professional Version */
-            .hero {
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                padding: 7rem 2rem 5rem;
-                position: relative;
-                overflow: hidden;
-            }
-            .hero-bg {
-                position: absolute;
-                inset: 0;
-                z-index: 0;
-                background:
-                    radial-gradient(
-                        ellipse 60% 50% at 80% 40%,
-                        rgba(0, 38, 84, 0.06) 0%,
-                        transparent 70%
-                    ),
-                    radial-gradient(
-                        ellipse 40% 60% at 10% 80%,
-                        rgba(200, 16, 46, 0.04) 0%,
-                        transparent 70%
-                    );
-            }
-            .hero-content {
-                position: relative;
-                z-index: 1;
-                max-width: 860px;
-                margin: 0 auto;
-                width: 100%;
-            }
+  /* HERO */
+  .hero { background: var(--ink); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 90% 50%, rgba(212,80,10,0.11) 0%, transparent 65%), radial-gradient(ellipse 40% 70% at 5% 85%, rgba(26,107,60,0.09) 0%, transparent 60%); pointer-events: none; }
+  .stamp { position: absolute; top: 6rem; right: 4rem; border: 1px solid rgba(245,242,236,0.09); border-radius: 6px; padding: 0.65rem 0.9rem; text-align: center; background: rgba(245,242,236,0.02); }
+  .stamp-label { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,242,236,0.28); margin-bottom: 0.25rem; }
+  .stamp-main { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.1em; color: rgba(245,242,236,0.65); }
+  .stamp-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #5ec47a; margin-right: 4px; vertical-align: middle; animation: pulse-dot 1.6s ease-in-out infinite; }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; width: 100%; }
+  .hero-rule { width: 32px; height: 2px; background: var(--accent); margin-bottom: 1.2rem; }
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem; }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 5.5rem); line-height: 0.91; letter-spacing: 0.02em; color: var(--paper); margin-bottom: 1.6rem; }
+  h1 .gold { color: var(--gold); }
+  h1 .ac { color: var(--accent); }
+  .hero-sub { font-size: clamp(0.9rem, 1.8vw, 1rem); font-weight: 300; line-height: 1.8; color: rgba(245,242,236,0.6); max-width: 500px; margin-bottom: 1.8rem; }
+  .hero-sub strong { color: rgba(245,242,236,0.92); font-weight: 500; }
+  .win-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; margin-bottom: 2rem; max-width: 640px; }
+  .win-card { border: 1px solid rgba(245,242,236,0.08); border-radius: var(--r); padding: 0.9rem 1rem; }
+  .win-card.wc-hw { background: rgba(26,107,60,0.07); border-color: rgba(94,196,122,0.18); }
+  .win-card.wc-pro { background: rgba(212,80,10,0.07); border-color: rgba(212,80,10,0.18); }
+  .win-card.wc-mkt { background: rgba(200,168,75,0.07); border-color: rgba(200,168,75,0.18); }
+  .wc-who { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .win-card.wc-hw .wc-who { color: #5ec47a; }
+  .win-card.wc-pro .wc-who { color: #e07050; }
+  .win-card.wc-mkt .wc-who { color: var(--gold); }
+  .wc-win { font-size: 0.82rem; font-weight: 500; color: rgba(245,242,236,0.85); line-height: 1.4; margin-bottom: 0.3rem; }
+  .wc-detail { font-size: 0.75rem; color: rgba(245,242,236,0.35); line-height: 1.5; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 2rem; }
+  .hero-pill { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.7rem; border-radius: 20px; border: 1px solid rgba(245,242,236,0.1); color: rgba(245,242,236,0.38); }
+  .hero-pill.on { border-color: rgba(26,107,60,0.45); color: #5ec47a; background: rgba(26,107,60,0.07); }
+  .hero-cta-row { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+  .btn-primary { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; border: none; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,80,10,0.3); }
+  .scroll-hint { font-size: 0.75rem; color: rgba(245,242,236,0.35); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+  .hero-stat-row { display: flex; gap: 2.2rem; margin-top: 2.8rem; padding-top: 2rem; border-top: 1px solid rgba(245,242,236,0.07); flex-wrap: wrap; }
+  .hsr-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold); line-height: 1; }
+  .hsr-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(245,242,236,0.28); margin-top: 0.2rem; }
 
-            .eyebrow {
-                font-family: "DM Mono", monospace;
-                font-size: 0.74rem;
-                letter-spacing: 0.25em;
-                text-transform: uppercase;
-                color: var(--navy);
-                margin-bottom: 1.1rem;
-                font-weight: 500;
-            }
-            h1 {
-                font-family: "Bebas Neue", sans-serif;
-                font-size: clamp(3.6rem, 9vw, 7.2rem);
-                line-height: 0.91;
-                letter-spacing: -0.02em;
-                color: var(--ink);
-                font-weight: 700;
-            }
-            h1 em {
-                font-style: normal;
-                color: var(--deepred);
-            }
-            .hero-sub {
-                margin-top: 2rem;
-                font-size: clamp(1.05rem, 2.1vw, 1.25rem);
-                font-weight: 400;
-                line-height: 1.78;
-                color: var(--mid);
-                max-width: 680px;
-            }
+  /* PS SECTION */
+  .ps-section { background: var(--ink); color: var(--paper); padding: 5rem 2rem; position: relative; overflow: hidden; }
+  .ps-section::before { content: 'THE PROBLEM'; position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); font-family: 'Bebas Neue', sans-serif; font-size: 8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.04); white-space: nowrap; pointer-events: none; }
+  .ps-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 48px 1fr; gap: 0; align-items: center; }
+  .ps-col { padding: 2rem; }
+  .ps-divider { display: flex; align-items: center; justify-content: center; height: 100%; }
+  .ps-divider-line { width: 1px; height: 100%; background: rgba(255,255,255,0.15); position: relative; }
+  .ps-divider-vs { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--accent); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.1em; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .ps-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+  .ps-label.bad { color: #e05050; }
+  .ps-label.good { color: #5ec47a; }
+  .ps-col h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.03em; line-height: 1; margin-bottom: 1rem; }
+  .ps-list { list-style: none; }
+  .ps-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; font-weight: 300; line-height: 1.5; color: rgba(245,242,236,0.7); margin-bottom: 0.7rem; }
+  .ps-list li .icon { flex-shrink: 0; margin-top: 2px; font-size: 0.85rem; }
+  .ps-stat-row { margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2.5rem; display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; max-width: 1000px; margin-left: auto; margin-right: auto; text-align: center; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 1; color: var(--gold); }
+  .stat-label { font-size: 0.8rem; color: rgba(245,242,236,0.55); margin-top: 0.3rem; line-height: 1.3; }
 
-            .btn-primary {
-                font-family: "DM Sans", sans-serif;
-                font-size: 0.93rem;
-                font-weight: 600;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                background: var(--deepred);
-                color: #fff;
-                padding: 1rem 2.3rem;
-                border-radius: 3px;
-                text-decoration: none;
-                border: none;
-                cursor: pointer;
-                transition: all 0.25s;
-                display: inline-block;
-                margin-top: 2.2rem;
-            }
-            .btn-primary:hover {
-                background: var(--navy);
-                transform: translateY(-3px);
-            }
+  /* HOW IT WORKS */
+  .hiw-section { padding: 5rem 2rem; background: var(--cream); }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: 0.03em; line-height: 1; color: var(--ink); }
+  .steps { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 2rem 1.5rem; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+  .step:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,14,12,0.1); }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 1; color: var(--accent); opacity: 0.18; position: absolute; top: 0.5rem; right: 1rem; }
+  .step-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .step h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .step p { font-size: 0.85rem; color: var(--mid); line-height: 1.6; }
 
-            /* QUOTE SECTION */
-            .quote-section {
-                padding: 5.5rem 2rem;
-                background: var(--cream);
-            }
-            .quote-wrap {
-                max-width: 780px;
-                margin: 0 auto;
-            }
-            .quote-card {
-                background: var(--card);
-                border: 1px solid var(--border);
-                border-radius: 8px;
-                overflow: hidden;
-                box-shadow: 0 6px 40px rgba(0, 0, 0, 0.07);
-            }
-            .quote-header {
-                background: var(--navy);
-                padding: 1.6rem 2rem;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                color: white;
-            }
-            .quote-header-title {
-                font-family: "Bebas Neue", sans-serif;
-                font-size: 1.45rem;
-                letter-spacing: 0.08em;
-            }
+  /* FORK */
+  .fork-section { padding: 5rem 2rem; background: var(--paper); }
+  .fork-grid { max-width: 860px; margin: 3rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .fork-card { border-radius: var(--r); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+  .fork-card:hover { transform: translateY(-5px); }
+  .fork-card.diy { background: #0f2318; color: var(--paper); border: 1px solid rgba(94,196,122,0.2); }
+  .fork-card.pro { background: var(--ink); color: var(--paper); border: 1px solid rgba(212,80,10,0.2); }
+  .fork-card.diy:hover { box-shadow: 0 20px 60px rgba(26,107,60,0.3); }
+  .fork-card.pro:hover { box-shadow: 0 20px 60px rgba(212,80,10,0.25); }
+  .fork-badge { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 20px; display: inline-block; margin-bottom: 1.2rem; }
+  .fork-card.diy .fork-badge { background: rgba(94,196,122,0.15); color: #5ec47a; }
+  .fork-card.pro .fork-badge { background: rgba(212,80,10,0.15); color: #f08060; }
+  .fork-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.04em; line-height: 1; margin-bottom: 1rem; }
+  .fork-card p { font-size: 0.88rem; line-height: 1.65; opacity: 0.7; margin-bottom: 1.5rem; }
+  .fork-features { list-style: none; }
+  .fork-features li { font-size: 0.82rem; opacity: 0.8; padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; gap: 0.5rem; }
+  .fork-savings { margin-top: 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: #5ec47a; line-height: 1; }
+  .fork-savings-label { font-size: 0.75rem; opacity: 0.6; margin-top: 0.2rem; }
 
-            .quote-body {
-                padding: 2.2rem;
-            }
-            .form-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 1.2rem;
-                margin-bottom: 1.2rem;
-            }
-            .form-group {
-                display: flex;
-                flex-direction: column;
-                gap: 0.4rem;
-            }
-            .form-group.full {
-                grid-column: 1/-1;
-            }
-            label {
-                font-size: 0.73rem;
-                font-weight: 500;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: var(--mid);
-            }
-            select,
-            input,
-            textarea {
-                font-family: "DM Sans", sans-serif;
-                font-size: 0.93rem;
-                background: var(--paper);
-                border: 1px solid var(--border);
-                border-radius: var(--r);
-                padding: 0.7rem 0.9rem;
-                color: var(--ink);
-                width: 100%;
-            }
-            select:focus,
-            input:focus,
-            textarea:focus {
-                border-color: var(--deepred);
-            }
+  /* AUTOQUOTE */
+  .quote-section { padding: 5rem 2rem; background: var(--cream); }
+  .quote-wrap { max-width: 780px; margin: 0 auto; }
+  .quote-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 40px rgba(15,14,12,0.08); }
+  .quote-header { background: var(--ink); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .quote-header-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.1em; color: var(--paper); }
+  .live-badge { display: flex; align-items: center; gap: 0.4rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #5ec47a; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #5ec47a; animation: pulse-dot 1.6s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+  .quote-body { padding: 2rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+  .form-group.full { grid-column: 1/-1; }
+  label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+  select, input, textarea { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--paper); border: 1px solid var(--border); border-radius: var(--r); padding: 0.6rem 0.8rem; color: var(--ink); transition: border-color 0.2s; width: 100%; }
+  select:focus, input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 80px; }
+  .divider-or { text-align: center; position: relative; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin: 1rem 0; }
+  .divider-or::before, .divider-or::after { content: ''; position: absolute; top: 50%; width: calc(50% - 2rem); height: 1px; background: var(--border); }
+  .divider-or::before { left: 0; }
+  .divider-or::after { right: 0; }
+  .optional-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .btn-submit { width: 100%; padding: 1rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--accent); color: #fff; border: none; border-radius: var(--r); cursor: pointer; transition: background 0.2s, transform 0.15s; }
+  .btn-submit:hover { background: #be4208; transform: translateY(-1px); }
+  .btn-submit:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+  .loading-bar { display: none; margin-top: 1.2rem; background: var(--paper); border-radius: 2px; overflow: hidden; height: 3px; }
+  .loading-bar.active { display: block; }
+  .loading-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--gold)); animation: load-prog 2.5s ease-in-out forwards; }
+  @keyframes load-prog { to { width: 92%; } }
+  .loading-text { display: none; text-align: center; margin-top: 0.8rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--mid); letter-spacing: 0.08em; }
+  .loading-text.active { display: block; }
 
-            .btn-submit {
-                width: 100%;
-                padding: 1.05rem;
-                margin-top: 1.2rem;
-                font-family: "DM Sans", sans-serif;
-                font-size: 0.96rem;
-                font-weight: 600;
-                letter-spacing: 0.07em;
-                text-transform: uppercase;
-                background: var(--deepred);
-                color: #fff;
-                border: none;
-                border-radius: var(--r);
-                cursor: pointer;
-                transition: all 0.2s;
-            }
-            .btn-submit:hover {
-                background: var(--navy);
-                transform: translateY(-1px);
-            }
+  /* RESULTS */
+  #results { display: none; }
+  #results.visible { display: block; }
+  .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .results-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; }
+  .verified-badge { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); background: rgba(26,107,60,0.08); padding: 0.3rem 0.6rem; border-radius: 2px; }
+  .cost-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .cost-cell { background: var(--paper); border-radius: var(--r); padding: 1rem; text-align: center; }
+  .cost-cell.total { background: var(--ink); color: var(--paper); }
+  .cost-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.6; margin-bottom: 0.3rem; }
+  .cost-val { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.02em; }
+  .cost-range { font-size: 0.72rem; opacity: 0.5; margin-top: 0.2rem; }
+  .breakdown-text { font-size: 0.88rem; line-height: 1.75; color: var(--mid); background: var(--paper); border-radius: var(--r); padding: 1.2rem; margin-bottom: 1.5rem; white-space: pre-wrap; }
+  .fork-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .btn-fork { padding: 1rem 1.2rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; border-radius: var(--r); cursor: pointer; border: none; transition: transform 0.15s, box-shadow 0.15s; }
+  .btn-fork:hover { transform: translateY(-2px); }
+  .btn-diy { background: #0f2318; color: #5ec47a; border: 1px solid rgba(94,196,122,0.25); }
+  .btn-diy:hover { box-shadow: 0 8px 24px rgba(26,107,60,0.25); }
+  .btn-pro { background: var(--accent); color: #fff; }
+  .btn-pro:hover { box-shadow: 0 8px 24px rgba(212,80,10,0.3); }
+  .btn-row-secondary { display: flex; gap: 0.8rem; }
+  .btn-secondary { flex: 1; padding: 0.65rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; color: var(--mid); border: 1px solid var(--border); border-radius: var(--r); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
 
-            .loading-bar {
-                display: none;
-                margin-top: 1.3rem;
-                background: var(--paper);
-                border-radius: 3px;
-                overflow: hidden;
-                height: 4px;
-            }
-            .loading-bar.active {
-                display: block;
-            }
-            .loading-fill {
-                height: 100%;
-                width: 0;
-                background: linear-gradient(90deg, var(--navy), var(--deepred));
-                animation: load-prog 2.8s ease-in-out forwards;
-            }
-            @keyframes load-prog {
-                to {
-                    width: 88%;
-                }
-            }
-            .loading-text {
-                display: none;
-                text-align: center;
-                margin-top: 0.9rem;
-                font-family: "DM Mono", monospace;
-                font-size: 0.76rem;
-                color: var(--mid);
-            }
-            .loading-text.active {
-                display: block;
-            }
+  /* DIY PANEL */
+  #diy-panel, #pro-panel { display: none; }
+  #diy-panel.visible, #pro-panel.visible { display: block; }
+  .panel-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .panel-icon { font-size: 2rem; }
+  .panel-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; }
+  .savings-chip { margin-left: auto; background: rgba(26,107,60,0.1); color: var(--accent2); font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; padding: 0.3rem 0.8rem; border-radius: 20px; }
+  .diy-instructions { font-size: 0.9rem; line-height: 1.8; color: var(--ink); background: #f8faf9; border-left: 3px solid var(--accent2); border-radius: 0 var(--r) var(--r) 0; padding: 1.5rem; margin-bottom: 1.5rem; white-space: pre-wrap; }
+  .difficulty-bar { background: var(--paper); border-radius: var(--r); padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+  .diff-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid); min-width: 80px; }
+  .diff-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .diff-fill { height: 100%; border-radius: 3px; background: var(--accent2); width: 0; transition: width 0.8s ease; }
+  .diff-val { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; min-width: 60px; text-align: right; }
+  .warning-box { background: rgba(212,80,10,0.06); border: 1px solid rgba(212,80,10,0.2); border-radius: var(--r); padding: 1rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: var(--accent); line-height: 1.6; display: none; }
+  .warning-box.visible { display: block; }
+  .warning-box strong { display: block; margin-bottom: 0.3rem; }
 
-            /* RESULTS */
-            #results {
-                display: none;
-                padding: 1.5rem 0;
-            }
-            #results.visible {
-                display: block;
-            }
-            .difficulty-box,
-            .savings-box {
-                background: var(--paper);
-                border: 1px solid var(--border);
-                border-radius: var(--r);
-                padding: 1.3rem;
-                margin-bottom: 1.3rem;
-            }
-            .difficulty-label {
-                font-size: 0.75rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: var(--mid);
-                margin-bottom: 0.5rem;
-            }
-            .difficulty-bar {
-                height: 8px;
-                background: #ddd;
-                border-radius: 4px;
-                overflow: hidden;
-                margin: 0.6rem 0;
-            }
-            .difficulty-fill {
-                height: 100%;
-                background: var(--deepred);
-                width: 0%;
-                transition: width 0.8s ease;
-            }
-            .savings-amount {
-                font-family: "Bebas Neue", sans-serif;
-                font-size: 2.4rem;
-                color: var(--deepred);
-                line-height: 1;
-            }
+  /* SHOP MATERIALS */
+  .shop-materials { margin-top: 1.5rem; margin-bottom: 1.5rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+  .shop-materials-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+  .shop-materials-header h4 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); font-weight: 500; }
+  .shop-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(26,107,60,0.1); color: var(--accent2); padding: 0.2rem 0.5rem; border-radius: 2px; }
+  .shop-item { background: var(--paper); border: 1px solid var(--border); border-radius: var(--r); padding: 0.9rem 1rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .shop-item-name { flex: 1; min-width: 160px; font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+  .shop-item-cost { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent2); white-space: nowrap; }
+  .shop-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .shop-link { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.7rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.04em; border: 1px solid var(--border); border-radius: 2px; color: var(--mid); text-decoration: none; background: var(--card); transition: border-color 0.15s, color 0.15s; white-space: nowrap; }
+  .shop-link:hover { border-color: var(--ink); color: var(--ink); }
+  .shop-link svg { width: 10px; height: 10px; flex-shrink: 0; opacity: 0.5; }
+  .shop-aff-note { font-size: 0.7rem; color: var(--mid); opacity: 0.6; margin-top: 0.8rem; font-style: italic; }
 
-            /* FOOTER */
-            footer {
-                background: var(--navy);
-                color: rgba(255, 255, 255, 0.82);
-                padding: 2.8rem 2rem;
-                text-align: center;
-                font-size: 0.79rem;
-                font-family: "DM Mono", monospace;
-                letter-spacing: 0.06em;
-            }
-            footer a {
-                color: rgba(255, 255, 255, 0.9);
-                text-decoration: none;
-            }
-            footer a:hover {
-                color: white;
-            }
-        </style>
-    </head>
-    <body>
-        <nav>
-            <a href="#" class="logo">Y<span>S</span>KAIPE</a>
-            <a href="#autoquote" class="nav-cta">Get My Quote</a>
-        </nav>
+  /* PRO PANEL */
+  .pro-intro { background: var(--ink); color: var(--paper); border-radius: var(--r); padding: 1.5rem; margin-bottom: 1.5rem; font-size: 0.88rem; line-height: 1.7; white-space: pre-wrap; }
+  .pro-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  .pro-card { background: var(--paper); border: 1px solid var(--border); border-radius: var(--r); padding: 1.2rem; transition: border-color 0.2s; }
+  .pro-card:hover { border-color: var(--accent); }
+  .pro-card-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .pro-card-trade { font-size: 0.75rem; color: var(--mid); margin-bottom: 0.5rem; }
+  .pro-card-stars { color: var(--gold); font-size: 0.8rem; }
+  .pro-card-rate { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-top: 0.4rem; }
 
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <div class="eyebrow">Human Hands. AI Power.</div>
-                <h1>FAIR FOR<br />EVERYONE.</h1>
-                <p class="hero-sub">
-                    YSKAIPE delivers transparent standard costs for home
-                    services using verified 2026 rates. It clearly indicates
-                    whether a job is suitable for DIY with a precise difficulty
-                    rating, and calculates exactly how much you can save by
-                    doing it yourself.<br /><br />
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(15,14,12,0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
+  .modal-overlay.active { display: flex; }
+  .modal { background: var(--card); border-radius: 6px; padding: 2rem; width: 90%; max-width: 400px; box-shadow: 0 20px 60px rgba(15,14,12,0.3); }
+  .modal h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .modal p { font-size: 0.85rem; color: var(--mid); margin-bottom: 1.2rem; }
+  .modal input { margin-bottom: 1rem; }
+  .modal-btns { display: flex; gap: 0.8rem; }
+  .btn-modal-send { flex:1; padding:0.75rem; background:var(--accent); color:#fff; font-weight:600; font-size:0.85rem; border:none; border-radius:var(--r); cursor:pointer; }
+  .btn-modal-cancel { flex:1; padding:0.75rem; background:transparent; color:var(--mid); font-size:0.85rem; border:1px solid var(--border); border-radius:var(--r); cursor:pointer; }
 
-                    YSKAIPE also provides detailed DIY plans with shoppable
-                    materials, vetted professional referrals, and more. Our
-                    mission is to make all of these services easier and as
-                    cost-efficient as possible for everyone involved.
-                </p>
-                <div>
-                    <a href="#autoquote" class="btn-primary"
-                        >Get Instant Quote →</a
-                    >
-                </div>
+  /* TRUST + FOOTER */
+  .trust-strip { background: var(--paper); border-top: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .trust-item { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); display: flex; align-items: center; gap: 0.4rem; }
+  footer { background: var(--ink); color: rgba(245,242,236,0.5); padding: 2rem; text-align: center; font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+  footer a { color: rgba(245,242,236,0.5); }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .ps-grid { grid-template-columns: 1fr; }
+    .ps-divider { display: none; }
+    .steps { grid-template-columns: 1fr; }
+    .fork-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr 1fr; }
+    .fork-actions { grid-template-columns: 1fr; }
+    .optional-row { grid-template-columns: 1fr; }
+    .pro-cards { grid-template-columns: 1fr; }
+    .stamp { display: none; }
+    .win-row { grid-template-columns: 1fr; }
+    .hero-pills { display: none; }
+    .shop-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Y<span>S</span>KAIPE</a>
+  <a href="#autoquote" class="nav-cta">Get My Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="stamp">
+    <div class="stamp-label">Market Intelligence</div>
+    <div class="stamp-main"><span class="stamp-dot"></span>NC 2026 Live</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-rule"></div>
+    <div class="eyebrow">Home Services Market Intelligence &middot; pronounced &ldquo;escape&rdquo;</div>
+    <h1>FAIR PRICE.<br><span class="gold">SMART CHOICE.</span><br><span class="ac">EVERYBODY</span><br>WINS.</h1>
+    <p class="hero-sub">
+      The home services market works best when <strong>everyone knows the fair rate.</strong>
+      Homeowners stop overpaying. Good contractors stop losing to lowballers.
+      DIY-able jobs get done right. Complex jobs go to the pros who deserve them.<br><br>
+      YSKAIPE is market intelligence for the rest of us &mdash;
+      <strong>the number that levels the field for everyone at the table.</strong>
+    </p>
+    <div class="win-row">
+      <div class="win-card wc-hw">
+        <div class="wc-who">Homeowner wins</div>
+        <div class="wc-win">Know the fair rate before anyone arrives</div>
+        <div class="wc-detail">DIY what you can. Hire smart when you cannot.</div>
+      </div>
+      <div class="win-card wc-pro">
+        <div class="wc-who">Pro wins</div>
+        <div class="wc-win">Compete on quality, not confusion</div>
+        <div class="wc-detail">Win jobs on skill. No more lowball pressure.</div>
+      </div>
+      <div class="win-card wc-mkt">
+        <div class="wc-who">Market wins</div>
+        <div class="wc-win">Transparency raises the floor</div>
+        <div class="wc-detail">Good work gets rewarded. Bad actors lose.</div>
+      </div>
+    </div>
+    <div class="hero-pills">
+      <span class="hero-pill on">&#10003; Instant standard cost</span>
+      <span class="hero-pill on">&#10003; DIY guidance + materials</span>
+      <span class="hero-pill on">&#10003; Vetted pro matching</span>
+      <span class="hero-pill">Free to use</span>
+      <span class="hero-pill">No signup</span>
+      <span class="hero-pill">Claude AI powered</span>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#autoquote" class="btn-primary">Get the Fair Rate &rarr;</a>
+      <span class="scroll-hint">8 sec &middot; no account needed</span>
+    </div>
+    <div class="hero-stat-row">
+      <div><div class="hsr-num">$2,400</div><div class="hsr-label">avg annual overpayment</div></div>
+      <div><div class="hsr-num">62%</div><div class="hsr-label">of jobs are DIY-able</div></div>
+      <div><div class="hsr-num">8 sec</div><div class="hsr-label">to your estimate</div></div>
+      <div><div class="hsr-num">$0</div><div class="hsr-label">to use YSKAIPE</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="ps-section">
+  <div class="ps-grid">
+    <div class="ps-col">
+      <div class="ps-label bad">Without YSKAIPE</div>
+      <h3>FLYING BLIND</h3>
+      <ul class="ps-list">
+        <li><span class="icon">&#128184;</span>You get a quote. You have no idea if it is fair.</li>
+        <li><span class="icon">&#9203;</span>3 contractor calls minimum. Days of waiting.</li>
+        <li><span class="icon">&#129335;</span>No idea if you could DIY it for a fraction of the cost.</li>
+        <li><span class="icon">&#128274;</span>Contractors know you do not know. They charge accordingly.</li>
+        <li><span class="icon">&#128196;</span>Zero documentation for the work done.</li>
+      </ul>
+    </div>
+    <div class="ps-divider"><div class="ps-divider-line"><div class="ps-divider-vs">VS</div></div></div>
+    <div class="ps-col">
+      <div class="ps-label good">With YSKAIPE AutoQuote</div>
+      <h3>TOTAL CLARITY</h3>
+      <ul class="ps-list">
+        <li><span class="icon">&#127919;</span>Instant standard cost. Labor + materials. Verified rates.</li>
+        <li><span class="icon">&#9889;</span>Seconds, not days. No phone calls. No sales pressure.</li>
+        <li><span class="icon">&#128295;</span>Know immediately if you should DIY &mdash; with full instructions.</li>
+        <li><span class="icon">&#128737;</span>Walk into any conversation knowing the fair market rate.</li>
+        <li><span class="icon">&#129309;</span>Vetted pro network when the job needs an expert.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ps-stat-row">
+    <div><div class="stat-num">$2,400</div><div class="stat-label">avg annual overpayment<br>per US homeowner</div></div>
+    <div><div class="stat-num">62%</div><div class="stat-label">of home jobs are<br>DIY-able with guidance</div></div>
+    <div><div class="stat-num">8 sec</div><div class="stat-label">average time to<br>your standard quote</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-section">
+  <div class="section-header">
+    <div class="section-eyebrow">The Process</div>
+    <div class="section-title">THREE STEPS TO FAIR</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-icon">&#128221;</div><h4>Describe the Job</h4><p>Tell us the trade, your location, and what needs fixing. Plain English &mdash; no technical knowledge required.</p></div>
+    <div class="step"><div class="step-num">2</div><div class="step-icon">&#129302;</div><h4>AI Runs the Numbers</h4><p>Claude AI parses your job against verified NC 2026 industry rates &mdash; labor, materials, timeline, complexity.</p></div>
+    <div class="step"><div class="step-num">3</div><div class="step-icon">&#128256;</div><h4>DIY or Pro &mdash; You Decide</h4><p>We show your savings if you tackle it yourself, with step-by-step guidance. Too complex? We match you with vetted pros.</p></div>
+  </div>
+</section>
+
+<!-- FORK PREVIEW -->
+<section class="fork-section">
+  <div class="section-header">
+    <div class="section-eyebrow">After Your Quote</div>
+    <div class="section-title">YOUR CALL. WE'VE GOT BOTH.</div>
+  </div>
+  <div class="fork-grid">
+    <div class="fork-card diy">
+      <div class="fork-badge">&#128295; DIY Path</div>
+      <h3>DO IT<br>YOURSELF</h3>
+      <p>If the AI rates your job as feasible for a motivated homeowner, we give you the full playbook &mdash; tools, materials, steps, safety notes.</p>
+      <ul class="fork-features">
+        <li>&#10003; Exact materials list with quantities</li>
+        <li>&#10003; Step-by-step instructions</li>
+        <li>&#10003; Difficulty rating &amp; time estimate</li>
+        <li>&#10003; Safety warnings flagged clearly</li>
+        <li>&#10003; When to stop and call a pro</li>
+      </ul>
+      <div class="fork-savings">SAVE $200&ndash;$1,800</div>
+      <div class="fork-savings-label">average labor cost avoided per job</div>
+    </div>
+    <div class="fork-card pro">
+      <div class="fork-badge">&#128222; Pro Path</div>
+      <h3>HIRE A<br>VETTED PRO</h3>
+      <p>Some jobs need a licensed professional. We match you with our network &mdash; and you already know the fair rate before they arrive.</p>
+      <ul class="fork-features">
+        <li>&#10003; Matched to your trade &amp; location</li>
+        <li>&#10003; You know the standard rate upfront</li>
+        <li>&#10003; No surprise upsells &mdash; you are informed</li>
+        <li>&#10003; Background-checked network members</li>
+        <li>&#10003; Quote in hand for negotiation</li>
+      </ul>
+      <div style="margin-top:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#f08060;">NEGOTIATION POWER</div>
+      <div class="fork-savings-label">walk in knowing exactly what is fair</div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOQUOTE -->
+<section class="quote-section" id="autoquote">
+  <div class="quote-wrap">
+    <div class="section-header">
+      <div class="section-eyebrow">AutoQuote &middot; Live</div>
+      <div class="section-title">GET YOUR NUMBER</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-header">
+        <div class="quote-header-title">YSKAIPE AutoQuote</div>
+        <div class="live-badge"><div class="live-dot"></div> Live &middot; AI Powered</div>
+      </div>
+      <div class="quote-body">
+        <div id="form-section">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Trade / Role</label>
+              <select id="trade">
+                <option value="">Select trade&hellip;</option>
+                <option>Plumber</option><option>Electrician</option><option>HVAC Technician</option>
+                <option>Roofer</option><option>General Contractor</option><option>Welder / Fabricator</option>
+                <option>Home Inspector</option><option>Pest Control</option><option>Arborist</option>
+                <option>EV Infrastructure Tech</option><option>Smart Home Integrator</option>
+                <option>Landscaper</option><option>Painter</option><option>Flooring Specialist</option>
+              </select>
             </div>
-        </section>
-
-        <!-- AUTOQUOTE -->
-        <section class="quote-section" id="autoquote">
-            <div class="quote-wrap">
-                <div class="quote-card">
-                    <div class="quote-header">
-                        <div class="quote-header-title">YSKAIPE AutoQuote</div>
-                        <div
-                            style="
-                                font-family: &quot;DM Mono&quot;, monospace;
-                                font-size: 0.68rem;
-                                letter-spacing: 0.12em;
-                                color: #e0b0b0;
-                            "
-                        >
-                            LIVE · AI POWERED
-                        </div>
-                    </div>
-                    <div class="quote-body">
-                        <div id="form-section">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label>Trade / Role</label>
-                                    <select id="trade">
-                                        <option value="">Select trade…</option>
-                                        <option>Plumber</option>
-                                        <option>Electrician</option>
-                                        <option>HVAC Technician</option>
-                                        <option>Roofer</option>
-                                        <option>General Contractor</option>
-                                        <option>Painter</option>
-                                        <option>Landscaper</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Location (ZIP)</label>
-                                    <input
-                                        type="text"
-                                        id="zip"
-                                        placeholder="e.g. 28036"
-                                        maxlength="10"
-                                    />
-                                </div>
-                            </div>
-
-                            <div
-                                class="form-group full"
-                                style="margin-bottom: 1.4rem"
-                            >
-                                <label>Describe the Job *</label>
-                                <textarea
-                                    id="job-desc"
-                                    placeholder="e.g. Kitchen faucet is leaking and needs cartridge replacement..."
-                                ></textarea>
-                            </div>
-
-                            <div
-                                style="
-                                    text-align: center;
-                                    font-size: 0.73rem;
-                                    color: var(--mid);
-                                    letter-spacing: 0.1em;
-                                    margin: 1.2rem 0;
-                                "
-                            >
-                                OPTIONAL — FOR EMAIL DELIVERY
-                            </div>
-
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label>Your Name</label>
-                                    <input
-                                        type="text"
-                                        id="user-name"
-                                        placeholder="Jane Smith"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input
-                                        type="email"
-                                        id="user-email"
-                                        placeholder="jane@email.com"
-                                    />
-                                </div>
-                            </div>
-
-                            <button
-                                type="button"
-                                class="btn-submit"
-                                id="submit-btn"
-                            >
-                                GET INSTANT STANDARD COST
-                            </button>
-                            <div class="loading-bar" id="loading-bar">
-                                <div class="loading-fill"></div>
-                            </div>
-                            <div class="loading-text" id="loading-text">
-                                Analyzing fair market rates…
-                            </div>
-                        </div>
-
-                        <!-- RESULTS -->
-                        <div id="results">
-                            <div class="results-header">
-                                <h3
-                                    style="
-                                        font-family:
-                                            &quot;Bebas Neue&quot;, sans-serif;
-                                        letter-spacing: 0.04em;
-                                    "
-                                >
-                                    Your Fair Cost Estimate
-                                </h3>
-                            </div>
-
-                            <div class="difficulty-box">
-                                <div class="difficulty-label">
-                                    Can You DIY This Job?
-                                </div>
-                                <div
-                                    id="difficulty-label"
-                                    style="
-                                        font-weight: 600;
-                                        margin-bottom: 0.6rem;
-                                    "
-                                >
-                                    —
-                                </div>
-                                <div class="difficulty-bar">
-                                    <div
-                                        class="difficulty-fill"
-                                        id="difficulty-fill"
-                                    ></div>
-                                </div>
-                            </div>
-
-                            <div class="savings-box">
-                                <div class="difficulty-label">
-                                    Potential Savings If You DIY
-                                </div>
-                                <div id="savings-amount" class="savings-amount">
-                                    $—
-                                </div>
-                                <small style="color: var(--mid)"
-                                    >compared to hiring a professional at
-                                    standard rates</small
-                                >
-                            </div>
-
-                            <div
-                                id="res-breakdown"
-                                style="
-                                    margin: 1.8rem 0;
-                                    line-height: 1.75;
-                                    color: var(--mid);
-                                "
-                            ></div>
-
-                            <button
-                                onclick="newQuote()"
-                                style="
-                                    padding: 0.9rem 2rem;
-                                    background: var(--navy);
-                                    color: white;
-                                    border: none;
-                                    border-radius: 3px;
-                                    cursor: pointer;
-                                    font-weight: 500;
-                                "
-                            >
-                                Start New Quote
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+              <label>Location (ZIP)</label>
+              <input type="text" id="zip" placeholder="e.g. 28036" maxlength="10">
             </div>
-        </section>
+            <div class="form-group">
+              <label>Home Size / Scope</label>
+              <input type="text" id="scope" placeholder="e.g. 2,400 sq ft single-family">
+            </div>
+          </div>
+          <div class="form-group full" style="margin-bottom:1rem;">
+            <label>Describe the Problem or Job *</label>
+            <textarea id="job-desc" placeholder="e.g. Kitchen faucet dripping, need to replace cartridge and check shutoff valves under sink. House built 1998."></textarea>
+          </div>
+          <div class="divider-or">optional &mdash; for email delivery</div>
+          <div class="optional-row">
+            <div class="form-group"><label>Your Name</label><input type="text" id="user-name" placeholder="Jane Smith"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="user-email" placeholder="jane@email.com"></div>
+          </div>
+          <button class="btn-submit" id="submit-btn" onclick="getQuote()">Get Instant Standard Cost</button>
+          <div class="loading-bar" id="loading-bar"><div class="loading-fill"></div></div>
+          <div class="loading-text" id="loading-text">Claude is analyzing your job against verified rates&hellip;</div>
+        </div>
 
-        <footer>
-            YSKAIPE · Human Hands. AI Power. ·
-            <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a><br /><br />
-            <a href="docs.html">Documentation</a> •
-            <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a
-            ><br /><br />
-            Creating Win-Win-Win outcomes · © 2026 YSKAIPE
-        </footer>
+        <div id="results">
+          <div class="results-header">
+            <h3>Standard Cost Estimate</h3>
+            <div class="verified-badge">&#10003; AI + Rates Verified</div>
+          </div>
+          <div class="cost-grid">
+            <div class="cost-cell"><div class="cost-label">Labor</div><div class="cost-val" id="res-labor">&mdash;</div><div class="cost-range" id="res-labor-range">&mdash;</div></div>
+            <div class="cost-cell"><div class="cost-label">Materials</div><div class="cost-val" id="res-materials">&mdash;</div><div class="cost-range" id="res-materials-range">&mdash;</div></div>
+            <div class="cost-cell total"><div class="cost-label">Total Standard</div><div class="cost-val" id="res-total">&mdash;</div><div class="cost-range" id="res-total-range">&mdash;</div></div>
+          </div>
+          <div class="breakdown-text" id="res-breakdown">&mdash;</div>
+          <div class="fork-actions">
+            <button class="btn-fork btn-diy" onclick="showDIY()">&#128295; DIY This Job &rarr;</button>
+            <button class="btn-fork btn-pro" onclick="showPro()">&#128222; Find a Pro &rarr;</button>
+          </div>
+          <div class="btn-row-secondary">
+            <button class="btn-secondary" onclick="exportPDF()">&#8595; Export PDF</button>
+            <button class="btn-secondary" onclick="openEmailModal()">&#9993; Email Quote</button>
+            <button class="btn-secondary" onclick="newQuote()">&#8635; New Quote</button>
+          </div>
+        </div>
 
-        <script>
-            let currentQuoteData = null;
+        <div id="diy-panel">
+          <div class="panel-header">
+            <div class="panel-icon">&#128295;</div>
+            <h3>DIY Instructions</h3>
+            <div class="savings-chip" id="diy-savings-chip">Save $&mdash;</div>
+          </div>
+          <div class="warning-box" id="diy-warning"><strong>&#9888;&#65039; Heads Up</strong><span id="diy-warning-text"></span></div>
+          <div class="difficulty-bar">
+            <div class="diff-label">Difficulty</div>
+            <div class="diff-track"><div class="diff-fill" id="diff-fill"></div></div>
+            <div class="diff-val" id="diff-val">&mdash;</div>
+          </div>
+          <div class="diy-instructions" id="diy-instructions">Loading instructions&hellip;</div>
+          <div id="shop-materials-container"></div>
+          <div class="btn-row-secondary">
+            <button class="btn-secondary" onclick="showResults()">&larr; Back to Quote</button>
+            <button class="btn-secondary" onclick="showPro()">Too Hard? Find a Pro &rarr;</button>
+          </div>
+        </div>
 
-            document.addEventListener("DOMContentLoaded", function () {
-                document
-                    .getElementById("submit-btn")
-                    .addEventListener("click", getQuote);
-            });
+        <div id="pro-panel">
+          <div class="panel-header">
+            <div class="panel-icon">&#128222;</div>
+            <h3>Professional Match</h3>
+          </div>
+          <div class="pro-intro" id="pro-intro">Finding your match&hellip;</div>
+          <div class="pro-cards" id="pro-cards"></div>
+          <div class="btn-row-secondary">
+            <button class="btn-secondary" onclick="showResults()">&larr; Back to Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            async function getQuote() {
-                const desc = document.getElementById("job-desc").value.trim();
-                if (!desc) {
-                    alert("Please describe the job.");
-                    return;
-                }
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">&#10003; NC 2026 verified rates</div>
+  <div class="trust-item">&#10003; No signup required</div>
+  <div class="trust-item">&#10003; No sales calls</div>
+  <div class="trust-item">&#10003; Claude AI powered</div>
+  <div class="trust-item">&#10003; Labor $95&ndash;$160/hr baseline</div>
+  <a href="future-of-work.html" class="trust-item" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(212,80,10,0.3);">&rarr; Future of Work</a>
+</div>
 
-                const btn = document.getElementById("submit-btn");
-                const originalText = btn.textContent;
+<!-- EMAIL MODAL -->
+<div class="modal-overlay" id="email-modal">
+  <div class="modal">
+    <h4>Email This Quote</h4>
+    <p>We will send a formatted breakdown to your inbox.</p>
+    <input type="email" id="modal-email" placeholder="your@email.com">
+    <div class="modal-btns">
+      <button class="btn-modal-send" onclick="sendEmail()">Send Quote</button>
+      <button class="btn-modal-cancel" onclick="closeEmailModal()">Cancel</button>
+    </div>
+  </div>
+</div>
 
-                btn.disabled = true;
-                btn.textContent = "Analyzing...";
-                document.getElementById("loading-bar").classList.add("active");
-                document.getElementById("loading-text").classList.add("active");
+<!-- FOOTER -->
+<footer>
+  YSKAIPE &middot; Human Hands. AI Power. &middot; <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a><br>
+  <div style="margin-top:0.8rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
+    <a href="future-of-work.html" style="color:rgba(245,242,236,0.6)">Future of Work</a>
+    <a href="docs.html" style="color:rgba(245,242,236,0.6)">Documentation</a>
+    <a href="privacy.html" style="color:rgba(245,242,236,0.6)">Privacy</a>
+    <a href="terms.html" style="color:rgba(245,242,236,0.6)">Terms</a>
+  </div><br>
+  Based on verified NC 2026 industry standards &middot; Regional adjustments applied &middot; &copy; 2025 Yskaipe
+</footer>
 
-                try {
-                    await new Promise((r) => setTimeout(r, 1600));
+<script>
+var AFFILIATE = { amazon: '', homedepot: '', lowes: '' };
 
-                    currentQuoteData = {
-                        total: 1240,
-                        diy_savings_low: 680,
-                        diy_savings_high: 920,
-                        difficulty_score: 4,
-                        difficulty_label: "Weekend Warrior",
-                        breakdown:
-                            "Based on current NC 2026 rates, this repair should cost between $980–$1,480 when done professionally. The job is well within reach for most homeowners with basic tools and careful attention to safety.",
-                    };
+function amazonURL(q) { var u = 'https://www.amazon.com/s?k=' + encodeURIComponent(q); return AFFILIATE.amazon ? u + '&tag=' + AFFILIATE.amazon : u; }
+function homedepotURL(q) { var u = 'https://www.homedepot.com/s/' + encodeURIComponent(q); return AFFILIATE.homedepot ? u + '?cm_mmc=afl-' + AFFILIATE.homedepot : u; }
+function lowesURL(q) { var u = 'https://www.lowes.com/search?searchTerm=' + encodeURIComponent(q); return AFFILIATE.lowes ? u + '&cm_mmc=afl-' + AFFILIATE.lowes : u; }
 
-                    const savings = currentQuoteData.diy_savings_low;
-                    document.getElementById("savings-amount").textContent =
-                        "$" +
-                        savings +
-                        "–$" +
-                        currentQuoteData.diy_savings_high;
+function renderShopMaterials(materials) {
+  var container = document.getElementById('shop-materials-container');
+  container.innerHTML = '';
+  if (!materials || !materials.length) return;
+  var icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+  var html = '<div class="shop-materials"><div class="shop-materials-header"><h4>Shop Materials</h4><span class="shop-tag">Amazon &middot; Home Depot &middot; Lowe\'s</span></div>';
+  for (var i = 0; i < materials.length; i++) {
+    var item = materials[i];
+    var label = item.qty ? item.name + ' &nbsp;&times;' + item.qty : item.name;
+    var cost = item.estimatedCost ? '<span class="shop-item-cost">~' + item.estimatedCost + '</span>' : '';
+    html += '<div class="shop-item"><div class="shop-item-name">' + label + '</div>' + cost + '<div class="shop-links"><a class="shop-link" href="' + amazonURL(item.name) + '" target="_blank" rel="noopener">' + icon + 'Amazon</a><a class="shop-link" href="' + homedepotURL(item.name) + '" target="_blank" rel="noopener">' + icon + 'Home Depot</a><a class="shop-link" href="' + lowesURL(item.name) + '" target="_blank" rel="noopener">' + icon + 'Lowe\'s</a></div></div>';
+  }
+  html += '<p class="shop-aff-note">Links open retailer search results. Prices are estimates only.</p></div>';
+  container.innerHTML = html;
+}
 
-                    const diffFill = document.getElementById("difficulty-fill");
-                    const score = currentQuoteData.difficulty_score;
-                    diffFill.style.width = score * 10 + "%";
-                    diffFill.style.background =
-                        score <= 4
-                            ? "#4a7043"
-                            : score <= 7
-                              ? "#c8a84b"
-                              : "#C8102E";
-                    document.getElementById("difficulty-label").textContent =
-                        currentQuoteData.difficulty_label;
+var currentQuoteData = null;
 
-                    document.getElementById("res-breakdown").innerHTML =
-                        currentQuoteData.breakdown;
+async function getQuote() {
+  var trade = document.getElementById('trade').value;
+  var zip = document.getElementById('zip').value;
+  var scope = document.getElementById('scope').value;
+  var desc = document.getElementById('job-desc').value.trim();
+  if (!desc) { alert('Please describe the job.'); return; }
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Analyzing...';
+  document.getElementById('loading-bar').classList.add('active');
+  document.getElementById('loading-text').classList.add('active');
+  var prompt = 'You are YSKAIPE AutoQuote - a home services cost estimator using verified NC 2026 industry rates (labor $95-$160/hr).\n\nJob details:\n- Trade: ' + (trade || 'General') + '\n- ZIP: ' + (zip || 'NC region') + '\n- Scope: ' + (scope || 'residential') + '\n- Description: ' + desc + '\n\nReturn ONLY valid JSON (no markdown, no extra text):\n{\n  "labor_low": number,\n  "labor_high": number,\n  "materials_low": number,\n  "materials_high": number,\n  "total_low": number,\n  "total_high": number,\n  "timeline": "string",\n  "breakdown": "3-4 sentence plain English breakdown",\n  "diy_savings_low": number,\n  "diy_savings_high": number,\n  "difficulty_score": number,\n  "difficulty_label": "string",\n  "diy_feasible": true or false,\n  "diy_warning": "string or empty",\n  "diy_steps": "numbered step-by-step instructions and tools only",\n  "diy_materials": [\n    { "name": "exact product name", "qty": "amount", "estimatedCost": "$X" }\n  ],\n  "pro_recommendation": "2-3 sentences",\n  "pro_keywords": ["keyword1", "keyword2"]\n}';
+  try {
+    var res = await fetch('/api/quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
+    });
+    var data = await res.json();
+    var raw = data.content && data.content.find(function(b) { return b.type === 'text'; });
+    var text = raw ? raw.text : '';
+    var clean = text.replace(/```json|```/g, '').trim();
+    var q = JSON.parse(clean);
+    currentQuoteData = q;
+    document.getElementById('res-labor').textContent = '$' + Math.round((q.labor_low + q.labor_high) / 2).toLocaleString();
+    document.getElementById('res-labor-range').textContent = '$' + q.labor_low.toLocaleString() + ' - $' + q.labor_high.toLocaleString();
+    document.getElementById('res-materials').textContent = '$' + Math.round((q.materials_low + q.materials_high) / 2).toLocaleString();
+    document.getElementById('res-materials-range').textContent = '$' + q.materials_low.toLocaleString() + ' - $' + q.materials_high.toLocaleString();
+    document.getElementById('res-total').textContent = '$' + Math.round((q.total_low + q.total_high) / 2).toLocaleString();
+    document.getElementById('res-total-range').textContent = '$' + q.total_low.toLocaleString() + ' - $' + q.total_high.toLocaleString();
+    document.getElementById('res-breakdown').textContent = q.breakdown + '\n\nTimeline: ' + q.timeline;
+    showResults();
+  } catch(e) {
+    alert('Something went wrong. Please try again.');
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Get Instant Standard Cost';
+    document.getElementById('loading-bar').classList.remove('active');
+    document.getElementById('loading-text').classList.remove('active');
+  }
+}
 
-                    document.getElementById("form-section").style.display =
-                        "none";
-                    document.getElementById("results").classList.add("visible");
-                } catch (e) {
-                    alert("Something went wrong. Please try again.");
-                } finally {
-                    btn.disabled = false;
-                    btn.textContent = originalText;
-                    document
-                        .getElementById("loading-bar")
-                        .classList.remove("active");
-                    document
-                        .getElementById("loading-text")
-                        .classList.remove("active");
-                }
-            }
+function showResults() {
+  document.getElementById('form-section').style.display = 'none';
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('diy-panel').classList.remove('visible');
+  document.getElementById('pro-panel').classList.remove('visible');
+}
 
-            function newQuote() {
-                document.getElementById("form-section").style.display = "block";
-                document.getElementById("results").classList.remove("visible");
-                document.getElementById("job-desc").value = "";
-            }
-        </script>
-    </body>
+function showDIY() {
+  if (!currentQuoteData) return;
+  var q = currentQuoteData;
+  document.getElementById('diy-savings-chip').textContent = 'Save $' + q.diy_savings_low.toLocaleString() + '-$' + q.diy_savings_high.toLocaleString();
+  document.getElementById('diy-instructions').textContent = q.diy_steps;
+  var score = q.difficulty_score;
+  var fill = document.getElementById('diff-fill');
+  fill.style.width = '0';
+  fill.style.background = score <= 4 ? '#5ec47a' : score <= 7 ? '#c8a84b' : '#e05050';
+  setTimeout(function() { fill.style.width = ((score / 10) * 100) + '%'; }, 50);
+  document.getElementById('diff-val').textContent = q.difficulty_label;
+  var warn = document.getElementById('diy-warning');
+  if (q.diy_warning && q.diy_warning.length > 2) {
+    document.getElementById('diy-warning-text').textContent = q.diy_warning;
+    warn.classList.add('visible');
+  } else {
+    warn.classList.remove('visible');
+  }
+  renderShopMaterials(q.diy_materials || []);
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('pro-panel').classList.remove('visible');
+  document.getElementById('diy-panel').classList.add('visible');
+}
+
+function showPro() {
+  if (!currentQuoteData) return;
+  var q = currentQuoteData;
+  document.getElementById('pro-intro').textContent = q.pro_recommendation;
+  var proNames = [
+    { name: 'Ridge & Sons', rate: '$110/hr', stars: '★★★★★', note: 'Top rated · 47 reviews' },
+    { name: 'Precision Home Services', rate: '$125/hr', stars: '★★★★☆', note: 'Licensed & insured · NC' },
+    { name: 'Trademaster NC', rate: '$95/hr', stars: '★★★★★', note: 'Background checked · Fast response' },
+    { name: 'Carolina Craft Co.', rate: '$140/hr', stars: '★★★★☆', note: 'Premium finish · Warranty included' }
+  ];
+  var container = document.getElementById('pro-cards');
+  container.innerHTML = '';
+  var trade = document.getElementById('trade').value || 'Contractor';
+  proNames.slice(0, 4).forEach(function(p) {
+    container.innerHTML += '<div class="pro-card"><div class="pro-card-name">' + p.name + '</div><div class="pro-card-trade">' + trade + ' · ' + p.note + '</div><div class="pro-card-stars">' + p.stars + '</div><div class="pro-card-rate">' + p.rate + ' · Standard rate verified</div></div>';
+  });
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('diy-panel').classList.remove('visible');
+  document.getElementById('pro-panel').classList.add('visible');
+}
+
+function newQuote() {
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('diy-panel').classList.remove('visible');
+  document.getElementById('pro-panel').classList.remove('visible');
+  document.getElementById('form-section').style.display = 'block';
+  document.getElementById('job-desc').value = '';
+  document.getElementById('shop-materials-container').innerHTML = '';
+  currentQuoteData = null;
+}
+
+function openEmailModal() {
+  var email = document.getElementById('user-email').value;
+  if (email) document.getElementById('modal-email').value = email;
+  document.getElementById('email-modal').classList.add('active');
+}
+function closeEmailModal() { document.getElementById('email-modal').classList.remove('active'); }
+function sendEmail() { alert('Quote sent! Check your inbox. (Demo mode)'); closeEmailModal(); }
+function exportPDF() { alert('PDF export coming soon.'); }
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
 </html>
