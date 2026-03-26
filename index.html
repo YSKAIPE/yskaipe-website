@@ -231,6 +231,25 @@
   footer a { color: rgba(245,242,236,0.5); }
 
   /* RESPONSIVE */
+
+  @media print {
+    nav, .trust-strip, footer, .hero, .ps-section, .hiw-section, .fork-section, .quote-section .section-header, .fork-actions, .btn-row-secondary, #form-section, #pro-panel { display: none !important; }
+    body { background: #fff; }
+    .quote-section { padding: 0; background: #fff; }
+    .quote-wrap { max-width: 100%; }
+    .quote-card { box-shadow: none; border: none; }
+    .quote-header { background: #0f0e0c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cost-cell.total { background: #0f0e0c !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    #results, #diy-panel { display: block !important; }
+    #results.visible, #diy-panel.visible { display: block !important; }
+    .diy-instructions { border-left: 3px solid #1a6b3c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .shop-materials { break-inside: avoid; }
+    .shop-links { display: none; }
+    .shop-item-cost { display: block; }
+    .quote-body { padding: 1rem; }
+    .panel-header { padding-bottom: 0.5rem; }
+  }
+
   @media (max-width: 700px) {
     .ps-grid { grid-template-columns: 1fr; }
     .ps-divider { display: none; }
@@ -528,7 +547,7 @@
 
 <!-- FOOTER -->
 <footer>
-  YSKAIPE &middot; Human Hands. AI Power. &middot; <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a><br>
+  YSKAIPE &middot; Human Hands. AI Power. &middot; <a href="/cdn-cgi/l/email-protection#8aedf8b2caf3f9e1ebe3faefa4e9e5e7"><span class="__cf_email__" data-cfemail="2542571d655c564e444c55400b464a48">[email&#160;protected]</span></a><br>
   <div style="margin-top:0.8rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
     <a href="future-of-work.html" style="color:rgba(245,242,236,0.6)">Future of Work</a>
     <a href="docs.html" style="color:rgba(245,242,236,0.6)">Documentation</a>
@@ -538,7 +557,7 @@
   Based on verified NC 2026 industry standards &middot; Regional adjustments applied &middot; &copy; 2025 Yskaipe
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var AFFILIATE = { amazon: '', homedepot: '', lowes: '' };
 
 function amazonURL(q) { var u = 'https://www.amazon.com/s?k=' + encodeURIComponent(q); return AFFILIATE.amazon ? u + '&tag=' + AFFILIATE.amazon : u; }
@@ -674,15 +693,49 @@ function openEmailModal() {
   document.getElementById('email-modal').classList.add('active');
 }
 function closeEmailModal() { document.getElementById('email-modal').classList.remove('active'); }
-function sendEmail() { alert('Quote sent! Check your inbox. (Demo mode)'); closeEmailModal(); }
-function exportPDF() { alert('PDF export coming soon.'); }
+async function sendEmail() {
+  var email = document.getElementById('modal-email').value.trim();
+  if (!email) { alert('Please enter your email address.'); return; }
+  if (!currentQuoteData) { alert('No quote data found.'); return; }
+  var btn = document.querySelector('.btn-modal-send');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    var res = await fetch('/api/email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        to: email,
+        name: document.getElementById('user-name').value || '',
+        quote: currentQuoteData
+      })
+    });
+    var data = await res.json();
+    if (data.success) {
+      alert('Quote sent to ' + email + '!');
+      closeEmailModal();
+    } else {
+      alert('Could not send email. Please try again.');
+    }
+  } catch(e) {
+    alert('Could not send email. Please try again.');
+  } finally {
+    btn.textContent = 'Send Quote';
+    btn.disabled = false;
+  }
+}
+function exportPDF() {
+  if (!currentQuoteData) { alert('Please get a quote first.'); return; }
+  var diyPanel = document.getElementById('diy-panel');
+  var results = document.getElementById('results');
+  var diyVisible = diyPanel.classList.contains('visible');
+  results.classList.add('visible');
+  if (!diyVisible) diyPanel.classList.add('visible');
+  setTimeout(function() {
+    window.print();
+    if (!diyVisible) diyPanel.classList.remove('visible');
+  }, 100);
+}
 
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-  a.addEventListener('click', function(e) {
-    var target = document.querySelector(a.getAttribute('href'));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-  });
-});
-</script>
-</body>
-</html>
+  a.addEventL
