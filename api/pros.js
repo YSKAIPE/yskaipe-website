@@ -1,71 +1,108 @@
-const TRADE_TO_QUERY = {
-  Plumber: "plumber",
-  Electrician: "electrician",
-  "HVAC Technician": "hvac contractor",
-  Roofer: "roofing contractor",
-  "General Contractor": "general contractor",
-  "Welder / Fabricator": "welder fabricator",
-  "Home Inspector": "home inspector",
-  "Pest Control": "pest control",
-  Arborist: "tree service",
-  "EV Infrastructure Tech": "EV charger installer",
-  "Smart Home Integrator": "smart home installer",
-  Landscaper: "landscaping",
-  Painter: "house painter",
-  "Flooring Specialist": "flooring contractor",
-  "Physical Therapist": "physical therapist",
-  "EMT / Paramedic": "emergency medical",
-  "Drone Ops Specialist": "drone services",
-};
-
 export default async function handler(req, res) {
   if (req.method !== "GET") return res.status(405).end();
 
   const { trade, zip } = req.query;
-  const apiKey = process.env.FOURSQUARE_API_KEY;
 
-  if (!apiKey)
-    return res.status(500).json({ error: "Foursquare API key not configured" });
+  const TRADE_TO_OSM = {
+    Plumber: "plumber",
+    Electrician: "electrician",
+    "HVAC Technician": "hvac",
+    Roofer: "roofing",
+    "General Contractor": "contractor",
+    Landscaper: "landscaping",
+    Painter: "painter",
+    "Flooring Specialist": "flooring",
+    "Pest Control": "pest_control",
+    "Home Inspector": "inspector",
+    Arborist: "tree_service",
+    "Smart Home Integrator": "electrician",
+    "EV Infrastructure Tech": "electrician",
+  };
 
-  const query = TRADE_TO_QUERY[trade] || trade || "contractor";
-  const location = zip ? `${zip}, NC` : "Davidson, NC";
+  const searchTerm = TRADE_TO_OSM[trade] || "contractor";
 
   try {
-    const url = new URL("https://api.foursquare.com/v3/places/search");
-    url.searchParams.set("query", query);
-    url.searchParams.set("near", location);
-    url.searchParams.set("limit", "4");
-    url.searchParams.set("sort", "RATING");
-    url.searchParams.set(
-      "fields",
-      "name,location,rating,stats,tel,website,verified,link",
+    // First geocode the ZIP to get lat/lon
+    const geoRes = await fetch(
+      `https://nominatim.openstreetmap.org/search?postalcode=${zip || "28036"}&country=US&format=json&limit=1`,
+      { headers: { "User-Agent": "yskaipe.com/1.0" } },
     );
+    const geoData = await geoRes.json();
 
-    const response = await fetch(url.toString(), {
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        Accept: "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      const err = await response.text();
-      console.error("Foursquare error:", err);
-      return res.status(500).json({ error: "Failed to fetch pros" });
+    if (!geoData.length) {
+      return res.status(200).json({ pros: [] });
     }
 
-    const data = await response.json();
-    const pros = (data.results || []).map((p) => ({
-      name: p.name || "Local Pro",
-      address: p.location?.formatted_address || p.location?.address || "",
-      city: p.location?.locality || "",
-      rating: p.rating ? Number((p.rating / 2).toFixed(1)) : null,
-      reviewCount: p.stats?.total_ratings || null,
-      phone: p.tel || null,
-      website: p.website || null,
-      verified: p.verified || false,
-      profileUrl: p.link ? `https://foursquare.com${p.link}` : null,
+    const lat = parseFloat(geoData[0].lat);
+    const lon = parseFloat(geoData[0].lon);
+    const radius = 16000; // 10 miles in meters
+
+    // Query Overpass for businesses
+    const overpassQuery = `
+      [out:json][timeout:10];
+      (
+        node["shop"="${searchTerm}"](around:${radius},${lat},${lon});
+        node["craft"="${searchTerm}"](around:${radius},${lat},${lon});
+        node["office"="company"]["name"~"${searchTerm}",i](around:${radius},${lat},${lon});
+      );
+      out body 4;
+    `;
+
+    const overpassRes = await fetch("https://overpass-api.de/api/interpreter", {
+      method: "POST",
+      body: overpassQuery,
+      headers: { "Content-Type": "text/plain" },
+    });
+
+    const overpassData = await overpassRes.json();
+    const elements = overpassData.elements || [];
+
+    const pros = elements.slice(0, 4).map((e) => ({
+      name: e.tags?.name || "Local Pro",
+      address:
+        [
+          e.tags?.["addr:housenumber"],
+          e.tags?.["addr:street"],
+          e.tags?.["addr:city"],
+        ]
+          .filter(Boolean)
+          .join(" ") || "",
+      city: e.tags?.["addr:city"] || "",
+      rating: null,
+      phone: e.tags?.phone || e.tags?.["contact:phone"] || null,
+      website: e.tags?.website || e.tags?.["contact:website"] || null,
+      verified: false,
     }));
+
+    // If no OSM results, fall back to search links
+    if (!pros.length) {
+      const q = encodeURIComponent(`${trade} contractor near ${zip} NC`);
+      return res.status(200).json({
+        pros: [
+          {
+            name: "Search Google for local pros",
+            address: `${zip} area, NC`,
+            phone: null,
+            website: `https://www.google.com/search?q=${q}`,
+            isSearch: true,
+          },
+          {
+            name: "Find on Angi",
+            address: `${zip} area, NC`,
+            phone: null,
+            website: `https://www.angi.com/search?q=${encodeURIComponent(trade)}&zip=${zip}`,
+            isSearch: true,
+          },
+          {
+            name: "Find on Thumbtack",
+            address: `${zip} area, NC`,
+            phone: null,
+            website: `https://www.thumbtack.com/search?q=${encodeURIComponent(trade)}&zip=${zip}`,
+            isSearch: true,
+          },
+        ],
+      });
+    }
 
     return res.status(200).json({ pros });
   } catch (e) {
