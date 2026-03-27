@@ -721,3 +721,12 @@ function exportPDF() {
 
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventL
+istener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
