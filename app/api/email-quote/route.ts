@@ -1,19 +1,25 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
-import { QuoteResult } from '@/types/quote'
+import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "YSKAIPE AutoQuote <quotes@yskaipe.com>";
+import { QuoteResult } from "@/types/quote";
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 function formatCurrency(n: number) {
-  return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+  return (
+    "$" +
+    n.toLocaleString("en-US", {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    })
+  );
 }
 
 function buildEmailHTML(quote: QuoteResult): string {
   const materialsHTML = quote.materials_list?.length
     ? `<ul style="margin:8px 0;padding-left:20px;color:#555;">
-        ${quote.materials_list.map((m) => `<li style="margin:4px 0;">${m}</li>`).join('')}
+        ${quote.materials_list.map((m) => `<li style="margin:4px 0;">${m}</li>`).join("")}
        </ul>`
-    : '<p style="color:#888;font-size:13px;">Not specified</p>'
+    : '<p style="color:#888;font-size:13px;">Not specified</p>';
 
   return `<!DOCTYPE html>
 <html>
@@ -92,7 +98,9 @@ function buildEmailHTML(quote: QuoteResult): string {
           </td>
         </tr>
 
-        ${quote.notes ? `
+        ${
+          quote.notes
+            ? `
         <!-- Notes -->
         <tr>
           <td style="padding:0 32px 24px;">
@@ -101,7 +109,9 @@ function buildEmailHTML(quote: QuoteResult): string {
               <p style="margin:0;font-size:13px;color:#666;line-height:1.6;">${quote.notes}</p>
             </div>
           </td>
-        </tr>` : ''}
+        </tr>`
+            : ""
+        }
 
         <!-- CTA -->
         <tr>
@@ -115,37 +125,50 @@ function buildEmailHTML(quote: QuoteResult): string {
     </td></tr>
   </table>
 </body>
-</html>`
+</html>`;
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const { quote, email }: { quote: QuoteResult; email: string } = await req.json()
+    const { quote, email }: { quote: QuoteResult; email: string } =
+      await req.json();
 
     if (!quote || !email) {
-      return NextResponse.json({ error: 'quote and email are required' }, { status: 400 })
+      return NextResponse.json(
+        { error: "quote and email are required" },
+        { status: 400 },
+      );
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
+      return NextResponse.json(
+        { error: "Invalid email address" },
+        { status: 400 },
+      );
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'YSKAIPE AutoQuote <quotes@yskaipe.com>',
+      from: "YSKAIPE AutoQuote <quotes@yskaipe.com>",
       to: [email],
       subject: `Your ${quote.trade} Standard Cost Estimate — $${quote.grand_total.toLocaleString()}`,
       html: buildEmailHTML(quote),
-    })
+    });
 
     if (error) {
-      console.error('Resend error:', error)
-      return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
+      console.error("Resend error:", error);
+      return NextResponse.json(
+        { error: "Failed to send email" },
+        { status: 500 },
+      );
     }
 
-    return NextResponse.json({ success: true, id: data?.id })
+    return NextResponse.json({ success: true, id: data?.id });
   } catch (err) {
-    console.error('Email route error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error("Email route error:", err);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

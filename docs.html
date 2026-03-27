@@ -1,333 +1,825 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Documentation · YSKAIPE</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0f0e0c;
-    --paper: #f5f2ec;
-    --cream: #ede9e0;
-    --accent: #d4500a;
-    --accent2: #1a6b3c;
-    --gold: #c8a84b;
-    --mid: #6b6560;
-    --border: rgba(15,14,12,0.12);
-    --card: #ffffff;
-    --r: 4px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Documentation · YSKAIPE</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --ink: #0f0e0c;
+                --paper: #f5f2ec;
+                --cream: #ede9e0;
+                --accent: #d4500a;
+                --accent2: #1a6b3c;
+                --gold: #c8a84b;
+                --mid: #6b6560;
+                --border: rgba(15, 14, 12, 0.12);
+                --card: #ffffff;
+                --r: 4px;
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: "DM Sans", sans-serif;
+                background: var(--paper);
+                color: var(--ink);
+                overflow-x: hidden;
+            }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem; height: 56px;
-    background: rgba(245,242,236,0.88); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.15em; color: var(--ink); text-decoration: none; }
-  .logo span { color: var(--accent); }
-  nav a.nav-back { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
-  nav a.nav-back:hover { color: var(--ink); }
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 2rem;
+                height: 56px;
+                background: rgba(245, 242, 236, 0.88);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--border);
+            }
+            .logo {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 1.5rem;
+                letter-spacing: 0.15em;
+                color: var(--ink);
+                text-decoration: none;
+            }
+            .logo span {
+                color: var(--accent);
+            }
+            nav a.nav-back {
+                font-size: 0.78rem;
+                font-weight: 500;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--mid);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+            nav a.nav-back:hover {
+                color: var(--ink);
+            }
 
-  .page-hero {
-    background: var(--ink);
-    padding: 7rem 2rem 4rem;
-    position: relative; overflow: hidden;
-  }
-  .page-hero::before {
-    content: 'DOCS';
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-family: 'Bebas Neue', sans-serif; font-size: 16rem; letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.03); white-space: nowrap; pointer-events: none;
-  }
-  .page-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-  .page-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-  .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--paper); margin-bottom: 1.5rem; }
-  .page-subtitle { font-size: 1rem; font-weight: 300; line-height: 1.7; color: rgba(245,242,236,0.6); max-width: 560px; }
+            .page-hero {
+                background: var(--ink);
+                padding: 7rem 2rem 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .page-hero::before {
+                content: "DOCS";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 16rem;
+                letter-spacing: 0.1em;
+                color: rgba(255, 255, 255, 0.03);
+                white-space: nowrap;
+                pointer-events: none;
+            }
+            .page-hero-inner {
+                max-width: 900px;
+                margin: 0 auto;
+                position: relative;
+                z-index: 1;
+            }
+            .page-eyebrow {
+                font-family: "DM Mono", monospace;
+                font-size: 0.68rem;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: var(--accent);
+                margin-bottom: 1rem;
+            }
+            .page-title {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(3rem, 8vw, 6rem);
+                line-height: 0.92;
+                letter-spacing: 0.02em;
+                color: var(--paper);
+                margin-bottom: 1.5rem;
+            }
+            .page-subtitle {
+                font-size: 1rem;
+                font-weight: 300;
+                line-height: 1.7;
+                color: rgba(245, 242, 236, 0.6);
+                max-width: 560px;
+            }
 
-  /* LAYOUT */
-  .docs-layout {
-    max-width: 900px; margin: 0 auto;
-    display: grid; grid-template-columns: 220px 1fr;
-    gap: 0; padding: 0 2rem;
-    align-items: start;
-  }
+            /* LAYOUT */
+            .docs-layout {
+                max-width: 900px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 220px 1fr;
+                gap: 0;
+                padding: 0 2rem;
+                align-items: start;
+            }
 
-  /* SIDEBAR */
-  .sidebar {
-    position: sticky; top: 72px;
-    padding: 3rem 2rem 3rem 0;
-    border-right: 1px solid var(--border);
-  }
-  .sidebar-section { margin-bottom: 2rem; }
-  .sidebar-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.6rem; }
-  .sidebar a { display: block; font-size: 0.85rem; color: var(--mid); text-decoration: none; padding: 0.3rem 0; transition: color 0.15s; }
-  .sidebar a:hover { color: var(--accent); }
-  .sidebar a.active { color: var(--accent); font-weight: 500; }
+            /* SIDEBAR */
+            .sidebar {
+                position: sticky;
+                top: 72px;
+                padding: 3rem 2rem 3rem 0;
+                border-right: 1px solid var(--border);
+            }
+            .sidebar-section {
+                margin-bottom: 2rem;
+            }
+            .sidebar-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--mid);
+                margin-bottom: 0.6rem;
+            }
+            .sidebar a {
+                display: block;
+                font-size: 0.85rem;
+                color: var(--mid);
+                text-decoration: none;
+                padding: 0.3rem 0;
+                transition: color 0.15s;
+            }
+            .sidebar a:hover {
+                color: var(--accent);
+            }
+            .sidebar a.active {
+                color: var(--accent);
+                font-weight: 500;
+            }
 
-  /* CONTENT */
-  .docs-content { padding: 3rem 0 6rem 3rem; }
+            /* CONTENT */
+            .docs-content {
+                padding: 3rem 0 6rem 3rem;
+            }
 
-  .doc-section { margin-bottom: 4rem; scroll-margin-top: 80px; }
-  .doc-section h2 {
-    font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.04em;
-    color: var(--ink); margin-bottom: 0.8rem;
-    padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
-  }
-  .doc-section h3 { font-size: 1rem; font-weight: 600; color: var(--ink); margin: 1.5rem 0 0.5rem; }
-  .doc-section p { font-size: 0.93rem; line-height: 1.8; color: var(--mid); margin-bottom: 1rem; }
-  .doc-section p strong { color: var(--ink); font-weight: 500; }
-  .doc-section ul { list-style: none; margin: 0.5rem 0 1rem; }
-  .doc-section ul li { font-size: 0.9rem; line-height: 1.7; color: var(--mid); padding: 0.35rem 0 0.35rem 1.2rem; position: relative; border-bottom: 1px solid var(--border); }
-  .doc-section ul li:last-child { border-bottom: none; }
-  .doc-section ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+            .doc-section {
+                margin-bottom: 4rem;
+                scroll-margin-top: 80px;
+            }
+            .doc-section h2 {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 2.2rem;
+                letter-spacing: 0.04em;
+                color: var(--ink);
+                margin-bottom: 0.8rem;
+                padding-bottom: 0.6rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .doc-section h3 {
+                font-size: 1rem;
+                font-weight: 600;
+                color: var(--ink);
+                margin: 1.5rem 0 0.5rem;
+            }
+            .doc-section p {
+                font-size: 0.93rem;
+                line-height: 1.8;
+                color: var(--mid);
+                margin-bottom: 1rem;
+            }
+            .doc-section p strong {
+                color: var(--ink);
+                font-weight: 500;
+            }
+            .doc-section ul {
+                list-style: none;
+                margin: 0.5rem 0 1rem;
+            }
+            .doc-section ul li {
+                font-size: 0.9rem;
+                line-height: 1.7;
+                color: var(--mid);
+                padding: 0.35rem 0 0.35rem 1.2rem;
+                position: relative;
+                border-bottom: 1px solid var(--border);
+            }
+            .doc-section ul li:last-child {
+                border-bottom: none;
+            }
+            .doc-section ul li::before {
+                content: "—";
+                position: absolute;
+                left: 0;
+                color: var(--accent);
+            }
 
-  .code-block {
-    background: var(--ink); color: #5ec47a;
-    font-family: 'DM Mono', monospace; font-size: 0.78rem; line-height: 1.7;
-    padding: 1.2rem 1.5rem; border-radius: var(--r);
-    margin: 1rem 0; overflow-x: auto;
-    white-space: pre;
-  }
-  .code-block .comment { color: rgba(245,242,236,0.3); }
-  .code-block .key { color: var(--gold); }
-  .code-block .val { color: #5ec47a; }
+            .code-block {
+                background: var(--ink);
+                color: #5ec47a;
+                font-family: "DM Mono", monospace;
+                font-size: 0.78rem;
+                line-height: 1.7;
+                padding: 1.2rem 1.5rem;
+                border-radius: var(--r);
+                margin: 1rem 0;
+                overflow-x: auto;
+                white-space: pre;
+            }
+            .code-block .comment {
+                color: rgba(245, 242, 236, 0.3);
+            }
+            .code-block .key {
+                color: var(--gold);
+            }
+            .code-block .val {
+                color: #5ec47a;
+            }
 
-  .info-card {
-    background: var(--cream); border: 1px solid var(--border);
-    border-radius: var(--r); padding: 1.2rem 1.5rem; margin: 1rem 0;
-    font-size: 0.88rem; line-height: 1.7; color: var(--ink);
-  }
-  .info-card .ic-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+            .info-card {
+                background: var(--cream);
+                border: 1px solid var(--border);
+                border-radius: var(--r);
+                padding: 1.2rem 1.5rem;
+                margin: 1rem 0;
+                font-size: 0.88rem;
+                line-height: 1.7;
+                color: var(--ink);
+            }
+            .info-card .ic-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--accent);
+                margin-bottom: 0.4rem;
+            }
 
-  .field-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
-  .field-table th { text-align: left; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); }
-  .field-table td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--mid); vertical-align: top; }
-  .field-table td:first-child { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--ink); white-space: nowrap; }
-  .field-table tr:last-child td { border-bottom: none; }
+            .field-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 1rem 0;
+                font-size: 0.85rem;
+            }
+            .field-table th {
+                text-align: left;
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--mid);
+                padding: 0.5rem 0.8rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .field-table td {
+                padding: 0.65rem 0.8rem;
+                border-bottom: 1px solid var(--border);
+                color: var(--mid);
+                vertical-align: top;
+            }
+            .field-table td:first-child {
+                font-family: "DM Mono", monospace;
+                font-size: 0.8rem;
+                color: var(--ink);
+                white-space: nowrap;
+            }
+            .field-table tr:last-child td {
+                border-bottom: none;
+            }
 
-  .badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 2px; margin-left: 0.4rem; vertical-align: middle; }
-  .badge.required { background: rgba(212,80,10,0.1); color: var(--accent); }
-  .badge.optional { background: rgba(26,107,60,0.1); color: var(--accent2); }
+            .badge {
+                display: inline-block;
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.15rem 0.5rem;
+                border-radius: 2px;
+                margin-left: 0.4rem;
+                vertical-align: middle;
+            }
+            .badge.required {
+                background: rgba(212, 80, 10, 0.1);
+                color: var(--accent);
+            }
+            .badge.optional {
+                background: rgba(26, 107, 60, 0.1);
+                color: var(--accent2);
+            }
 
-  /* FOOTER */
-  footer { background: var(--ink); color: rgba(245,242,236,0.5); padding: 2rem; text-align: center; font-size: 0.78rem; font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
-  footer a { color: rgba(245,242,236,0.5); }
-  .footer-links { margin-top: 0.8rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+            /* FOOTER */
+            footer {
+                background: var(--ink);
+                color: rgba(245, 242, 236, 0.5);
+                padding: 2rem;
+                text-align: center;
+                font-size: 0.78rem;
+                font-family: "DM Mono", monospace;
+                letter-spacing: 0.08em;
+            }
+            footer a {
+                color: rgba(245, 242, 236, 0.5);
+            }
+            .footer-links {
+                margin-top: 0.8rem;
+                display: flex;
+                gap: 2rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
 
-  @media (max-width: 700px) {
-    .docs-layout { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .docs-content { padding: 2rem 0 4rem; }
-  }
-</style>
-</head>
-<body>
+            @media (max-width: 700px) {
+                .docs-layout {
+                    grid-template-columns: 1fr;
+                }
+                .sidebar {
+                    display: none;
+                }
+                .docs-content {
+                    padding: 2rem 0 4rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="index.html" class="logo">Y<span>S</span>KAIPE</a>
+            <a href="index.html" class="nav-back">← Back to Home</a>
+        </nav>
 
-<nav>
-  <a href="index.html" class="logo">Y<span>S</span>KAIPE</a>
-  <a href="index.html" class="nav-back">← Back to Home</a>
-</nav>
+        <div class="page-hero">
+            <div class="page-hero-inner">
+                <div class="page-eyebrow">Documentation · v1.0</div>
+                <div class="page-title">HOW<br />YSKAIPE<br />WORKS</div>
+                <p class="page-subtitle">
+                    Everything you need to understand YSKAIPE's AutoQuote system
+                    — how we calculate rates, what the AI returns, and how to
+                    get the most accurate estimates.
+                </p>
+            </div>
+        </div>
 
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="page-eyebrow">Documentation · v1.0</div>
-    <div class="page-title">HOW<br>YSKAIPE<br>WORKS</div>
-    <p class="page-subtitle">Everything you need to understand YSKAIPE's AutoQuote system — how we calculate rates, what the AI returns, and how to get the most accurate estimates.</p>
-  </div>
-</div>
+        <div class="docs-layout">
+            <nav class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Getting Started</div>
+                    <a href="#overview">Overview</a>
+                    <a href="#how-to-use">How to Use</a>
+                    <a href="#rates">Rate Methodology</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-label">AutoQuote</div>
+                    <a href="#input-fields">Input Fields</a>
+                    <a href="#quote-output">Quote Output</a>
+                    <a href="#diy-report">DIY Report</a>
+                    <a href="#shop-materials">Shop Materials</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-label">AI & Accuracy</div>
+                    <a href="#claude-ai">Claude AI</a>
+                    <a href="#accuracy">Accuracy & Limits</a>
+                    <a href="#tips">Tips for Better Quotes</a>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-label">Pro Network</div>
+                    <a href="#pro-network">Pro Matching</a>
+                    <a href="#join-pro">Join as a Pro</a>
+                </div>
+            </nav>
 
-<div class="docs-layout">
-  <nav class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Getting Started</div>
-      <a href="#overview">Overview</a>
-      <a href="#how-to-use">How to Use</a>
-      <a href="#rates">Rate Methodology</a>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">AutoQuote</div>
-      <a href="#input-fields">Input Fields</a>
-      <a href="#quote-output">Quote Output</a>
-      <a href="#diy-report">DIY Report</a>
-      <a href="#shop-materials">Shop Materials</a>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">AI & Accuracy</div>
-      <a href="#claude-ai">Claude AI</a>
-      <a href="#accuracy">Accuracy & Limits</a>
-      <a href="#tips">Tips for Better Quotes</a>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Pro Network</div>
-      <a href="#pro-network">Pro Matching</a>
-      <a href="#join-pro">Join as a Pro</a>
-    </div>
-  </nav>
+            <div class="docs-content">
+                <div class="doc-section" id="overview">
+                    <h2>Overview</h2>
+                    <p>
+                        YSKAIPE is a home services cost intelligence platform.
+                        Our AutoQuote tool uses Claude AI (by Anthropic) to
+                        generate instant standard cost estimates for home repair
+                        and improvement jobs based on verified NC 2026 industry
+                        rates.
+                    </p>
+                    <p>
+                        The goal is simple:
+                        <strong
+                            >give every homeowner the knowledge they need to
+                            make a fair decision before any work begins.</strong
+                        >
+                        Whether you want to DIY, negotiate with a contractor, or
+                        just know if a quote is reasonable — YSKAIPE gives you
+                        the baseline.
+                    </p>
+                    <div class="info-card">
+                        <div class="ic-label">Current Coverage</div>
+                        North Carolina residential market · 2026 verified rates
+                        · Labor baseline $95–$160/hr · 14 trade categories
+                    </div>
+                </div>
 
-  <div class="docs-content">
+                <div class="doc-section" id="how-to-use">
+                    <h2>How to Use</h2>
+                    <h3>Step 1 — Describe your job</h3>
+                    <p>
+                        Navigate to the AutoQuote section. Select your trade,
+                        enter your ZIP code, and describe the job in plain
+                        English. The more detail you provide, the more accurate
+                        your estimate will be.
+                    </p>
+                    <h3>Step 2 — Get your estimate</h3>
+                    <p>
+                        YSKAIPE returns a standard cost estimate within seconds,
+                        broken down into labor and materials ranges, with a
+                        plain-English explanation of what drives the cost.
+                    </p>
+                    <h3>Step 3 — Choose your path</h3>
+                    <p>From your estimate, you can go two directions:</p>
+                    <ul>
+                        <li>
+                            <strong>DIY This Job</strong> — get step-by-step
+                            instructions, a difficulty rating, safety warnings,
+                            and a materials list with retailer links
+                        </li>
+                        <li>
+                            <strong>Find a Pro</strong> — see matched local
+                            professionals and the fair rate to expect from them
+                        </li>
+                    </ul>
+                </div>
 
-    <div class="doc-section" id="overview">
-      <h2>Overview</h2>
-      <p>YSKAIPE is a home services cost intelligence platform. Our AutoQuote tool uses Claude AI (by Anthropic) to generate instant standard cost estimates for home repair and improvement jobs based on verified NC 2026 industry rates.</p>
-      <p>The goal is simple: <strong>give every homeowner the knowledge they need to make a fair decision before any work begins.</strong> Whether you want to DIY, negotiate with a contractor, or just know if a quote is reasonable — YSKAIPE gives you the baseline.</p>
-      <div class="info-card">
-        <div class="ic-label">Current Coverage</div>
-        North Carolina residential market · 2026 verified rates · Labor baseline $95–$160/hr · 14 trade categories
-      </div>
-    </div>
+                <div class="doc-section" id="rates">
+                    <h2>Rate Methodology</h2>
+                    <p>
+                        YSKAIPE estimates are based on verified NC 2026
+                        residential trade rates, compiled from industry data,
+                        regional labor surveys, and material cost indexes.
+                    </p>
+                    <h3>Labor rates</h3>
+                    <p>
+                        Our labor baseline is
+                        <strong>$95–$160/hr</strong> depending on trade,
+                        complexity, and region within NC. Specialty trades
+                        (HVAC, electrical, EV infrastructure) sit at the higher
+                        end. General labor and painting typically fall at the
+                        lower end.
+                    </p>
+                    <h3>Materials</h3>
+                    <p>
+                        Material costs are estimated using current retail
+                        pricing from major home improvement suppliers. These
+                        figures reflect what a homeowner would pay at retail —
+                        contractors may pay less wholesale.
+                    </p>
+                    <h3>Regional adjustment</h3>
+                    <p>
+                        The Claude AI model applies regional context within NC —
+                        Charlotte metro, Triangle, Triad, and coastal markets
+                        each have slight cost variations that are factored into
+                        estimates when a ZIP code is provided.
+                    </p>
+                </div>
 
-    <div class="doc-section" id="how-to-use">
-      <h2>How to Use</h2>
-      <h3>Step 1 — Describe your job</h3>
-      <p>Navigate to the AutoQuote section. Select your trade, enter your ZIP code, and describe the job in plain English. The more detail you provide, the more accurate your estimate will be.</p>
-      <h3>Step 2 — Get your estimate</h3>
-      <p>YSKAIPE returns a standard cost estimate within seconds, broken down into labor and materials ranges, with a plain-English explanation of what drives the cost.</p>
-      <h3>Step 3 — Choose your path</h3>
-      <p>From your estimate, you can go two directions:</p>
-      <ul>
-        <li><strong>DIY This Job</strong> — get step-by-step instructions, a difficulty rating, safety warnings, and a materials list with retailer links</li>
-        <li><strong>Find a Pro</strong> — see matched local professionals and the fair rate to expect from them</li>
-      </ul>
-    </div>
+                <div class="doc-section" id="input-fields">
+                    <h2>Input Fields</h2>
+                    <table class="field-table">
+                        <tr>
+                            <th>Field</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Trade / Role
+                                <span class="badge required">required</span>
+                            </td>
+                            <td>
+                                The type of contractor the job requires.
+                                Selecting the right trade improves estimate
+                                accuracy significantly.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Location (ZIP)
+                                <span class="badge optional">optional</span>
+                            </td>
+                            <td>
+                                Your ZIP code. Used to apply regional rate
+                                adjustments within NC. Defaults to NC regional
+                                average if omitted.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Home Size / Scope
+                                <span class="badge optional">optional</span>
+                            </td>
+                            <td>
+                                Square footage or scope descriptor (e.g. "2,400
+                                sq ft single-family"). Helps calibrate material
+                                quantities and labor time.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Job Description
+                                <span class="badge required">required</span>
+                            </td>
+                            <td>
+                                Plain English description of the problem or job.
+                                Be specific — include symptoms, what's broken,
+                                approximate age of the home, and any known
+                                constraints.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Name &amp; Email
+                                <span class="badge optional">optional</span>
+                            </td>
+                            <td>
+                                For email delivery of your quote only. Never
+                                required. Never used for marketing.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
-    <div class="doc-section" id="rates">
-      <h2>Rate Methodology</h2>
-      <p>YSKAIPE estimates are based on verified NC 2026 residential trade rates, compiled from industry data, regional labor surveys, and material cost indexes.</p>
-      <h3>Labor rates</h3>
-      <p>Our labor baseline is <strong>$95–$160/hr</strong> depending on trade, complexity, and region within NC. Specialty trades (HVAC, electrical, EV infrastructure) sit at the higher end. General labor and painting typically fall at the lower end.</p>
-      <h3>Materials</h3>
-      <p>Material costs are estimated using current retail pricing from major home improvement suppliers. These figures reflect what a homeowner would pay at retail — contractors may pay less wholesale.</p>
-      <h3>Regional adjustment</h3>
-      <p>The Claude AI model applies regional context within NC — Charlotte metro, Triangle, Triad, and coastal markets each have slight cost variations that are factored into estimates when a ZIP code is provided.</p>
-    </div>
+                <div class="doc-section" id="quote-output">
+                    <h2>Quote Output</h2>
+                    <p>
+                        The AutoQuote returns a structured estimate with the
+                        following fields:
+                    </p>
+                    <table class="field-table">
+                        <tr>
+                            <th>Field</th>
+                            <th>What it means</th>
+                        </tr>
+                        <tr>
+                            <td>Labor</td>
+                            <td>
+                                Standard labor cost range for the job based on
+                                trade rates and estimated time.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Materials</td>
+                            <td>
+                                Estimated cost of materials at retail pricing.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Standard</td>
+                            <td>
+                                Combined labor + materials midpoint. This is the
+                                fair market reference figure.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Timeline</td>
+                            <td>Estimated job duration for a professional.</td>
+                        </tr>
+                        <tr>
+                            <td>Breakdown</td>
+                            <td>
+                                3–4 sentence plain English explanation of what
+                                drives the cost and any regional factors.
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="info-card">
+                        <div class="ic-label">How to use your estimate</div>
+                        If a contractor's quote is within ~20% of the YSKAIPE
+                        total, it's likely fair. More than 30% above? Ask for
+                        itemized breakdown. Significantly below? Ask what's not
+                        included.
+                    </div>
+                </div>
 
-    <div class="doc-section" id="input-fields">
-      <h2>Input Fields</h2>
-      <table class="field-table">
-        <tr><th>Field</th><th>Description</th></tr>
-        <tr><td>Trade / Role <span class="badge required">required</span></td><td>The type of contractor the job requires. Selecting the right trade improves estimate accuracy significantly.</td></tr>
-        <tr><td>Location (ZIP) <span class="badge optional">optional</span></td><td>Your ZIP code. Used to apply regional rate adjustments within NC. Defaults to NC regional average if omitted.</td></tr>
-        <tr><td>Home Size / Scope <span class="badge optional">optional</span></td><td>Square footage or scope descriptor (e.g. "2,400 sq ft single-family"). Helps calibrate material quantities and labor time.</td></tr>
-        <tr><td>Job Description <span class="badge required">required</span></td><td>Plain English description of the problem or job. Be specific — include symptoms, what's broken, approximate age of the home, and any known constraints.</td></tr>
-        <tr><td>Name &amp; Email <span class="badge optional">optional</span></td><td>For email delivery of your quote only. Never required. Never used for marketing.</td></tr>
-      </table>
-    </div>
+                <div class="doc-section" id="diy-report">
+                    <h2>DIY Report</h2>
+                    <p>
+                        When you click <strong>DIY This Job</strong>, YSKAIPE
+                        generates a full DIY playbook including:
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Difficulty rating</strong> — scored 1–10
+                            with a plain label (Easy / Weekend Warrior /
+                            Experienced DIYer / Expert Only)
+                        </li>
+                        <li>
+                            <strong>Safety & permit warnings</strong> — flagged
+                            prominently for any job involving electrical,
+                            plumbing, structural, or permitted work
+                        </li>
+                        <li>
+                            <strong>Step-by-step instructions</strong> —
+                            numbered, plain English, tool-specific guidance
+                        </li>
+                        <li>
+                            <strong>Materials list</strong> — specific product
+                            names, quantities, and estimated costs
+                        </li>
+                        <li>
+                            <strong>Shop links</strong> — direct retailer search
+                            links for every material item
+                        </li>
+                    </ul>
+                    <p>
+                        DIY savings shown reflect the labor cost avoided —
+                        materials still apply.
+                    </p>
+                </div>
 
-    <div class="doc-section" id="quote-output">
-      <h2>Quote Output</h2>
-      <p>The AutoQuote returns a structured estimate with the following fields:</p>
-      <table class="field-table">
-        <tr><th>Field</th><th>What it means</th></tr>
-        <tr><td>Labor</td><td>Standard labor cost range for the job based on trade rates and estimated time.</td></tr>
-        <tr><td>Materials</td><td>Estimated cost of materials at retail pricing.</td></tr>
-        <tr><td>Total Standard</td><td>Combined labor + materials midpoint. This is the fair market reference figure.</td></tr>
-        <tr><td>Timeline</td><td>Estimated job duration for a professional.</td></tr>
-        <tr><td>Breakdown</td><td>3–4 sentence plain English explanation of what drives the cost and any regional factors.</td></tr>
-      </table>
-      <div class="info-card">
-        <div class="ic-label">How to use your estimate</div>
-        If a contractor's quote is within ~20% of the YSKAIPE total, it's likely fair. More than 30% above? Ask for itemized breakdown. Significantly below? Ask what's not included.
-      </div>
-    </div>
+                <div class="doc-section" id="shop-materials">
+                    <h2>Shop Materials</h2>
+                    <p>
+                        Every DIY report includes a
+                        <strong>Shop Materials</strong> section that links each
+                        required material directly to Amazon, Home Depot, and
+                        Lowe's search results.
+                    </p>
+                    <p>
+                        Links are generated automatically from the AI's
+                        materials list — no manual curation. Product names are
+                        optimized for retail search to surface the most relevant
+                        results.
+                    </p>
+                    <div class="info-card">
+                        <div class="ic-label">Affiliate disclosure</div>
+                        Shop Materials links may include affiliate tracking
+                        codes. YSKAIPE earns a small commission on qualifying
+                        purchases at no extra cost to you. We do not accept
+                        payment to feature specific brands or products.
+                    </div>
+                </div>
 
-    <div class="doc-section" id="diy-report">
-      <h2>DIY Report</h2>
-      <p>When you click <strong>DIY This Job</strong>, YSKAIPE generates a full DIY playbook including:</p>
-      <ul>
-        <li><strong>Difficulty rating</strong> — scored 1–10 with a plain label (Easy / Weekend Warrior / Experienced DIYer / Expert Only)</li>
-        <li><strong>Safety & permit warnings</strong> — flagged prominently for any job involving electrical, plumbing, structural, or permitted work</li>
-        <li><strong>Step-by-step instructions</strong> — numbered, plain English, tool-specific guidance</li>
-        <li><strong>Materials list</strong> — specific product names, quantities, and estimated costs</li>
-        <li><strong>Shop links</strong> — direct retailer search links for every material item</li>
-      </ul>
-      <p>DIY savings shown reflect the labor cost avoided — materials still apply.</p>
-    </div>
+                <div class="doc-section" id="claude-ai">
+                    <h2>Claude AI</h2>
+                    <p>
+                        YSKAIPE's cost intelligence is powered by
+                        <strong>Claude</strong>, developed by Anthropic. Claude
+                        is one of the most capable and safety-focused AI models
+                        available. We chose Anthropic as our AI partner because
+                        their values — honesty, transparency, and genuine
+                        helpfulness — align directly with YSKAIPE's mission.
+                    </p>
+                    <p>
+                        When you submit a quote, your job description is sent to
+                        Anthropic's API. Claude parses the job against our rate
+                        data and returns a structured JSON estimate. Your data
+                        is handled under Anthropic's privacy policy and is not
+                        used to train their models without consent.
+                    </p>
+                    <div class="code-block">
+                        <span class="comment"
+                            >// Simplified example of what YSKAIPE sends to
+                            Claude</span
+                        >
+                        {
+                        <span class="key">"trade"</span>:
+                        <span class="val">"Plumber"</span>,
+                        <span class="key">"zip"</span>:
+                        <span class="val">"28036"</span>,
+                        <span class="key">"description"</span>:
+                        <span class="val"
+                            >"Kitchen faucet dripping, replace cartridge"</span
+                        >
+                        }
 
-    <div class="doc-section" id="shop-materials">
-      <h2>Shop Materials</h2>
-      <p>Every DIY report includes a <strong>Shop Materials</strong> section that links each required material directly to Amazon, Home Depot, and Lowe's search results.</p>
-      <p>Links are generated automatically from the AI's materials list — no manual curation. Product names are optimized for retail search to surface the most relevant results.</p>
-      <div class="info-card">
-        <div class="ic-label">Affiliate disclosure</div>
-        Shop Materials links may include affiliate tracking codes. YSKAIPE earns a small commission on qualifying purchases at no extra cost to you. We do not accept payment to feature specific brands or products.
-      </div>
-    </div>
+                        <span class="comment"
+                            >// Claude returns structured cost data
+                            including:</span
+                        >
+                        <span class="comment"
+                            >// labor range, materials range, diy steps,
+                            materials list, etc.</span
+                        >
+                    </div>
+                </div>
 
-    <div class="doc-section" id="claude-ai">
-      <h2>Claude AI</h2>
-      <p>YSKAIPE's cost intelligence is powered by <strong>Claude</strong>, developed by Anthropic. Claude is one of the most capable and safety-focused AI models available. We chose Anthropic as our AI partner because their values — honesty, transparency, and genuine helpfulness — align directly with YSKAIPE's mission.</p>
-      <p>When you submit a quote, your job description is sent to Anthropic's API. Claude parses the job against our rate data and returns a structured JSON estimate. Your data is handled under Anthropic's privacy policy and is not used to train their models without consent.</p>
-      <div class="code-block"><span class="comment">// Simplified example of what YSKAIPE sends to Claude</span>
-{
-  <span class="key">"trade"</span>: <span class="val">"Plumber"</span>,
-  <span class="key">"zip"</span>: <span class="val">"28036"</span>,
-  <span class="key">"description"</span>: <span class="val">"Kitchen faucet dripping, replace cartridge"</span>
-}
+                <div class="doc-section" id="accuracy">
+                    <h2>Accuracy & Limits</h2>
+                    <p>
+                        YSKAIPE estimates are reference figures, not binding
+                        quotes. Actual costs vary based on:
+                    </p>
+                    <ul>
+                        <li>Job complexity not captured in the description</li>
+                        <li>Material price fluctuations</li>
+                        <li>Contractor overhead, markup, and availability</li>
+                        <li>
+                            Permit fees, disposal costs, and unforeseen
+                            complications
+                        </li>
+                        <li>
+                            Geographic variation within NC beyond ZIP-level
+                            adjustment
+                        </li>
+                    </ul>
+                    <p>
+                        In our testing, YSKAIPE estimates fall within
+                        <strong>15–25% of actual contractor quotes</strong> for
+                        clearly described standard jobs. Complex or ambiguous
+                        jobs will have wider ranges.
+                    </p>
+                </div>
 
-<span class="comment">// Claude returns structured cost data including:</span>
-<span class="comment">// labor range, materials range, diy steps, materials list, etc.</span></div>
-    </div>
+                <div class="doc-section" id="tips">
+                    <h2>Tips for Better Quotes</h2>
+                    <ul>
+                        <li>
+                            Include the age of your home — older homes often
+                            have non-standard plumbing, wiring, or dimensions
+                            that affect cost
+                        </li>
+                        <li>
+                            Describe symptoms, not just the fix — "water
+                            dripping under sink" is better than "fix leak"
+                        </li>
+                        <li>
+                            Mention any known constraints — access issues,
+                            existing damage, HOA restrictions
+                        </li>
+                        <li>
+                            Specify the scope — "replace one faucet" vs "replumb
+                            entire kitchen" yields very different estimates
+                        </li>
+                        <li>
+                            Select the correct trade — a general contractor
+                            quote differs significantly from a specialist
+                        </li>
+                    </ul>
+                </div>
 
-    <div class="doc-section" id="accuracy">
-      <h2>Accuracy & Limits</h2>
-      <p>YSKAIPE estimates are reference figures, not binding quotes. Actual costs vary based on:</p>
-      <ul>
-        <li>Job complexity not captured in the description</li>
-        <li>Material price fluctuations</li>
-        <li>Contractor overhead, markup, and availability</li>
-        <li>Permit fees, disposal costs, and unforeseen complications</li>
-        <li>Geographic variation within NC beyond ZIP-level adjustment</li>
-      </ul>
-      <p>In our testing, YSKAIPE estimates fall within <strong>15–25% of actual contractor quotes</strong> for clearly described standard jobs. Complex or ambiguous jobs will have wider ranges.</p>
-    </div>
+                <div class="doc-section" id="pro-network">
+                    <h2>Pro Network</h2>
+                    <p>
+                        YSKAIPE's pro matching surfaces vetted local
+                        professionals when a job is too complex or risky for
+                        DIY. Matched pros are background-checked members of the
+                        YSKAIPE network who agree to transparent, fair pricing
+                        standards.
+                    </p>
+                    <p>
+                        You always receive your standard cost estimate
+                        <em>before</em> seeing pro results — so you walk into
+                        every conversation knowing the fair rate.
+                    </p>
+                    <div class="info-card">
+                        <div class="ic-label">Important</div>
+                        Pro network profiles shown in the current version are
+                        illustrative placeholders. Live contractor matching with
+                        real NC professionals is coming in a future release.
+                    </div>
+                </div>
 
-    <div class="doc-section" id="tips">
-      <h2>Tips for Better Quotes</h2>
-      <ul>
-        <li>Include the age of your home — older homes often have non-standard plumbing, wiring, or dimensions that affect cost</li>
-        <li>Describe symptoms, not just the fix — "water dripping under sink" is better than "fix leak"</li>
-        <li>Mention any known constraints — access issues, existing damage, HOA restrictions</li>
-        <li>Specify the scope — "replace one faucet" vs "replumb entire kitchen" yields very different estimates</li>
-        <li>Select the correct trade — a general contractor quote differs significantly from a specialist</li>
-      </ul>
-    </div>
+                <div class="doc-section" id="join-pro">
+                    <h2>Join as a Pro</h2>
+                    <p>
+                        Are you a licensed NC home service professional who
+                        believes in fair, transparent pricing? YSKAIPE is
+                        building a network of vetted contractors who want to win
+                        jobs on quality and honesty — not information asymmetry.
+                    </p>
+                    <p>
+                        To express interest in joining the YSKAIPE pro network,
+                        email us at
+                        <a
+                            href="mailto:gr8@yskaipe.com"
+                            style="color: var(--accent); text-decoration: none"
+                            >gr8@yskaipe.com</a
+                        >
+                        with your trade, license number, and service area.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    <div class="doc-section" id="pro-network">
-      <h2>Pro Network</h2>
-      <p>YSKAIPE's pro matching surfaces vetted local professionals when a job is too complex or risky for DIY. Matched pros are background-checked members of the YSKAIPE network who agree to transparent, fair pricing standards.</p>
-      <p>You always receive your standard cost estimate <em>before</em> seeing pro results — so you walk into every conversation knowing the fair rate.</p>
-      <div class="info-card">
-        <div class="ic-label">Important</div>
-        Pro network profiles shown in the current version are illustrative placeholders. Live contractor matching with real NC professionals is coming in a future release.
-      </div>
-    </div>
-
-    <div class="doc-section" id="join-pro">
-      <h2>Join as a Pro</h2>
-      <p>Are you a licensed NC home service professional who believes in fair, transparent pricing? YSKAIPE is building a network of vetted contractors who want to win jobs on quality and honesty — not information asymmetry.</p>
-      <p>To express interest in joining the YSKAIPE pro network, email us at <a href="mailto:gr8@yskaipe.com" style="color:var(--accent);text-decoration:none;">gr8@yskaipe.com</a> with your trade, license number, and service area.</p>
-    </div>
-
-  </div>
-</div>
-
-<footer>
-  YSKAIPE · Human Hands. AI Power. · <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="docs.html" style="color:rgba(245,242,236,0.8)">Documentation</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-    <a href="future-of-work.html">Future of Work</a>
-  </div><br>
-  Based on verified NC 2026 industry standards · © 2025 Yskaipe
-</footer>
-
-</body>
+        <footer>
+            YSKAIPE · Human Hands. AI Power. ·
+            <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="docs.html" style="color: rgba(245, 242, 236, 0.8)"
+                    >Documentation</a
+                >
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="future-of-work.html">Future of Work</a>
+            </div>
+            <br />
+            Based on verified NC 2026 industry standards · © 2025 Yskaipe
+        </footer>
+    </body>
 </html>
