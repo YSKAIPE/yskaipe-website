@@ -589,37 +589,39 @@ async function getQuote() {
   var desc = document.getElementById('job-desc').value.trim();
   if (!desc) { alert('Please describe the job.'); return; }
   var btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Analyzing...';
+  btn.disabled = true; btn.textContent = 'Analyzing...';
   document.getElementById('loading-bar').classList.add('active');
   document.getElementById('loading-text').classList.add('active');
-  var prompt = 'You are YSKAIPE AutoQuote - a home services cost estimator using verified NC 2026 industry rates (labor $95-$160/hr).\n\nJob details:\n- Trade: ' + (trade || 'General') + '\n- ZIP: ' + (zip || 'NC region') + '\n- Scope: ' + (scope || 'residential') + '\n- Description: ' + desc + '\n\nReturn ONLY valid JSON (no markdown, no extra text):\n{\n  "labor_low": number,\n  "labor_high": number,\n  "materials_low": number,\n  "materials_high": number,\n  "total_low": number,\n  "total_high": number,\n  "timeline": "string",\n  "breakdown": "3-4 sentence plain English breakdown",\n  "diy_savings_low": number,\n  "diy_savings_high": number,\n  "difficulty_score": number,\n  "difficulty_label": "string",\n  "diy_feasible": true or false,\n  "diy_warning": "string or empty",\n  "diy_steps": "numbered step-by-step instructions and tools only",\n  "diy_materials": [\n    { "name": "exact product name", "qty": "amount", "estimatedCost": "$X" }\n  ],\n  "pro_recommendation": "2-3 sentences",\n  "pro_keywords": ["keyword1", "keyword2"]\n}';
   try {
-    var res = await fetch('/api/quote', {
+    var res = await fetch('/api/quotes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
+      body: JSON.stringify({
+        trade: trade || 'General Contractor',
+        zip: zip || '28036',
+        scope: scope || 'residential',
+        description: desc,
+        customerName: document.getElementById('user-name').value || '',
+        customerEmail: document.getElementById('user-email').value || ''
+      })
     });
     var data = await res.json();
-    var raw = data.content && data.content.find(function(b) { return b.type === 'text'; });
-    var text = raw ? raw.text : '';
-    var clean = text.replace(/```json|```/g, '').trim();
-    var q = JSON.parse(clean);
+    if (!data.quote) throw new Error(data.error || 'No quote returned');
+    var q = data.quote;
     currentQuoteData = q;
-    document.getElementById('res-labor').textContent = '$' + Math.round((q.labor_low + q.labor_high) / 2).toLocaleString();
-    document.getElementById('res-labor-range').textContent = '$' + q.labor_low.toLocaleString() + ' - $' + q.labor_high.toLocaleString();
-    document.getElementById('res-materials').textContent = '$' + Math.round((q.materials_low + q.materials_high) / 2).toLocaleString();
-    document.getElementById('res-materials-range').textContent = '$' + q.materials_low.toLocaleString() + ' - $' + q.materials_high.toLocaleString();
-    document.getElementById('res-total').textContent = '$' + Math.round((q.total_low + q.total_high) / 2).toLocaleString();
-    document.getElementById('res-total-range').textContent = '$' + q.total_low.toLocaleString() + ' - $' + q.total_high.toLocaleString();
-    document.getElementById('res-breakdown').textContent = q.breakdown + '\n\nTimeline: ' + q.timeline;
+    document.getElementById('res-labor').textContent = '$' + q.labor_total.toLocaleString();
+    document.getElementById('res-labor-range').textContent = q.labor_hours + 'h @ $' + q.labor_rate + '/hr';
+    document.getElementById('res-materials').textContent = '$' + q.materials_total.toLocaleString();
+    document.getElementById('res-materials-range').textContent = 'Estimated materials';
+    document.getElementById('res-total').textContent = '$' + q.grand_total.toLocaleString();
+    document.getElementById('res-total-range').textContent = q.time_estimate;
+    document.getElementById('res-breakdown').textContent = q.breakdown + (q.notes ? '\n\nNote: ' + q.notes : '');
     showResults();
   } catch(e) {
-    alert('Something went wrong. Please try again.');
+    alert('Something went wrong: ' + e.message);
     console.error(e);
   } finally {
-    btn.disabled = false;
-    btn.textContent = 'Get Instant Standard Cost';
+    btn.disabled = false; btn.textContent = 'Get Instant Standard Cost';
     document.getElementById('loading-bar').classList.remove('active');
     document.getElementById('loading-text').classList.remove('active');
   }
@@ -656,85 +658,65 @@ function showDIY() {
   document.getElementById('diy-panel').classList.add('visible');
 }
 
-function showPro() {
+async function showPro() {
   if (!currentQuoteData) return;
-  var q = currentQuoteData;
-  document.getElementById('pro-intro').textContent = q.pro_recommendation;
-  var proNames = [
-    { name: 'Ridge & Sons', rate: '$110/hr', stars: '★★★★★', note: 'Top rated · 47 reviews' },
-    { name: 'Precision Home Services', rate: '$125/hr', stars: '★★★★☆', note: 'Licensed & insured · NC' },
-    { name: 'Trademaster NC', rate: '$95/hr', stars: '★★★★★', note: 'Background checked · Fast response' },
-    { name: 'Carolina Craft Co.', rate: '$140/hr', stars: '★★★★☆', note: 'Premium finish · Warranty included' }
-  ];
-  var container = document.getElementById('pro-cards');
-  container.innerHTML = '';
-  var trade = document.getElementById('trade').value || 'Contractor';
-  proNames.slice(0, 4).forEach(function(p) {
-    container.innerHTML += '<div class="pro-card"><div class="pro-card-name">' + p.name + '</div><div class="pro-card-trade">' + trade + ' · ' + p.note + '</div><div class="pro-card-stars">' + p.stars + '</div><div class="pro-card-rate">' + p.rate + ' · Standard rate verified</div></div>';
-  });
+  var trade = document.getElementById('trade').value || 'General Contractor';
+  var zip = document.getElementById('zip').value || '28036';
+  document.getElementById('pro-intro').textContent = currentQuoteData.pro_recommendation || 'Finding local professionals near you...';
   document.getElementById('results').classList.remove('visible');
   document.getElementById('diy-panel').classList.remove('visible');
   document.getElementById('pro-panel').classList.add('visible');
-}
-
-function newQuote() {
-  document.getElementById('results').classList.remove('visible');
-  document.getElementById('diy-panel').classList.remove('visible');
-  document.getElementById('pro-panel').classList.remove('visible');
-  document.getElementById('form-section').style.display = 'block';
-  document.getElementById('job-desc').value = '';
-  document.getElementById('shop-materials-container').innerHTML = '';
-  currentQuoteData = null;
-}
-
-function openEmailModal() {
-  var email = document.getElementById('user-email').value;
-  if (email) document.getElementById('modal-email').value = email;
-  document.getElementById('email-modal').classList.add('active');
-}
-function closeEmailModal() { document.getElementById('email-modal').classList.remove('active'); }
-async function sendEmail() {
-  var email = document.getElementById('modal-email').value.trim();
-  if (!email) { alert('Please enter your email address.'); return; }
-  if (!currentQuoteData) { alert('No quote data found.'); return; }
-  var btn = document.querySelector('.btn-modal-send');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
+  var container = document.getElementById('pro-cards');
+  container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem;font-family:\'DM Mono\',monospace;font-size:0.75rem;color:var(--mid);">Finding local pros near ' + zip + '...</div>';
   try {
-    var res = await fetch('/api/email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        to: email,
-        name: document.getElementById('user-name').value || '',
-        quote: currentQuoteData
-      })
-    });
+    var res = await fetch('/api/pros?trade=' + encodeURIComponent(trade) + '&zip=' + encodeURIComponent(zip));
     var data = await res.json();
-    if (data.success) {
-      alert('Quote sent to ' + email + '!');
-      closeEmailModal();
-    } else {
-      alert('Could not send email. Please try again.');
+    var pros = data.pros || [];
+    if (!pros.length) {
+      container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem;font-size:0.85rem;color:var(--mid);">No local pros found for this ZIP. Try a nearby area.</div>';
+      return;
     }
+    container.innerHTML = '';
+    pros.forEach(function(p) {
+      var ratingNum = p.rating ? parseFloat(p.rating) : 0;
+      var fullStars = Math.round(ratingNum);
+      var stars = '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
+      var ratingLine = p.rating ? p.rating + '/5 · ' + (p.reviewCount ? p.reviewCount + ' ratings' : 'Foursquare verified') : 'No rating yet';
+      var phone = p.phone ? '<div style="font-size:0.78rem;margin-top:0.5rem;"><a href="tel:' + p.phone + '" style="color:var(--accent);text-decoration:none;">📞 ' + p.phone + '</a></div>' : '';
+      var web = p.website ? '<div style="font-size:0.72rem;margin-top:0.3rem;"><a href="' + p.website + '" target="_blank" rel="noopener" style="color:var(--mid);text-decoration:underline;">Visit website →</a></div>' : '';
+      var verified = p.verified ? '<span style="font-size:0.65rem;color:#5ec47a;margin-left:0.4rem;">✓ Verified</span>' : '';
+      container.innerHTML += '<div class="pro-card">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;">' +
+        '<div class="pro-card-name">' + p.name + verified + '</div>' +
+        '</div>' +
+        '<div class="pro-card-trade" style="font-size:0.72rem;margin-top:0.2rem;">' + (p.address || p.city || '') + '</div>' +
+        '<div class="pro-card-stars" style="margin-top:0.4rem;">' + stars + ' <span style="font-size:0.72rem;color:var(--mid);">' + ratingLine + '</span></div>' +
+        phone + web +
+        '</div>';
+    });
   } catch(e) {
-    alert('Could not send email. Please try again.');
-  } finally {
-    btn.textContent = 'Send Quote';
-    btn.disabled = false;
+    container.innerHTML = '<div style="grid-column:1/-1;padding:1rem;font-size:0.85rem;color:var(--accent);">Could not load local pros. Please try again.</div>';
+    console.error(e);
   }
 }
 function exportPDF() {
   if (!currentQuoteData) { alert('Please get a quote first.'); return; }
   var diyPanel = document.getElementById('diy-panel');
+  var proPanel = document.getElementById('pro-panel');
   var results = document.getElementById('results');
   var diyVisible = diyPanel.classList.contains('visible');
+  var proVisible = proPanel.classList.contains('visible');
   results.classList.add('visible');
   if (!diyVisible) diyPanel.classList.add('visible');
+  proPanel.classList.remove('visible');
   setTimeout(function() {
     window.print();
-    if (!diyVisible) diyPanel.classList.remove('visible');
-  }, 100);
+    setTimeout(function() {
+      if (!diyVisible) diyPanel.classList.remove('visible');
+      if (proVisible) proPanel.classList.add('visible');
+      if (!diyVisible && !proVisible) results.classList.add('visible');
+    }, 500);
+  }, 150);
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
