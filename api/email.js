@@ -1,90 +1,98 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).end();
+  if (req.method !== 'POST') return res.status(405).end()
 
-  const { to, name, quote } = req.body;
-  if (!to || !quote) return res.status(400).json({ error: 'Missing required fields' });
+  const { quote, email, to, name } = req.body
+  const recipientEmail = email || to
 
-  const q = quote;
-  const labor = '$' + Math.round((q.labor_low + q.labor_high) / 2).toLocaleString();
-  const materials = '$' + Math.round((q.materials_low + q.materials_high) / 2).toLocaleString();
-  const total = '$' + Math.round((q.total_low + q.total_high) / 2).toLocaleString();
+  if (!recipientEmail || !quote) {
+    return res.status(400).json({ error: 'email and quote are required' })
+  }
 
-  const materialsRows = (q.diy_materials || []).map(m =>
-    `<tr><td style="padding:8px 12px;border-bottom:1px solid #ede9e0;font-size:14px;">${m.name}${m.qty ? ' &times;' + m.qty : ''}</td><td style="padding:8px 12px;border-bottom:1px solid #ede9e0;font-size:14px;text-align:right;color:#1a6b3c;">${m.estimatedCost || ''}</td></tr>`
-  ).join('');
+  const formatCurrency = (n) => '$' + (n || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })
 
-  const html = `
-<!DOCTYPE html>
+  const materialsHTML = quote.materials_list?.length
+    ? quote.materials_list.map(m => `<li style="margin:4px 0;color:#555;">${m}</li>`).join('')
+    : '<li style="color:#888;">Not specified</li>'
+
+  const html = `<!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#f5f2ec;font-family:'DM Sans',Helvetica,Arial,sans-serif;">
-  <div style="max-width:600px;margin:40px auto;background:#ffffff;border-radius:6px;overflow:hidden;box-shadow:0 4px 24px rgba(15,14,12,0.08);">
-    <div style="background:#0f0e0c;padding:32px 40px;">
-      <div style="font-size:28px;font-weight:700;letter-spacing:0.15em;color:#f5f2ec;">YSKAIPE</div>
-      <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#d4500a;margin-top:4px;">Your Standard Cost Estimate</div>
-    </div>
-    <div style="padding:32px 40px;">
-      ${name ? `<p style="font-size:15px;color:#6b6560;margin:0 0 24px;">Hi ${name},</p>` : ''}
-      <p style="font-size:15px;color:#6b6560;margin:0 0 24px;">Here is your YSKAIPE standard cost estimate based on verified NC 2026 industry rates.</p>
-      <div style="display:flex;gap:12px;margin-bottom:24px;">
-        <div style="flex:1;background:#f5f2ec;border-radius:4px;padding:16px;text-align:center;">
-          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:#6b6560;margin-bottom:4px;">Labor</div>
-          <div style="font-size:28px;font-weight:700;color:#0f0e0c;">${labor}</div>
-          <div style="font-size:12px;color:#6b6560;">$${q.labor_low.toLocaleString()} &ndash; $${q.labor_high.toLocaleString()}</div>
-        </div>
-        <div style="flex:1;background:#f5f2ec;border-radius:4px;padding:16px;text-align:center;">
-          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:#6b6560;margin-bottom:4px;">Materials</div>
-          <div style="font-size:28px;font-weight:700;color:#0f0e0c;">${materials}</div>
-          <div style="font-size:12px;color:#6b6560;">$${q.materials_low.toLocaleString()} &ndash; $${q.materials_high.toLocaleString()}</div>
-        </div>
-        <div style="flex:1;background:#0f0e0c;border-radius:4px;padding:16px;text-align:center;">
-          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(245,242,236,0.5);margin-bottom:4px;">Total Standard</div>
-          <div style="font-size:28px;font-weight:700;color:#f5f2ec;">${total}</div>
-          <div style="font-size:12px;color:rgba(245,242,236,0.4);">$${q.total_low.toLocaleString()} &ndash; $${q.total_high.toLocaleString()}</div>
-        </div>
-      </div>
-      <div style="background:#f5f2ec;border-radius:4px;padding:16px;margin-bottom:24px;font-size:14px;line-height:1.75;color:#6b6560;">
-        ${q.breakdown}<br><br><strong style="color:#0f0e0c;">Timeline:</strong> ${q.timeline}
-      </div>
-      ${q.diy_steps ? `
-      <h3 style="font-size:16px;font-weight:600;color:#0f0e0c;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #ede9e0;">DIY Instructions</h3>
-      <div style="font-size:14px;line-height:1.8;color:#6b6560;margin-bottom:24px;padding-left:0;white-space:pre-wrap;">${q.diy_steps}</div>
-      ` : ''}
-      ${materialsRows ? `
-      <h3 style="font-size:16px;font-weight:600;color:#0f0e0c;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #ede9e0;">Materials List</h3>
-      <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
-        <thead><tr><th style="text-align:left;padding:8px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#6b6560;border-bottom:2px solid #ede9e0;">Item</th><th style="text-align:right;padding:8px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#6b6560;border-bottom:2px solid #ede9e0;">Est. Cost</th></tr></thead>
-        <tbody>${materialsRows}</tbody>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head>
+<body style="margin:0;padding:0;background:#f5f4f0;font-family:Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f4f0;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e6e0;">
+        <tr><td style="background:#0a0a0a;padding:28px 32px;">
+          <p style="margin:0;font-size:11px;letter-spacing:0.12em;color:#888;text-transform:uppercase;">YSKAIPE AutoQuote</p>
+          <h1 style="margin:6px 0 0;font-size:24px;font-weight:500;color:#fff;">Your Standard Cost Estimate</h1>
+        </td></tr>
+        <tr><td style="padding:24px 32px;">
+          <p style="margin:0;font-size:11px;color:#999;text-transform:uppercase;letter-spacing:0.08em;">Trade</p>
+          <p style="margin:4px 0 12px;font-size:18px;font-weight:500;color:#0a0a0a;">${quote.trade || 'General'}</p>
+          <p style="margin:0 0 16px;font-size:13px;color:#888;">${quote.description || ''}</p>
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="background:#f9f8f5;border-radius:8px;padding:16px 20px;" align="center">
+                <p style="margin:0;font-size:11px;color:#999;text-transform:uppercase;">Labor</p>
+                <p style="margin:6px 0 0;font-size:22px;font-weight:500;color:#0a0a0a;">${formatCurrency(quote.labor_total)}</p>
+              </td>
+              <td width="12"></td>
+              <td style="background:#f9f8f5;border-radius:8px;padding:16px 20px;" align="center">
+                <p style="margin:0;font-size:11px;color:#999;text-transform:uppercase;">Materials</p>
+                <p style="margin:6px 0 0;font-size:22px;font-weight:500;color:#0a0a0a;">${formatCurrency(quote.materials_total)}</p>
+              </td>
+              <td width="12"></td>
+              <td style="background:#0a0a0a;border-radius:8px;padding:16px 20px;" align="center">
+                <p style="margin:0;font-size:11px;color:#666;text-transform:uppercase;">Total</p>
+                <p style="margin:6px 0 0;font-size:22px;font-weight:500;color:#fff;">${formatCurrency(quote.grand_total)}</p>
+                <p style="margin:4px 0 0;font-size:12px;color:#666;">${quote.time_estimate || ''}</p>
+              </td>
+            </tr>
+          </table>
+        </td></tr>
+        <tr><td style="padding:0 32px 24px;">
+          <div style="background:#f9f8f5;border-radius:8px;padding:16px 20px;">
+            <p style="margin:0 0 8px;font-size:12px;font-weight:500;color:#0a0a0a;text-transform:uppercase;letter-spacing:0.06em;">Breakdown</p>
+            <p style="margin:0;font-size:14px;color:#555;line-height:1.7;">${quote.breakdown || ''}</p>
+          </div>
+        </td></tr>
+        <tr><td style="padding:0 32px 24px;border-top:1px solid #f0eeea;">
+          <p style="margin:16px 0 8px;font-size:12px;font-weight:500;color:#0a0a0a;text-transform:uppercase;">Materials</p>
+          <ul style="margin:8px 0;padding-left:20px;">${materialsHTML}</ul>
+        </td></tr>
+        <tr><td style="padding:24px 32px;background:#f9f8f5;border-top:1px solid #f0eeea;" align="center">
+          <a href="https://www.yskaipe.com" style="display:inline-block;background:#0a0a0a;color:#fff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:500;">Get another quote</a>
+          <p style="margin:16px 0 0;font-size:12px;color:#aaa;">YSKAIPE · NC 2026 verified rates · <a href="mailto:hello@yskaipe.com" style="color:#aaa;">hello@yskaipe.com</a></p>
+        </td></tr>
       </table>
-      ` : ''}
-      ${q.diy_warning ? `<div style="background:rgba(212,80,10,0.06);border:1px solid rgba(212,80,10,0.2);border-radius:4px;padding:12px 16px;font-size:13px;color:#d4500a;margin-bottom:24px;"><strong>Heads Up:</strong> ${q.diy_warning}</div>` : ''}
-    </div>
-    <div style="background:#0f0e0c;padding:24px 40px;text-align:center;">
-      <p style="font-size:12px;color:rgba(245,242,236,0.4);margin:0;">YSKAIPE &middot; Human Hands. AI Power. &middot; yskaipe.com</p>
-      <p style="font-size:11px;color:rgba(245,242,236,0.25);margin:8px 0 0;">Based on verified NC 2026 industry standards. Estimates are for reference only.</p>
-    </div>
-  </div>
+    </td></tr>
+  </table>
 </body>
-</html>`;
+</html>`
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + process.env.RESEND_API_KEY
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'YSKAIPE <quotes@yskaipe.com>',
-        to: [to],
-        subject: 'Your YSKAIPE Standard Cost Estimate',
+        from: 'YSKAIPE AutoQuote <quotes@yskaipe.com>',
+        to: [recipientEmail],
+        subject: `Your ${quote.trade || 'Home Service'} Estimate — ${formatCurrency(quote.grand_total)}`,
         html
       })
-    });
-    const data = await response.json();
-    if (!response.ok) return res.status(500).json({ error: data });
-    res.status(200).json({ success: true });
+    })
+
+    const data = await response.json()
+    if (!response.ok) {
+      console.error('Resend error:', data)
+      return res.status(500).json({ error: 'Failed to send email' })
+    }
+
+    return res.status(200).json({ success: true, id: data.id })
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    console.error('Email error:', e)
+    return res.status(500).json({ error: 'Internal server error' })
   }
 }
