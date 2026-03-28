@@ -1,102 +1,56 @@
-const TRADE_TO_OSM = {
-  'Plumber': 'plumber',
-  'Electrician': 'electrician',
-  'HVAC Technician': 'hvac',
-  'Roofer': 'roofing',
-  'General Contractor': 'contractor',
-  'Landscaper': 'landscaping',
-  'Painter': 'painter',
-  'Flooring Specialist': 'flooring',
-  'Pest Control': 'pest_control',
-  'Home Inspector': 'inspector',
-  'Arborist': 'tree_service',
-  'Smart Home Integrator': 'electrician',
-  'EV Infrastructure Tech': 'electrician',
-  'Welder / Fabricator': 'welder',
-  'Physical Therapist': 'physiotherapist',
-  'EMT / Paramedic': 'ambulance',
-  'Drone Ops Specialist': 'surveyor',
-}
-
-function searchFallback(trade, zip) {
-  const q = encodeURIComponent(`${trade} contractor near ${zip} NC`)
-  return [
-    { name: 'Search Google for local pros', address: `${zip} area, NC`, phone: null, website: `https://www.google.com/search?q=${q}`, isSearch: true },
-    { name: 'Find on Angi', address: `${zip} area, NC`, phone: null, website: `https://www.angi.com/search?q=${encodeURIComponent(trade)}&zip=${zip}`, isSearch: true },
-    { name: 'Find on Thumbtack', address: `${zip} area, NC`, phone: null, website: `https://www.thumbtack.com/search?q=${encodeURIComponent(trade)}&zip=${zip}`, isSearch: true },
-    { name: 'Find on HomeAdvisor', address: `${zip} area, NC`, phone: null, website: `https://www.homeadvisor.com/c.${encodeURIComponent(trade)}.${zip}.html`, isSearch: true },
-  ]
-}
-
 export default async function handler(req, res) {
-  if (req.method !== 'GET') return res.status(405).end()
+  if (req.method !== "GET") return res.status(405).end();
 
-  const { trade, zip } = req.query
-  const searchTerm = TRADE_TO_OSM[trade] || 'contractor'
-  const safeZip = zip || '28036'
+  const { trade, zip } = req.query;
+  const safeTrade = trade || "General Contractor";
+  const safeZip = zip || "28036";
+
+  const prompt = `You are a local contractor directory for the ${safeZip} NC area.
+
+Return ONLY valid JSON, no markdown, no extra text.
+Generate 4 realistic local ${safeTrade} businesses near ZIP ${safeZip} in North Carolina.
+Use realistic NC business names, real-sounding addresses near that ZIP, realistic ratings and phone numbers.
+Do NOT use generic names like "Local Pro" or "ABC Company".
+Use real street names and cities near the ZIP code.
+
+{
+  "pros": [
+    {
+      "name": "realistic local business name",
+      "address": "123 Real St, Davidson, NC 28036",
+      "city": "Davidson",
+      "rating": 4.7,
+      "reviewCount": 43,
+      "phone": "(704) 555-0182",
+      "website": null,
+      "specialty": "one line specialty description"
+    }
+  ]
+}`;
 
   try {
-    // Step 1: Geocode ZIP to lat/lon
-    const geoRes = await fetch(
-      `https://nominatim.openstreetmap.org/search?postalcode=${safeZip}&country=US&format=json&limit=1`,
-      { headers: { 'User-Agent': 'yskaipe.com contact@yskaipe.com' } }
-    )
-    const geoData = await geoRes.json()
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 1024,
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
 
-    if (!geoData || !geoData.length) {
-      return res.status(200).json({ pros: searchFallback(trade, safeZip) })
-    }
+    const data = await response.json();
+    const raw = data.content?.find((b) => b.type === "text")?.text || "";
+    const clean = raw.replace(/```json|```/g, "").trim();
+    const parsed = JSON.parse(clean);
 
-    const lat = parseFloat(geoData[0].lat)
-    const lon = parseFloat(geoData[0].lon)
-    const radius = 24000 // ~15 miles
-
-    // Step 2: Query Overpass API
-    const query = `[out:json][timeout:15];(node["shop"="${searchTerm}"](around:${radius},${lat},${lon});node["craft"="${searchTerm}"](around:${radius},${lat},${lon});node["amenity"="${searchTerm}"](around:${radius},${lat},${lon}););out body 6;`
-
-    const overpassRes = await fetch(
-      `https://overpass-api.de/api/interpreter`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `data=${encodeURIComponent(query)}`
-      }
-    )
-
-    const text = await overpassRes.text()
-    let elements = []
-
-    try {
-      const overpassData = JSON.parse(text)
-      elements = overpassData.elements || []
-    } catch(e) {
-      console.error('Overpass parse error:', text.substring(0, 200))
-      return res.status(200).json({ pros: searchFallback(trade, safeZip) })
-    }
-
-    if (!elements.length) {
-      return res.status(200).json({ pros: searchFallback(trade, safeZip) })
-    }
-
-    const pros = elements.slice(0, 4).map(e => ({
-      name: e.tags?.name || 'Local Pro',
-      address: [
-        e.tags?.['addr:housenumber'],
-        e.tags?.['addr:street'],
-        e.tags?.['addr:city'] || 'NC'
-      ].filter(Boolean).join(' '),
-      city: e.tags?.['addr:city'] || '',
-      rating: null,
-      phone: e.tags?.phone || e.tags?.['contact:phone'] || null,
-      website: e.tags?.website || e.tags?.['contact:website'] || null,
-      verified: false,
-      isSearch: false,
-    }))
-
-    return res.status(200).json({ pros })
-
+    return res.status(200).json({ pros: parsed.pros || [], source: "ai" });
   } catch (e) {
-    console.error('Pros error:', e)
-    return res.status(200).json({ pros: searchFallback(trade, safeZip) })
+    console.error("Pros error:", e);
+    return res.status(200).json({ pros: [], source: "error" });
   }
 }
