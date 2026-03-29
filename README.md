@@ -1,69 +1,107 @@
-# YSKAIPE — Human Hands. AI Power.
+# YSKAIPE · Home Services Market Intelligence
+### pronounced "escape" · [yskaipe.com](https://www.yskaipe.com) · [@yskaipe](https://x.com/yskaipe)
 
-> The future belongs to people who can't be replaced.
+> **Fair Price. Smart Choice. Everybody Wins.**
 
-YSKAIPE is a platform built for skilled trade professionals and physical-world operators — plumbers, electricians, builders, healthcare workers, and more — who want to leverage AI without being replaced by it. The moat is presence, trust, and accountability. AI sharpens it.
+The home services market works best when everyone knows the fair rate. Homeowners stop overpaying. Good contractors stop losing to lowballers. DIY-able jobs get done right. Complex jobs go to the pros who deserve them.
+
+YSKAIPE is market intelligence for the rest of us — the number that levels the field for everyone at the table.
 
 ---
 
-## What This Is
+## What It Does
 
-A Next.js website for [yskaipe.com](https://www.yskaipe.com) — built to educate, onboard, and equip skilled professionals with the exact AI tools and workflows for their field. Not generic. Not overwhelming. Exactly what the job needs.
+**YSKAIPE AutoQuote** gives homeowners an instant, AI-powered standard cost estimate for any home services job — labor, materials, timeline, and complexity — in about 8 seconds. No signup. No sales calls. No BS.
 
-Key pages include:
+After the quote, users choose their path:
 
-- **Home** — The manifesto. The moat. The archetypes.
-- **AutoQuote** — AI-powered instant standard cost estimator for trade professionals. Describe the job, get a transparent labor + materials breakdown in seconds.
-- **Sectors** — Role-by-role AI augmentation playbooks across trades, healthcare, infrastructure, food systems, and emerging physical-digital hybrids.
-- **Pitch / Roadmap / Build Log** — The story of how YSKAIPE is being built in public.
+- 🔧 **DIY** — step-by-step instructions, difficulty rating, materials list with Amazon / Home Depot / Lowe's shopping links
+- 📞 **Find a Pro** — real local contractor data powered by Foursquare Places API
+- 📄 **Export PDF** — print-ready formatted quote
+- ✉️ **Email Quote** — formatted breakdown sent via Resend
 
 ---
 
 ## Tech Stack
 
-- [Next.js](https://nextjs.org/) (App Router)
-- [Tailwind CSS](https://tailwindcss.com/)
-- TypeScript
-- Deployed on [Vercel](https://vercel.com)
+| Layer | Tech |
+|---|---|
+| Frontend | Vanilla HTML/CSS/JS — single `index.html` |
+| AI Engine | Claude Sonnet (Anthropic API) |
+| Pro Data | Foursquare Places API v3 |
+| Email | Resend |
+| Serverless Functions | Vercel (Node.js) |
+| Database | Supabase (quote storage) |
+| Deployment | Vercel + GitHub |
+| Domain | yskaipe.com via Cloudflare |
 
 ---
 
-## Getting Started
+## Live Features (Beta · March 2026)
+
+- ✅ AutoQuote — AI-powered instant cost estimate (labor + materials)
+- ✅ DIY Panel — difficulty score, step-by-step instructions, shop materials
+- ✅ Pro Panel — real local contractor data via Foursquare Places API
+- ✅ PDF Export — print-ready quote with DIY instructions
+- ✅ Email Quote — formatted breakdown to any inbox
+- ✅ NC 2026 verified rates — regional labor rate adjustments
+- ✅ 14 trade types supported
+- 🔜 Pro Dashboard — contractor profiles and program
+- 🔜 Pro Program — verified pro network enrollment
+- 🔜 Market Intelligence Reports
+
+---
+
+## Supported Trades
+
+Plumber · Electrician · HVAC Technician · Roofer · General Contractor · Welder / Fabricator · Home Inspector · Pest Control · Arborist · EV Infrastructure Tech · Smart Home Integrator · Landscaper · Painter · Flooring Specialist
+
+---
+
+## API Routes
+
+| Route | Method | Description |
+|---|---|---|
+| `/api/quotes` | POST | Generate AI quote with DIY + Pro fields |
+| `/api/pros` | GET | Fetch local contractors via Foursquare |
+| `/api/email` | POST | Send formatted quote via Resend |
+
+---
+
+## Environment Variables
+
 ```bash
-pnpm install
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see the site.
-
----
-
-## Project Structure
-```
-app/          # Next.js App Router pages
-components/   # Shared UI components
-public/       # Static HTML pages (AutoQuote, sectors, etc.)
-utils/        # Utility functions
-```
-
-HTML pages in `public/` are served via rewrites configured in `next.config.js`.
-
----
-
-## Deploying
-
-Push to `master` — Vercel auto-deploys.
-```bash
-git add .
-git commit -m "your message"
-git pull --rebase origin master
-git push
+ANTHROPIC_API_KEY=        # Claude API key
+FOURSQUARE_API_KEY=       # Foursquare Places API v3 key
+RESEND_API_KEY=           # Resend email API key
+NEXT_PUBLIC_SUPABASE_URL= # Supabase project URL
+SUPABASE_SERVICE_KEY=     # Supabase service role key
 ```
 
 ---
 
-## About
+## The Vision
 
-YSKAIPE — EST. 2025  
-Human hands. AI power. The moat holds.  
-[hello@yskaipe.com](mailto:hello@yskaipe.com)
+YSKAIPE exists because the home services market is broken — not for lack of good contractors, but for lack of shared information. A homeowner with no reference point pays whatever they're told. A good contractor loses jobs to lowballers because the customer can't tell the difference.
+
+**Transparency fixes this.** When everyone at the table knows the fair rate:
+- Homeowners make informed decisions
+- Quality contractors win on merit
+- DIY-able jobs get done right
+- Complex jobs go to the pros who deserve them
+
+This is market intelligence for the rest of us.
+
+---
+
+## Status
+
+🟢 **Live Beta** — [yskaipe.com](https://www.yskaipe.com)
+
+Built in public. Follow the build: [@yskaipe](https://x.com/yskaipe)
+
+---
+
+## License
+
+© 2026 YSKAIPE · Based on verified NC 2026 industry standards · Human Hands. AI Power.
