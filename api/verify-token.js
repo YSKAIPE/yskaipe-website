@@ -54,7 +54,7 @@ export default async function handler(req, res) {
   }
 
   // Issue a session token (24h) so they don't need to re-auth on every page load
-  const sessionToken = crypto.randomUUID() + '-' + Date.now();
+  const sessionToken = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2) + '-' + Date.now();
   const sessionExpires = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
   await supabase.from('magic_tokens').insert({
