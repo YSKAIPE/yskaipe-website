@@ -164,8 +164,8 @@
     <h1>Your next job is already <em>waiting</em>.</h1>
     <p>Subscribe to YSKAIPE Pro and get AI-matched homeowner leads delivered to you — pre-scoped, pre-priced at 2026 fair rates, no cold calling, no chasing. Just jobs that fit.</p>
     <div class="hero-btns">
-      <a href="#" onclick="showPage('pricing');return false" class="btn btn-amber">See Subscription Plans</a>
-      <a href="#" onclick="showPage('pricing');return false" class="btn btn-outline">Homeowner Plans →</a>
+      <a href="#page-pricing" class="btn btn-amber">See Subscription Plans</a>
+      <a href="#page-pricing" class="btn btn-outline">Homeowner Plans →</a>
     </div>
   </div>
 
@@ -200,12 +200,12 @@
     <div class="pricing-label">The YSKAIPE difference</div>
     <div class="pricing-title" style="margin-bottom:1rem">No chasing. No invoices. No shared leads.</div>
     <p style="color:var(--slate2);font-weight:300;max-width:560px;margin:0 auto 2.5rem;font-size:1rem;line-height:1.7">Angi and Thumbtack sell your lead to 5 other contractors and charge you whether you win or not. YSKAIPE gives you exclusive, pre-scoped jobs — and your subscription is the only fee.</p>
-    <a href="#" onclick="showPage('pricing');return false" class="btn btn-amber">View Plans & Pricing</a>
+    <a href="#page-pricing" class="btn btn-amber">View Plans & Pricing</a>
   </div>
 </div>
 
 <!-- ═══ PRICING ═══ -->
-<div id="page-pricing" class="page">
+<div id="page-pricing" class="page" style="display:block">
   <div style="padding:4rem 2rem 2rem;text-align:center">
     <div class="pricing-label">Subscription plans</div>
     <div class="pricing-title">Pick your level. Start winning jobs.</div>
@@ -313,7 +313,7 @@
             <li>Ask the AI anything — follow-up chat</li>
             <li>Exclusive Power User badge for pros to see</li>
           </ul>
-          <a href="#" onclick="preselectTier('Power');showPage('signup');return false" class="btn btn-purple btn-sm" style="text-align:center;display:block">Upgrade — $9/mo</a>
+          <a href="#signup-anchor" onclick="preselectTier('Power')" class="btn btn-purple btn-sm" style="text-align:center;display:block">Upgrade — $9/mo</a>
         </div>
       </div>
     </div>
@@ -380,7 +380,7 @@
           <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.25rem">Are you a homeowner?</div>
           <div style="font-size:0.85rem;color:var(--slate2)">Upgrade to Power for $9/mo — priority matching, saved history, full AI access.</div>
         </div>
-        <a href="#" onclick="preselectTier('Power');switchToHomeowner();return false" class="btn btn-purple btn-sm">Get Power — $9/mo</a>
+        <a href="#signup-anchor" onclick="preselectTier('Power')" class="btn btn-purple btn-sm">Get Power — $9/mo</a>
       </div>
     </div>
   </div>
