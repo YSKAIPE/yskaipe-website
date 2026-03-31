@@ -768,4 +768,17 @@ function logout() {
 // ── Boot ──────────────────────────────────────────────────────
 (function boot() {
   var params  = new URLSearchParams(window.location.search);
-  var token   = 
+  var token   = params.get('token');
+  var session = localStorage.getItem(SESSION_KEY);
+
+  if (token) {
+    verifyToken(token);
+  } else if (session) {
+    checkSession(session);
+  } else {
+    showScreen('login');
+  }
+})();
+</script>
+</body>
+</html>
