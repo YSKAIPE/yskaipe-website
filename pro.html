@@ -132,7 +132,10 @@
     <a href="#signup">Join</a>
     <a href="/">← Main Site</a>
   </div>
-  <a href="#signup" class="nav-cta">Subscribe Now</a>
+  <div style="display:flex;align-items:center;gap:0.75rem">
+    <a href="/public/dashboard.html" style="font-size:0.8rem;color:var(--slate2);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--slate2)'">Member login →</a>
+    <a href="#signup" class="nav-cta">Subscribe Now</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -247,6 +250,9 @@
 <!-- SIGNUP FORM -->
 <div id="signup" class="signup-section">
   <div id="signup-form-wrap">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <p style="font-size:0.85rem;color:var(--slate)">Already a member? <a href="/public/dashboard.html" style="color:var(--amber);font-weight:600;text-decoration:none">Log in to your dashboard →</a></p>
+    </div>
     <div class="form-card">
       <div class="form-title">Join YSKAIPE Pro</div>
       <div class="form-sub">Choose your plan and you're in. Stripe handles billing — no hidden fees, cancel anytime.</div>

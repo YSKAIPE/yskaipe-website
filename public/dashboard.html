@@ -43,6 +43,38 @@
     .login-msg.error{background:rgba(192,57,43,0.1);color:#e74c3c;border:1px solid rgba(192,57,43,0.2)}
     .login-note{font-size:0.78rem;color:#5A5660;text-align:center;margin-top:1.5rem;line-height:1.5}
 
+    /* ── PROFILE SETUP ── */
+    .setup-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;background:var(--dark1)}
+    .setup-box{background:var(--dark2);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:2.5rem;width:100%;max-width:540px}
+    .setup-logo{font-family:var(--fh);font-size:1.5rem;color:#F2EFE9;letter-spacing:-0.02em;margin-bottom:0.25rem}
+    .setup-logo span{color:var(--amber)}
+    .setup-progress{display:flex;gap:0.375rem;margin-bottom:2rem}
+    .setup-step{flex:1;height:3px;border-radius:100px;background:rgba(255,255,255,0.1)}
+    .setup-step.done{background:var(--green)}
+    .setup-step.active{background:var(--amber)}
+    .setup-heading{font-family:var(--fh);font-size:1.5rem;color:#F2EFE9;letter-spacing:-0.02em;margin-bottom:0.375rem}
+    .setup-sub{font-size:0.875rem;color:#8CA0BC;margin-bottom:1.75rem;font-weight:300;line-height:1.6}
+    .setup-label{font-size:0.72rem;font-weight:600;color:#8CA0BC;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.5rem}
+    .setup-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r);padding:0.75rem 1rem;color:#F2EFE9;font-size:0.9rem;font-family:var(--fb);outline:none;transition:border-color 0.2s;margin-bottom:1.25rem}
+    .setup-input:focus{border-color:var(--amber)}
+    .setup-input::placeholder{color:#5A5660}
+    .setup-textarea{resize:vertical;min-height:80px}
+    .setup-select option{background:var(--dark2);color:#F2EFE9}
+    .setup-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .setup-avatar-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+    .setup-avatar-preview{width:64px;height:64px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:1.5rem;color:#fff;flex-shrink:0}
+    .setup-avatar-info{font-size:0.82rem;color:#8CA0BC;line-height:1.5}
+    .setup-avatar-info label{display:inline-block;margin-top:0.4rem;color:var(--amber);cursor:pointer;font-weight:600;font-size:0.8rem}
+    .setup-avatar-info input[type=file]{display:none}
+    .setup-value-box{background:rgba(79,168,106,0.08);border:1px solid rgba(79,168,106,0.2);border-radius:var(--r);padding:1rem;margin-bottom:1.5rem}
+    .setup-value-box p{font-size:0.85rem;color:rgba(242,239,233,0.8);line-height:1.6;font-weight:300}
+    .setup-value-box strong{color:#4FA86A}
+    .setup-btn{width:100%;background:var(--accent);color:#fff;font-family:var(--fb);font-weight:700;font-size:0.95rem;padding:0.875rem;border:none;border-radius:var(--r);cursor:pointer;transition:all 0.2s;letter-spacing:0.04em;margin-top:0.5rem}
+    .setup-btn:hover{background:#a04e25;transform:translateY(-1px)}
+    .setup-btn:disabled{background:#555;cursor:not-allowed;transform:none}
+    .setup-skip{display:block;text-align:center;margin-top:1rem;font-size:0.8rem;color:#5A5660;cursor:pointer;text-decoration:none;transition:color 0.2s}
+    .setup-skip:hover{color:#8CA0BC}
+
     /* ── DASHBOARD NAV ── */
     .dash-nav{background:var(--dark1);border-bottom:1px solid rgba(255,255,255,0.07);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
     .dash-logo{font-family:var(--fh);font-size:1.4rem;color:#F2EFE9;text-decoration:none;letter-spacing:-0.02em}
@@ -177,6 +209,74 @@
   </div>
 </div>
 
+<!-- ═══ PROFILE SETUP SCREEN ═══ -->
+<div id="screen-setup" class="screen">
+  <div class="setup-wrap">
+    <div class="setup-box">
+      <div class="setup-logo">ysk<span>AI</span>pe<span style="font-family:var(--fb);font-size:0.6rem;background:var(--amber);color:var(--dark1);padding:0.15rem 0.5rem;border-radius:100px;font-weight:700;vertical-align:middle;margin-left:0.3rem">PRO</span></div>
+
+      <div class="setup-progress" style="margin-top:1rem">
+        <div class="setup-step done"></div>
+        <div class="setup-step done"></div>
+        <div class="setup-step active"></div>
+        <div class="setup-step"></div>
+      </div>
+
+      <div class="setup-heading">Let's set up your profile.</div>
+      <div class="setup-sub">This is what homeowners see when you're matched to their job. Takes 2 minutes — and it directly affects how many leads you receive.</div>
+
+      <!-- Value box -->
+      <div class="setup-value-box">
+        <p>Pros with complete profiles receive <strong>3× more lead matches</strong> than those without. Your photo, bio and confirmed trade are the first things homeowners see.</p>
+      </div>
+
+      <!-- Avatar -->
+      <div class="setup-avatar-row">
+        <div class="setup-avatar-preview" id="setup-avatar-preview">?</div>
+        <div class="setup-avatar-info">
+          <div style="color:#F2EFE9;font-weight:600;font-size:0.9rem" id="setup-avatar-name">Your name</div>
+          <div style="color:var(--amber);font-size:0.82rem" id="setup-avatar-tier">Pro</div>
+          <label>+ Upload photo (optional)<input type="file" id="avatar-upload" accept="image/*" onchange="previewAvatar(this)"/></label>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <label class="setup-label">About you — what you're best at</label>
+      <textarea class="setup-input setup-textarea" id="setup-bio" placeholder="e.g. Licensed plumber with 12 years in the Charlotte area. Specialise in water heater installs, leak repairs, and full bathroom remodels. Fast response, clean work, guaranteed."></textarea>
+
+      <!-- Trade + radius -->
+      <div class="setup-row">
+        <div>
+          <label class="setup-label">Primary trade</label>
+          <select class="setup-input setup-select" id="setup-trade">
+            <option value="">Select trade…</option>
+            <option>Plumbing</option><option>Electrical</option><option>HVAC</option>
+            <option>Carpentry</option><option>Roofing</option><option>Painting</option>
+            <option>Flooring</option><option>Landscaping</option><option>General Contractor</option>
+          </select>
+        </div>
+        <div>
+          <label class="setup-label">Service radius</label>
+          <select class="setup-input setup-select" id="setup-radius">
+            <option value="15">15 miles</option>
+            <option value="25" selected>25 miles</option>
+            <option value="50">50 miles</option>
+            <option value="75">75 miles</option>
+            <option value="100">100 miles</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- License -->
+      <label class="setup-label">NC License number (optional — adds verified badge)</label>
+      <input class="setup-input" id="setup-license" type="text" placeholder="e.g. NC-12345678"/>
+
+      <button class="setup-btn" id="setup-btn" onclick="saveProfile()">Complete Setup &amp; See My Leads →</button>
+      <a href="#" class="setup-skip" onclick="skipSetup()">Skip for now — I'll complete this later</a>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ DASHBOARD SCREEN ═══ -->
 <div id="screen-dashboard" class="screen">
 
@@ -296,11 +396,11 @@
   </div>
 
   <footer>
-    YSKAIPE Pro · <a href="/">yskaipe.com</a> · Questions? <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a>
+    YSKAIPE Pro · <a href="/">yskaipe.com</a> · Questions? <a href="/cdn-cgi/l/email-protection#b0d7c288f0c9c3dbd1d9c0d59ed3dfdd"><span class="__cf_email__" data-cfemail="86e1f4bec6fff5ede7eff6e3a8e5e9eb">[email&#160;protected]</span></a>
   </footer>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var SESSION_KEY = 'yskaipe_pro_session';
 var proData = null;
 
@@ -387,8 +487,17 @@ async function verifyToken(token) {
     // Clean URL
     window.history.replaceState({}, '', window.location.pathname);
 
-    populateDashboard(data.subscriber);
-    showScreen('dashboard');
+    // Check if first-time setup needed
+    var setupDone = localStorage.getItem('yskaipe_setup_done_' + proData.email);
+    var isNewUser = !proData.bio && !setupDone;
+
+    if (isNewUser) {
+      initSetupScreen(proData);
+      showScreen('setup');
+    } else {
+      populateDashboard(proData);
+      showScreen('dashboard');
+    }
 
   } catch (err) {
     showScreen('login');
@@ -402,10 +511,18 @@ async function checkSession(token) {
     var data = await res.json();
     if (!res.ok) { logout(); return; }
     proData = data.subscriber;
-    // Issue fresh session token
     localStorage.setItem(SESSION_KEY, data.session);
-    populateDashboard(data.subscriber);
-    showScreen('dashboard');
+
+    var setupDone = localStorage.getItem('yskaipe_setup_done_' + proData.email);
+    var isNewUser = !proData.bio && !setupDone;
+
+    if (isNewUser) {
+      initSetupScreen(proData);
+      showScreen('setup');
+    } else {
+      populateDashboard(proData);
+      showScreen('dashboard');
+    }
   } catch (err) {
     logout();
   }
@@ -553,6 +670,76 @@ function passLead(id) {
   setTimeout(function(){ card.style.display = 'none'; }, 320);
 }
 
+// ── Profile setup ─────────────────────────────────────────────
+function initSetupScreen(pro) {
+  var initials = (pro.name || '?').split(' ').map(function(w){ return w[0]; }).join('').slice(0,2).toUpperCase();
+  document.getElementById('setup-avatar-preview').textContent = initials;
+  document.getElementById('setup-avatar-name').textContent    = pro.name || '';
+  document.getElementById('setup-avatar-tier').textContent    = pro.tier + ' Member';
+  if (pro.trade) {
+    var sel = document.getElementById('setup-trade');
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === pro.trade) { sel.selectedIndex = i; break; }
+    }
+  }
+  if (pro.bio) document.getElementById('setup-bio').value = pro.bio;
+}
+
+function previewAvatar(input) {
+  if (!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var preview = document.getElementById('setup-avatar-preview');
+    preview.style.backgroundImage = 'url(' + e.target.result + ')';
+    preview.style.backgroundSize  = 'cover';
+    preview.style.backgroundPosition = 'center';
+    preview.textContent = '';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+async function saveProfile() {
+  var bio     = document.getElementById('setup-bio').value.trim();
+  var trade   = document.getElementById('setup-trade').value;
+  var radius  = document.getElementById('setup-radius').value;
+  var license = document.getElementById('setup-license').value.trim();
+  var btn     = document.getElementById('setup-btn');
+
+  btn.disabled    = true;
+  btn.textContent = 'Saving…';
+
+  try {
+    await fetch('/api/update-profile', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        session: localStorage.getItem(SESSION_KEY),
+        bio, trade, radius, license,
+        setup_complete: true,
+      }),
+    });
+  } catch (e) {
+    console.log('Profile save error (non-blocking):', e.message);
+  }
+
+  // Mark setup done locally so we don't show it again
+  localStorage.setItem('yskaipe_setup_done_' + proData.email, '1');
+
+  // Update local proData
+  if (trade)  proData.trade = trade;
+  if (bio)    proData.bio   = bio;
+
+  populateDashboard(proData);
+  showScreen('dashboard');
+}
+
+function skipSetup() {
+  localStorage.setItem('yskaipe_setup_done_' + proData.email, '1');
+  populateDashboard(proData);
+  showScreen('dashboard');
+  return false;
+}
+
 // ── Billing portal ────────────────────────────────────────────
 async function openPortal() {
   if (!proData) return;
@@ -581,17 +768,4 @@ function logout() {
 // ── Boot ──────────────────────────────────────────────────────
 (function boot() {
   var params  = new URLSearchParams(window.location.search);
-  var token   = params.get('token');
-  var session = localStorage.getItem(SESSION_KEY);
-
-  if (token) {
-    verifyToken(token);
-  } else if (session) {
-    checkSession(session);
-  } else {
-    showScreen('login');
-  }
-})();
-</script>
-</body>
-</html>
+  var token   = 
