@@ -10,16 +10,24 @@
         />
         <style>
             :root {
-                --ink: #0f0e0c;
-                --paper: #f5f2ec;
-                --cream: #ede9e0;
-                --accent: #d4500a;
-                --accent2: #1a6b3c;
-                --gold: #c8a84b;
-                --mid: #6b6560;
-                --border: rgba(15, 14, 12, 0.12);
-                --card: #ffffff;
-                --r: 4px;
+                --ink: #1e1c1a;
+                --paper: #f2efe9;
+                --cream: #e8e4dc;
+                --card: #faf8f5;
+                --accent: #b85c2c;
+                --accent2: #3a6b47;
+                --gold: #c49a35;
+                --amber: #d4851a;
+                --amber3: #e8a83a;
+                --mid: #5a5650;
+                --muted: #8c887f;
+                --border: rgba(30, 28, 26, 0.1);
+                --r: 6px;
+                --dark1: #2a2724;
+                --dark2: #333028;
+                --dark3: #3d3a30;
+                --navy2: #2a2724;
+                --green: #4fa86a;
             }
             *,
             *::before,
@@ -36,6 +44,8 @@
                 background: var(--paper);
                 color: var(--ink);
                 overflow-x: hidden;
+                font-weight: 400;
+                -webkit-font-smoothing: antialiased;
             }
 
             nav {
@@ -49,9 +59,10 @@
                 justify-content: space-between;
                 padding: 0 2rem;
                 height: 56px;
-                background: rgba(245, 242, 236, 0.88);
+                background: rgba(242, 239, 233, 0.94);
                 backdrop-filter: blur(12px);
                 border-bottom: 1px solid var(--border);
+                gap: 1rem;
             }
             .logo {
                 font-family: "Bebas Neue", sans-serif;
@@ -62,6 +73,11 @@
             }
             .logo span {
                 color: var(--accent);
+            }
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
             }
             nav a.nav-cta {
                 font-size: 0.8rem;
@@ -78,9 +94,24 @@
             nav a.nav-cta:hover {
                 background: var(--accent);
             }
+            nav a.nav-pro {
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                background: var(--amber);
+                color: var(--ink);
+                padding: 0.45rem 1rem;
+                border-radius: 20px;
+                text-decoration: none;
+                transition: background 0.2s;
+                white-space: nowrap;
+            }
+            nav a.nav-pro:hover {
+                background: var(--amber3);
+            }
 
             .hero {
-                background: var(--ink);
+                background: var(--dark1);
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
@@ -96,13 +127,18 @@
                 background:
                     radial-gradient(
                         ellipse 70% 60% at 90% 50%,
-                        rgba(212, 80, 10, 0.11) 0%,
+                        rgba(196, 98, 45, 0.18) 0%,
                         transparent 65%
                     ),
                     radial-gradient(
                         ellipse 40% 70% at 5% 85%,
-                        rgba(26, 107, 60, 0.09) 0%,
+                        rgba(61, 122, 82, 0.12) 0%,
                         transparent 60%
+                    ),
+                    radial-gradient(
+                        ellipse 50% 40% at 50% 0%,
+                        rgba(212, 168, 71, 0.08) 0%,
+                        transparent 55%
                     );
                 pointer-events: none;
             }
@@ -121,21 +157,21 @@
                 font-size: 0.52rem;
                 letter-spacing: 0.18em;
                 text-transform: uppercase;
-                color: rgba(245, 242, 236, 0.28);
+                color: rgba(242, 239, 233, 0.3);
                 margin-bottom: 0.25rem;
             }
             .stamp-main {
                 font-family: "Bebas Neue", sans-serif;
                 font-size: 0.95rem;
                 letter-spacing: 0.1em;
-                color: rgba(245, 242, 236, 0.65);
+                color: rgba(242, 239, 233, 0.7);
             }
             .stamp-dot {
                 display: inline-block;
                 width: 5px;
                 height: 5px;
                 border-radius: 50%;
-                background: #5ec47a;
+                background: var(--green);
                 margin-right: 4px;
                 vertical-align: middle;
                 animation: pulse-dot 1.6s ease-in-out infinite;
@@ -179,12 +215,12 @@
                 font-size: clamp(0.9rem, 1.8vw, 1rem);
                 font-weight: 300;
                 line-height: 1.8;
-                color: rgba(245, 242, 236, 0.6);
+                color: rgba(242, 239, 233, 0.65);
                 max-width: 500px;
                 margin-bottom: 1.8rem;
             }
             .hero-sub strong {
-                color: rgba(245, 242, 236, 0.92);
+                color: rgba(242, 239, 233, 0.95);
                 font-weight: 500;
             }
             .win-row {
@@ -195,21 +231,21 @@
                 max-width: 640px;
             }
             .win-card {
-                border: 1px solid rgba(245, 242, 236, 0.08);
+                border: 1px solid rgba(242, 239, 233, 0.08);
                 border-radius: var(--r);
                 padding: 0.9rem 1rem;
             }
             .win-card.wc-hw {
-                background: rgba(26, 107, 60, 0.07);
-                border-color: rgba(94, 196, 122, 0.18);
+                background: rgba(58, 107, 71, 0.07);
+                border-color: rgba(79, 168, 106, 0.18);
             }
             .win-card.wc-pro {
-                background: rgba(212, 80, 10, 0.07);
-                border-color: rgba(212, 80, 10, 0.18);
+                background: rgba(184, 92, 44, 0.07);
+                border-color: rgba(184, 92, 44, 0.18);
             }
             .win-card.wc-mkt {
-                background: rgba(200, 168, 75, 0.07);
-                border-color: rgba(200, 168, 75, 0.18);
+                background: rgba(196, 154, 53, 0.07);
+                border-color: rgba(196, 154, 53, 0.18);
             }
             .wc-who {
                 font-family: "DM Mono", monospace;
@@ -219,7 +255,7 @@
                 margin-bottom: 0.4rem;
             }
             .win-card.wc-hw .wc-who {
-                color: #5ec47a;
+                color: #4fa86a;
             }
             .win-card.wc-pro .wc-who {
                 color: #e07050;
@@ -236,7 +272,7 @@
             }
             .wc-detail {
                 font-size: 0.75rem;
-                color: rgba(245, 242, 236, 0.35);
+                color: rgba(242, 239, 233, 0.4);
                 line-height: 1.5;
             }
             .hero-pills {
@@ -256,9 +292,9 @@
                 color: rgba(245, 242, 236, 0.38);
             }
             .hero-pill.on {
-                border-color: rgba(26, 107, 60, 0.45);
-                color: #5ec47a;
-                background: rgba(26, 107, 60, 0.07);
+                border-color: rgba(58, 107, 71, 0.45);
+                color: #4fa86a;
+                background: rgba(58, 107, 71, 0.07);
             }
             .hero-cta-row {
                 display: flex;
@@ -286,11 +322,29 @@
             }
             .btn-primary:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 8px 24px rgba(212, 80, 10, 0.3);
+                box-shadow: 0 8px 24px rgba(184, 92, 44, 0.3);
+            }
+            .btn-pro-hero {
+                font-family: "DM Sans", sans-serif;
+                font-size: 0.85rem;
+                font-weight: 600;
+                letter-spacing: 0.05em;
+                background: transparent;
+                color: var(--amber);
+                border: 1px solid rgba(212, 133, 26, 0.35);
+                padding: 0.9rem 1.5rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition: all 0.2s;
+                display: inline-block;
+            }
+            .btn-pro-hero:hover {
+                background: rgba(212, 133, 26, 0.1);
+                border-color: var(--amber);
             }
             .scroll-hint {
                 font-size: 0.75rem;
-                color: rgba(245, 242, 236, 0.35);
+                color: rgba(242, 239, 233, 0.4);
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
                 font-family: "DM Mono", monospace;
@@ -300,7 +354,7 @@
                 gap: 2.2rem;
                 margin-top: 2.8rem;
                 padding-top: 2rem;
-                border-top: 1px solid rgba(245, 242, 236, 0.07);
+                border-top: 1px solid rgba(242, 239, 233, 0.07);
                 flex-wrap: wrap;
             }
             .hsr-num {
@@ -314,12 +368,12 @@
                 font-size: 0.58rem;
                 letter-spacing: 0.13em;
                 text-transform: uppercase;
-                color: rgba(245, 242, 236, 0.28);
+                color: rgba(242, 239, 233, 0.3);
                 margin-top: 0.2rem;
             }
 
             .ps-section {
-                background: var(--ink);
+                background: var(--dark1);
                 color: var(--paper);
                 padding: 5rem 2rem;
                 position: relative;
@@ -389,7 +443,7 @@
                 color: #e05050;
             }
             .ps-label.good {
-                color: #5ec47a;
+                color: #4fa86a;
             }
             .ps-col h3 {
                 font-family: "Bebas Neue", sans-serif;
@@ -408,7 +462,7 @@
                 font-size: 0.9rem;
                 font-weight: 300;
                 line-height: 1.5;
-                color: rgba(245, 242, 236, 0.7);
+                color: rgba(242, 239, 233, 0.82);
                 margin-bottom: 0.7rem;
             }
             .ps-list li .icon {
@@ -436,7 +490,7 @@
             }
             .stat-label {
                 font-size: 0.8rem;
-                color: rgba(245, 242, 236, 0.55);
+                color: rgba(242, 239, 233, 0.7);
                 margin-top: 0.3rem;
                 line-height: 1.3;
             }
@@ -444,6 +498,8 @@
             .hiw-section {
                 padding: 5rem 2rem;
                 background: var(--cream);
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
             }
             .section-header {
                 text-align: center;
@@ -483,7 +539,7 @@
             }
             .step:hover {
                 transform: translateY(-4px);
-                box-shadow: 0 16px 40px rgba(15, 14, 12, 0.1);
+                box-shadow: 0 16px 40px var(--border);
             }
             .step-num {
                 font-family: "Bebas Neue", sans-serif;
@@ -508,6 +564,7 @@
                 font-size: 0.85rem;
                 color: var(--mid);
                 line-height: 1.6;
+                font-weight: 400;
             }
 
             .fork-section {
@@ -535,20 +592,20 @@
                 transform: translateY(-5px);
             }
             .fork-card.diy {
-                background: #0f2318;
+                background: var(--dark2);
                 color: var(--paper);
-                border: 1px solid rgba(94, 196, 122, 0.2);
+                border: 1px solid rgba(76, 175, 120, 0.2);
             }
             .fork-card.pro {
-                background: var(--ink);
+                background: var(--dark1);
                 color: var(--paper);
-                border: 1px solid rgba(212, 80, 10, 0.2);
+                border: 1px solid rgba(196, 98, 45, 0.2);
             }
             .fork-card.diy:hover {
-                box-shadow: 0 20px 60px rgba(26, 107, 60, 0.3);
+                box-shadow: 0 20px 60px rgba(58, 107, 71, 0.3);
             }
             .fork-card.pro:hover {
-                box-shadow: 0 20px 60px rgba(212, 80, 10, 0.25);
+                box-shadow: 0 20px 60px rgba(184, 92, 44, 0.25);
             }
             .fork-badge {
                 font-family: "DM Mono", monospace;
@@ -561,11 +618,11 @@
                 margin-bottom: 1.2rem;
             }
             .fork-card.diy .fork-badge {
-                background: rgba(94, 196, 122, 0.15);
-                color: #5ec47a;
+                background: rgba(79, 168, 106, 0.15);
+                color: #4fa86a;
             }
             .fork-card.pro .fork-badge {
-                background: rgba(212, 80, 10, 0.15);
+                background: rgba(184, 92, 44, 0.15);
                 color: #f08060;
             }
             .fork-card h3 {
@@ -597,13 +654,124 @@
                 margin-top: 1.5rem;
                 font-family: "Bebas Neue", sans-serif;
                 font-size: 2.5rem;
-                color: #5ec47a;
+                color: #4fa86a;
                 line-height: 1;
             }
             .fork-savings-label {
                 font-size: 0.75rem;
                 opacity: 0.6;
                 margin-top: 0.2rem;
+            }
+
+            /* ── PRO CONTRACTOR BANNER ── */
+            .pro-banner {
+                background: var(--dark3);
+                border-top: 1px solid rgba(212, 133, 26, 0.2);
+                border-bottom: 1px solid rgba(212, 133, 26, 0.2);
+                padding: 4.5rem 2rem;
+            }
+            .pro-banner-inner {
+                max-width: 960px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                align-items: center;
+            }
+            .pro-banner-hw {
+                padding-right: 3rem;
+                border-right: 1px solid rgba(255, 255, 255, 0.08);
+            }
+            .pro-banner-contractor {
+                padding-left: 3rem;
+            }
+            .pro-banner-eyebrow {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--amber);
+                margin-bottom: 0.75rem;
+            }
+            .pro-banner h2 {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(1.8rem, 3vw, 2.5rem);
+                letter-spacing: 0.03em;
+                line-height: 1.05;
+                color: #f8f9fc;
+                margin-bottom: 0.75rem;
+            }
+            .pro-banner h2 em {
+                color: var(--amber);
+                font-style: italic;
+                font-family: "DM Sans", sans-serif;
+                font-weight: 700;
+                font-size: 0.7em;
+                letter-spacing: 0;
+            }
+            .pro-banner p {
+                font-size: 0.9rem;
+                color: rgba(220, 216, 208, 0.9);
+                line-height: 1.7;
+                font-weight: 300;
+                margin-bottom: 1.25rem;
+            }
+            .pro-banner-pills {
+                display: flex;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                margin-bottom: 1.5rem;
+            }
+            .pro-banner-pill {
+                font-size: 0.72rem;
+                background: rgba(34, 200, 122, 0.08);
+                color: #22c87a;
+                border: 1px solid rgba(34, 200, 122, 0.2);
+                padding: 0.25rem 0.75rem;
+                border-radius: 100px;
+            }
+            .btn-banner-hw {
+                display: inline-block;
+                background: var(--accent);
+                color: #fff;
+                font-family: "DM Sans", sans-serif;
+                font-weight: 700;
+                font-size: 0.85rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                padding: 0.75rem 1.5rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+            .btn-banner-hw:hover {
+                background: #be4208;
+                transform: translateY(-1px);
+            }
+            .btn-banner-pro {
+                display: inline-block;
+                background: var(--amber);
+                color: #0b1629;
+                font-family: "DM Sans", sans-serif;
+                font-weight: 700;
+                font-size: 0.85rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                padding: 0.75rem 1.5rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+            .btn-banner-pro:hover {
+                background: var(--amber3);
+                transform: translateY(-1px);
+            }
+            .pro-price-tag {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 1.5rem;
+                color: var(--amber);
+                margin-bottom: 0.5rem;
+                letter-spacing: 0.03em;
             }
 
             .quote-section {
@@ -619,10 +787,10 @@
                 border: 1px solid var(--border);
                 border-radius: 6px;
                 overflow: hidden;
-                box-shadow: 0 4px 40px rgba(15, 14, 12, 0.08);
+                box-shadow: 0 4px 40px rgba(30, 28, 26, 0.08);
             }
             .quote-header {
-                background: var(--ink);
+                background: var(--dark1);
                 padding: 1.5rem 2rem;
                 display: flex;
                 align-items: center;
@@ -642,13 +810,13 @@
                 font-size: 0.65rem;
                 letter-spacing: 0.15em;
                 text-transform: uppercase;
-                color: #5ec47a;
+                color: #4fa86a;
             }
             .live-dot {
                 width: 7px;
                 height: 7px;
                 border-radius: 50%;
-                background: #5ec47a;
+                background: var(--green);
                 animation: pulse-dot 1.6s ease-in-out infinite;
             }
             @keyframes pulse-dot {
@@ -681,7 +849,7 @@
             }
             label {
                 font-size: 0.72rem;
-                font-weight: 500;
+                font-weight: 600;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
                 color: var(--mid);
@@ -825,7 +993,8 @@
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
                 color: var(--accent2);
-                background: rgba(26, 107, 60, 0.08);
+                font-weight: 600;
+                background: rgba(58, 107, 71, 0.1);
                 padding: 0.3rem 0.6rem;
                 border-radius: 2px;
             }
@@ -842,15 +1011,16 @@
                 text-align: center;
             }
             .cost-cell.total {
-                background: var(--ink);
+                background: var(--dark1);
                 color: var(--paper);
             }
             .cost-label {
                 font-size: 0.68rem;
                 text-transform: uppercase;
                 letter-spacing: 0.12em;
-                opacity: 0.6;
+                opacity: 0.75;
                 margin-bottom: 0.3rem;
+                font-weight: 500;
             }
             .cost-val {
                 font-family: "Bebas Neue", sans-serif;
@@ -865,8 +1035,8 @@
             .breakdown-text {
                 font-size: 0.88rem;
                 line-height: 1.75;
-                color: var(--mid);
-                background: var(--paper);
+                color: var(--ink);
+                background: var(--cream);
                 border-radius: var(--r);
                 padding: 1.2rem;
                 margin-bottom: 1.5rem;
@@ -896,19 +1066,19 @@
                 transform: translateY(-2px);
             }
             .btn-diy {
-                background: #0f2318;
-                color: #5ec47a;
-                border: 1px solid rgba(94, 196, 122, 0.25);
+                background: var(--dark2);
+                color: var(--green);
+                border: 1px solid rgba(76, 175, 120, 0.25);
             }
             .btn-diy:hover {
-                box-shadow: 0 8px 24px rgba(26, 107, 60, 0.25);
+                box-shadow: 0 8px 24px rgba(58, 107, 71, 0.25);
             }
             .btn-pro {
                 background: var(--accent);
                 color: #fff;
             }
             .btn-pro:hover {
-                box-shadow: 0 8px 24px rgba(212, 80, 10, 0.3);
+                box-shadow: 0 8px 24px rgba(184, 92, 44, 0.3);
             }
             .btn-row-secondary {
                 display: flex;
@@ -933,6 +1103,47 @@
             .btn-secondary:hover {
                 border-color: var(--ink);
                 color: var(--ink);
+            }
+
+            /* Pro upsell after quote */
+            .pro-upsell-strip {
+                margin-top: 1.25rem;
+                background: var(--dark3);
+                border-radius: var(--r);
+                padding: 1rem 1.25rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            .pro-upsell-strip p {
+                font-size: 0.82rem;
+                color: rgba(220, 216, 208, 0.9);
+                font-weight: 300;
+                line-height: 1.5;
+            }
+            .pro-upsell-strip strong {
+                color: #f5a623;
+                font-weight: 600;
+            }
+            .btn-upsell {
+                display: inline-block;
+                background: #f5a623;
+                color: #0b1629;
+                font-family: "DM Sans", sans-serif;
+                font-weight: 700;
+                font-size: 0.78rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                padding: 0.6rem 1.25rem;
+                border-radius: 2px;
+                text-decoration: none;
+                white-space: nowrap;
+                transition: background 0.2s;
+            }
+            .btn-upsell:hover {
+                background: #ffc85c;
             }
 
             #diy-panel,
@@ -961,7 +1172,7 @@
             }
             .savings-chip {
                 margin-left: auto;
-                background: rgba(26, 107, 60, 0.1);
+                background: rgba(58, 107, 71, 0.1);
                 color: var(--accent2);
                 font-family: "Bebas Neue", sans-serif;
                 font-size: 1.2rem;
@@ -972,7 +1183,7 @@
                 font-size: 0.9rem;
                 line-height: 1.8;
                 color: var(--ink);
-                background: #f8faf9;
+                background: #f7f4ee;
                 border-left: 3px solid var(--accent2);
                 border-radius: 0 var(--r) var(--r) 0;
                 padding: 1.5rem;
@@ -1016,8 +1227,8 @@
                 text-align: right;
             }
             .warning-box {
-                background: rgba(212, 80, 10, 0.06);
-                border: 1px solid rgba(212, 80, 10, 0.2);
+                background: rgba(184, 92, 44, 0.06);
+                border: 1px solid rgba(184, 92, 44, 0.2);
                 border-radius: var(--r);
                 padding: 1rem;
                 margin-bottom: 1.5rem;
@@ -1033,7 +1244,6 @@
                 display: block;
                 margin-bottom: 0.3rem;
             }
-
             .shop-materials {
                 margin-top: 1.5rem;
                 margin-bottom: 1.5rem;
@@ -1059,7 +1269,7 @@
                 font-size: 0.6rem;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
-                background: rgba(26, 107, 60, 0.1);
+                background: rgba(58, 107, 71, 0.1);
                 color: var(--accent2);
                 padding: 0.2rem 0.5rem;
                 border-radius: 2px;
@@ -1128,9 +1338,8 @@
                 margin-top: 0.8rem;
                 font-style: italic;
             }
-
             .pro-intro {
-                background: var(--ink);
+                background: var(--dark1);
                 color: var(--paper);
                 border-radius: var(--r);
                 padding: 1.5rem;
@@ -1176,6 +1385,30 @@
                 margin-top: 0.4rem;
             }
 
+            /* Pro panel subscription CTA */
+            .pro-sub-cta {
+                background: var(--dark3);
+                border: 1px solid rgba(212, 133, 26, 0.25);
+                border-radius: var(--r);
+                padding: 1.25rem;
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            .pro-sub-cta p {
+                font-size: 0.82rem;
+                color: rgba(220, 216, 208, 0.9);
+                font-weight: 300;
+                line-height: 1.5;
+            }
+            .pro-sub-cta strong {
+                color: #f5a623;
+            }
+
             .modal-overlay {
                 display: none;
                 position: fixed;
@@ -1195,7 +1428,7 @@
                 padding: 2rem;
                 width: 90%;
                 max-width: 400px;
-                box-shadow: 0 20px 60px rgba(15, 14, 12, 0.3);
+                box-shadow: 0 20px 60px rgba(30, 28, 26, 0.3);
             }
             .modal h4 {
                 font-family: "Bebas Neue", sans-serif;
@@ -1237,7 +1470,7 @@
             }
 
             .trust-strip {
-                background: var(--paper);
+                background: var(--cream);
                 border-top: 1px solid var(--border);
                 padding: 1.5rem 2rem;
                 display: flex;
@@ -1257,8 +1490,8 @@
                 gap: 0.4rem;
             }
             footer {
-                background: var(--ink);
-                color: rgba(245, 242, 236, 0.5);
+                background: var(--dark1);
+                color: rgba(242, 239, 233, 0.5);
                 padding: 2rem;
                 text-align: center;
                 font-size: 0.78rem;
@@ -1266,7 +1499,7 @@
                 letter-spacing: 0.08em;
             }
             footer a {
-                color: rgba(245, 242, 236, 0.5);
+                color: rgba(242, 239, 233, 0.5);
             }
 
             @media print {
@@ -1277,6 +1510,7 @@
                 .ps-section,
                 .hiw-section,
                 .fork-section,
+                .pro-banner,
                 .quote-section .section-header,
                 .fork-actions,
                 .btn-row-secondary,
@@ -1299,12 +1533,12 @@
                     border: none;
                 }
                 .quote-header {
-                    background: #0f0e0c !important;
+                    background: var(--dark1) !important;
                     -webkit-print-color-adjust: exact;
                     print-color-adjust: exact;
                 }
                 .cost-cell.total {
-                    background: #0f0e0c !important;
+                    background: var(--dark1) !important;
                     color: #fff !important;
                     -webkit-print-color-adjust: exact;
                     print-color-adjust: exact;
@@ -1318,7 +1552,7 @@
                     display: block !important;
                 }
                 .diy-instructions {
-                    border-left: 3px solid #1a6b3c !important;
+                    border-left: 3px solid #3d7a52 !important;
                     -webkit-print-color-adjust: exact;
                     print-color-adjust: exact;
                 }
@@ -1338,7 +1572,6 @@
                     padding-bottom: 0.5rem;
                 }
             }
-
             @media (max-width: 700px) {
                 .ps-grid {
                     grid-template-columns: 1fr;
@@ -1381,13 +1614,29 @@
                     align-items: flex-start;
                     gap: 0.5rem;
                 }
+                .pro-banner-inner {
+                    grid-template-columns: 1fr;
+                }
+                .pro-banner-hw {
+                    padding-right: 0;
+                    border-right: none;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    padding-bottom: 2rem;
+                    margin-bottom: 2rem;
+                }
+                .pro-banner-contractor {
+                    padding-left: 0;
+                }
             }
         </style>
     </head>
     <body>
         <nav>
             <a href="#" class="logo">Y<span>S</span>KAIPE</a>
-            <a href="#autoquote" class="nav-cta">Get My Quote</a>
+            <div class="nav-right">
+                <a href="/public/pro.html" class="nav-pro">⚡ For Pros</a>
+                <a href="#autoquote" class="nav-cta">Get My Quote</a>
+            </div>
         </nav>
 
         <section class="hero">
@@ -1464,6 +1713,9 @@
                 <div class="hero-cta-row">
                     <a href="#autoquote" class="btn-primary"
                         >Get the Fair Rate &rarr;</a
+                    >
+                    <a href="/public/pro.html" class="btn-pro-hero"
+                        >⚡ Contractors: Join Pro Network</a
                     >
                     <span class="scroll-hint"
                         >8 sec &middot; no account needed</span
@@ -1641,8 +1893,8 @@
                     <h3>HIRE A<br />VETTED PRO</h3>
                     <p>
                         Some jobs need a licensed professional. We match you
-                        with our network &mdash; and you already know the fair
-                        rate before they arrive.
+                        with our subscribed network &mdash; and you already know
+                        the fair rate before they arrive.
                     </p>
                     <ul class="fork-features">
                         <li>&#10003; Matched to your trade &amp; location</li>
@@ -1667,6 +1919,47 @@
                     <div class="fork-savings-label">
                         walk in knowing exactly what is fair
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CONTRACTOR / HOMEOWNER SPLIT BANNER ═══ -->
+        <section class="pro-banner">
+            <div class="pro-banner-inner">
+                <div class="pro-banner-hw">
+                    <div class="pro-banner-eyebrow">For Homeowners</div>
+                    <h2>
+                        Job too complex to DIY?<br />We have a pro for that.
+                    </h2>
+                    <p>
+                        After your free quote, tap "Find a Pro" and we instantly
+                        match you with a vetted, subscribed contractor in your
+                        ZIP &mdash; who already knows the 2026 fair rate. No
+                        cold calls. No price surprises.
+                    </p>
+                    <a href="#autoquote" class="btn-banner-hw"
+                        >Get Your Free Quote &rarr;</a
+                    >
+                </div>
+                <div class="pro-banner-contractor">
+                    <div class="pro-banner-eyebrow">For Contractors</div>
+                    <h2>
+                        Stop chasing leads.<br /><em>Subscribe</em> to them.
+                    </h2>
+                    <p>
+                        YSKAIPE Pro delivers AI-matched homeowner jobs straight
+                        to your phone &mdash; pre-scoped, pre-priced at 2026
+                        fair rates, exclusive to you. No per-lead fees. Ever.
+                    </p>
+                    <div class="pro-price-tag">From $29 / month</div>
+                    <div class="pro-banner-pills">
+                        <span class="pro-banner-pill">✓ Exclusive leads</span>
+                        <span class="pro-banner-pill">✓ No cold calling</span>
+                        <span class="pro-banner-pill">✓ Cancel anytime</span>
+                    </div>
+                    <a href="/public/pro.html" class="btn-banner-pro"
+                        >Join YSKAIPE Pro &rarr;</a
+                    >
                 </div>
             </div>
         </section>
@@ -1857,6 +2150,19 @@
                                     &#8635; New Quote
                                 </button>
                             </div>
+                            <!-- Pro upsell strip after quote -->
+                            <div class="pro-upsell-strip">
+                                <p>
+                                    &#9889;
+                                    <strong>Are you a contractor?</strong>
+                                    Subscribe to YSKAIPE Pro and get jobs like
+                                    this delivered to your phone — pre-scoped,
+                                    pre-priced, exclusive.
+                                </p>
+                                <a href="/public/pro.html" class="btn-upsell"
+                                    >Join Pro — from $29/mo</a
+                                >
+                            </div>
                         </div>
 
                         <div id="diy-panel">
@@ -1915,6 +2221,20 @@
                                 Finding your match&hellip;
                             </div>
                             <div class="pro-cards" id="pro-cards"></div>
+                            <!-- Subscription CTA inside pro panel -->
+                            <div class="pro-sub-cta">
+                                <p>
+                                    &#127775;
+                                    <strong>Are you a contractor?</strong> These
+                                    leads come from YSKAIPE Pro — our subscribed
+                                    network of vetted professionals. Join for
+                                    <strong>$29/month</strong> and get matched
+                                    jobs like this delivered to you.
+                                </p>
+                                <a href="/public/pro.html" class="btn-upsell"
+                                    >Join Pro Network</a
+                                >
+                            </div>
                             <div class="btn-row-secondary">
                                 <button
                                     class="btn-secondary"
@@ -1943,9 +2263,19 @@
                 style="
                     color: var(--accent);
                     text-decoration: none;
-                    border-bottom: 1px solid rgba(212, 80, 10, 0.3);
+                    border-bottom: 1px solid rgba(184, 92, 44, 0.3);
                 "
                 >&rarr; Future of Work</a
+            >
+            <a
+                href="/public/pro.html"
+                class="trust-item"
+                style="
+                    color: var(--amber);
+                    text-decoration: none;
+                    border-bottom: 1px solid rgba(212, 133, 26, 0.3);
+                "
+                >⚡ Pro Network</a
             >
         </div>
 
@@ -1973,8 +2303,7 @@
         </div>
 
         <footer>
-            YSKAIPE &middot; Human Hands. AI Power. &middot;
-            hello@yskaipe.com<br />
+            YSKAIPE &middot; Human Hands. AI Power. &middot; gr8@yskaipe.com<br />
             <div
                 style="
                     margin-top: 0.8rem;
@@ -1984,19 +2313,18 @@
                     flex-wrap: wrap;
                 "
             >
+                <a href="/public/pro.html">⚡ Pro Network</a>
                 <a href="future-of-work.html">Future of Work</a>
                 <a href="docs.html">Documentation</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
             </div>
-            <br />
-            Based on verified NC 2026 industry standards &middot; Regional
+            <br />Based on verified NC 2026 industry standards &middot; Regional
             adjustments applied &middot; &copy; 2025 Yskaipe
         </footer>
 
         <script>
             var AFFILIATE = { amazon: "yskaipe-20", homedepot: "", lowes: "" };
-
             function amazonURL(q) {
                 var u = "https://www.amazon.com/s?k=" + encodeURIComponent(q);
                 return AFFILIATE.amazon ? u + "&tag=" + AFFILIATE.amazon : u;
@@ -2154,7 +2482,11 @@
                 var fill = document.getElementById("diff-fill");
                 fill.style.width = "0";
                 fill.style.background =
-                    score <= 4 ? "#5ec47a" : score <= 7 ? "#c8a84b" : "#e05050";
+                    score <= 4
+                        ? "var(--green)"
+                        : score <= 7
+                          ? "#c8a84b"
+                          : "#e05050";
                 setTimeout(function () {
                     fill.style.width = (score / 10) * 100 + "%";
                 }, 50);
@@ -2284,7 +2616,6 @@
                 if (email) document.getElementById("modal-email").value = email;
                 document.getElementById("email-modal").classList.add("active");
             }
-
             function closeEmailModal() {
                 document
                     .getElementById("email-modal")
