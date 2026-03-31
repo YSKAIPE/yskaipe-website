@@ -475,7 +475,7 @@ function switchTab(tab, btn) {
   document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
   btn.classList.add('active');
   document.getElementById('tab-pro').style.display = tab === 'pro' ? 'block' : 'none';
-  document.getElementById('tab-hw').style.display = tab === 'hw' ? 'block' : 'none';
+  document.getElementById('tab-hw').style.display  = tab === 'hw'  ? 'block' : 'none';
 }
 
 function selectTier(tier) {
@@ -485,18 +485,17 @@ function selectTier(tier) {
   if (el) el.classList.add('selected');
 }
 
-function preselectTier(tier) {
-  currentTier = tier;
-  document.querySelectorAll('.tier-opt').forEach(function(o){ o.classList.remove('selected'); });
-  var el = document.getElementById('tier-' + tier);
-  if (el) el.classList.add('selected');
-}
+function preselectTier(tier) { selectTier(tier); }
 
 function switchToHomeowner() {
   showPage('signup');
-  document.getElementById('signup-form-wrap').querySelector('.form-title').textContent = 'Upgrade to Power';
-  document.getElementById('signup-form-wrap').querySelector('.form-sub').textContent = 'Priority pro matching, unlimited quote history, and full AI access for $9/mo.';
-  document.querySelector('.tier-pick').style.display = 'none';
+  var title = document.querySelector('#signup-form-wrap .form-title');
+  var sub   = document.querySelector('#signup-form-wrap .form-sub');
+  if (title) title.textContent = 'Upgrade to Power';
+  if (sub)   sub.textContent   = 'Priority pro matching, unlimited quote history, and full AI access for $9/mo.';
+  var tp = document.querySelector('.tier-pick');
+  if (tp) tp.style.display = 'none';
+  currentTier = 'Power';
 }
 
 function calcMRR() {
@@ -505,31 +504,110 @@ function calcMRR() {
   var e = parseInt(document.getElementById('s-elite').value);
   var h = parseInt(document.getElementById('s-hw').value);
   document.getElementById('v-start').textContent = s;
-  document.getElementById('v-pro').textContent = p;
+  document.getElementById('v-pro').textContent   = p;
   document.getElementById('v-elite').textContent = e;
-  document.getElementById('v-hw').textContent = h;
+  document.getElementById('v-hw').textContent    = h;
   var mrr = s * 29 + p * 79 + e * 149 + h * 9;
-  var arr = mrr * 12;
-  var subs = s + p + e + h;
-  document.getElementById('r-mrr').textContent = '$' + mrr.toLocaleString();
-  document.getElementById('r-arr').textContent = '$' + arr.toLocaleString();
-  document.getElementById('r-subs').textContent = subs.toLocaleString();
+  document.getElementById('r-mrr').textContent  = '$' + mrr.toLocaleString();
+  document.getElementById('r-arr').textContent  = '$' + (mrr * 12).toLocaleString();
+  document.getElementById('r-subs').textContent = (s + p + e + h).toLocaleString();
 }
 
-function submitSignup() {
-  var ok = document.getElementById('f-first').value.trim()
-    && document.getElementById('f-last').value.trim()
-    && document.getElementById('f-biz').value.trim()
-    && document.getElementById('f-trade').value
-    && document.getElementById('f-zip').value.trim()
-    && document.getElementById('f-email').value.trim()
-    && document.getElementById('f-phone').value.trim();
-  document.getElementById('f-err').style.display = ok ? 'none' : 'block';
-  if (!ok) return;
-  document.getElementById('signup-form-wrap').style.display = 'none';
-  document.getElementById('signup-success').classList.add('show');
-  window.scrollTo(0, 0);
+// ── Stripe Checkout ──────────────────────────────────────────
+async function submitSignup() {
+  var first     = document.getElementById('f-first').value.trim();
+  var last      = document.getElementById('f-last').value.trim();
+  var biz       = document.getElementById('f-biz').value.trim();
+  var tradeEl   = document.getElementById('f-trade');
+  var trade     = tradeEl ? tradeEl.value : '';
+  var zip       = document.getElementById('f-zip').value.trim();
+  var email     = document.getElementById('f-email').value.trim();
+  var phone     = document.getElementById('f-phone').value.trim();
+  var errEl     = document.getElementById('f-err');
+  var submitBtn = document.querySelector('button[onclick="submitSignup()"]');
+
+  var isPro = currentTier !== 'Power';
+  if (!first || !last || !email || !phone || (isPro && (!trade || !zip))) {
+    errEl.style.display = 'block';
+    errEl.textContent   = 'Please fill in all fields before subscribing.';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  submitBtn.disabled    = true;
+  submitBtn.textContent = 'Redirecting to secure checkout…';
+
+  try {
+    var res = await fetch('/api/create-checkout', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tier:     currentTier,
+        email:    email,
+        name:     first + ' ' + last,
+        business: biz,
+        trade:    trade,
+        zip:      zip,
+        phone:    phone,
+      }),
+    });
+
+    var data = await res.json();
+
+    if (!res.ok || !data.url) {
+      throw new Error(data.error || 'Could not create checkout session');
+    }
+
+    window.location.href = data.url;
+
+  } catch (err) {
+    console.error('Checkout error:', err);
+    errEl.style.display = 'block';
+    errEl.textContent   = 'Something went wrong: ' + err.message + '. Please try again.';
+    submitBtn.disabled    = false;
+    submitBtn.textContent = 'Subscribe & Start Getting Leads →';
+  }
 }
+
+// ── Customer Portal ──────────────────────────────────────────
+async function openPortal() {
+  var email = prompt('Enter your subscription email address:');
+  if (!email) return;
+  try {
+    var res  = await fetch('/api/customer-portal', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email }),
+    });
+    var data = await res.json();
+    if (data.url) window.location.href = data.url;
+    else alert('No active subscription found for ' + email);
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+}
+
+// ── Handle return from Stripe ────────────────────────────────
+(function handleReturn() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('success') === 'true') {
+    var wrap = document.getElementById('signup-form-wrap');
+    var succ = document.getElementById('signup-success');
+    if (wrap) wrap.style.display = 'none';
+    if (succ) succ.classList.add('show');
+    showPage('signup');
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+  if (params.get('canceled') === 'true') {
+    showPage('signup');
+    var errEl = document.getElementById('f-err');
+    if (errEl) {
+      errEl.style.display = 'block';
+      errEl.textContent   = 'Checkout cancelled — no charge was made. Try again anytime.';
+    }
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+})();
 </script>
 </body>
 </html>
