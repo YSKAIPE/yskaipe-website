@@ -33,7 +33,7 @@
     .nav-cta:hover{background:var(--amber3)}
 
     /* PAGES */
-    .page{display:none}.page.active{display:block}
+    .page{display:block}
 
     /* BUTTONS */
     .btn{display:inline-block;text-align:center;text-decoration:none;font-family:var(--fb);font-weight:700;font-size:1rem;padding:0.875rem 2rem;border-radius:8px;cursor:pointer;border:none;transition:all 0.2s}
@@ -149,12 +149,12 @@
 <nav>
   <a href="/" class="logo">ysk<span class="ai">AI</span>pe<span class="pill">PRO</span></a>
   <div class="nav-links">
-    <a href="#" onclick="showPage('landing');return false" id="nl-landing" class="active">Home</a>
-    <a href="#" onclick="showPage('pricing');return false" id="nl-pricing">Pricing</a>
-    <a href="#" onclick="showPage('signup');return false" id="nl-signup">Join</a>
+    <a href="#page-landing" id="nl-landing">Home</a>
+    <a href="#page-pricing" id="nl-pricing">Pricing</a>
+    <a href="#signup-anchor" id="nl-signup">Join</a>
     <a href="/">← Main Site</a>
   </div>
-  <a href="#" onclick="showPage('signup');return false" class="nav-cta">Subscribe Now</a>
+  <a href="#signup-anchor" class="nav-cta">Subscribe Now</a>
 </nav>
 
 <!-- ═══ LANDING ═══ -->
@@ -236,7 +236,7 @@
             <li>Basic pro profile listing</li>
             <li>Cancel anytime</li>
           </ul>
-          <a href="#" onclick="preselectTier('Starter');showPage('signup');return false" class="btn btn-outline btn-sm" style="text-align:center">Get Started — $29/mo</a>
+          <a href="#signup-anchor" onclick="preselectTier('Starter')" class="btn btn-outline btn-sm" style="text-align:center">Get Started — $29/mo</a>
         </div>
 
         <div class="price-card featured">
@@ -254,7 +254,7 @@
             <li>Monthly performance dashboard</li>
             <li>Cancel anytime</li>
           </ul>
-          <a href="#" onclick="preselectTier('Pro');showPage('signup');return false" class="btn btn-amber btn-sm" style="text-align:center">Subscribe — $79/mo</a>
+          <a href="#signup-anchor" onclick="preselectTier('Pro')" class="btn btn-amber btn-sm" style="text-align:center">Subscribe — $79/mo</a>
         </div>
 
         <div class="price-card">
@@ -272,7 +272,7 @@
             <li>Dedicated onboarding call</li>
             <li>Priority support + account review</li>
           </ul>
-          <a href="#" onclick="preselectTier('Elite');showPage('signup');return false" class="btn btn-outline btn-sm" style="text-align:center">Go Elite — $149/mo</a>
+          <a href="#signup-anchor" onclick="preselectTier('Elite')" class="btn btn-outline btn-sm" style="text-align:center">Go Elite — $149/mo</a>
         </div>
 
       </div>
@@ -321,7 +321,8 @@
 </div>
 
 <!-- ═══ SIGN UP ═══ -->
-<div id="page-signup" class="page">
+<div id="page-signup" class="page active" style="display:block">
+  <div id="signup-anchor"></div>
   <div id="signup-form-wrap">
     <div class="signup-wrap" style="padding-top:4rem">
       <div class="form-card">
