@@ -406,6 +406,13 @@ function showPage(name) {
   document.querySelectorAll('.nav-links a').forEach(function(a){ a.classList.remove('active'); });
   var el = document.getElementById('nl-' + name);
   if (el) el.classList.add('active');
+  // Always reset signup form to visible when navigating to signup page
+  if (name === 'signup') {
+    var wrap = document.getElementById('signup-form-wrap');
+    var succ = document.getElementById('signup-success');
+    if (wrap) wrap.style.display = 'block';
+    if (succ) succ.classList.remove('show');
+  }
   window.scrollTo(0, 0);
   return false;
 }
