@@ -92,20 +92,6 @@
     .hw-price span{font-family:var(--fb);font-size:0.9rem;color:var(--slate);font-weight:400}
     .hw-desc{font-size:0.875rem;color:var(--slate2);margin-bottom:1.25rem;line-height:1.6;font-weight:300}
 
-    /* MRR CALCULATOR */
-    .calc-wrap{max-width:780px;margin:0 auto;padding:0 2rem 4rem}
-    .calc-card{background:var(--navy2);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:2rem}
-    .calc-title{font-family:var(--fh);font-size:1.5rem;margin-bottom:0.5rem;letter-spacing:-0.02em}
-    .calc-sub{color:var(--slate2);font-size:0.9rem;margin-bottom:2rem;font-weight:300}
-    .slider-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
-    .slider-label{font-size:0.8rem;color:var(--slate2);font-weight:500;min-width:160px}
-    .slider-row input[type=range]{flex:1;accent-color:var(--amber)}
-    .slider-val{font-weight:700;font-size:0.9rem;min-width:40px;text-align:right;color:var(--amber)}
-    .mrr-result{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.05);border-radius:10px;overflow:hidden;margin-top:2rem}
-    .mrr-item{background:var(--navy);padding:1.25rem;text-align:center}
-    .mrr-label{font-size:0.7rem;color:var(--slate);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.5rem}
-    .mrr-num{font-family:var(--fh);font-size:2rem;color:var(--amber);letter-spacing:-0.02em}
-    .mrr-note{font-size:0.75rem;color:var(--slate);margin-top:0.3rem}
 
     /* HOW SECTION */
     .how-wrap{max-width:960px;margin:0 auto;padding:0 2rem 4rem}
@@ -155,7 +141,6 @@
       .form-row{grid-template-columns:1fr}
       .tier-pick{grid-template-columns:1fr}
       .nav-links{display:none}
-      .mrr-result{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -291,52 +276,6 @@
         </div>
 
       </div>
-
-      <!-- MRR CALCULATOR -->
-      <div class="calc-wrap" style="padding:0 0 0">
-        <div class="calc-card">
-          <div class="calc-title">What does your network earn?</div>
-          <div class="calc-sub">Drag the sliders to model YSKAIPE's monthly recurring revenue at different network sizes.</div>
-          <div class="slider-row">
-            <div class="slider-label">Starter subscribers</div>
-            <input type="range" min="0" max="200" value="30" id="s-start" oninput="calcMRR()">
-            <div class="slider-val" id="v-start">30</div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-label">Pro subscribers</div>
-            <input type="range" min="0" max="200" value="50" id="s-pro" oninput="calcMRR()">
-            <div class="slider-val" id="v-pro">50</div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-label">Elite subscribers</div>
-            <input type="range" min="0" max="100" value="20" id="s-elite" oninput="calcMRR()">
-            <div class="slider-val" id="v-elite">20</div>
-          </div>
-          <div class="slider-row">
-            <div class="slider-label">Power homeowners</div>
-            <input type="range" min="0" max="500" value="150" id="s-hw" oninput="calcMRR()">
-            <div class="slider-val" id="v-hw">150</div>
-          </div>
-          <div class="mrr-result">
-            <div class="mrr-item">
-              <div class="mrr-label">Monthly Recurring Revenue</div>
-              <div class="mrr-num" id="r-mrr">$9,220</div>
-              <div class="mrr-note">Before expenses</div>
-            </div>
-            <div class="mrr-item">
-              <div class="mrr-label">Annual Run Rate</div>
-              <div class="mrr-num" id="r-arr">$110,640</div>
-              <div class="mrr-note">If flat, no growth</div>
-            </div>
-            <div class="mrr-item">
-              <div class="mrr-label">Total Subscribers</div>
-              <div class="mrr-num" id="r-subs">250</div>
-              <div class="mrr-note">Pros + homeowners</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- HOMEOWNER TIERS -->
@@ -496,21 +435,6 @@ function switchToHomeowner() {
   var tp = document.querySelector('.tier-pick');
   if (tp) tp.style.display = 'none';
   currentTier = 'Power';
-}
-
-function calcMRR() {
-  var s = parseInt(document.getElementById('s-start').value);
-  var p = parseInt(document.getElementById('s-pro').value);
-  var e = parseInt(document.getElementById('s-elite').value);
-  var h = parseInt(document.getElementById('s-hw').value);
-  document.getElementById('v-start').textContent = s;
-  document.getElementById('v-pro').textContent   = p;
-  document.getElementById('v-elite').textContent = e;
-  document.getElementById('v-hw').textContent    = h;
-  var mrr = s * 29 + p * 79 + e * 149 + h * 9;
-  document.getElementById('r-mrr').textContent  = '$' + mrr.toLocaleString();
-  document.getElementById('r-arr').textContent  = '$' + (mrr * 12).toLocaleString();
-  document.getElementById('r-subs').textContent = (s + p + e + h).toLocaleString();
 }
 
 // ── Stripe Checkout ──────────────────────────────────────────
