@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE · Mass Contractor Loader · Foursquare</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0e0f0e; --surface:#161714; --surface2:#1e1f1c;
+    --border:#2a2b28; --border2:#363733;
+    --accent:#b8f073; --accent2:#7dd3a8;
+    --amber:#f5c842; --coral:#f07a5a; --blue:#6ab0f5;
+    --text:#e8e6df; --muted:#7a7870; --dim:#4a4946;
+    --mono:'IBM Plex Mono',monospace; --sans:'DM Sans',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh}
+  header{border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.08em}
+  .logo span{color:var(--muted)}
+  .hstat{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .hstat strong{color:var(--accent)}
+
+  .layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 53px)}
+
+  /* LEFT */
+  .left{border-right:1px solid var(--border);display:flex;flex-direction:column}
+  .sec{padding:16px 20px;border-bottom:1px solid var(--border)}
+  .sec-title{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+
+  label{font-size:11px;color:var(--muted);font-family:var(--mono);display:block;margin-bottom:4px}
+  input[type=text],input[type=password],select{
+    width:100%;background:var(--surface2);border:1px solid var(--border2);
+    color:var(--text);font-family:var(--sans);font-size:12px;
+    padding:8px 10px;border-radius:6px;outline:none;transition:border-color .15s;margin-bottom:10px
+  }
+  input:focus,select:focus{border-color:var(--accent)}
+  select option{background:var(--surface2)}
+
+  .checkbox-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;cursor:pointer}
+  .checkbox-row input[type=checkbox]{accent-color:var(--accent);width:14px;height:14px;cursor:pointer}
+  .checkbox-row span{font-size:12px;color:var(--text)}
+  .checkbox-row .sub{font-size:11px;color:var(--muted)}
+
+  .run-btn{
+    width:100%;padding:11px;background:var(--accent);color:#0e0f0e;
+    border:none;border-radius:6px;font-family:var(--mono);font-size:12px;
+    font-weight:500;cursor:pointer;letter-spacing:.04em;transition:opacity .15s;
+    margin-top:4px
+  }
+  .run-btn:hover{opacity:.88}
+  .run-btn:disabled{opacity:.4;cursor:not-allowed}
+
+  .key-hint{font-size:11px;color:var(--dim);line-height:1.5;margin-top:8px}
+  .key-hint a{color:var(--blue);text-decoration:none}
+  .key-hint a:hover{text-decoration:underline}
+
+  /* RIGHT */
+  .right{display:flex;flex-direction:column}
+  .right-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;border-bottom:1px solid var(--border)
+  }
+  .right-title{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .action-row{display:flex;gap:8px}
+  .sec-btn{
+    font-family:var(--mono);font-size:11px;color:var(--accent2);
+    background:transparent;border:1px solid #1a3a2a;padding:6px 14px;
+    border-radius:20px;cursor:pointer;transition:all .15s
+  }
+  .sec-btn:hover{background:#1a3a2a}
+  .sec-btn.amber{color:var(--amber);border-color:#3a2a0e}
+  .sec-btn.amber:hover{background:#3a2a0e}
+
+  /* STATS */
+  .stats-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:16px 24px;border-bottom:1px solid var(--border)}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px}
+  .sv{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--accent)}
+  .sl{font-size:11px;color:var(--muted);margin-top:2px}
+
+  /* LOG */
+  .log-wrap{padding:0 24px;border-bottom:1px solid var(--border);max-height:130px;overflow-y:auto}
+  .log-entry{font-family:var(--mono);font-size:11px;padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:10px}
+  .log-entry:last-child{border-bottom:none}
+  .lt{color:var(--dim);min-width:60px}
+  .lm.ok{color:var(--accent2)}
+  .lm.warn{color:var(--amber)}
+  .lm.err{color:var(--coral)}
+  .lm.info{color:var(--muted)}
+
+  /* TABLE */
+  .table-wrap{flex:1;overflow-y:auto;padding:24px}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:left;
+    padding:8px 10px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+  td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:middle}
+  tr:hover td{background:var(--surface2)}
+  .trade-pill{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:20px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);white-space:nowrap}
+  .lp1{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:20px;background:#1a2e1a;color:var(--accent2);border:1px solid #2a4a2a}
+  .lp2{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:20px;background:#2e1a0e;color:var(--amber);border:1px solid #4a2e0e}
+  .stars{color:var(--amber)}
+  .rm{background:none;border:none;color:var(--dim);cursor:pointer;font-size:14px;padding:2px 6px;border-radius:4px}
+  .rm:hover{color:var(--coral);background:#2e1a0e}
+  .biz-name{color:var(--text);font-weight:500}
+  .pb-wrap{padding:0 24px 12px}
+  .pb-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:5px}
+  .pb-track{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+  .pb-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s}
+
+  .empty{text-align:center;padding:60px 20px;color:var(--dim)}
+  .empty .big{font-family:var(--mono);font-size:36px;color:var(--border2);margin-bottom:12px}
+  .empty p{font-size:13px;line-height:1.6}
+
+  /* SETUP GUIDE */
+  .setup-card{background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:20px;margin:24px}
+  .sc-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:12px}
+  .sc-step{display:flex;gap:10px;margin-bottom:10px;font-size:12px;color:var(--muted);line-height:1.6}
+  .sc-n{font-family:var(--mono);font-size:10px;color:var(--accent);min-width:20px;margin-top:2px}
+  .sc-step a{color:var(--blue);text-decoration:none}
+  .sc-step a:hover{text-decoration:underline}
+  .sc-step strong{color:var(--text)}
+  .warn-box{background:#1f1a0e;border:1px solid #3a2e0e;border-radius:8px;padding:12px 14px;margin-top:12px;font-size:12px;color:var(--amber);line-height:1.6}
+  .warn-box strong{color:var(--text)}
+
+  select[multiple]{height:auto;padding:4px}
+  select[multiple] option{padding:6px 8px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">YSKAIPE <span>/</span> mass contractor loader</div>
+  <div class="hstat">loaded: <strong id="hdr-count">0</strong> contractors</div>
+</header>
+
+<div class="layout">
+
+  <!-- LEFT PANEL -->
+  <div class="left">
+
+    <div class="sec">
+      <div class="sec-title">Foursquare Places API key</div>
+      <label>Paste your Foursquare API key</label>
+      <input type="password" id="api-key" placeholder="fsq3...">
+      <div class="key-hint">
+        Need a key? <a href="https://foursquare.com/developer" target="_blank">Get Foursquare API key &rarr;</a><br>
+        Free tier: 10,000 calls/month · this job costs $0.
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Trades to search</div>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="plumber" checked><span>Plumber</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="electrician" checked><span>Electrician</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="HVAC contractor"><span>HVAC</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="roofer"><span>Roofer</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="general contractor"><span>General contractor</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="landscaper"><span>Landscaper</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="painter contractor"><span>Painter</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="trade-cb" value="flooring contractor"><span>Flooring</span></label>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">NC cities</div>
+      <label class="checkbox-row"><input type="checkbox" class="city-cb" value="Charlotte, NC" checked><span>Charlotte</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="city-cb" value="Raleigh, NC" checked><span>Raleigh</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="city-cb" value="Durham, NC"><span>Durham</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="city-cb" value="Cary, NC"><span>Cary</span></label>
+      <label class="checkbox-row"><input type="checkbox" class="city-cb" value="Greensboro, NC"><span>Greensboro</span></label>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Filters</div>
+      <label>Minimum star rating</label>
+      <select id="min-stars">
+        <option value="4.0">4.0+</option>
+        <option value="4.3">4.3+</option>
+        <option value="4.5">4.5+</option>
+        <option value="3.5">3.5+ (wider net)</option>
+      </select>
+      <label>Max results per search</label>
+      <select id="max-results">
+        <option value="10">10 per search</option>
+        <option value="20" selected>20 per search</option>
+      </select>
+    </div>
+
+    <div class="sec">
+      <button class="run-btn" id="run-btn" onclick="runSearch()">Run search &rarr;</button>
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+    <div class="right-header">
+      <div class="right-title">Results</div>
+      <div class="action-row">
+        <button class="sec-btn" onclick="clearAll()">Clear</button>
+        <button class="sec-btn amber" onclick="exportCSV()">Export CSV &rarr;</button>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat"><div class="sv" id="s-total">0</div><div class="sl">Total found</div></div>
+      <div class="stat"><div class="sv" id="s-qual">0</div><div class="sl">Qualified</div></div>
+      <div class="stat"><div class="sv" id="s-l1">0</div><div class="sl">Letter 1</div></div>
+      <div class="stat"><div class="sv" id="s-l2">0</div><div class="sl">Letter 2</div></div>
+      <div class="stat"><div class="sv" id="s-skip">0</div><div class="sl">Skipped</div></div>
+    </div>
+
+    <div class="pb-wrap">
+      <div class="pb-label"><span id="pb-status">Ready</span><span id="pb-pct">0%</span></div>
+      <div class="pb-track"><div class="pb-fill" id="pb-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="log-wrap" id="log-wrap"></div>
+
+    <div class="table-wrap" id="table-wrap">
+      <div class="setup-card">
+        <div class="sc-title">Get set up in 3 minutes</div>
+        <div class="sc-step"><span class="sc-n">01</span><span>Go to <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a> and sign in with your Google account.</span></div>
+        <div class="sc-step"><span class="sc-n">02</span><span>Create a new project (or use an existing one). Click <strong>Enable APIs</strong> → search <strong>Places API</strong> → Enable it.</span></div>
+        <div class="sc-step"><span class="sc-n">03</span><span>Go to <strong>Credentials</strong> → <strong>Create Credentials</strong> → <strong>API Key</strong>. Copy the key.</span></div>
+        <div class="sc-step"><span class="sc-n">04</span><span>Add a billing account (required even for free tier — Google won't charge under $200/mo). This entire job costs under $1.</span></div>
+        <div class="sc-step"><span class="sc-n">05</span><span>Paste your key in the left panel, select trades + cities, hit <strong>Run search</strong>. Results load in ~30 seconds.</span></div>
+        <div class="warn-box">
+          <strong>Important:</strong> This tool calls the Google Places API directly from your browser. Your API key is never sent anywhere except Google. Results are stored locally in your browser — nothing leaves your machine except the API calls.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let results = [];
+let skipped = 0;
+let searchTotal = 0;
+let searchDone  = 0;
+
+function log(msg, type='info') {
+  const wrap = document.getElementById('log-wrap');
+  const now  = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const div  = document.createElement('div');
+  div.className = 'log-entry';
+  div.innerHTML = `<span class="lt">${now}</span><span class="lm ${type}">${msg}</span>`;
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function updateStats() {
+  const qual = results.length;
+  const l1   = results.filter(r=>r.letter==='L1').length;
+  const l2   = results.filter(r=>r.letter==='L2').length;
+  document.getElementById('s-total').textContent = qual + skipped;
+  document.getElementById('s-qual').textContent  = qual;
+  document.getElementById('s-l1').textContent    = l1;
+  document.getElementById('s-l2').textContent    = l2;
+  document.getElementById('s-skip').textContent  = skipped;
+  document.getElementById('hdr-count').textContent = qual;
+  if(searchTotal>0) {
+    const pct = Math.round((searchDone/searchTotal)*100);
+    document.getElementById('pb-fill').style.width = pct+'%';
+    document.getElementById('pb-pct').textContent  = pct+'%';
+    document.getElementById('pb-status').textContent = searchDone<searchTotal ? `Searching ${searchDone}/${searchTotal}...` : 'Complete';
+  }
+  renderTable();
+}
+
+function assignLetter(place) {
+  const rating = place.rating || 0;
+  const reviews= place.user_ratings_total || 0;
+  const name   = (place.name||'').toLowerCase();
+  const chains = ['mr. rooter','roto-rooter','servicemaster','servpro','1-800','mr. electric','ace hardware','the home depot','lowe'];
+  if(chains.some(c=>name.includes(c))) return null;
+  if(rating < 3.5) return null;
+  if(reviews < 10) return null;
+  if(rating < 4.0 && reviews < 50) return null;
+  if(rating >= 4.5 && reviews >= 50) return 'L1';
+  if(rating >= 4.0 && reviews >= 20) return 'L1';
+  return 'L2';
+}
+
+function geocodeCity(city) {
+  const coords = {
+    'Charlotte, NC':   {lat:35.2271, lng:-80.8431},
+    'Raleigh, NC':     {lat:35.7796, lng:-78.6382},
+    'Durham, NC':      {lat:35.9940, lng:-78.8986},
+    'Cary, NC':        {lat:35.7915, lng:-78.7811},
+    'Greensboro, NC':  {lat:36.0726, lng:-79.7920},
+  };
+  return coords[city] || {lat:35.2271, lng:-80.8431};
+}
+
+async function searchPlaces(apiKey, trade, city, minStars, maxRes) {
+  const loc = geocodeCity(city);
+  const query = encodeURIComponent(trade);
+  const fsqUrl = `https://api.foursquare.com/v3/places/search?query=${query}&ll=${loc.lat},${loc.lng}&radius=25000&limit=${maxRes}&fields=fsq_id,name,location,tel,website,categories`;
+  const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(fsqUrl);
+
+  let data;
+  try {
+    const r = await fetch(proxyUrl, {
+      headers: { 'Authorization': apiKey, 'Accept': 'application/json' }
+    });
+    if(r.status === 401) { log('API key rejected — check your Foursquare key', 'err'); return []; }
+    if(!r.ok) {
+      const txt = await r.text().catch(()=>'');
+      log(`Foursquare error ${r.status} for ${trade} / ${city} · ${txt.slice(0,60)}`, 'err');
+      return [];
+    }
+    data = await r.json();
+  } catch(e) {
+    log(`Network error for ${trade} / ${city}: ${e.message}`, 'err');
+    return [];
+  }
+
+  const places = (data.results || []).slice(0, maxRes);
+  if(!places.length) { log(`No results for ${trade} / ${city}`, 'warn'); return []; }
+
+  const chains = ['mr. rooter','roto-rooter','servicemaster','servpro','1-800','mr. electric','home depot','lowe'];
+  const qualified = [];
+
+  for(const p of places) {
+    const name = (p.name || '').toLowerCase();
+    if(chains.some(c=>name.includes(c))) { skipped++; continue; }
+    const loc2   = p.location || {};
+    const addr   = [loc2.address, loc2.locality, loc2.region].filter(Boolean).join(', ');
+    const cityStr= loc2.locality || city.split(',')[0];
+    const zip    = loc2.postcode || '';
+    qualified.push({
+      id:      p.fsq_id,
+      name:    p.name,
+      address: addr,
+      city:    cityStr,
+      zip,
+      trade,
+      rating:  'verify',
+      reviews: 0,
+      letter:  'L1',
+      phone:   p.tel || '',
+      email:   '',
+      website: p.website || '',
+      note:    `Verify stars on Google Maps · ${cityStr}`,
+    });
+  }
+  return qualified;
+}
+
+async function runSearch() {
+  const apiKey = document.getElementById('api-key').value.trim();
+  if(!apiKey) { alert('Please paste your Foursquare Places API key first.'); return; }
+
+  const trades  = [...document.querySelectorAll('.trade-cb:checked')].map(c=>c.value);
+  const cities  = [...document.querySelectorAll('.city-cb:checked')].map(c=>c.value);
+  const minStars= document.getElementById('min-stars').value;
+  const maxRes  = parseInt(document.getElementById('max-results').value);
+
+  if(!trades.length || !cities.length) { alert('Select at least one trade and one city.'); return; }
+
+  results   = [];
+  skipped   = 0;
+  searchDone= 0;
+  searchTotal = trades.length * cities.length;
+
+  document.getElementById('run-btn').disabled = true;
+  document.getElementById('log-wrap').innerHTML = '';
+  document.getElementById('table-wrap').innerHTML = '';
+
+  log(`Starting ${searchTotal} searches across ${trades.length} trades × ${cities.length} cities`, 'info');
+
+  for(const trade of trades) {
+    for(const city of cities) {
+      log(`Searching: ${trade} · ${city}`, 'info');
+      const found = await searchPlaces(apiKey, trade, city, minStars, maxRes);
+      results.push(...found);
+      searchDone++;
+      log(`Found ${found.length} qualified · ${skipped} skipped so far`, found.length>0?'ok':'warn');
+      updateStats();
+      await new Promise(r=>setTimeout(r,300));
+    }
+  }
+
+  const dupes = new Map();
+  results = results.filter(r => {
+    if(dupes.has(r.id)) return false;
+    dupes.set(r.id, true);
+    return true;
+  });
+
+  log(`Done · ${results.length} unique qualified contractors loaded`, 'ok');
+  document.getElementById('run-btn').disabled = false;
+  updateStats();
+}
+
+function renderTable() {
+  const wrap = document.getElementById('table-wrap');
+  if(!results.length) {
+    wrap.innerHTML = '<div class="empty"><div class="big">[ ]</div><p>No results yet. Configure your search and hit Run.</p></div>';
+    return;
+  }
+  const rows = results.map(r=>`
+    <tr>
+      <td class="biz-name">${r.name}</td>
+      <td><span class="trade-pill">${r.trade}</span></td>
+      <td>${r.city} ${r.zip?'· '+r.zip:''}</td>
+      <td style="color:var(--amber);font-size:11px">verify on Maps</td>
+      <td><span class="${r.letter==='L1'?'lp1':'lp2'}">${r.letter}</span></td>
+      <td style="color:var(--dim);font-size:11px;max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${r.address}">${r.address}</td>
+      <td><button class="rm" onclick="removeResult('${r.id}')">×</button></td>
+    </tr>`).join('');
+
+  wrap.innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Business</th><th>Trade</th><th>Location</th>
+        <th>Rating</th><th>Letter</th><th>Address</th><th></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function removeResult(id) {
+  results = results.filter(r=>r.id!==id);
+  skipped++;
+  updateStats();
+}
+
+function clearAll() {
+  if(!results.length || confirm('Clear all results?')) {
+    results=[]; skipped=0; searchDone=0; searchTotal=0;
+    document.getElementById('log-wrap').innerHTML='';
+    updateStats();
+  }
+}
+
+function exportCSV() {
+  if(!results.length){ alert('No results to export.'); return; }
+  const headers = ['Business Name','Trade','City','ZIP','Rating','Letter Type','Address','Phone','Website','Email','Note'];
+  const rows = results.map(r=>[
+    r.name,r.trade,r.city,r.zip,r.rating,
+    r.letter==='L1'?'Letter 1 - Direct':'Letter 2 - Pain-first',
+    r.address,r.phone,r.website||'',r.email,r.note
+  ].map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(','));
+  const csv=[headers.join(','),...rows].join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='YSKAIPE_Contractors_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+  log(`Exported ${results.length} contractors to CSV`, 'ok');
+}
+
+renderTable();
+</script>
+</body>
+</html>
