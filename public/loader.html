@@ -295,7 +295,7 @@ function geocodeCity(city) {
 async function searchPlaces(apiKey, trade, city, minStars, maxRes) {
   const loc = geocodeCity(city);
   const query = encodeURIComponent(trade);
-  const url = `/api/fsq-search?query=${query}&ll=${loc.lat},${loc.lng}&radius=25000&limit=${maxRes}`;
+  const url = `/api/pros?trade=${encodeURIComponent(trade)}&zip=${getZipForCity(city)}`;
 
   let data;
   try {
@@ -455,3 +455,15 @@ renderTable();
 </script>
 </body>
 </html>
+<script>
+function getZipForCity(city) {
+  const zips = {
+    'Charlotte, NC': '28202',
+    'Raleigh, NC': '27601',
+    'Durham, NC': '27701',
+    'Cary, NC': '27511',
+    'Greensboro, NC': '27401',
+  };
+  return zips[city] || '28202';
+}
+</script>
