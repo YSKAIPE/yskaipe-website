@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE · Founding Member — Lock Your Rate Forever</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --dark: #141412;
+    --ink: #2a2924;
+    --muted: #7a7868;
+    --dim: #b0ae9e;
+    --accent: #c8a84b;
+    --accent-light: #f5ecd4;
+    --accent-dark: #8a6e28;
+    --green: #2d6a4f;
+    --green-light: #e8f5ee;
+    --border: #e2dfd4;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: .5;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 900; color: var(--dark); letter-spacing: -.02em; text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-link { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .15s; }
+  .nav-link:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500; padding: 8px 18px;
+    background: var(--dark); color: var(--bg);
+    border-radius: 40px; text-decoration: none;
+    transition: opacity .15s;
+  }
+  .nav-cta:hover { opacity: .85; }
+
+  /* HERO */
+  .hero {
+    max-width: 860px; margin: 0 auto;
+    padding: 80px 48px 60px;
+    text-align: center;
+    animation: fadeUp .7s ease both;
+  }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+  .founding-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-light); border: 1px solid var(--accent);
+    color: var(--accent-dark); font-size: 12px; font-weight: 500;
+    padding: 6px 16px; border-radius: 40px; margin-bottom: 32px;
+    letter-spacing: .04em; text-transform: uppercase;
+    animation: fadeUp .5s ease both;
+  }
+  .badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.85)} }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 7vw, 72px);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.05;
+    letter-spacing: -.03em;
+    margin-bottom: 24px;
+    animation: fadeUp .6s .1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 18px; color: var(--muted); line-height: 1.65;
+    max-width: 580px; margin: 0 auto 40px;
+    font-weight: 300;
+    animation: fadeUp .6s .2s ease both;
+  }
+
+  .deadline-strip {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--dark); color: var(--bg);
+    font-size: 13px; font-weight: 500;
+    padding: 10px 24px; border-radius: 40px;
+    margin-bottom: 16px;
+    animation: fadeUp .6s .3s ease both;
+  }
+  .deadline-strip span { color: var(--accent); }
+
+  .spots-left {
+    font-size: 12px; color: var(--muted);
+    animation: fadeUp .6s .35s ease both;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 48px; height: 1px; background: var(--border);
+    margin: 48px auto;
+  }
+
+  /* PLANS */
+  .plans-section { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+  .plans-intro {
+    text-align: center; margin-bottom: 48px;
+    animation: fadeUp .6s .2s ease both;
+  }
+  .plans-intro h2 {
+    font-family: var(--serif); font-size: 36px; font-weight: 700;
+    color: var(--dark); margin-bottom: 10px; letter-spacing: -.02em;
+  }
+  .plans-intro p { font-size: 15px; color: var(--muted); }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .plan-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    position: relative;
+    transition: transform .2s, box-shadow .2s;
+    animation: fadeUp .6s ease both;
+  }
+  .plan-card:nth-child(1) { animation-delay: .1s; }
+  .plan-card:nth-child(2) { animation-delay: .2s; transform: translateY(-12px); }
+  .plan-card:nth-child(3) { animation-delay: .3s; }
+  .plan-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+  .plan-card.featured:hover { transform: translateY(-16px); }
+  .plan-card.featured {
+    border-color: var(--accent);
+    border-width: 2px;
+    box-shadow: 0 20px 60px rgba(200,168,75,.15);
+  }
+
+  .popular-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: white;
+    font-size: 11px; font-weight: 500; padding: 4px 14px;
+    border-radius: 20px; letter-spacing: .06em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .plan-icon { font-size: 28px; margin-bottom: 16px; }
+  .plan-name {
+    font-family: var(--serif); font-size: 22px; font-weight: 700;
+    color: var(--dark); margin-bottom: 4px;
+  }
+  .plan-tagline { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+  .price-block { margin-bottom: 8px; }
+  .founding-price {
+    font-family: var(--serif); font-size: 48px; font-weight: 900;
+    color: var(--dark); line-height: 1; letter-spacing: -.03em;
+  }
+  .founding-price sup { font-size: 22px; vertical-align: super; font-weight: 700; }
+  .founding-price sub { font-size: 16px; font-weight: 400; color: var(--muted); }
+  .original-price {
+    font-size: 14px; color: var(--dim);
+    text-decoration: line-through; margin-bottom: 4px;
+  }
+  .saving-pill {
+    display: inline-block;
+    background: var(--green-light); color: var(--green);
+    font-size: 11px; font-weight: 500; padding: 3px 10px;
+    border-radius: 20px; margin-bottom: 20px;
+  }
+
+  .lock-line {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 500; color: var(--accent-dark);
+    background: var(--accent-light); padding: 8px 12px;
+    border-radius: 8px; margin-bottom: 24px;
+  }
+  .lock-icon { font-size: 13px; }
+
+  .plan-features { list-style: none; margin-bottom: 28px; }
+  .plan-features li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; color: var(--ink); padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .plan-features li:last-child { border-bottom: none; }
+  .check { color: var(--green); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+  .plan-btn {
+    display: block; width: 100%; padding: 14px;
+    text-align: center; font-size: 14px; font-weight: 500;
+    border-radius: 10px; text-decoration: none;
+    transition: all .15s; cursor: pointer; border: none;
+    font-family: var(--sans);
+  }
+  .plan-btn.primary {
+    background: var(--dark); color: white;
+  }
+  .plan-btn.primary:hover { background: var(--ink); }
+  .plan-btn.featured-btn {
+    background: var(--accent); color: white;
+  }
+  .plan-btn.featured-btn:hover { background: var(--accent-dark); }
+  .plan-btn.outline {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .plan-btn.outline:hover { background: var(--bg); }
+
+  /* WHAT'S INCLUDED */
+  .included-section {
+    background: var(--dark); color: var(--bg);
+    padding: 72px 48px;
+    margin-bottom: 0;
+  }
+  .included-inner { max-width: 900px; margin: 0 auto; }
+  .included-inner h2 {
+    font-family: var(--serif); font-size: 36px; font-weight: 700;
+    text-align: center; margin-bottom: 8px; letter-spacing: -.02em;
+  }
+  .included-inner h2 em { font-style: italic; color: var(--accent); }
+  .included-sub { text-align: center; color: #8a8878; font-size: 15px; margin-bottom: 48px; }
+
+  .included-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .included-item {
+    padding: 24px;
+    border: 1px solid #2a2924;
+    border-radius: 12px;
+  }
+  .ii-icon { font-size: 24px; margin-bottom: 12px; }
+  .ii-title { font-size: 15px; font-weight: 500; color: var(--bg); margin-bottom: 6px; }
+  .ii-desc { font-size: 13px; color: #8a8878; line-height: 1.6; }
+
+  /* FAIRNESS STRIP */
+  .fairness {
+    background: var(--accent-light);
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding: 28px 48px;
+    text-align: center;
+  }
+  .fairness p {
+    font-family: var(--serif); font-size: 20px; font-style: italic;
+    color: var(--accent-dark); max-width: 700px; margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* GUARANTEE */
+  .guarantee {
+    max-width: 700px; margin: 60px auto;
+    padding: 0 48px;
+    text-align: center;
+  }
+  .g-title { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+  .g-body { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--dim);
+  }
+  footer a { color: var(--dim); text-decoration: none; }
+  footer a:hover { color: var(--muted); }
+
+  /* FORM MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(20,20,18,.7);
+    z-index: 500;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 20px;
+    padding: 40px; width: 100%; max-width: 480px;
+    position: relative; animation: modalIn .25s ease;
+  }
+  @keyframes modalIn { from{opacity:0;transform:scale(.96)} to{opacity:1;transform:scale(1)} }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: none; border: none; font-size: 20px;
+    color: var(--dim); cursor: pointer;
+  }
+  .modal-plan-badge {
+    display: inline-block; background: var(--accent-light); color: var(--accent-dark);
+    font-size: 11px; font-weight: 500; padding: 4px 12px;
+    border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .05em;
+  }
+  .modal h3 { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+  .form-field { margin-bottom: 14px; }
+  .form-field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 5px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+  .form-field input, .form-field select {
+    width: 100%; padding: 11px 14px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-family: var(--sans); font-size: 14px; color: var(--ink);
+    background: var(--bg); outline: none; transition: border-color .15s;
+  }
+  .form-field input:focus, .form-field select:focus { border-color: var(--accent); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .submit-btn {
+    width: 100%; padding: 14px; background: var(--dark); color: white;
+    border: none; border-radius: 10px; font-family: var(--sans);
+    font-size: 15px; font-weight: 500; cursor: pointer;
+    transition: opacity .15s; margin-top: 8px;
+  }
+  .submit-btn:hover { opacity: .88; }
+  .form-note { font-size: 11px; color: var(--dim); text-align: center; margin-top: 10px; line-height: 1.5; }
+
+  @media(max-width:768px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 48px 24px 40px; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card.featured { transform: none; }
+    .plans-section { padding: 0 20px 60px; }
+    .included-grid { grid-template-columns: 1fr; }
+    .included-section { padding: 48px 24px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://yskaipe.com">ysk<span>AI</span>pe</a>
+  <div class="nav-right">
+    <a class="nav-link" href="https://yskaipe.com">Home</a>
+    <a class="nav-link" href="https://yskaipe.com/public/pro.html">Pro plans</a>
+    <a class="nav-cta" href="#plans">Lock my rate →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="founding-badge">
+    <div class="badge-dot"></div>
+    Founding member · NC 2026 · 50 spots only
+  </div>
+
+  <h1>Lock your rate.<br><em>Forever.</em></h1>
+
+  <p class="hero-sub">
+    The first 50 NC contractors who join YSKAIPE Pro keep their founding rate permanently —
+    no matter what pricing does in the future. This is a one-time opportunity.
+  </p>
+
+  <div class="deadline-strip">
+    Founding rates close <span>April 30, 2026 at midnight</span>
+  </div>
+  <div class="spots-left">After that, standard pricing applies. No exceptions.</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLANS -->
+<section class="plans-section" id="plans">
+  <div class="plans-intro">
+    <h2>Three tiers. One permanent discount.</h2>
+    <p>Pick the plan that fits your business today. Your rate locks forever on April 30.</p>
+  </div>
+
+  <div class="plans-grid">
+
+    <!-- STARTER -->
+    <div class="plan-card">
+      <div class="plan-icon">🔧</div>
+      <div class="plan-name">Founding Starter</div>
+      <div class="plan-tagline">For contractors testing the waters. Steady matched leads, zero risk.</div>
+      <div class="price-block">
+        <div class="original-price">Was $29/mo</div>
+        <div class="founding-price"><sup>$</sup>19<sub>/mo</sub></div>
+      </div>
+      <div class="saving-pill">Save $120/year · locked forever</div>
+      <div class="lock-line"><span class="lock-icon">🔒</span> Your rate never increases</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span>3 AI-matched leads per month</li>
+        <li><span class="check">✓</span>1 trade category</li>
+        <li><span class="check">✓</span>25-mile service radius</li>
+        <li><span class="check">✓</span>SMS lead notifications</li>
+        <li><span class="check">✓</span>Founding member badge on profile</li>
+        <li><span class="check">✓</span>Cancel anytime</li>
+      </ul>
+      <button class="plan-btn outline" onclick="openModal('Founding Starter','$19/mo — locked forever')">Lock Starter rate →</button>
+    </div>
+
+    <!-- PRO (FEATURED) -->
+    <div class="plan-card featured">
+      <div class="popular-badge">Most popular</div>
+      <div class="plan-icon">⚡</div>
+      <div class="plan-name">Founding Pro</div>
+      <div class="plan-tagline">The sweet spot for active contractors. More leads, more trades, priority matching.</div>
+      <div class="price-block">
+        <div class="original-price">Was $79/mo</div>
+        <div class="founding-price"><sup>$</sup>49<sub>/mo</sub></div>
+      </div>
+      <div class="saving-pill">Save $360/year · locked forever</div>
+      <div class="lock-line"><span class="lock-icon">🔒</span> Your rate never increases</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span>10 AI-matched leads per month</li>
+        <li><span class="check">✓</span>3 trade categories</li>
+        <li><span class="check">✓</span>50-mile service radius</li>
+        <li><span class="check">✓</span>SMS + push notifications</li>
+        <li><span class="check">✓</span>Priority match queue over Starter</li>
+        <li><span class="check">✓</span>Monthly performance dashboard</li>
+        <li><span class="check">✓</span>Founding member badge on profile</li>
+        <li><span class="check">✓</span>Cancel anytime</li>
+      </ul>
+      <button class="plan-btn featured-btn" onclick="openModal('Founding Pro','$49/mo — locked forever')">Lock Pro rate →</button>
+    </div>
+
+    <!-- ELITE -->
+    <div class="plan-card">
+      <div class="plan-icon">👑</div>
+      <div class="plan-name">Founding Elite</div>
+      <div class="plan-tagline">Maximum lead flow. First-mover advantage. Full network presence.</div>
+      <div class="price-block">
+        <div class="original-price">Was $149/mo</div>
+        <div class="founding-price"><sup>$</sup>99<sub>/mo</sub></div>
+      </div>
+      <div class="saving-pill">Save $600/year · locked forever</div>
+      <div class="lock-line"><span class="lock-icon">🔒</span> Your rate never increases</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span>Unlimited AI-matched leads</li>
+        <li><span class="check">✓</span>All trade categories</li>
+        <li><span class="check">✓</span>Unlimited service radius</li>
+        <li><span class="check">✓</span>First-look — beats all other tiers</li>
+        <li><span class="check">✓</span>Elite badge on public profile</li>
+        <li><span class="check">✓</span>Featured in Pro directory</li>
+        <li><span class="check">✓</span>Dedicated onboarding call</li>
+        <li><span class="check">✓</span>Priority support + account review</li>
+        <li><span class="check">✓</span>Founding member badge on profile</li>
+        <li><span class="check">✓</span>Cancel anytime</li>
+      </ul>
+      <button class="plan-btn primary" onclick="openModal('Founding Elite','$99/mo — locked forever')">Lock Elite rate →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAIRNESS STRIP -->
+<div class="fairness">
+  <p>"Fair price. Smart choice. Everybody wins." — We stand for fairness always, even if we make less money. Your founding rate is a promise we will keep.</p>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included-section">
+  <div class="included-inner">
+    <h2>Everything in <em>every</em> plan</h2>
+    <p class="included-sub">No per-lead fees. No bidding wars. No surprises. Ever.</p>
+    <div class="included-grid">
+      <div class="included-item">
+        <div class="ii-icon">🎯</div>
+        <div class="ii-title">Pre-scoped leads</div>
+        <div class="ii-desc">Every homeowner already has a verified fair-rate estimate before you arrive. No more educating skeptical customers from scratch.</div>
+      </div>
+      <div class="included-item">
+        <div class="ii-icon">🛡</div>
+        <div class="ii-title">No per-lead fees. Ever.</div>
+        <div class="ii-desc">Flat monthly rate. Win every job you claim and keep 100% of it. We never take a cut of your earnings.</div>
+      </div>
+      <div class="included-item">
+        <div class="ii-icon">⚡</div>
+        <div class="ii-title">Exclusive leads</div>
+        <div class="ii-desc">You're not competing against 8 other contractors. One claim, one job. First tap wins.</div>
+      </div>
+      <div class="included-item">
+        <div class="ii-icon">📍</div>
+        <div class="ii-title">ZIP-matched jobs</div>
+        <div class="ii-desc">Leads match your trade and service area. No irrelevant jobs, no wasted notifications.</div>
+      </div>
+      <div class="included-item">
+        <div class="ii-icon">🤖</div>
+        <div class="ii-title">Claude AI powered</div>
+        <div class="ii-desc">NC 2026 verified rates power every estimate. The homeowner arrives knowing what fair looks like — and so do you.</div>
+      </div>
+      <div class="included-item">
+        <div class="ii-icon">🏅</div>
+        <div class="ii-title">Founding member badge</div>
+        <div class="ii-desc">Permanent recognition on your public profile. Homeowners see you as a trusted original — because you are.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<div class="guarantee">
+  <div class="g-title">Cancel anytime. No questions asked.</div>
+  <div class="g-body">Your founding rate locks in permanently the moment you subscribe. If YSKAIPE ever isn't working for your business, cancel with one click — no penalty, no hassle. We earn your loyalty every month or not at all.</div>
+</div>
+
+<footer>
+  <span>© 2026 YSKAIPE · NC Home Services Market Intelligence</span>
+  <span>
+    <a href="https://yskaipe.com">Home</a> ·
+    <a href="https://yskaipe.com/public/pro.html">Pro plans</a> ·
+    <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a>
+  </span>
+</footer>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-plan-badge" id="modal-badge">Founding Pro</div>
+    <h3>Lock your founding rate</h3>
+    <p class="modal-sub" id="modal-sub">$49/mo · locked forever · cancel anytime</p>
+    <div class="form-row">
+      <div class="form-field"><label>First name</label><input type="text" id="f-first" placeholder="Mike"></div>
+      <div class="form-field"><label>Last name</label><input type="text" id="f-last" placeholder="Torres"></div>
+    </div>
+    <div class="form-field"><label>Business name</label><input type="text" id="f-biz" placeholder="Torres Plumbing LLC"></div>
+    <div class="form-field"><label>Email</label><input type="email" id="f-email" placeholder="mike@torresplumbing.com"></div>
+    <div class="form-field"><label>Phone (for lead SMS)</label><input type="tel" id="f-phone" placeholder="704-555-0191"></div>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Primary trade</label>
+        <select id="f-trade">
+          <option value="">Select...</option>
+          <option>Plumbing</option><option>Electrical</option><option>HVAC</option>
+          <option>Roofing</option><option>Carpentry</option><option>Painting</option>
+          <option>Flooring</option><option>Landscaping</option><option>General Contractor</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Service ZIP</label><input type="text" id="f-zip" placeholder="28202" maxlength="5"></div>
+    </div>
+    <button class="submit-btn" onclick="submitForm()">Continue to secure checkout →</button>
+    <div class="form-note">🔒 Stripe handles billing · your card is never stored on YSKAIPE servers · cancel anytime</div>
+  </div>
+</div>
+
+<script>
+function openModal(plan, sub) {
+  document.getElementById('modal-badge').textContent = plan;
+  document.getElementById('modal-sub').textContent = sub;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if(e.target === document.getElementById('modal')) closeModal();
+}
+function submitForm() {
+  const first = document.getElementById('f-first').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const trade = document.getElementById('f-trade').value;
+  if(!first || !email || !trade) {
+    alert('Please fill in your name, email, and trade to continue.');
+    return;
+  }
+  // Route to your Stripe checkout or pro signup page
+  window.location.href = 'https://www.yskaipe.com/public/pro.html#signup';
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>

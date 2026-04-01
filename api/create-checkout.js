@@ -11,6 +11,10 @@ const PRICE_IDS = {
   Starter: process.env.STRIPE_PRICE_STARTER, // $29/mo
   Pro:     process.env.STRIPE_PRICE_PRO,     // $79/mo
   Elite:   process.env.STRIPE_PRICE_ELITE,   // $149/mo
+  // Founding member tiers
+  FoundingStarter: process.env.STRIPE_PRICE_FOUNDING_STARTER, // $19/mo
+  FoundingPro:     process.env.STRIPE_PRICE_FOUNDING_PRO,     // $49/mo
+  FoundingElite:   process.env.STRIPE_PRICE_FOUNDING_ELITE,   // $99/mo
   // Homeowner tier
   Power:   process.env.STRIPE_PRICE_POWER,   // $9/mo
 };
