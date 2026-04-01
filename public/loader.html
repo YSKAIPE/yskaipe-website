@@ -293,9 +293,8 @@ function geocodeCity(city) {
 }
 
 async function searchPlaces(apiKey, trade, city, minStars, maxRes) {
-  const loc = geocodeCity(city);
-  const query = encodeURIComponent(trade);
-  const url = `/api/pros?trade=${encodeURIComponent(trade)}&zip=${getZipForCity(city)}`;
+  const zip = getZipForCity(city);
+  const url = `/api/pros?trade=${encodeURIComponent(trade)}&zip=${zip}`;
 
   let data;
   try {
@@ -311,12 +310,7 @@ async function searchPlaces(apiKey, trade, city, minStars, maxRes) {
     return [];
   }
 
-  if(data.error) {
-    log(`Foursquare error for ${trade} / ${city}: ${data.error}`, 'err');
-    return [];
-  }
-
-  const places = (data.results || []).slice(0, maxRes);
+  const places = (data.pros || []).slice(0, maxRes);
   if(!places.length) { log(`No results for ${trade} / ${city}`, 'warn'); return []; }
 
   const chains = ['mr. rooter','roto-rooter','servicemaster','servpro','1-800','mr. electric','home depot','lowe'];
@@ -325,27 +319,38 @@ async function searchPlaces(apiKey, trade, city, minStars, maxRes) {
   for(const p of places) {
     const name = (p.name || '').toLowerCase();
     if(chains.some(c=>name.includes(c))) { skipped++; continue; }
-    const loc2   = p.location || {};
-    const addr   = [loc2.address, loc2.locality, loc2.region].filter(Boolean).join(', ');
-    const cityStr= loc2.locality || city.split(',')[0];
-    const zip    = loc2.postcode || '';
+    const addr    = p.address || '';
+    const cityStr = p.city || city.split(',')[0];
+    const zipMatch = addr.match(/\d{5}/);
+    const zip2    = zipMatch ? zipMatch[0] : '';
     qualified.push({
-      id:      p.fsq_id,
+      id:      Math.random().toString(36).slice(2),
       name:    p.name,
       address: addr,
       city:    cityStr,
-      zip,
+      zip:     zip2,
       trade,
       rating:  'verify',
       reviews: 0,
       letter:  'L1',
-      phone:   p.tel || '',
+      phone:   p.phone || '',
       email:   '',
       website: p.website || '',
       note:    `Verify stars on Google Maps · ${cityStr}`,
     });
   }
   return qualified;
+}
+
+function getZipForCity(city) {
+  const zips = {
+    'Charlotte, NC': '28202',
+    'Raleigh, NC':   '27601',
+    'Durham, NC':    '27701',
+    'Cary, NC':      '27511',
+    'Greensboro, NC':'27401',
+  };
+  return zips[city] || '28202';
 }
 
 async function runSearch() {
@@ -455,15 +460,3 @@ renderTable();
 </script>
 </body>
 </html>
-<script>
-function getZipForCity(city) {
-  const zips = {
-    'Charlotte, NC': '28202',
-    'Raleigh, NC': '27601',
-    'Durham, NC': '27701',
-    'Cary, NC': '27511',
-    'Greensboro, NC': '27401',
-  };
-  return zips[city] || '28202';
-}
-</script>
