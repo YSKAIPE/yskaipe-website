@@ -87,6 +87,23 @@
                 background: rgba(196, 154, 53, 0.07);
                 color: var(--amber);
             }
+            nav a.nav-why {
+                font-size: 0.75rem;
+                font-weight: 500;
+                letter-spacing: 0.09em;
+                text-transform: uppercase;
+                color: var(--accent2);
+                text-decoration: none;
+                padding: 0.4rem 0.85rem;
+                border: 1px solid rgba(58, 107, 71, 0.35);
+                border-radius: 2px;
+                transition: border-color 0.2s, color 0.2s, background 0.2s;
+                white-space: nowrap;
+            }
+            nav a.nav-why:hover {
+                border-color: var(--accent2);
+                background: rgba(58, 107, 71, 0.06);
+            }
             nav a.nav-cta {
                 font-size: 0.8rem;
                 font-weight: 500;
@@ -169,16 +186,10 @@
             .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(184,92,44,0.3); }
             .btn-pro-hero { font-family:"DM Sans",sans-serif; font-size:0.85rem; font-weight:600; letter-spacing:0.05em; background:transparent; color:var(--amber); border:1px solid rgba(212,133,26,0.35); padding:0.9rem 1.5rem; border-radius:2px; text-decoration:none; transition:all 0.2s; display:inline-block; }
             .btn-pro-hero:hover { background:rgba(212,133,26,0.1); border-color:var(--amber); }
-
-            /* NEW — Mission CTA in hero */
-            .btn-mission-hero {
-                font-family:"DM Sans",sans-serif; font-size:0.85rem; font-weight:500;
-                letter-spacing:0.05em; background:transparent; color:var(--gold);
-                border:1px solid rgba(196,154,53,0.35); padding:0.9rem 1.5rem;
-                border-radius:2px; text-decoration:none; transition:all 0.2s; display:inline-block;
-            }
+            .btn-mission-hero { font-family:"DM Sans",sans-serif; font-size:0.85rem; font-weight:500; letter-spacing:0.05em; background:transparent; color:var(--gold); border:1px solid rgba(196,154,53,0.35); padding:0.9rem 1.5rem; border-radius:2px; text-decoration:none; transition:all 0.2s; display:inline-block; }
             .btn-mission-hero:hover { background:rgba(196,154,53,0.1); border-color:var(--gold); }
-
+            .btn-why-hero { font-family:"DM Sans",sans-serif; font-size:0.85rem; font-weight:500; letter-spacing:0.05em; background:transparent; color:#4fa86a; border:1px solid rgba(79,168,106,0.35); padding:0.9rem 1.5rem; border-radius:2px; text-decoration:none; transition:all 0.2s; display:inline-block; }
+            .btn-why-hero:hover { background:rgba(58,107,71,0.1); border-color:#4fa86a; }
             .scroll-hint { font-size:0.75rem; color:rgba(242,239,233,0.4); letter-spacing:0.08em; text-transform:uppercase; font-family:"DM Mono",monospace; }
             .hero-stat-row { display:flex; gap:2.2rem; margin-top:2.8rem; padding-top:2rem; border-top:1px solid rgba(242,239,233,0.07); flex-wrap:wrap; }
             .hsr-num { font-family:"Bebas Neue",sans-serif; font-size:2rem; color:var(--gold); line-height:1; }
@@ -205,19 +216,41 @@
             .mission-features { list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.5rem; }
             .mission-features li { font-size:0.82rem; color:rgba(220,216,208,0.75); display:flex; align-items:flex-start; gap:0.6rem; line-height:1.5; }
             .mission-features li::before { content:'→'; font-family:"DM Mono",monospace; font-size:0.72rem; color:var(--gold); flex-shrink:0; margin-top:1px; }
-            .btn-mission-strip {
-                display: inline-block;
-                background: var(--gold); color: var(--dark1);
-                font-family:"DM Sans",sans-serif; font-weight:700; font-size:0.82rem;
-                letter-spacing:0.06em; text-transform:uppercase;
-                padding: 0.75rem 1.5rem; border-radius:2px; text-decoration:none;
-                transition: background 0.2s, transform 0.15s;
-            }
+            .btn-mission-strip { display: inline-block; background: var(--gold); color: var(--dark1); font-family:"DM Sans",sans-serif; font-weight:700; font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase; padding: 0.75rem 1.5rem; border-radius:2px; text-decoration:none; transition: background 0.2s, transform 0.15s; }
             .btn-mission-strip:hover { background:var(--amber3); transform:translateY(-1px); }
             .mission-feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
             .mission-feat-item { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:var(--r); padding:0.9rem; }
             .mission-feat-num { font-family:"Bebas Neue",sans-serif; font-size:1.4rem; color:rgba(196,154,53,0.25); line-height:1; margin-bottom:4px; }
             .mission-feat-title { font-size:0.78rem; font-weight:500; color:rgba(245,242,236,0.7); line-height:1.3; }
+
+            /* ── WHY YSKAIPE CALLOUT ── */
+            .why-callout {
+                background: var(--dark1);
+                border-top: 1px solid rgba(79,168,106,0.15);
+                border-bottom: 1px solid rgba(79,168,106,0.15);
+                padding: 2.5rem 2rem;
+            }
+            .why-callout-inner {
+                max-width: 1000px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+            .why-callout-left { flex: 1; min-width: 260px; }
+            .why-callout-eyebrow { font-family:"DM Mono",monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:#4fa86a; margin-bottom:0.5rem; }
+            .why-callout-headline { font-family:"Bebas Neue",sans-serif; font-size:clamp(1.5rem,3vw,2.2rem); letter-spacing:0.03em; line-height:1; color:var(--paper); margin-bottom:0.5rem; }
+            .why-callout-headline span { color:#4fa86a; }
+            .why-callout-body { font-size:0.85rem; font-weight:300; color:rgba(220,216,208,0.7); line-height:1.65; max-width:520px; }
+            .why-scores { display:flex; gap:1.5rem; flex-wrap:wrap; }
+            .why-score-item { text-align:center; }
+            .why-score-val { font-family:"Bebas Neue",sans-serif; font-size:1.6rem; color:#4fa86a; line-height:1; }
+            .why-score-label { font-family:"DM Mono",monospace; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(242,239,233,0.35); margin-top:0.2rem; }
+            .why-score-vs { font-family:"DM Mono",monospace; font-size:0.65rem; color:rgba(242,239,233,0.25); margin-top:0.1rem; }
+            .btn-why-callout { display:inline-block; background:transparent; color:#4fa86a; border:1px solid rgba(79,168,106,0.4); font-family:"DM Sans",sans-serif; font-weight:600; font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase; padding:0.75rem 1.5rem; border-radius:2px; text-decoration:none; transition:all 0.2s; white-space:nowrap; flex-shrink:0; }
+            .btn-why-callout:hover { background:rgba(58,107,71,0.12); border-color:#4fa86a; transform:translateY(-1px); }
 
             /* ── PROBLEM SECTION ── */
             .ps-section { background:var(--dark1); color:var(--paper); padding:5rem 2rem; position:relative; overflow:hidden; }
@@ -234,7 +267,12 @@
             .ps-list { list-style:none; }
             .ps-list li { display:flex; align-items:flex-start; gap:0.6rem; font-size:0.9rem; font-weight:300; line-height:1.5; color:rgba(242,239,233,0.82); margin-bottom:0.7rem; }
             .ps-list li .icon { flex-shrink:0; margin-top:2px; font-size:0.85rem; }
-            .ps-stat-row { margin-top:3rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:2.5rem; display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; max-width:1000px; margin-left:auto; margin-right:auto; text-align:center; }
+            .ps-data-cta { max-width:1000px; margin:2.5rem auto 0; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:space-between; gap:1.5rem; flex-wrap:wrap; }
+            .ps-data-cta-text { font-size:0.88rem; font-weight:300; color:rgba(242,239,233,0.65); line-height:1.6; max-width:500px; }
+            .ps-data-cta-text strong { color:rgba(242,239,233,0.9); font-weight:500; }
+            .btn-ps-why { display:inline-block; background:transparent; color:#4fa86a; border:1px solid rgba(79,168,106,0.35); font-family:"DM Sans",sans-serif; font-weight:600; font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase; padding:0.7rem 1.4rem; border-radius:2px; text-decoration:none; transition:all 0.2s; white-space:nowrap; }
+            .btn-ps-why:hover { background:rgba(58,107,71,0.12); border-color:#4fa86a; }
+            .ps-stat-row { margin-top:2rem; display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; max-width:1000px; margin-left:auto; margin-right:auto; text-align:center; }
             .stat-num { font-family:"Bebas Neue",sans-serif; font-size:3.2rem; line-height:1; color:var(--gold); }
             .stat-label { font-size:0.8rem; color:rgba(242,239,233,0.7); margin-top:0.3rem; line-height:1.3; }
 
@@ -405,7 +443,7 @@
 
             /* ── PRINT ── */
             @media print {
-                nav,.trust-strip,footer,.hero,.ps-section,.hiw-section,.fork-section,.pro-banner,.mission-teaser,.quote-section .section-header,.fork-actions,.btn-row-secondary,#form-section,#pro-panel { display:none !important; }
+                nav,.trust-strip,footer,.hero,.ps-section,.hiw-section,.fork-section,.pro-banner,.mission-teaser,.why-callout,.quote-section .section-header,.fork-actions,.btn-row-secondary,#form-section,#pro-panel { display:none !important; }
                 body { background:#fff; }
                 .quote-section { padding:0; background:#fff; }
                 .quote-wrap { max-width:100%; }
@@ -445,6 +483,9 @@
                 .mission-teaser-right { padding-left:0; }
                 .mission-feat-grid { grid-template-columns:1fr 1fr; }
                 nav a.nav-mission { display:none; }
+                .why-callout-inner { flex-direction:column; }
+                .why-scores { justify-content:center; }
+                .ps-data-cta { flex-direction:column; align-items:flex-start; }
             }
         </style>
     </head>
@@ -454,6 +495,7 @@
         <nav>
             <a href="#" class="logo">Y<span>S</span>KAIPE</a>
             <div class="nav-right">
+                <a href="/why-yskaipe.html" class="nav-why">&#9654; Why YSKAIPE</a>
                 <a href="/yskaipe-mission.html" class="nav-mission">&#9670; Our Mission</a>
                 <a href="/public/pro.html" class="nav-pro">&#9889; For Pros</a>
                 <a href="#autoquote" class="nav-cta">Get My Quote</a>
@@ -504,6 +546,7 @@
                     <a href="#autoquote" class="btn-primary">Get the Fair Rate &rarr;</a>
                     <a href="/public/pro.html" class="btn-pro-hero">&#9889; Contractors: Join Pro Network</a>
                     <a href="/yskaipe-mission.html" class="btn-mission-hero">&#9670; Our Mission</a>
+                    <a href="/why-yskaipe.html" class="btn-why-hero">&#9654; Why YSKAIPE</a>
                     <span class="scroll-hint">8 sec &middot; no account needed</span>
                 </div>
                 <div class="hero-stat-row">
@@ -563,6 +606,35 @@
             </div>
         </div>
 
+        <!-- WHY YSKAIPE CALLOUT -->
+        <div class="why-callout">
+            <div class="why-callout-inner">
+                <div class="why-callout-left">
+                    <div class="why-callout-eyebrow">&#9654; Why YSKAIPE</div>
+                    <div class="why-callout-headline">Angi has a <span>-32 NPS.</span><br />We built the fix.</div>
+                    <div class="why-callout-body">The incumbent is in freefall &mdash; F-rated by the BBB, 350 layoffs, revenue dropping 13% year over year. We built YSKAIPE specifically to fix the broken model. See the full data-backed comparison.</div>
+                </div>
+                <div class="why-scores">
+                    <div class="why-score-item">
+                        <div class="why-score-val">36</div>
+                        <div class="why-score-label">Angi CSAT</div>
+                        <div class="why-score-vs">out of 100</div>
+                    </div>
+                    <div class="why-score-item">
+                        <div class="why-score-val" style="color:var(--amber);">-32</div>
+                        <div class="why-score-label">Angi NPS</div>
+                        <div class="why-score-vs">62% detractors</div>
+                    </div>
+                    <div class="why-score-item">
+                        <div class="why-score-val">F</div>
+                        <div class="why-score-label">Angi BBB</div>
+                        <div class="why-score-vs">1,800+ complaints</div>
+                    </div>
+                </div>
+                <a href="/why-yskaipe.html" class="btn-why-callout">See Full Comparison &rarr;</a>
+            </div>
+        </div>
+
         <!-- PROBLEM -->
         <section class="ps-section">
             <div class="ps-grid">
@@ -593,6 +665,10 @@
                         <li><span class="icon">&#129309;</span>Vetted pro network when the job needs an expert.</li>
                     </ul>
                 </div>
+            </div>
+            <div class="ps-data-cta">
+                <div class="ps-data-cta-text">Want to see how this stacks up against the competition? We ran a <strong>full data-backed comparison</strong> against Angi — satisfaction scores, pricing models, contractor ROI, and long-term impact potential.</div>
+                <a href="/why-yskaipe.html" class="btn-ps-why">&#9654; See the Scorecard</a>
             </div>
             <div class="ps-stat-row">
                 <div><div class="stat-num">$2,400</div><div class="stat-label">avg annual overpayment<br />per US homeowner</div></div>
@@ -826,6 +902,7 @@
             <a href="future-of-work.html" class="trust-item" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(184,92,44,0.3);">&rarr; Future of Work</a>
             <a href="/yskaipe-mission.html" class="trust-item" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(196,154,53,0.3);">&#9670; Our Mission</a>
             <a href="/public/pro.html" class="trust-item" style="color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(212,133,26,0.3);">&#9889; Pro Network</a>
+            <a href="/why-yskaipe.html" class="trust-item" style="color:#4fa86a;text-decoration:none;border-bottom:1px solid rgba(79,168,106,0.3);">&#9654; Why YSKAIPE</a>
         </div>
 
         <!-- EMAIL MODAL -->
@@ -847,6 +924,7 @@
             <div style="margin-top:0.8rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;">
                 <a href="/yskaipe-mission.html">&#9670; Our Mission</a>
                 <a href="/public/pro.html">&#9889; Pro Network</a>
+                <a href="/why-yskaipe.html">&#9654; Why YSKAIPE</a>
                 <a href="future-of-work.html">Future of Work</a>
                 <a href="docs.html">Documentation</a>
                 <a href="privacy.html">Privacy</a>
