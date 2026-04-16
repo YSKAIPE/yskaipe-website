@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
   }
 
   // 7. Write lead assignment rows for top 5
-  return NextResponse.json({ debug: ranked.slice(0, 2) });
+
   const now = Date.now();
   const assignments = ranked.slice(0, 5).map((r) => {
     const delayMins = getDelayMinutes(r.contractor.tier);
