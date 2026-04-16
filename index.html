@@ -3070,22 +3070,25 @@
                     "Home service request";
                 var name = document.getElementById("user-name").value || "";
                 var email = document.getElementById("user-email").value || "";
+                var tradeMap = {
+                    plumber: "plumbing",
+                    electrician: "electrical",
+                    "hvac technician": "hvac",
+                    roofer: "roofing",
+                    "general contractor": "hvac",
+                    landscaper: "landscaping",
+                    painter: "painting",
+                };
+                var tradeMapped =
+                    tradeMap[trade.toLowerCase()] ||
+                    trade.toLowerCase().split(" ")[0];
                 // Save to Supabase and redirect to match flow
                 try {
                     var matchRes = await fetch("/api/quote", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            trade: trade
-                                .toLowerCase()
-                                .replace(" ", "_")
-                                .replace("hvac technician", "hvac")
-                                .replace("plumber", "plumbing")
-                                .replace("electrician", "electrical")
-                                .replace("roofer", "roofing")
-                                .replace("landscaper", "landscaping")
-                                .replace("painter", "painting")
-                                .replace("general contractor", "hvac"),
+                            trade: tradeMapped,
                             description: desc,
                             zip_code: zip,
                             homeowner_name: name || "YSKAIPE User",
