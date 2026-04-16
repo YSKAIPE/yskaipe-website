@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Your Contractor — YSKAIPE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+/* ── PASTE YOUR EXISTING match-flow.html CSS HERE (unchanged) ── */
+:root {
+  --ink:#181815;--ink-mid:#3a3a35;--ink-soft:#78786e;--ink-faint:#b4b4a8;
+  --paper:#fafaf7;--white:#ffffff;--rule:#e6e6de;
+  --green:#0f6e56;--green-mid:#1d9e75;--green-lt:#e1f5ee;--green-pale:#f0faf6;
+  --amber:#b86e0a;--amber-lt:#fdf3e3;--blue:#185fa5;--blue-lt:#e6f1fb;
+  --red:#c0392b;--red-lt:#fdecea;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+.shell{min-height:100vh;display:flex;flex-direction:column}
+.topbar{height:54px;background:var(--white);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:50}
+.logo{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-0.02em;color:var(--ink);text-decoration:none}
+.logo em{font-style:normal;color:var(--green-mid)}
+.back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-soft);background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:6px;transition:background 0.12s,color 0.12s}
+.back-btn:hover{background:var(--rule);color:var(--ink)}
+.job-pill{font-size:11px;font-weight:500;background:var(--green-lt);color:var(--green);padding:3px 10px;border-radius:100px;border:1px solid rgba(29,158,117,0.2)}
+.step-track{background:var(--white);border-bottom:1px solid var(--rule);padding:0 24px;display:flex;align-items:stretch;overflow-x:auto}
+.step-track::-webkit-scrollbar{display:none}
+.step-item{display:flex;align-items:center;gap:8px;padding:12px 16px 12px 0;font-size:12px;color:var(--ink-faint);white-space:nowrap;position:relative}
+.step-item+.step-item::before{content:'';width:24px;height:1px;background:var(--rule);margin-right:16px;flex-shrink:0}
+.step-dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--ink-faint);flex-shrink:0;transition:all 0.3s ease}
+.step-item.active .step-dot{background:var(--green);border-color:var(--green);color:var(--white)}
+.step-item.done .step-dot{background:var(--green-lt);border-color:var(--green-mid);color:var(--green)}
+.step-item.done .step-dot::after{content:'✓';font-size:10px}
+.step-item.done .step-num{display:none}
+.step-item.active{color:var(--ink)}
+.step-item.done{color:var(--green)}
+.content{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:40px 24px 60px}
+.card-wrap{width:100%;max-width:540px;display:flex;flex-direction:column;gap:16px}
+.job-strip{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.job-trade-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.job-strip-body{flex:1;min-width:0}
+.job-strip-title{font-size:13px;font-weight:600;color:var(--ink)}
+.job-strip-meta{font-size:11px;color:var(--ink-soft);display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.quote-badge{font-size:12px;font-weight:600;color:var(--green);white-space:nowrap}
+.screen{display:none;flex-direction:column;gap:16px}
+.screen.active{display:flex}
+.match-card{background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:32px 28px;text-align:center}
+.match-title{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.2;color:var(--ink);margin-bottom:8px}
+.match-sub{font-size:14px;color:var(--ink-soft);margin-bottom:32px;line-height:1.55}
+.radar-wrap{position:relative;width:120px;height:120px;margin:0 auto 32px}
+.radar-circle{position:absolute;border-radius:50%;border:1.5px solid var(--green-mid);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;animation:radar-pulse 2.4s ease-out infinite}
+.radar-circle:nth-child(1){width:120px;height:120px;animation-delay:0s}
+.radar-circle:nth-child(2){width:80px;height:80px;animation-delay:0.6s}
+.radar-circle:nth-child(3){width:40px;height:40px;animation-delay:1.2s}
+@keyframes radar-pulse{0%{transform:translate(-50%,-50%) scale(0.6);opacity:0.8}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.radar-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--green);z-index:2}
+.factors-list{text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.factor-row{display:flex;align-items:center;gap:10px}
+.factor-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.factor-label{font-size:12px;color:var(--ink-soft);flex:1}
+.factor-bar-bg{width:100px;height:5px;border-radius:3px;background:var(--rule);overflow:hidden;flex-shrink:0}
+.factor-bar-fill{height:100%;border-radius:3px;background:var(--green-mid);width:0;transition:width 0.8s ease}
+.factor-val{font-size:11px;font-weight:600;color:var(--ink-soft);min-width:28px;text-align:right}
+.algo-note{font-size:11px;color:var(--ink-faint);display:flex;align-items:center;gap:5px;justify-content:center}
+.queue-strip{background:var(--green-pale);border:1px solid rgba(29,158,117,0.2);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px}
+.queue-dot{width:7px;height:7px;border-radius:50%;background:var(--green-mid);animation:blink 1.2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.queue-text{font-size:12px;color:var(--green);font-weight:500;flex:1}
+.queue-count{font-size:11px;color:var(--ink-soft)}
+.contractor-card{background:var(--white);border:1.5px solid var(--green-mid);border-radius:14px;overflow:hidden}
+.contractor-header{padding:20px 22px 16px;display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--rule)}
+.contractor-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex-shrink:0}
+.contractor-meta{flex:1}
+.contractor-name{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.contractor-trade{font-size:12px;color:var(--ink-soft);margin-bottom:6px}
+.badge-row{display:flex;gap:5px;flex-wrap:wrap}
+.badge{font-size:10px;font-weight:600;letter-spacing:0.05em;padding:2px 7px;border-radius:4px}
+.badge-founding{background:#1a1a18;color:#f5d97a}
+.badge-elite{background:var(--blue-lt);color:var(--blue)}
+.badge-verified{background:var(--green-lt);color:var(--green)}
+.match-score-wrap{text-align:right;flex-shrink:0}
+.match-score-num{font-family:'DM Serif Display',serif;font-size:36px;line-height:1;color:var(--green)}
+.match-score-lbl{font-size:10px;color:var(--ink-faint);margin-top:2px}
+.contractor-stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule)}
+.stat-cell{padding:12px 16px;text-align:center;border-right:1px solid var(--rule)}
+.stat-cell:last-child{border-right:none}
+.stat-num{font-size:16px;font-weight:600;color:var(--ink)}
+.stat-lbl{font-size:10px;color:var(--ink-faint);margin-top:2px}
+.contractor-body{padding:16px 22px;display:flex;flex-direction:column;gap:10px}
+.score-breakdown-label{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+.mini-factor{display:flex;align-items:center;gap:8px;font-size:12px}
+.mini-factor-lbl{width:80px;color:var(--ink-soft);flex-shrink:0}
+.mini-bar-bg{flex:1;height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
+.mini-bar-fill{height:100%;border-radius:2px;background:var(--green-mid)}
+.mini-val{font-size:11px;font-weight:600;color:var(--ink-soft);width:26px;text-align:right;flex-shrink:0}
+.response-banner{background:var(--amber-lt);border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--amber)}
+.action-row{display:flex;gap:10px}
+.btn{flex:1;padding:13px;border-radius:9px;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.btn-primary{background:var(--green);color:var(--white)}
+.btn-primary:hover{background:var(--green-mid)}
+.btn-secondary{background:transparent;color:var(--ink-mid);border:1.5px solid var(--rule)}
+.btn-secondary:hover{border-color:var(--ink-faint)}
+.next-queue-note{font-size:11px;color:var(--ink-faint);text-align:center;padding:4px 0}
+.terms-card{background:var(--white);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.terms-header{padding:18px 22px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:flex-start}
+.terms-header h2{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink)}
+.terms-header p{font-size:12px;color:var(--ink-soft);margin-top:3px}
+.edit-link{font-size:12px;color:var(--green);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.terms-body{padding:18px 22px;display:flex;flex-direction:column;gap:14px}
+.cost-breakdown{background:var(--green-pale);border:1px solid rgba(29,158,117,0.15);border-radius:10px;padding:14px 16px}
+.cost-title{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.cost-line{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-mid);padding:5px 0;border-bottom:1px solid rgba(29,158,117,0.1)}
+.cost-line:last-child{border-bottom:none}
+.cost-line.total{font-weight:600;color:var(--ink);font-size:15px;margin-top:4px;padding-top:10px;border-top:1.5px solid rgba(29,158,117,0.2);border-bottom:none}
+.cost-range{font-size:11px;color:var(--ink-faint);margin-top:4px;text-align:right}
+.difficulty-row{display:flex;align-items:center;gap:10px}
+.difficulty-label{font-size:12px;color:var(--ink-soft);flex:1}
+.difficulty-dots{display:flex;gap:4px}
+.diff-dot{width:8px;height:8px;border-radius:50%;background:var(--rule)}
+.diff-dot.filled{background:var(--amber)}
+.diff-text{font-size:12px;font-weight:600;color:var(--amber)}
+.scope-box{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.scope-box h4{font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+.scope-box p{font-size:13px;color:var(--ink-mid);line-height:1.55}
+.terms-options{display:flex;flex-direction:column;gap:8px}
+.option-row{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--rule);border-radius:9px;cursor:pointer;transition:border-color 0.15s}
+.option-row:hover{border-color:var(--green-mid)}
+.option-row.selected{border-color:var(--green);background:var(--green-pale)}
+.option-radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--ink-faint);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center}
+.option-row.selected .option-radio{border-color:var(--green);background:var(--green)}
+.option-row.selected .option-radio::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--white)}
+.option-label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.option-desc{font-size:12px;color:var(--ink-soft);line-height:1.4}
+.confirm-card{background:var(--white);border:1px solid var(--rule);border-radius:14px;overflow:hidden;text-align:center}
+.confirm-top{background:var(--green);padding:36px 28px 28px}
+.confirm-check{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:var(--white)}
+.confirm-top h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--white);margin-bottom:8px}
+.confirm-top p{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.5}
+.confirm-body{padding:24px;display:flex;flex-direction:column;gap:14px}
+.ref-box{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.ref-label{font-size:11px;color:var(--ink-faint);margin-bottom:3px}
+.ref-num{font-family:'DM Mono',monospace;font-size:16px;font-weight:600;color:var(--ink);letter-spacing:0.05em}
+.copy-btn{font-size:11px;color:var(--green);background:var(--green-lt);border:none;padding:4px 10px;border-radius:5px;cursor:pointer}
+.next-steps{text-align:left;display:flex;flex-direction:column;gap:10px}
+.next-step-item{display:flex;gap:12px;align-items:flex-start}
+.step-circle{width:26px;height:26px;border-radius:50%;background:var(--green-lt);color:var(--green);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.next-step-item p{font-size:13px;color:var(--ink-mid);line-height:1.5}
+.next-step-item strong{color:var(--ink)}
+.contractor-contact{background:var(--green-pale);border:1px solid rgba(29,158,117,0.2);border-radius:9px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.contact-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.contact-body{flex:1}
+.contact-name{font-size:14px;font-weight:600;color:var(--ink)}
+.contact-info{font-size:12px;color:var(--ink-soft);margin-top:2px}
+.contact-respond{font-size:11px;font-weight:600;color:var(--green);margin-top:4px}
+.rating-prompt{background:var(--amber-lt);border:1px solid rgba(184,110,10,0.15);border-radius:9px;padding:14px 16px;text-align:left}
+.rating-prompt h4{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.rating-prompt p{font-size:12px;color:var(--ink-soft)}
+.error-banner{background:var(--red-lt);border:1px solid rgba(192,57,43,0.2);border-radius:9px;padding:12px 16px;font-size:13px;color:var(--red);display:none}
+.loading-overlay{position:fixed;inset:0;background:rgba(250,250,247,0.85);display:flex;align-items:center;justify-content:center;z-index:99;display:none}
+.spinner{width:28px;height:28px;border:2.5px solid var(--rule);border-top-color:var(--green);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="loading-overlay" id="loading-overlay">
+  <div class="spinner"></div>
+</div>
+
+<div class="topbar">
+  <button class="back-btn" onclick="history.back()">← Back to quote</button>
+  <a href="/" class="logo">YSK<em>AI</em>PE</a>
+  <span class="job-pill" id="nav-trade-pill">—</span>
+</div>
+
+<div class="step-track">
+  <div class="step-item active" id="step-1"><div class="step-dot"><span class="step-num">1</span></div>Finding match</div>
+  <div class="step-item" id="step-2"><div class="step-dot"><span class="step-num">2</span></div>Review contractor</div>
+  <div class="step-item" id="step-3"><div class="step-dot"><span class="step-num">3</span></div>Confirm terms</div>
+  <div class="step-item" id="step-4"><div class="step-dot"><span class="step-num">4</span></div>Confirmed</div>
+</div>
+
+<div class="content">
+<div class="card-wrap">
+
+  <div class="job-strip">
+    <div class="job-trade-icon" id="job-icon" style="background:#E6F1FB">—</div>
+    <div class="job-strip-body">
+      <div class="job-strip-title" id="job-title">Loading…</div>
+      <div class="job-strip-meta">
+        <span id="job-location">—</span>
+        <span id="job-est">—</span>
+      </div>
+    </div>
+    <div class="quote-badge" id="job-score-badge">—</div>
+  </div>
+
+  <div class="error-banner" id="error-banner"></div>
+
+  <!-- SCREEN 1: MATCHING -->
+  <div class="screen active" id="screen-matching">
+    <div class="match-card">
+      <div class="radar-wrap">
+        <div class="radar-circle"></div>
+        <div class="radar-circle"></div>
+        <div class="radar-circle"></div>
+        <div class="radar-center"></div>
+      </div>
+      <h2 class="match-title">Finding your best match</h2>
+      <p class="match-sub" id="match-sub-text">Scoring contractors in your area…</p>
+      <div class="factors-list">
+        <div class="factor-row"><div class="factor-icon" style="background:#E6F1FB">🔧</div><div class="factor-label">Trade match</div><div class="factor-bar-bg"><div class="factor-bar-fill" id="fb-trade" style="background:#185fa5"></div></div><div class="factor-val" id="fv-trade">—</div></div>
+        <div class="factor-row"><div class="factor-icon" style="background:#E1F5EE">🏅</div><div class="factor-label">Subscription tier</div><div class="factor-bar-bg"><div class="factor-bar-fill" id="fb-tier"></div></div><div class="factor-val" id="fv-tier">—</div></div>
+        <div class="factor-row"><div class="factor-icon" style="background:#FDF3E3">📍</div><div class="factor-label">Proximity</div><div class="factor-bar-bg"><div class="factor-bar-fill" id="fb-geo" style="background:#b86e0a"></div></div><div class="factor-val" id="fv-geo">—</div></div>
+        <div class="factor-row"><div class="factor-icon" style="background:#E1F5EE">⭐</div><div class="factor-label">Loyalty score</div><div class="factor-bar-bg"><div class="factor-bar-fill" id="fb-loyal"></div></div><div class="factor-val" id="fv-loyal">—</div></div>
+      </div>
+      <div class="algo-note" id="algo-status"><span>Calling scoring engine…</span></div>
+    </div>
+    <div class="queue-strip">
+      <div class="queue-dot"></div>
+      <div class="queue-text" id="queue-text">Running capacity pre-filter…</div>
+      <div class="queue-count" id="queue-count">—</div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: MATCH REVEALED -->
+  <div class="screen" id="screen-match">
+    <div style="font-size:13px;color:var(--ink-soft);padding:2px 0">
+      Match found — <strong style="color:var(--green)" id="match-score-headline">—</strong>
+    </div>
+    <div class="contractor-card">
+      <div class="contractor-header">
+        <div class="contractor-avatar" id="ct-avatar" style="background:#E6F1FB;color:#0C447C">—</div>
+        <div class="contractor-meta">
+          <div class="contractor-name" id="ct-name">—</div>
+          <div class="contractor-trade" id="ct-trade">—</div>
+          <div class="badge-row" id="ct-badges"></div>
+        </div>
+        <div class="match-score-wrap">
+          <div class="match-score-num" id="ct-score">—</div>
+          <div class="match-score-lbl">match score</div>
+        </div>
+      </div>
+      <div class="contractor-stats">
+        <div class="stat-cell"><div class="stat-num" id="ct-rating">—</div><div class="stat-lbl">Rating</div></div>
+        <div class="stat-cell"><div class="stat-num" id="ct-distance">—</div><div class="stat-lbl">Distance</div></div>
+        <div class="stat-cell"><div class="stat-num" id="ct-jobs">—</div><div class="stat-lbl">Jobs done</div></div>
+      </div>
+      <div class="contractor-body">
+        <div>
+          <div class="score-breakdown-label">Why this match</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="mini-factor"><span class="mini-factor-lbl">Trade match</span><div class="mini-bar-bg"><div class="mini-bar-fill" id="mb-trade" style="background:#185fa5"></div></div><span class="mini-val" id="mv-trade">—</span></div>
+            <div class="mini-factor"><span class="mini-factor-lbl">Tier</span><div class="mini-bar-bg"><div class="mini-bar-fill" id="mb-tier"></div></div><span class="mini-val" id="mv-tier">—</span></div>
+            <div class="mini-factor"><span class="mini-factor-lbl">Proximity</span><div class="mini-bar-bg"><div class="mini-bar-fill" id="mb-geo" style="background:#b86e0a"></div></div><span class="mini-val" id="mv-geo">—</span></div>
+            <div class="mini-factor"><span class="mini-factor-lbl">Loyalty</span><div class="mini-bar-bg"><div class="mini-bar-fill" id="mb-loyal"></div></div><span class="mini-val" id="mv-loyal">—</span></div>
+          </div>
+        </div>
+        <div class="response-banner"><span>⚡</span><span id="ct-response-note">—</span></div>
+        <div class="action-row">
+          <button class="btn btn-primary" onclick="goToTerms()">Review &amp; accept terms →</button>
+          <button class="btn btn-secondary" onclick="requestDifferent()">Different contractor</button>
+        </div>
+        <div class="next-queue-note" id="next-queue-note">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: TERMS -->
+  <div class="screen" id="screen-terms">
+    <div class="terms-card">
+      <div class="terms-header">
+        <div><h2>Review proposed terms</h2><p id="terms-sub">Based on your description and our Fair Rate Index</p></div>
+        <span class="edit-link" onclick="showScreen('match')">Edit scope</span>
+      </div>
+      <div class="terms-body">
+        <div class="cost-breakdown">
+          <div class="cost-title">Estimated cost breakdown</div>
+          <div id="cost-lines"></div>
+          <div class="cost-line total"><span>Total estimated range</span><span id="cost-total">—</span></div>
+          <div class="cost-range">Final price confirmed by contractor after diagnostic. YSKAIPE Fair Rate Index protected.</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px;">Difficulty rating</div>
+          <div class="difficulty-row">
+            <span class="difficulty-label">Job complexity</span>
+            <div class="difficulty-dots" id="diff-dots"></div>
+            <span class="diff-text" id="diff-text">—</span>
+          </div>
+        </div>
+        <div class="scope-box"><h4>Job scope</h4><p id="scope-text">—</p></div>
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;">How would you like to proceed?</div>
+          <div class="terms-options">
+            <div class="option-row selected" onclick="selectOption(this)" data-value="accept"><div class="option-radio"></div><div><div class="option-label">Accept these terms</div><div class="option-desc">Connect at the estimated range. Final price confirmed after diagnostic.</div></div></div>
+            <div class="option-row" onclick="selectOption(this)" data-value="firm_quote"><div class="option-radio"></div><div><div class="option-label">Request a firm quote first</div><div class="option-desc">Contractor sends a fixed price before you commit. Adds ~2 hours.</div></div></div>
+            <div class="option-row" onclick="selectOption(this)" data-value="diagnostic"><div class="option-radio"></div><div><div class="option-label">Schedule a free diagnostic visit</div><div class="option-desc">Contractor comes out, diagnoses, then quotes. You only pay if you proceed.</div></div></div>
+          </div>
+        </div>
+        <div class="action-row">
+          <button class="btn btn-secondary" onclick="showScreen('match')">← Back</button>
+          <button class="btn btn-primary" onclick="confirmJob()">Confirm &amp; connect →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: CONFIRMED -->
+  <div class="screen" id="screen-confirmed">
+    <div class="confirm-card">
+      <div class="confirm-top">
+        <div class="confirm-check">✓</div>
+        <h2>You're connected.</h2>
+        <p id="confirm-sub">Your contractor has been notified and will reach out shortly.</p>
+      </div>
+      <div class="confirm-body">
+        <div class="ref-box">
+          <div><div class="ref-label">Job reference</div><div class="ref-num" id="job-ref">YSK-—</div></div>
+          <button class="copy-btn" onclick="copyRef()">Copy</button>
+        </div>
+        <div class="contractor-contact">
+          <div class="contact-avatar" id="cc-avatar" style="background:#E6F1FB;color:#0C447C">—</div>
+          <div class="contact-body">
+            <div class="contact-name" id="cc-name">—</div>
+            <div class="contact-info" id="cc-info">—</div>
+            <div class="contact-respond" id="cc-respond">—</div>
+          </div>
+        </div>
+        <div class="next-steps">
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px;">What happens next</div>
+          <div class="next-step-item"><div class="step-circle">1</div><p><strong>Contractor contacts you</strong> — they will call or text to confirm details and schedule.</p></div>
+          <div class="next-step-item"><div class="step-circle">2</div><p><strong>Diagnostic + firm quote</strong> — scope confirmed on-site. Final price within the Fair Rate Index range.</p></div>
+          <div class="next-step-item"><div class="step-circle">3</div><p><strong>Job complete + review</strong> — your rating improves their loyalty score and ranking.</p></div>
+        </div>
+        <div class="rating-prompt"><h4>Your review matters</h4><p>A 4.7+ rating adds +12 pts to this contractor's loyalty score, moving them up the queue for future homeowners.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// CONFIG — replace with your actual values
+// ══════════════════════════════════════════════════════════════
+const API_BASE = ''  // '' = same origin (Next.js). Or 'https://yskaipe.com' in prod.
+
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+let state = {
+  requestId:     null,
+  contractorId:  null,
+  leadId:        null,
+  jobRef:        null,
+  matchData:     null,
+  requestData:   null,
+  currentScreen: 'matching',
+  queueIndex:    0,   // which contractor in the queue we're showing
+  queue:         [],
+  selectedOption:'accept',
+}
+
+// ══════════════════════════════════════════════════════════════
+// BOOT: read request_id from URL params
+// URL: /match?request_id=xxx
+// ══════════════════════════════════════════════════════════════
+const params = new URLSearchParams(window.location.search)
+state.requestId = params.get('request_id')
+
+const TRADE_ICONS = {hvac:'❄',plumbing:'🔧',electrical:'⚡',roofing:'🏠',landscaping:'🌿',painting:'🎨'}
+const TRADE_COLORS = {hvac:'#E6F1FB',plumbing:'#E1F5EE',electrical:'#FAEEDA',roofing:'#FAECE7',landscaping:'#EAF3DE',painting:'#FBEAF0'}
+
+// ══════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════
+async function init() {
+  if (!state.requestId) {
+    // Demo mode — use sample data if no request_id
+    state.requestId = 'c1000000-0000-0000-0000-000000000001'
+  }
+
+  // Load request details to populate job strip
+  try {
+    const res = await fetch(`${API_BASE}/api/request?id=${state.requestId}`)
+    if (res.ok) {
+      state.requestData = await res.json()
+      populateJobStrip(state.requestData)
+    }
+  } catch(e) {
+    // Fail gracefully — populate with defaults
+    populateJobStrip({ trade:'hvac', description:'AC unit not cooling', zip_code:'28036', quote_low:280, quote_high:520, difficulty_score:6 })
+  }
+
+  // Run matching
+  await runMatch()
+}
+
+function populateJobStrip(req) {
+  const trade = req.trade || 'hvac'
+  document.getElementById('nav-trade-pill').textContent = trade.toUpperCase()
+  document.getElementById('job-icon').textContent = TRADE_ICONS[trade] || '🔧'
+  document.getElementById('job-icon').style.background = TRADE_COLORS[trade] || '#F1EFE8'
+  document.getElementById('job-title').textContent = req.description?.slice(0,60) || 'Home service request'
+  document.getElementById('job-location').textContent = req.zip_code ? `Zip: ${req.zip_code}` : '—'
+  document.getElementById('job-est').textContent = req.quote_low ? `Est. $${req.quote_low}–$${req.quote_high}` : '—'
+  document.getElementById('job-score-badge').textContent = `Difficulty ${req.difficulty_score || '—'}/10`
+}
+
+// ══════════════════════════════════════════════════════════════
+// STEP 1: RUN MATCH
+// ══════════════════════════════════════════════════════════════
+async function runMatch() {
+  setLoading(true)
+
+  // Animate factor bars while waiting
+  const animTimer = animateMatchingBars()
+
+  try {
+    const res = await fetch(`${API_BASE}/api/match`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ request_id: state.requestId }),
+    })
+
+    clearTimeout(animTimer)
+
+    if (!res.ok) {
+      const err = await res.json()
+      showError(err.error || 'Matching failed. Please try again.')
+      setLoading(false)
+      return
+    }
+
+    const data = await res.json()
+    state.matchData = data
+    state.queue = data.queue || []
+    state.queueIndex = 0
+
+    // Animate final scores
+    const b = data.match.breakdown
+    animFactor('trade', b.tradePts,   '#185fa5')
+    animFactor('tier',  b.tierPts,    '#1d9e75')
+    animFactor('geo',   b.geoPts,     '#b86e0a')
+    animFactor('loyal', b.loyaltyPts, '#1d9e75')
+    document.getElementById('fv-trade').textContent = b.tradePts
+    document.getElementById('fv-tier').textContent  = b.tierPts
+    document.getElementById('fv-geo').textContent   = b.geoPts
+    document.getElementById('fv-loyal').textContent = b.loyaltyPts
+    document.getElementById('algo-status').innerHTML = `<span style="color:var(--green);font-weight:500">Match found — score ${data.match.compositeScore}/100</span>`
+    document.getElementById('queue-text').textContent = `Best match identified. ${state.queue.length} more in queue.`
+    document.getElementById('queue-count').textContent = `${1 + state.queue.length} eligible`
+
+    setLoading(false)
+
+    // Auto-advance to match screen after 1.4s
+    setTimeout(() => {
+      populateMatchScreen(data.match)
+      showScreen('match')
+    }, 1400)
+
+  } catch(e) {
+    clearTimeout(animTimer)
+    showError('Network error — please check your connection.')
+    setLoading(false)
+  }
+}
+
+function animateMatchingBars() {
+  // Animate bars incrementally while API is fetching
+  const steps = [
+    { delay: 300,  key:'trade', val:70,  color:'#185fa5' },
+    { delay: 700,  key:'tier',  val:60,  color:'#1d9e75' },
+    { delay: 1100, key:'geo',   val:80,  color:'#b86e0a' },
+    { delay: 1500, key:'loyal', val:40,  color:'#1d9e75' },
+  ]
+  steps.forEach(s => setTimeout(() => {
+    animFactor(s.key, s.val, s.color)
+    document.getElementById(`fv-${s.key}`).textContent = '…'
+  }, s.delay))
+
+  // Update queue text
+  setTimeout(() => { document.getElementById('queue-text').textContent = 'Checking capacity and monthly caps…' }, 500)
+  setTimeout(() => { document.getElementById('queue-text').textContent = 'Ranking by composite score…' }, 1200)
+}
+
+function animFactor(key, val, color) {
+  const fill = document.getElementById('fb-' + key)
+  if (!fill) return
+  fill.style.background = color
+  fill.style.width = Math.min(val, 100) + '%'
+}
+
+// ══════════════════════════════════════════════════════════════
+// POPULATE MATCH SCREEN
+// ══════════════════════════════════════════════════════════════
+function populateMatchScreen(match) {
+  const ct = match.contractor
+  const b  = match.breakdown
+
+  document.getElementById('match-score-headline').textContent = `composite score ${match.compositeScore}/100`
+  document.getElementById('ct-name').textContent    = ct.company_name || ct.name
+  document.getElementById('ct-trade').textContent   = `${ct.primary_trade?.toUpperCase()} Specialist`
+  document.getElementById('ct-score').textContent   = match.compositeScore
+  document.getElementById('ct-rating').textContent  = `${parseFloat(ct.review_average).toFixed(1)}★`
+  document.getElementById('ct-jobs').textContent    = ct.jobs_completed
+
+  // Distance — placeholder until geocoding is wired
+  document.getElementById('ct-distance').textContent = '—'
+
+  // Avatar
+  const av = document.getElementById('ct-avatar')
+  av.textContent = ct.avatar_initials || ct.name.slice(0,2).toUpperCase()
+  av.style.background = TRADE_COLORS[ct.primary_trade] || '#F1EFE8'
+
+  // Badges
+  const badges = document.getElementById('ct-badges')
+  badges.innerHTML = ''
+  if (ct.is_founding) badges.innerHTML += `<span class="badge badge-founding">Founding</span>`
+  if (ct.tier === 'elite' || ct.tier === 'founding') badges.innerHTML += `<span class="badge badge-elite">Elite</span>`
+  badges.innerHTML += `<span class="badge badge-verified">✓ Verified</span>`
+
+  // Score breakdown bars
+  ;[['trade',b.tradePts,'#185fa5'],['tier',b.tierPts,'#1d9e75'],['geo',b.geoPts,'#b86e0a'],['loyal',b.loyaltyPts,'#1d9e75']].forEach(([k,v,c]) => {
+    const el = document.getElementById('mb-'+k)
+    if (el) { el.style.width = v+'%'; el.style.background = c }
+    const vEl = document.getElementById('mv-'+k)
+    if (vEl) vEl.textContent = v
+  })
+
+  // Response note
+  const delay = ct.notification_delay_minutes
+  document.getElementById('ct-response-note').textContent = delay === 0
+    ? `${ct.is_founding ? 'Founding contractor' : 'Elite contractor'} — responds instantly.`
+    : `${ct.tier.charAt(0).toUpperCase()+ct.tier.slice(1)} contractor — responds within ${delay} minute${delay===1?'':'s'}.`
+
+  // Next in queue
+  if (state.queue.length > 0) {
+    const next = state.queue[0]
+    document.getElementById('next-queue-note').textContent =
+      `Next in queue: ${next.name} (score ${next.compositeScore}) · ${next.tier} tier`
+  } else {
+    document.getElementById('next-queue-note').textContent = 'This is the only match in your area.'
+  }
+
+  state.contractorId = ct.id
+}
+
+// ══════════════════════════════════════════════════════════════
+// STEP 2: DIFFERENT CONTRACTOR
+// ══════════════════════════════════════════════════════════════
+function requestDifferent() {
+  state.queueIndex++
+  if (state.queueIndex >= state.queue.length) {
+    showError('No more contractors available in your area right now.')
+    return
+  }
+  const next = state.queue[state.queueIndex - 1]
+  document.getElementById('ct-name').textContent  = next.name
+  document.getElementById('ct-score').textContent = next.compositeScore
+  document.getElementById('next-queue-note').textContent =
+    state.queueIndex < state.queue.length
+      ? `Next: ${state.queue[state.queueIndex].name} (score ${state.queue[state.queueIndex].compositeScore})`
+      : 'No more contractors in queue.'
+}
+
+// ══════════════════════════════════════════════════════════════
+// STEP 3: TERMS SCREEN
+// ══════════════════════════════════════════════════════════════
+function goToTerms() {
+  // Populate terms from request data
+  const req = state.requestData || {}
+  const lines = req.line_items || []
+
+  document.getElementById('terms-sub').textContent =
+    `Based on your description and the Fair Rate Index for zip ${req.zip_code || '—'}`
+  document.getElementById('scope-text').textContent = req.description || '—'
+
+  // Cost lines
+  const costLinesEl = document.getElementById('cost-lines')
+  costLinesEl.innerHTML = lines.map(l =>
+    `<div class="cost-line"><span>${l.label}</span><span>$${l.low}–$${l.high}</span></div>`
+  ).join('')
+
+  const low  = lines.reduce((s,l) => s + l.low,  0)
+  const high = lines.reduce((s,l) => s + l.high, 0)
+  document.getElementById('cost-total').textContent = `$${low}–$${high}`
+
+  // Difficulty dots
+  const diff = req.difficulty_score || 5
+  const labels = ['','Very easy','Easy','Easy','Moderate','Moderate','Moderate','Hard','Hard','Very hard','Expert']
+  document.getElementById('diff-dots').innerHTML =
+    Array.from({length:10}).map((_,i) =>
+      `<div class="diff-dot${i < diff ? ' filled' : ''}"></div>`
+    ).join('')
+  document.getElementById('diff-text').textContent = labels[diff] || 'Moderate'
+
+  showScreen('terms')
+}
+
+// ══════════════════════════════════════════════════════════════
+// STEP 4: CONFIRM JOB
+// ══════════════════════════════════════════════════════════════
+async function confirmJob() {
+  setLoading(true)
+  const selectedOption = document.querySelector('.option-row.selected')?.dataset.value || 'accept'
+
+  try {
+    const res = await fetch(`${API_BASE}/api/lead`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        request_id:     state.requestId,
+        contractor_id:  state.contractorId,
+        proposed_terms: { option: selectedOption },
+      }),
+    })
+
+    const data = await res.json()
+    setLoading(false)
+
+    if (!res.ok) { showError(data.error || 'Failed to confirm.'); return }
+
+    state.leadId = data.lead_id
+    state.jobRef = data.job_ref
+    populateConfirmScreen(data)
+    showScreen('confirmed')
+
+  } catch(e) {
+    setLoading(false)
+    showError('Network error — please try again.')
+  }
+}
+
+function populateConfirmScreen(data) {
+  const ct = state.matchData?.match?.contractor || {}
+  document.getElementById('job-ref').textContent = data.job_ref || 'YSK-—'
+  document.getElementById('confirm-sub').textContent =
+    `${ct.company_name || ct.name || 'Your contractor'} has been notified and will reach out shortly.`
+
+  const av = document.getElementById('cc-avatar')
+  av.textContent = ct.avatar_initials || '?'
+  av.style.background = TRADE_COLORS[ct.primary_trade] || '#F1EFE8'
+
+  document.getElementById('cc-name').textContent   = ct.company_name || ct.name || '—'
+  document.getElementById('cc-info').textContent   = `${data.contractor?.phone || ''} · ${data.contractor?.email || ''}`
+  document.getElementById('cc-respond').textContent =
+    ct.notification_delay_minutes === 0
+      ? 'Founding/Elite contractor — typically responds in < 5 min'
+      : `Typical response: ${ct.notification_delay_minutes} min`
+}
+
+// ══════════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════════
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'))
+  document.getElementById('screen-' + name).classList.add('active')
+  state.currentScreen = name
+  updateSteps(name)
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+function updateSteps(name) {
+  const map = { matching:1, match:2, terms:3, confirmed:4 }
+  const active = map[name] || 1
+  ;[1,2,3,4].forEach(i => {
+    const el = document.getElementById('step-'+i)
+    el.classList.remove('active','done')
+    if (i < active) el.classList.add('done')
+    if (i === active) el.classList.add('active')
+  })
+}
+
+function selectOption(el) {
+  document.querySelectorAll('.option-row').forEach(r => r.classList.remove('selected'))
+  el.classList.add('selected')
+}
+
+function setLoading(on) {
+  document.getElementById('loading-overlay').style.display = on ? 'flex' : 'none'
+}
+
+function showError(msg) {
+  const el = document.getElementById('error-banner')
+  el.textContent = msg
+  el.style.display = 'block'
+  setTimeout(() => el.style.display = 'none', 5000)
+}
+
+function copyRef() {
+  navigator.clipboard.writeText(document.getElementById('job-ref').textContent)
+    .then(() => { const b = document.querySelector('.copy-btn'); b.textContent = 'Copied!'; setTimeout(() => b.textContent = 'Copy', 2000) })
+}
+
+// ── START ──
+init()
+</script>
+</body>
+</html>
