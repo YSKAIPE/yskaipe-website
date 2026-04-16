@@ -18,7 +18,7 @@
 // Types
 // ─────────────────────────────────────────────
 
-export type SubscriptionTier = "Elite" | "Pro" | "Starter";
+export type SubscriptionTier = "Founding" | "Elite" | "Pro" | "Starter";
 
 export type TradeMatchType = "primary" | "secondary" | "none";
 
@@ -111,18 +111,21 @@ const GEO_BANDS = [
 
 /** Tier radius caps — contractors beyond these are excluded */
 const TIER_RADIUS_CAPS: Record<SubscriptionTier, number> = {
+  Founding: 2147483647,
   Elite: 50,
   Pro: 50,
   Starter: 25,
 };
 
 const TIER_RAW_PTS: Record<SubscriptionTier, number> = {
+  Founding: 100,
   Elite: 100,
   Pro: 66,
   Starter: 33,
 };
 
 const NOTIFICATION_DELAY: Record<SubscriptionTier, number> = {
+  Founding: 0,
   Elite: 0,
   Pro: 2,
   Starter: 5,
