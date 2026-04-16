@@ -148,7 +148,11 @@ export async function POST(req: NextRequest) {
   if (assignErr) {
     console.error("[/api/match] upsert leads", assignErr);
     return NextResponse.json(
-      { error: "Failed to write assignments" },
+      {
+        error: "Failed to write assignments",
+        detail: assignErr.message,
+        code: assignErr.code,
+      },
       { status: 500 },
     );
   }
