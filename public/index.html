@@ -48,6 +48,7 @@
                 -webkit-font-smoothing: antialiased;
             }
 
+            /* ── NAV ── */
             nav {
                 position: fixed;
                 top: 0;
@@ -70,6 +71,7 @@
                 letter-spacing: 0.15em;
                 color: var(--ink);
                 text-decoration: none;
+                flex-shrink: 0;
             }
             .logo span {
                 color: var(--accent);
@@ -78,6 +80,47 @@
                 display: flex;
                 align-items: center;
                 gap: 0.75rem;
+            }
+            nav a.nav-mission {
+                font-size: 0.75rem;
+                font-weight: 500;
+                letter-spacing: 0.09em;
+                text-transform: uppercase;
+                color: var(--gold);
+                text-decoration: none;
+                padding: 0.4rem 0.85rem;
+                border: 1px solid rgba(196, 154, 53, 0.4);
+                border-radius: 2px;
+                transition:
+                    border-color 0.2s,
+                    color 0.2s,
+                    background 0.2s;
+                white-space: nowrap;
+            }
+            nav a.nav-mission:hover {
+                border-color: var(--gold);
+                background: rgba(196, 154, 53, 0.07);
+                color: var(--amber);
+            }
+            nav a.nav-why {
+                font-size: 0.75rem;
+                font-weight: 500;
+                letter-spacing: 0.09em;
+                text-transform: uppercase;
+                color: var(--accent2);
+                text-decoration: none;
+                padding: 0.4rem 0.85rem;
+                border: 1px solid rgba(58, 107, 71, 0.35);
+                border-radius: 2px;
+                transition:
+                    border-color 0.2s,
+                    color 0.2s,
+                    background 0.2s;
+                white-space: nowrap;
+            }
+            nav a.nav-why:hover {
+                border-color: var(--accent2);
+                background: rgba(58, 107, 71, 0.06);
             }
             nav a.nav-cta {
                 font-size: 0.8rem;
@@ -110,6 +153,7 @@
                 background: var(--amber3);
             }
 
+            /* ── HERO ── */
             .hero {
                 background: var(--dark1);
                 min-height: 100vh;
@@ -342,6 +386,42 @@
                 background: rgba(212, 133, 26, 0.1);
                 border-color: var(--amber);
             }
+            .btn-mission-hero {
+                font-family: "DM Sans", sans-serif;
+                font-size: 0.85rem;
+                font-weight: 500;
+                letter-spacing: 0.05em;
+                background: transparent;
+                color: var(--gold);
+                border: 1px solid rgba(196, 154, 53, 0.35);
+                padding: 0.9rem 1.5rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition: all 0.2s;
+                display: inline-block;
+            }
+            .btn-mission-hero:hover {
+                background: rgba(196, 154, 53, 0.1);
+                border-color: var(--gold);
+            }
+            .btn-why-hero {
+                font-family: "DM Sans", sans-serif;
+                font-size: 0.85rem;
+                font-weight: 500;
+                letter-spacing: 0.05em;
+                background: transparent;
+                color: #4fa86a;
+                border: 1px solid rgba(79, 168, 106, 0.35);
+                padding: 0.9rem 1.5rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition: all 0.2s;
+                display: inline-block;
+            }
+            .btn-why-hero:hover {
+                background: rgba(58, 107, 71, 0.1);
+                border-color: #4fa86a;
+            }
             .scroll-hint {
                 font-size: 0.75rem;
                 color: rgba(242, 239, 233, 0.4);
@@ -372,6 +452,220 @@
                 margin-top: 0.2rem;
             }
 
+            /* ── MISSION TEASER STRIP ── */
+            .mission-teaser {
+                background: var(--dark2);
+                border-top: 1px solid rgba(196, 154, 53, 0.15);
+                border-bottom: 1px solid rgba(196, 154, 53, 0.15);
+                padding: 3.5rem 2rem;
+            }
+            .mission-teaser-inner {
+                max-width: 1000px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                align-items: center;
+            }
+            .mission-teaser-left {
+                padding-right: 3rem;
+                border-right: 1px solid rgba(255, 255, 255, 0.07);
+            }
+            .mission-teaser-right {
+                padding-left: 3rem;
+            }
+            .mission-eyebrow {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: var(--gold);
+                margin-bottom: 0.75rem;
+            }
+            .mission-headline {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(2rem, 4vw, 3rem);
+                letter-spacing: 0.04em;
+                line-height: 1;
+                color: var(--paper);
+                margin-bottom: 1rem;
+            }
+            .mission-headline span {
+                color: var(--gold);
+            }
+            .mission-body {
+                font-size: 0.88rem;
+                font-weight: 300;
+                color: rgba(220, 216, 208, 0.8);
+                line-height: 1.75;
+                margin-bottom: 1.5rem;
+            }
+            .mission-features {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+                margin-bottom: 1.5rem;
+            }
+            .mission-features li {
+                font-size: 0.82rem;
+                color: rgba(220, 216, 208, 0.75);
+                display: flex;
+                align-items: flex-start;
+                gap: 0.6rem;
+                line-height: 1.5;
+            }
+            .mission-features li::before {
+                content: "→";
+                font-family: "DM Mono", monospace;
+                font-size: 0.72rem;
+                color: var(--gold);
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+            .btn-mission-strip {
+                display: inline-block;
+                background: var(--gold);
+                color: var(--dark1);
+                font-family: "DM Sans", sans-serif;
+                font-weight: 700;
+                font-size: 0.82rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                padding: 0.75rem 1.5rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition:
+                    background 0.2s,
+                    transform 0.15s;
+            }
+            .btn-mission-strip:hover {
+                background: var(--amber3);
+                transform: translateY(-1px);
+            }
+            .mission-feat-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+            .mission-feat-item {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: var(--r);
+                padding: 0.9rem;
+            }
+            .mission-feat-num {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 1.4rem;
+                color: rgba(196, 154, 53, 0.25);
+                line-height: 1;
+                margin-bottom: 4px;
+            }
+            .mission-feat-title {
+                font-size: 0.78rem;
+                font-weight: 500;
+                color: rgba(245, 242, 236, 0.7);
+                line-height: 1.3;
+            }
+
+            /* ── WHY YSKAIPE CALLOUT ── */
+            .why-callout {
+                background: var(--dark1);
+                border-top: 1px solid rgba(79, 168, 106, 0.15);
+                border-bottom: 1px solid rgba(79, 168, 106, 0.15);
+                padding: 2.5rem 2rem;
+            }
+            .why-callout-inner {
+                max-width: 1000px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+            .why-callout-left {
+                flex: 1;
+                min-width: 260px;
+            }
+            .why-callout-eyebrow {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: #4fa86a;
+                margin-bottom: 0.5rem;
+            }
+            .why-callout-headline {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: clamp(1.5rem, 3vw, 2.2rem);
+                letter-spacing: 0.03em;
+                line-height: 1;
+                color: var(--paper);
+                margin-bottom: 0.5rem;
+            }
+            .why-callout-headline span {
+                color: #4fa86a;
+            }
+            .why-callout-body {
+                font-size: 0.85rem;
+                font-weight: 300;
+                color: rgba(220, 216, 208, 0.7);
+                line-height: 1.65;
+                max-width: 520px;
+            }
+            .why-scores {
+                display: flex;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+            .why-score-item {
+                text-align: center;
+            }
+            .why-score-val {
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 1.6rem;
+                color: #4fa86a;
+                line-height: 1;
+            }
+            .why-score-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.55rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: rgba(242, 239, 233, 0.35);
+                margin-top: 0.2rem;
+            }
+            .why-score-vs {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                color: rgba(242, 239, 233, 0.25);
+                margin-top: 0.1rem;
+            }
+            .btn-why-callout {
+                display: inline-block;
+                background: transparent;
+                color: #4fa86a;
+                border: 1px solid rgba(79, 168, 106, 0.4);
+                font-family: "DM Sans", sans-serif;
+                font-weight: 600;
+                font-size: 0.82rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                padding: 0.75rem 1.5rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition: all 0.2s;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            .btn-why-callout:hover {
+                background: rgba(58, 107, 71, 0.12);
+                border-color: #4fa86a;
+                transform: translateY(-1px);
+            }
+
+            /* ── PROBLEM SECTION ── */
             .ps-section {
                 background: var(--dark1);
                 color: var(--paper);
@@ -470,10 +764,50 @@
                 margin-top: 2px;
                 font-size: 0.85rem;
             }
-            .ps-stat-row {
-                margin-top: 3rem;
+            .ps-data-cta {
+                max-width: 1000px;
+                margin: 2.5rem auto 0;
+                padding-top: 2rem;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
-                padding-top: 2.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+            .ps-data-cta-text {
+                font-size: 0.88rem;
+                font-weight: 300;
+                color: rgba(242, 239, 233, 0.65);
+                line-height: 1.6;
+                max-width: 500px;
+            }
+            .ps-data-cta-text strong {
+                color: rgba(242, 239, 233, 0.9);
+                font-weight: 500;
+            }
+            .btn-ps-why {
+                display: inline-block;
+                background: transparent;
+                color: #4fa86a;
+                border: 1px solid rgba(79, 168, 106, 0.35);
+                font-family: "DM Sans", sans-serif;
+                font-weight: 600;
+                font-size: 0.82rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                padding: 0.7rem 1.4rem;
+                border-radius: 2px;
+                text-decoration: none;
+                transition: all 0.2s;
+                white-space: nowrap;
+            }
+            .btn-ps-why:hover {
+                background: rgba(58, 107, 71, 0.12);
+                border-color: #4fa86a;
+            }
+            .ps-stat-row {
+                margin-top: 2rem;
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 1rem;
@@ -495,6 +829,7 @@
                 line-height: 1.3;
             }
 
+            /* ── HOW IT WORKS ── */
             .hiw-section {
                 padding: 5rem 2rem;
                 background: var(--cream);
@@ -567,6 +902,7 @@
                 font-weight: 400;
             }
 
+            /* ── FORK ── */
             .fork-section {
                 padding: 5rem 2rem;
                 background: var(--paper);
@@ -663,7 +999,7 @@
                 margin-top: 0.2rem;
             }
 
-            /* ── PRO CONTRACTOR BANNER ── */
+            /* ── PRO BANNER ── */
             .pro-banner {
                 background: var(--dark3);
                 border-top: 1px solid rgba(212, 133, 26, 0.2);
@@ -774,6 +1110,7 @@
                 letter-spacing: 0.03em;
             }
 
+            /* ── QUOTE SECTION ── */
             .quote-section {
                 padding: 5rem 2rem;
                 background: var(--cream);
@@ -967,7 +1304,6 @@
             .loading-text.active {
                 display: block;
             }
-
             #results {
                 display: none;
             }
@@ -1104,8 +1440,6 @@
                 border-color: var(--ink);
                 color: var(--ink);
             }
-
-            /* Pro upsell after quote */
             .pro-upsell-strip {
                 margin-top: 1.25rem;
                 background: var(--dark3);
@@ -1145,7 +1479,6 @@
             .btn-upsell:hover {
                 background: #ffc85c;
             }
-
             #diy-panel,
             #pro-panel {
                 display: none;
@@ -1384,8 +1717,6 @@
                 color: var(--accent);
                 margin-top: 0.4rem;
             }
-
-            /* Pro panel subscription CTA */
             .pro-sub-cta {
                 background: var(--dark3);
                 border: 1px solid rgba(212, 133, 26, 0.25);
@@ -1409,6 +1740,7 @@
                 color: #f5a623;
             }
 
+            /* ── MODAL ── */
             .modal-overlay {
                 display: none;
                 position: fixed;
@@ -1469,6 +1801,7 @@
                 cursor: pointer;
             }
 
+            /* ── TRUST STRIP ── */
             .trust-strip {
                 background: var(--cream);
                 border-top: 1px solid var(--border);
@@ -1489,6 +1822,8 @@
                 align-items: center;
                 gap: 0.4rem;
             }
+
+            /* ── FOOTER ── */
             footer {
                 background: var(--dark1);
                 color: rgba(242, 239, 233, 0.5);
@@ -1502,6 +1837,7 @@
                 color: rgba(242, 239, 233, 0.5);
             }
 
+            /* ── PRINT ── */
             @media print {
                 nav,
                 .trust-strip,
@@ -1511,6 +1847,8 @@
                 .hiw-section,
                 .fork-section,
                 .pro-banner,
+                .mission-teaser,
+                .why-callout,
                 .quote-section .section-header,
                 .fork-actions,
                 .btn-row-secondary,
@@ -1572,6 +1910,8 @@
                     padding-bottom: 0.5rem;
                 }
             }
+
+            /* ── RESPONSIVE ── */
             @media (max-width: 700px) {
                 .ps-grid {
                     grid-template-columns: 1fr;
@@ -1627,18 +1967,55 @@
                 .pro-banner-contractor {
                     padding-left: 0;
                 }
+                .mission-teaser-inner {
+                    grid-template-columns: 1fr;
+                }
+                .mission-teaser-left {
+                    padding-right: 0;
+                    border-right: none;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+                    padding-bottom: 2rem;
+                    margin-bottom: 2rem;
+                }
+                .mission-teaser-right {
+                    padding-left: 0;
+                }
+                .mission-feat-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+                nav a.nav-mission {
+                    display: none;
+                }
+                .why-callout-inner {
+                    flex-direction: column;
+                }
+                .why-scores {
+                    justify-content: center;
+                }
+                .ps-data-cta {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
             }
         </style>
     </head>
     <body>
+        <!-- NAV -->
         <nav>
             <a href="#" class="logo">Y<span>S</span>KAIPE</a>
             <div class="nav-right">
-                <a href="/public/pro.html" class="nav-pro">⚡ For Pros</a>
+                <a href="/why-yskaipe.html" class="nav-why"
+                    >&#9654; Why YSKAIPE</a
+                >
+                <a href="/yskaipe-mission.html" class="nav-mission"
+                    >&#9670; Our Mission</a
+                >
+                <a href="/public/pro.html" class="nav-pro">&#9889; For Pros</a>
                 <a href="#autoquote" class="nav-cta">Get My Quote</a>
             </div>
         </nav>
 
+        <!-- HERO -->
         <section class="hero">
             <div class="hero-bg"></div>
             <div class="stamp">
@@ -1715,7 +2092,13 @@
                         >Get the Fair Rate &rarr;</a
                     >
                     <a href="/public/pro.html" class="btn-pro-hero"
-                        >⚡ Contractors: Join Pro Network</a
+                        >&#9889; Contractors: Join Pro Network</a
+                    >
+                    <a href="/yskaipe-mission.html" class="btn-mission-hero"
+                        >&#9670; Our Mission</a
+                    >
+                    <a href="/why-yskaipe.html" class="btn-why-hero"
+                        >&#9654; Why YSKAIPE</a
                     >
                     <span class="scroll-hint"
                         >8 sec &middot; no account needed</span
@@ -1742,6 +2125,132 @@
             </div>
         </section>
 
+        <!-- MISSION TEASER STRIP -->
+        <div class="mission-teaser">
+            <div class="mission-teaser-inner">
+                <div class="mission-teaser-left">
+                    <div class="mission-eyebrow">&#9670; YSKAIPE Mission</div>
+                    <div class="mission-headline">
+                        10 features.<br /><span>One platform.</span><br />Two
+                        winners.
+                    </div>
+                    <div class="mission-body">
+                        We didn't build another lead-gen site. We built a full
+                        intelligence platform — with 10 differentiated features
+                        no competitor has combined in one place. Every single
+                        one is a win for homeowners and contractors alike.
+                    </div>
+                    <a href="/yskaipe-mission.html" class="btn-mission-strip"
+                        >Read Our Full Mission &rarr;</a
+                    >
+                </div>
+                <div class="mission-teaser-right">
+                    <div class="mission-feat-grid">
+                        <div class="mission-feat-item">
+                            <div class="mission-feat-num">01</div>
+                            <div class="mission-feat-title">
+                                Instant Autoquote on Any Service
+                            </div>
+                        </div>
+                        <div class="mission-feat-item">
+                            <div class="mission-feat-num">02</div>
+                            <div class="mission-feat-title">
+                                Zip-Code Standard Pricing
+                            </div>
+                        </div>
+                        <div class="mission-feat-item">
+                            <div class="mission-feat-num">03</div>
+                            <div class="mission-feat-title">
+                                Materials vs. Labor Breakdown
+                            </div>
+                        </div>
+                        <div class="mission-feat-item">
+                            <div class="mission-feat-num">04</div>
+                            <div class="mission-feat-title">
+                                DIY Instructions + Shopping
+                            </div>
+                        </div>
+                        <div class="mission-feat-item">
+                            <div class="mission-feat-num">05</div>
+                            <div class="mission-feat-title">
+                                Difficulty Ratings on Every Job
+                            </div>
+                        </div>
+                        <div class="mission-feat-item">
+                            <div class="mission-feat-num">06</div>
+                            <div class="mission-feat-title">
+                                Pro Referral Network
+                            </div>
+                        </div>
+                        <div class="mission-feat-item">
+                            <div class="mission-feat-num">07</div>
+                            <div class="mission-feat-title">
+                                Better Leads for Contractors
+                            </div>
+                        </div>
+                        <div
+                            class="mission-feat-item"
+                            style="border-color: rgba(196, 154, 53, 0.2)"
+                        >
+                            <div
+                                class="mission-feat-num"
+                                style="color: rgba(196, 154, 53, 0.45)"
+                            >
+                                +3
+                            </div>
+                            <div
+                                class="mission-feat-title"
+                                style="color: rgba(196, 154, 53, 0.7)"
+                            >
+                                More coming &rarr;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHY YSKAIPE CALLOUT -->
+        <div class="why-callout">
+            <div class="why-callout-inner">
+                <div class="why-callout-left">
+                    <div class="why-callout-eyebrow">&#9654; Why YSKAIPE</div>
+                    <div class="why-callout-headline">
+                        Angi has a <span>-32 NPS.</span><br />We built the fix.
+                    </div>
+                    <div class="why-callout-body">
+                        The incumbent is in freefall &mdash; F-rated by the BBB,
+                        350 layoffs, revenue dropping 13% year over year. We
+                        built YSKAIPE specifically to fix the broken model. See
+                        the full data-backed comparison.
+                    </div>
+                </div>
+                <div class="why-scores">
+                    <div class="why-score-item">
+                        <div class="why-score-val">36</div>
+                        <div class="why-score-label">Angi CSAT</div>
+                        <div class="why-score-vs">out of 100</div>
+                    </div>
+                    <div class="why-score-item">
+                        <div class="why-score-val" style="color: var(--amber)">
+                            -32
+                        </div>
+                        <div class="why-score-label">Angi NPS</div>
+                        <div class="why-score-vs">62% detractors</div>
+                    </div>
+                    <div class="why-score-item">
+                        <div class="why-score-val">F</div>
+                        <div class="why-score-label">Angi BBB</div>
+                        <div class="why-score-vs">1,800+ complaints</div>
+                    </div>
+                </div>
+                <a href="/why-yskaipe.html" class="btn-why-callout"
+                    >See Full Comparison &rarr;</a
+                >
+            </div>
+        </div>
+
+        <!-- PROBLEM -->
         <section class="ps-section">
             <div class="ps-grid">
                 <div class="ps-col">
@@ -1802,6 +2311,17 @@
                     </ul>
                 </div>
             </div>
+            <div class="ps-data-cta">
+                <div class="ps-data-cta-text">
+                    Want to see how this stacks up against the competition? We
+                    ran a <strong>full data-backed comparison</strong> against
+                    Angi — satisfaction scores, pricing models, contractor ROI,
+                    and long-term impact potential.
+                </div>
+                <a href="/why-yskaipe.html" class="btn-ps-why"
+                    >&#9654; See the Scorecard</a
+                >
+            </div>
             <div class="ps-stat-row">
                 <div>
                     <div class="stat-num">$2,400</div>
@@ -1824,6 +2344,7 @@
             </div>
         </section>
 
+        <!-- HOW IT WORKS -->
         <section class="hiw-section">
             <div class="section-header">
                 <div class="section-eyebrow">The Process</div>
@@ -1862,6 +2383,7 @@
             </div>
         </section>
 
+        <!-- FORK -->
         <section class="fork-section">
             <div class="section-header">
                 <div class="section-eyebrow">After Your Quote</div>
@@ -1923,7 +2445,7 @@
             </div>
         </section>
 
-        <!-- ═══ CONTRACTOR / HOMEOWNER SPLIT BANNER ═══ -->
+        <!-- PRO BANNER -->
         <section class="pro-banner">
             <div class="pro-banner-inner">
                 <div class="pro-banner-hw">
@@ -1953,9 +2475,15 @@
                     </p>
                     <div class="pro-price-tag">From $29 / month</div>
                     <div class="pro-banner-pills">
-                        <span class="pro-banner-pill">✓ Exclusive leads</span>
-                        <span class="pro-banner-pill">✓ No cold calling</span>
-                        <span class="pro-banner-pill">✓ Cancel anytime</span>
+                        <span class="pro-banner-pill"
+                            >&#10003; Exclusive leads</span
+                        >
+                        <span class="pro-banner-pill"
+                            >&#10003; No cold calling</span
+                        >
+                        <span class="pro-banner-pill"
+                            >&#10003; Cancel anytime</span
+                        >
                     </div>
                     <a href="/public/pro.html" class="btn-banner-pro"
                         >Join YSKAIPE Pro &rarr;</a
@@ -1964,6 +2492,7 @@
             </div>
         </section>
 
+        <!-- AUTOQUOTE -->
         <section class="quote-section" id="autoquote">
             <div class="quote-wrap">
                 <div class="section-header">
@@ -2150,7 +2679,6 @@
                                     &#8635; New Quote
                                 </button>
                             </div>
-                            <!-- Pro upsell strip after quote -->
                             <div class="pro-upsell-strip">
                                 <p>
                                     &#9889;
@@ -2221,7 +2749,6 @@
                                 Finding your match&hellip;
                             </div>
                             <div class="pro-cards" id="pro-cards"></div>
-                            <!-- Subscription CTA inside pro panel -->
                             <div class="pro-sub-cta">
                                 <p>
                                     &#127775;
@@ -2249,6 +2776,7 @@
             </div>
         </section>
 
+        <!-- TRUST STRIP -->
         <div class="trust-strip">
             <div class="trust-item">&#10003; NC 2026 verified rates</div>
             <div class="trust-item">&#10003; No signup required</div>
@@ -2268,6 +2796,16 @@
                 >&rarr; Future of Work</a
             >
             <a
+                href="/yskaipe-mission.html"
+                class="trust-item"
+                style="
+                    color: var(--gold);
+                    text-decoration: none;
+                    border-bottom: 1px solid rgba(196, 154, 53, 0.3);
+                "
+                >&#9670; Our Mission</a
+            >
+            <a
                 href="/public/pro.html"
                 class="trust-item"
                 style="
@@ -2275,10 +2813,21 @@
                     text-decoration: none;
                     border-bottom: 1px solid rgba(212, 133, 26, 0.3);
                 "
-                >⚡ Pro Network</a
+                >&#9889; Pro Network</a
+            >
+            <a
+                href="/why-yskaipe.html"
+                class="trust-item"
+                style="
+                    color: #4fa86a;
+                    text-decoration: none;
+                    border-bottom: 1px solid rgba(79, 168, 106, 0.3);
+                "
+                >&#9654; Why YSKAIPE</a
             >
         </div>
 
+        <!-- EMAIL MODAL -->
         <div class="modal-overlay" id="email-modal">
             <div class="modal">
                 <h4>Email This Quote</h4>
@@ -2302,6 +2851,7 @@
             </div>
         </div>
 
+        <!-- FOOTER -->
         <footer>
             YSKAIPE &middot; Human Hands. AI Power. &middot; gr8@yskaipe.com<br />
             <div
@@ -2313,14 +2863,16 @@
                     flex-wrap: wrap;
                 "
             >
-                <a href="/public/pro.html">⚡ Pro Network</a>
+                <a href="/yskaipe-mission.html">&#9670; Our Mission</a>
+                <a href="/public/pro.html">&#9889; Pro Network</a>
+                <a href="/why-yskaipe.html">&#9654; Why YSKAIPE</a>
                 <a href="future-of-work.html">Future of Work</a>
                 <a href="docs.html">Documentation</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
             </div>
             <br />Based on verified NC 2026 industry standards &middot; Regional
-            adjustments applied &middot; &copy; 2025 Yskaipe
+            adjustments applied &middot; &copy; 2026 Yskaipe
         </footer>
 
         <script>
@@ -2510,10 +3062,48 @@
 
             async function showPro() {
                 if (!currentQuoteData) return;
-                var trade =
-                    document.getElementById("trade").value ||
-                    "General Contractor";
+                var trade = document.getElementById("trade").value || "hvac";
                 var zip = document.getElementById("zip").value || "28036";
+                var desc =
+                    document.getElementById("job-desc").value ||
+                    currentQuoteData.breakdown ||
+                    "Home service request";
+                var name = document.getElementById("user-name").value || "";
+                var email = document.getElementById("user-email").value || "";
+                var tradeMap = {
+                    plumber: "plumbing",
+                    electrician: "electrical",
+                    "hvac technician": "hvac",
+                    roofer: "roofing",
+                    "general contractor": "hvac",
+                    landscaper: "landscaping",
+                    painter: "painting",
+                };
+                var tradeMapped =
+                    tradeMap[trade.toLowerCase()] ||
+                    trade.toLowerCase().split(" ")[0];
+                // Save to Supabase and redirect to match flow
+                try {
+                    var matchRes = await fetch("/api/quote", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            trade: tradeMapped,
+                            description: desc,
+                            zip_code: zip,
+                            homeowner_name: name || "YSKAIPE User",
+                            homeowner_email: email || "user@yskaipe.com",
+                        }),
+                    });
+                    var matchData = await matchRes.json();
+                    if (matchData.request_id) {
+                        window.location.href =
+                            "/match.html?request_id=" + matchData.request_id;
+                        return;
+                    }
+                } catch (e) {
+                    console.error("Match redirect failed", e);
+                }
                 document.getElementById("pro-intro").textContent =
                     currentQuoteData.pro_recommendation ||
                     "Finding local professionals near you...";
@@ -2547,8 +3137,8 @@
                         var fullStars = Math.round(ratingNum);
                         var stars =
                             ratingNum > 0
-                                ? "★".repeat(fullStars) +
-                                  "☆".repeat(5 - fullStars)
+                                ? "\u2605".repeat(fullStars) +
+                                  "\u2606".repeat(5 - fullStars)
                                 : "";
                         var ratingLine = p.rating ? p.rating + "/5" : "";
                         var phone = p.phone
