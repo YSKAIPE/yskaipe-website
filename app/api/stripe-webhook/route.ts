@@ -10,7 +10,7 @@ import Stripe from "stripe";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
+  apiVersion: "2026-03-25.dahlia",
 });
 
 const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!;
@@ -24,7 +24,10 @@ export async function POST(req: NextRequest) {
   try {
     event = stripe.webhooks.constructEvent(body, sig, WEBHOOK_SECRET);
   } catch (err: any) {
-    console.error("[stripe-webhook] signature verification failed", err.message);
+    console.error(
+      "[stripe-webhook] signature verification failed",
+      err.message,
+    );
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
@@ -48,12 +51,12 @@ export async function POST(req: NextRequest) {
 
     // Map trade display name to internal key
     const tradeMap: Record<string, string> = {
-      "HVAC": "hvac",
-      "Plumbing": "plumbing",
-      "Electrical": "electrical",
-      "Roofing": "roofing",
-      "Landscaping": "landscaping",
-      "Painting": "painting",
+      HVAC: "hvac",
+      Plumbing: "plumbing",
+      Electrical: "electrical",
+      Roofing: "roofing",
+      Landscaping: "landscaping",
+      Painting: "painting",
     };
     const tradeMapped = tradeMap[trade] || trade.toLowerCase();
 
@@ -90,15 +93,17 @@ export async function POST(req: NextRequest) {
         .single();
 
       if (contractorErr) {
-        console.error("[stripe-webhook] contractor insert error", contractorErr);
+        console.error(
+          "[stripe-webhook] contractor insert error",
+          contractorErr,
+        );
       } else {
         console.log("[stripe-webhook] contractor created", contractor?.id);
       }
 
       // 2. Create subscriber row (for magic link auth)
-      const { error: subErr } = await supabaseAdmin
-        .from("subscribers")
-        .upsert({
+      const { error: subErr } = await supabaseAdmin.from("subscribers").upsert(
+        {
           email,
           name: `${firstName} ${lastName}`.trim(),
           business: company,
@@ -108,8 +113,12 @@ export async function POST(req: NextRequest) {
           status: "active",
           stripe_customer_id: stripeCustomerId,
           activated_at: new Date().toISOString(),
-          current_period_end: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-        }, { onConflict: "email" });
+          current_period_end: new Date(
+            Date.now() + 365 * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+        },
+        { onConflict: "email" },
+      );
 
       if (subErr) {
         console.error("[stripe-webhook] subscriber upsert error", subErr);
@@ -129,7 +138,6 @@ export async function POST(req: NextRequest) {
       } else {
         console.log("[stripe-webhook] magic link sent to", email);
       }
-
     } catch (err: any) {
       console.error("[stripe-webhook] processing error", err);
       return NextResponse.json({ error: err.message }, { status: 500 });

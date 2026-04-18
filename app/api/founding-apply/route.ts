@@ -8,7 +8,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
+  apiVersion: "2026-03-25.dahlia",
 });
 
 const FOUNDING_PRICE_ID = "price_1THWTWJoiiIktGFZd7YDhB57";
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     if (!email || !firstName || !trade) {
       return NextResponse.json(
         { error: "Missing required fields" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
