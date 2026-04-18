@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE — Our Mission</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1F3A; --navy-mid: #152D4E; --navy-light: #1E3D63;
+    --gold: #E8B84B; --gold-light: #F5D07A; --gold-dark: #C49A30;
+    --cream: #F7F3EC; --cream-dark: #EDE8DE;
+    --white: #FFFFFF; --slate: #8FA3BB; --slate-light: #B8CADB;
+    --green: #2D9E6B; --green-light: #E8F7F1;
+    --blue-soft: #EEF3FA; --blue-text: #2C5F9E;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); overflow-x: hidden; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy); min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 80px 40px 60px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(232,184,75,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(30,61,99,0.8) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:28px; opacity:0; animation:fadeUp 0.8s 0.2s forwards; }
+  .hero-logo { font-family:'Bebas Neue',sans-serif; font-size:clamp(72px,16vw,140px); letter-spacing:0.08em; color:var(--white); line-height:0.9; opacity:0; animation:fadeUp 0.8s 0.4s forwards; }
+  .hero-logo span { color: var(--gold); }
+  .hero-tagline { font-size:clamp(16px,2.5vw,22px); font-weight:300; color:var(--slate-light); max-width:640px; line-height:1.7; margin-top:28px; opacity:0; animation:fadeUp 0.8s 0.6s forwards; }
+  .hero-divider { width:60px; height:2px; background:var(--gold); margin:36px auto; opacity:0; animation:fadeUp 0.8s 0.8s forwards; }
+  .hero-mission { font-size:clamp(14px,1.8vw,17px); font-weight:300; color:var(--slate); max-width:560px; line-height:1.8; opacity:0; animation:fadeUp 0.8s 1s forwards; font-style:italic; }
+  .hero-scroll { margin-top:60px; opacity:0; animation:fadeUp 0.8s 1.3s forwards; }
+  .hero-scroll a { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .scroll-arrow { width:1px; height:40px; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollPulse 2s infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.4;transform:scaleY(0.7)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* SHARED */
+  section { padding: 100px 40px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:16px; }
+  .section-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,6vw,68px); letter-spacing:0.04em; color:var(--navy); line-height:1; margin-bottom:20px; }
+  .section-body { font-size:17px; font-weight:300; color:#4A5E72; line-height:1.8; max-width:580px; }
+
+  /* PROBLEM STRIP */
+  .problem-strip { background:var(--navy); padding:70px 40px; }
+  .problem-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr 1fr; }
+  .problem-item { padding:40px; border-right:1px solid rgba(255,255,255,0.08); }
+  .problem-item:last-child { border-right:none; }
+  .problem-x { font-family:'Bebas Neue',sans-serif; font-size:48px; color:rgba(192,57,43,0.4); line-height:1; margin-bottom:12px; }
+  .problem-title { font-size:15px; font-weight:500; color:var(--white); margin-bottom:8px; }
+  .problem-desc { font-size:13px; font-weight:300; color:var(--slate); line-height:1.7; }
+
+  /* FEATURES 01–07 */
+  .features-section { background:var(--cream); }
+  .features-intro { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px; gap:40px; flex-wrap:wrap; }
+  .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2px; background:var(--cream-dark); border:2px solid var(--cream-dark); border-radius:16px; overflow:hidden; }
+  .feat-card { background:var(--white); padding:40px 36px; transition:background 0.2s; position:relative; overflow:hidden; }
+  .feat-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:0; background:var(--gold); transition:height 0.35s ease; }
+  .feat-card:hover::before { height:100%; }
+  .feat-card:hover { background:#FDFBF8; }
+  .feat-number { font-family:'Bebas Neue',sans-serif; font-size:52px; color:var(--cream-dark); line-height:1; margin-bottom:16px; transition:color 0.3s; }
+  .feat-card:hover .feat-number { color:var(--gold-light); }
+  .feat-icon { font-size:24px; margin-bottom:12px; display:block; }
+  .feat-title { font-size:17px; font-weight:600; color:var(--navy); margin-bottom:10px; line-height:1.3; }
+  .feat-desc { font-size:14px; font-weight:300; color:#5A6E82; line-height:1.75; }
+  .feat-tag { display:inline-block; margin-top:16px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; padding:4px 10px; border-radius:20px; }
+  .feat-tag.owner { background:var(--green-light); color:var(--green); }
+  .feat-tag.contractor { background:#FFF8E8; color:var(--gold-dark); }
+  .feat-tag.both { background:var(--blue-soft); color:var(--blue-text); }
+
+  /* WIN WIN STRIP */
+  .winwin-strip { background:var(--navy-light); padding:60px 40px; text-align:center; }
+  .winwin-inner { max-width:800px; margin:0 auto; }
+  .winwin-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,6vw,60px); letter-spacing:0.06em; color:var(--white); margin-bottom:16px; }
+  .winwin-headline span { color:var(--gold); }
+  .winwin-body { font-size:16px; font-weight:300; color:var(--slate-light); line-height:1.8; margin-bottom:36px; }
+  .winwin-pills { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .winwin-pill { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; padding:8px 18px; border-radius:30px; border:1px solid rgba(255,255,255,0.15); color:var(--slate-light); }
+  .winwin-pill.gold { border-color:var(--gold); color:var(--gold); }
+
+  /* TOMORROW FEATURES 08–10 */
+  .tomorrow-section { background:#F2EDE3; padding:100px 40px; }
+  .tomorrow-inner { max-width:1100px; margin:0 auto; }
+  .tomorrow-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:50px; gap:40px; flex-wrap:wrap; }
+  .tomorrow-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
+  .tomorrow-card { background:var(--navy); border-radius:16px; padding:40px 32px; position:relative; overflow:hidden; }
+  .tomorrow-card::after { content:''; position:absolute; bottom:0; right:0; width:100px; height:100px; background:radial-gradient(circle at bottom right,rgba(232,184,75,0.12),transparent 70%); pointer-events:none; }
+  .new-ribbon { display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.14em; text-transform:uppercase; background:var(--gold); color:var(--navy); padding:3px 10px; border-radius:4px; margin-bottom:14px; font-weight:500; }
+  .tomorrow-num { font-family:'Bebas Neue',sans-serif; font-size:64px; color:rgba(232,184,75,0.12); line-height:1; margin-bottom:12px; }
+  .tomorrow-icon { font-size:28px; margin-bottom:14px; display:block; }
+  .tomorrow-title { font-size:17px; font-weight:600; color:var(--white); margin-bottom:12px; line-height:1.3; }
+  .tomorrow-desc { font-size:13px; font-weight:300; color:var(--slate); line-height:1.75; margin-bottom:22px; }
+  .tomorrow-wins { display:flex; flex-direction:column; gap:10px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); }
+  .tw { display:flex; gap:9px; align-items:flex-start; font-size:12px; line-height:1.55; }
+  .tw-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+  .tw-dot.o { background:#2D9E6B; }
+  .tw-dot.c { background:var(--gold); }
+  .tw-text.o { color:#5DCAA5; }
+  .tw-text.c { color:var(--gold-light); }
+
+  /* DUAL AUDIENCE */
+  .dual-section { background:var(--navy); padding:100px 40px; }
+  .dual-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  .dual-card { border-radius:16px; padding:52px 44px; }
+  .dual-card.homeowner { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); }
+  .dual-card.contractor { background:var(--gold); border:1px solid var(--gold-dark); }
+  .dual-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:20px; }
+  .dual-card.homeowner .dual-eyebrow { color:var(--slate); }
+  .dual-card.contractor .dual-eyebrow { color:var(--navy-mid); }
+  .dual-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,4vw,52px); letter-spacing:0.04em; line-height:1; margin-bottom:24px; }
+  .dual-card.homeowner .dual-headline { color:var(--white); }
+  .dual-card.contractor .dual-headline { color:var(--navy); }
+  .dual-body { font-size:15px; font-weight:300; line-height:1.8; margin-bottom:32px; }
+  .dual-card.homeowner .dual-body { color:var(--slate-light); }
+  .dual-card.contractor .dual-body { color:var(--navy-mid); }
+  .dual-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .dual-list li { font-size:14px; display:flex; gap:10px; align-items:flex-start; line-height:1.5; }
+  .dual-card.homeowner .dual-list li { color:var(--slate-light); }
+  .dual-card.contractor .dual-list li { color:var(--navy); }
+  .dual-list li::before { content:'→'; font-family:'DM Mono',monospace; font-size:12px; flex-shrink:0; margin-top:1px; }
+  .dual-card.homeowner .dual-list li::before { color:var(--gold); }
+  .dual-card.contractor .dual-list li::before { color:var(--navy-mid); }
+  .dual-badge { display:inline-block; margin-top:30px; border-radius:8px; padding:10px 20px; font-family:'DM Mono',monospace; font-size:12px; letter-spacing:0.1em; }
+  .dual-badge.free { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:var(--gold); }
+  .dual-badge.sub { background:var(--navy); color:var(--gold); }
+
+  /* STATS */
+  .stats-strip { background:var(--gold); padding:60px 40px; }
+  .stats-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); }
+  .stat-item { text-align:center; padding:20px; border-right:1px solid rgba(11,31,58,0.15); }
+  .stat-item:last-child { border-right:none; }
+  .stat-num { font-family:'Bebas Neue',sans-serif; font-size:56px; color:var(--navy); line-height:1; }
+  .stat-label { font-size:13px; font-weight:400; color:var(--navy-mid); margin-top:6px; line-height:1.4; }
+
+  /* CTA */
+  .cta-section { background:var(--navy); padding:120px 40px; text-align:center; position:relative; overflow:hidden; }
+  .cta-section::before { content:'YSKAIPE'; position:absolute; font-family:'Bebas Neue',sans-serif; font-size:clamp(120px,25vw,280px); color:rgba(255,255,255,0.02); letter-spacing:0.08em; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; white-space:nowrap; }
+  .cta-inner { position:relative; z-index:1; }
+  .cta-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,96px); letter-spacing:0.05em; color:var(--white); line-height:1; margin-bottom:24px; }
+  .cta-headline span { color:var(--gold); }
+  .cta-body { font-size:18px; font-weight:300; color:var(--slate-light); max-width:520px; margin:0 auto 48px; line-height:1.8; }
+  .cta-buttons { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn-primary { background:var(--gold); color:var(--navy); font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; padding:16px 36px; border-radius:8px; text-decoration:none; letter-spacing:0.04em; transition:background 0.2s,transform 0.15s; display:inline-block; }
+  .btn-primary:hover { background:var(--gold-light); transform:translateY(-1px); }
+  .btn-outline { background:transparent; color:var(--white); font-family:'DM Sans',sans-serif; font-size:14px; font-weight:400; padding:16px 36px; border-radius:8px; border:1px solid rgba(255,255,255,0.25); text-decoration:none; letter-spacing:0.04em; transition:border-color 0.2s,transform 0.15s; display:inline-block; }
+  .btn-outline:hover { border-color:rgba(255,255,255,0.6); transform:translateY(-1px); }
+
+  /* FOOTER */
+  footer { background:#07131F; padding:40px; text-align:center; }
+  .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:0.12em; color:var(--gold); margin-bottom:12px; }
+  .footer-tagline { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--slate); }
+  .footer-links { display:flex; gap:28px; justify-content:center; margin-top:24px; flex-wrap:wrap; }
+  footer a { color:var(--slate-light); text-decoration:none; font-size:13px; transition:color 0.2s; }
+  footer a:hover { color:var(--gold); }
+  .footer-copy { margin-top:32px; font-size:12px; color:rgba(143,163,187,0.4); }
+
+  /* RESPONSIVE */
+  @media (max-width:768px) {
+    section { padding:70px 24px; }
+    .problem-inner,.dual-inner,.tomorrow-grid { grid-template-columns:1fr; }
+    .problem-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.08); padding:28px 24px; }
+    .problem-item:last-child { border-bottom:none; }
+    .stats-inner { grid-template-columns:1fr 1fr; }
+    .stat-item { border-right:none; border-bottom:1px solid rgba(11,31,58,0.1); }
+    .stat-item:nth-child(even) { border-right:none; }
+    .features-grid { grid-template-columns:1fr; }
+    .features-intro,.tomorrow-header { flex-direction:column; align-items:flex-start; }
+    .winwin-strip,.problem-strip { padding:50px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">North Carolina's Home Services Revolution</div>
+  <div class="hero-logo">YSK<span>AI</span>PE</div>
+  <div class="hero-tagline">The AI-powered marketplace that puts homeowners back in control — and gives contractors the leads they actually deserve.</div>
+  <div class="hero-divider"></div>
+  <div class="hero-mission">"We built YSKAIPE because getting honest pricing and finding a trusted contractor shouldn't require luck — it should require a good platform."</div>
+  <div class="hero-scroll">
+    <a href="#problem">
+      <span>Our mission</span>
+      <div class="scroll-arrow"></div>
+    </a>
+  </div>
+</section>
+
+<!-- PROBLEM STRIP -->
+<div class="problem-strip" id="problem">
+  <div class="problem-inner">
+    <div class="problem-item">
+      <div class="problem-x">✕</div>
+      <div class="problem-title">No pricing transparency</div>
+      <div class="problem-desc">Homeowners call three contractors just to get a rough ballpark — and still don't know if the number is fair for their area.</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-x">✕</div>
+      <div class="problem-title">Bad contractor leads</div>
+      <div class="problem-desc">Platforms sell the same lead to five contractors at once. Everyone loses time — especially the homeowner waiting for a callback.</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-x">✕</div>
+      <div class="problem-title">Generic national data</div>
+      <div class="problem-desc">Pricing tools pull national averages that have nothing to do with what a job actually costs in your zip code — and no one tells you.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES 01–07 -->
+<section class="features-section" id="features">
+  <div class="section-inner">
+    <div class="features-intro">
+      <div>
+        <div class="section-label">Platform Features — Available Now</div>
+        <div class="section-headline">Built different.<br>By design.</div>
+      </div>
+      <div class="section-body">Seven core capabilities no other platform has combined in one place — built for homeowners and contractors alike.</div>
+    </div>
+    <div class="features-grid">
+
+      <div class="feat-card">
+        <div class="feat-number">01</div>
+        <span class="feat-icon">⚡</span>
+        <div class="feat-title">Instant Autoquote on Any Home Service</div>
+        <div class="feat-desc">Describe your job and get an AI-generated quote in seconds — not days. Roofing, plumbing, HVAC, fencing, painting, electrical, and hundreds more. No phone tag. No waiting. Just answers.</div>
+        <span class="feat-tag owner">Homeowner</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-number">02</div>
+        <span class="feat-icon">📍</span>
+        <div class="feat-title">Accurate Standard Pricing by Zip Code</div>
+        <div class="feat-desc">What a job costs in Charlotte isn't what it costs in Asheville. YSKAIPE localizes every estimate to your actual zip code — not a misleading national average that has nothing to do with your market.</div>
+        <span class="feat-tag owner">Homeowner</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-number">03</div>
+        <span class="feat-icon">🔍</span>
+        <div class="feat-title">Materials vs. Labor Cost Breakdown</div>
+        <div class="feat-desc">One lump-sum quote tells you nothing. YSKAIPE breaks every estimate into material costs and labor costs so you know exactly where every dollar goes — and can negotiate from a position of real knowledge.</div>
+        <span class="feat-tag both">Homeowner + Contractor</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-number">04</div>
+        <span class="feat-icon">🛠️</span>
+        <div class="feat-title">DIY Instructions + Easy Shopping</div>
+        <div class="feat-desc">Not every job needs a pro. YSKAIPE gives homeowners clear step-by-step DIY guides AND connects them directly to the exact materials they need — saving time, money, and a lot of guesswork at the hardware store.</div>
+        <span class="feat-tag owner">Homeowner</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-number">05</div>
+        <span class="feat-icon">📊</span>
+        <div class="feat-title">Difficulty Ratings on Every Job</div>
+        <div class="feat-desc">Should you DIY it or call a pro? YSKAIPE rates every home service job by difficulty with full descriptions — from weekend-warrior easy to definitely-hire-someone — so you make the right call before spending a dime.</div>
+        <span class="feat-tag owner">Homeowner</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-number">06</div>
+        <span class="feat-icon">🤝</span>
+        <div class="feat-title">Pro Referral Network</div>
+        <div class="feat-desc">When a job calls for a pro, YSKAIPE connects homeowners to vetted, verified local contractors through a referral network built on quality — not ad spend. The right pro for your job, not the loudest bidder.</div>
+        <span class="feat-tag both">Homeowner + Contractor</span>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-number">07</div>
+        <span class="feat-icon">🎯</span>
+        <div class="feat-title">Contractors Get Better Leads</div>
+        <div class="feat-desc">No more bidding against four other contractors on the same job. YSKAIPE's AI matches contractors to homeowners whose projects actually fit their trade and skill set — fewer dead ends, more revenue per hour.</div>
+        <span class="feat-tag contractor">Contractor</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WIN WIN STRIP -->
+<div class="winwin-strip">
+  <div class="winwin-inner">
+    <div class="winwin-headline">A genuine <span>win-win</span> platform.</div>
+    <div class="winwin-body">Every feature YSKAIPE adds is designed to benefit both sides of the marketplace at once — because a platform that only serves one side eventually serves neither.</div>
+    <div class="winwin-pills">
+      <div class="winwin-pill gold">Homeowners save money</div>
+      <div class="winwin-pill">Contractors earn more</div>
+      <div class="winwin-pill gold">Better matches for both</div>
+      <div class="winwin-pill">Less wasted time</div>
+      <div class="winwin-pill gold">Built on trust</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES 08–10 TOMORROW -->
+<section class="tomorrow-section" id="tomorrow">
+  <div class="tomorrow-inner">
+    <div class="tomorrow-header">
+      <div>
+        <div class="section-label">What's Next — The Platform Tomorrow</div>
+        <div class="section-headline">Three more reasons<br>YSKAIPE wins long-term.</div>
+      </div>
+      <div class="section-body">These aren't features competitors are building. They're the capabilities that turn YSKAIPE from a marketplace into a full home ownership platform — and a contractor growth engine.</div>
+    </div>
+
+    <div class="tomorrow-grid">
+
+      <div class="tomorrow-card">
+        <div class="new-ribbon">Coming Soon</div>
+        <div class="tomorrow-num">08</div>
+        <span class="tomorrow-icon">⭐</span>
+        <div class="tomorrow-title">Verified Contractor Profiles & Reputation System</div>
+        <div class="tomorrow-desc">Every YSKAIPE contractor builds a verified profile with job history, trade certifications, real homeowner reviews, and completed project photos — a portable reputation that grows stronger with every job completed.</div>
+        <div class="tomorrow-wins">
+          <div class="tw">
+            <div class="tw-dot o"></div>
+            <div class="tw-text o">Homeowners hire with real confidence — not guesswork or crossed fingers.</div>
+          </div>
+          <div class="tw">
+            <div class="tw-dot c"></div>
+            <div class="tw-text c">Contractors build a digital reputation that earns premium referrals over time.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tomorrow-card">
+        <div class="new-ribbon">Coming Soon</div>
+        <div class="tomorrow-num">09</div>
+        <span class="tomorrow-icon">📅</span>
+        <div class="tomorrow-title">Home Maintenance Timeline & Smart Reminders</div>
+        <div class="tomorrow-desc">YSKAIPE tracks your home's full maintenance history and proactively alerts you when seasonal tasks, warranties, or recurring services are coming due — turning expensive reactive repairs into planned, affordable maintenance.</div>
+        <div class="tomorrow-wins">
+          <div class="tw">
+            <div class="tw-dot o"></div>
+            <div class="tw-text o">Homeowners avoid costly emergency repairs by staying a season ahead.</div>
+          </div>
+          <div class="tw">
+            <div class="tw-dot c"></div>
+            <div class="tw-text c">Contractors get recurring, predictable work from loyal homeowners they already know.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tomorrow-card">
+        <div class="new-ribbon">Coming Soon</div>
+        <div class="tomorrow-num">10</div>
+        <span class="tomorrow-icon">🌦️</span>
+        <div class="tomorrow-title">Seasonal & Regional Job Intelligence</div>
+        <div class="tomorrow-desc">YSKAIPE's AI learns NC's seasonal rhythms — surfacing the right jobs at the right time. Spring gutters, summer AC tune-ups, fall weatherproofing. The platform anticipates what homeowners need before they even think to ask.</div>
+        <div class="tomorrow-wins">
+          <div class="tw">
+            <div class="tw-dot o"></div>
+            <div class="tw-text o">Homeowners get proactive suggestions that protect their home and budget year-round.</div>
+          </div>
+          <div class="tw">
+            <div class="tw-dot c"></div>
+            <div class="tw-text c">Contractors fill their pipeline during slow seasons with perfectly timed, targeted leads.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DUAL AUDIENCE -->
+<section class="dual-section" id="audience">
+  <div class="dual-inner">
+
+    <div class="dual-card homeowner">
+      <div class="dual-eyebrow">For Homeowners</div>
+      <div class="dual-headline">Finally, a platform that works for you.</div>
+      <div class="dual-body">YSKAIPE is 100% free for homeowners. Get instant pricing, understand your options, find trusted local pros — and never overpay again.</div>
+      <ul class="dual-list">
+        <li>Instant autoquotes on virtually any home service</li>
+        <li>Real zip-code pricing — not national averages</li>
+        <li>See materials vs. labor before you commit</li>
+        <li>Step-by-step DIY guides + easy material shopping</li>
+        <li>Difficulty ratings so you know what you're getting into</li>
+        <li>Connect to vetted local pros through the referral network</li>
+        <li>Track your home's maintenance history in one place</li>
+        <li>Seasonal reminders before small problems become big bills</li>
+      </ul>
+      <div class="dual-badge free">Always free for homeowners</div>
+    </div>
+
+    <div class="dual-card contractor">
+      <div class="dual-eyebrow">For Contractors</div>
+      <div class="dual-headline">Leads that actually match your trade.</div>
+      <div class="dual-body">Stop fighting for recycled leads sold to five guys at once. YSKAIPE matches your skills to homeowners who need exactly what you do — today and every season ahead.</div>
+      <ul class="dual-list">
+        <li>AI-matched leads based on your specific trade</li>
+        <li>No competing with 4 other contractors on the same job</li>
+        <li>High-intent homeowners with real, defined budgets</li>
+        <li>Build a verified profile that earns premium referrals</li>
+        <li>Recurring work through home maintenance reminders</li>
+        <li>Seasonal intelligence that fills your slow-season pipeline</li>
+        <li>Pricing tools to win bids confidently and profitably</li>
+        <li>Grow your reputation and your revenue on one platform</li>
+      </ul>
+      <div class="dual-badge sub">Subscription-based · No surprise fees</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">$0</div>
+      <div class="stat-label">Cost for homeowners.<br>Always free.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Differentiated features<br>no competitor has combined.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">NC</div>
+      <div class="stat-label">Built local. Priced by<br>your actual zip code.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2×</div>
+      <div class="stat-label">Win-win for homeowners<br>AND contractors.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-headline">Home services.<br><span>Done right.</span></div>
+    <div class="cta-body">Whether you're a homeowner who deserves honest pricing or a contractor who deserves better leads — YSKAIPE was built for you.</div>
+    <div class="cta-buttons">
+      <a href="https://yskaipe.com" class="btn-primary">Get Your Free Quote →</a>
+      <a href="https://yskaipe.com" class="btn-outline">Join as a Contractor</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">YSKAIPE</div>
+  <div class="footer-tagline">AI-Powered Home Services · North Carolina</div>
+  <div class="footer-links">
+    <a href="https://yskaipe.com">yskaipe.com</a>
+    <a href="https://yskaipe.com">For Homeowners</a>
+    <a href="https://yskaipe.com">For Contractors</a>
+    <a href="https://yskaipe.com">About</a>
+  </div>
+  <div class="footer-copy">© 2026 YSKAIPE. All rights reserved. North Carolina.</div>
+</footer>
+
+</body>
+</html>

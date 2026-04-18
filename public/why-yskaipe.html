@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why YSKAIPE · The Honest Comparison</title>
+<meta name="description" content="See how YSKAIPE compares to Angi on customer satisfaction, value, price, and long-term impact. The data is clear.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-dark: #085041;
+    --teal-mid: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-xlight: #f0faf6;
+    --coral-dark: #712B13;
+    --coral-mid: #D85A30;
+    --coral-light: #FAECE7;
+    --gray-dark: #2C2C2A;
+    --gray-mid: #5F5E5A;
+    --gray-light: #F1EFE8;
+    --gray-border: #D3D1C7;
+    --white: #ffffff;
+    --amber: #BA7517;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--gray-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+    border-bottom: 1px solid var(--gray-border);
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--gray-dark);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--gray-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal-mid); }
+  .nav-cta {
+    background: var(--teal-mid) !important;
+    color: var(--white) !important;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px !important;
+    font-weight: 500;
+  }
+  .nav-cta:hover { background: var(--teal-dark) !important; }
+
+  /* HERO */
+  .hero {
+    background: var(--gray-dark);
+    color: var(--white);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 80px,
+      rgba(255,255,255,0.02) 80px,
+      rgba(255,255,255,0.02) 81px
+    );
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--teal-mid);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 strong { font-weight: 600; color: var(--teal-mid); }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 5px 12px;
+    border: 1px solid rgba(29,158,117,0.4);
+    border-radius: 2px;
+    color: var(--teal-mid);
+    letter-spacing: 0.06em;
+  }
+
+  /* VERDICT BANNER */
+  .verdict-banner {
+    background: var(--teal-light);
+    border-left: 4px solid var(--teal-mid);
+    padding: 1.25rem 2rem;
+    max-width: 860px;
+    margin: 2.5rem auto;
+    border-radius: 0 6px 6px 0;
+  }
+  .verdict-banner p {
+    font-size: 14px;
+    color: var(--teal-dark);
+    line-height: 1.75;
+  }
+  .verdict-banner strong { font-weight: 600; }
+
+  /* MAIN CONTAINER */
+  .container {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* SCORE CARDS */
+  .score-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0 3rem;
+  }
+  .score-card {
+    background: var(--gray-light);
+    border-radius: 6px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .score-card .score-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--gray-mid);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .score-card .score-winner {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    margin-bottom: 0.25rem;
+  }
+  .score-card .score-note {
+    font-size: 12px;
+    color: var(--gray-mid);
+  }
+
+  /* COMPARISON TABLE */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+    padding: 1rem 1rem 0.5rem;
+    background: var(--gray-light);
+    border-top: 1px solid var(--gray-border);
+    border-bottom: 1px solid var(--gray-border);
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--gray-border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13.5px;
+    margin-bottom: 2.5rem;
+  }
+
+  .compare-table thead tr {
+    background: var(--gray-dark);
+    color: var(--white);
+  }
+  .compare-table thead th {
+    padding: 12px 14px;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-align: left;
+  }
+  .compare-table thead th:nth-child(2) {
+    background: rgba(216, 90, 48, 0.25);
+    text-align: center;
+  }
+  .compare-table thead th:nth-child(3) {
+    background: var(--teal-dark);
+    text-align: center;
+  }
+
+  .section-row td {
+    background: var(--gray-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+    padding: 8px 14px;
+    border-top: 1px solid var(--gray-border);
+    border-bottom: 1px solid var(--gray-border);
+  }
+
+  .compare-table tbody tr:not(.section-row) td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--gray-border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .compare-table tbody tr:not(.section-row):hover td {
+    background: rgba(29,158,117,0.03);
+  }
+
+  .col-category { color: var(--gray-dark); font-weight: 500; width: 28%; }
+  .col-angi { color: var(--coral-dark); width: 36%; text-align: left; }
+  .col-angi.neutral { color: var(--gray-mid); }
+  .col-yskaipe { color: var(--teal-dark); font-weight: 500; width: 36%; text-align: left; }
+  .col-yskaipe.neutral { color: var(--gray-mid); font-weight: 400; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-left: 5px;
+    vertical-align: middle;
+    letter-spacing: 0.04em;
+  }
+  .tag-win { background: var(--teal-light); color: var(--teal-dark); }
+  .tag-loss { background: var(--coral-light); color: var(--coral-dark); }
+  .tag-neutral { background: var(--gray-light); color: var(--gray-mid); }
+
+  /* BOTTOM CTA */
+  .cta-section {
+    background: var(--gray-dark);
+    color: var(--white);
+    padding: 3.5rem 2rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .cta-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .cta-section h2 strong { font-weight: 600; color: var(--teal-mid); }
+  .cta-section p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 2rem;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal-mid);
+    color: var(--white);
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal-dark); }
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.7);
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.6); color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    background: var(--gray-light);
+    border-top: 1px solid var(--gray-border);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-mid);
+  }
+  footer a { color: var(--gray-mid); text-decoration: none; margin: 0 0.75rem; }
+  footer a:hover { color: var(--teal-mid); }
+  .footer-note {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--gray-border);
+    margin-top: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 640px) {
+    .score-strip { grid-template-columns: 1fr; }
+    .compare-table { font-size: 12px; }
+    .compare-table thead th, .compare-table tbody tr td { padding: 9px 10px; }
+    .col-category { width: 32%; }
+    .col-angi, .col-yskaipe { width: 34%; }
+    nav { padding: 0 1rem; }
+    .hero { padding: 3.5rem 1.25rem 3rem; }
+    .verdict-banner { margin: 1.5rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">YSKAIPE</a>
+  <div class="nav-links">
+    <a href="/yskaipe-mission.html">◆ Our Mission</a>
+    <a href="/public/pro.html">⚡ For Pros</a>
+    <a href="/#autoquote" class="nav-cta">Get My Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Competitive Analysis · April 2026</div>
+  <h1>The market was <strong>broken by design.</strong><br>We built the fix.</h1>
+  <p class="hero-sub">An honest, data-backed comparison of YSKAIPE vs. Angi — on satisfaction, value, price, and long-term impact.</p>
+  <div class="hero-badge">Based on live site review + public data · NC 2026</div>
+</div>
+
+<!-- VERDICT -->
+<div style="max-width:940px;margin:0 auto;padding:0 1.5rem;">
+  <div class="verdict-banner">
+    <p><strong>Honest take:</strong> Angi is a declining tollbooth — it profits from confusion and both sides know it. YSKAIPE's bet is that transparency itself is the product, which is a genuinely different idea in this space. The website communicates it clearly, the price is right, and the timing is good. The only honest caveat: YSKAIPE wins on paper and on potential — but scale, trust, and the Fair Rate Index data moat have to be earned. The gap between "better idea" and "bigger business" is execution.</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- SCORE STRIP -->
+  <div class="score-strip">
+    <div class="score-card">
+      <div class="score-label">Total value / price</div>
+      <div class="score-winner">YSKAIPE wins</div>
+      <div class="score-note">Clear winner on both sides</div>
+    </div>
+    <div class="score-card">
+      <div class="score-label">Cleverness of concept</div>
+      <div class="score-winner">YSKAIPE wins</div>
+      <div class="score-note">Fundamentally different frame</div>
+    </div>
+    <div class="score-card">
+      <div class="score-label">Long-term impact potential</div>
+      <div class="score-winner">YSKAIPE wins</div>
+      <div class="score-note">If execution keeps up</div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Angi</th>
+        <th>YSKAIPE</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- CUSTOMER SATISFACTION -->
+      <tr class="section-row"><td colspan="3">Customer Satisfaction</td></tr>
+      <tr>
+        <td class="col-category">CSAT score</td>
+        <td class="col-angi">36 / 100 <span class="tag tag-loss">critical</span></td>
+        <td class="col-yskaipe neutral">No aggregate score yet <span class="tag tag-neutral">early stage</span></td>
+      </tr>
+      <tr>
+        <td class="col-category">Net Promoter Score</td>
+        <td class="col-angi">-32 &nbsp;·&nbsp; 62% detractors</td>
+        <td class="col-yskaipe">Structurally positive by design</td>
+      </tr>
+      <tr>
+        <td class="col-category">Review site rating</td>
+        <td class="col-angi">2.1 / 5 Trustpilot · 6,754 reviews</td>
+        <td class="col-yskaipe neutral">Not yet rated — no volume</td>
+      </tr>
+      <tr>
+        <td class="col-category">BBB standing</td>
+        <td class="col-angi">F rating · 1,800+ complaints</td>
+        <td class="col-yskaipe">Clean — no complaints</td>
+      </tr>
+
+      <!-- HOMEOWNER VALUE -->
+      <tr class="section-row"><td colspan="3">Value vs. Price — Homeowners</td></tr>
+      <tr>
+        <td class="col-category">Cost to homeowner</td>
+        <td class="col-angi neutral">Free to submit a request</td>
+        <td class="col-yskaipe">Free — no account, no signup <span class="tag tag-win">edge</span></td>
+      </tr>
+      <tr>
+        <td class="col-category">What homeowner gets</td>
+        <td class="col-angi">Phone spam from multiple contractors · blind quotes</td>
+        <td class="col-yskaipe">Instant fair-rate estimate in 8 sec · labor + materials · DIY path</td>
+      </tr>
+      <tr>
+        <td class="col-category">Price info before contact</td>
+        <td class="col-angi">None — you go in completely blind</td>
+        <td class="col-yskaipe">Full price intelligence before any contractor contact</td>
+      </tr>
+      <tr>
+        <td class="col-category">DIY option surfaced</td>
+        <td class="col-angi">No</td>
+        <td class="col-yskaipe">Yes — full instructions, materials list, difficulty rating</td>
+      </tr>
+
+      <!-- CONTRACTOR VALUE -->
+      <tr class="section-row"><td colspan="3">Value vs. Price — Contractors</td></tr>
+      <tr>
+        <td class="col-category">Monthly cost</td>
+        <td class="col-angi">$350–$500+/mo subscription + $45–70/lead</td>
+        <td class="col-yskaipe">From $29/month · no per-lead fees ever</td>
+      </tr>
+      <tr>
+        <td class="col-category">Lead quality</td>
+        <td class="col-angi">Shared with multiple contractors · ~30–40% fraud rate reported</td>
+        <td class="col-yskaipe">Exclusive · pre-scoped · pre-priced leads</td>
+      </tr>
+      <tr>
+        <td class="col-category">Contract terms</td>
+        <td class="col-angi">12-month lock-in · 50% early exit fee</td>
+        <td class="col-yskaipe">Cancel anytime</td>
+      </tr>
+      <tr>
+        <td class="col-category">Contractor ROI</td>
+        <td class="col-angi">$12,400+ avg customer acquisition cost reported</td>
+        <td class="col-yskaipe">Dramatically lower burn with exclusive matching</td>
+      </tr>
+
+      <!-- CLEVERNESS -->
+      <tr class="section-row"><td colspan="3">Cleverness + Design</td></tr>
+      <tr>
+        <td class="col-category">Core concept</td>
+        <td class="col-angi neutral">Lead marketplace · built 1995 · no structural reinvention</td>
+        <td class="col-yskaipe">Price intelligence first — flips the model entirely</td>
+      </tr>
+      <tr>
+        <td class="col-category">AI integration</td>
+        <td class="col-angi neutral">AI used internally for dispatch · not user-facing</td>
+        <td class="col-yskaipe">Claude AI is the product · autoquote is the core UX</td>
+      </tr>
+      <tr>
+        <td class="col-category">Defensible moat</td>
+        <td class="col-angi neutral">Brand recognition + scale — both eroding</td>
+        <td class="col-yskaipe">Fair Rate Index as a data moat — gets smarter every job</td>
+      </tr>
+      <tr>
+        <td class="col-category">Website clarity</td>
+        <td class="col-angi neutral">Generic — "find pros near you" + a search bar</td>
+        <td class="col-yskaipe">Mission-clear · benefit-stacked · 3-step product visible in seconds</td>
+      </tr>
+
+      <!-- IMPACT POTENTIAL -->
+      <tr class="section-row"><td colspan="3">Potential for Impact</td></tr>
+      <tr>
+        <td class="col-category">Business trajectory</td>
+        <td class="col-angi">Revenue -13% YoY · 350 layoffs · market cap ~$376M</td>
+        <td class="col-yskaipe">Early-stage but structurally sound · both sides aligned</td>
+      </tr>
+      <tr>
+        <td class="col-category">Market trust trajectory</td>
+        <td class="col-angi">Declining — contractors and homeowners both increasingly hostile</td>
+        <td class="col-yskaipe">Trust is the product · built into pricing from day one</td>
+      </tr>
+      <tr>
+        <td class="col-category">Differentiation</td>
+        <td class="col-angi neutral">Commoditized — indistinguishable from Thumbtack / HomeAdvisor</td>
+        <td class="col-yskaipe">No direct competitor combines price intel + DIY + matching</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to try the <strong>better way?</strong></h2>
+  <p>Free. No signup. Your fair rate in 8 seconds.</p>
+  <div class="cta-buttons">
+    <a href="/#autoquote" class="btn-primary">Get My Free Quote →</a>
+    <a href="/public/pro.html" class="btn-ghost">⚡ Join as a Pro</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="/">Home</a>
+    <a href="/yskaipe-mission.html">Our Mission</a>
+    <a href="/public/pro.html">For Pros</a>
+    <a href="/future-of-work.html">Future of Work</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+  <div class="footer-note">Based on verified NC 2026 industry standards · Live site analysis · Public review data · Angi Inc. financial disclosures · © 2026 YSKAIPE</div>
+</footer>
+
+</body>
+</html>
