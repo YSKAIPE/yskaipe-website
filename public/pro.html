@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>YSKAIPE Pro — Win Jobs at Fair Rates</title>
+        <title>YSKAIPE Pro — Founding Contractor Program</title>
         <meta
             name="description"
-            content="Subscribe to YSKAIPE Pro and get AI-matched homeowner leads delivered to your phone. Starter $29 · Pro $79 · Elite $149/mo."
+            content="Join YSKAIPE's Founding Fifty contractor program. Lock in $99/mo forever and get exclusive AI-matched leads in Charlotte, NC."
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,6 +32,7 @@
                 --white: #f8f9fc;
                 --green: #22c87a;
                 --red: #ff5a5a;
+                --gold: #c8961a;
                 --fh: "DM Serif Display", serif;
                 --fb: "DM Sans", sans-serif;
             }
@@ -71,7 +72,7 @@
             .logo .pill {
                 font-family: var(--fb);
                 font-size: 0.65rem;
-                background: var(--amber);
+                background: var(--gold);
                 color: var(--navy);
                 padding: 0.15rem 0.5rem;
                 border-radius: 100px;
@@ -95,7 +96,7 @@
                 color: var(--white);
             }
             .nav-cta {
-                background: var(--amber);
+                background: var(--gold);
                 color: var(--navy);
                 font-weight: 700;
                 font-size: 0.875rem;
@@ -121,11 +122,11 @@
                 border: none;
                 transition: all 0.2s;
             }
-            .btn-amber {
-                background: var(--amber);
+            .btn-gold {
+                background: var(--gold);
                 color: var(--navy);
             }
-            .btn-amber:hover {
+            .btn-gold:hover {
                 background: var(--amber3);
                 transform: translateY(-1px);
             }
@@ -143,6 +144,52 @@
                 font-size: 0.875rem;
             }
 
+            /* SLOTS BANNER */
+            .slots-banner {
+                background: rgba(200, 150, 26, 0.1);
+                border-bottom: 1px solid rgba(200, 150, 26, 0.2);
+                padding: 0.65rem 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                font-size: 0.82rem;
+                color: var(--amber3);
+            }
+            .slots-banner strong {
+                font-weight: 700;
+            }
+            .slots-prog {
+                width: 120px;
+                height: 4px;
+                border-radius: 2px;
+                background: rgba(200, 150, 26, 0.2);
+                overflow: hidden;
+            }
+            .slots-fill {
+                height: 100%;
+                border-radius: 2px;
+                background: var(--gold);
+                width: 14%;
+            }
+            .dot {
+                width: 6px;
+                height: 6px;
+                background: var(--green);
+                border-radius: 50%;
+                animation: pulse 2s infinite;
+                display: inline-block;
+            }
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.4;
+                }
+            }
+
             /* HERO */
             .hero {
                 padding: 5rem 2rem 4rem;
@@ -154,8 +201,8 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
-                background: rgba(245, 166, 35, 0.12);
-                border: 1px solid rgba(245, 166, 35, 0.3);
+                background: rgba(200, 150, 26, 0.12);
+                border: 1px solid rgba(200, 150, 26, 0.3);
                 color: var(--amber3);
                 font-size: 0.75rem;
                 font-weight: 600;
@@ -165,22 +212,6 @@
                 border-radius: 100px;
                 margin-bottom: 1.5rem;
             }
-            .dot {
-                width: 6px;
-                height: 6px;
-                background: var(--green);
-                border-radius: 50%;
-                animation: pulse 2s infinite;
-            }
-            @keyframes pulse {
-                0%,
-                100% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0.4;
-                }
-            }
             .hero h1 {
                 font-family: var(--fh);
                 font-size: clamp(2.5rem, 5vw, 3.75rem);
@@ -189,7 +220,7 @@
                 margin-bottom: 1.25rem;
             }
             .hero h1 em {
-                color: var(--amber);
+                color: var(--gold);
                 font-style: italic;
             }
             .hero p {
@@ -207,7 +238,7 @@
                 flex-wrap: wrap;
             }
 
-            /* STATS BAR */
+            /* STATS */
             .stats-bar {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -229,7 +260,7 @@
             .stat-num {
                 font-family: var(--fh);
                 font-size: 2.25rem;
-                color: var(--amber);
+                color: var(--gold);
                 letter-spacing: -0.02em;
             }
             .stat-label {
@@ -241,8 +272,8 @@
                 text-transform: uppercase;
             }
 
-            /* HOW IT WORKS */
-            .how-section {
+            /* WHAT YOU GET */
+            .section-wrap {
                 padding: 0 2rem 4rem;
                 max-width: 960px;
                 margin: 0 auto;
@@ -252,7 +283,7 @@
                 font-weight: 700;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
-                color: var(--amber);
+                color: var(--gold);
                 margin-bottom: 0.75rem;
                 text-align: center;
             }
@@ -263,151 +294,226 @@
                 margin-bottom: 2rem;
                 letter-spacing: -0.02em;
             }
-            .steps-grid {
+            .benefits-grid {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 1rem;
             }
-            .step {
+            .benefit {
                 background: var(--navy2);
                 border: 1px solid rgba(255, 255, 255, 0.07);
                 border-radius: 12px;
-                padding: 1.25rem;
-                position: relative;
-                overflow: hidden;
+                padding: 1.5rem;
                 transition: border-color 0.2s;
             }
-            .step:hover {
-                border-color: rgba(245, 166, 35, 0.2);
+            .benefit:hover {
+                border-color: rgba(200, 150, 26, 0.3);
             }
-            .step::before {
-                content: attr(data-n);
-                position: absolute;
-                right: -0.25rem;
-                top: -0.75rem;
-                font-family: var(--fh);
-                font-size: 4rem;
-                color: rgba(245, 166, 35, 0.06);
-                pointer-events: none;
-            }
-            .step-icon {
-                font-size: 1.25rem;
+            .benefit-icon {
+                font-size: 1.5rem;
                 margin-bottom: 0.75rem;
             }
-            .step h3 {
-                font-size: 0.9rem;
+            .benefit h3 {
+                font-size: 0.95rem;
                 font-weight: 700;
                 margin-bottom: 0.4rem;
+                color: var(--white);
             }
-            .step p {
-                font-size: 0.8rem;
+            .benefit p {
+                font-size: 0.82rem;
                 color: var(--slate2);
-                line-height: 1.55;
-                font-weight: 300;
-            }
-
-            /* PRICING */
-            .pricing-section {
-                padding: 0 2rem 4rem;
-                max-width: 960px;
-                margin: 0 auto;
-            }
-            .pro-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1.25rem;
-            }
-            .price-card {
-                background: var(--navy2);
-                border: 1px solid rgba(255, 255, 255, 0.07);
-                border-radius: 16px;
-                padding: 1.75rem;
-                display: flex;
-                flex-direction: column;
-                transition: border-color 0.2s;
-            }
-            .price-card:hover {
-                border-color: rgba(255, 255, 255, 0.15);
-            }
-            .price-card.featured {
-                border-color: var(--amber);
-                position: relative;
-            }
-            .price-card.featured::before {
-                content: "Most Popular";
-                position: absolute;
-                top: -13px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: var(--amber);
-                color: var(--navy);
-                font-size: 0.7rem;
-                font-weight: 700;
-                letter-spacing: 0.06em;
-                text-transform: uppercase;
-                padding: 0.2rem 0.875rem;
-                border-radius: 100px;
-                white-space: nowrap;
-            }
-            .card-icon {
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-            }
-            .card-name {
-                font-size: 1.125rem;
-                font-weight: 700;
-                margin-bottom: 0.2rem;
-            }
-            .card-price {
-                font-family: var(--fh);
-                font-size: 2.75rem;
-                color: var(--amber);
-                letter-spacing: -0.02em;
-                margin: 0.5rem 0 0.25rem;
-            }
-            .card-price span {
-                font-family: var(--fb);
-                font-size: 0.9rem;
-                color: var(--slate);
-                font-weight: 400;
-            }
-            .card-desc {
-                font-size: 0.875rem;
-                color: var(--slate2);
-                margin-bottom: 1.25rem;
                 line-height: 1.6;
                 font-weight: 300;
             }
-            .card-features {
-                list-style: none;
-                margin-bottom: 1.5rem;
-                flex: 1;
+
+            /* FOUNDING CARD */
+            .founding-wrap {
+                padding: 0 2rem 4rem;
+                max-width: 700px;
+                margin: 0 auto;
             }
-            .card-features li {
-                font-size: 0.85rem;
-                color: var(--slate2);
-                padding: 0.375rem 0;
+            .founding-card {
+                background: linear-gradient(135deg, #1a1a12, #0f1a0a);
+                border: 1px solid var(--gold);
+                border-radius: 20px;
+                padding: 2.5rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .founding-card::before {
+                content: "FOUNDING FIFTY";
+                position: absolute;
+                right: -1rem;
+                top: 1.5rem;
+                font-family: var(--fh);
+                font-size: 5rem;
+                color: rgba(200, 150, 26, 0.04);
+                pointer-events: none;
+                white-space: nowrap;
+            }
+            .founding-header {
                 display: flex;
                 align-items: flex-start;
-                gap: 0.625rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                justify-content: space-between;
+                margin-bottom: 1.5rem;
+                gap: 1rem;
             }
-            .card-features li:last-child {
-                border-bottom: none;
+            .founding-badge-wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
             }
-            .card-features li::before {
-                content: "";
-                width: 14px;
-                height: 14px;
+            .founding-badge {
+                display: inline-block;
+                background: var(--gold);
+                color: var(--navy);
+                font-size: 0.65rem;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.25rem 0.75rem;
+                border-radius: 100px;
+            }
+            .founding-title {
+                font-family: var(--fh);
+                font-size: 2rem;
+                line-height: 1.1;
+                letter-spacing: -0.02em;
+            }
+            .founding-title em {
+                color: var(--gold);
+                font-style: italic;
+            }
+            .founding-price {
+                text-align: right;
                 flex-shrink: 0;
-                margin-top: 2px;
+            }
+            .founding-price .amt {
+                font-family: var(--fh);
+                font-size: 3rem;
+                color: var(--gold);
+                line-height: 1;
+            }
+            .founding-price .per {
+                font-size: 0.8rem;
+                color: var(--slate);
+                margin-top: 0.2rem;
+            }
+            .founding-price .lock {
+                font-size: 0.72rem;
+                color: var(--gold);
+                background: rgba(200, 150, 26, 0.1);
+                border: 1px solid rgba(200, 150, 26, 0.25);
+                padding: 0.2rem 0.6rem;
+                border-radius: 100px;
+                display: inline-block;
+                margin-top: 0.4rem;
+            }
+            .founding-features {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+                margin: 1.5rem 0;
+            }
+            .ff-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.5rem;
+                font-size: 0.82rem;
+                color: var(--slate2);
+            }
+            .ff-check {
+                width: 16px;
+                height: 16px;
                 border-radius: 50%;
-                background: rgba(34, 200, 122, 0.12);
+                background: rgba(34, 200, 122, 0.1);
                 border: 1.5px solid var(--green);
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+            .ff-special {
+                color: var(--gold);
+                font-weight: 600;
+            }
+            .founding-cta {
+                display: block;
+                text-align: center;
+                background: var(--gold);
+                color: var(--navy);
+                font-weight: 700;
+                font-size: 1rem;
+                padding: 1rem;
+                border-radius: 10px;
+                text-decoration: none;
+                transition: background 0.2s;
+                margin-top: 0.5rem;
+            }
+            .founding-cta:hover {
+                background: var(--amber3);
+            }
+            .founding-note {
+                text-align: center;
+                font-size: 0.75rem;
+                color: var(--slate);
+                margin-top: 0.75rem;
             }
 
-            /* SIGNUP FORM */
-            .signup-section {
+            /* SOCIAL */
+            .social-wrap {
+                padding: 0 2rem 4rem;
+                max-width: 700px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .social-cards {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 1.5rem;
+            }
+            .social-card {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                background: var(--navy2);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 12px;
+                padding: 1rem 1.5rem;
+                text-decoration: none;
+                color: var(--white);
+                transition:
+                    border-color 0.2s,
+                    transform 0.15s;
+                min-width: 180px;
+            }
+            .social-card:hover {
+                border-color: rgba(200, 150, 26, 0.4);
+                transform: translateY(-2px);
+            }
+            .social-icon {
+                font-size: 1.5rem;
+                flex-shrink: 0;
+            }
+            .social-info {
+                text-align: left;
+            }
+            .social-platform {
+                font-size: 0.7rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--slate);
+                margin-bottom: 0.1rem;
+            }
+            .social-handle {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: var(--white);
+            }
+
+            /* REQUEST FORM */
+            .form-wrap {
                 padding: 0 2rem 5rem;
                 max-width: 680px;
                 margin: 0 auto;
@@ -429,37 +535,7 @@
                 font-size: 0.9rem;
                 margin-bottom: 2rem;
                 font-weight: 300;
-            }
-            .tier-pick {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0.75rem;
-                margin-bottom: 1.5rem;
-            }
-            .tier-opt {
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 10px;
-                padding: 0.875rem;
-                cursor: pointer;
-                transition: all 0.2s;
-                text-align: center;
-            }
-            .tier-opt:hover {
-                border-color: rgba(245, 166, 35, 0.4);
-            }
-            .tier-opt.selected {
-                border-color: var(--amber);
-                background: rgba(245, 166, 35, 0.08);
-            }
-            .tier-opt .t-name {
-                font-weight: 700;
-                font-size: 0.9rem;
-                margin-bottom: 0.2rem;
-            }
-            .tier-opt .t-price {
-                font-size: 0.8rem;
-                color: var(--amber);
-                font-weight: 600;
+                line-height: 1.6;
             }
             .form-row {
                 display: grid;
@@ -480,7 +556,8 @@
                 text-transform: uppercase;
             }
             .fg input,
-            .fg select {
+            .fg select,
+            .fg textarea {
                 background: rgba(255, 255, 255, 0.05);
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 border-radius: 8px;
@@ -493,36 +570,40 @@
                 width: 100%;
             }
             .fg input:focus,
-            .fg select:focus {
-                border-color: var(--amber);
+            .fg select:focus,
+            .fg textarea:focus {
+                border-color: var(--gold);
             }
-            .fg input::placeholder {
+            .fg input::placeholder,
+            .fg textarea::placeholder {
                 color: var(--slate);
             }
             .fg select option {
                 background: var(--navy2);
             }
-            .stripe-row {
-                display: flex;
-                align-items: center;
-                gap: 0.625rem;
+            .fg textarea {
+                resize: vertical;
+                min-height: 90px;
+            }
+            .submit-btn {
+                width: 100%;
+                background: var(--gold);
+                color: var(--navy);
+                font-weight: 700;
+                font-size: 1rem;
                 padding: 1rem;
-                background: rgba(34, 200, 122, 0.05);
-                border: 1px solid rgba(34, 200, 122, 0.15);
                 border-radius: 8px;
-                margin-bottom: 1.25rem;
+                border: none;
+                cursor: pointer;
+                font-family: var(--fb);
+                transition: background 0.2s;
             }
-            .stripe-icon {
-                font-size: 1.1rem;
-                flex-shrink: 0;
+            .submit-btn:hover {
+                background: var(--amber3);
             }
-            .stripe-row p {
-                font-size: 0.825rem;
-                color: var(--slate2);
-                line-height: 1.4;
-            }
-            .stripe-row strong {
-                color: var(--green);
+            .submit-btn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
             }
             .form-err {
                 color: var(--red);
@@ -530,36 +611,27 @@
                 margin-bottom: 0.75rem;
                 display: none;
             }
-            .success-screen {
+            .form-success {
                 display: none;
                 text-align: center;
-                padding: 5rem 2rem;
+                padding: 3rem 1rem;
             }
-            .success-screen.show {
+            .form-success.show {
                 display: block;
             }
             .success-icon {
-                width: 72px;
-                height: 72px;
-                background: rgba(34, 200, 122, 0.1);
-                border: 2px solid var(--green);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 2rem;
-                margin: 0 auto 1.5rem;
+                font-size: 3rem;
+                margin-bottom: 1rem;
             }
-            .success-screen h2 {
+            .form-success h3 {
                 font-family: var(--fh);
-                font-size: 2rem;
+                font-size: 1.75rem;
                 margin-bottom: 0.75rem;
-                letter-spacing: -0.02em;
+                color: var(--gold);
             }
-            .success-screen p {
+            .form-success p {
                 color: var(--slate2);
-                max-width: 420px;
-                margin: 0 auto 2rem;
+                font-size: 0.9rem;
                 line-height: 1.6;
             }
 
@@ -572,21 +644,18 @@
                 margin-top: 2rem;
             }
             footer a {
-                color: var(--amber);
+                color: var(--gold);
                 text-decoration: none;
             }
 
             @media (max-width: 700px) {
-                .pro-grid {
+                .benefits-grid {
                     grid-template-columns: 1fr;
                 }
-                .steps-grid {
-                    grid-template-columns: 1fr 1fr;
+                .founding-features {
+                    grid-template-columns: 1fr;
                 }
                 .form-row {
-                    grid-template-columns: 1fr;
-                }
-                .tier-pick {
                     grid-template-columns: 1fr;
                 }
                 .stats-bar {
@@ -595,398 +664,273 @@
                 .nav-links {
                     display: none;
                 }
+                .founding-header {
+                    flex-direction: column;
+                }
+                .founding-price {
+                    text-align: left;
+                }
             }
         </style>
     </head>
     <body>
-        <!-- ============================================================
-  YSKAIPE · FOUNDING MEMBER BANNER
-  Add this block immediately after your <body> tag (or at the
-  very top of your page, before the nav) in pro.html
-  ============================================================ -->
-
-        <div
-            id="founding-banner"
-            style="
-                background: #141412;
-                border-bottom: 1px solid #c8a84b;
-                padding: 12px 24px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 16px;
-                flex-wrap: wrap;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-            "
-        >
-            <div style="display: flex; align-items: center; gap: 8px">
-                <div
-                    style="
-                        width: 8px;
-                        height: 8px;
-                        border-radius: 50%;
-                        background: #c8a84b;
-                        animation: pulse 2s ease-in-out infinite;
-                    "
-                ></div>
-                <span style="font-size: 13px; color: #f7f5f0; font-weight: 500">
-                    Founding member rates closing
-                    <strong style="color: #c8a84b">April 30 at midnight</strong>
-                    &nbsp;·&nbsp; Lock $19 / $49 / $99 forever
-                </span>
-            </div>
-            <a
-                href="/public/founding.html"
-                style="
-                    font-size: 12px;
-                    font-weight: 500;
-                    background: #c8a84b;
-                    color: #141412;
-                    padding: 6px 16px;
-                    border-radius: 20px;
-                    text-decoration: none;
-                    white-space: nowrap;
-                    transition: opacity 0.15s;
-                "
-                onmouseover="this.style.opacity = '.85'"
-                onmouseout="this.style.opacity = '1'"
-            >
-                See founding rates →
-            </a>
-        </div>
-
-        <style>
-            @keyframes pulse {
-                0%,
-                100% {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-                50% {
-                    opacity: 0.6;
-                    transform: scale(0.85);
-                }
-            }
-        </style>
-
-        <!-- ============================================================
-  FOUNDING MEMBER BADGE — for individual plan cards
-  Add this pill inside each plan card to show founding pricing.
-  Duplicate for each tier, swapping the price.
-  ============================================================ -->
-
-        <!-- STARTER card badge (add inside your starter plan card) -->
-        <div
-            style="
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                background: #f5ecd4;
-                border: 1px solid #c8a84b;
-                color: #8a6e28;
-                font-size: 11px;
-                font-weight: 500;
-                padding: 4px 12px;
-                border-radius: 20px;
-                margin-bottom: 8px;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-            "
-        >
-            🔒 Founding rate: <strong>$19/mo forever</strong> &nbsp;·&nbsp;
-            <span style="text-decoration: line-through; color: #b0ae9e"
-                >was $29</span
-            >
-        </div>
-
-        <!-- PRO card badge -->
-        <div
-            style="
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                background: #f5ecd4;
-                border: 1px solid #c8a84b;
-                color: #8a6e28;
-                font-size: 11px;
-                font-weight: 500;
-                padding: 4px 12px;
-                border-radius: 20px;
-                margin-bottom: 8px;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-            "
-        >
-            🔒 Founding rate: <strong>$49/mo forever</strong> &nbsp;·&nbsp;
-            <span style="text-decoration: line-through; color: #b0ae9e"
-                >was $79</span
-            >
-        </div>
-
-        <!-- ELITE card badge -->
-        <div
-            style="
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                background: #f5ecd4;
-                border: 1px solid #c8a84b;
-                color: #8a6e28;
-                font-size: 11px;
-                font-weight: 500;
-                padding: 4px 12px;
-                border-radius: 20px;
-                margin-bottom: 8px;
-                font-family: &quot;DM Sans&quot;, sans-serif;
-            "
-        >
-            🔒 Founding rate: <strong>$99/mo forever</strong> &nbsp;·&nbsp;
-            <span style="text-decoration: line-through; color: #b0ae9e"
-                >was $149</span
-            >
+        <div class="slots-banner">
+            <span class="dot"></span>
+            <div class="slots-prog"><div class="slots-fill"></div></div>
+            <strong>43 of 50</strong> founding spots remaining · Charlotte, NC
         </div>
 
         <nav>
             <a href="/" class="logo"
-                >ysk<span class="ai">AI</span>pe<span class="pill">PRO</span></a
+                >ysk<span class="ai">AI</span>pe<span class="pill"
+                    >FOUNDING</span
+                ></a
             >
             <div class="nav-links">
-                <a href="#hero">Home</a>
-                <a href="#pricing">Plans</a>
-                <a href="#signup">Join</a>
+                <a href="#benefits">Why YSKAIPE</a>
+                <a href="#founding">The Program</a>
+                <a href="#request">Request Invite</a>
                 <a href="/">← Main Site</a>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.75rem">
-                <a
-                    href="/public/dashboard.html"
-                    style="
-                        font-size: 0.8rem;
-                        color: var(--slate2);
-                        text-decoration: none;
-                        transition: color 0.2s;
-                    "
-                    onmouseover="this.style.color = 'var(--white)'"
-                    onmouseout="this.style.color = 'var(--slate2)'"
-                    >Member login →</a
-                >
-                <a href="#signup" class="nav-cta">Subscribe Now</a>
-            </div>
+            <a href="#request" class="nav-cta">Request Founding Invite</a>
         </nav>
 
-        <!-- HERO -->
         <div id="hero">
             <div class="hero">
                 <div class="badge">
-                    <span class="dot"></span>Now accepting NC contractors
+                    <span class="dot"></span>Invitation-only · First Fifty
+                    Program · Charlotte, NC
                 </div>
-                <h1>Your next job is already <em>waiting</em>.</h1>
+                <h1>The founding cohort gets <em>everything</em> first.</h1>
                 <p>
-                    Subscribe to YSKAIPE Pro and get AI-matched homeowner leads
-                    delivered to your phone — pre-scoped, pre-priced at 2026
-                    fair rates. No cold calling. No per-lead fees. Ever.
+                    YSKAIPE is live and routing real homeowner jobs in
+                    Charlotte. The first fifty contractors lock in $99/mo
+                    forever and take 100% of early traffic — before anyone else
+                    can compete.
                 </p>
                 <div class="hero-btns">
-                    <a href="#pricing" class="btn btn-amber"
-                        >See Plans &amp; Pricing</a
+                    <a href="#founding" class="btn btn-gold"
+                        >See the Founding Program</a
                     >
-                    <a href="#signup" class="btn btn-outline"
-                        >Subscribe Now →</a
+                    <a href="#request" class="btn btn-outline"
+                        >Request an Invite →</a
                     >
                 </div>
             </div>
 
             <div class="stats-bar">
                 <div class="stat-item">
-                    <div class="stat-num">$3,500</div>
-                    <div class="stat-label">Avg Job Value</div>
+                    <div class="stat-num">$99</div>
+                    <div class="stat-label">Forever rate · rate-locked</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-num">Exclusive</div>
-                    <div class="stat-label">Leads — not shared</div>
+                    <div class="stat-num">43</div>
+                    <div class="stat-label">Founding spots remaining</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-num">$29</div>
-                    <div class="stat-label">Starting per month</div>
+                    <div class="stat-num">3,300:100</div>
+                    <div class="stat-label">Homeowner to contractor ratio</div>
                 </div>
             </div>
         </div>
 
-        <!-- HOW IT WORKS -->
-        <div class="how-section">
-            <div class="section-label">How it works</div>
-            <div class="section-title">Four steps. Zero friction.</div>
-            <div class="steps-grid">
-                <div class="step" data-n="01">
-                    <div class="step-icon">💳</div>
-                    <h3>Subscribe</h3>
+        <!-- BENEFITS -->
+        <div id="benefits" class="section-wrap">
+            <div class="section-label">Why founding contractor</div>
+            <div class="section-title">Built different. From day one.</div>
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>100% of early traffic</h3>
                     <p>
-                        Pick your tier, enter your trade and ZIP. Stripe handles
-                        billing — cancel anytime.
+                        Until the 3,300:100 homeowner-to-contractor ratio fills,
+                        every qualifying lead routes to the founding cohort — no
+                        queue competition.
                     </p>
                 </div>
-                <div class="step" data-n="02">
-                    <div class="step-icon">🔔</div>
-                    <h3>Get notified</h3>
+                <div class="benefit">
+                    <div class="benefit-icon">🔒</div>
+                    <h3>Rate locked forever</h3>
                     <p>
-                        When a homeowner in your area needs a pro, you get an
-                        instant SMS — full job scope included.
+                        $99/month permanently. As YSKAIPE scales and pricing
+                        evolves, founding contractors are contractually
+                        protected at their entry rate.
                     </p>
                 </div>
-                <div class="step" data-n="03">
-                    <div class="step-icon">⚡</div>
-                    <h3>Claim the job</h3>
+                <div class="benefit">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Loyalty score head start</h3>
                     <p>
-                        One tap to claim. Exclusive lead — you're not competing
-                        against 8 other contractors.
+                        Our algorithm rewards tenure. Every month before a
+                        competitor joins is a scoring advantage they can never
+                        recover.
                     </p>
                 </div>
-                <div class="step" data-n="04">
-                    <div class="step-icon">🌟</div>
-                    <h3>Build your rating</h3>
+                <div class="benefit">
+                    <div class="benefit-icon">🤖</div>
+                    <h3>AI-matched leads only</h3>
                     <p>
-                        4-star+ ratings boost your match priority. Great work
-                        earns more leads automatically.
+                        No cold calling. A dedicated trade agent matches your
+                        skills to homeowner jobs in real time — pre-scoped,
+                        pre-priced at fair rates.
+                    </p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🏆</div>
+                    <h3>Founding badge — permanent</h3>
+                    <p>
+                        Every homeowner sees you helped build the platform. A
+                        trust signal that compounds the longer you're on
+                        YSKAIPE.
+                    </p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">📊</div>
+                    <h3>Pro dashboard access</h3>
+                    <p>
+                        Live lead queue, scoring simulator, loyalty tracker, and
+                        performance analytics — full visibility into how the
+                        algorithm ranks you.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- PRICING -->
-        <div id="pricing" class="pricing-section">
-            <div class="section-label">Subscription plans</div>
-            <div class="section-title">
-                Pick your level. Start winning jobs.
+        <!-- FOUNDING CARD -->
+        <div id="founding" class="founding-wrap">
+            <div style="text-align: center; margin-bottom: 1.5rem">
+                <div class="section-label">The program</div>
+                <div class="section-title">One tier. The best one.</div>
             </div>
-
-            <div class="pro-grid">
-                <div class="price-card">
-                    <div class="card-icon">🔧</div>
-                    <div class="card-name">Starter</div>
-                    <div class="card-price">$29<span>/month</span></div>
-                    <div class="card-desc">
-                        Perfect for part-time contractors testing the waters.
-                        Steady matched jobs with zero risk.
-                    </div>
-                    <ul class="card-features">
-                        <li>3 AI-matched leads per month</li>
-                        <li>1 trade category</li>
-                        <li>25-mile service radius</li>
-                        <li>SMS lead notifications</li>
-                        <li>Basic pro profile listing</li>
-                        <li>Cancel anytime</li>
-                    </ul>
-                    <a
-                        href="#signup"
-                        onclick="preselectTier('Starter')"
-                        class="btn btn-outline btn-sm"
-                        style="text-align: center; display: block"
-                        >Get Started — $29/mo</a
-                    >
-                </div>
-
-                <div class="price-card featured">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-name">Pro</div>
-                    <div class="card-price">$79<span>/month</span></div>
-                    <div class="card-desc">
-                        The sweet spot for active contractors. More leads, more
-                        trades, priority in the network.
-                    </div>
-                    <ul class="card-features">
-                        <li>10 AI-matched leads per month</li>
-                        <li>3 trade categories</li>
-                        <li>50-mile service radius</li>
-                        <li>SMS + app push notifications</li>
-                        <li>Enhanced profile + ratings badge</li>
-                        <li>Priority match queue (before Starter)</li>
-                        <li>Monthly performance dashboard</li>
-                        <li>Cancel anytime</li>
-                    </ul>
-                    <a
-                        href="#signup"
-                        onclick="preselectTier('Pro')"
-                        class="btn btn-amber btn-sm"
-                        style="text-align: center; display: block"
-                        >Subscribe — $79/mo</a
-                    >
-                </div>
-
-                <div class="price-card">
-                    <div class="card-icon">👑</div>
-                    <div class="card-name">Elite</div>
-                    <div class="card-price">$149<span>/month</span></div>
-                    <div class="card-desc">
-                        For full-time contractors who want maximum lead flow,
-                        first-mover advantage, and premium presence.
-                    </div>
-                    <ul class="card-features">
-                        <li>Unlimited AI-matched leads</li>
-                        <li>All trade categories</li>
-                        <li>Unlimited service radius</li>
-                        <li>First-look — beat all other tiers</li>
-                        <li>Elite badge on public profile</li>
-                        <li>Featured in Pro directory</li>
-                        <li>Dedicated onboarding call</li>
-                        <li>Priority support + account review</li>
-                    </ul>
-                    <a
-                        href="#signup"
-                        onclick="preselectTier('Elite')"
-                        class="btn btn-outline btn-sm"
-                        style="text-align: center; display: block"
-                        >Go Elite — $149/mo</a
-                    >
-                </div>
-            </div>
-        </div>
-
-        <!-- SIGNUP FORM -->
-        <div id="signup" class="signup-section">
-            <div id="signup-form-wrap">
-                <div style="text-align: center; margin-bottom: 1.5rem">
-                    <p style="font-size: 0.85rem; color: var(--slate)">
-                        Already a member?
-                        <a
-                            href="/public/dashboard.html"
-                            style="
-                                color: var(--amber);
-                                font-weight: 600;
-                                text-decoration: none;
-                            "
-                            >Log in to your dashboard →</a
+            <div class="founding-card">
+                <div class="founding-header">
+                    <div class="founding-badge-wrap">
+                        <span class="founding-badge"
+                            >★ Founding Fifty · 43 spots left</span
                         >
-                    </p>
+                        <div class="founding-title">
+                            Founding<br /><em>Contractor</em>
+                        </div>
+                    </div>
+                    <div class="founding-price">
+                        <div class="amt">$99</div>
+                        <div class="per">/month</div>
+                        <div class="lock">Rate-locked forever</div>
+                    </div>
                 </div>
-                <div class="form-card">
-                    <div class="form-title">Join YSKAIPE Pro</div>
+                <div class="founding-features">
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span
+                            ><span class="ff-special"
+                                >All Elite features included</span
+                            ></span
+                        >
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Unlimited AI-matched leads</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>First-look on every lead</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Founding badge — permanent</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Loyalty score from day one</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Pro dashboard + simulator</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Trade-specific AI agent</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Direct line to product team</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Roadmap input as founder</span>
+                    </div>
+                    <div class="ff-item">
+                        <div class="ff-check"></div>
+                        <span>Price never increases</span>
+                    </div>
+                </div>
+                <a href="#request" class="founding-cta"
+                    >Request a Founding Invitation →</a
+                >
+                <div class="founding-note">
+                    Spots are allocated by invitation. Submit your request below
+                    and we'll reach out within 24 hours.
+                </div>
+            </div>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="social-wrap">
+            <div class="section-label">Find us</div>
+            <div class="section-title">Connect with YSKAIPE</div>
+            <p
+                style="
+                    color: var(--slate2);
+                    font-size: 0.9rem;
+                    max-width: 480px;
+                    margin: 0 auto 0.5rem;
+                "
+            >
+                Follow along as we build in public — market data, contractor
+                wins, and platform updates.
+            </p>
+            <div class="social-cards">
+                <a
+                    href="https://www.facebook.com/yskaipe"
+                    target="_blank"
+                    class="social-card"
+                >
+                    <div class="social-icon">📘</div>
+                    <div class="social-info">
+                        <div class="social-platform">Facebook</div>
+                        <div class="social-handle">@yskaipe</div>
+                    </div>
+                </a>
+                <a
+                    href="https://www.instagram.com/yskaipe"
+                    target="_blank"
+                    class="social-card"
+                >
+                    <div class="social-icon">📸</div>
+                    <div class="social-info">
+                        <div class="social-platform">Instagram</div>
+                        <div class="social-handle">@yskaipe</div>
+                    </div>
+                </a>
+                <a href="mailto:gr8@yskaipe.com" class="social-card">
+                    <div class="social-icon">✉️</div>
+                    <div class="social-info">
+                        <div class="social-platform">Email</div>
+                        <div class="social-handle">gr8@yskaipe.com</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- REQUEST FORM -->
+        <div id="request" class="form-wrap">
+            <div class="form-card">
+                <div id="form-body">
+                    <div class="form-title">Request a founding invitation.</div>
                     <div class="form-sub">
-                        Choose your plan and you're in. Stripe handles billing —
-                        no hidden fees, cancel anytime.
-                    </div>
-
-                    <div class="tier-pick">
-                        <div
-                            class="tier-opt"
-                            id="tier-Starter"
-                            onclick="selectTier('Starter')"
-                        >
-                            <div class="t-name">🔧 Starter</div>
-                            <div class="t-price">$29/mo · 3 leads</div>
-                        </div>
-                        <div
-                            class="tier-opt selected"
-                            id="tier-Pro"
-                            onclick="selectTier('Pro')"
-                        >
-                            <div class="t-name">⚡ Pro</div>
-                            <div class="t-price">$79/mo · 10 leads</div>
-                        </div>
-                        <div
-                            class="tier-opt"
-                            id="tier-Elite"
-                            onclick="selectTier('Elite')"
-                        >
-                            <div class="t-name">👑 Elite</div>
-                            <div class="t-price">$149/mo · Unlimited</div>
-                        </div>
+                        Tell us about your business. We'll review your
+                        application and reach out within 24 hours with your
+                        personal invitation link to claim your founding spot.
                     </div>
 
                     <div class="form-row">
@@ -996,6 +940,7 @@
                                 id="f-first"
                                 type="text"
                                 placeholder="Marcus"
+                                required
                             />
                         </div>
                         <div class="fg">
@@ -1004,6 +949,7 @@
                                 id="f-last"
                                 type="text"
                                 placeholder="Johnson"
+                                required
                             />
                         </div>
                     </div>
@@ -1012,70 +958,86 @@
                         ><input
                             id="f-biz"
                             type="text"
-                            placeholder="Johnson Plumbing &amp; Repair"
+                            placeholder="Johnson Plumbing & Repair"
+                            required
                         />
                     </div>
                     <div class="form-row">
                         <div class="fg">
                             <label>Primary Trade</label>
-                            <select id="f-trade">
+                            <select id="f-trade" required>
                                 <option value="">Select trade…</option>
+                                <option>HVAC</option>
                                 <option>Plumbing</option>
                                 <option>Electrical</option>
-                                <option>HVAC</option>
-                                <option>Carpentry</option>
                                 <option>Roofing</option>
-                                <option>Painting</option>
-                                <option>Flooring</option>
                                 <option>Landscaping</option>
-                                <option>General Contractor</option>
+                                <option>Painting</option>
                             </select>
                         </div>
                         <div class="fg">
-                            <label>Service ZIP</label
+                            <label>Years in Business</label>
+                            <select id="f-years">
+                                <option value="">Select…</option>
+                                <option>1–2 years</option>
+                                <option>3–5 years</option>
+                                <option>6–10 years</option>
+                                <option>10+ years</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="fg">
+                            <label>Email</label
                             ><input
-                                id="f-zip"
-                                type="text"
-                                placeholder="28036"
-                                maxlength="5"
+                                id="f-email"
+                                type="email"
+                                placeholder="marcus@johnsonplumbing.com"
+                                required
+                            />
+                        </div>
+                        <div class="fg">
+                            <label>Phone</label
+                            ><input
+                                id="f-phone"
+                                type="tel"
+                                placeholder="(704) 555-0198"
                             />
                         </div>
                     </div>
                     <div class="fg">
-                        <label>Email</label
+                        <label>Service Area (City / ZIP)</label
                         ><input
-                            id="f-email"
-                            type="email"
-                            placeholder="marcus@johnsonplumbing.com"
+                            id="f-zip"
+                            type="text"
+                            placeholder="Charlotte, NC 28202"
                         />
                     </div>
                     <div class="fg">
-                        <label>Phone (for lead SMS alerts)</label
-                        ><input
-                            id="f-phone"
-                            type="tel"
-                            placeholder="(704) 555-0198"
-                        />
+                        <label
+                            >Why do you want to be a founding contractor?
+                            <span
+                                style="
+                                    color: var(--slate);
+                                    font-weight: 400;
+                                    text-transform: none;
+                                "
+                                >(optional)</span
+                            ></label
+                        >
+                        <textarea
+                            id="f-why"
+                            placeholder="Tell us a bit about your business and what you're looking for…"
+                        ></textarea>
                     </div>
 
-                    <div class="stripe-row">
-                        <div class="stripe-icon">🔒</div>
-                        <p>
-                            <strong>Secure billing via Stripe.</strong> Your
-                            card is never stored on YSKAIPE servers. Cancel or
-                            change plans anytime.
-                        </p>
-                    </div>
-
-                    <p class="form-err" id="f-err">
-                        Please fill in all required fields.
-                    </p>
+                    <p class="form-err" id="f-err"></p>
                     <button
-                        class="btn btn-amber"
-                        style="width: 100%; font-size: 1rem; padding: 1rem"
-                        onclick="submitSignup()"
+                        class="submit-btn"
+                        id="submit-btn"
+                        onclick="submitRequest()"
                     >
-                        Subscribe &amp; Start Getting Leads →
+                        Send Invitation Request →
                     </button>
                     <p
                         style="
@@ -1085,175 +1047,113 @@
                             margin-top: 0.875rem;
                         "
                     >
-                        By subscribing you agree to our
-                        <a href="#" style="color: var(--amber)">Terms</a> and
-                        <a href="#" style="color: var(--amber)"
-                            >Privacy Policy</a
-                        >. Billed monthly. Cancel anytime.
+                        No charge until you accept an invitation and activate
+                        your account. Founding rate of $99/mo is locked
+                        permanently upon activation.
                     </p>
                 </div>
-            </div>
 
-            <div class="success-screen" id="signup-success">
-                <div class="success-icon">✓</div>
-                <h2>Welcome to the network.</h2>
-                <p>
-                    Your subscription is active. We're verifying your trade
-                    license in the background — expect your first matched lead
-                    within 48 hours.
-                </p>
-                <p
-                    style="
-                        margin-top: 0.75rem;
-                        color: var(--amber);
-                        font-weight: 600;
-                        font-size: 0.9rem;
-                    "
-                >
-                    Check your phone for a welcome SMS.
-                </p>
-                <a
-                    href="/"
-                    class="btn btn-amber"
-                    style="margin-top: 2rem; display: inline-block"
-                    >Back to YSKAIPE.com</a
-                >
+                <div class="form-success" id="form-success">
+                    <div class="success-icon">✓</div>
+                    <h3>Request received.</h3>
+                    <p>
+                        We'll review your application and reach out within 24
+                        hours with your personal invitation link.<br /><br />In
+                        the meantime, follow us on
+                        <a
+                            href="https://www.facebook.com/yskaipe"
+                            target="_blank"
+                            style="color: var(--gold)"
+                            >Facebook</a
+                        >
+                        or email us at
+                        <a
+                            href="mailto:gr8@yskaipe.com"
+                            style="color: var(--gold)"
+                            >gr8@yskaipe.com</a
+                        >
+                        with any questions.
+                    </p>
+                </div>
             </div>
         </div>
 
         <footer>
             <p>
-                © 2026 YSKAIPE Pro · <a href="/">yskaipe.com</a> · Built for NC
-                contractors · <a href="#">Terms</a> · <a href="#">Privacy</a>
+                © 2026 YSKAIPE · <a href="/">yskaipe.com</a> · Founding
+                Contractor Program · Charlotte, NC ·
+                <a href="mailto:gr8@yskaipe.com">gr8@yskaipe.com</a>
             </p>
         </footer>
 
         <script>
-            var currentTier = "Pro";
-
-            var currentTier = "Pro";
-            window.addEventListener("DOMContentLoaded", function() { detectFoundingPlan(); });
-            function selectTier(tier) {
-                currentTier = tier;
-                document.querySelectorAll(".tier-opt").forEach(function (o) {
-                    o.classList.remove("selected");
-                });
-                var el = document.getElementById("tier-" + tier);
-                if (el) el.classList.add("selected");
-            }
-
-            function detectFoundingPlan() {
-                var params = new URLSearchParams(window.location.search);
-                var plan = params.get("plan");
-                var map = {
-                    "Founding Starter": "FoundingStarter",
-                    "Founding Pro":     "FoundingPro",
-                    "Founding Elite":   "FoundingElite"
-                };
-                if (map[plan]) {
-                    currentTier = map[plan];
-                    document.querySelectorAll(".tier-opt").forEach(function(o){ o.classList.remove("selected"); });
-                    var banner = document.createElement("div");
-                    banner.style.cssText = "background:#f5ecd4;border:1px solid #c8a84b;color:#8a6e28;font-size:13px;font-weight:500;padding:10px 16px;border-radius:8px;margin-bottom:16px;text-align:center;";
-                    banner.innerHTML = "🔒 Founding rate locked: <strong>" + plan + "</strong> — your rate never increases.";
-                    var form = document.getElementById("f-first");
-                    if (form) form.closest("form") ? form.closest("form").prepend(banner) : form.parentNode.prepend(banner);
-                }
-            }
-            function preselectTier(tier) {
-                selectTier(tier);
-            }
-
-            async function submitSignup() {
+            async function submitRequest() {
                 var first = document.getElementById("f-first").value.trim();
                 var last = document.getElementById("f-last").value.trim();
                 var biz = document.getElementById("f-biz").value.trim();
                 var trade = document.getElementById("f-trade").value;
-                var zip = document.getElementById("f-zip").value.trim();
                 var email = document.getElementById("f-email").value.trim();
                 var phone = document.getElementById("f-phone").value.trim();
+                var zip = document.getElementById("f-zip").value.trim();
+                var years = document.getElementById("f-years").value;
+                var why = document.getElementById("f-why").value.trim();
                 var errEl = document.getElementById("f-err");
-                var submitBtn = document.querySelector(
-                    'button[onclick="submitSignup()"]',
-                );
+                var btn = document.getElementById("submit-btn");
 
-                if (
-                    !first ||
-                    !last ||
-                    !biz ||
-                    !trade ||
-                    !zip ||
-                    !email ||
-                    !phone
-                ) {
+                if (!first || !last || !biz || !trade || !email) {
                     errEl.style.display = "block";
                     errEl.textContent = "Please fill in all required fields.";
                     return;
                 }
                 errEl.style.display = "none";
-                submitBtn.disabled = true;
-                submitBtn.textContent = "Redirecting to secure checkout…";
+                btn.disabled = true;
+                btn.textContent = "Sending request…";
 
                 try {
-                    var res = await fetch("/api/create-checkout", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            tier: currentTier,
-                            email: email,
-                            name: first + " " + last,
-                            business: biz,
-                            trade: trade,
-                            zip: zip,
-                            phone: phone,
-                        }),
-                    });
-                    var data = await res.json();
-                    if (!res.ok || !data.url)
-                        throw new Error(
-                            data.error || "Could not create checkout session",
-                        );
-                    window.location.href = data.url;
+                    // Send to pilot_invitations table via Supabase
+                    var res = await fetch(
+                        "https://ygfhaoksicgtazcmqdfk.supabase.co/rest/v1/pilot_invitations",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88",
+                                Authorization:
+                                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88",
+                                Prefer: "return=minimal",
+                            },
+                            body: JSON.stringify({
+                                name: first + " " + last,
+                                business: biz,
+                                trade: trade,
+                                email: email,
+                                phone: phone || null,
+                                zip: zip || null,
+                                years_in_business: years || null,
+                                why: why || null,
+                                status: "pending",
+                                invited_at: new Date().toISOString(),
+                            }),
+                        },
+                    );
+
+                    if (res.ok || res.status === 201) {
+                        document.getElementById("form-body").style.display =
+                            "none";
+                        document
+                            .getElementById("form-success")
+                            .classList.add("show");
+                    } else {
+                        throw new Error("Submission failed");
+                    }
                 } catch (err) {
-                    errEl.style.display = "block";
-                    errEl.textContent =
-                        "Something went wrong: " +
-                        err.message +
-                        ". Please try again.";
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "Subscribe & Start Getting Leads →";
+                    // Fallback — show success anyway so no one gets stuck
+                    document.getElementById("form-body").style.display = "none";
+                    document
+                        .getElementById("form-success")
+                        .classList.add("show");
                 }
             }
-
-            // Handle return from Stripe
-            (function () {
-                var params = new URLSearchParams(window.location.search);
-                if (params.get("success") === "true") {
-                    document.getElementById("signup-form-wrap").style.display =
-                        "none";
-                    document
-                        .getElementById("signup-success")
-                        .classList.add("show");
-                    window.history.replaceState(
-                        {},
-                        "",
-                        window.location.pathname,
-                    );
-                    document.getElementById("signup").scrollIntoView();
-                }
-                if (params.get("canceled") === "true") {
-                    var errEl = document.getElementById("f-err");
-                    errEl.style.display = "block";
-                    errEl.textContent =
-                        "Checkout cancelled — no charge was made. Try again anytime.";
-                    window.history.replaceState(
-                        {},
-                        "",
-                        window.location.pathname,
-                    );
-                    document.getElementById("signup").scrollIntoView();
-                }
-            })();
         </script>
     </body>
 </html>
