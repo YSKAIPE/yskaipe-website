@@ -35,7 +35,6 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ── NAV ── */
   nav {
     position: sticky; top: 0; z-index: 100;
     background: var(--white);
@@ -44,516 +43,165 @@
     display: flex; align-items: center; justify-content: space-between;
     height: 58px;
   }
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px; letter-spacing: -0.02em; color: var(--ink);
-    text-decoration: none;
-  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 22px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
   .nav-logo span { color: var(--green-mid); }
   .nav-right { display: flex; align-items: center; gap: 12px; }
   .nav-link { font-size: 13px; color: var(--ink-soft); text-decoration: none; }
   .nav-link:hover { color: var(--ink); }
-  .nav-cta {
-    font-size: 13px; font-weight: 500;
-    background: var(--green); color: var(--white);
-    padding: 7px 18px; border-radius: 6px;
-    text-decoration: none; transition: background 0.15s;
-  }
+  .nav-cta { font-size: 13px; font-weight: 500; background: var(--green); color: var(--white); padding: 7px 18px; border-radius: 6px; text-decoration: none; transition: background 0.15s; }
   .nav-cta:hover { background: var(--green-mid); }
 
-  /* ── HERO ── */
-  .hero {
-    background: var(--ink);
-    color: var(--white);
-    padding: 80px 40px 72px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      -45deg,
-      transparent, transparent 40px,
-      rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
-    );
-    pointer-events: none;
-  }
-  .founding-ribbon {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--amber-light); color: var(--amber);
-    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 5px 14px; border-radius: 100px;
-    margin-bottom: 28px;
-    animation: fadeUp 0.5s ease both;
-  }
-  .ribbon-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gold);
-    animation: pulse 2s infinite;
-  }
+  .hero { background: var(--ink); color: var(--white); padding: 80px 40px 72px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px); pointer-events: none; }
+  .founding-ribbon { display: inline-flex; align-items: center; gap: 8px; background: var(--amber-light); color: var(--amber); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 28px; animation: fadeUp 0.5s ease both; }
+  .ribbon-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
   @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
 
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(36px, 6vw, 68px);
-    line-height: 1.08;
-    letter-spacing: -0.025em;
-    margin-bottom: 20px;
-    animation: fadeUp 0.5s 0.1s ease both;
-  }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(36px, 6vw, 68px); line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 20px; animation: fadeUp 0.5s 0.1s ease both; }
   .hero h1 em { font-style: italic; color: #9FE1CB; }
-  .hero-sub {
-    font-size: 18px; font-weight: 300;
-    color: rgba(255,255,255,0.65);
-    max-width: 560px; margin: 0 auto 40px;
-    animation: fadeUp 0.5s 0.2s ease both;
-  }
-  .hero-counter {
-    display: inline-flex; align-items: center; gap: 16px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 12px; padding: 16px 28px;
-    margin-bottom: 44px;
-    animation: fadeUp 0.5s 0.3s ease both;
-  }
-  .counter-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 42px; line-height: 1;
-    color: #9FE1CB;
-  }
+  .hero-sub { font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.65); max-width: 560px; margin: 0 auto 40px; animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-counter { display: inline-flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 16px 28px; margin-bottom: 44px; animation: fadeUp 0.5s 0.3s ease both; }
+  .counter-num { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1; color: #9FE1CB; }
   .counter-meta { text-align: left; }
   .counter-label { font-size: 13px; font-weight: 500; color: var(--white); }
   .counter-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
   .counter-divider { width: 1px; height: 44px; background: rgba(255,255,255,0.12); }
-
-  .hero-ratio {
-    font-size: 13px; color: rgba(255,255,255,0.45);
-    margin-bottom: 0;
-    animation: fadeUp 0.5s 0.35s ease both;
-  }
+  .hero-ratio { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 0; animation: fadeUp 0.5s 0.35s ease both; }
   .hero-ratio strong { color: rgba(255,255,255,0.75); }
 
-  /* ── SECTION WRAPPER ── */
   .section { padding: 72px 40px; max-width: 1100px; margin: 0 auto; }
   .section-sm { padding: 56px 40px; max-width: 860px; margin: 0 auto; }
-  .section-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--green);
-    margin-bottom: 10px;
-  }
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 4vw, 42px);
-    line-height: 1.12; letter-spacing: -0.02em;
-    color: var(--ink); margin-bottom: 16px;
-  }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 16px; }
   .section-title em { font-style: italic; }
-  .section-body {
-    font-size: 16px; color: var(--ink-mid); line-height: 1.7;
-    max-width: 620px;
-  }
+  .section-body { font-size: 16px; color: var(--ink-mid); line-height: 1.7; max-width: 620px; }
 
-  /* ── WHY NOW ── */
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-top: 48px;
-  }
-  .why-card {
-    background: var(--white);
-    padding: 28px 28px 32px;
-  }
-  .why-icon {
-    font-size: 22px; margin-bottom: 14px;
-    width: 44px; height: 44px;
-    background: var(--green-pale);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .why-card h3 {
-    font-size: 15px; font-weight: 600; color: var(--ink);
-    margin-bottom: 8px;
-  }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; margin-top: 48px; }
+  .why-card { background: var(--white); padding: 28px 28px 32px; }
+  .why-icon { font-size: 22px; margin-bottom: 14px; width: 44px; height: 44px; background: var(--green-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .why-card h3 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
   .why-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
 
-  /* ── RATIO EXPLAINER ── */
-  .ratio-band {
-    background: var(--green);
-    color: var(--white);
-    padding: 56px 40px;
-  }
-  .ratio-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-    align-items: center;
-  }
-  .ratio-text h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 34px; line-height: 1.15;
-    margin-bottom: 16px;
-  }
+  .ratio-band { background: var(--green); color: var(--white); padding: 56px 40px; }
+  .ratio-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .ratio-text h2 { font-family: 'DM Serif Display', serif; font-size: 34px; line-height: 1.15; margin-bottom: 16px; }
   .ratio-text h2 em { font-style: italic; color: #9FE1CB; }
   .ratio-text p { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; }
-  .ratio-visual {
-    display: flex; flex-direction: column; gap: 12px;
-  }
-  .ratio-bar-wrap { }
-  .ratio-bar-label {
-    display: flex; justify-content: space-between;
-    font-size: 12px; margin-bottom: 5px;
-  }
+  .ratio-visual { display: flex; flex-direction: column; gap: 12px; }
+  .ratio-bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
   .ratio-bar-label span:first-child { color: rgba(255,255,255,0.6); }
   .ratio-bar-label span:last-child { font-weight: 600; color: var(--white); }
-  .ratio-bar-bg {
-    height: 8px; border-radius: 4px;
-    background: rgba(255,255,255,0.15);
-    overflow: hidden;
-  }
-  .ratio-bar-fill {
-    height: 100%; border-radius: 4px;
-    background: #9FE1CB;
-    transition: width 1s ease;
-  }
-  .ratio-note {
-    margin-top: 16px;
-    font-size: 12px; color: rgba(255,255,255,0.5);
-    border-top: 1px solid rgba(255,255,255,0.15);
-    padding-top: 14px;
-  }
+  .ratio-bar-bg { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15); overflow: hidden; }
+  .ratio-bar-fill { height: 100%; border-radius: 4px; background: #9FE1CB; transition: width 1s ease; }
+  .ratio-note { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.5); border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px; }
 
-  /* ── PRICING ── */
   .pricing-section { background: var(--white); padding: 80px 40px; }
   .pricing-inner { max-width: 1100px; margin: 0 auto; }
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-top: 52px;
-    align-items: start;
-  }
-  .plan-card {
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    padding: 28px 24px 32px;
-    background: var(--paper);
-    display: flex; flex-direction: column; gap: 0;
-    position: relative;
-    transition: border-color 0.2s, transform 0.2s;
-  }
+  .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 52px; align-items: start; }
+  .plan-card { border: 1px solid var(--rule); border-radius: 14px; padding: 28px 24px 32px; background: var(--paper); display: flex; flex-direction: column; gap: 0; position: relative; transition: border-color 0.2s, transform 0.2s; }
   .plan-card:hover { border-color: #a0c8b8; transform: translateY(-2px); }
-  .plan-card.featured {
-    border-color: var(--green);
-    background: var(--white);
-    box-shadow: 0 0 0 3px var(--green-light);
-  }
-  .plan-card.founding {
-    background: var(--ink);
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(200,150,26,0.15);
-  }
+  .plan-card.featured { border-color: var(--green); background: var(--white); box-shadow: 0 0 0 3px var(--green-light); }
+  .plan-card.founding { background: var(--ink); border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,150,26,0.15); }
   .plan-card.founding:hover { border-color: #e6b830; }
-  .plan-badge {
-    position: absolute; top: -12px; left: 24px;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 10px; border-radius: 100px;
-  }
+  .plan-badge { position: absolute; top: -12px; left: 24px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; }
   .plan-badge.popular { background: var(--green); color: var(--white); }
-  .plan-badge.founding-badge {
-    background: var(--gold); color: var(--ink);
-  }
-  .plan-name {
-    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-soft);
-    margin-bottom: 8px;
-  }
+  .plan-badge.founding-badge { background: var(--gold); color: var(--ink); }
+  .plan-name { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
   .plan-card.founding .plan-name { color: rgba(255,255,255,0.5); }
-  .plan-price {
-    font-family: 'DM Serif Display', serif;
-    font-size: 42px; line-height: 1;
-    color: var(--ink); margin-bottom: 2px;
-  }
+  .plan-price { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1; color: var(--ink); margin-bottom: 2px; }
   .plan-card.founding .plan-price { color: #f5d97a; }
   .plan-price sup { font-size: 22px; vertical-align: top; margin-top: 8px; display: inline-block; }
   .plan-price-note { font-size: 12px; color: var(--ink-faint); margin-bottom: 6px; }
   .plan-card.founding .plan-price-note { color: rgba(255,255,255,0.35); }
-  .plan-lock {
-    font-size: 11px; font-weight: 600;
-    color: var(--gold);
-    background: rgba(200,150,26,0.1);
-    border: 1px solid rgba(200,150,26,0.25);
-    padding: 3px 10px; border-radius: 100px;
-    display: inline-block; margin-bottom: 18px;
-  }
-  .plan-divider {
-    height: 1px; background: var(--rule);
-    margin: 16px 0;
-  }
+  .plan-lock { font-size: 11px; font-weight: 600; color: var(--gold); background: rgba(200,150,26,0.1); border: 1px solid rgba(200,150,26,0.25); padding: 3px 10px; border-radius: 100px; display: inline-block; margin-bottom: 18px; }
+  .plan-divider { height: 1px; background: var(--rule); margin: 16px 0; }
   .plan-card.founding .plan-divider { background: rgba(255,255,255,0.1); }
-  .plan-tagline {
-    font-size: 13px; color: var(--ink-mid); line-height: 1.5;
-    margin-bottom: 20px;
-  }
+  .plan-tagline { font-size: 13px; color: var(--ink-mid); line-height: 1.5; margin-bottom: 20px; }
   .plan-card.founding .plan-tagline { color: rgba(255,255,255,0.65); }
-  .plan-features {
-    list-style: none; display: flex; flex-direction: column; gap: 9px;
-    margin-bottom: 28px; flex: 1;
-  }
-  .plan-features li {
-    display: flex; align-items: flex-start; gap: 9px;
-    font-size: 13px; color: var(--ink-mid); line-height: 1.45;
-  }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; flex: 1; }
+  .plan-features li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--ink-mid); line-height: 1.45; }
   .plan-card.founding .plan-features li { color: rgba(255,255,255,0.75); }
-  .feat-check {
-    width: 16px; height: 16px; border-radius: 50%;
-    background: var(--green-light);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 1px;
-  }
-  .feat-check::after {
-    content: '';
-    width: 5px; height: 3px;
-    border-left: 1.5px solid var(--green);
-    border-bottom: 1.5px solid var(--green);
-    transform: rotate(-45deg) translate(0.5px, -0.5px);
-  }
-  .plan-card.founding .feat-check {
-    background: rgba(159,225,203,0.15);
-  }
-  .plan-card.founding .feat-check::after {
-    border-color: #9FE1CB;
-  }
-  .feat-special {
-    font-size: 11px; font-weight: 600;
-    color: var(--gold); letter-spacing: 0.04em;
-  }
-  .plan-btn {
-    display: block; text-align: center;
-    padding: 12px; border-radius: 8px;
-    font-size: 14px; font-weight: 600;
-    text-decoration: none; cursor: pointer;
-    border: none; width: 100%;
-    transition: all 0.15s;
-  }
-  .plan-btn-outline {
-    background: transparent;
-    border: 1.5px solid var(--rule);
-    color: var(--ink-mid);
-  }
+  .feat-check { width: 16px; height: 16px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .feat-check::after { content: ''; width: 5px; height: 3px; border-left: 1.5px solid var(--green); border-bottom: 1.5px solid var(--green); transform: rotate(-45deg) translate(0.5px, -0.5px); }
+  .plan-card.founding .feat-check { background: rgba(159,225,203,0.15); }
+  .plan-card.founding .feat-check::after { border-color: #9FE1CB; }
+  .feat-special { font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 0.04em; }
+  .plan-btn { display: block; text-align: center; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; width: 100%; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+  .plan-btn-outline { background: transparent; border: 1.5px solid var(--rule); color: var(--ink-mid); }
   .plan-btn-outline:hover { border-color: var(--ink-mid); color: var(--ink); }
-  .plan-btn-green {
-    background: var(--green); color: var(--white);
-  }
+  .plan-btn-green { background: var(--green); color: var(--white); }
   .plan-btn-green:hover { background: var(--green-mid); }
-  .plan-btn-gold {
-    background: var(--gold); color: var(--ink);
-  }
+  .plan-btn-gold { background: var(--gold); color: var(--ink); }
   .plan-btn-gold:hover { background: #e6b830; }
+  .stripe-note { text-align: center; margin-top: 24px; font-size: 12px; color: var(--ink-faint); }
+  .stripe-note code { font-size: 11px; background: #f3f3ef; padding: 2px 7px; border-radius: 4px; color: var(--ink-soft); }
 
-  /* stripe note */
-  .stripe-note {
-    text-align: center; margin-top: 24px;
-    font-size: 12px; color: var(--ink-faint);
-  }
-  .stripe-note code {
-    font-size: 11px;
-    background: #f3f3ef; padding: 2px 7px; border-radius: 4px;
-    color: var(--ink-soft);
-  }
-
-  /* ── HOW IT WORKS ── */
-  .how-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-    margin-top: 52px;
-  }
+  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 52px; }
   .how-step { display: flex; flex-direction: column; gap: 12px; }
-  .step-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 48px; line-height: 1;
-    color: var(--green-light);
-  }
+  .step-num { font-family: 'DM Serif Display', serif; font-size: 48px; line-height: 1; color: var(--green-light); }
   .how-step h3 { font-size: 16px; font-weight: 600; color: var(--ink); }
   .how-step p { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
 
-  /* ── ALGORITHM PREVIEW ── */
-  .algo-band {
-    background: var(--green-pale);
-    border-top: 1px solid var(--green-light);
-    border-bottom: 1px solid var(--green-light);
-    padding: 56px 40px;
-  }
+  .algo-band { background: var(--green-pale); border-top: 1px solid var(--green-light); border-bottom: 1px solid var(--green-light); padding: 56px 40px; }
   .algo-inner { max-width: 1100px; margin: 0 auto; }
   .algo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 32px; }
   .factor-list { display: flex; flex-direction: column; gap: 12px; }
-  .factor-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    background: var(--white);
-    border: 1px solid var(--rule);
-    border-radius: 10px; padding: 14px 16px;
-  }
-  .factor-num {
-    width: 26px; height: 26px; border-radius: 50%;
-    background: var(--green); color: var(--white);
-    font-size: 12px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
+  .factor-item { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
+  .factor-num { width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: var(--white); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .factor-body h4 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
   .factor-body p { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
-  .factor-new {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-    background: var(--amber-light); color: var(--amber);
-    padding: 1px 6px; border-radius: 4px; margin-left: 6px;
-  }
-  .formula-display {
-    background: var(--ink);
-    border-radius: 12px; padding: 28px;
-    color: var(--white);
-  }
-  .formula-display pre {
-    font-family: 'DM Mono', 'Courier New', monospace;
-    font-size: 13px; line-height: 1.8;
-    color: #9FE1CB;
-    white-space: pre-wrap;
-  }
-  .formula-note {
-    margin-top: 16px; font-size: 12px;
-    color: rgba(255,255,255,0.45); line-height: 1.6;
-  }
+  .factor-new { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; background: var(--amber-light); color: var(--amber); padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+  .formula-display { background: var(--ink); border-radius: 12px; padding: 28px; color: var(--white); }
+  .formula-display pre { font-family: 'DM Mono', 'Courier New', monospace; font-size: 13px; line-height: 1.8; color: #9FE1CB; white-space: pre-wrap; }
+  .formula-note { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
 
-  /* ── TRADE AGENTS ── */
-  .agents-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    margin-top: 40px;
-  }
-  .agent-card {
-    border: 1px solid var(--rule);
-    border-radius: 12px; padding: 20px;
-    background: var(--white);
-    transition: border-color 0.15s, transform 0.15s;
-  }
+  .agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .agent-card { border: 1px solid var(--rule); border-radius: 12px; padding: 20px; background: var(--white); transition: border-color 0.15s, transform 0.15s; }
   .agent-card:hover { border-color: var(--green-mid); transform: translateY(-2px); }
-  .agent-avatar-wrap {
-    width: 44px; height: 44px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 15px;
-    margin-bottom: 12px;
-  }
+  .agent-avatar-wrap { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; margin-bottom: 12px; }
   .agent-card h3 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
   .agent-card .agent-trade { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
   .agent-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
 
-  /* ── FORM ── */
   .form-section { background: var(--ink); padding: 80px 40px; }
   .form-inner { max-width: 600px; margin: 0 auto; text-align: center; }
   .form-inner .section-label { color: #9FE1CB; }
   .form-inner .section-title { color: var(--white); }
   .form-inner .section-title em { color: #9FE1CB; }
   .form-sub { font-size: 15px; color: rgba(255,255,255,0.55); margin-bottom: 40px; }
-
   .invite-form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .form-group { display: flex; flex-direction: column; gap: 5px; }
   .form-group label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); }
-  .form-group input,
-  .form-group select {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px; padding: 11px 14px;
-    font-size: 14px; color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    transition: border-color 0.15s;
-    outline: none;
-  }
+  .form-group input, .form-group select { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 11px 14px; font-size: 14px; color: var(--white); font-family: 'DM Sans', sans-serif; transition: border-color 0.15s; outline: none; }
   .form-group input::placeholder { color: rgba(255,255,255,0.25); }
-  .form-group input:focus,
-  .form-group select:focus { border-color: var(--green-mid); }
+  .form-group input:focus, .form-group select:focus { border-color: var(--green-mid); }
   .form-group select option { background: var(--ink); color: var(--white); }
-  .form-submit {
-    background: var(--gold); color: var(--ink);
-    border: none; border-radius: 8px; padding: 14px;
-    font-size: 15px; font-weight: 700;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer; transition: background 0.15s;
-    margin-top: 6px;
-  }
+  .form-submit { background: var(--gold); color: var(--ink); border: none; border-radius: 8px; padding: 14px; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.15s; margin-top: 6px; width: 100%; }
   .form-submit:hover { background: #e6b830; }
-  .form-legal {
-    font-size: 11px; color: rgba(255,255,255,0.3);
-    text-align: center; line-height: 1.5;
-    margin-top: 4px;
-  }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-legal { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; line-height: 1.5; margin-top: 4px; }
 
-  /* ── FOOTER ── */
-  footer {
-    background: #111110;
-    padding: 32px 40px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 12px;
-  }
-  .footer-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px; color: rgba(255,255,255,0.5);
-  }
+  .slots-bar { background: var(--amber-light); border-bottom: 1px solid rgba(200,150,26,0.2); padding: 10px 40px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; color: var(--amber); }
+  .slots-bar strong { font-weight: 700; }
+  .slots-progress { width: 160px; height: 5px; border-radius: 3px; background: rgba(133,79,11,0.15); overflow: hidden; }
+  .slots-fill { height: 100%; border-radius: 3px; background: var(--gold); width: 14%; }
+
+  footer { background: #111110; padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 18px; color: rgba(255,255,255,0.5); }
   .footer-logo span { color: var(--green-mid); }
   footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
 
-  /* ── SLOTS COUNTER ── */
-  .slots-bar {
-    background: var(--amber-light);
-    border-bottom: 1px solid rgba(200,150,26,0.2);
-    padding: 10px 40px;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-    font-size: 13px; color: var(--amber);
-  }
-  .slots-bar strong { font-weight: 700; }
-  .slots-progress {
-    width: 160px; height: 5px; border-radius: 3px;
-    background: rgba(133,79,11,0.15); overflow: hidden;
-  }
-  .slots-fill {
-    height: 100%; border-radius: 3px;
-    background: var(--gold);
-    width: 14%;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media(max-width: 900px) {
-    .pricing-grid { grid-template-columns: 1fr 1fr; }
-    .ratio-inner { grid-template-columns: 1fr; gap: 32px; }
-    .algo-grid { grid-template-columns: 1fr; }
-    .how-grid { grid-template-columns: 1fr; }
-    .agents-grid { grid-template-columns: 1fr 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-  @media(max-width: 600px) {
-    nav { padding: 0 20px; }
-    .hero { padding: 56px 20px 48px; }
-    .section { padding: 48px 20px; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .agents-grid { grid-template-columns: 1fr; }
-    .form-section { padding: 56px 20px; }
-    footer { padding: 24px 20px; }
-    .slots-bar { padding: 10px 20px; }
-  }
-
-  /* ── ANIMATIONS ── */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal.visible { opacity: 1; transform: none; }
+
+  @media(max-width: 900px) { .pricing-grid { grid-template-columns: 1fr 1fr; } .ratio-inner { grid-template-columns: 1fr; gap: 32px; } .algo-grid { grid-template-columns: 1fr; } .how-grid { grid-template-columns: 1fr; } .agents-grid { grid-template-columns: 1fr 1fr; } .form-row { grid-template-columns: 1fr; } }
+  @media(max-width: 600px) { nav { padding: 0 20px; } .hero { padding: 56px 20px 48px; } .section { padding: 48px 20px; } .pricing-grid { grid-template-columns: 1fr; } .agents-grid { grid-template-columns: 1fr; } .form-section { padding: 56px 20px; } footer { padding: 24px 20px; } .slots-bar { padding: 10px 20px; } }
 </style>
 </head>
 <body>
 
-<!-- SLOTS TICKER -->
 <div class="slots-bar">
   <div class="slots-progress"><div class="slots-fill" id="slots-fill"></div></div>
   <strong id="slots-remaining">43 of 50</strong> founding contractor slots remaining
@@ -561,7 +209,6 @@
   <span>Charlotte, NC · Pilot launch</span>
 </div>
 
-<!-- NAV -->
 <nav>
   <a href="https://yskaipe.com" class="nav-logo">YSK<span>AI</span>PE</a>
   <div class="nav-right">
@@ -571,83 +218,43 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="founding-ribbon">
-    <span class="ribbon-dot"></span>
-    Invitation-only · First Fifty Program
-  </div>
+  <div class="founding-ribbon"><span class="ribbon-dot"></span>Invitation-only · First Fifty Program</div>
   <h1>The first <em>fifty</em> contractors<br>shape everything.</h1>
   <p class="hero-sub">Join YSKAIPE's founding cohort and take 100% of early homeowner traffic as we build the market around you.</p>
   <div class="hero-counter">
     <div>
       <div class="counter-num" id="hero-slots">43</div>
-      <div class="counter-meta">
-        <div class="counter-label">Spots remaining</div>
-        <div class="counter-sub">of 50 total · Charlotte metro</div>
-      </div>
+      <div class="counter-meta"><div class="counter-label">Spots remaining</div><div class="counter-sub">of 50 total · Charlotte metro</div></div>
     </div>
     <div class="counter-divider"></div>
     <div>
       <div class="counter-num">$99</div>
-      <div class="counter-meta">
-        <div class="counter-label">Forever rate</div>
-        <div class="counter-sub">Rate-locked · Never increases</div>
-      </div>
+      <div class="counter-meta"><div class="counter-label">Forever rate</div><div class="counter-sub">Rate-locked · Never increases</div></div>
     </div>
     <div class="counter-divider"></div>
     <div>
       <div class="counter-num">3,300</div>
-      <div class="counter-meta">
-        <div class="counter-label">Homeowners per 100 pros</div>
-        <div class="counter-sub">Target ratio for lead saturation</div>
-      </div>
+      <div class="counter-meta"><div class="counter-label">Homeowners per 100 pros</div><div class="counter-sub">Target ratio for lead saturation</div></div>
     </div>
   </div>
   <p class="hero-ratio">Early market means <strong>you absorb all incoming leads</strong> — no queue competition until the ratio fills.</p>
 </section>
 
-<!-- WHY NOW -->
 <section class="section reveal" id="why">
   <div class="section-label">Why founding contractor</div>
   <h2 class="section-title">The rarest window<br>is the <em>first</em> one.</h2>
   <p class="section-body">Every marketplace has a moment before saturation — when demand comes in and the supply side is thin. That's where you are right now. YSKAIPE is live, submitting real auto-quotes, and building homeowner traffic daily.</p>
-
   <div class="why-grid">
-    <div class="why-card">
-      <div class="why-icon">⚡</div>
-      <h3>100% of traffic is yours</h3>
-      <p>Until the 3,300:100 homeowner-to-contractor ratio fills, every qualifying lead routes to the founding cohort — no late-joiners competing for the same job.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🔒</div>
-      <h3>Rate locked forever</h3>
-      <p>$99/month is the founding rate. As YSKAIPE scales and pricing evolves, your subscription price is permanently locked — contractually.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">📈</div>
-      <h3>Loyalty score head start</h3>
-      <p>Our algorithm rewards tenure. Every month you're on the platform before a competitor joins is a scoring advantage they can never recover.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🤖</div>
-      <h3>AI agent-matched leads</h3>
-      <p>A dedicated trade agent processes every homeowner request in real time — scoring, routing, and presenting it to the best-fit contractor in milliseconds.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">🏆</div>
-      <h3>Founding Pro badge</h3>
-      <p>Permanent "Founding Contractor" designation on your public profile. Homeowners see who helped build the platform — trust that compounds over time.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">📊</div>
-      <h3>Pro dashboard access</h3>
-      <p>Full access to the contractor command center: live lead queue, algorithm scoring simulator, loyalty tracker, and performance analytics.</p>
-    </div>
+    <div class="why-card"><div class="why-icon">⚡</div><h3>100% of traffic is yours</h3><p>Until the 3,300:100 homeowner-to-contractor ratio fills, every qualifying lead routes to the founding cohort — no late-joiners competing for the same job.</p></div>
+    <div class="why-card"><div class="why-icon">🔒</div><h3>Rate locked forever</h3><p>$99/month is the founding rate. As YSKAIPE scales and pricing evolves, your subscription price is permanently locked — contractually.</p></div>
+    <div class="why-card"><div class="why-icon">📈</div><h3>Loyalty score head start</h3><p>Our algorithm rewards tenure. Every month you're on the platform before a competitor joins is a scoring advantage they can never recover.</p></div>
+    <div class="why-card"><div class="why-icon">🤖</div><h3>AI agent-matched leads</h3><p>A dedicated trade agent processes every homeowner request in real time — scoring, routing, and presenting it to the best-fit contractor in milliseconds.</p></div>
+    <div class="why-card"><div class="why-icon">🏆</div><h3>Founding Pro badge</h3><p>Permanent "Founding Contractor" designation on your public profile. Homeowners see who helped build the platform — trust that compounds over time.</p></div>
+    <div class="why-card"><div class="why-icon">📊</div><h3>Pro dashboard access</h3><p>Full access to the contractor command center: live lead queue, algorithm scoring simulator, loyalty tracker, and performance analytics.</p></div>
   </div>
 </section>
 
-<!-- RATIO BAND -->
 <div class="ratio-band">
   <div class="ratio-inner">
     <div class="ratio-text">
@@ -673,15 +280,11 @@
   </div>
 </div>
 
-<!-- PRICING -->
 <section class="pricing-section" id="pricing">
   <div class="pricing-inner">
     <div class="section-label">Plans &amp; pricing</div>
     <h2 class="section-title">Choose your position<br>in the network.</h2>
-
     <div class="pricing-grid">
-
-      <!-- FOUNDING -->
       <div class="plan-card founding">
         <span class="plan-badge founding-badge">Founding · 50 slots</span>
         <div style="margin-top:12px;"></div>
@@ -706,8 +309,6 @@
         <a href="#apply" class="plan-btn plan-btn-gold">Claim founding spot →</a>
         <div style="margin-top:10px; font-size:11px; text-align:center; color:rgba(255,255,255,0.25);">Stripe: <code style="color:rgba(255,255,255,0.35);font-size:10px;">founding_contractor_pilot_v1</code></div>
       </div>
-
-      <!-- STARTER -->
       <div class="plan-card">
         <div class="plan-name">Starter</div>
         <div class="plan-price"><sup>$</sup>29</div>
@@ -726,8 +327,6 @@
         </ul>
         <a href="#apply" class="plan-btn plan-btn-outline">Get started — $29/mo</a>
       </div>
-
-      <!-- PRO -->
       <div class="plan-card featured">
         <span class="plan-badge popular">Most popular</span>
         <div style="margin-top:12px;"></div>
@@ -750,8 +349,6 @@
         </ul>
         <a href="#apply" class="plan-btn plan-btn-green">Subscribe — $79/mo</a>
       </div>
-
-      <!-- ELITE -->
       <div class="plan-card">
         <div class="plan-name">Elite</div>
         <div class="plan-price"><sup>$</sup>149</div>
@@ -773,51 +370,21 @@
         </ul>
         <a href="#apply" class="plan-btn plan-btn-outline">Subscribe — $149/mo</a>
       </div>
-
     </div>
-
-    <div class="stripe-note">
-      Powered by Stripe · Secure checkout · Cancel anytime<br>
-      Stripe product codes: <code>starter_v2</code> · <code>pro_v2</code> · <code>elite_v2</code> · <code>founding_contractor_pilot_v1</code>
-    </div>
+    <div class="stripe-note">Powered by Stripe · Secure checkout · Cancel anytime<br>Stripe product codes: <code>starter_v2</code> · <code>pro_v2</code> · <code>elite_v2</code> · <code>founding_contractor_pilot_v1</code></div>
   </div>
 </section>
 
-<!-- ALGORITHM -->
 <div class="algo-band">
   <div class="algo-inner">
     <div class="section-label">WinWinAI matching engine</div>
     <h2 class="section-title">How every lead finds<br>the right contractor.</h2>
     <div class="algo-grid">
       <div class="factor-list">
-        <div class="factor-item">
-          <div class="factor-num">1</div>
-          <div class="factor-body">
-            <h4>Trade match</h4>
-            <p>Primary trade = 100pts. Secondary trade = 50pts. No match = hard exclusion. This is a gate, not a penalty.</p>
-          </div>
-        </div>
-        <div class="factor-item">
-          <div class="factor-num">2</div>
-          <div class="factor-body">
-            <h4>Subscription tier</h4>
-            <p>Elite = instant delivery. Pro = 2-min delay. Starter = 5-min delay. Higher tiers win ties and see leads first.</p>
-          </div>
-        </div>
-        <div class="factor-item">
-          <div class="factor-num">3</div>
-          <div class="factor-body">
-            <h4>Geographic proximity</h4>
-            <p>0–10mi = 100%. 11–25mi = 70%. 26–50mi = 40%. Beyond service radius = excluded.</p>
-          </div>
-        </div>
-        <div class="factor-item">
-          <div class="factor-num">4</div>
-          <div class="factor-body">
-            <h4>Loyalty score <span class="factor-new">v2</span></h4>
-            <p>Tenure + jobs completed + response rate + referrals + review average. Founding contractors start accumulating on day one.</p>
-          </div>
-        </div>
+        <div class="factor-item"><div class="factor-num">1</div><div class="factor-body"><h4>Trade match</h4><p>Primary trade = 100pts. Secondary trade = 50pts. No match = hard exclusion. This is a gate, not a penalty.</p></div></div>
+        <div class="factor-item"><div class="factor-num">2</div><div class="factor-body"><h4>Subscription tier</h4><p>Elite = instant delivery. Pro = 2-min delay. Starter = 5-min delay. Higher tiers win ties and see leads first.</p></div></div>
+        <div class="factor-item"><div class="factor-num">3</div><div class="factor-body"><h4>Geographic proximity</h4><p>0–10mi = 100%. 11–25mi = 70%. 26–50mi = 40%. Beyond service radius = excluded.</p></div></div>
+        <div class="factor-item"><div class="factor-num">4</div><div class="factor-body"><h4>Loyalty score <span class="factor-new">v2</span></h4><p>Tenure + jobs completed + response rate + referrals + review average. Founding contractors start accumulating on day one.</p></div></div>
       </div>
       <div class="formula-display">
         <pre>score =
@@ -847,109 +414,49 @@ Tie-breaking order:
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
 <section class="section reveal" id="how">
   <div class="section-label">Workflow</div>
   <h2 class="section-title">From homeowner request<br>to your phone, in seconds.</h2>
   <div class="how-grid">
-    <div class="how-step">
-      <div class="step-num">01</div>
-      <h3>Homeowner submits a request</h3>
-      <p>They describe the job on yskaipe.com. The platform instantly generates a Premium Auto-Quote — estimated cost breakdown, difficulty score, DIY shopping list, and pro options.</p>
-    </div>
-    <div class="how-step">
-      <div class="step-num">02</div>
-      <h3>AI trade agent takes over</h3>
-      <p>A dedicated agent for that trade (HVAC, Plumbing, Electrical, etc.) walks the homeowner through their options — while simultaneously running the 4-factor scoring algorithm against the contractor queue.</p>
-    </div>
-    <div class="how-step">
-      <div class="step-num">03</div>
-      <h3>Best-fit contractor receives the lead</h3>
-      <p>The highest-scored eligible contractor gets the lead instantly (Founding / Elite) or with a short delay (Pro / Starter). They can accept the job on the homeowner's proposed terms or negotiate directly.</p>
-    </div>
+    <div class="how-step"><div class="step-num">01</div><h3>Homeowner submits a request</h3><p>They describe the job on yskaipe.com. The platform instantly generates a Premium Auto-Quote — estimated cost breakdown, difficulty score, DIY shopping list, and pro options.</p></div>
+    <div class="how-step"><div class="step-num">02</div><h3>AI trade agent takes over</h3><p>A dedicated agent for that trade (HVAC, Plumbing, Electrical, etc.) walks the homeowner through their options — while simultaneously running the 4-factor scoring algorithm against the contractor queue.</p></div>
+    <div class="how-step"><div class="step-num">03</div><h3>Best-fit contractor receives the lead</h3><p>The highest-scored eligible contractor gets the lead instantly (Founding / Elite) or with a short delay (Pro / Starter). They can accept the job on the homeowner's proposed terms or negotiate directly.</p></div>
   </div>
 </section>
 
-<!-- TRADE AGENTS -->
 <section class="section reveal" style="padding-top:0">
   <div class="section-label">AI trade agents</div>
   <h2 class="section-title">Six agents.<br>One for every trade.</h2>
   <div class="agents-grid">
-    <div class="agent-card">
-      <div class="agent-avatar-wrap" style="background:#E6F1FB;color:#0C447C">A</div>
-      <div class="agent-trade">HVAC</div>
-      <h3>Agent Aria</h3>
-      <p>Climate systems, installs, emergency response. Routes heating and cooling jobs to the closest qualified pro.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-avatar-wrap" style="background:#E1F5EE;color:#085041">R</div>
-      <div class="agent-trade">Plumbing</div>
-      <h3>Agent River</h3>
-      <p>Leaks, installs, drain systems, emergency calls. Prioritizes response time and trade match score.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-avatar-wrap" style="background:#FAEEDA;color:#633806">V</div>
-      <div class="agent-trade">Electrical</div>
-      <h3>Agent Volt</h3>
-      <p>Panels, wiring, EV chargers, code compliance. Routes high-ticket electrical jobs to licensed pros only.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-avatar-wrap" style="background:#FAECE7;color:#712B13">Ri</div>
-      <div class="agent-trade">Roofing</div>
-      <h3>Agent Ridge</h3>
-      <p>Storm damage, full replacements, inspections. Includes storm-alert early access for founding contractors.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-avatar-wrap" style="background:#EAF3DE;color:#27500A">T</div>
-      <div class="agent-trade">Landscaping</div>
-      <h3>Agent Terra</h3>
-      <p>Lawn care, irrigation, hardscape, recurring seasonal work. Routes return homeowners back to their preferred pro.</p>
-    </div>
-    <div class="agent-card">
-      <div class="agent-avatar-wrap" style="background:#FBEAF0;color:#72243E">H</div>
-      <div class="agent-trade">Painting</div>
-      <h3>Agent Hue</h3>
-      <p>Interior, exterior, specialty finishes. Founding painters get the Fair Rate Index as a client-facing pitch tool.</p>
-    </div>
+    <div class="agent-card"><div class="agent-avatar-wrap" style="background:#E6F1FB;color:#0C447C">A</div><div class="agent-trade">HVAC</div><h3>Agent Aria</h3><p>Climate systems, installs, emergency response. Routes heating and cooling jobs to the closest qualified pro.</p></div>
+    <div class="agent-card"><div class="agent-avatar-wrap" style="background:#E1F5EE;color:#085041">R</div><div class="agent-trade">Plumbing</div><h3>Agent River</h3><p>Leaks, installs, drain systems, emergency calls. Prioritizes response time and trade match score.</p></div>
+    <div class="agent-card"><div class="agent-avatar-wrap" style="background:#FAEEDA;color:#633806">V</div><div class="agent-trade">Electrical</div><h3>Agent Volt</h3><p>Panels, wiring, EV chargers, code compliance. Routes high-ticket electrical jobs to licensed pros only.</p></div>
+    <div class="agent-card"><div class="agent-avatar-wrap" style="background:#FAECE7;color:#712B13">Ri</div><div class="agent-trade">Roofing</div><h3>Agent Ridge</h3><p>Storm damage, full replacements, inspections. Includes storm-alert early access for founding contractors.</p></div>
+    <div class="agent-card"><div class="agent-avatar-wrap" style="background:#EAF3DE;color:#27500A">T</div><div class="agent-trade">Landscaping</div><h3>Agent Terra</h3><p>Lawn care, irrigation, hardscape, recurring seasonal work. Routes return homeowners back to their preferred pro.</p></div>
+    <div class="agent-card"><div class="agent-avatar-wrap" style="background:#FBEAF0;color:#72243E">H</div><div class="agent-trade">Painting</div><h3>Agent Hue</h3><p>Interior, exterior, specialty finishes. Founding painters get the Fair Rate Index as a client-facing pitch tool.</p></div>
   </div>
 </section>
 
-<!-- APPLICATION FORM -->
 <section class="form-section" id="apply">
   <div class="form-inner">
     <div class="section-label">Founding contractor application</div>
     <h2 class="section-title" style="font-size:32px;">Claim your founding spot.<br><em>Before it's gone.</em></h2>
-    <p class="form-sub">Fill out the form below. A member of the YSKAIPE pilot team will reach out within 24 hours to complete your setup.</p>
+    <p class="form-sub">Complete the form below to secure your spot and lock in your $99/mo rate forever. You'll be taken to a secure Stripe checkout — then your account is created automatically.</p>
 
     <form class="invite-form" id="founding-form" onsubmit="handleSubmit(event)">
       <div class="form-row">
-        <div class="form-group">
-          <label>First name</label>
-          <input type="text" placeholder="Mike" required>
-        </div>
-        <div class="form-group">
-          <label>Last name</label>
-          <input type="text" placeholder="Torres" required>
-        </div>
+        <div class="form-group"><label>First name</label><input type="text" id="firstName" placeholder="Mike" required></div>
+        <div class="form-group"><label>Last name</label><input type="text" id="lastName" placeholder="Torres" required></div>
       </div>
-      <div class="form-group">
-        <label>Company name</label>
-        <input type="text" placeholder="Torres HVAC &amp; Heating" required>
-      </div>
+      <div class="form-group"><label>Company name</label><input type="text" id="company" placeholder="Torres HVAC &amp; Heating" required></div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Email address</label>
-          <input type="email" placeholder="mike@torreshvac.com" required>
-        </div>
-        <div class="form-group">
-          <label>Phone number</label>
-          <input type="tel" placeholder="(704) 555-0182">
-        </div>
+        <div class="form-group"><label>Email address</label><input type="email" id="email" placeholder="mike@torreshvac.com" required></div>
+        <div class="form-group"><label>Phone number</label><input type="tel" id="phone" placeholder="(704) 555-0182"></div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Primary trade</label>
-          <select required>
+          <select id="trade" required>
             <option value="">Select trade</option>
             <option>HVAC</option>
             <option>Plumbing</option>
@@ -961,7 +468,7 @@ Tie-breaking order:
         </div>
         <div class="form-group">
           <label>Years in business</label>
-          <select>
+          <select id="years">
             <option value="">Select</option>
             <option>1–2 years</option>
             <option>3–5 years</option>
@@ -970,23 +477,15 @@ Tie-breaking order:
           </select>
         </div>
       </div>
-      <div class="form-group">
-        <label>Primary service area (city / zip)</label>
-        <input type="text" placeholder="Charlotte, NC 28202">
-      </div>
-      <button type="submit" class="form-submit">Apply for founding contractor — $99/mo locked →</button>
-      <div class="form-legal">By submitting, you agree to be contacted by the YSKAIPE pilot team. No charge until your account is activated. Founding rate locked at $99/month permanently upon activation.</div>
+      <div class="form-group"><label>Primary service area (city / zip)</label><input type="text" id="zip" placeholder="Charlotte, NC 28202"></div>
+      <button type="submit" class="form-submit" id="submit-btn">Claim founding spot — $99/mo locked →</button>
+      <div class="form-legal">By submitting, you agree to YSKAIPE's terms of service. You'll be taken to a secure Stripe checkout to complete your subscription. Founding rate of $99/month is permanently locked upon activation.</div>
     </form>
 
-    <div id="form-success" style="display:none; text-align:center; padding: 40px 0;">
-      <div style="font-size:40px; margin-bottom:16px;">✓</div>
-      <h3 style="font-family:'DM Serif Display',serif; font-size:24px; color:#9FE1CB; margin-bottom:10px;">Application received.</h3>
-      <p style="color:rgba(255,255,255,0.55); font-size:15px;">The YSKAIPE pilot team will reach out within 24 hours. You're on the list.</p>
-    </div>
+    <div id="form-error" style="display:none; margin-top:16px; padding:12px 16px; background:rgba(192,57,43,0.15); border:1px solid rgba(192,57,43,0.3); border-radius:8px; color:#ff8a80; font-size:14px;"></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">YSK<span>AI</span>PE</div>
   <p>First Fifty Founding Contractor Program · Charlotte, NC · yskaipe.com</p>
@@ -994,37 +493,37 @@ Tie-breaking order:
 </footer>
 
 <script>
-  // Slots counter animation
   let slotsRemaining = 43;
   document.getElementById('hero-slots').textContent = slotsRemaining;
   document.getElementById('slots-remaining').innerHTML = `<strong>${slotsRemaining} of 50</strong>`;
   document.getElementById('slots-fill').style.width = ((50 - slotsRemaining) / 50 * 100) + '%';
 
-  // Ratio bars animate on scroll
   const ratioAnimated = { done: false };
   function animateRatioBars() {
     if (ratioAnimated.done) return;
-    const targets = { hw: { val: 847, max: 3300, el: 'hw', label: 'hw-count' }, ct: { val: 7, max: 50, el: 'ct', label: 'ct-count' }, sat: { val: 26, max: 100, el: 'sat', label: 'sat-count', pct: true } };
+    const targets = {
+      hw:  { val: 847,  max: 3300, el: 'hw',  label: 'hw-count',  pct: false },
+      ct:  { val: 7,    max: 50,   el: 'ct',  label: 'ct-count',  pct: false },
+      sat: { val: 26,   max: 100,  el: 'sat', label: 'sat-count', pct: true  }
+    };
     Object.values(targets).forEach(t => {
       let current = 0;
       const step = t.val / 40;
       const interval = setInterval(() => {
         current = Math.min(current + step, t.val);
         document.getElementById(t.label).textContent = t.pct ? Math.round(current) + '%' : Math.round(current).toLocaleString();
-        const fillPct = (current / t.max) * 100;
-        document.getElementById(t.el + '-bar').style.width = Math.min(fillPct, 100) + '%';
+        document.getElementById(t.el + '-bar').style.width = Math.min((current / t.max) * 100, 100) + '%';
         if (current >= t.val) clearInterval(interval);
       }, 30);
     });
     ratioAnimated.done = true;
   }
 
-  // Intersection observer for reveals + ratio
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        if (entry.target.closest('.ratio-band')) animateRatioBars();
+        if (entry.target.classList.contains('ratio-band') || entry.target.closest('.ratio-band')) animateRatioBars();
       }
     });
   }, { threshold: 0.15 });
@@ -1033,15 +532,41 @@ Tie-breaking order:
   const ratioSection = document.querySelector('.ratio-band');
   if (ratioSection) observer.observe(ratioSection);
 
-  // Form submit
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    document.getElementById('founding-form').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    slotsRemaining = Math.max(0, slotsRemaining - 1);
-    document.getElementById('hero-slots').textContent = slotsRemaining;
-    document.getElementById('slots-remaining').innerHTML = `<strong>${slotsRemaining} of 50</strong>`;
-    document.getElementById('slots-fill').style.width = ((50 - slotsRemaining) / 50 * 100) + '%';
+    const btn = document.getElementById('submit-btn');
+    const errBox = document.getElementById('form-error');
+    errBox.style.display = 'none';
+    btn.textContent = 'Securing your spot…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/founding-apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: document.getElementById('firstName').value.trim(),
+          lastName:  document.getElementById('lastName').value.trim(),
+          company:   document.getElementById('company').value.trim(),
+          email:     document.getElementById('email').value.trim(),
+          phone:     document.getElementById('phone').value.trim(),
+          trade:     document.getElementById('trade').value,
+          years:     document.getElementById('years').value,
+          zip:       document.getElementById('zip').value.trim(),
+        })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch(err) {
+      errBox.textContent = err.message;
+      errBox.style.display = 'block';
+      btn.textContent = 'Claim founding spot — $99/mo locked →';
+      btn.disabled = false;
+    }
   }
 </script>
 </body>

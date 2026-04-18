@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to YSKAIPE — Founding Contractor</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1e1c1a;--paper:#f2efe9;--accent:#b85c2c;--gold:#c49a35;--green:#4fa86a;--dark1:#2a2724;--mid:#5a5650}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--dark1);color:var(--paper);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;-webkit-font-smoothing:antialiased}
+.card{max-width:560px;width:100%;text-align:center}
+.check-circle{width:72px;height:72px;border-radius:50%;background:rgba(79,168,106,0.15);border:2px solid rgba(79,168,106,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-size:2rem}
+.eyebrow{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:0.04em;line-height:1;color:var(--paper);margin-bottom:1rem}
+h1 span{color:var(--gold)}
+.sub{font-size:1rem;font-weight:300;color:rgba(242,239,233,0.7);line-height:1.7;margin-bottom:2rem;max-width:420px;margin-left:auto;margin-right:auto}
+.steps{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:1.5rem;margin-bottom:2rem;text-align:left;display:flex;flex-direction:column;gap:1rem}
+.step{display:flex;align-items:flex-start;gap:1rem}
+.step-num{width:28px;height:28px;border-radius:50%;background:rgba(196,154,53,0.15);border:1px solid rgba(196,154,53,0.3);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--gold);flex-shrink:0;margin-top:1px}
+.step-text{font-size:0.9rem;font-weight:300;color:rgba(242,239,233,0.8);line-height:1.5}
+.step-text strong{color:var(--paper);font-weight:500}
+.founding-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(196,154,53,0.1);border:1px solid rgba(196,154,53,0.25);border-radius:20px;padding:0.4rem 1rem;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
+.btn-dashboard{display:inline-block;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.9rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:2px;text-decoration:none;transition:background 0.2s}
+.btn-dashboard:hover{background:#be4208}
+.footer-note{margin-top:2rem;font-size:0.78rem;color:rgba(242,239,233,0.3);line-height:1.6}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="check-circle">✓</div>
+  <div class="eyebrow">⚡ Founding Contractor · First Fifty</div>
+  <h1>You're <span>in.</span></h1>
+  <p class="sub">Your founding spot is secured. Your subscription is active. Your loyalty score starts accumulating right now — before anyone else joins.</p>
+
+  <div class="founding-badge">
+    ★ Founding Contractor · Rate locked at $99/mo forever
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Check your email</strong> — a magic link is on its way. Click it to access your contractor dashboard. No password needed, ever.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Your profile is live</strong> — you're already in the matching engine. The first homeowner request that matches your trade routes to you.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Loyalty score accumulates daily</strong> — every month you're on the platform before a competitor joins is a scoring advantage they can never recover.</div>
+    </div>
+  </div>
+
+  <a href="/dashboard.html" class="btn-dashboard">Open my dashboard →</a>
+
+  <p class="footer-note">
+    Didn't get the magic link? Check your spam folder or email<br>
+    <a href="mailto:gr8@yskaipe.com" style="color:var(--gold)">gr8@yskaipe.com</a> and we'll get you in within the hour.
+  </p>
+</div>
+</body>
+</html>
