@@ -163,48 +163,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 </head>
 <body>
 <div class="shell">
-
-<div class="loading-overlay" id="loading-overlay">
-  <div class="spinner"></div>
-</div>
-
+<div class="loading-overlay" id="loading-overlay"><div class="spinner"></div></div>
 <div class="topbar">
   <button class="back-btn" onclick="history.back()">← Back to quote</button>
   <a href="/" class="logo">YSK<em>AI</em>PE</a>
   <span class="job-pill" id="nav-trade-pill">—</span>
 </div>
-
 <div class="step-track">
   <div class="step-item active" id="step-1"><div class="step-dot"><span class="step-num">1</span></div>Finding match</div>
   <div class="step-item" id="step-2"><div class="step-dot"><span class="step-num">2</span></div>Review contractor</div>
   <div class="step-item" id="step-3"><div class="step-dot"><span class="step-num">3</span></div>Confirm terms</div>
   <div class="step-item" id="step-4"><div class="step-dot"><span class="step-num">4</span></div>Confirmed</div>
 </div>
-
 <div class="content">
 <div class="card-wrap">
-
   <div class="job-strip">
     <div class="job-trade-icon" id="job-icon" style="background:#E6F1FB">—</div>
     <div class="job-strip-body">
       <div class="job-strip-title" id="job-title">Loading…</div>
-      <div class="job-strip-meta">
-        <span id="job-location">—</span>
-        <span id="job-est">—</span>
-      </div>
+      <div class="job-strip-meta"><span id="job-location">—</span><span id="job-est">—</span></div>
     </div>
     <div class="quote-badge" id="job-score-badge">—</div>
   </div>
-
   <div class="error-banner" id="error-banner"></div>
 
   <!-- SCREEN 1: MATCHING -->
   <div class="screen active" id="screen-matching">
     <div class="match-card">
       <div class="radar-wrap">
-        <div class="radar-circle"></div>
-        <div class="radar-circle"></div>
-        <div class="radar-circle"></div>
+        <div class="radar-circle"></div><div class="radar-circle"></div><div class="radar-circle"></div>
         <div class="radar-center"></div>
       </div>
       <h2 class="match-title">Finding your best match</h2>
@@ -260,7 +247,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
         <div class="response-banner"><span>⚡</span><span id="ct-response-note">—</span></div>
         <div class="action-row">
           <button class="btn btn-primary" onclick="goToTerms()">Review &amp; accept terms →</button>
-          <button class="btn btn-secondary" onclick="requestDifferent()">Different contractor</button>
+          <button class="btn btn-secondary" id="btn-different" onclick="requestDifferent()">Different contractor</button>
         </div>
         <div class="next-queue-note" id="next-queue-note">—</div>
       </div>
@@ -344,6 +331,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 
 <script>
 const API_BASE = ''
+const SB = 'https://ygfhaoksicgtazcmqdfk.supabase.co/rest/v1'
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88'
 
 let state = {
   requestId:     null,
@@ -353,7 +342,10 @@ let state = {
   matchData:     null,
   requestData:   null,
   currentScreen: 'matching',
-  queueIndex:    0,
+  // queueIndex tracks which queue item is currently displayed.
+  // -1 = showing the primary match (from data.match)
+  // 0,1,2... = showing state.queue[queueIndex]
+  queueIndex:    -1,
   queue:         [],
   selectedOption:'accept',
 }
@@ -365,15 +357,10 @@ const TRADE_ICONS = {hvac:'❄',plumbing:'🔧',electrical:'⚡',roofing:'🏠',
 const TRADE_COLORS = {hvac:'#E6F1FB',plumbing:'#E1F5EE',electrical:'#FAEEDA',roofing:'#FAECE7',landscaping:'#EAF3DE',painting:'#FBEAF0'}
 
 async function init() {
-  if (!state.requestId) {
-    state.requestId = 'c1000000-0000-0000-0000-000000000001'
-  }
+  if (!state.requestId) state.requestId = 'c1000000-0000-0000-0000-000000000001'
   try {
     const res = await fetch(`${API_BASE}/api/request?id=${state.requestId}`)
-    if (res.ok) {
-      state.requestData = await res.json()
-      populateJobStrip(state.requestData)
-    }
+    if (res.ok) { state.requestData = await res.json(); populateJobStrip(state.requestData) }
   } catch(e) {
     populateJobStrip({ trade:'hvac', description:'AC unit not cooling', zip_code:'28036', quote_low:280, quote_high:520, difficulty_score:6 })
   }
@@ -401,20 +388,15 @@ async function runMatch() {
       body: JSON.stringify({ request_id: state.requestId }),
     })
     clearTimeout(animTimer)
-    if (!res.ok) {
-      const err = await res.json()
-      showError(err.error || 'Matching failed. Please try again.')
-      setLoading(false)
-      return
-    }
+    if (!res.ok) { const err = await res.json(); showError(err.error || 'Matching failed.'); setLoading(false); return }
     const data = await res.json()
     state.matchData = data
     state.queue = data.queue || []
-    state.queueIndex = 0
+    state.queueIndex = -1  // start at primary match
     const b = data.match.breakdown
-    animFactor('trade', b.tradePts,   '#185fa5')
-    animFactor('tier',  b.tierPts,    '#1d9e75')
-    animFactor('geo',   b.geoPts,     '#b86e0a')
+    animFactor('trade', b.tradePts, '#185fa5')
+    animFactor('tier',  b.tierPts,  '#1d9e75')
+    animFactor('geo',   b.geoPts,   '#b86e0a')
     animFactor('loyal', b.loyaltyPts, '#1d9e75')
     document.getElementById('fv-trade').textContent = b.tradePts
     document.getElementById('fv-tier').textContent  = b.tierPts
@@ -424,10 +406,7 @@ async function runMatch() {
     document.getElementById('queue-text').textContent = `Best match identified. ${state.queue.length} more in queue.`
     document.getElementById('queue-count').textContent = `${1 + state.queue.length} eligible`
     setLoading(false)
-    setTimeout(() => {
-      populateMatchScreen(data.match)
-      showScreen('match')
-    }, 1400)
+    setTimeout(() => { populateMatchScreen(data.match); showScreen('match') }, 1400)
   } catch(e) {
     clearTimeout(animTimer)
     showError('Network error — please check your connection.')
@@ -437,15 +416,12 @@ async function runMatch() {
 
 function animateMatchingBars() {
   const steps = [
-    { delay: 300,  key:'trade', val:70,  color:'#185fa5' },
-    { delay: 700,  key:'tier',  val:60,  color:'#1d9e75' },
-    { delay: 1100, key:'geo',   val:80,  color:'#b86e0a' },
-    { delay: 1500, key:'loyal', val:40,  color:'#1d9e75' },
+    { delay:300,  key:'trade', val:70, color:'#185fa5' },
+    { delay:700,  key:'tier',  val:60, color:'#1d9e75' },
+    { delay:1100, key:'geo',   val:80, color:'#b86e0a' },
+    { delay:1500, key:'loyal', val:40, color:'#1d9e75' },
   ]
-  steps.forEach(s => setTimeout(() => {
-    animFactor(s.key, s.val, s.color)
-    document.getElementById(`fv-${s.key}`).textContent = '…'
-  }, s.delay))
+  steps.forEach(s => setTimeout(() => { animFactor(s.key, s.val, s.color); document.getElementById(`fv-${s.key}`).textContent = '…' }, s.delay))
   setTimeout(() => { document.getElementById('queue-text').textContent = 'Checking capacity and monthly caps…' }, 500)
   setTimeout(() => { document.getElementById('queue-text').textContent = 'Ranking by composite score…' }, 1200)
 }
@@ -476,76 +452,91 @@ function populateMatchScreen(match) {
   if (ct.tier === 'elite' || ct.tier === 'founding') badges.innerHTML += `<span class="badge badge-elite">Elite</span>`
   badges.innerHTML += `<span class="badge badge-verified">✓ Verified</span>`
   ;[['trade',b.tradePts,'#185fa5'],['tier',b.tierPts,'#1d9e75'],['geo',b.geoPts,'#b86e0a'],['loyal',b.loyaltyPts,'#1d9e75']].forEach(([k,v,c]) => {
-    const el = document.getElementById('mb-'+k)
-    if (el) { el.style.width = v+'%'; el.style.background = c }
-    const vEl = document.getElementById('mv-'+k)
-    if (vEl) vEl.textContent = v
+    const el = document.getElementById('mb-'+k); if (el) { el.style.width = v+'%'; el.style.background = c }
+    const vEl = document.getElementById('mv-'+k); if (vEl) vEl.textContent = v
   })
   const delay = ct.notification_delay_minutes
   document.getElementById('ct-response-note').textContent = delay === 0
     ? `${ct.is_founding ? 'Founding contractor' : 'Elite contractor'} — responds instantly.`
     : `${ct.tier.charAt(0).toUpperCase()+ct.tier.slice(1)} contractor — responds within ${delay} minute${delay===1?'':'s'}.`
+  // Show/hide Different contractor button and queue note
+  const btnDiff = document.getElementById('btn-different')
   if (state.queue.length > 0) {
-    const next = state.queue[0]
-    document.getElementById('next-queue-note').textContent =
-      `Next in queue: ${next.name} (score ${next.compositeScore}) · ${next.tier} tier`
+    btnDiff.style.display = ''
+    document.getElementById('next-queue-note').textContent = `Next in queue: ${state.queue[0].name} (score ${state.queue[0].compositeScore}) · ${state.queue[0].tier} tier`
   } else {
+    btnDiff.style.display = 'none'
     document.getElementById('next-queue-note').textContent = 'This is the only match in your area.'
   }
   state.contractorId = ct.id
 }
 
-// ── FIXED: off-by-one corrected, contractorId updated on selection ──
-function requestDifferent() {
-  if (state.queueIndex >= state.queue.length - 1) {
+// ── FIXED requestDifferent ──
+// queueIndex starts at -1 (primary match). Each click advances into state.queue[0], [1], etc.
+async function requestDifferent() {
+  const nextIndex = state.queueIndex + 1
+  if (nextIndex >= state.queue.length) {
     showError('No more contractors available in your area right now.')
+    document.getElementById('btn-different').style.display = 'none'
     return
   }
-  state.queueIndex++
-  const next = state.queue[state.queueIndex]
-  // Update the contractor that will be assigned on confirm
-  state.contractorId = next.id
+  state.queueIndex = nextIndex
+  const next = state.queue[nextIndex]
+
+  // Look up the contractor's id from Supabase by name (queue items don't include id)
+  try {
+    const r = await fetch(`${SB}/contractors?name=eq.${encodeURIComponent(next.name)}&select=id,avatar_initials,primary_trade,notification_delay_minutes,review_average,jobs_completed`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+    })
+    const rows = await r.json()
+    if (Array.isArray(rows) && rows[0]) {
+      state.contractorId = rows[0].id
+      // Update avatar
+      const av = document.getElementById('ct-avatar')
+      av.textContent = rows[0].avatar_initials || next.name.slice(0,2).toUpperCase()
+      av.style.background = TRADE_COLORS[rows[0].primary_trade] || '#F1EFE8'
+      document.getElementById('ct-rating').textContent = rows[0].review_average ? parseFloat(rows[0].review_average).toFixed(1) + '★' : '—'
+      document.getElementById('ct-jobs').textContent = rows[0].jobs_completed || 0
+    }
+  } catch(e) {
+    console.warn('Could not fetch contractor id for queue item', e)
+  }
+
   document.getElementById('ct-name').textContent = next.company_name || next.name
   document.getElementById('ct-score').textContent = next.compositeScore
   document.getElementById('match-score-headline').textContent = `composite score ${next.compositeScore}/100`
-  // Update score bars if breakdown available
+
   const b = next.breakdown || {}
-  ;[['trade', b.tradePts||0, '#185fa5'],['tier', b.tierPts||0, '#1d9e75'],['geo', b.geoPts||0, '#b86e0a'],['loyal', b.loyaltyPts||0, '#1d9e75']].forEach(([k,v,c]) => {
+  ;[['trade',b.tradePts||0,'#185fa5'],['tier',b.tierPts||0,'#1d9e75'],['geo',b.geoPts||0,'#b86e0a'],['loyal',b.loyaltyPts||0,'#1d9e75']].forEach(([k,v,c]) => {
     const el = document.getElementById('mb-'+k); if (el) { el.style.width = v+'%'; el.style.background = c }
     const vEl = document.getElementById('mv-'+k); if (vEl) vEl.textContent = v
   })
-  // Update badges
+
   const badges = document.getElementById('ct-badges')
   badges.innerHTML = ''
   if (next.is_founding) badges.innerHTML += `<span class="badge badge-founding">Founding</span>`
   if (next.tier === 'elite' || next.tier === 'founding') badges.innerHTML += `<span class="badge badge-elite">Elite</span>`
   badges.innerHTML += `<span class="badge badge-verified">✓ Verified</span>`
-  // Update next in queue note
-  const hasMore = state.queueIndex < state.queue.length - 1
+
+  const hasMore = nextIndex < state.queue.length - 1
   document.getElementById('next-queue-note').textContent = hasMore
-    ? `Next: ${state.queue[state.queueIndex + 1].name} (score ${state.queue[state.queueIndex + 1].compositeScore})`
+    ? `Next: ${state.queue[nextIndex + 1].name} (score ${state.queue[nextIndex + 1].compositeScore})`
     : 'No more contractors in queue.'
+  if (!hasMore) document.getElementById('btn-different').style.display = 'none'
 }
 
 function goToTerms() {
   const req = state.requestData || {}
   const lines = req.line_items || []
-  document.getElementById('terms-sub').textContent =
-    `Based on your description and the Fair Rate Index for zip ${req.zip_code || '—'}`
+  document.getElementById('terms-sub').textContent = `Based on your description and the Fair Rate Index for zip ${req.zip_code || '—'}`
   document.getElementById('scope-text').textContent = req.description || '—'
-  const costLinesEl = document.getElementById('cost-lines')
-  costLinesEl.innerHTML = lines.map(l =>
-    `<div class="cost-line"><span>${l.label}</span><span>$${l.low}–$${l.high}</span></div>`
-  ).join('')
-  const low  = lines.reduce((s,l) => s + l.low,  0)
+  document.getElementById('cost-lines').innerHTML = lines.map(l => `<div class="cost-line"><span>${l.label}</span><span>$${l.low}–$${l.high}</span></div>`).join('')
+  const low = lines.reduce((s,l) => s + l.low, 0)
   const high = lines.reduce((s,l) => s + l.high, 0)
   document.getElementById('cost-total').textContent = `$${low}–$${high}`
   const diff = req.difficulty_score || 5
   const labels = ['','Very easy','Easy','Easy','Moderate','Moderate','Moderate','Hard','Hard','Very hard','Expert']
-  document.getElementById('diff-dots').innerHTML =
-    Array.from({length:10}).map((_,i) =>
-      `<div class="diff-dot${i < diff ? ' filled' : ''}"></div>`
-    ).join('')
+  document.getElementById('diff-dots').innerHTML = Array.from({length:10}).map((_,i) => `<div class="diff-dot${i < diff ? ' filled' : ''}"></div>`).join('')
   document.getElementById('diff-text').textContent = labels[diff] || 'Moderate'
   showScreen('terms')
 }
@@ -557,11 +548,7 @@ async function confirmJob() {
     const res = await fetch(`${API_BASE}/api/lead`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        request_id:     state.requestId,
-        contractor_id:  state.contractorId,
-        proposed_terms: { option: selectedOption },
-      }),
+      body: JSON.stringify({ request_id: state.requestId, contractor_id: state.contractorId, proposed_terms: { option: selectedOption } }),
     })
     const data = await res.json()
     setLoading(false)
@@ -579,17 +566,15 @@ async function confirmJob() {
 function populateConfirmScreen(data) {
   const ct = state.matchData?.match?.contractor || {}
   document.getElementById('job-ref').textContent = data.job_ref || 'YSK-—'
-  document.getElementById('confirm-sub').textContent =
-    `${ct.company_name || ct.name || 'Your contractor'} has been notified and will reach out shortly.`
+  document.getElementById('confirm-sub').textContent = `${ct.company_name || ct.name || 'Your contractor'} has been notified and will reach out shortly.`
   const av = document.getElementById('cc-avatar')
   av.textContent = ct.avatar_initials || '?'
   av.style.background = TRADE_COLORS[ct.primary_trade] || '#F1EFE8'
-  document.getElementById('cc-name').textContent   = ct.company_name || ct.name || '—'
-  document.getElementById('cc-info').textContent   = `${data.contractor?.phone || ''} · ${data.contractor?.email || ''}`
-  document.getElementById('cc-respond').textContent =
-    ct.notification_delay_minutes === 0
-      ? 'Founding/Elite contractor — typically responds in < 5 min'
-      : `Typical response: ${ct.notification_delay_minutes} min`
+  document.getElementById('cc-name').textContent = ct.company_name || ct.name || '—'
+  document.getElementById('cc-info').textContent = `${data.contractor?.phone || ''} · ${data.contractor?.email || ''}`
+  document.getElementById('cc-respond').textContent = ct.notification_delay_minutes === 0
+    ? 'Founding/Elite contractor — typically responds in < 5 min'
+    : `Typical response: ${ct.notification_delay_minutes} min`
 }
 
 function showScreen(name) {

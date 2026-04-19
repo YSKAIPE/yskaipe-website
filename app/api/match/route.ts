@@ -44,7 +44,6 @@ export async function POST(req: NextRequest) {
   };
 
   // 3. Fetch eligible contractors for this trade (capacity pre-filter via view)
-  // Primary trade match
   const { data: primary, error: ctErr } = await supabaseAdmin
     .from("eligible_contractors")
     .select("*")
@@ -78,8 +77,6 @@ export async function POST(req: NextRequest) {
   }
 
   // 4. Map DB rows → ContractorProfile for leadScoring.ts
-  //    Tier enum: DB stores lowercase ('founding','elite','pro','starter')
-  //    leadScoring.ts expects title-case ('Founding','Elite','Pro','Starter')
   const tierMap: Record<string, string> = {
     founding: "Founding",
     elite: "Elite",
@@ -102,9 +99,6 @@ export async function POST(req: NextRequest) {
   }));
 
   // 5. Build the lead object
-  //    distanceMiles: using 0 until geocoding is wired.
-  //    The geo score will be 100 for all — fair for now,
-  //    real distance replaces this in the next step.
   const lead = {
     id: request.id,
     trade: request.trade,
@@ -122,7 +116,6 @@ export async function POST(req: NextRequest) {
   }
 
   // 7. Write lead assignment rows for top 5
-
   const now = Date.now();
   const assignments = ranked.slice(0, 5).map((r) => {
     const delayMins = getDelayMinutes(r.contractor.tier);
@@ -165,6 +158,8 @@ export async function POST(req: NextRequest) {
     .eq("id", request_id);
 
   // 9. Return top match + queue tail
+  // FIXED: include id, avatar_initials, is_founding in queue items so the
+  // frontend can display and assign the correct contractor without a second lookup.
   const topRaw = allRaw.find((c: any) => c.id === ranked[0].contractor.id);
 
   return NextResponse.json({
@@ -189,10 +184,19 @@ export async function POST(req: NextRequest) {
     queue: ranked.slice(1, 4).map((r) => {
       const raw = allRaw.find((c: any) => c.id === r.contractor.id);
       return {
+        id: raw?.id,                              // ← ADDED: needed for lead assignment
         rank: r.rank,
         name: raw?.company_name || r.contractor.name,
+        company_name: raw?.company_name,
         tier: raw?.tier ?? r.contractor.tier,
+        is_founding: raw?.is_founding ?? false,
+        avatar_initials: raw?.avatar_initials,
+        primary_trade: raw?.primary_trade,
+        review_average: raw?.review_average,
+        jobs_completed: raw?.jobs_completed,
+        notification_delay_minutes: getDelayMinutes(raw?.tier ?? r.contractor.tier),
         compositeScore: r.result.compositeScore,
+        breakdown: r.result.breakdown,            // ← ADDED: for score bars on selection
       };
     }),
   });
