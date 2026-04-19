@@ -3,20 +3,18 @@
 // POST /api/lead
 // Body: { request_id, contractor_id, proposed_terms }
 // Called when homeowner confirms terms on Screen 3.
-// Writes proposed_terms to the lead, increments monthly cap.
+// Writes to lead_assignments, updates leads, dismisses queue.
 // ============================================================
-
 import { NextRequest, NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function POST(req: NextRequest) {
   const { request_id, contractor_id, proposed_terms } = await req.json();
-
   if (!request_id || !contractor_id) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  // Update assignment with proposed terms
+  // Update the chosen lead row with proposed terms + assigned status
   const { data: lead, error: leadErr } = await supabaseAdmin
     .from("leads")
     .update({ status: "assigned", proposed_terms })
@@ -32,6 +30,30 @@ export async function POST(req: NextRequest) {
       { status: 404 },
     );
   }
+
+  // ── Write to lead_assignments (customer chose this contractor) ──
+  const { error: assignErr } = await supabaseAdmin
+    .from("lead_assignments")
+    .insert({
+      request_id,
+      contractor_id,
+      assigned_by: "customer",
+      rank_at_assignment: lead.rank_position,
+      status: "active",
+    });
+  if (assignErr) {
+    console.error("[/api/lead] lead_assignments insert failed:", assignErr);
+    // Non-fatal — homeowner flow continues even if this fails
+  }
+
+  // ── Dismiss all other pending leads for this request ──
+  // Removes this job from every other contractor's queue view
+  await supabaseAdmin
+    .from("leads")
+    .update({ dismissed_at: new Date().toISOString() })
+    .eq("request_id", request_id)
+    .neq("contractor_id", contractor_id)
+    .eq("status", "pending");
 
   // Pull contractor details for confirmation screen
   const { data: contractor } = await supabaseAdmin
