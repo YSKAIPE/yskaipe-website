@@ -10,7 +10,6 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);-webkit-font-smoothing:antialiased;font-size:14px;min-height:100vh}
 
-/* TOPBAR */
 .topbar{background:#111;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06)}
 .topbar-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.12em;color:rgba(255,255,255,0.4)}
 .topbar-logo span{color:#9FE1CB}
@@ -21,7 +20,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .contractor-id{font-size:9px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.2)}
 
-/* HERO PROFILE */
 .profile-bar{background:linear-gradient(135deg,#1a1a12,#0f1a0a);border-bottom:1px solid rgba(196,154,53,0.15);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .profile-left{display:flex;align-items:center;gap:16px}
 .profile-avatar{width:52px;height:52px;border-radius:50%;background:rgba(196,154,53,0.15);border:2px solid rgba(196,154,53,0.3);color:var(--gold);font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -33,10 +31,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .pstat-num{font-size:22px;font-weight:500;font-family:'DM Mono',monospace;color:var(--gold);line-height:1}
 .pstat-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.07em;color:rgba(255,255,255,0.3);margin-top:3px}
 
-/* MAIN */
 .main{padding:20px 24px;display:flex;flex-direction:column;gap:16px}
 
-/* KPI STRIP */
 .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .kpi{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px}
 .kpi-num{font-size:24px;font-weight:500;line-height:1;font-family:'DM Mono',monospace}
@@ -45,26 +41,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .kpi-num.gold{color:var(--gold)}
 .kpi-num.blue{color:#5ba3f5}
 
-/* GRID */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
-/* PANEL */
 .panel{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden}
 .panel-header{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between}
 .panel-title{font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
 .panel-body{padding:0}
 
-/* LEAD CARDS */
 .lead-card{padding:16px;border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.1s}
 .lead-card:last-child{border-bottom:none}
 .lead-card:hover{background:rgba(255,255,255,0.02)}
 .lead-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .lead-trade{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9FE1CB}
 .lead-status{font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px}
-.ls-assigned{background:rgba(24,95,165,0.2);color:#5ba3f5}
-.ls-accepted{background:rgba(29,158,117,0.2);color:#1d9e75}
+.ls-active{background:rgba(24,95,165,0.2);color:#5ba3f5}
+.ls-completed{background:rgba(29,158,117,0.2);color:#1d9e75}
 .ls-pending{background:rgba(184,110,10,0.2);color:#e8a83a}
-.ls-declined{background:rgba(192,57,43,0.2);color:#e05050}
+.ls-reassigned{background:rgba(192,57,43,0.2);color:#e05050}
+.ls-cancelled{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3)}
 .lead-desc{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;margin-bottom:8px}
 .lead-meta{display:flex;gap:12px;font-size:10px;color:rgba(255,255,255,0.3);font-family:'DM Mono',monospace;margin-bottom:10px}
 .lead-score{display:flex;align-items:center;gap:6px;margin-bottom:10px}
@@ -75,10 +69,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .lead-actions{display:flex;gap:8px}
 .btn-accept{background:#1d9e75;color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s}
 .btn-accept:hover{background:#0f6e56}
+.btn-accept:disabled{opacity:0.5;cursor:not-allowed}
 .btn-decline{background:transparent;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:7px 16px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
 .btn-decline:hover{border-color:rgba(192,57,43,0.4);color:#e05050}
+.btn-decline:disabled{opacity:0.5;cursor:not-allowed}
 
-/* LOYALTY SCORE */
 .loyalty-section{padding:16px}
 .loyalty-total{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--gold);line-height:1;margin-bottom:4px}
 .loyalty-sub{font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:16px}
@@ -88,7 +83,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .loyalty-bar-fill{height:100%;border-radius:3px;transition:width 0.8s ease}
 .loyalty-note{font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px;line-height:1.6;border-top:1px solid rgba(255,255,255,0.05);padding-top:10px}
 
-/* AGENT */
 .agent-card{padding:16px;text-align:center}
 .agent-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;margin:0 auto 12px}
 .agent-name{font-size:16px;font-weight:600;margin-bottom:4px}
@@ -99,12 +93,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .empty{padding:32px;text-align:center;font-size:11px;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace}
 .loading{padding:24px;text-align:center;font-size:11px;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace}
 
-/* HOW IT WORKS */
 .how-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .how-item:last-child{border-bottom:none}
 .how-num{width:24px;height:24px;border-radius:50%;background:rgba(29,158,117,0.15);color:#1d9e75;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .how-text{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5}
 .how-text strong{color:var(--paper);font-weight:500}
+
+.toast{position:fixed;bottom:24px;right:24px;background:#1d9e75;color:#fff;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:600;opacity:0;transform:translateY(8px);transition:all 0.25s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.error{background:#c0392b}
 </style>
 </head>
 <body>
@@ -118,7 +115,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
   </div>
 </div>
 
-<!-- PROFILE BAR -->
 <div class="profile-bar">
   <div class="profile-left">
     <div class="profile-avatar" id="p-initials">??</div>
@@ -137,7 +133,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 </div>
 
 <div class="main">
-  <!-- KPI STRIP -->
   <div class="kpi-strip">
     <div class="kpi"><div class="kpi-num green" id="k-assigned">—</div><div class="kpi-lbl">Assigned leads</div></div>
     <div class="kpi"><div class="kpi-num gold" id="k-accepted">—</div><div class="kpi-lbl">Accepted</div></div>
@@ -146,7 +141,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
   </div>
 
   <div class="grid-2">
-    <!-- LEAD QUEUE -->
     <div class="panel">
       <div class="panel-header">
         <div class="panel-title">🎯 Your Lead Queue</div>
@@ -157,32 +151,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
       </div>
     </div>
 
-    <!-- RIGHT COLUMN -->
     <div style="display:flex;flex-direction:column;gap:16px">
-
-      <!-- LOYALTY SCORE -->
       <div class="panel">
         <div class="panel-header"><div class="panel-title">📈 Loyalty Score</div></div>
         <div class="loyalty-section" id="loyalty-section">
           <div class="loading">Loading…</div>
         </div>
       </div>
-
-      <!-- AI AGENT -->
       <div class="panel">
         <div class="panel-header"><div class="panel-title">🤖 Your AI Agent</div></div>
         <div class="agent-card" id="agent-card">
           <div class="loading">Loading…</div>
         </div>
       </div>
-
-      <!-- HOW LEADS WORK -->
       <div class="panel">
         <div class="panel-header"><div class="panel-title">⚡ How leads work</div></div>
         <div>
           <div class="how-item"><div class="how-num">1</div><div class="how-text"><strong>Homeowner submits a job</strong> — AI quotes the job and routes it to the best-fit contractor instantly.</div></div>
-          <div class="how-item"><div class="how-num">2</div><div class="how-text"><strong>You get the lead first</strong> — as a Founding contractor you have zero notification delay.</div></div>
-          <div class="how-item"><div class="how-num">3</div><div class="how-text"><strong>Accept or decline</strong> — accepted jobs notify the homeowner. Declined passes to the queue.</div></div>
+          <div class="how-item"><div class="how-num">2</div><div class="how-text"><strong>Customer picks you</strong> — either accepting the top recommendation or choosing from the ranked queue.</div></div>
+          <div class="how-item"><div class="how-num">3</div><div class="how-text"><strong>Accept or decline</strong> — accepted jobs notify the homeowner. Declined passes to the next pro in queue.</div></div>
           <div class="how-item"><div class="how-num">4</div><div class="how-text"><strong>Complete the job</strong> — every job and review boosts your loyalty score and match ranking.</div></div>
         </div>
       </div>
@@ -190,32 +177,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
 const SB = 'https://ygfhaoksicgtazcmqdfk.supabase.co/rest/v1'
 const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88'
 const H = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
 
-// Get contractor ID from URL param, default to Founder Ten
 const params = new URLSearchParams(window.location.search)
 const CID = params.get('cid') || '9d2de48d-a109-4882-8a7a-adc069b9bc4f'
 
 const AGENTS = {
-  hvac: { name:'Agent Aria', color:'#E6F1FB', textColor:'#0C447C', letter:'A', desc:'Climate systems, installs, emergency response. Routes heating and cooling jobs to the closest qualified pro.' },
-  plumbing: { name:'Agent River', color:'#E1F5EE', textColor:'#085041', letter:'R', desc:'Leaks, installs, drain systems, emergency calls. Prioritizes response time and trade match score.' },
-  electrical: { name:'Agent Volt', color:'#FAEEDA', textColor:'#633806', letter:'V', desc:'Panels, wiring, EV chargers, code compliance. Routes high-ticket electrical jobs to licensed pros only.' },
-  roofing: { name:'Agent Ridge', color:'#FAECE7', textColor:'#712B13', letter:'Ri', desc:'Storm damage, full replacements, inspections. Includes storm-alert early access for founding contractors.' },
-  landscaping: { name:'Agent Terra', color:'#EAF3DE', textColor:'#27500A', letter:'T', desc:'Lawn care, irrigation, hardscape, recurring seasonal work. Routes return homeowners back to preferred pro.' },
-  painting: { name:'Agent Hue', color:'#FBEAF0', textColor:'#72243E', letter:'H', desc:'Interior, exterior, specialty finishes. Founding painters get the Fair Rate Index as a client-facing pitch tool.' }
+  hvac:        { name:'Agent Aria',  color:'#E6F1FB', textColor:'#0C447C', letter:'A',  desc:'Climate systems, installs, emergency response. Routes heating and cooling jobs to the closest qualified pro.' },
+  plumbing:    { name:'Agent River', color:'#E1F5EE', textColor:'#085041', letter:'R',  desc:'Leaks, installs, drain systems, emergency calls. Prioritizes response time and trade match score.' },
+  electrical:  { name:'Agent Volt',  color:'#FAEEDA', textColor:'#633806', letter:'V',  desc:'Panels, wiring, EV chargers, code compliance. Routes high-ticket electrical jobs to licensed pros only.' },
+  roofing:     { name:'Agent Ridge', color:'#FAECE7', textColor:'#712B13', letter:'Ri', desc:'Storm damage, full replacements, inspections. Includes storm-alert early access for founding contractors.' },
+  landscaping: { name:'Agent Terra', color:'#EAF3DE', textColor:'#27500A', letter:'T',  desc:'Lawn care, irrigation, hardscape, recurring seasonal work. Routes return homeowners back to preferred pro.' },
+  painting:    { name:'Agent Hue',   color:'#FBEAF0', textColor:'#72243E', letter:'H',  desc:'Interior, exterior, specialty finishes. Founding painters get the Fair Rate Index as a client-facing pitch tool.' }
 }
 
-async function get(path) {
-  const r = await fetch(SB + path, { headers: H })
+function toast(msg, isError = false) {
+  const t = document.getElementById('toast')
+  t.textContent = msg
+  t.className = 'toast show' + (isError ? ' error' : '')
+  setTimeout(() => t.className = 'toast', 3000)
+}
+
+async function api(path, opts = {}) {
+  const r = await fetch(SB + path, { headers: { ...H, ...opts.headers }, ...opts })
+  if (opts.method && opts.method !== 'GET') return r
   return r.json()
-}
-
-function fmt(iso) {
-  if (!iso) return '—'
-  return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' ' + new Date(iso).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})
 }
 
 function jobRef(id) {
@@ -228,10 +219,12 @@ function jobRef(id) {
   return 'YSK-2026-' + code
 }
 
+// ─── PROFILE ────────────────────────────────────────────────────────────────
 async function loadProfile() {
-  const data = await get(`/contractors?id=eq.${CID}&select=*`)
+  const data = await api(`/contractors?id=eq.${CID}&select=*`)
   if (!Array.isArray(data) || !data[0]) return
   const c = data[0]
+
   document.getElementById('cid-display').textContent = 'ID: ' + CID.slice(0,8) + '…'
   document.getElementById('p-initials').textContent = c.avatar_initials || '??'
   document.getElementById('p-name').textContent = c.name
@@ -242,7 +235,6 @@ async function loadProfile() {
   document.getElementById('p-months').textContent = c.months_on_platform || 0
   document.getElementById('p-leads').textContent = c.leads_this_month || 0
 
-  // Loyalty score
   const loyalty = Math.min(100, Math.round(
     (c.months_on_platform||0) * 4 +
     Math.min(c.jobs_completed||0, 30) * 0.5 +
@@ -251,12 +243,13 @@ async function loadProfile() {
     (c.review_average||0) * 4
   ))
   document.getElementById('k-loyalty').textContent = loyalty
+
   document.getElementById('loyalty-section').innerHTML = `
     <div class="loyalty-total">${loyalty}</div>
     <div class="loyalty-sub">/ 100 · Loyalty Score v2</div>
     <div class="loyalty-bar-wrap">
       <div class="loyalty-bar-label"><span>Tenure</span><span>${c.months_on_platform||0} months</span></div>
-      <div class="loyalty-bar-bg"><div class="loyalty-bar-fill" style="width:${Math.min(100,(c.months_on_platform||0)/18*100)}%;background:${var_gold()}"></div></div>
+      <div class="loyalty-bar-bg"><div class="loyalty-bar-fill" style="width:${Math.min(100,(c.months_on_platform||0)/18*100)}%;background:#c49a35"></div></div>
     </div>
     <div class="loyalty-bar-wrap">
       <div class="loyalty-bar-label"><span>Jobs completed</span><span>${c.jobs_completed||0}</span></div>
@@ -272,7 +265,6 @@ async function loadProfile() {
     </div>
     <div class="loyalty-note">As a Founding contractor, your loyalty score accumulates from day one — before any competitor joins. At month 6, you outscore a new Elite on equivalent leads.</div>`
 
-  // Agent
   const agent = AGENTS[c.primary_trade] || AGENTS.hvac
   document.getElementById('agent-card').innerHTML = `
     <div class="agent-avatar" style="background:${agent.color};color:${agent.textColor}">${agent.letter}</div>
@@ -282,45 +274,56 @@ async function loadProfile() {
     <div class="agent-status"><div class="live-dot" style="background:#1d9e75"></div>Active · Processing leads</div>`
 }
 
-function var_gold() { return '#c49a35' }
-
+// ─── LEADS — now sourced from lead_assignments ───────────────────────────────
 async function loadLeads() {
-  const data = await get(`/leads?contractor_id=eq.${CID}&select=*,homeowner_requests(*)&order=rank_position.asc,created_at.desc`)
-  if (!Array.isArray(data)) return
+  // Pull this contractor's assignments, joining back to leads and homeowner_requests for details
+  const assignments = await api(
+    `/lead_assignments?contractor_id=eq.${CID}&select=*,leads!lead_assignments_request_id_fkey(composite_score,rank_position,trade_pts,tier_pts,geo_pts,loyalty_pts),homeowner_requests!lead_assignments_request_id_fkey(trade,description,zip_code,quote_low,quote_high,difficulty_score)&order=assigned_at.desc`
+  )
 
-  const assigned = data.filter(l => l.status === 'assigned').length
-  const accepted = data.filter(l => l.status === 'accepted').length
-  const scores = data.map(l => l.composite_score).filter(Boolean)
-  const avgScore = scores.length ? Math.round(scores.reduce((a,b) => a+b,0)/scores.length) : 0
-
-  document.getElementById('k-assigned').textContent = assigned
-  document.getElementById('k-accepted').textContent = accepted
-  document.getElementById('k-score').textContent = avgScore || '—'
-  document.getElementById('leads-updated').textContent = new Date().toLocaleTimeString()
-
-  if (!data.length) {
-    document.getElementById('leads-panel').innerHTML = '<div class="empty">No leads yet — you\'ll be notified instantly when a homeowner job matches your trade.</div>'
+  if (!Array.isArray(assignments)) {
+    document.getElementById('leads-panel').innerHTML = '<div class="empty">Error loading leads. Please refresh.</div>'
     return
   }
 
-  document.getElementById('leads-panel').innerHTML = data.slice(0,8).map(l => {
-    const rq = l.homeowner_requests || {}
-    const score = l.composite_score || 0
-    const statusClass = { assigned:'ls-assigned', accepted:'ls-accepted', pending:'ls-pending', declined:'ls-declined' }[l.status] || 'ls-pending'
-    const canAct = l.status === 'assigned' || l.status === 'pending'
+  // KPI counters — sourced entirely from lead_assignments
+  const totalAssigned = assignments.length
+  const totalAccepted = assignments.filter(a => a.status === 'completed').length
+  const scores = assignments.map(a => a.leads?.composite_score).filter(Boolean)
+  const avgScore = scores.length ? Math.round(scores.reduce((a,b) => a+b,0)/scores.length) : 0
+
+  document.getElementById('k-assigned').textContent = totalAssigned
+  document.getElementById('k-accepted').textContent = totalAccepted
+  document.getElementById('k-score').textContent = avgScore || '—'
+  document.getElementById('leads-updated').textContent = new Date().toLocaleTimeString()
+
+  if (!assignments.length) {
+    document.getElementById('leads-panel').innerHTML = '<div class="empty">No leads yet — you\'ll be notified instantly when a homeowner job matches your trade and a customer selects you.</div>'
+    return
+  }
+
+  document.getElementById('leads-panel').innerHTML = assignments.slice(0,8).map(a => {
+    const rq = a.homeowner_requests || {}
+    const ld = a.leads || {}
+    const score = ld.composite_score || 0
+    const canAct = a.status === 'active'
+
+    const statusLabel = { active:'active', completed:'accepted', reassigned:'reassigned', cancelled:'cancelled' }[a.status] || a.status
+    const statusClass = { active:'ls-active', completed:'ls-completed', reassigned:'ls-reassigned', cancelled:'ls-cancelled' }[a.status] || 'ls-pending'
+
     return `<div class="lead-card">
       <div class="lead-header">
         <div>
-          <div class="lead-trade">${(rq.trade||'—').toUpperCase()} · ${jobRef(l.request_id)}</div>
+          <div class="lead-trade">${(rq.trade||'—').toUpperCase()} · ${jobRef(a.request_id)}</div>
         </div>
-        <span class="lead-status ${statusClass}">${l.status||'—'}</span>
+        <span class="lead-status ${statusClass}">${statusLabel}</span>
       </div>
       <div class="lead-desc">${rq.description ? rq.description.slice(0,120) + (rq.description.length > 120 ? '…' : '') : 'No description'}</div>
       <div class="lead-meta">
         <span>ZIP ${rq.zip_code||'—'}</span>
         <span>$${rq.quote_low||'?'}–$${rq.quote_high||'?'}</span>
         <span>Difficulty ${rq.difficulty_score||'—'}/10</span>
-        <span>Rank #${l.rank_position||'—'}</span>
+        <span>Rank #${ld.rank_position||a.rank_at_assignment||'—'}</span>
       </div>
       <div class="lead-score">
         <span class="score-label">Match score</span>
@@ -328,37 +331,86 @@ async function loadLeads() {
         <span class="score-val">${score}</span>
       </div>
       ${canAct ? `<div class="lead-actions">
-        <button class="btn-accept" onclick="acceptLead('${l.id}', this)">✓ Accept Job</button>
-        <button class="btn-decline" onclick="declineLead('${l.id}', this)">Decline</button>
+        <button class="btn-accept" onclick="acceptLead('${a.id}','${a.request_id}',this)">✓ Accept Job</button>
+        <button class="btn-decline" onclick="declineLead('${a.id}','${a.request_id}',this)">Decline</button>
       </div>` : ''}
     </div>`
   }).join('')
 }
 
-async function acceptLead(leadId, btn) {
+// ─── ACCEPT — writes to lead_assignments, updates leads, dismisses queue ─────
+async function acceptLead(assignmentId, requestId, btn) {
   btn.disabled = true
   btn.textContent = 'Accepting…'
+  const siblingBtn = btn.nextElementSibling
+  if (siblingBtn) siblingBtn.disabled = true
+
   try {
-    await fetch(SB + `/leads?id=eq.${leadId}`, {
+    const now = new Date().toISOString()
+
+    // 1. Mark this assignment as completed (contractor accepted)
+    const r1 = await api(`/lead_assignments?id=eq.${assignmentId}`, {
       method: 'PATCH',
-      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ status: 'accepted', accepted_at: new Date().toISOString() })
+      headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ status: 'completed', resolved_at: now })
     })
-    loadLeads()
-  } catch(e) { btn.disabled = false; btn.textContent = '✓ Accept Job' }
+
+    // 2. Mark the lead row as accepted
+    const r2 = await api(`/leads?request_id=eq.${requestId}&contractor_id=eq.${CID}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ status: 'accepted', accepted_at: now })
+    })
+
+    // 3. Dismiss all other pending lead rows for this request (other contractors' queue entries)
+    await api(`/leads?request_id=eq.${requestId}&contractor_id=neq.${CID}&status=eq.pending`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ dismissed_at: now })
+    })
+
+    toast('Job accepted! The homeowner has been notified.')
+    await loadLeads()
+  } catch(e) {
+    toast('Error accepting — please try again.', true)
+    btn.disabled = false
+    btn.textContent = '✓ Accept Job'
+    if (siblingBtn) siblingBtn.disabled = false
+  }
 }
 
-async function declineLead(leadId, btn) {
+// ─── DECLINE — marks assignment cancelled, lead dismissed for this contractor ─
+async function declineLead(assignmentId, requestId, btn) {
   btn.disabled = true
   btn.textContent = 'Declining…'
+  const siblingBtn = btn.previousElementSibling
+  if (siblingBtn) siblingBtn.disabled = true
+
   try {
-    await fetch(SB + `/leads?id=eq.${leadId}`, {
+    const now = new Date().toISOString()
+
+    // 1. Mark assignment as cancelled
+    await api(`/lead_assignments?id=eq.${assignmentId}`, {
       method: 'PATCH',
-      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ status: 'declined' })
+      headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ status: 'cancelled', resolved_at: now })
     })
-    loadLeads()
-  } catch(e) { btn.disabled = false; btn.textContent = 'Decline' }
+
+    // 2. Mark lead row as declined for this contractor
+    await api(`/leads?request_id=eq.${requestId}&contractor_id=eq.${CID}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ status: 'declined', dismissed_at: now })
+    })
+
+    toast('Lead declined. Next contractor in queue will be notified.')
+    await loadLeads()
+  } catch(e) {
+    toast('Error declining — please try again.', true)
+    btn.disabled = false
+    btn.textContent = 'Decline'
+    if (siblingBtn) siblingBtn.disabled = false
+  }
 }
 
 async function loadAll() {
