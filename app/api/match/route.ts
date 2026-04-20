@@ -173,7 +173,7 @@ export async function POST(req: NextRequest) {
     status: "active",
     assigned_at: new Date().toISOString(),
     rank_at_assignment: 1,
-    assigned_by: "match_engine",
+    assigned_by: "system",
   };
 
   const { error: assignErr } = await supabaseAdmin

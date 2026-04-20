@@ -564,6 +564,7 @@ async function reassignManual(requestId, excludeContractorId, idx, btn) {
         status: 'active',
         assigned_at: new Date().toISOString(),
         rank_at_assignment: 1,
+        assigned_by: 'admin',
         notes: 'Manual reassign by admin'
       })
     })
