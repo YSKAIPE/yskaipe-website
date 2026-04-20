@@ -432,7 +432,7 @@ async function loadActivity() {
 async function loadDeclined() {
   // pull lead_assignments that are cancelled or reassigned — these are declined-by-contractor rows
   const [assignments, requests] = await Promise.all([
-    get('/lead_assignments?status=in.(cancelled,reassigned)&order=responded_at.desc,updated_at.desc&limit=50'),
+    get('/lead_assignments?status=in.(cancelled,reassigned,declined)&order=resolved_at.desc.nullslast,assigned_at.desc&limit=50'),
     get('/homeowner_requests?select=id,homeowner_name,trade,zip_code,description,quote_low,quote_high,difficulty_score,status')
   ])
   if (!Array.isArray(assignments)) {
@@ -480,7 +480,7 @@ async function loadDeclined() {
     const trade = (r.trade || '—').toUpperCase()
     const zip = r.zip_code || '—'
     const desc = r.description ? r.description.slice(0, 70) + (r.description.length > 70 ? '…' : '') : 'No description'
-    const respondedAt = a.responded_at || a.updated_at || '—'
+    const respondedAt = a.resolved_at || a.assigned_at || '—'
 
     // Build dropdown of candidates: same trade, not the declining contractor, sorted by tier + loyalty signals
     const candidates = CONTRACTORS_CACHE
