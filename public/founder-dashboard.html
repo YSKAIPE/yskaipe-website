@@ -68,11 +68,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .btn-decline:disabled{opacity:0.5;cursor:not-allowed}
 .accepted-section{padding:12px 16px;border-top:1px solid rgba(29,158,117,0.15);background:rgba(29,158,117,0.03)}
 .accepted-title{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#1d9e75;margin-bottom:10px}
-.accepted-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-.accepted-item:last-child{border-bottom:none}
+.accepted-item{display:flex;align-items:center;justify-content:space-between;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;border-radius:4px;transition:background 0.15s;margin:0 -8px}
+.accepted-item:last-of-type{border-bottom:none}
+.accepted-item:hover{background:rgba(184,240,115,0.05)}
+.accepted-item-left{flex:1;min-width:0}
 .accepted-ref{font-size:11px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.6)}
-.accepted-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
+.accepted-desc{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.accepted-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.accepted-chevron{display:inline-block;font-size:10px;color:rgba(255,255,255,0.35);transition:transform 0.25s ease}
+.accepted-item.open .accepted-chevron{transform:rotate(90deg);color:#1d9e75}
 .accepted-check{color:#1d9e75;font-size:14px}
+.accepted-details{max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:rgba(0,0,0,0.25);border-left:2px solid #1d9e75;border-radius:0 6px 6px 0;margin:0 -8px 8px -6px}
+.accepted-details.open{max-height:800px}
+.ad-inner{padding:14px 16px}
+.ad-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);align-items:flex-start}
+.ad-row:last-child{border-bottom:none}
+.ad-label{color:rgba(255,255,255,0.4);font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;padding-top:2px}
+.ad-value{color:rgba(255,255,255,0.85);text-align:right;flex:1;font-size:11px;line-height:1.5}
+.ad-value a{color:#5ba3f5;text-decoration:none}
+.ad-value a:hover{text-decoration:underline}
+.ad-desc-row{padding:10px 0 8px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.ad-desc-label{color:rgba(255,255,255,0.4);font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.ad-desc-body{color:rgba(255,255,255,0.85);font-size:12px;line-height:1.55}
+.ad-score-wrap{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.ad-score-bar{display:inline-block;width:80px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+.ad-score-fill{height:100%;background:linear-gradient(90deg,#1d9e75,#9FE1CB)}
+.ad-score-val{font-family:'DM Mono',monospace;font-size:11px;color:#1d9e75;font-weight:500;min-width:26px;text-align:right}
+.ad-pill{display:inline-block;padding:2px 8px;background:rgba(29,158,117,0.15);color:#1d9e75;border-radius:3px;font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-left:6px}
 .loyalty-section{padding:16px}
 .loyalty-total{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--gold);line-height:1;margin-bottom:4px}
 .loyalty-sub{font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:16px}
@@ -207,6 +229,33 @@ function jobRef(id) {
   for (let i = 0; i < 7; i++) { code = chars[n % chars.length] + code; n = Math.floor(n / chars.length) }
   return 'YSK-2026-' + code
 }
+function fmtDate(iso) {
+  if (!iso) return '—'
+  try {
+    const d = new Date(iso)
+    return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }) + ' · ' +
+           d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' })
+  } catch(e) { return iso }
+}
+function esc(s) {
+  if (s === null || s === undefined) return ''
+  return String(s).replace(/[&<>"']/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]
+  })
+}
+function toggleAccepted(idx) {
+  const item = document.getElementById('acc-item-' + idx)
+  const det = document.getElementById('acc-det-' + idx)
+  if (!item || !det) return
+  const isOpen = item.classList.contains('open')
+  // close all others for clean accordion feel
+  document.querySelectorAll('.accepted-item.open').forEach(function(el){ el.classList.remove('open') })
+  document.querySelectorAll('.accepted-details.open').forEach(function(el){ el.classList.remove('open') })
+  if (!isOpen) {
+    item.classList.add('open')
+    det.classList.add('open')
+  }
+}
 async function loadProfile() {
   const data = await api('/contractors?id=eq.' + CID + '&select=*')
   if (!Array.isArray(data) || !data[0]) return
@@ -293,17 +342,62 @@ async function loadLeads() {
       '</div>'
     }).join('')
   }
-  // Accepted section
+  // Accepted section — now clickable with accordion details
   if (accepted.length) {
     document.getElementById('accepted-panel').innerHTML =
-      '<div class="accepted-section"><div class="accepted-title">✓ Accepted Jobs (' + accepted.length + ')</div>' +
-      accepted.map(function(a) {
+      '<div class="accepted-section"><div class="accepted-title">✓ Accepted Jobs (' + accepted.length + ') · tap to expand</div>' +
+      accepted.map(function(a, idx) {
         const rq = requestsMap[a.request_id] || {}
-        return '<div class="accepted-item">' +
-          '<div><div class="accepted-ref">' + jobRef(a.request_id) + '</div>' +
-          '<div class="accepted-desc">' + (rq.description ? rq.description.slice(0,60) : '—') + '</div></div>' +
-          '<span class="accepted-check">✓</span>' +
-        '</div>'
+        const ld = leadsMap[a.request_id] || {}
+        const score = ld.composite_score || 0
+        const trade = (rq.trade || '—').toUpperCase()
+        const descShort = rq.description ? rq.description.slice(0, 60) + (rq.description.length > 60 ? '...' : '') : '—'
+        const homeownerName = rq.homeowner_name || rq.full_name || rq.contact_name || rq.name || 'Not provided'
+        const homeownerEmail = rq.homeowner_email || rq.email || ''
+        const homeownerPhone = rq.homeowner_phone || rq.phone || ''
+        const zip = rq.zip_code || '—'
+        const qLow = rq.quote_low != null ? '$' + rq.quote_low : '?'
+        const qHigh = rq.quote_high != null ? '$' + rq.quote_high : '?'
+        const diff = rq.difficulty_score != null ? rq.difficulty_score + '/10' : '—'
+        const acceptedAt = a.accepted_at || a.responded_at || a.updated_at || a.assigned_at
+        const assignedAt = a.assigned_at
+        const rank = ld.rank_position || a.rank_at_assignment || '—'
+
+        // contact line
+        let contactHtml = esc(homeownerName)
+        if (homeownerEmail) contactHtml += '<br><a href="mailto:' + esc(homeownerEmail) + '">' + esc(homeownerEmail) + '</a>'
+        if (homeownerPhone) contactHtml += '<br><a href="tel:' + esc(homeownerPhone) + '">' + esc(homeownerPhone) + '</a>'
+        if (!homeownerEmail && !homeownerPhone) contactHtml += '<br><span style="color:rgba(255,255,255,0.3);font-size:10px">Contact info will appear here once captured on the request form.</span>'
+
+        const descFull = rq.description ? esc(rq.description) : '<span style="color:rgba(255,255,255,0.3)">No description provided</span>'
+
+        return (
+          '<div class="accepted-item" id="acc-item-' + idx + '" onclick="toggleAccepted(' + idx + ')">' +
+            '<div class="accepted-item-left">' +
+              '<div class="accepted-ref">' + jobRef(a.request_id) + ' <span class="ad-pill">' + esc(trade) + '</span></div>' +
+              '<div class="accepted-desc">' + esc(descShort) + '</div>' +
+            '</div>' +
+            '<div class="accepted-right">' +
+              '<span class="accepted-check">✓</span>' +
+              '<span class="accepted-chevron">▶</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="accepted-details" id="acc-det-' + idx + '">' +
+            '<div class="ad-inner">' +
+              '<div class="ad-desc-row">' +
+                '<div class="ad-desc-label">Full job description</div>' +
+                '<div class="ad-desc-body">' + descFull + '</div>' +
+              '</div>' +
+              '<div class="ad-row"><div class="ad-label">Location (ZIP)</div><div class="ad-value">' + esc(zip) + '</div></div>' +
+              '<div class="ad-row"><div class="ad-label">Homeowner</div><div class="ad-value">' + contactHtml + '</div></div>' +
+              '<div class="ad-row"><div class="ad-label">Quote range</div><div class="ad-value">' + esc(qLow) + ' – ' + esc(qHigh) + '</div></div>' +
+              '<div class="ad-row"><div class="ad-label">Difficulty</div><div class="ad-value">' + esc(diff) + '</div></div>' +
+              '<div class="ad-row"><div class="ad-label">Match score</div><div class="ad-value"><div class="ad-score-wrap"><div class="ad-score-bar"><div class="ad-score-fill" style="width:' + score + '%"></div></div><span class="ad-score-val">' + score + '</span></div><div style="font-size:9px;color:rgba(255,255,255,0.35);margin-top:4px;text-align:right">Rank #' + esc(rank) + ' at time of assignment</div></div></div>' +
+              '<div class="ad-row"><div class="ad-label">Assigned</div><div class="ad-value">' + esc(fmtDate(assignedAt)) + '</div></div>' +
+              '<div class="ad-row"><div class="ad-label">Accepted</div><div class="ad-value" style="color:#1d9e75">' + esc(fmtDate(acceptedAt)) + '</div></div>' +
+            '</div>' +
+          '</div>'
+        )
       }).join('') + '</div>'
   } else {
     document.getElementById('accepted-panel').innerHTML = ''
