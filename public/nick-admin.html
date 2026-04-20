@@ -37,7 +37,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .main{padding:24px;overflow-y:auto;max-height:calc(100vh - 52px)}
 
 /* KPI STRIP */
-.kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:24px}
+.kpi-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:24px}
 .kpi{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px 16px}
 .kpi-num{font-size:24px;font-weight:500;line-height:1;font-family:'DM Mono',monospace}
 .kpi-lbl{font-size:10px;color:rgba(255,255,255,0.35);margin-top:4px;text-transform:uppercase;letter-spacing:0.06em}
@@ -45,15 +45,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .kpi-num.gold{color:var(--gold)}
 .kpi-num.blue{color:#5ba3f5}
 .kpi-num.amber{color:#e8a83a}
+.kpi-num.red{color:#e05050}
 
-/* GRID 2-COL */
+/* GRID */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
 
 /* PANEL */
 .panel{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden}
+.panel.reassign-panel{border:1px solid rgba(224,80,80,0.2);background:rgba(224,80,80,0.02)}
 .panel-header{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between}
 .panel-title{font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.panel-title.danger{color:#e05050}
 .panel-action{font-size:10px;color:#9FE1CB;cursor:pointer;font-family:'DM Mono',monospace}
 .panel-body{padding:16px}
 
@@ -74,6 +77,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .pill-accepted{background:rgba(29,158,117,0.2);color:#1d9e75}
 .pill-pending{background:rgba(184,110,10,0.2);color:#e8a83a}
 .pill-active{background:rgba(29,158,117,0.15);color:#1d9e75}
+.pill-declined{background:rgba(224,80,80,0.15);color:#e05050}
+.pill-test{background:rgba(196,154,53,0.15);color:var(--gold);border:1px solid rgba(196,154,53,0.25)}
 
 /* SCORE BAR */
 .score-wrap{display:flex;align-items:center;gap:6px}
@@ -103,12 +108,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
 .health-ok{color:#1d9e75}
 .health-warn{color:#e8a83a}
 
+/* REASSIGN */
+.reassign-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);align-items:center}
+.reassign-row:last-child{border-bottom:none}
+.reassign-left{min-width:0}
+.reassign-ref{font-size:11px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.75);font-weight:500}
+.reassign-desc{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reassign-meta{display:flex;gap:8px;margin-top:4px;font-size:9px;color:rgba(255,255,255,0.35);font-family:'DM Mono',monospace;flex-wrap:wrap}
+.reassign-meta span{white-space:nowrap}
+.ra-select{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);font-size:10px;padding:5px 8px;border-radius:4px;font-family:'DM Sans',sans-serif;min-width:150px}
+.ra-select:focus{outline:none;border-color:#9FE1CB}
+.btn-ra{background:#1d9e75;color:#fff;border:none;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.btn-ra:hover{background:#0f6e56}
+.btn-ra:disabled{opacity:0.5;cursor:not-allowed}
+.btn-ra.manual{background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)}
+.btn-ra.manual:hover{border-color:#9FE1CB;color:#9FE1CB}
+
 /* REFRESH */
 .refresh-btn{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);padding:3px 8px;border-radius:4px;cursor:pointer}
 .refresh-btn:hover{color:rgba(255,255,255,0.6)}
 
 .empty{padding:24px;text-align:center;font-size:11px;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace}
 .loading{padding:16px;text-align:center;font-size:11px;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:#1d9e75;color:#fff;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:600;opacity:0;transform:translateY(8px);transition:all 0.25s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.error{background:#c0392b}
 </style>
 </head>
 <body>
@@ -132,6 +158,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
       <div class="sidebar-link active"><span class="icon">📊</span>Overview</div>
       <div class="sidebar-link"><span class="icon">🏠</span><a href="https://yskaipe.com" target="_blank" style="color:inherit;text-decoration:none">yskaipe.com</a></div>
       <div class="sidebar-link"><span class="icon">📋</span><a href="/lead-allocation.html" style="color:inherit;text-decoration:none">Lead Allocation</a></div>
+      <div class="sidebar-link"><span class="icon">🧪</span><a href="/batch-test.html" style="color:inherit;text-decoration:none">Batch Test</a></div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Contractors</div>
@@ -159,7 +186,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
       <div class="kpi"><div class="kpi-num blue" id="k-requests">—</div><div class="kpi-lbl">Requests</div></div>
       <div class="kpi"><div class="kpi-num green" id="k-leads">—</div><div class="kpi-lbl">Leads</div></div>
       <div class="kpi"><div class="kpi-num amber" id="k-accepted">—</div><div class="kpi-lbl">Accepted</div></div>
+      <div class="kpi"><div class="kpi-num red" id="k-declined">—</div><div class="kpi-lbl">Declined</div></div>
       <div class="kpi"><div class="kpi-num" id="k-slots" style="color:var(--gold)">—</div><div class="kpi-lbl">Slots Left</div></div>
+    </div>
+
+    <!-- DECLINED LEADS REASSIGN PANEL -->
+    <div class="panel reassign-panel" style="margin-bottom:16px">
+      <div class="panel-header">
+        <div class="panel-title danger">🔁 Declined / Unassigned — Needs Reassignment</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span id="declined-count" style="font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.4)"></span>
+          <button class="refresh-btn" onclick="loadDeclined()">↻</button>
+        </div>
+      </div>
+      <div class="panel-body" style="padding:0" id="declined-panel">
+        <div class="loading">Loading…</div>
+      </div>
     </div>
 
     <!-- ROW 1 -->
@@ -246,14 +288,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
 const SB = 'https://ygfhaoksicgtazcmqdfk.supabase.co/rest/v1'
 const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88'
 const H = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
 
+// cache for contractors list so we can populate reassign dropdowns
+let CONTRACTORS_CACHE = []
+
 async function get(path) {
   const r = await fetch(SB + path, { headers: H })
   return r.json()
+}
+
+function toast(msg, isError = false) {
+  const t = document.getElementById('toast')
+  t.textContent = msg
+  t.className = 'toast show' + (isError ? ' error' : '')
+  setTimeout(() => t.className = 'toast', 3000)
 }
 
 function tierPill(t) {
@@ -261,17 +315,36 @@ function tierPill(t) {
   return `<span class="pill ${map[t]||'pill-starter'}">${(t||'—').toUpperCase()}</span>`
 }
 function statusPill(s) {
-  const map = { assigned:'pill-assigned', accepted:'pill-accepted', pending:'pill-pending', active:'pill-active' }
+  const map = { assigned:'pill-assigned', accepted:'pill-accepted', pending:'pill-pending', active:'pill-active', declined:'pill-declined', cancelled:'pill-declined', reassigned:'pill-declined' }
   return `<span class="pill ${map[s]||'pill-pending'}">${s||'—'}</span>`
 }
 function fmt(iso) {
   if (!iso) return '—'
   return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})
 }
+function jobRef(id) {
+  if (!id) return '—'
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+  let hash = 0
+  for (let i = 0; i < id.length; i++) hash = ((hash << 5) - hash) + id.charCodeAt(i)
+  let code = '', n = Math.abs(hash)
+  for (let i = 0; i < 7; i++) { code = chars[n % chars.length] + code; n = Math.floor(n / chars.length) }
+  return 'YSK-2026-' + code
+}
+function esc(s) {
+  if (s === null || s === undefined) return ''
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])
+}
+function isTestRequest(r) {
+  if (!r) return false
+  const name = r.homeowner_name || ''
+  return name.toUpperCase().startsWith('TEST·') || name.toUpperCase().startsWith('TEST ·')
+}
 
 async function loadContractors() {
   const data = await get('/contractors?select=*&order=is_founding.desc,tier.asc,created_at.asc')
   if (!Array.isArray(data)) return
+  CONTRACTORS_CACHE = data
   document.getElementById('k-contractors').textContent = data.length
   const founding = data.filter(c => c.is_founding)
   document.getElementById('k-founding').textContent = founding.length
@@ -282,21 +355,21 @@ async function loadContractors() {
   document.getElementById('cohort-count').textContent = founding.length + ' / 50'
   document.getElementById('cohort-grid').innerHTML = founding.map(c => `
     <div class="cohort-card">
-      <div class="cohort-avatar">${c.avatar_initials||'??'}</div>
-      <div class="cohort-name">${c.name}</div>
-      <div class="cohort-company">${c.company_name}</div>
-      <div class="cohort-trade">${c.primary_trade}</div>
+      <div class="cohort-avatar">${esc(c.avatar_initials||'??')}</div>
+      <div class="cohort-name">${esc(c.name)}</div>
+      <div class="cohort-company">${esc(c.company_name||'')}</div>
+      <div class="cohort-trade">${esc(c.primary_trade||'')}</div>
     </div>`).join('') || '<div class="empty">No founding contractors yet</div>'
 
   // All contractors table
   document.getElementById('contractors-body').innerHTML = data.map(c => `
     <tr>
-      <td style="font-weight:500;color:var(--paper)">${c.company_name||c.name}</td>
-      <td>${(c.primary_trade||'—').toUpperCase()}</td>
+      <td style="font-weight:500;color:var(--paper)">${esc(c.company_name||c.name)}</td>
+      <td>${esc((c.primary_trade||'—').toUpperCase())}</td>
       <td>${tierPill(c.tier)}</td>
       <td style="font-family:'DM Mono',monospace">${c.jobs_completed||0}</td>
       <td style="font-family:'DM Mono',monospace">${c.review_average||'—'}</td>
-      <td>${statusPill(c.is_active ? 'active' : 'inactive')}</td>
+      <td>${statusPill(c.status==='active'||c.is_active ? 'active' : 'inactive')}</td>
     </tr>`).join('')
 }
 
@@ -306,9 +379,9 @@ async function loadRequests() {
   document.getElementById('k-requests').textContent = data.length
   document.getElementById('requests-body').innerHTML = data.map(r => `
     <tr>
-      <td style="font-weight:500;color:var(--paper)">${r.homeowner_name||'Anonymous'}</td>
-      <td>${(r.trade||'—').toUpperCase()}</td>
-      <td style="font-family:'DM Mono',monospace">${r.zip_code||'—'}</td>
+      <td style="font-weight:500;color:var(--paper)">${esc(r.homeowner_name||'Anonymous')}${isTestRequest(r)?' <span class="pill pill-test">TEST</span>':''}</td>
+      <td>${esc((r.trade||'—').toUpperCase())}</td>
+      <td style="font-family:'DM Mono',monospace">${esc(r.zip_code||'—')}</td>
       <td style="font-family:'DM Mono',monospace;font-size:10px">$${r.quote_low||'?'}–$${r.quote_high||'?'}</td>
       <td>${statusPill(r.status)}</td>
     </tr>`).join('') || '<tr><td colspan="5" class="empty">No requests yet</td></tr>'
@@ -325,8 +398,8 @@ async function loadLeads() {
     const score = l.composite_score || 0
     const color = score >= 80 ? '#1d9e75' : score >= 60 ? '#5ba3f5' : '#888'
     return `<tr>
-      <td style="font-weight:500;color:var(--paper)">${c.company_name||c.name||'—'}</td>
-      <td>${(r.trade||'—').toUpperCase()}</td>
+      <td style="font-weight:500;color:var(--paper)">${esc(c.company_name||c.name||'—')}</td>
+      <td>${esc((r.trade||'—').toUpperCase())}</td>
       <td>${tierPill(c.tier)}</td>
       <td><div class="score-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:${score}%;background:${color}"></div></div><span style="font-family:'DM Mono',monospace;font-size:11px;color:${color}">${score}</span></div></td>
       <td style="font-family:'DM Mono',monospace">#${l.rank_position||'—'}</td>
@@ -346,15 +419,169 @@ async function loadActivity() {
     return `<div class="activity-item">
       <div class="activity-dot" style="background:${color}"></div>
       <div>
-        <div class="activity-text"><strong style="color:var(--paper)">${c.company_name||'Unknown'}</strong> — ${l.status} lead · ${(r.trade||'').toUpperCase()}</div>
+        <div class="activity-text"><strong style="color:var(--paper)">${esc(c.company_name||'Unknown')}</strong> — ${esc(l.status)} lead · ${esc((r.trade||'').toUpperCase())}</div>
         <div class="activity-time">${fmt(l.created_at)}</div>
       </div>
     </div>`
   }).join('') || '<div class="empty">No activity yet</div>'
 }
 
+// =========================================================================
+// DECLINED LEADS REASSIGN PANEL
+// =========================================================================
+async function loadDeclined() {
+  // pull lead_assignments that are cancelled or reassigned — these are declined-by-contractor rows
+  const [assignments, requests] = await Promise.all([
+    get('/lead_assignments?status=in.(cancelled,reassigned)&order=responded_at.desc,updated_at.desc&limit=50'),
+    get('/homeowner_requests?select=id,homeowner_name,trade,zip_code,description,quote_low,quote_high,difficulty_score,status')
+  ])
+  if (!Array.isArray(assignments)) {
+    document.getElementById('declined-panel').innerHTML = '<div class="empty">Error loading declined leads.</div>'
+    return
+  }
+
+  // Build request map
+  const reqMap = {}
+  if (Array.isArray(requests)) requests.forEach(r => { reqMap[r.id] = r })
+
+  // Group by request_id — we only want to surface one row per request where the request still needs a new assignment.
+  // A request "needs reassignment" if it has NO currently-active or completed assignment.
+  const activeRequestIds = new Set()
+  const allActive = await get('/lead_assignments?status=in.(active,completed)&select=request_id')
+  if (Array.isArray(allActive)) allActive.forEach(a => activeRequestIds.add(a.request_id))
+
+  // Dedupe: take most-recent declined row per request that has no active/completed assignment
+  const byRequest = {}
+  assignments.forEach(a => {
+    if (activeRequestIds.has(a.request_id)) return  // already re-placed
+    if (!byRequest[a.request_id]) byRequest[a.request_id] = a
+  })
+  const openDeclined = Object.values(byRequest)
+
+  document.getElementById('k-declined').textContent = openDeclined.length
+  document.getElementById('declined-count').textContent = openDeclined.length ? openDeclined.length + ' open' : ''
+
+  if (!openDeclined.length) {
+    document.getElementById('declined-panel').innerHTML = '<div class="empty">✓ No declined leads needing reassignment.</div>'
+    return
+  }
+
+  // For each, we need to know who declined it
+  const cIds = [...new Set(openDeclined.map(a => a.contractor_id).filter(Boolean))]
+  let cMap = {}
+  if (cIds.length) {
+    const declinedByList = await get('/contractors?id=in.(' + cIds.join(',') + ')&select=id,name,company_name,primary_trade')
+    if (Array.isArray(declinedByList)) declinedByList.forEach(c => { cMap[c.id] = c })
+  }
+
+  document.getElementById('declined-panel').innerHTML = openDeclined.map((a, idx) => {
+    const r = reqMap[a.request_id] || {}
+    const declinedBy = cMap[a.contractor_id] || {}
+    const trade = (r.trade || '—').toUpperCase()
+    const zip = r.zip_code || '—'
+    const desc = r.description ? r.description.slice(0, 70) + (r.description.length > 70 ? '…' : '') : 'No description'
+    const respondedAt = a.responded_at || a.updated_at || '—'
+
+    // Build dropdown of candidates: same trade, not the declining contractor, sorted by tier + loyalty signals
+    const candidates = CONTRACTORS_CACHE
+      .filter(c => c.id !== a.contractor_id)
+      .filter(c => !r.trade || !c.primary_trade || c.primary_trade.toLowerCase() === r.trade.toLowerCase())
+      .sort((x, y) => {
+        const rank = { founding: 0, elite: 1, pro: 2, starter: 3 }
+        if ((rank[x.tier]||9) !== (rank[y.tier]||9)) return (rank[x.tier]||9) - (rank[y.tier]||9)
+        return (y.jobs_completed||0) - (x.jobs_completed||0)
+      })
+      .slice(0, 20)
+
+    const optionsHtml = ['<option value="">— pick contractor —</option>']
+      .concat(candidates.map(c => `<option value="${c.id}">${esc(c.company_name||c.name)} (${esc(c.tier||'')}, ${esc(c.primary_trade||'')})</option>`))
+      .join('')
+
+    const testBadge = isTestRequest(r) ? ' <span class="pill pill-test">TEST</span>' : ''
+
+    return `
+      <div class="reassign-row" data-req="${a.request_id}">
+        <div class="reassign-left">
+          <div class="reassign-ref">${jobRef(a.request_id)} · ${esc(trade)}${testBadge}</div>
+          <div class="reassign-desc">${esc(desc)}</div>
+          <div class="reassign-meta">
+            <span>ZIP ${esc(zip)}</span>
+            <span>$${r.quote_low||'?'}–$${r.quote_high||'?'}</span>
+            <span>Diff ${r.difficulty_score||'—'}/10</span>
+            <span style="color:#e05050">Declined by ${esc(declinedBy.company_name || declinedBy.name || 'unknown')}</span>
+            <span>${fmt(respondedAt)}</span>
+          </div>
+        </div>
+        <select class="ra-select" id="ra-sel-${idx}">${optionsHtml}</select>
+        <div style="display:flex;gap:6px">
+          <button class="btn-ra manual" onclick="reassignManual('${a.request_id}','${a.contractor_id||''}',${idx},this)">Manual</button>
+          <button class="btn-ra" onclick="reassignAuto('${a.request_id}','${a.contractor_id||''}',this)">⚡ Auto</button>
+        </div>
+      </div>
+    `
+  }).join('')
+}
+
+// AUTO reassign — calls /api/match to re-run the scoring engine, excluding the declining contractor
+async function reassignAuto(requestId, excludeContractorId, btn) {
+  btn.disabled = true
+  btn.textContent = 'Reassigning…'
+  try {
+    const r = await fetch('/api/match', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ request_id: requestId, exclude_contractor_ids: excludeContractorId ? [excludeContractorId] : [] })
+    })
+    if (!r.ok) throw new Error(await r.text())
+    toast('Auto-reassigned to next best contractor.')
+    await loadAll()
+  } catch(e) {
+    console.error(e)
+    toast('Auto reassign failed — try manual.', true)
+    btn.disabled = false
+    btn.textContent = '⚡ Auto'
+  }
+}
+
+// MANUAL reassign — insert a new lead_assignment for the chosen contractor
+async function reassignManual(requestId, excludeContractorId, idx, btn) {
+  const sel = document.getElementById('ra-sel-' + idx)
+  const newContractorId = sel ? sel.value : ''
+  if (!newContractorId) {
+    toast('Pick a contractor from the dropdown first.', true)
+    return
+  }
+  btn.disabled = true
+  btn.textContent = 'Saving…'
+  try {
+    // Create a new assignment row. Status 'active' so it lands on that contractor's dashboard.
+    const res = await fetch(SB + '/lead_assignments', {
+      method: 'POST',
+      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+      body: JSON.stringify({
+        request_id: requestId,
+        contractor_id: newContractorId,
+        status: 'active',
+        assigned_at: new Date().toISOString(),
+        rank_at_assignment: 1,
+        notes: 'Manual reassign by admin'
+      })
+    })
+    if (!res.ok) throw new Error(await res.text())
+    // Also create a leads row if you want it to appear in lead queues — optional; your /api/match flow normally handles this.
+    toast('Manually reassigned. Contractor will see it on their dashboard.')
+    await loadAll()
+  } catch(e) {
+    console.error(e)
+    toast('Manual reassign failed — check console.', true)
+    btn.disabled = false
+    btn.textContent = 'Manual'
+  }
+}
+
 async function loadAll() {
   await Promise.all([loadContractors(), loadRequests(), loadLeads(), loadActivity()])
+  await loadDeclined()  // must be after contractors so cache is populated
   document.getElementById('db-status').textContent = '✓ Connected'
   document.getElementById('last-sync').textContent = new Date().toLocaleTimeString()
 }

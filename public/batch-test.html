@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSKAIPE · Batch Test Harness</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fafaf7;--gold:#c49a35;--dark:#1e1c1a;--accent:#9FE1CB;--red:#c0392b}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--paper);-webkit-font-smoothing:antialiased;font-size:14px;min-height:100vh}
+.topbar{background:#111;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06)}
+.topbar-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.12em;color:rgba(255,255,255,0.5)}
+.topbar-logo span{color:var(--accent)}
+.back-link{font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;font-family:'DM Mono',monospace}
+.back-link:hover{color:var(--accent)}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 24px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.08em;color:var(--paper);margin-bottom:6px}
+.sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:24px;line-height:1.5}
+.panel{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.panel-header{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between}
+.panel-title{font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+.panel-body{padding:20px}
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field.wide{grid-column:span 3}
+label{font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+input,select,textarea{background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);color:var(--paper);font-size:13px;padding:8px 10px;border-radius:5px;font-family:'DM Sans',sans-serif}
+textarea{min-height:60px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+.row-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{padding:9px 18px;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.btn-primary{background:#1d9e75;color:#fff}
+.btn-primary:hover{background:#0f6e56}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:transparent;border:1px solid rgba(224,80,80,0.35);color:#e05050}
+.btn-danger:hover{background:rgba(224,80,80,0.1)}
+.results{margin-top:8px}
+.results-table{width:100%;border-collapse:collapse}
+.results-table th{font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:8px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.05)}
+.results-table td{font-size:11px;padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.04);color:rgba(255,255,255,0.7)}
+.results-table tr:last-child td{border-bottom:none}
+.pill{font-size:9px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block}
+.pill-ok{background:rgba(29,158,117,0.2);color:#1d9e75}
+.pill-err{background:rgba(224,80,80,0.2);color:#e05050}
+.pill-pending{background:rgba(184,110,10,0.2);color:#e8a83a}
+.score-chip{display:inline-block;padding:2px 8px;border-radius:10px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600}
+.hint{font-size:10px;color:rgba(255,255,255,0.3);margin-top:4px;line-height:1.4}
+.empty{padding:24px;text-align:center;font-size:11px;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:12px}
+.stat-num{font-size:22px;font-weight:500;font-family:'DM Mono',monospace;line-height:1}
+.stat-lbl{font-size:9px;color:rgba(255,255,255,0.35);margin-top:4px;text-transform:uppercase;letter-spacing:0.06em}
+.toast{position:fixed;bottom:24px;right:24px;background:#1d9e75;color:#fff;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:600;opacity:0;transform:translateY(8px);transition:all 0.25s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.error{background:#c0392b}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-logo">YSK<span>AI</span>PE · Batch Test</div>
+  <a class="back-link" href="/nick-admin.html">← Back to Super Admin</a>
+</div>
+
+<div class="wrap">
+  <h1>BATCH TEST HARNESS</h1>
+  <p class="sub">Generate multiple test homeowner requests at once to validate the matching algorithm across trade, ZIP, difficulty, and quote range variations. All test rows are prefixed <code style="background:rgba(196,154,53,0.1);color:var(--gold);padding:1px 5px;border-radius:3px">TEST·</code> in the homeowner_name field so you can clear them in one click.</p>
+
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num" style="color:#1d9e75" id="s-generated">0</div><div class="stat-lbl">Generated this session</div></div>
+    <div class="stat"><div class="stat-num" style="color:#5ba3f5" id="s-matched">0</div><div class="stat-lbl">Successfully matched</div></div>
+    <div class="stat"><div class="stat-num" style="color:#e05050" id="s-failed">0</div><div class="stat-lbl">Failed</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--gold)" id="s-db-test">—</div><div class="stat-lbl">Test rows in DB</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header"><div class="panel-title">⚙️ Test Configuration</div></div>
+    <div class="panel-body">
+      <div class="form-grid">
+        <div class="field">
+          <label>Trade</label>
+          <select id="f-trade">
+            <option value="hvac">HVAC</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="electrical">Electrical</option>
+            <option value="roofing">Roofing</option>
+            <option value="landscaping">Landscaping</option>
+            <option value="painting">Painting</option>
+            <option value="__random">🎲 Random each time</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>ZIP Code</label>
+          <input type="text" id="f-zip" value="28036" placeholder="e.g. 28036" />
+          <div class="hint">Use __random to cycle through NC ZIPs</div>
+        </div>
+        <div class="field">
+          <label># of test requests</label>
+          <input type="number" id="f-count" value="5" min="1" max="25" />
+        </div>
+        <div class="field">
+          <label>Difficulty (1–10)</label>
+          <input type="number" id="f-difficulty" value="5" min="1" max="10" />
+        </div>
+        <div class="field">
+          <label>Quote low ($)</label>
+          <input type="number" id="f-ql" value="200" min="0" />
+        </div>
+        <div class="field">
+          <label>Quote high ($)</label>
+          <input type="number" id="f-qh" value="800" min="0" />
+        </div>
+        <div class="field wide">
+          <label>Description template</label>
+          <textarea id="f-desc">Test job — {{trade}} repair needed in ZIP {{zip}}. Homeowner available weekdays after 4pm. Batch test #{{n}}.</textarea>
+          <div class="hint">Placeholders: <code style="color:var(--accent)">&#123;&#123;trade&#125;&#125;</code>, <code style="color:var(--accent)">&#123;&#123;zip&#125;&#125;</code>, <code style="color:var(--accent)">&#123;&#123;n&#125;&#125;</code></div>
+        </div>
+      </div>
+
+      <div class="row-actions">
+        <button class="btn btn-primary" id="btn-run" onclick="runBatch()">🧪 Run Batch Test</button>
+        <button class="btn btn-ghost" onclick="clearResults()">Clear Results</button>
+        <button class="btn btn-danger" onclick="wipeTestData()">🗑 Wipe All TEST· Data</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">📊 Results</div>
+      <span style="font-size:10px;color:rgba(255,255,255,0.3);font-family:'DM Mono',monospace" id="results-ts"></span>
+    </div>
+    <div class="panel-body" style="padding:0">
+      <table class="results-table" id="results-table">
+        <thead><tr><th>#</th><th>Ref</th><th>Trade</th><th>ZIP</th><th>Quote</th><th>Diff</th><th>Matched To</th><th>Score</th><th>Status</th></tr></thead>
+        <tbody id="results-body"><tr><td colspan="9" class="empty">No tests run yet. Click "Run Batch Test" to begin.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SB = 'https://ygfhaoksicgtazcmqdfk.supabase.co/rest/v1'
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88'
+const H = { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
+
+const TRADES = ['hvac','plumbing','electrical','roofing','landscaping','painting']
+const NC_ZIPS = ['28036','28202','28210','28269','28401','28403','27601','27604','27703','28801']
+
+let sessionGenerated = 0, sessionMatched = 0, sessionFailed = 0, resultRows = []
+
+function toast(msg, isError = false) {
+  const t = document.getElementById('toast')
+  t.textContent = msg
+  t.className = 'toast show' + (isError ? ' error' : '')
+  setTimeout(() => t.className = 'toast', 3500)
+}
+function esc(s) {
+  if (s === null || s === undefined) return ''
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])
+}
+function jobRef(id) {
+  if (!id) return '—'
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+  let hash = 0
+  for (let i = 0; i < id.length; i++) hash = ((hash << 5) - hash) + id.charCodeAt(i)
+  let code = '', n = Math.abs(hash)
+  for (let i = 0; i < 7; i++) { code = chars[n % chars.length] + code; n = Math.floor(n / chars.length) }
+  return 'YSK-2026-' + code
+}
+function updateStats() {
+  document.getElementById('s-generated').textContent = sessionGenerated
+  document.getElementById('s-matched').textContent = sessionMatched
+  document.getElementById('s-failed').textContent = sessionFailed
+}
+function renderResults() {
+  const tb = document.getElementById('results-body')
+  if (!resultRows.length) {
+    tb.innerHTML = '<tr><td colspan="9" class="empty">No tests run yet.</td></tr>'
+    return
+  }
+  tb.innerHTML = resultRows.map((r, i) => {
+    const scoreColor = r.score >= 80 ? '#1d9e75' : r.score >= 60 ? '#5ba3f5' : r.score ? '#e8a83a' : 'rgba(255,255,255,0.2)'
+    const statusPill = r.status === 'matched' ? '<span class="pill pill-ok">matched</span>' :
+                       r.status === 'error' ? '<span class="pill pill-err">error</span>' :
+                       '<span class="pill pill-pending">' + esc(r.status||'?') + '</span>'
+    return `<tr>
+      <td style="font-family:'DM Mono',monospace;color:rgba(255,255,255,0.4)">${i+1}</td>
+      <td style="font-family:'DM Mono',monospace">${r.requestId ? jobRef(r.requestId) : '—'}</td>
+      <td>${esc((r.trade||'').toUpperCase())}</td>
+      <td style="font-family:'DM Mono',monospace">${esc(r.zip||'—')}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:10px">$${r.qlow||'?'}–$${r.qhigh||'?'}</td>
+      <td style="font-family:'DM Mono',monospace">${r.difficulty||'—'}</td>
+      <td style="color:var(--paper);font-weight:500">${esc(r.matchedTo||'—')}</td>
+      <td><span class="score-chip" style="color:${scoreColor};background:${scoreColor}20">${r.score||'—'}</span></td>
+      <td>${statusPill}</td>
+    </tr>`
+  }).join('')
+  document.getElementById('results-ts').textContent = 'Updated ' + new Date().toLocaleTimeString()
+}
+
+async function countTestDataInDb() {
+  try {
+    const r = await fetch(SB + '/homeowner_requests?homeowner_name=ilike.TEST%C2%B7%25&select=id', {
+      headers: { ...H, 'Prefer': 'count=exact', 'Range': '0-0' }
+    })
+    const range = r.headers.get('content-range') || ''
+    const total = range.split('/')[1]
+    document.getElementById('s-db-test').textContent = total || '0'
+  } catch(e) {
+    document.getElementById('s-db-test').textContent = '?'
+  }
+}
+
+async function runBatch() {
+  const btn = document.getElementById('btn-run')
+  btn.disabled = true
+  btn.textContent = 'Running...'
+
+  const tradeChoice = document.getElementById('f-trade').value
+  const zipChoice = document.getElementById('f-zip').value.trim()
+  const count = Math.min(25, Math.max(1, parseInt(document.getElementById('f-count').value) || 5))
+  const difficulty = parseInt(document.getElementById('f-difficulty').value) || 5
+  const ql = parseInt(document.getElementById('f-ql').value) || 200
+  const qh = parseInt(document.getElementById('f-qh').value) || 800
+  const descTpl = document.getElementById('f-desc').value
+
+  for (let i = 1; i <= count; i++) {
+    const trade = tradeChoice === '__random' ? TRADES[Math.floor(Math.random() * TRADES.length)] : tradeChoice
+    const zip = zipChoice === '__random' || !zipChoice ? NC_ZIPS[Math.floor(Math.random() * NC_ZIPS.length)] : zipChoice
+    const description = descTpl.replace(/\{\{trade\}\}/g, trade).replace(/\{\{zip\}\}/g, zip).replace(/\{\{n\}\}/g, i)
+    const homeownerName = 'TEST·' + trade.toUpperCase() + '·' + zip + '·' + Date.now().toString(36) + '-' + i
+
+    const row = { trade, zip, qlow: ql, qhigh: qh, difficulty, status: 'creating', requestId: null, matchedTo: null, score: null }
+    resultRows.push(row)
+    renderResults()
+
+    try {
+      // 1. Insert homeowner_request
+      const createRes = await fetch(SB + '/homeowner_requests', {
+        method: 'POST',
+        headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+        body: JSON.stringify({
+          homeowner_name: homeownerName,
+          homeowner_email: 'test+' + Date.now() + '@yskaipe.com',
+          trade,
+          zip_code: zip,
+          description,
+          quote_low: ql,
+          quote_high: qh,
+          difficulty_score: difficulty,
+          status: 'pending'
+        })
+      })
+      if (!createRes.ok) throw new Error('create failed: ' + await createRes.text())
+      const created = await createRes.json()
+      const req = Array.isArray(created) ? created[0] : created
+      row.requestId = req.id
+      row.status = 'matching'
+      sessionGenerated++
+      renderResults()
+
+      // 2. Call /api/match to score & assign
+      const matchRes = await fetch('/api/match', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ request_id: req.id })
+      })
+      if (!matchRes.ok) throw new Error('match failed: ' + await matchRes.text())
+      const matchData = await matchRes.json().catch(() => ({}))
+
+      // Try to pull who it matched to
+      const leadAssignments = await fetch(SB + '/lead_assignments?request_id=eq.' + req.id + '&order=assigned_at.desc&limit=1', { headers: H }).then(r => r.json())
+      const firstAssignment = Array.isArray(leadAssignments) && leadAssignments[0]
+      if (firstAssignment) {
+        const c = await fetch(SB + '/contractors?id=eq.' + firstAssignment.contractor_id + '&select=company_name,name,tier', { headers: H }).then(r => r.json())
+        const contractor = Array.isArray(c) && c[0]
+        row.matchedTo = contractor ? (contractor.company_name || contractor.name) + ' · ' + (contractor.tier || '') : 'Assigned (lookup failed)'
+
+        // Fetch composite score from leads table
+        const leads = await fetch(SB + '/leads?request_id=eq.' + req.id + '&contractor_id=eq.' + firstAssignment.contractor_id + '&select=composite_score&limit=1', { headers: H }).then(r => r.json())
+        if (Array.isArray(leads) && leads[0]) row.score = leads[0].composite_score
+      } else {
+        row.matchedTo = 'No contractor matched'
+      }
+
+      row.status = 'matched'
+      sessionMatched++
+    } catch(e) {
+      console.error(e)
+      row.status = 'error'
+      row.matchedTo = String(e).slice(0, 60)
+      sessionFailed++
+    }
+    updateStats()
+    renderResults()
+  }
+
+  btn.disabled = false
+  btn.textContent = '🧪 Run Batch Test'
+  toast('Batch complete — ' + count + ' test requests processed.')
+  countTestDataInDb()
+}
+
+function clearResults() {
+  resultRows = []
+  sessionGenerated = sessionMatched = sessionFailed = 0
+  updateStats()
+  renderResults()
+  toast('Results cleared.')
+}
+
+async function wipeTestData() {
+  if (!confirm('Delete ALL homeowner_requests with names starting "TEST·" from the database? This also deletes related leads and lead_assignments.')) return
+  try {
+    // Find test request ids
+    const reqs = await fetch(SB + '/homeowner_requests?homeowner_name=ilike.TEST%C2%B7%25&select=id', { headers: H }).then(r => r.json())
+    if (!Array.isArray(reqs) || !reqs.length) {
+      toast('No test data found.')
+      return
+    }
+    const ids = reqs.map(r => r.id)
+    const idList = '(' + ids.join(',') + ')'
+
+    // Delete lead_assignments → leads → requests (in order to respect FKs)
+    await fetch(SB + '/lead_assignments?request_id=in.' + idList, { method: 'DELETE', headers: H })
+    await fetch(SB + '/leads?request_id=in.' + idList, { method: 'DELETE', headers: H })
+    await fetch(SB + '/homeowner_requests?id=in.' + idList, { method: 'DELETE', headers: H })
+
+    toast('Wiped ' + ids.length + ' test requests and their leads/assignments.')
+    countTestDataInDb()
+  } catch(e) {
+    console.error(e)
+    toast('Wipe failed — check console.', true)
+  }
+}
+
+countTestDataInDb()
+</script>
+</body>
+</html>
