@@ -1,9 +1,9 @@
 // ============================================================
-// FILE 4: app/api/match/route.ts
+// FILE: app/api/match/route.ts
 // POST /api/match
-// Body: { request_id }
-// Runs the 4-factor scoring engine, writes lead assignments,
-// returns top match + queue summary.
+// Body: { request_id, exclude_contractor_ids? }
+// Runs the 4-factor scoring engine, writes to BOTH leads and
+// lead_assignments so founder dashboards and admin queues reflect state.
 // ============================================================
 
 import { NextRequest, NextResponse } from "next/server";
@@ -15,7 +15,12 @@ import {
 } from "@/lib/leadScoring";
 
 export async function POST(req: NextRequest) {
-  const { request_id } = await req.json();
+  const body = await req.json();
+  const { request_id } = body;
+  const excludeIds: string[] = Array.isArray(body.exclude_contractor_ids)
+    ? body.exclude_contractor_ids
+    : [];
+
   if (!request_id)
     return NextResponse.json({ error: "Missing request_id" }, { status: 400 });
 
@@ -64,10 +69,15 @@ export async function POST(req: NextRequest) {
     .contains("secondary_trades", [request.trade]);
 
   const primaryIds = new Set((primary ?? []).map((c: any) => c.id));
-  const allRaw = [
+  let allRaw = [
     ...(primary ?? []),
     ...(secondary ?? []).filter((c: any) => !primaryIds.has(c.id)),
   ];
+
+  // Apply exclude list (used for reassignment flows)
+  if (excludeIds.length) {
+    allRaw = allRaw.filter((c: any) => !excludeIds.includes(c.id));
+  }
 
   if (!allRaw.length) {
     return NextResponse.json(
@@ -115,9 +125,11 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 7. Write lead assignment rows for top 5
+  // 7. Write leads rows for top 5 (scoring record)
   const now = Date.now();
-  const assignments = ranked.slice(0, 5).map((r) => {
+  const topRanked = ranked.slice(0, 5);
+
+  const leadsRows = topRanked.map((r) => {
     const delayMins = getDelayMinutes(r.contractor.tier);
     return {
       request_id,
@@ -135,20 +147,41 @@ export async function POST(req: NextRequest) {
     };
   });
 
-  const { error: assignErr } = await supabaseAdmin
+  const { error: leadsErr } = await supabaseAdmin
     .from("leads")
-    .upsert(assignments, { onConflict: "request_id,contractor_id" });
+    .upsert(leadsRows, { onConflict: "request_id,contractor_id" });
 
-  if (assignErr) {
-    console.error("[/api/match] upsert leads", assignErr);
+  if (leadsErr) {
+    console.error("[/api/match] upsert leads", leadsErr);
     return NextResponse.json(
       {
-        error: "Failed to write assignments",
-        detail: assignErr.message,
-        code: assignErr.code,
+        error: "Failed to write leads",
+        detail: leadsErr.message,
+        code: leadsErr.code,
       },
       { status: 500 },
     );
+  }
+
+  // 7b. Write a lead_assignment row ONLY for the top-ranked contractor.
+  // This is what founder-dashboard reads. status='active' so it shows up
+  // in the contractor's queue with Accept/Decline buttons.
+  const topMatch = topRanked[0];
+  const topAssignment = {
+    request_id,
+    contractor_id: topMatch.contractor.id,
+    status: "active",
+    assigned_at: new Date().toISOString(),
+    rank_at_assignment: 1,
+  };
+
+  const { error: assignErr } = await supabaseAdmin
+    .from("lead_assignments")
+    .upsert([topAssignment], { onConflict: "request_id,contractor_id" });
+
+  if (assignErr) {
+    // Log but don't fail the whole match — leads row is still written.
+    console.error("[/api/match] upsert lead_assignments", assignErr);
   }
 
   // 8. Mark request as assigned
@@ -157,9 +190,7 @@ export async function POST(req: NextRequest) {
     .update({ status: "assigned", matched_at: new Date().toISOString() })
     .eq("id", request_id);
 
-  // 9. Return top match + queue tail
-  // FIXED: include id, avatar_initials, is_founding in queue items so the
-  // frontend can display and assign the correct contractor without a second lookup.
+  // 9. Return top match + queue tail (unchanged)
   const topRaw = allRaw.find((c: any) => c.id === ranked[0].contractor.id);
 
   return NextResponse.json({
@@ -184,7 +215,7 @@ export async function POST(req: NextRequest) {
     queue: ranked.slice(1, 4).map((r) => {
       const raw = allRaw.find((c: any) => c.id === r.contractor.id);
       return {
-        id: raw?.id,                              // ← ADDED: needed for lead assignment
+        id: raw?.id,
         rank: r.rank,
         name: raw?.company_name || r.contractor.name,
         company_name: raw?.company_name,
@@ -196,7 +227,7 @@ export async function POST(req: NextRequest) {
         jobs_completed: raw?.jobs_completed,
         notification_delay_minutes: getDelayMinutes(raw?.tier ?? r.contractor.tier),
         compositeScore: r.result.compositeScore,
-        breakdown: r.result.breakdown,            // ← ADDED: for score bars on selection
+        breakdown: r.result.breakdown,
       };
     }),
   });
