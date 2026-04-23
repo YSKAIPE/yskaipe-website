@@ -1,0 +1,236 @@
+/* ============================================================
+   YSKAIPE Legal Pages — Shared Stylesheet
+   Applies to: terms, contractor-agreement, privacy, fair-rate-disclaimer
+   Design principle: Legal documents must read as professional and
+   trustworthy. Restrained typography, generous line-height, strong
+   hierarchy. No flash — this is where users decide whether to trust us.
+   ============================================================ */
+
+:root {
+  --yskaipe-navy: #0a2540;
+  --yskaipe-teal: #00a896;
+  --yskaipe-teal-dark: #028090;
+  --yskaipe-ink: #1a2332;
+  --yskaipe-body: #2d3748;
+  --yskaipe-muted: #64748b;
+  --yskaipe-border: #e2e8f0;
+  --yskaipe-bg: #ffffff;
+  --yskaipe-bg-subtle: #f8fafc;
+  --yskaipe-bg-warn: #fffbeb;
+  --yskaipe-warn-border: #fbbf24;
+  --yskaipe-bg-info: #eff6ff;
+  --yskaipe-info-border: #3b82f6;
+
+  --font-serif: 'Source Serif 4', 'Charter', 'Georgia', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+
+  --measure: 70ch;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--yskaipe-body);
+  background: var(--yskaipe-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* --- Page scaffolding ---------------------------------------- */
+.legal-header {
+  background: var(--yskaipe-navy);
+  color: #fff;
+  padding: 2rem 1.5rem;
+  border-bottom: 3px solid var(--yskaipe-teal);
+}
+.legal-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.legal-header a.brand {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+.legal-header nav a {
+  color: #cbd5e1;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-size: 0.9rem;
+}
+.legal-header nav a:hover { color: #fff; }
+
+.legal-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 3rem;
+}
+@media (max-width: 900px) {
+  .legal-container { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1rem 4rem; }
+  .legal-toc { position: static !important; }
+}
+
+/* --- Table of contents --------------------------------------- */
+.legal-toc {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+  font-size: 0.875rem;
+  border-left: 2px solid var(--yskaipe-border);
+  padding-left: 1rem;
+}
+.legal-toc h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--yskaipe-muted);
+  margin: 0 0 0.75rem;
+}
+.legal-toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: toc;
+}
+.legal-toc li {
+  counter-increment: toc;
+  margin: 0.4rem 0;
+}
+.legal-toc li::before {
+  content: counter(toc) ". ";
+  color: var(--yskaipe-muted);
+  margin-right: 0.25rem;
+}
+.legal-toc a {
+  color: var(--yskaipe-body);
+  text-decoration: none;
+}
+.legal-toc a:hover { color: var(--yskaipe-teal-dark); text-decoration: underline; }
+
+/* --- Main document ------------------------------------------- */
+.legal-main {
+  max-width: var(--measure);
+}
+.legal-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--yskaipe-navy);
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+  font-weight: 600;
+}
+.legal-subtitle {
+  font-size: 1.05rem;
+  color: var(--yskaipe-muted);
+  margin: 0 0 2rem;
+  font-style: italic;
+}
+
+.legal-meta {
+  background: var(--yskaipe-bg-subtle);
+  border: 1px solid var(--yskaipe-border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 0 0 2.5rem;
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+.legal-meta strong { color: var(--yskaipe-ink); }
+
+.legal-main h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--yskaipe-navy);
+  margin: 3rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--yskaipe-border);
+  font-weight: 600;
+  scroll-margin-top: 80px;
+}
+.legal-main h3 {
+  font-size: 1.1rem;
+  color: var(--yskaipe-ink);
+  margin: 2rem 0 0.75rem;
+  font-weight: 600;
+}
+.legal-main p { margin: 0 0 1rem; }
+.legal-main ul, .legal-main ol { padding-left: 1.5rem; margin: 0 0 1rem; }
+.legal-main li { margin: 0.4rem 0; }
+.legal-main a { color: var(--yskaipe-teal-dark); }
+
+/* --- Special callouts ---------------------------------------- */
+.callout {
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  border-left: 4px solid;
+}
+.callout.info { background: var(--yskaipe-bg-info); border-left-color: var(--yskaipe-info-border); }
+.callout.warn { background: var(--yskaipe-bg-warn); border-left-color: var(--yskaipe-warn-border); }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--yskaipe-ink); }
+
+/* --- All-caps legal emphasis (common in ToS) ----------------- */
+.legal-emphasis {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+}
+
+/* --- Definition blocks --------------------------------------- */
+.defn {
+  background: var(--yskaipe-bg-subtle);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+}
+.defn dt { font-weight: 600; color: var(--yskaipe-navy); display: inline; }
+.defn dd { display: inline; margin: 0 0 0 0.25rem; }
+
+/* --- Footer -------------------------------------------------- */
+.legal-footer {
+  background: var(--yskaipe-bg-subtle);
+  border-top: 1px solid var(--yskaipe-border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--yskaipe-muted);
+}
+.legal-footer a {
+  color: var(--yskaipe-teal-dark);
+  text-decoration: none;
+  margin: 0 0.75rem;
+}
+
+/* --- Print styles (people WILL print these) ------------------ */
+@media print {
+  .legal-header, .legal-footer, .legal-toc { display: none; }
+  .legal-container { grid-template-columns: 1fr; padding: 0; max-width: none; }
+  .legal-main { max-width: none; }
+  body { font-size: 11pt; line-height: 1.5; }
+  h2 { page-break-after: avoid; }
+  .callout { border: 1px solid #999; break-inside: avoid; }
+}
