@@ -38,7 +38,8 @@
                 overflow-x: hidden;
             }
 
-            nav {
+            /* TOP NAV */
+            nav.topnav {
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -53,17 +54,23 @@
                 backdrop-filter: blur(12px);
                 border-bottom: 1px solid var(--border);
             }
-            .logo {
+            .topnav .logo {
                 font-family: "Bebas Neue", sans-serif;
                 font-size: 1.5rem;
                 letter-spacing: 0.15em;
                 color: var(--ink);
                 text-decoration: none;
+                line-height: 1;
             }
-            .logo span {
+            .topnav .logo span {
                 color: var(--accent);
             }
-            nav a.nav-back {
+            .topnav-links {
+                display: flex;
+                align-items: center;
+                gap: 1.75rem;
+            }
+            .topnav-link {
                 font-size: 0.78rem;
                 font-weight: 500;
                 letter-spacing: 0.08em;
@@ -71,8 +78,15 @@
                 color: var(--mid);
                 text-decoration: none;
                 transition: color 0.2s;
+                line-height: 1;
             }
-            nav a.nav-back:hover {
+            .topnav-link:hover {
+                color: var(--ink);
+            }
+            .topnav-link.primary {
+                color: var(--accent);
+            }
+            .topnav-link.primary:hover {
                 color: var(--ink);
             }
 
@@ -350,13 +364,25 @@
                 .docs-content {
                     padding: 2rem 0 4rem;
                 }
+                nav.topnav {
+                    padding: 0 1rem;
+                }
+                .topnav-links {
+                    gap: 1rem;
+                }
+                .topnav-link {
+                    font-size: 0.7rem;
+                }
             }
         </style>
     </head>
     <body>
-        <nav>
+        <nav class="topnav">
             <a href="index.html" class="logo">Y<span>S</span>KAIPE</a>
-            <a href="index.html" class="nav-back">← Back to Home</a>
+            <div class="topnav-links">
+                <a href="/login.html" class="topnav-link primary">Pro Login</a>
+                <a href="index.html" class="topnav-link">← Back to Home</a>
+            </div>
         </nav>
 
         <div class="page-hero">
@@ -814,6 +840,7 @@
                 <a href="docs.html" style="color: rgba(245, 242, 236, 0.8)"
                     >Documentation</a
                 >
+                <a href="/login.html">Pro Login</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="terms.html">Terms</a>
                 <a href="future-of-work.html">Future of Work</a>
