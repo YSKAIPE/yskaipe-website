@@ -54,22 +54,22 @@ export async function POST(req: NextRequest) {
     }
 
     if (!codeRow) {
-      // Increment attempts on the most recent code for this email so we can
-      // detect brute-force across codes
-      await supabaseAdmin
-        .rpc("increment_code_attempts", {
-          p_email: normalizedEmail,
-        })
-        .catch(() => {
-          // RPC may not exist — silent fallback below
-        });
-
-      // Also try a direct increment on any recent unused codes for this email
-      await supabaseAdmin
+      // Code is wrong. Bump attempts on any recent unused codes for this email
+      // so brute force gets blocked at the MAX_ATTEMPTS threshold.
+      const { data: recentCodes } = await supabaseAdmin
         .from("login_codes")
-        .update({ attempts: (codeRow as any)?.attempts + 1 || 1 })
+        .select("id, attempts")
         .eq("email", normalizedEmail)
         .is("used_at", null);
+
+      if (recentCodes && recentCodes.length > 0) {
+        for (const rc of recentCodes) {
+          await supabaseAdmin
+            .from("login_codes")
+            .update({ attempts: (rc.attempts || 0) + 1 })
+            .eq("id", rc.id);
+        }
+      }
 
       return NextResponse.json(
         { error: "Invalid or expired code. Please try again." },
