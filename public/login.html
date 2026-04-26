@@ -1,294 +1,498 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Log in — YSKAIPE</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --ink: #1a1a18;
-        --ink-mid: #3d3d38;
-        --ink-soft: #7a7a72;
-        --ink-faint: #b8b8b0;
-        --green: #0f6e56;
-        --green-mid: #1d9e75;
-        --green-light: #e1f5ee;
-        --green-pale: #f0faf6;
-        --amber: #854f0b;
-        --amber-light: #faeeda;
-        --gold: #c8961a;
-        --paper: #fafaf7;
-        --white: #ffffff;
-        --rule: #e4e4de;
-        --error: #c0392b;
-      }
-      *, *::before, *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: "DM Sans", sans-serif;
-        background: var(--ink);
-        color: var(--white);
-        font-size: 16px;
-        line-height: 1.65;
-        -webkit-font-smoothing: antialiased;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      nav {
-        background: var(--ink);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 0 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 58px;
-      }
-      .nav-logo {
-        font-family: "DM Serif Display", serif;
-        font-size: 22px;
-        letter-spacing: -0.02em;
-        color: var(--white);
-        text-decoration: none;
-      }
-      .nav-logo span {
-        color: var(--green-mid);
-      }
-      .nav-link {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.55);
-        text-decoration: none;
-      }
-      .nav-link:hover {
-        color: var(--white);
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Log in — YSKAIPE</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --ink: #1a1a18;
+                --ink-mid: #3d3d38;
+                --ink-soft: #7a7a72;
+                --green: #0f6e56;
+                --green-mid: #1d9e75;
+                --green-light: #e1f5ee;
+                --amber: #854f0b;
+                --amber-light: #faeeda;
+                --gold: #c8961a;
+                --paper: #fafaf7;
+                --white: #ffffff;
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: "DM Sans", sans-serif;
+                background: var(--ink);
+                color: var(--white);
+                font-size: 16px;
+                line-height: 1.65;
+                -webkit-font-smoothing: antialiased;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            nav {
+                background: var(--ink);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 0 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 58px;
+            }
+            .nav-logo {
+                font-family: "DM Serif Display", serif;
+                font-size: 22px;
+                letter-spacing: -0.02em;
+                color: var(--white);
+                text-decoration: none;
+            }
+            .nav-logo span {
+                color: var(--green-mid);
+            }
+            .nav-link {
+                font-size: 13px;
+                color: rgba(255, 255, 255, 0.55);
+                text-decoration: none;
+            }
+            .nav-link:hover {
+                color: var(--white);
+            }
 
-      main {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 40px 20px;
-      }
-      .login-card {
-        max-width: 440px;
-        width: 100%;
-        text-align: center;
-      }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--amber-light);
-        color: var(--amber);
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 5px 14px;
-        border-radius: 100px;
-        margin-bottom: 24px;
-      }
-      h1 {
-        font-family: "DM Serif Display", serif;
-        font-size: 38px;
-        line-height: 1.12;
-        letter-spacing: -0.025em;
-        margin-bottom: 14px;
-      }
-      h1 em {
-        font-style: italic;
-        color: #9fe1cb;
-      }
-      .subtitle {
-        font-size: 15px;
-        color: rgba(255, 255, 255, 0.6);
-        margin-bottom: 36px;
-        line-height: 1.6;
-      }
-      .form-group {
-        text-align: left;
-        margin-bottom: 16px;
-      }
-      .form-group label {
-        font-size: 12px;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.55);
-        margin-bottom: 6px;
-        display: block;
-      }
-      .form-group input {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.07);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 8px;
-        padding: 13px 16px;
-        font-size: 15px;
-        color: var(--white);
-        font-family: "DM Sans", sans-serif;
-        transition: border-color 0.15s;
-        outline: none;
-      }
-      .form-group input::placeholder {
-        color: rgba(255, 255, 255, 0.25);
-      }
-      .form-group input:focus {
-        border-color: var(--green-mid);
-      }
-      .submit-btn {
-        width: 100%;
-        background: var(--gold);
-        color: var(--ink);
-        border: none;
-        border-radius: 8px;
-        padding: 14px;
-        font-size: 15px;
-        font-weight: 700;
-        font-family: "DM Sans", sans-serif;
-        cursor: pointer;
-        transition: background 0.15s;
-      }
-      .submit-btn:hover {
-        background: #e6b830;
-      }
-      .submit-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-      .helper {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.4);
-        margin-top: 18px;
-        line-height: 1.5;
-      }
-      .helper a {
-        color: #9fe1cb;
-        text-decoration: underline;
-      }
-      .message {
-        margin-top: 18px;
-        padding: 14px 18px;
-        border-radius: 8px;
-        font-size: 14px;
-        line-height: 1.55;
-        text-align: left;
-      }
-      .message.success {
-        background: rgba(15, 110, 86, 0.18);
-        border: 1px solid rgba(159, 225, 203, 0.3);
-        color: #9fe1cb;
-      }
-      .message.error {
-        background: rgba(192, 57, 43, 0.15);
-        border: 1px solid rgba(192, 57, 43, 0.3);
-        color: #ff8a80;
-      }
-      footer {
-        padding: 24px 40px;
-        text-align: center;
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.25);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-      }
-    </style>
-  </head>
-  <body>
-    <nav>
-      <a href="/" class="nav-logo">YSK<span>AI</span>PE</a>
-      <a href="/founding.html" class="nav-link">Founding Program →</a>
-    </nav>
+            main {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 20px;
+            }
+            .login-card {
+                max-width: 440px;
+                width: 100%;
+                text-align: center;
+            }
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: var(--amber-light);
+                color: var(--amber);
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 5px 14px;
+                border-radius: 100px;
+                margin-bottom: 24px;
+            }
+            h1 {
+                font-family: "DM Serif Display", serif;
+                font-size: 38px;
+                line-height: 1.12;
+                letter-spacing: -0.025em;
+                margin-bottom: 14px;
+            }
+            h1 em {
+                font-style: italic;
+                color: #9fe1cb;
+            }
+            .subtitle {
+                font-size: 15px;
+                color: rgba(255, 255, 255, 0.6);
+                margin-bottom: 36px;
+                line-height: 1.6;
+            }
+            .form-group {
+                text-align: left;
+                margin-bottom: 16px;
+            }
+            .form-group label {
+                font-size: 12px;
+                font-weight: 500;
+                color: rgba(255, 255, 255, 0.55);
+                margin-bottom: 6px;
+                display: block;
+            }
+            .form-group input {
+                width: 100%;
+                background: rgba(255, 255, 255, 0.07);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 8px;
+                padding: 13px 16px;
+                font-size: 15px;
+                color: var(--white);
+                font-family: "DM Sans", sans-serif;
+                transition: border-color 0.15s;
+                outline: none;
+            }
+            .form-group input::placeholder {
+                color: rgba(255, 255, 255, 0.25);
+            }
+            .form-group input:focus {
+                border-color: var(--green-mid);
+            }
+            .code-input {
+                text-align: center !important;
+                font-family: "Courier New", monospace !important;
+                font-size: 28px !important;
+                letter-spacing: 0.3em !important;
+                font-weight: 700 !important;
+            }
+            .submit-btn {
+                width: 100%;
+                background: var(--gold);
+                color: var(--ink);
+                border: none;
+                border-radius: 8px;
+                padding: 14px;
+                font-size: 15px;
+                font-weight: 700;
+                font-family: "DM Sans", sans-serif;
+                cursor: pointer;
+                transition: background 0.15s;
+            }
+            .submit-btn:hover {
+                background: #e6b830;
+            }
+            .submit-btn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+            .helper {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.4);
+                margin-top: 18px;
+                line-height: 1.5;
+            }
+            .helper a {
+                color: #9fe1cb;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            .message {
+                margin-top: 18px;
+                padding: 14px 18px;
+                border-radius: 8px;
+                font-size: 14px;
+                line-height: 1.55;
+                text-align: left;
+            }
+            .message.success {
+                background: rgba(15, 110, 86, 0.18);
+                border: 1px solid rgba(159, 225, 203, 0.3);
+                color: #9fe1cb;
+            }
+            .message.error {
+                background: rgba(192, 57, 43, 0.15);
+                border: 1px solid rgba(192, 57, 43, 0.3);
+                color: #ff8a80;
+            }
+            .step-info {
+                font-size: 13px;
+                color: rgba(255, 255, 255, 0.55);
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .step-info strong {
+                color: var(--white);
+            }
+            .change-email {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.4);
+                margin-top: 12px;
+                text-align: center;
+            }
+            .change-email a {
+                color: #9fe1cb;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+            footer {
+                padding: 24px 40px;
+                text-align: center;
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.25);
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .hidden {
+                display: none !important;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="/" class="nav-logo">YSK<span>AI</span>PE</a>
+            <a href="/founding.html" class="nav-link">Founding Program →</a>
+        </nav>
 
-    <main>
-      <div class="login-card">
-        <div class="badge">★ Pro Login</div>
-        <h1>Welcome <em>back</em>.</h1>
-        <p class="subtitle">
-          Enter your email and we'll send you a magic link to access your
-          contractor dashboard. No password — ever.
-        </p>
+        <main>
+            <div class="login-card">
+                <div class="badge">★ Pro Login</div>
+                <h1>Welcome <em>back</em>.</h1>
 
-        <form id="login-form" onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@yourcompany.com"
-              required
-              autocomplete="email"
-              autofocus
-            />
-          </div>
-          <button type="submit" class="submit-btn" id="submit-btn">
-            Send me a magic link →
-          </button>
-        </form>
+                <!-- Step 1: Email -->
+                <div id="step-email">
+                    <p class="subtitle">
+                        Enter your email and we'll send you a 6-digit login
+                        code. No password — ever.
+                    </p>
+                    <form id="email-form" onsubmit="handleEmailSubmit(event)">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@yourcompany.com"
+                                required
+                                autocomplete="email"
+                                autofocus
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                            id="email-submit"
+                        >
+                            Send me a code →
+                        </button>
+                    </form>
+                    <p class="helper">
+                        Don't have an account yet?
+                        <a href="/founding.html"
+                            >Apply for the Founding Fifty program →</a
+                        >
+                    </p>
+                </div>
 
-        <div id="message"></div>
+                <!-- Step 2: Code -->
+                <div id="step-code" class="hidden">
+                    <p class="step-info">
+                        We sent a 6-digit code to
+                        <strong id="email-display"></strong>.<br />
+                        Enter it below to log in.
+                    </p>
+                    <form id="code-form" onsubmit="handleCodeSubmit(event)">
+                        <div class="form-group">
+                            <label for="code">6-digit code</label>
+                            <input
+                                type="text"
+                                id="code"
+                                name="code"
+                                placeholder="000000"
+                                inputmode="numeric"
+                                pattern="[0-9]{6}"
+                                maxlength="6"
+                                required
+                                autocomplete="one-time-code"
+                                class="code-input"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                            id="code-submit"
+                        >
+                            Log in →
+                        </button>
+                    </form>
+                    <p class="change-email">
+                        <a onclick="goBackToEmail()">← Use a different email</a>
+                        &nbsp;·&nbsp;
+                        <a onclick="resendCode()">Resend code</a>
+                    </p>
+                </div>
 
-        <p class="helper">
-          Don't have an account yet?
-          <a href="/founding.html">Apply for the Founding Fifty program →</a>
-        </p>
-      </div>
-    </main>
+                <div id="message"></div>
+            </div>
+        </main>
 
-    <footer>
-      YSKAIPE · yskaipe.com · Need help? <a href="mailto:gr8@yskaipe.com" style="color: rgba(255, 255, 255, 0.45);">gr8@yskaipe.com</a>
-    </footer>
+        <footer>
+            YSKAIPE · yskaipe.com · Need help?
+            <a
+                href="mailto:gr8@yskaipe.com"
+                style="color: rgba(255, 255, 255, 0.45)"
+                >gr8@yskaipe.com</a
+            >
+        </footer>
 
-    <script>
-      async function handleSubmit(e) {
-        e.preventDefault();
-        const btn = document.getElementById("submit-btn");
-        const messageBox = document.getElementById("message");
-        const email = document.getElementById("email").value.trim();
+        <script>
+            // Read ?next=<encoded url> for post-login redirect
+            const urlParams = new URLSearchParams(window.location.search);
+            const nextUrl = urlParams.get("next") || null;
 
-        messageBox.innerHTML = "";
-        btn.textContent = "Sending magic link…";
-        btn.disabled = true;
+            function setMessage(html, type = "") {
+                const box = document.getElementById("message");
+                if (!html) {
+                    box.innerHTML = "";
+                    return;
+                }
+                box.innerHTML = `<div class="message ${type}">${html}</div>`;
+            }
 
-        try {
-          const res = await fetch("/api/auth/send-link", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email }),
-          });
-          const data = await res.json();
+            async function handleEmailSubmit(e) {
+                e.preventDefault();
+                const btn = document.getElementById("email-submit");
+                const email = document.getElementById("email").value.trim();
 
-          if (res.ok) {
-            messageBox.innerHTML = `<div class="message success">
-              <strong>Check your inbox.</strong><br>
-              We've sent a magic link to <strong>${email}</strong>. Click the
-              link in the email to log in. The link expires in 1 hour.
-            </div>`;
-            btn.textContent = "Sent ✓";
-            document.getElementById("email").disabled = true;
-          } else {
-            messageBox.innerHTML = `<div class="message error">
-              ${data.error || "Something went wrong. Please try again."}
-            </div>`;
-            btn.textContent = "Send me a magic link →";
-            btn.disabled = false;
-          }
-        } catch (err) {
-          messageBox.innerHTML = `<div class="message error">
-            Network error. Please check your connection and try again.
-          </div>`;
-          btn.textContent = "Send me a magic link →";
-          btn.disabled = false;
-        }
-      }
-    </script>
-  </body>
+                setMessage("");
+                btn.textContent = "Sending code…";
+                btn.disabled = true;
+
+                try {
+                    const res = await fetch("/api/auth/request-code", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email }),
+                    });
+
+                    if (res.ok) {
+                        // Always show step 2 — even if email isn't a real contractor.
+                        // (We don't reveal whether email exists, for security.)
+                        document.getElementById("email-display").textContent =
+                            email;
+                        document
+                            .getElementById("step-email")
+                            .classList.add("hidden");
+                        document
+                            .getElementById("step-code")
+                            .classList.remove("hidden");
+                        document.getElementById("code").focus();
+                        btn.textContent = "Send me a code →";
+                        btn.disabled = false;
+                    } else {
+                        const data = await res.json();
+                        setMessage(
+                            data.error ||
+                                "Something went wrong. Please try again.",
+                            "error",
+                        );
+                        btn.textContent = "Send me a code →";
+                        btn.disabled = false;
+                    }
+                } catch (err) {
+                    setMessage(
+                        "Network error. Check your connection and try again.",
+                        "error",
+                    );
+                    btn.textContent = "Send me a code →";
+                    btn.disabled = false;
+                }
+            }
+
+            async function handleCodeSubmit(e) {
+                e.preventDefault();
+                const btn = document.getElementById("code-submit");
+                const email = document.getElementById("email").value.trim();
+                const code = document.getElementById("code").value.trim();
+
+                setMessage("");
+                btn.textContent = "Verifying…";
+                btn.disabled = true;
+
+                try {
+                    const res = await fetch("/api/auth/verify-code", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, code }),
+                    });
+                    const data = await res.json();
+
+                    if (res.ok && data.token && data.cid) {
+                        // Store session token + cid for the dashboard's auth gate
+                        localStorage.setItem(
+                            "yskaipe_session_token",
+                            data.token,
+                        );
+                        localStorage.setItem("yskaipe_session_cid", data.cid);
+                        localStorage.setItem(
+                            "yskaipe_session_expires",
+                            data.expiresAt,
+                        );
+
+                        setMessage("✓ Logged in. Redirecting…", "success");
+
+                        // Redirect: if there's a ?next= param use that, else go to dashboard
+                        const target = nextUrl
+                            ? decodeURIComponent(nextUrl)
+                            : `/founder-dashboard.html?cid=${data.cid}`;
+                        setTimeout(() => {
+                            window.location.href = target;
+                        }, 600);
+                    } else {
+                        setMessage(
+                            data.error ||
+                                "Invalid code. Please try again or request a new one.",
+                            "error",
+                        );
+                        btn.textContent = "Log in →";
+                        btn.disabled = false;
+                        document.getElementById("code").select();
+                    }
+                } catch (err) {
+                    setMessage(
+                        "Network error. Check your connection and try again.",
+                        "error",
+                    );
+                    btn.textContent = "Log in →";
+                    btn.disabled = false;
+                }
+            }
+
+            function goBackToEmail() {
+                document.getElementById("step-code").classList.add("hidden");
+                document
+                    .getElementById("step-email")
+                    .classList.remove("hidden");
+                document.getElementById("code").value = "";
+                setMessage("");
+                document.getElementById("email").focus();
+            }
+
+            async function resendCode() {
+                const email = document.getElementById("email").value.trim();
+                if (!email) return;
+
+                setMessage("Sending new code…", "success");
+                try {
+                    const res = await fetch("/api/auth/request-code", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email }),
+                    });
+                    if (res.ok) {
+                        setMessage(`✓ New code sent to ${email}`, "success");
+                    } else {
+                        const data = await res.json();
+                        setMessage(
+                            data.error || "Could not resend code.",
+                            "error",
+                        );
+                    }
+                } catch (err) {
+                    setMessage("Network error. Try again.", "error");
+                }
+            }
+
+            // Auto-format code input — only digits, max 6
+            document.getElementById("code").addEventListener("input", (e) => {
+                e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
+                // Auto-submit when 6 digits entered
+                if (e.target.value.length === 6) {
+                    document.getElementById("code-form").requestSubmit();
+                }
+            });
+        </script>
+    </body>
 </html>

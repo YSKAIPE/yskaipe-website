@@ -708,38 +708,27 @@
     </head>
     <body>
         <!--
-        =============================================================================
-        SOFT AUTH GATE — temporary for tonight
-        =============================================================================
-        Verifies that ?cid=<uuid> is in the URL and that it points to a real
-        contractor row in Supabase. No session check, no email cross-reference.
-        UUIDs are not guessable, so this is an acceptable security posture for
-        the soft launch. Proper session-based auth will be re-added tomorrow.
+    =============================================================================
+    AUTH GATE v3 — session token validation (replaces soft gate)
+    =============================================================================
+    Replace the entire <script> block at the top of founder-dashboard.html that
+    contains the softGate function with this. Keep the comment header above it
+    or replace as you like.
 
-        Also strips any leftover #access_token=... fragment from prior magic-link
-        attempts so the URL stays clean.
-        =============================================================================
-        -->
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    What it does:
+    1. Reads cid from URL (existing behavior — dashboard data queries use this).
+    2. Reads session token from localStorage.
+    3. Posts to /api/auth/whoami to validate token + cid match.
+    4. If valid → continue rendering.
+    5. If invalid → redirect to /login.html with ?next=<this-page> so they come
+       back here after logging in.
+
+    No race conditions, no third-party Supabase Auth quirks. We control the
+    session lifecycle end-to-end.
+    =============================================================================
+    -->
         <script>
-            (async function softGate() {
-                const SUPABASE_URL = "https://ygfhaoksicgtazcmqdfk.supabase.co";
-                const SUPABASE_ANON_KEY =
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88";
-
-                const supabase = window.supabase.createClient(
-                    SUPABASE_URL,
-                    SUPABASE_ANON_KEY,
-                );
-
-                // Clean up any auth token leftover in the URL hash from prior
-                // magic-link attempts — keeps the URL bookmarkable + tidy.
-                if (window.location.hash) {
-                    const cleanUrl =
-                        window.location.pathname + window.location.search;
-                    window.history.replaceState({}, document.title, cleanUrl);
-                }
-
+            (async function authGate() {
                 const params = new URLSearchParams(window.location.search);
                 const cid = params.get("cid");
 
@@ -748,20 +737,85 @@
                     return;
                 }
 
-                const { data: contractor } = await supabase
-                    .from("contractors")
-                    .select("id")
-                    .eq("id", cid)
-                    .maybeSingle();
+                const token = localStorage.getItem("yskaipe_session_token");
+                const storedCid = localStorage.getItem("yskaipe_session_cid");
 
-                if (!contractor) {
-                    window.location.replace("/login.html");
+                // Quick local check before hitting the API
+                if (!token) {
+                    const next = encodeURIComponent(
+                        window.location.pathname + window.location.search,
+                    );
+                    window.location.replace(`/login.html?next=${next}`);
                     return;
                 }
 
-                // ✅ cid valid — let the dashboard render.
-                window.__authedContractor = { cid };
+                // If localStorage has a different cid than URL, redirect to login
+                // (someone bookmarked a different contractor's URL while logged in as another)
+                if (storedCid && storedCid !== cid) {
+                    const next = encodeURIComponent(
+                        window.location.pathname + window.location.search,
+                    );
+                    window.location.replace(`/login.html?next=${next}`);
+                    return;
+                }
+
+                // Server-side validation
+                try {
+                    const res = await fetch("/api/auth/whoami", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ token, cid }),
+                    });
+
+                    if (!res.ok) {
+                        // Token expired, mismatched, or invalid — clear local and redirect
+                        localStorage.removeItem("yskaipe_session_token");
+                        localStorage.removeItem("yskaipe_session_cid");
+                        localStorage.removeItem("yskaipe_session_expires");
+                        const next = encodeURIComponent(
+                            window.location.pathname + window.location.search,
+                        );
+                        window.location.replace(`/login.html?next=${next}`);
+                        return;
+                    }
+
+                    const data = await res.json();
+
+                    // ✅ Auth verified. Make contractor info available globally.
+                    window.__authedContractor = {
+                        cid: data.contractor.id,
+                        email: data.contractor.email,
+                        name: data.contractor.name,
+                        company: data.contractor.company_name,
+                        trade: data.contractor.primary_trade,
+                        tier: data.contractor.tier,
+                        is_founding: data.contractor.is_founding,
+                    };
+
+                    // Clean up any leftover hash from old magic-link attempts
+                    if (window.location.hash) {
+                        const cleanUrl =
+                            window.location.pathname + window.location.search;
+                        window.history.replaceState(
+                            {},
+                            document.title,
+                            cleanUrl,
+                        );
+                    }
+                } catch (err) {
+                    console.error("[auth-gate] whoami failed", err);
+                    // Network error — show login page rather than leave them stuck
+                    window.location.replace("/login.html");
+                }
             })();
+
+            // Optional: logout helper. Call window.yskaipeLogout() from anywhere.
+            window.yskaipeLogout = function () {
+                localStorage.removeItem("yskaipe_session_token");
+                localStorage.removeItem("yskaipe_session_cid");
+                localStorage.removeItem("yskaipe_session_expires");
+                window.location.replace("/login.html");
+            };
         </script>
 
         <div class="topbar">

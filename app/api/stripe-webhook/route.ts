@@ -5,8 +5,10 @@
 //   2. Resolves customer email (falls back to Stripe customer object if session.customer_email is null)
 //   3. Creates contractor row in Supabase — HARD FAILS if insert errors so Stripe will retry
 //   4. Upserts subscriber row (non-fatal)
-//   5. Generates magic link via Supabase Auth admin
-//   6. Sends magic link via Resend with link to /founder-dashboard.html?cid=<contractor-uuid>
+//   5. Sends welcome email via Resend pointing to /login.html (NOT a magic link)
+//
+// NOTE: This version drops the Supabase magic-link generation entirely.
+// All login is now handled by the custom 6-digit code flow at /login.html.
 
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -37,8 +39,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  // Idempotency check — Stripe at-least-once delivery + duplicate endpoints
-  // can fire the same event 2-3 times. Skip if we've already processed this event ID.
+  // Idempotency check
   try {
     const { data: existing } = await supabaseAdmin
       .from("processed_stripe_events")
@@ -54,7 +55,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ received: true, duplicate: true });
     }
   } catch (err) {
-    // Table may not exist yet — log and continue rather than block processing.
     console.warn("[stripe-webhook] idempotency check skipped:", err);
   }
 
@@ -66,9 +66,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ received: true });
     }
 
-    // Resolve email — session.customer_email is null when we passed a pre-created
-    // customer object (which we do to suppress the Link OTP intercept). Fall back
-    // to looking up the email on the Stripe customer object.
     let email = session.customer_email || "";
     const stripeCustomerId = session.customer as string;
     const stripeSubscriptionId = session.subscription as string;
@@ -102,7 +99,6 @@ export async function POST(req: NextRequest) {
     const trade = meta.trade || "hvac";
     const zip = meta.zip || "";
 
-    // Map trade display name to internal key
     const tradeMap: Record<string, string> = {
       HVAC: "hvac",
       Plumbing: "plumbing",
@@ -115,13 +111,13 @@ export async function POST(req: NextRequest) {
 
     const initials = (firstName[0] || "") + (lastName[0] || company[0] || "");
 
-    // 1. Create contractor row — HARD FAIL if this errors so Stripe retries
+    // 1. Create contractor row — HARD FAIL if insert errors
     const { data: contractor, error: contractorErr } = await supabaseAdmin
       .from("contractors")
       .insert({
         name: `${firstName} ${lastName}`.trim(),
         company_name: company,
-        email,
+        email: email.toLowerCase(),
         phone,
         avatar_initials: initials.toUpperCase(),
         tier: "founding",
@@ -159,10 +155,10 @@ export async function POST(req: NextRequest) {
 
     console.log("[stripe-webhook] contractor created", contractor.id);
 
-    // 2. Subscriber upsert — non-fatal, log and continue if it fails
+    // 2. Subscriber upsert — non-fatal
     const { error: subErr } = await supabaseAdmin.from("subscribers").upsert(
       {
-        email,
+        email: email.toLowerCase(),
         name: `${firstName} ${lastName}`.trim(),
         business: company,
         trade: tradeMapped,
@@ -185,58 +181,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Generate magic link — note: generateLink does NOT send an email,
-    // it only returns the link. We send via Resend below.
-    const dashboardUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/founder-dashboard.html?cid=${contractor.id}`;
+    // 3. Send welcome email — points to /login.html, NOT a magic link
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || "https://www.yskaipe.com";
+    const loginUrl = `${siteUrl}/login.html`;
 
-    const { data: linkData, error: magicErr } =
-      await supabaseAdmin.auth.admin.generateLink({
-        type: "magiclink",
-        email,
-        options: {
-          redirectTo: dashboardUrl,
-        },
-      });
-
-    if (magicErr || !linkData?.properties?.action_link) {
-      console.error("[stripe-webhook] magic link generation error", magicErr);
-      return NextResponse.json(
-        {
-          error: "Magic link generation failed",
-          contractorId: contractor.id,
-        },
-        { status: 500 },
-      );
-    }
-
-    const magicActionLink = linkData.properties.action_link;
-
-    // 4. Send via Resend
     try {
       await resend.emails.send({
         from: FROM_EMAIL,
         to: email,
         subject:
-          "Welcome to YSKAIPE — your Founding Contractor dashboard is ready",
+          "Welcome to YSKAIPE — your Founding Contractor account is active",
         html: buildWelcomeEmail({
           firstName,
-          magicLink: magicActionLink,
-          dashboardUrl,
+          email,
+          loginUrl,
         }),
       });
-      console.log("[stripe-webhook] magic link sent via Resend to", email);
+      console.log("[stripe-webhook] welcome email sent to", email);
     } catch (err: any) {
       console.error("[stripe-webhook] Resend send failed", err);
-      return NextResponse.json(
-        {
-          error: "Email send failed",
-          contractorId: contractor.id,
-        },
-        { status: 500 },
+      // Don't fail the webhook — contractor is created, they can request a code from /login.html themselves
+      console.warn(
+        "[stripe-webhook] continuing despite email failure — contractor can self-serve at /login.html",
       );
     }
 
-    // 5. Record event as processed (idempotency)
+    // 4. Record event as processed
     try {
       await supabaseAdmin.from("processed_stripe_events").insert({
         event_id: event.id,
@@ -244,7 +215,6 @@ export async function POST(req: NextRequest) {
         contractor_id: contractor.id,
       });
     } catch (err) {
-      // Table may not exist — log but don't fail.
       console.warn("[stripe-webhook] could not record processed event", err);
     }
   }
@@ -254,12 +224,12 @@ export async function POST(req: NextRequest) {
 
 function buildWelcomeEmail({
   firstName,
-  magicLink,
-  dashboardUrl,
+  email,
+  loginUrl,
 }: {
   firstName: string;
-  magicLink: string;
-  dashboardUrl: string;
+  email: string;
+  loginUrl: string;
 }): string {
   const greeting = firstName ? `Welcome, ${firstName}` : "Welcome";
   return `<!doctype html>
@@ -279,20 +249,19 @@ function buildWelcomeEmail({
         Your founding spot is secured. Your subscription is active. Your loyalty score starts accumulating right now — before anyone else joins.
       </p>
       <p style="font-size:15px; line-height:1.65; color:#3d3d38; margin:0 0 28px;">
-        Click below to open your Founder Dashboard. This link logs you in automatically — no password needed, ever.
+        To access your contractor dashboard, click the button below and enter the 6-digit code we'll email you. No password to remember — ever.
       </p>
       <div style="text-align:center; margin:32px 0;">
-        <a href="${magicLink}" style="display:inline-block; background:#c8961a; color:#1a1a18; padding:14px 32px; border-radius:8px; font-size:15px; font-weight:700; text-decoration:none;">
-          Open my Founder Dashboard →
+        <a href="${loginUrl}" style="display:inline-block; background:#c8961a; color:#1a1a18; padding:14px 32px; border-radius:8px; font-size:15px; font-weight:700; text-decoration:none;">
+          Log in to my dashboard →
         </a>
       </div>
       <p style="font-size:13px; line-height:1.6; color:#7a7a72; margin:24px 0 0; text-align:center;">
-        Or copy and paste this link into your browser:<br>
-        <a href="${magicLink}" style="color:#0f6e56; word-break:break-all;">${magicLink}</a>
+        Use this email — <strong>${email}</strong> — when you log in.
       </p>
       <hr style="border:none; border-top:1px solid #e4e4de; margin:32px 0;" />
       <p style="font-size:12px; color:#7a7a72; line-height:1.6; margin:0;">
-        Founding rate of $99/month is permanently locked. Your dashboard URL is also bookmarkable directly: <a href="${dashboardUrl}" style="color:#7a7a72;">${dashboardUrl}</a>
+        Founding rate of $99/month is permanently locked. Bookmark <a href="${loginUrl}" style="color:#0f6e56;">${loginUrl}</a> for quick access whenever you need to check your dashboard.
       </p>
     </div>
     <p style="text-align:center; font-size:11px; color:#b8b8b0; margin-top:20px;">
