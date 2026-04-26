@@ -25,6 +25,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    if (!siteUrl) {
+      throw new Error("NEXT_PUBLIC_SITE_URL is not configured");
+    }
+
+    // Create a fresh Stripe customer FIRST, so we pass `customer` (not `customer_email`)
+    // to checkout.sessions.create. This is the key to bypassing the Link OTP intercept:
+    // when Stripe sees a customer_email it recognizes from Link's global database, it
+    // shows the "Confirm it's you" OTP screen even when Link isn't a payment method type.
+    // Passing a pre-created customer object skips that Link lookup entirely.
+    const customer = await stripe.customers.create({
+      email,
+      name: `${firstName} ${lastName || ""}`.trim(),
+      phone: phone || undefined,
+      metadata: {
+        firstName,
+        lastName: lastName || "",
+        company: company || "",
+        trade,
+        years: years || "",
+        zip: zip || "",
+        program: "founding_fifty",
+      },
+    });
+
     // Create Stripe Checkout session
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
@@ -35,7 +60,7 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      customer_email: email,
+      customer: customer.id, // pre-created customer suppresses Link OTP intercept
       metadata: {
         firstName,
         lastName,
@@ -46,8 +71,8 @@ export async function POST(req: NextRequest) {
         zip: zip || "",
         program: "founding_fifty",
       },
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/founding-success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/founding.html`,
+      success_url: `${siteUrl}/founding-success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/founding.html`,
       subscription_data: {
         metadata: {
           firstName,
