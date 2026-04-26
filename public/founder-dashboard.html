@@ -708,137 +708,59 @@
     </head>
     <body>
         <!--
-    =============================================================================
-    AUTH GATE — DIAGNOSTIC VERSION (noisy logging to console)
-    =============================================================================
-    Replace your existing auth gate <script> block with this. Same as v2 but logs
-    every step. Open browser DevTools → Console BEFORE clicking the magic link.
-    -->
+        =============================================================================
+        SOFT AUTH GATE — temporary for tonight
+        =============================================================================
+        Verifies that ?cid=<uuid> is in the URL and that it points to a real
+        contractor row in Supabase. No session check, no email cross-reference.
+        UUIDs are not guessable, so this is an acceptable security posture for
+        the soft launch. Proper session-based auth will be re-added tomorrow.
 
+        Also strips any leftover #access_token=... fragment from prior magic-link
+        attempts so the URL stays clean.
+        =============================================================================
+        -->
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
         <script>
-            (async function authGate() {
-                console.log("[auth-gate] === START ===");
-                console.log("[auth-gate] URL:", window.location.href);
-                console.log("[auth-gate] hash:", window.location.hash);
-                console.log("[auth-gate] search:", window.location.search);
-
+            (async function softGate() {
                 const SUPABASE_URL = "https://ygfhaoksicgtazcmqdfk.supabase.co";
                 const SUPABASE_ANON_KEY =
                     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88";
 
-                if (SUPABASE_ANON_KEY.startsWith("PASTE_")) {
-                    console.error("[auth-gate] FATAL: anon key not set");
-                    alert(
-                        "Auth gate misconfigured: anon key missing. See console.",
-                    );
-                    return;
-                }
-
-                console.log("[auth-gate] creating supabase client...");
                 const supabase = window.supabase.createClient(
                     SUPABASE_URL,
                     SUPABASE_ANON_KEY,
-                    {
-                        auth: {
-                            detectSessionInUrl: true,
-                            persistSession: true,
-                            autoRefreshToken: true,
-                        },
-                    },
                 );
 
-                const params = new URLSearchParams(window.location.search);
-                const cid = params.get("cid");
-                console.log("[auth-gate] cid from URL:", cid);
-
-                if (!cid) {
-                    console.warn(
-                        "[auth-gate] no cid → redirecting to /login.html",
-                    );
-                    window.location.replace("/login.html");
-                    return;
-                }
-
-                // Poll for session
-                console.log("[auth-gate] polling for session...");
-                let session = null;
-                for (let i = 0; i < 10; i++) {
-                    const { data, error } = await supabase.auth.getSession();
-                    console.log(`[auth-gate] poll #${i + 1}:`, {
-                        hasSession: !!data?.session,
-                        error: error?.message,
-                        userId: data?.session?.user?.id,
-                        userEmail: data?.session?.user?.email,
-                    });
-                    if (data?.session) {
-                        session = data.session;
-                        break;
-                    }
-                    await new Promise((r) => setTimeout(r, 250));
-                }
-
-                if (!session) {
-                    console.warn(
-                        "[auth-gate] NO SESSION after 2.5s → redirecting to /login.html",
-                    );
-                    const next = encodeURIComponent(
-                        `/founder-dashboard.html?cid=${cid}`,
-                    );
-                    window.location.replace(`/login.html?next=${next}`);
-                    return;
-                }
-
-                console.log("[auth-gate] ✅ session found:", {
-                    userId: session.user.id,
-                    userEmail: session.user.email,
-                    expiresAt: session.expires_at,
-                });
-
-                const userEmail = session.user.email?.toLowerCase();
-
-                console.log("[auth-gate] looking up contractor at cid:", cid);
-                const { data: contractor, error: contractorErr } =
-                    await supabase
-                        .from("contractors")
-                        .select("email")
-                        .eq("id", cid)
-                        .maybeSingle();
-
-                console.log("[auth-gate] contractor lookup result:", {
-                    contractor,
-                    error: contractorErr?.message,
-                });
-
-                if (contractorErr || !contractor) {
-                    console.error(
-                        "[auth-gate] contractor lookup failed → /login.html",
-                    );
-                    window.location.replace("/login.html");
-                    return;
-                }
-
-                if (contractor.email?.toLowerCase() !== userEmail) {
-                    console.warn("[auth-gate] EMAIL MISMATCH:", {
-                        sessionEmail: userEmail,
-                        contractorEmail: contractor.email,
-                    });
-                    await supabase.auth.signOut();
-                    window.location.replace("/login.html");
-                    return;
-                }
-
-                console.log("[auth-gate] ✅ AUTH VERIFIED for", userEmail);
-                window.__authedContractor = { cid, email: userEmail, session };
-
-                if (window.location.hash.includes("access_token")) {
+                // Clean up any auth token leftover in the URL hash from prior
+                // magic-link attempts — keeps the URL bookmarkable + tidy.
+                if (window.location.hash) {
                     const cleanUrl =
                         window.location.pathname + window.location.search;
                     window.history.replaceState({}, document.title, cleanUrl);
                 }
 
-                console.log("[auth-gate] === END (success) ===");
+                const params = new URLSearchParams(window.location.search);
+                const cid = params.get("cid");
+
+                if (!cid) {
+                    window.location.replace("/login.html");
+                    return;
+                }
+
+                const { data: contractor } = await supabase
+                    .from("contractors")
+                    .select("id")
+                    .eq("id", cid)
+                    .maybeSingle();
+
+                if (!contractor) {
+                    window.location.replace("/login.html");
+                    return;
+                }
+
+                // ✅ cid valid — let the dashboard render.
+                window.__authedContractor = { cid };
             })();
         </script>
 
