@@ -709,67 +709,79 @@
     <body>
         <!--
     =============================================================================
-    AUTH GATE FOR FOUNDER DASHBOARD
+    AUTH GATE — DIAGNOSTIC VERSION (noisy logging to console)
     =============================================================================
-    Drop this <script> block at the TOP of the <body> in /public/founder-dashboard.html
-    (before any of the dashboard rendering code).
-
-    What it does:
-    1. Reads ?cid=<uuid> from URL (existing behavior — your dashboard data queries
-       already use this).
-    2. Checks if there's a valid Supabase session.
-    3. If no session → redirect to /login.html (preserving cid so they come back to
-       the right dashboard after logging in).
-    4. If session exists, cross-checks: does the logged-in user's email match the
-       contractor at this cid?
-    5. If yes → continue (your existing dashboard code runs).
-    6. If no → redirect to /login.html (someone trying to access a dashboard that's
-       not theirs).
-
-    Requirements:
-    - @supabase/supabase-js v2 loaded via CDN (added below)
-    - NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY available
-      (pasted directly here since this is a static HTML file — these are PUBLIC
-       keys, safe to expose. Do NOT paste service_role key here.)
-    =============================================================================
+    Replace your existing auth gate <script> block with this. Same as v2 but logs
+    every step. Open browser DevTools → Console BEFORE clicking the magic link.
     -->
 
-        <!-- Supabase JS client (load before the auth gate script) -->
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
         <script>
             (async function authGate() {
-                // === 1. Configure Supabase client ===
-                // Replace these with your real values from Vercel env vars NEXT_PUBLIC_SUPABASE_URL
-                // and NEXT_PUBLIC_SUPABASE_ANON_KEY. These are PUBLIC by design.
-                const SUPABASE_URL = "https://ygfhaoksicgtazcmqdfk.supabase.co";
-                const SUPABASE_ANON_KEY =
-                    "PASTE_YOUR_NEXT_PUBLIC_SUPABASE_ANON_KEY_HERE";
+                console.log("[auth-gate] === START ===");
+                console.log("[auth-gate] URL:", window.location.href);
+                console.log("[auth-gate] hash:", window.location.hash);
+                console.log("[auth-gate] search:", window.location.search);
 
+                const SUPABASE_URL = "https://ygfhaoksicgtazcmqdfk.supabase.co";
+                const SUPABASE_ANON_KEY = "PASTE_YOUR_ANON_KEY_HERE";
+
+                if (SUPABASE_ANON_KEY.startsWith("PASTE_")) {
+                    console.error("[auth-gate] FATAL: anon key not set");
+                    alert(
+                        "Auth gate misconfigured: anon key missing. See console.",
+                    );
+                    return;
+                }
+
+                console.log("[auth-gate] creating supabase client...");
                 const supabase = window.supabase.createClient(
                     SUPABASE_URL,
                     SUPABASE_ANON_KEY,
+                    {
+                        auth: {
+                            detectSessionInUrl: true,
+                            persistSession: true,
+                            autoRefreshToken: true,
+                        },
+                    },
                 );
 
-                // === 2. Read cid from URL ===
                 const params = new URLSearchParams(window.location.search);
                 const cid = params.get("cid");
+                console.log("[auth-gate] cid from URL:", cid);
 
                 if (!cid) {
-                    // No cid — they shouldn't be here. Send to login.
+                    console.warn(
+                        "[auth-gate] no cid → redirecting to /login.html",
+                    );
                     window.location.replace("/login.html");
                     return;
                 }
 
-                // === 3. Check Supabase session ===
-                // Note: when arriving from a magic link, Supabase auto-handles the token in
-                // the URL hash and creates a session. We just need to check if it's there.
-                const { data: sessionData, error: sessionErr } =
-                    await supabase.auth.getSession();
+                // Poll for session
+                console.log("[auth-gate] polling for session...");
+                let session = null;
+                for (let i = 0; i < 10; i++) {
+                    const { data, error } = await supabase.auth.getSession();
+                    console.log(`[auth-gate] poll #${i + 1}:`, {
+                        hasSession: !!data?.session,
+                        error: error?.message,
+                        userId: data?.session?.user?.id,
+                        userEmail: data?.session?.user?.email,
+                    });
+                    if (data?.session) {
+                        session = data.session;
+                        break;
+                    }
+                    await new Promise((r) => setTimeout(r, 250));
+                }
 
-                if (sessionErr || !sessionData?.session) {
-                    // No valid session. Redirect to login, preserving cid in a 'next' param
-                    // so we can come back here after they log in.
+                if (!session) {
+                    console.warn(
+                        "[auth-gate] NO SESSION after 2.5s → redirecting to /login.html",
+                    );
                     const next = encodeURIComponent(
                         `/founder-dashboard.html?cid=${cid}`,
                     );
@@ -777,9 +789,15 @@
                     return;
                 }
 
-                const userEmail = sessionData.session.user.email?.toLowerCase();
+                console.log("[auth-gate] ✅ session found:", {
+                    userId: session.user.id,
+                    userEmail: session.user.email,
+                    expiresAt: session.expires_at,
+                });
 
-                // === 4. Cross-check: does this session match the cid's contractor email? ===
+                const userEmail = session.user.email?.toLowerCase();
+
+                console.log("[auth-gate] looking up contractor at cid:", cid);
                 const { data: contractor, error: contractorErr } =
                     await supabase
                         .from("contractors")
@@ -787,48 +805,40 @@
                         .eq("id", cid)
                         .maybeSingle();
 
+                console.log("[auth-gate] contractor lookup result:", {
+                    contractor,
+                    error: contractorErr?.message,
+                });
+
                 if (contractorErr || !contractor) {
                     console.error(
-                        "[auth-gate] contractor lookup failed",
-                        contractorErr,
+                        "[auth-gate] contractor lookup failed → /login.html",
                     );
                     window.location.replace("/login.html");
                     return;
                 }
 
                 if (contractor.email?.toLowerCase() !== userEmail) {
-                    // Session is for a different contractor than the one in the URL.
-                    // Sign them out and send to login.
+                    console.warn("[auth-gate] EMAIL MISMATCH:", {
+                        sessionEmail: userEmail,
+                        contractorEmail: contractor.email,
+                    });
                     await supabase.auth.signOut();
                     window.location.replace("/login.html");
                     return;
                 }
 
-                // ✅ Auth verified. Make session info available globally for the rest of
-                // the dashboard code to use if it wants.
-                window.__authedContractor = {
-                    cid,
-                    email: userEmail,
-                    session: sessionData.session,
-                };
+                console.log("[auth-gate] ✅ AUTH VERIFIED for", userEmail);
+                window.__authedContractor = { cid, email: userEmail, session };
 
-                // Continue rendering the dashboard normally — no need to do anything else here.
-            })();
-        </script>
-
-        <script>
-            async function logout(e) {
-                if (e) e.preventDefault();
-                if (window.supabase && window.__authedContractor) {
-                    // Recreate client to call signOut (or hold a reference from auth gate)
-                    const supabase = window.supabase.createClient(
-                        "https://ygfhaoksicgtazcmqdfk.supabase.co",
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88",
-                    );
-                    await supabase.auth.signOut();
+                if (window.location.hash.includes("access_token")) {
+                    const cleanUrl =
+                        window.location.pathname + window.location.search;
+                    window.history.replaceState({}, document.title, cleanUrl);
                 }
-                window.location.replace("/login.html");
-            }
+
+                console.log("[auth-gate] === END (success) ===");
+            })();
         </script>
 
         <div class="topbar">
