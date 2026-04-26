@@ -139,7 +139,9 @@ export async function POST(req: NextRequest) {
         leads_this_month: 0,
         stripe_customer_id: stripeCustomerId,
         stripe_subscription_id: stripeSubscriptionId,
-        status: "active",
+        is_active: true,
+        subscription_active: true,
+        onboarded_at: new Date().toISOString(),
       })
       .select()
       .single();
