@@ -152,6 +152,20 @@
             nav a.nav-pro:hover {
                 background: var(--amber3);
             }
+            nav a.nav-login {
+                font-size: 0.7rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--muted);
+                text-decoration: none;
+                padding: 0.4rem 0.6rem;
+                transition: color 0.2s;
+                white-space: nowrap;
+            }
+            nav a.nav-login:hover {
+                color: var(--ink);
+            }
 
             /* ── HERO ── */
             .hero {
@@ -1983,7 +1997,8 @@
                 .mission-feat-grid {
                     grid-template-columns: 1fr 1fr;
                 }
-                nav a.nav-mission {
+                nav a.nav-mission,
+                nav a.nav-login {
                     display: none;
                 }
                 .why-callout-inner {
@@ -2011,6 +2026,7 @@
                     >&#9670; Our Mission</a
                 >
                 <a href="/pro.html" class="nav-pro">&#9889; For Pros</a>
+                <a href="/login.html" class="nav-login">Pro Login</a>
                 <a href="#autoquote" class="nav-cta">Get My Quote</a>
             </div>
         </nav>
@@ -2858,6 +2874,7 @@
             >
                 <a href="/yskaipe-mission.html">&#9670; Our Mission</a>
                 <a href="/pro.html">&#9889; Pro Network</a>
+                <a href="/login.html">Pro Login</a>
                 <a href="/why-yskaipe.html">&#9654; Why YSKAIPE</a>
                 <a href="/future-of-work.html">Future of Work</a>
                 <a href="/docs.html">Documentation</a>
