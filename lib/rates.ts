@@ -8,90 +8,57 @@ export interface TradeRates {
   typicalMaterialsRatio: number // materials as % of labor
 }
 
+// Keys MUST match the trade_type Postgres enum exactly:
+// 'plumbing' | 'electrical' | 'hvac' | 'roofing' | 'landscaping'
+// 'painting' | 'general_contracting' | 'automotive'
 export const RATES_DB: Record<TradeType, TradeRates> = {
-  'Plumber': {
+  plumbing: {
     laborMin: 95, laborMax: 145,
     commonJobs: ['faucet repair', 'pipe replacement', 'water heater', 'drain unclog', 'shutoff valve'],
     permitRequired: true,
     typicalMaterialsRatio: 0.4,
   },
-  'Electrician': {
+  electrical: {
     laborMin: 100, laborMax: 155,
     commonJobs: ['panel upgrade', 'outlet install', 'EV charger', 'light fixture', 'circuit breaker'],
     permitRequired: true,
     typicalMaterialsRatio: 0.35,
   },
-  'HVAC Technician': {
+  hvac: {
     laborMin: 90, laborMax: 140,
     commonJobs: ['AC tune-up', 'furnace repair', 'duct cleaning', 'thermostat install', 'refrigerant recharge'],
     permitRequired: false,
     typicalMaterialsRatio: 0.45,
   },
-  'Roofer': {
+  roofing: {
     laborMin: 80, laborMax: 130,
     commonJobs: ['shingle replacement', 'leak repair', 'full reroof', 'gutter install', 'storm damage'],
     permitRequired: false,
     typicalMaterialsRatio: 0.6,
   },
-  'General Contractor': {
+  landscaping: {
+    laborMin: 55, laborMax: 95,
+    commonJobs: ['weekly lawn service', 'mulch install', 'hedge trimming', 'leaf cleanup', 'sod install', 'irrigation repair'],
+    permitRequired: false,
+    typicalMaterialsRatio: 0.3,
+  },
+  painting: {
+    laborMin: 60, laborMax: 95,
+    commonJobs: ['interior repaint', 'exterior repaint', 'cabinet refinish', 'trim and doors', 'deck staining'],
+    permitRequired: false,
+    typicalMaterialsRatio: 0.25,
+  },
+  general_contracting: {
     laborMin: 85, laborMax: 135,
     commonJobs: ['kitchen remodel', 'bathroom remodel', 'addition', 'deck build', 'basement finish'],
     permitRequired: true,
     typicalMaterialsRatio: 0.55,
   },
-  'Welder / Fabricator': {
-    laborMin: 90, laborMax: 145,
-    commonJobs: ['custom fabrication', 'structural weld', 'gate repair', 'railing install', 'trailer repair'],
+  automotive: {
+    laborMin: 90, laborMax: 150,
+    commonJobs: ['oil change', 'brake pad replacement', 'diagnostic scan', 'battery replacement', 'tire rotation', 'alternator replacement'],
     permitRequired: false,
     typicalMaterialsRatio: 0.5,
-  },
-  'Home Inspector': {
-    laborMin: 75, laborMax: 110,
-    commonJobs: ['full home inspection', 'pre-listing inspection', 'radon test', 'mold inspection', '4-point inspection'],
-    permitRequired: false,
-    typicalMaterialsRatio: 0.05,
-  },
-  'Pest Control': {
-    laborMin: 60, laborMax: 100,
-    commonJobs: ['termite treatment', 'rodent control', 'ant treatment', 'bed bug treatment', 'preventive spray'],
-    permitRequired: false,
-    typicalMaterialsRatio: 0.3,
-  },
-  'Arborist': {
-    laborMin: 80, laborMax: 125,
-    commonJobs: ['tree removal', 'tree trimming', 'stump grinding', 'disease treatment', 'emergency storm cleanup'],
-    permitRequired: false,
-    typicalMaterialsRatio: 0.15,
-  },
-  'EV Infrastructure Tech': {
-    laborMin: 100, laborMax: 160,
-    commonJobs: ['Level 2 charger install', 'panel upgrade for EV', 'fleet charging design', 'permit filing', 'load calc'],
-    permitRequired: true,
-    typicalMaterialsRatio: 0.5,
-  },
-  'Physical Therapist': {
-    laborMin: 85, laborMax: 130,
-    commonJobs: ['initial evaluation', 'manual therapy', 'home visit', 'post-surgery rehab', 'sports injury'],
-    permitRequired: false,
-    typicalMaterialsRatio: 0.1,
-  },
-  'EMT / Paramedic': {
-    laborMin: 90, laborMax: 140,
-    commonJobs: ['event medical standby', 'transport', 'first responder', 'training', 'consultation'],
-    permitRequired: true,
-    typicalMaterialsRatio: 0.2,
-  },
-  'Drone Ops Specialist': {
-    laborMin: 85, laborMax: 135,
-    commonJobs: ['roof inspection', 'construction survey', 'agricultural mapping', 'real estate photography', 'infrastructure inspection'],
-    permitRequired: true,
-    typicalMaterialsRatio: 0.1,
-  },
-  'Smart Home Integrator': {
-    laborMin: 95, laborMax: 150,
-    commonJobs: ['security system install', 'smart lighting setup', 'home automation', 'network setup', 'AV install'],
-    permitRequired: false,
-    typicalMaterialsRatio: 0.6,
   },
 }
 

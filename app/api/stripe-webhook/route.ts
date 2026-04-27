@@ -100,12 +100,32 @@ export async function POST(req: NextRequest) {
     const zip = meta.zip || "";
 
     const tradeMap: Record<string, string> = {
-      HVAC: "hvac",
+      // Canonical lowercase pass-through (new form sends these)
+      plumbing: "plumbing",
+      electrical: "electrical",
+      hvac: "hvac",
+      roofing: "roofing",
+      landscaping: "landscaping",
+      painting: "painting",
+      general_contracting: "general_contracting",
+      automotive: "automotive",
+
+      // Capitalized variants (old form may still be in transit)
       Plumbing: "plumbing",
       Electrical: "electrical",
+      HVAC: "hvac",
       Roofing: "roofing",
       Landscaping: "landscaping",
       Painting: "painting",
+      "General Contracting": "general_contracting",
+      "General Contractor": "general_contracting",
+      Automotive: "automotive",
+      Plumber: "plumbing",
+      Electrician: "electrical",
+      "HVAC Technician": "hvac",
+      Roofer: "roofing",
+      Landscaper: "landscaping",
+      Painter: "painting",
     };
     const tradeMapped = tradeMap[trade] || trade.toLowerCase();
 

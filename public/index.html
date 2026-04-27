@@ -2533,13 +2533,28 @@
                                         <option value="">
                                             Select trade&hellip;
                                         </option>
-                                        <option>Electrician</option>
-                                        <option>General Contractor</option>
-                                        <option>HVAC Technician</option>
-                                        <option>Landscaper</option>
-                                        <option>Painter</option>
-                                        <option>Plumber</option>
-                                        <option>Roofer</option>
+                                        <option value="automotive">
+                                            Automotive
+                                        </option>
+                                        <option value="electrical">
+                                            Electrician
+                                        </option>
+                                        <option value="general_contracting">
+                                            General Contractor
+                                        </option>
+                                        <option value="hvac">
+                                            HVAC Technician
+                                        </option>
+                                        <option value="landscaping">
+                                            Landscaper
+                                        </option>
+                                        <option value="painting">
+                                            Painter
+                                        </option>
+                                        <option value="plumbing">
+                                            Plumber
+                                        </option>
+                                        <option value="roofing">Roofer</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -2975,7 +2990,7 @@
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            trade: trade || "General Contractor",
+                            trade: trade || "general_contracting",
                             zip: zip || "28036",
                             scope: scope || "residential",
                             description: desc,

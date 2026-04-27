@@ -464,4 +464,28 @@ export const TRADE_INCENTIVES: Record<
       { atMonth: 8, feature: "Premium homeowner segment access unlocked" },
     ],
   },
+  "General Contracting": {
+    type: "volume",
+    foundingBonus:
+      "Multi-trade dispatch — receive routed leads for kitchen/bath remodels, additions, and full-scope rebuilds across NC pilot zips",
+    loyaltyUnlocks: [
+      {
+        atMonth: 4,
+        feature: "Sub-contractor referral network access unlocked",
+      },
+      { atMonth: 9, feature: "High-ticket remodel lead category unlocked" },
+    ],
+  },
+  Automotive: {
+    type: "volume",
+    foundingBonus:
+      "Mobile mechanic + at-shop lead routing with verified diagnostic intent capture",
+    loyaltyUnlocks: [
+      { atMonth: 3, feature: "Fleet service lead category unlocked" },
+      {
+        atMonth: 9,
+        feature: "Insurance claim and warranty lead types unlocked",
+      },
+    ],
+  },
 };
