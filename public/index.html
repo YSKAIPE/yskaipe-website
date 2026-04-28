@@ -79,92 +79,46 @@
             .nav-right {
                 display: flex;
                 align-items: center;
-                gap: 0.75rem;
+                gap: 0.25rem;
             }
-            nav a.nav-mission {
-                font-size: 0.75rem;
+            /* Unified nav link style — text-based, accent on hover */
+            nav a.nav-link {
+                font-family: "DM Sans", sans-serif;
+                font-size: 0.78rem;
                 font-weight: 500;
-                letter-spacing: 0.09em;
+                letter-spacing: 0.1em;
                 text-transform: uppercase;
-                color: var(--gold);
+                color: var(--mid);
                 text-decoration: none;
-                padding: 0.4rem 0.85rem;
-                border: 1px solid rgba(196, 154, 53, 0.4);
+                padding: 0.5rem 0.9rem;
                 border-radius: 2px;
                 transition:
-                    border-color 0.2s,
                     color 0.2s,
                     background 0.2s;
                 white-space: nowrap;
             }
-            nav a.nav-mission:hover {
-                border-color: var(--gold);
-                background: rgba(196, 154, 53, 0.07);
-                color: var(--amber);
+            nav a.nav-link:hover {
+                color: var(--ink);
+                background: rgba(30, 28, 26, 0.04);
             }
-            nav a.nav-why {
-                font-size: 0.75rem;
-                font-weight: 500;
-                letter-spacing: 0.09em;
-                text-transform: uppercase;
-                color: var(--accent2);
-                text-decoration: none;
-                padding: 0.4rem 0.85rem;
-                border: 1px solid rgba(58, 107, 71, 0.35);
-                border-radius: 2px;
-                transition:
-                    border-color 0.2s,
-                    color 0.2s,
-                    background 0.2s;
-                white-space: nowrap;
-            }
-            nav a.nav-why:hover {
-                border-color: var(--accent2);
-                background: rgba(58, 107, 71, 0.06);
-            }
+            /* Primary CTA — only visually distinct nav item */
             nav a.nav-cta {
-                font-size: 0.8rem;
-                font-weight: 500;
+                font-family: "DM Sans", sans-serif;
+                font-size: 0.78rem;
+                font-weight: 600;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
                 background: var(--ink);
                 color: var(--paper);
-                padding: 0.45rem 1.1rem;
+                padding: 0.5rem 1.1rem;
                 border-radius: 2px;
                 text-decoration: none;
                 transition: background 0.2s;
+                white-space: nowrap;
+                margin-left: 0.5rem;
             }
             nav a.nav-cta:hover {
                 background: var(--accent);
-            }
-            nav a.nav-pro {
-                font-size: 0.78rem;
-                font-weight: 700;
-                letter-spacing: 0.06em;
-                background: var(--amber);
-                color: var(--ink);
-                padding: 0.45rem 1rem;
-                border-radius: 20px;
-                text-decoration: none;
-                transition: background 0.2s;
-                white-space: nowrap;
-            }
-            nav a.nav-pro:hover {
-                background: var(--amber3);
-            }
-            nav a.nav-login {
-                font-size: 0.7rem;
-                font-weight: 500;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: var(--muted);
-                text-decoration: none;
-                padding: 0.4rem 0.6rem;
-                transition: color 0.2s;
-                white-space: nowrap;
-            }
-            nav a.nav-login:hover {
-                color: var(--ink);
             }
 
             /* ── HERO ── */
@@ -1205,6 +1159,10 @@
                 text-transform: uppercase;
                 color: var(--mid);
             }
+            label .req {
+                color: var(--accent);
+                margin-left: 2px;
+            }
             select,
             input,
             textarea {
@@ -1224,39 +1182,50 @@
                 outline: none;
                 border-color: var(--accent);
             }
+            input.invalid,
+            select.invalid,
+            textarea.invalid {
+                border-color: #c14444;
+                background: rgba(193, 68, 68, 0.04);
+            }
             textarea {
                 resize: vertical;
                 min-height: 80px;
             }
-            .divider-or {
-                text-align: center;
-                position: relative;
-                font-size: 0.72rem;
-                letter-spacing: 0.1em;
+            .contact-section-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.68rem;
+                letter-spacing: 0.18em;
                 text-transform: uppercase;
                 color: var(--mid);
-                margin: 1rem 0;
+                margin: 1.25rem 0 0.75rem;
+                padding-top: 1.25rem;
+                border-top: 1px solid var(--border);
             }
-            .divider-or::before,
-            .divider-or::after {
-                content: "";
-                position: absolute;
-                top: 50%;
-                width: calc(50% - 2rem);
-                height: 1px;
-                background: var(--border);
+            .contact-section-label .helper {
+                text-transform: none;
+                letter-spacing: 0.02em;
+                font-family: "DM Sans", sans-serif;
+                font-size: 0.72rem;
+                font-weight: 400;
+                color: var(--muted);
+                margin-left: 0.4rem;
             }
-            .divider-or::before {
-                left: 0;
-            }
-            .divider-or::after {
-                right: 0;
-            }
-            .optional-row {
+            .contact-grid {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr;
                 gap: 1rem;
                 margin-bottom: 1.5rem;
+            }
+            .field-error {
+                display: none;
+                color: #c14444;
+                font-size: 0.72rem;
+                font-weight: 500;
+                margin-top: 0.2rem;
+            }
+            .field-error.visible {
+                display: block;
             }
             .btn-submit {
                 width: 100%;
@@ -1926,6 +1895,17 @@
             }
 
             /* ── RESPONSIVE ── */
+            @media (max-width: 900px) {
+                nav a.nav-link {
+                    padding: 0.5rem 0.65rem;
+                    font-size: 0.72rem;
+                    letter-spacing: 0.08em;
+                }
+                nav a.nav-cta {
+                    padding: 0.5rem 0.9rem;
+                    font-size: 0.72rem;
+                }
+            }
             @media (max-width: 700px) {
                 .ps-grid {
                     grid-template-columns: 1fr;
@@ -1942,13 +1922,13 @@
                 .form-grid {
                     grid-template-columns: 1fr;
                 }
+                .contact-grid {
+                    grid-template-columns: 1fr;
+                }
                 .cost-grid {
                     grid-template-columns: 1fr 1fr;
                 }
                 .fork-actions {
-                    grid-template-columns: 1fr;
-                }
-                .optional-row {
                     grid-template-columns: 1fr;
                 }
                 .pro-cards {
@@ -1997,8 +1977,8 @@
                 .mission-feat-grid {
                     grid-template-columns: 1fr 1fr;
                 }
-                nav a.nav-mission,
-                nav a.nav-login {
+                /* Hide secondary nav links on small screens — keep logo + Quote CTA */
+                nav a.nav-link.nav-secondary {
                     display: none;
                 }
                 .why-callout-inner {
@@ -2017,16 +1997,18 @@
     <body>
         <!-- NAV -->
         <nav>
-            <a href="#" class="logo">Y<span>S</span>KAIPE</a>
+            <a href="/" class="logo">Y<span>S</span>KAIPE</a>
             <div class="nav-right">
-                <a href="/why-yskaipe.html" class="nav-why"
-                    >&#9654; Why YSKAIPE</a
+                <a href="/why-yskaipe.html" class="nav-link nav-secondary"
+                    >Why YSKAIPE</a
                 >
-                <a href="/yskaipe-mission.html" class="nav-mission"
-                    >&#9670; Our Mission</a
+                <a href="/yskaipe-mission.html" class="nav-link nav-secondary"
+                    >Our Mission</a
                 >
-                <a href="/pro.html" class="nav-pro">&#9889; For Pros</a>
-                <a href="/login.html" class="nav-login">Pro Login</a>
+                <a href="/pro.html" class="nav-link">For Pros</a>
+                <a href="/login.html" class="nav-link nav-secondary"
+                    >Pro Login</a
+                >
                 <a href="#autoquote" class="nav-cta">Get My Quote</a>
             </div>
         </nav>
@@ -2528,67 +2510,124 @@
                         <div id="form-section">
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label>Trade / Role</label>
+                                    <label
+                                        >Trade / Role
+                                        <span class="req">*</span></label
+                                    >
                                     <select id="trade">
                                         <option value="">
                                             Select trade&hellip;
                                         </option>
-                                        <option>Electrician</option>
-                                        <option>General Contractor</option>
-                                        <option>HVAC Technician</option>
-                                        <option>Landscaper</option>
-                                        <option>Painter</option>
-                                        <option>Plumber</option>
-                                        <option>Roofer</option>
+                                        <option value="automotive">
+                                            Automotive
+                                        </option>
+                                        <option value="electrical">
+                                            Electrician
+                                        </option>
+                                        <option value="general_contracting">
+                                            General Contractor
+                                        </option>
+                                        <option value="hvac">
+                                            HVAC Technician
+                                        </option>
+                                        <option value="landscaping">
+                                            Landscaper
+                                        </option>
+                                        <option value="painting">
+                                            Painter
+                                        </option>
+                                        <option value="plumbing">
+                                            Plumber
+                                        </option>
+                                        <option value="roofing">Roofer</option>
                                     </select>
+                                    <div class="field-error" id="err-trade">
+                                        Please select a trade.
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Location (ZIP)</label>
+                                    <label
+                                        >Location (ZIP)
+                                        <span class="req">*</span></label
+                                    >
                                     <input
                                         type="text"
                                         id="zip"
                                         placeholder="e.g. 28036"
                                         maxlength="10"
                                     />
-                                </div>
-                                <div class="form-group">
-                                    <label>Home Size / Scope</label>
-                                    <input
-                                        type="text"
-                                        id="scope"
-                                        placeholder="e.g. 2,400 sq ft single-family"
-                                    />
+                                    <div class="field-error" id="err-zip">
+                                        Please enter a valid 5-digit ZIP code.
+                                    </div>
                                 </div>
                             </div>
                             <div
                                 class="form-group full"
                                 style="margin-bottom: 1rem"
                             >
-                                <label>Describe the Problem or Job *</label>
+                                <label
+                                    >Describe the Problem or Job
+                                    <span class="req">*</span></label
+                                >
                                 <textarea
                                     id="job-desc"
                                     placeholder="e.g. Kitchen faucet dripping, need to replace cartridge and check shutoff valves under sink. House built 1998."
                                 ></textarea>
+                                <div class="field-error" id="err-desc">
+                                    Please describe the job (at least a few
+                                    words).
+                                </div>
                             </div>
-                            <div class="divider-or">
-                                optional &mdash; for email delivery
+                            <div class="contact-section-label">
+                                Your Contact Info
+                                <span class="helper"
+                                    >&mdash; required so we can match you with a
+                                    pro</span
+                                >
                             </div>
-                            <div class="optional-row">
+                            <div class="contact-grid">
                                 <div class="form-group">
-                                    <label>Your Name</label
-                                    ><input
+                                    <label
+                                        >Your Name
+                                        <span class="req">*</span></label
+                                    >
+                                    <input
                                         type="text"
                                         id="user-name"
                                         placeholder="Jane Smith"
+                                        autocomplete="name"
                                     />
+                                    <div class="field-error" id="err-name">
+                                        Please enter your name.
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Email</label
-                                    ><input
+                                    <label
+                                        >Email <span class="req">*</span></label
+                                    >
+                                    <input
                                         type="email"
                                         id="user-email"
                                         placeholder="jane@email.com"
+                                        autocomplete="email"
                                     />
+                                    <div class="field-error" id="err-email">
+                                        Please enter a valid email.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label
+                                        >Phone <span class="req">*</span></label
+                                    >
+                                    <input
+                                        type="tel"
+                                        id="user-phone"
+                                        placeholder="(704) 555-0123"
+                                        autocomplete="tel"
+                                    />
+                                    <div class="field-error" id="err-phone">
+                                        Please enter a valid phone number.
+                                    </div>
                                 </div>
                             </div>
                             <button
@@ -2956,15 +2995,107 @@
 
             var currentQuoteData = null;
 
+            // ── VALIDATION HELPERS ──
+            function setFieldError(inputId, errorId, show) {
+                var input = document.getElementById(inputId);
+                var err = document.getElementById(errorId);
+                if (show) {
+                    input.classList.add("invalid");
+                    err.classList.add("visible");
+                } else {
+                    input.classList.remove("invalid");
+                    err.classList.remove("visible");
+                }
+            }
+
+            function isValidEmail(s) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+            }
+            function isValidZip(s) {
+                return /^\d{5}(-\d{4})?$/.test(s);
+            }
+            function isValidPhone(s) {
+                // strip non-digits, accept 10 or 11-digit (US) numbers
+                var digits = s.replace(/\D/g, "");
+                return digits.length === 10 || digits.length === 11;
+            }
+
+            // Clear error styling as user types
+            [
+                "trade",
+                "zip",
+                "job-desc",
+                "user-name",
+                "user-email",
+                "user-phone",
+            ].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                var evt = el.tagName === "SELECT" ? "change" : "input";
+                el.addEventListener(evt, function () {
+                    el.classList.remove("invalid");
+                    var errMap = {
+                        trade: "err-trade",
+                        zip: "err-zip",
+                        "job-desc": "err-desc",
+                        "user-name": "err-name",
+                        "user-email": "err-email",
+                        "user-phone": "err-phone",
+                    };
+                    var errEl = document.getElementById(errMap[id]);
+                    if (errEl) errEl.classList.remove("visible");
+                });
+            });
+
             async function getQuote() {
                 var trade = document.getElementById("trade").value;
-                var zip = document.getElementById("zip").value;
-                var scope = document.getElementById("scope").value;
+                var zip = document.getElementById("zip").value.trim();
                 var desc = document.getElementById("job-desc").value.trim();
-                if (!desc) {
-                    alert("Please describe the job.");
+                var name = document.getElementById("user-name").value.trim();
+                var email = document.getElementById("user-email").value.trim();
+                var phone = document.getElementById("user-phone").value.trim();
+
+                // Validate everything before submitting
+                var hasError = false;
+
+                if (!trade) {
+                    setFieldError("trade", "err-trade", true);
+                    hasError = true;
+                }
+                if (!zip || !isValidZip(zip)) {
+                    setFieldError("zip", "err-zip", true);
+                    hasError = true;
+                }
+                if (!desc || desc.length < 5) {
+                    setFieldError("job-desc", "err-desc", true);
+                    hasError = true;
+                }
+                if (!name) {
+                    setFieldError("user-name", "err-name", true);
+                    hasError = true;
+                }
+                if (!email || !isValidEmail(email)) {
+                    setFieldError("user-email", "err-email", true);
+                    hasError = true;
+                }
+                if (!phone || !isValidPhone(phone)) {
+                    setFieldError("user-phone", "err-phone", true);
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    // Scroll to first error
+                    var firstErr = document.querySelector(".invalid");
+                    if (firstErr) {
+                        firstErr.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                        });
+                        firstErr.focus();
+                    }
                     return;
                 }
+
                 var btn = document.getElementById("submit-btn");
                 btn.disabled = true;
                 btn.textContent = "Analyzing...";
@@ -2975,16 +3106,13 @@
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            trade: trade || "General Contractor",
-                            zip: zip || "28036",
-                            scope: scope || "residential",
+                            trade: trade,
+                            zip: zip,
+                            scope: "residential",
                             description: desc,
-                            customerName:
-                                document.getElementById("user-name").value ||
-                                "",
-                            customerEmail:
-                                document.getElementById("user-email").value ||
-                                "",
+                            customerName: name,
+                            customerEmail: email,
+                            customerPhone: phone,
                         }),
                     });
                     var data = await res.json();
@@ -3084,6 +3212,7 @@
                     "Home service request";
                 var name = document.getElementById("user-name").value || "";
                 var email = document.getElementById("user-email").value || "";
+                var phone = document.getElementById("user-phone").value || "";
                 var tradeMap = {
                     plumber: "plumbing",
                     electrician: "electrical",
@@ -3107,6 +3236,7 @@
                             zip_code: zip,
                             homeowner_name: name || "YSKAIPE User",
                             homeowner_email: email || "user@yskaipe.com",
+                            homeowner_phone: phone || "",
                         }),
                     });
                     var matchData = await matchRes.json();
@@ -3155,7 +3285,7 @@
                                   "\u2606".repeat(5 - fullStars)
                                 : "";
                         var ratingLine = p.rating ? p.rating + "/5" : "";
-                        var phone = p.phone
+                        var phoneLine = p.phone
                             ? '<div style="font-size:0.78rem;margin-top:0.5rem;"><a href="tel:' +
                               p.phone +
                               '" style="color:var(--accent);text-decoration:none;">📞 ' +
@@ -3169,7 +3299,7 @@
                               (p.isSearch ? p.name + " →" : "Visit website →") +
                               "</a></div>"
                             : "";
-                        var name = p.isSearch
+                        var nameEl = p.isSearch
                             ? ""
                             : '<div class="pro-card-name">' + p.name + "</div>";
                         var addr = p.address
@@ -3186,10 +3316,10 @@
                             : "";
                         container.innerHTML +=
                             '<div class="pro-card">' +
-                            name +
+                            nameEl +
                             addr +
                             rating +
-                            phone +
+                            phoneLine +
                             web +
                             "</div>";
                     });
