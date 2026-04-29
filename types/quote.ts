@@ -17,6 +17,7 @@ export interface QuoteRequest {
   description: string;
   customerName?: string;
   customerEmail?: string;
+  customerPhone?: string;
 }
 
 export interface QuoteResult {
@@ -27,6 +28,7 @@ export interface QuoteResult {
   description: string;
   customerName?: string;
   customerEmail?: string;
+  customerPhone?: string;
   labor_hours: number;
   labor_rate: number;
   labor_total: number;

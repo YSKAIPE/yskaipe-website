@@ -1,10 +1,12 @@
 // ============================================================
-// FILE 3: app/api/quote/route.ts
+// FILE: app/api/quote/route.ts
 // POST /api/quote
-// Body: { trade, description, zip_code, homeowner_name, homeowner_email }
+// Body: { trade, description, zip_code, homeowner_name, homeowner_email, homeowner_phone }
 // Creates a homeowner_request row and returns the auto-quote.
-// This is called from your existing quote form on yskaipe.com.
+// This is called from the homeowner quote form on yskaipe.com.
 // After success, redirect the user to /match?request_id={id}
+//
+// CHANGED 2026-04-28: homeowner_phone is now required and persisted.
 // ============================================================
 
 import { NextRequest, NextResponse } from "next/server";
@@ -86,22 +88,86 @@ const QUOTE_TABLES: Record<
     ],
     difficulty: 4,
   },
+  // GC rates: NC market customer-facing $75–$150/hr.
+  // Bands here are intentionally wide — GC scope ranges from
+  // half-day handyman fixes to multi-week remodels. The AI
+  // estimator narrows it from the description.
+  general_contracting: {
+    lines: [
+      { label: "Initial site visit / estimate", low: 0, high: 250 },
+      { label: "Labor (per day on smaller jobs)", low: 300, high: 700 },
+      { label: "Materials (varies widely by scope)", low: 150, high: 2500 },
+      { label: "Permits (if structural / electrical / plumbing)", low: 0, high: 500 },
+    ],
+    diy: [],
+    difficulty: 7,
+  },
+  // Automotive: NC customer-facing labor $85–$155/hr.
+  // Diagnostic fee typical $90–$150 (often credited if work proceeds).
+  automotive: {
+    lines: [
+      { label: "Diagnostic / inspection fee", low: 90, high: 150 },
+      { label: "Labor (1–3 hrs typical)", low: 110, high: 465 },
+      { label: "Parts (varies by repair)", low: 30, high: 800 },
+      { label: "Shop supplies / fees", low: 0, high: 30 },
+    ],
+    diy: [
+      { name: "OBD-II scanner (basic)", price: 28 },
+      { name: "Engine air filter", price: 18 },
+    ],
+    difficulty: 5,
+  },
 };
+
+// ── Validation helpers ─────────────────────────────────────
+// Same rules as the client form (index.html). Server-side check
+// guards against direct API hits and stale cached frontends.
+function isValidEmail(s: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+}
+
+function isValidPhone(s: string): boolean {
+  const digits = s.replace(/\D/g, "");
+  return digits.length === 10 || digits.length === 11;
+}
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { trade, description, zip_code, homeowner_name, homeowner_email } =
-    body;
+  const {
+    trade,
+    description,
+    zip_code,
+    homeowner_name,
+    homeowner_email,
+    homeowner_phone,
+  } = body;
 
+  // ── Required field check ─────────────────────────────────
   if (
     !trade ||
     !description ||
     !zip_code ||
     !homeowner_name ||
-    !homeowner_email
+    !homeowner_email ||
+    !homeowner_phone
   ) {
     return NextResponse.json(
       { error: "Missing required fields" },
+      { status: 400 },
+    );
+  }
+
+  // ── Format validation ────────────────────────────────────
+  if (!isValidEmail(homeowner_email)) {
+    return NextResponse.json(
+      { error: "Invalid email format" },
+      { status: 400 },
+    );
+  }
+
+  if (!isValidPhone(homeowner_phone)) {
+    return NextResponse.json(
+      { error: "Invalid phone number" },
       { status: 400 },
     );
   }
@@ -122,6 +188,7 @@ export async function POST(req: NextRequest) {
     .insert({
       homeowner_name,
       homeowner_email,
+      homeowner_phone,
       zip_code,
       trade,
       description,

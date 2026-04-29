@@ -16,6 +16,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey)
 //   description text not null,
 //   customer_name text,
 //   customer_email text,
+//   customer_phone text,                              -- added 2026-04-28
 //   labor_hours numeric,
 //   labor_rate numeric,
 //   labor_total numeric,
@@ -41,6 +42,9 @@ export const supabase = createClient(supabaseUrl, supabaseKey)
 // create policy "Service role can read"
 //   on quotes for select
 //   using (true);
+//
+// -- Migration for existing deployments (idempotent):
+// alter table quotes add column if not exists customer_phone text;
 // ──────────────────────────────────────────────────────────────────────────
 
 export async function saveQuote(quote: QuoteResult): Promise<{ id: string } | null> {
@@ -53,6 +57,7 @@ export async function saveQuote(quote: QuoteResult): Promise<{ id: string } | nu
       description: quote.description,
       customer_name: quote.customerName,
       customer_email: quote.customerEmail,
+      customer_phone: quote.customerPhone,
       labor_hours: quote.labor_hours,
       labor_rate: quote.labor_rate,
       labor_total: quote.labor_total,
@@ -92,6 +97,7 @@ export async function getQuoteById(id: string): Promise<QuoteResult | null> {
     description: data.description,
     customerName: data.customer_name,
     customerEmail: data.customer_email,
+    customerPhone: data.customer_phone,
     labor_hours: data.labor_hours,
     labor_rate: data.labor_rate,
     labor_total: data.labor_total,

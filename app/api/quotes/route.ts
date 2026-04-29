@@ -9,7 +9,15 @@ const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 export async function POST(req: NextRequest) {
   try {
     const body: QuoteRequest = await req.json()
-    const { trade, zip, scope, description, customerName, customerEmail } = body
+    const {
+      trade,
+      zip,
+      scope,
+      description,
+      customerName,
+      customerEmail,
+      customerPhone,
+    } = body
 
     if (!trade || !description) {
       return NextResponse.json({ error: 'trade and description are required' }, { status: 400 })
@@ -81,6 +89,7 @@ Job description: ${description}`
       description,
       customerName,
       customerEmail,
+      customerPhone,
       labor_hours: parsed.labor_hours,
       labor_rate: parsed.labor_rate,
       labor_total: parsed.labor_total,
