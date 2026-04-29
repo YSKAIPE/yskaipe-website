@@ -3240,7 +3240,7 @@
                 btn.textContent = "Sending...";
                 btn.disabled = true;
                 try {
-                    var res = await fetch("/api/email", {
+                    var res = await fetch("/api/email-quote", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
