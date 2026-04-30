@@ -742,9 +742,14 @@
 
             .agents-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 gap: 16px;
                 margin-top: 40px;
+            }
+            @media (max-width: 1100px) {
+                .agents-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
             }
             .agent-card {
                 border: 1px solid var(--rule);
@@ -1481,9 +1486,11 @@ Tie-breaking order:
                     <h3>AI trade agent takes over</h3>
                     <p>
                         A dedicated agent for that trade (HVAC, Plumbing,
-                        Electrical, etc.) walks the homeowner through their
-                        options — while simultaneously running the 4-factor
-                        scoring algorithm against the contractor queue.
+                        Electrical, Roofing, Landscaping, Painting,
+                        Automotive, or General Contracting) walks the homeowner
+                        through their options — while simultaneously running
+                        the 4-factor scoring algorithm against the contractor
+                        queue.
                     </p>
                 </div>
                 <div class="how-step">
@@ -1501,7 +1508,7 @@ Tie-breaking order:
 
         <section class="section reveal" style="padding-top: 0">
             <div class="section-label">AI trade agents</div>
-            <h2 class="section-title">Six agents.<br />One for every trade.</h2>
+            <h2 class="section-title">Eight agents.<br />One for every trade.</h2>
             <div class="agents-grid">
                 <div class="agent-card">
                     <div
@@ -1587,6 +1594,36 @@ Tie-breaking order:
                         Interior, exterior, specialty finishes. Founding
                         painters get the Fair Rate Index as a client-facing
                         pitch tool.
+                    </p>
+                </div>
+                <div class="agent-card">
+                    <div
+                        class="agent-avatar-wrap"
+                        style="background: #ecedf0; color: #2a2e3a"
+                    >
+                        Ax
+                    </div>
+                    <div class="agent-trade">Automotive</div>
+                    <h3>Agent Axle</h3>
+                    <p>
+                        Mobile mechanics, fleet service, in-driveway repairs.
+                        Routes time-sensitive work to the closest qualified
+                        pro.
+                    </p>
+                </div>
+                <div class="agent-card">
+                    <div
+                        class="agent-avatar-wrap"
+                        style="background: #f3ede1; color: #5a4317"
+                    >
+                        F
+                    </div>
+                    <div class="agent-trade">General Contracting</div>
+                    <h3>Agent Forge</h3>
+                    <p>
+                        Multi-trade projects, remodels, additions. Coordinates
+                        scope across trades and routes complex jobs to
+                        licensed GCs.
                     </p>
                 </div>
             </div>
