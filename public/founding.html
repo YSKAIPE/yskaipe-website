@@ -361,6 +361,7 @@
                 padding-top: 14px;
             }
 
+            /* ── PRICING ─────────────────────────────────────── */
             .pricing-section {
                 background: var(--white);
                 padding: 80px 40px;
@@ -369,215 +370,248 @@
                 max-width: 1100px;
                 margin: 0 auto;
             }
-            .pricing-grid {
+            .pricing-hero-grid {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 16px;
+                grid-template-columns: 1.05fr 1fr;
+                gap: 48px;
+                align-items: stretch;
                 margin-top: 52px;
-                align-items: start;
             }
-            .plan-card {
-                border: 1px solid var(--rule);
-                border-radius: 14px;
-                padding: 28px 24px 32px;
-                background: var(--paper);
+
+            /* The single hero plan card — the only purchasable option */
+            .plan-card-hero {
+                background: var(--ink);
+                border: 1px solid var(--gold);
+                border-radius: 18px;
+                padding: 40px 40px 36px;
+                color: var(--white);
+                position: relative;
+                box-shadow: 0 0 0 4px rgba(200, 150, 26, 0.12);
                 display: flex;
                 flex-direction: column;
-                gap: 0;
-                position: relative;
-                transition:
-                    border-color 0.2s,
-                    transform 0.2s;
             }
-            .plan-card:hover {
-                border-color: #a0c8b8;
-                transform: translateY(-2px);
-            }
-            .plan-card.featured {
-                border-color: var(--green);
-                background: var(--white);
-                box-shadow: 0 0 0 3px var(--green-light);
-            }
-            .plan-card.founding {
-                background: var(--ink);
-                border-color: var(--gold);
-                box-shadow: 0 0 0 3px rgba(200, 150, 26, 0.15);
-            }
-            .plan-card.founding:hover {
-                border-color: #e6b830;
-            }
-            .plan-badge {
+            .plan-card-hero::before {
+                content: "";
                 position: absolute;
-                top: -12px;
-                left: 24px;
+                inset: 0;
+                border-radius: 18px;
+                background: radial-gradient(
+                    circle at top right,
+                    rgba(200, 150, 26, 0.08),
+                    transparent 60%
+                );
+                pointer-events: none;
+            }
+            .hero-plan-badge {
+                position: absolute;
+                top: -13px;
+                left: 32px;
+                background: var(--gold);
+                color: var(--ink);
                 font-size: 10px;
                 font-weight: 700;
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
-                padding: 3px 10px;
+                padding: 5px 13px;
                 border-radius: 100px;
             }
-            .plan-badge.popular {
-                background: var(--green);
-                color: var(--white);
-            }
-            .plan-badge.founding-badge {
-                background: var(--gold);
-                color: var(--ink);
-            }
-            .plan-name {
+            .hero-plan-name {
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
-                color: var(--ink-soft);
-                margin-bottom: 8px;
-            }
-            .plan-card.founding .plan-name {
                 color: rgba(255, 255, 255, 0.5);
+                margin-bottom: 14px;
+                margin-top: 6px;
             }
-            .plan-price {
-                font-family: "DM Serif Display", serif;
-                font-size: 42px;
-                line-height: 1;
-                color: var(--ink);
-                margin-bottom: 2px;
-            }
-            .plan-card.founding .plan-price {
-                color: #f5d97a;
-            }
-            .plan-price sup {
-                font-size: 22px;
-                vertical-align: top;
-                margin-top: 8px;
-                display: inline-block;
-            }
-            .plan-price-note {
-                font-size: 12px;
-                color: var(--ink-faint);
+            .hero-plan-pricerow {
+                display: flex;
+                align-items: baseline;
+                gap: 14px;
                 margin-bottom: 6px;
             }
-            .plan-card.founding .plan-price-note {
-                color: rgba(255, 255, 255, 0.35);
+            .hero-plan-price {
+                font-family: "DM Serif Display", serif;
+                font-size: 72px;
+                line-height: 1;
+                color: #f5d97a;
             }
-            .plan-lock {
+            .hero-plan-price sup {
+                font-size: 32px;
+                vertical-align: top;
+                margin-top: 14px;
+                display: inline-block;
+            }
+            .hero-plan-permonth {
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.5);
+            }
+            .hero-plan-introtag {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
                 font-size: 11px;
                 font-weight: 600;
+                letter-spacing: 0.05em;
                 color: var(--gold);
                 background: rgba(200, 150, 26, 0.1);
-                border: 1px solid rgba(200, 150, 26, 0.25);
-                padding: 3px 10px;
+                border: 1px solid rgba(200, 150, 26, 0.28);
+                padding: 5px 12px;
                 border-radius: 100px;
-                display: inline-block;
-                margin-bottom: 18px;
+                margin-bottom: 22px;
             }
-            .plan-divider {
+            .hero-plan-tagline {
+                font-size: 15px;
+                line-height: 1.6;
+                color: rgba(255, 255, 255, 0.78);
+                margin-bottom: 24px;
+            }
+            .hero-plan-divider {
                 height: 1px;
-                background: var(--rule);
-                margin: 16px 0;
-            }
-            .plan-card.founding .plan-divider {
                 background: rgba(255, 255, 255, 0.1);
+                margin-bottom: 22px;
             }
-            .plan-tagline {
-                font-size: 13px;
-                color: var(--ink-mid);
-                line-height: 1.5;
-                margin-bottom: 20px;
-            }
-            .plan-card.founding .plan-tagline {
-                color: rgba(255, 255, 255, 0.65);
-            }
-            .plan-features {
+            .hero-plan-features {
                 list-style: none;
-                display: flex;
-                flex-direction: column;
-                gap: 9px;
-                margin-bottom: 28px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 11px 22px;
+                margin-bottom: 30px;
                 flex: 1;
             }
-            .plan-features li {
+            .hero-plan-features li {
                 display: flex;
                 align-items: flex-start;
-                gap: 9px;
+                gap: 10px;
                 font-size: 13px;
-                color: var(--ink-mid);
+                color: rgba(255, 255, 255, 0.78);
                 line-height: 1.45;
             }
-            .plan-card.founding .plan-features li {
-                color: rgba(255, 255, 255, 0.75);
-            }
-            .feat-check {
-                width: 16px;
-                height: 16px;
+            .hero-feat-check {
+                width: 17px;
+                height: 17px;
                 border-radius: 50%;
-                background: var(--green-light);
+                background: rgba(159, 225, 203, 0.15);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-shrink: 0;
                 margin-top: 1px;
             }
-            .feat-check::after {
+            .hero-feat-check::after {
                 content: "";
                 width: 5px;
                 height: 3px;
-                border-left: 1.5px solid var(--green);
-                border-bottom: 1.5px solid var(--green);
+                border-left: 1.5px solid #9fe1cb;
+                border-bottom: 1.5px solid #9fe1cb;
                 transform: rotate(-45deg) translate(0.5px, -0.5px);
             }
-            .plan-card.founding .feat-check {
-                background: rgba(159, 225, 203, 0.15);
-            }
-            .plan-card.founding .feat-check::after {
-                border-color: #9fe1cb;
-            }
-            .feat-special {
-                font-size: 11px;
-                font-weight: 600;
-                color: var(--gold);
-                letter-spacing: 0.04em;
-            }
-            .plan-btn {
+            .hero-plan-cta {
                 display: block;
                 text-align: center;
-                padding: 12px;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: 600;
-                text-decoration: none;
-                cursor: pointer;
-                border: none;
-                width: 100%;
-                transition: all 0.15s;
-                font-family: "DM Sans", sans-serif;
-            }
-            .plan-btn-outline {
-                background: transparent;
-                border: 1.5px solid var(--rule);
-                color: var(--ink-mid);
-            }
-            .plan-btn-outline:hover {
-                border-color: var(--ink-mid);
-                color: var(--ink);
-            }
-            .plan-btn-green {
-                background: var(--green);
-                color: var(--white);
-            }
-            .plan-btn-green:hover {
-                background: var(--green-mid);
-            }
-            .plan-btn-gold {
                 background: var(--gold);
                 color: var(--ink);
+                padding: 16px;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                text-decoration: none;
+                transition: background 0.15s;
             }
-            .plan-btn-gold:hover {
+            .hero-plan-cta:hover {
                 background: #e6b830;
             }
+            .hero-plan-finepath {
+                margin-top: 14px;
+                font-size: 11px;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.32);
+            }
+
+            /* The "future tiers" panel — informational only */
+            .future-panel {
+                background: var(--paper);
+                border: 1px dashed var(--rule);
+                border-radius: 18px;
+                padding: 36px 32px;
+                display: flex;
+                flex-direction: column;
+            }
+            .future-eyebrow {
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--ink-soft);
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .future-eyebrow::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--ink-faint);
+            }
+            .future-title {
+                font-family: "DM Serif Display", serif;
+                font-size: 26px;
+                line-height: 1.2;
+                color: var(--ink);
+                margin-bottom: 12px;
+                letter-spacing: -0.015em;
+            }
+            .future-title em {
+                font-style: italic;
+            }
+            .future-intro {
+                font-size: 14px;
+                color: var(--ink-mid);
+                line-height: 1.6;
+                margin-bottom: 24px;
+            }
+            .future-tier {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 14px 0;
+                border-top: 1px solid var(--rule);
+            }
+            .future-tier:last-child {
+                border-bottom: 1px solid var(--rule);
+            }
+            .future-tier-name {
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--ink);
+                margin-bottom: 3px;
+            }
+            .future-tier-desc {
+                font-size: 12px;
+                color: var(--ink-soft);
+                line-height: 1.5;
+                max-width: 240px;
+            }
+            .future-tier-price {
+                font-family: "DM Serif Display", serif;
+                font-size: 18px;
+                color: var(--ink-faint);
+                white-space: nowrap;
+                font-style: italic;
+            }
+            .future-footnote {
+                margin-top: 20px;
+                font-size: 12px;
+                color: var(--ink-faint);
+                line-height: 1.5;
+            }
+
             .stripe-note {
                 text-align: center;
-                margin-top: 24px;
+                margin-top: 36px;
                 font-size: 12px;
                 color: var(--ink-faint);
             }
@@ -681,6 +715,10 @@
                 padding: 1px 6px;
                 border-radius: 4px;
                 margin-left: 6px;
+            }
+            .factor-gold {
+                background: rgba(200, 150, 26, 0.18);
+                color: var(--amber);
             }
             .formula-display {
                 background: var(--ink);
@@ -910,10 +948,15 @@
                 transform: none;
             }
 
-            @media (max-width: 900px) {
-                .pricing-grid {
-                    grid-template-columns: 1fr 1fr;
+            @media (max-width: 980px) {
+                .pricing-hero-grid {
+                    grid-template-columns: 1fr;
                 }
+                .hero-plan-features {
+                    grid-template-columns: 1fr;
+                }
+            }
+            @media (max-width: 900px) {
                 .ratio-inner {
                     grid-template-columns: 1fr;
                     gap: 32px;
@@ -941,8 +984,14 @@
                 .section {
                     padding: 48px 20px;
                 }
-                .pricing-grid {
-                    grid-template-columns: 1fr;
+                .pricing-section {
+                    padding: 56px 20px;
+                }
+                .plan-card-hero {
+                    padding: 32px 24px 28px;
+                }
+                .hero-plan-price {
+                    font-size: 60px;
                 }
                 .agents-grid {
                     grid-template-columns: 1fr;
@@ -965,7 +1014,7 @@
                 <div class="slots-fill" id="slots-fill"></div>
             </div>
             <strong id="slots-remaining">43 of 50</strong> founding contractor
-            slots remaining
+            spots remaining
             <span style="opacity: 0.5">·</span>
             <span>Charlotte, NC · Pilot launch</span>
         </div>
@@ -991,8 +1040,9 @@
                 The first <em>fifty</em> Pro Contractors<br />shape everything.
             </h1>
             <p class="hero-sub">
-                Join YSKAIPE's founding cohort and take 100% of early homeowner
-                traffic as we build the market around you.
+                Join YSKAIPE's founding cohort at our special introductory rate
+                and take 100% of early homeowner traffic as we build the market
+                around you.
             </p>
             <div class="hero-counter">
                 <div>
@@ -1008,9 +1058,9 @@
                 <div>
                     <div class="counter-num">$99</div>
                     <div class="counter-meta">
-                        <div class="counter-label">Forever rate</div>
+                        <div class="counter-label">Founding rate</div>
                         <div class="counter-sub">
-                            Rate-locked · Never increases
+                            Special pilot price · First Fifty only
                         </div>
                     </div>
                 </div>
@@ -1054,12 +1104,13 @@
                     </p>
                 </div>
                 <div class="why-card">
-                    <div class="why-icon">🔒</div>
-                    <h3>Rate locked forever</h3>
+                    <div class="why-icon">🎟️</div>
+                    <h3>Special pilot pricing</h3>
                     <p>
-                        $99/month is the founding rate. As YSKAIPE scales and
-                        pricing evolves, your subscription price is permanently
-                        locked — contractually.
+                        $99/month is our introductory founding rate, reserved
+                        for the First Fifty cohort only. After we close, we'll
+                        adjust pricing to closer match our fair market value
+                        analysis.
                     </p>
                 </div>
                 <div class="why-card">
@@ -1161,7 +1212,7 @@
                     <div class="ratio-note">
                         Target: 3,300 homeowners : 100 contractors. At target
                         ratio, every active contractor receives enough leads to
-                        generate meaningful ROI at every tier.
+                        generate meaningful ROI.
                     </div>
                 </div>
             </div>
@@ -1169,289 +1220,148 @@
 
         <section class="pricing-section" id="pricing">
             <div class="pricing-inner">
-                <div class="section-label">Plans &amp; pricing</div>
+                <div class="section-label">The First Fifty offer</div>
                 <h2 class="section-title">
-                    Choose your position<br />in the network.
+                    One plan. One price.<br />
+                    <em>Fifty seats.</em>
                 </h2>
-                <div class="pricing-grid">
-                    <div class="plan-card founding">
-                        <span class="plan-badge founding-badge"
-                            >Founding · 50 slots</span
+                <p class="section-body">
+                    During pilot, we're keeping it simple. Every founding
+                    contractor gets the same all-in plan at the same
+                    introductory rate. Standard tiers will roll out after the
+                    cohort closes.
+                </p>
+
+                <div class="pricing-hero-grid">
+                    <!-- HERO PLAN: the only purchasable option -->
+                    <div class="plan-card-hero">
+                        <span class="hero-plan-badge"
+                            >Founding · 50 seats only</span
                         >
-                        <div style="margin-top: 12px"></div>
-                        <div class="plan-name">Founding Contractor</div>
-                        <div class="plan-price"><sup>$</sup>99</div>
-                        <div class="plan-price-note">/month · forever rate</div>
-                        <div class="plan-lock">Rate-locked permanently</div>
-                        <div class="plan-tagline">
-                            Take 100% of early traffic. Shape the platform. Lock
-                            your price before the market fills.
+                        <div class="hero-plan-name">Founding Contractor</div>
+                        <div class="hero-plan-pricerow">
+                            <div class="hero-plan-price">
+                                <sup>$</sup>99
+                            </div>
+                            <div class="hero-plan-permonth">per month</div>
                         </div>
-                        <div class="plan-divider"></div>
-                        <ul class="plan-features">
+                        <div class="hero-plan-introtag">
+                            Special introductory rate · First Fifty cohort
+                        </div>
+                        <div class="hero-plan-tagline">
+                            Take 100% of early traffic. Shape the platform.
+                            Lock in a price reserved exclusively for the First
+                            Fifty before standard tiers launch.
+                        </div>
+                        <div class="hero-plan-divider"></div>
+                        <ul class="hero-plan-features">
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    ><span class="feat-special"
-                                        >All Elite features included</span
-                                    ></span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Unlimited AI-matched leads</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Unlimited AI-matched leads — all trade
-                                    categories</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>All trade categories</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >First-look on every lead, before all other
-                                    tiers</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Instant lead delivery — no delay</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Founding Contractor badge — permanent,
-                                    public</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>First-look on every lead</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Loyalty score head start — tenure
-                                    accumulates from day one</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Founding Pro badge — permanent</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Pro Dashboard with live algorithm
-                                    simulator</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Loyalty score from day one</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Trade-specific AI agent — walks you through
-                                    every lead</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Pro Dashboard + algorithm simulator</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Direct line to pilot support + product
-                                    team</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Trade-specific AI agent</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Input on platform roadmap as founding
-                                    cohort</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Direct line to founder + product team</span>
                             </li>
                             <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Rate-locked forever — your price never
-                                    increases</span
-                                >
+                                <div class="hero-feat-check"></div>
+                                <span>Input on platform roadmap</span>
                             </li>
                         </ul>
-                        <a href="#apply" class="plan-btn plan-btn-gold"
-                            >Claim founding spot →</a
+                        <a href="#apply" class="hero-plan-cta"
+                            >Claim founding spot — $99/mo →</a
                         >
-                        <div
-                            style="
-                                margin-top: 10px;
-                                font-size: 11px;
-                                text-align: center;
-                                color: rgba(255, 255, 255, 0.25);
-                            "
-                        >
-                            Stripe:
+                        <div class="hero-plan-finepath">
+                            Stripe checkout ·
                             <code
                                 style="
-                                    color: rgba(255, 255, 255, 0.35);
+                                    color: rgba(255, 255, 255, 0.4);
                                     font-size: 10px;
+                                    background: rgba(255, 255, 255, 0.05);
+                                    padding: 1px 6px;
+                                    border-radius: 3px;
                                 "
                                 >founding_contractor_pilot_v1</code
                             >
                         </div>
                     </div>
-                    <div class="plan-card">
-                        <div class="plan-name">Starter</div>
-                        <div class="plan-price"><sup>$</sup>29</div>
-                        <div class="plan-price-note">
-                            /month · cancel anytime
+
+                    <!-- FUTURE TIERS PANEL: informational only -->
+                    <div class="future-panel">
+                        <div class="future-eyebrow">After the cohort closes</div>
+                        <h3 class="future-title">
+                            Standard tiers<br /><em>coming soon.</em>
+                        </h3>
+                        <p class="future-intro">
+                            Once the First Fifty fills, we'll open standard
+                            subscription tiers calibrated to actual lead volume
+                            and fair market value. Pricing is being finalized.
+                        </p>
+                        <div class="future-tier">
+                            <div>
+                                <div class="future-tier-name">Starter</div>
+                                <div class="future-tier-desc">
+                                    For part-time pros testing the platform.
+                                </div>
+                            </div>
+                            <div class="future-tier-price">TBD</div>
                         </div>
-                        <div style="height: 26px"></div>
-                        <div class="plan-tagline">
-                            For part-time contractors testing the platform.
-                            Steady matched jobs with zero risk.
+                        <div class="future-tier">
+                            <div>
+                                <div class="future-tier-name">Pro</div>
+                                <div class="future-tier-desc">
+                                    For active contractors with steady volume.
+                                </div>
+                            </div>
+                            <div class="future-tier-price">TBD</div>
                         </div>
-                        <div class="plan-divider"></div>
-                        <ul class="plan-features">
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>3 AI-matched leads per month</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>1 trade category</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>25-mile service radius</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>SMS lead notifications</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Basic pro profile listing</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Access to lead queue (5-min delay)</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Loyalty score accumulation</span>
-                            </li>
-                        </ul>
-                        <a href="#apply" class="plan-btn plan-btn-outline"
-                            >Get started — $29/mo</a
-                        >
-                    </div>
-                    <div class="plan-card featured">
-                        <span class="plan-badge popular">Most popular</span>
-                        <div style="margin-top: 12px"></div>
-                        <div class="plan-name">Pro</div>
-                        <div class="plan-price"><sup>$</sup>79</div>
-                        <div class="plan-price-note">
-                            /month · cancel anytime
+                        <div class="future-tier">
+                            <div>
+                                <div class="future-tier-name">Elite</div>
+                                <div class="future-tier-desc">
+                                    For full-time contractors maximizing flow.
+                                </div>
+                            </div>
+                            <div class="future-tier-price">TBD</div>
                         </div>
-                        <div style="height: 26px"></div>
-                        <div class="plan-tagline">
-                            The sweet spot for active contractors. More leads,
-                            more trades, priority in the network.
-                        </div>
-                        <div class="plan-divider"></div>
-                        <ul class="plan-features">
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>10 AI-matched leads per month</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>3 trade categories</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>50-mile service radius</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>SMS + push notifications</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Enhanced profile + ratings badge</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >Priority match queue (before Starter)</span
-                                >
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Access to lead queue (2-min delay)</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Monthly performance dashboard</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Loyalty score accumulation</span>
-                            </li>
-                        </ul>
-                        <a href="#apply" class="plan-btn plan-btn-green"
-                            >Subscribe — $79/mo</a
-                        >
-                    </div>
-                    <div class="plan-card">
-                        <div class="plan-name">Elite</div>
-                        <div class="plan-price"><sup>$</sup>149</div>
-                        <div class="plan-price-note">
-                            /month · cancel anytime
-                        </div>
-                        <div style="height: 26px"></div>
-                        <div class="plan-tagline">
-                            For full-time contractors who want maximum lead flow
-                            and first-mover advantage.
-                        </div>
-                        <div class="plan-divider"></div>
-                        <ul class="plan-features">
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Unlimited AI-matched leads</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>All trade categories</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Unlimited service radius</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span
-                                    >First-look — beat all standard tiers</span
-                                >
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Elite badge on public profile</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Featured in Pro directory</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Dedicated onboarding call</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Priority support + account review</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Loyalty score accumulation</span>
-                            </li>
-                            <li>
-                                <div class="feat-check"></div>
-                                <span>Instant lead delivery (no delay)</span>
-                            </li>
-                        </ul>
-                        <a href="#apply" class="plan-btn plan-btn-outline"
-                            >Subscribe — $149/mo</a
-                        >
+                        <p class="future-footnote">
+                            Founding contractors keep first-look priority over
+                            every standard tier — that advantage is structural,
+                            not a one-time discount.
+                        </p>
                     </div>
                 </div>
+
                 <div class="stripe-note">
-                    Powered by Stripe · Secure checkout · Cancel anytime<br />Stripe
-                    product codes: <code>starter_v2</code> ·
-                    <code>pro_v2</code> · <code>elite_v2</code> ·
-                    <code>founding_contractor_pilot_v1</code>
+                    Powered by Stripe · Secure checkout · Cancel anytime
                 </div>
             </div>
         </section>
@@ -1478,11 +1388,17 @@
                         <div class="factor-item">
                             <div class="factor-num">2</div>
                             <div class="factor-body">
-                                <h4>Subscription tier</h4>
+                                <h4>
+                                    Founding status
+                                    <span class="factor-new factor-gold"
+                                        >First Fifty</span
+                                    >
+                                </h4>
                                 <p>
-                                    Elite = instant delivery. Pro = 2-min delay.
-                                    Starter = 5-min delay. Higher tiers win ties
-                                    and see leads first.
+                                    Founding pros get instant lead delivery and
+                                    a structural priority weight. When standard
+                                    tiers launch, they'll slot in below founding
+                                    on this same axis.
                                 </p>
                             </div>
                         </div>
@@ -1514,21 +1430,21 @@
                     <div class="formula-display">
                         <pre>
 score =
-  ( trade  × w_trade
-  + tier   × w_tier
-  + geo    × w_geo
-  + loyalty × w_loyalty )
+  ( trade    × w_trade
+  + founding × w_founding
+  + geo      × w_geo
+  + loyalty  × w_loyalty )
   ÷ Σ weights × 100
 
 ─────────────────────────────
 Founding contractor advantage:
 
-  loyalty starts accumulating
-  before any competitor joins.
+  founding flag + early loyalty
+  accumulation compound together.
 
-  At month 6, a founding pro
-  outscores a new Elite on
-  equivalent leads.
+  By the time standard tiers
+  launch, the First Fifty hold
+  a permanent structural edge.
 ─────────────────────────────
 Tie-breaking order:
   1. Composite score
@@ -1575,9 +1491,9 @@ Tie-breaking order:
                     <h3>Best-fit contractor receives the lead</h3>
                     <p>
                         The highest-scored eligible contractor gets the lead
-                        instantly (Founding / Elite) or with a short delay (Pro
-                        / Starter). They can accept the job on the homeowner's
-                        proposed terms or negotiate directly.
+                        instantly. Founding pros sit at the top of the queue
+                        with structural priority. They can accept the job on
+                        the homeowner's proposed terms or negotiate directly.
                     </p>
                 </div>
             </div>
@@ -1683,9 +1599,10 @@ Tie-breaking order:
                     Claim your founding spot.<br /><em>Before it's gone.</em>
                 </h2>
                 <p class="form-sub">
-                    Complete the form below to secure your spot and lock in your
-                    $99/mo rate forever. You'll be taken to a secure Stripe
-                    checkout — then your account is created automatically.
+                    Complete the form below to secure your spot at the $99/mo
+                    introductory founding rate. You'll be taken to a secure
+                    Stripe checkout — then your account is created
+                    automatically.
                 </p>
 
                 <form
@@ -1738,13 +1655,14 @@ Tie-breaking order:
                                 type="tel"
                                 id="phone"
                                 placeholder="(704) 555-0182"
+                                required
                             />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Primary trade</label>
-                            <select name="trade" required>
+                            <select id="trade" name="trade" required>
                                 <option value="">Select trade&hellip;</option>
                                 <option value="automotive">Automotive</option>
                                 <option value="electrical">Electrical</option>
@@ -1778,7 +1696,7 @@ Tie-breaking order:
                         />
                     </div>
                     <button type="submit" class="form-submit" id="submit-btn">
-                        Claim founding spot — $99/mo locked →
+                        Claim founding spot — $99/mo →
                     </button>
                     <div class="form-legal">
                         By submitting, you agree to the
@@ -1802,8 +1720,10 @@ Tie-breaking order:
                             style="color: #9fe1cb; text-decoration: underline"
                             >Fair Rate Index disclaimer</a
                         >. You'll be taken to a secure Stripe checkout to
-                        complete your subscription. Founding rate of $99/month
-                        is permanently locked upon activation.
+                        complete your subscription. The $99/month rate is a
+                        special introductory price for the First Fifty
+                        founding cohort; standard tier pricing will be
+                        announced after the cohort closes.
                     </div>
                 </form>
 
@@ -1830,7 +1750,7 @@ Tie-breaking order:
                 yskaipe.com
             </p>
             <p style="font-size: 11px">
-                Founding rate: $99/mo permanently locked · Stripe:
+                Founding rate: $99/mo introductory pilot pricing · Stripe:
                 founding_contractor_pilot_v1
             </p>
             <p
@@ -1996,7 +1916,7 @@ Tie-breaking order:
                 } catch (err) {
                     errBox.textContent = err.message;
                     errBox.style.display = "block";
-                    btn.textContent = "Claim founding spot — $99/mo locked →";
+                    btn.textContent = "Claim founding spot — $99/mo →";
                     btn.disabled = false;
                 }
             }
