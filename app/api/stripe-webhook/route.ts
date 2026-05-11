@@ -39,7 +39,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 const resend = new Resend(process.env.RESEND_API_KEY!);
 const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!;
 const FROM_EMAIL = "YSKAIPE <gr8@yskaipe.com>";
-const INTERNAL_ALERT_TO = "nick@yskaipe.com";
+const INTERNAL_ALERT_TO = "gr8@yskaipe.com";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.yskaipe.com";
 
 // ─── Main handler ────────────────────────────────────────────────
