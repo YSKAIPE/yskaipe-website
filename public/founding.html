@@ -27,16 +27,8 @@
                 --white: #ffffff;
                 --rule: #e4e4de;
             }
-            *,
-            *::before,
-            *::after {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-            html {
-                scroll-behavior: smooth;
-            }
+            *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+            html { scroll-behavior: smooth; }
             body {
                 font-family: "DM Sans", sans-serif;
                 background: var(--paper);
@@ -47,338 +39,123 @@
             }
 
             nav {
-                position: sticky;
-                top: 0;
-                z-index: 100;
+                position: sticky; top: 0; z-index: 100;
                 background: var(--white);
                 border-bottom: 1px solid var(--rule);
                 padding: 0 40px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+                display: flex; align-items: center; justify-content: space-between;
                 height: 58px;
             }
-            .nav-logo {
-                font-family: "DM Serif Display", serif;
-                font-size: 22px;
-                letter-spacing: -0.02em;
-                color: var(--ink);
-                text-decoration: none;
-            }
-            .nav-logo span {
-                color: var(--green-mid);
-            }
-            .nav-right {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .nav-link {
-                font-size: 13px;
-                color: var(--ink-soft);
-                text-decoration: none;
-            }
-            .nav-link:hover {
-                color: var(--ink);
-            }
-            .nav-cta {
-                font-size: 13px;
-                font-weight: 500;
-                background: var(--green);
-                color: var(--white);
-                padding: 7px 18px;
-                border-radius: 6px;
-                text-decoration: none;
-                transition: background 0.15s;
-            }
-            .nav-cta:hover {
-                background: var(--green-mid);
-            }
+            .nav-logo { font-family: "DM Serif Display", serif; font-size: 22px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+            .nav-logo span { color: var(--green-mid); }
+            .nav-right { display: flex; align-items: center; gap: 12px; }
+            .nav-link { font-size: 13px; color: var(--ink-soft); text-decoration: none; }
+            .nav-link:hover { color: var(--ink); }
+            .nav-cta { font-size: 13px; font-weight: 500; background: var(--green); color: var(--white); padding: 7px 18px; border-radius: 6px; text-decoration: none; transition: background 0.15s; }
+            .nav-cta:hover { background: var(--green-mid); }
 
             .hero {
-                background: var(--ink);
-                color: var(--white);
-                padding: 80px 40px 72px;
-                text-align: center;
-                position: relative;
-                overflow: hidden;
+                background: var(--ink); color: var(--white);
+                padding: 80px 40px 72px; text-align: center;
+                position: relative; overflow: hidden;
             }
             .hero::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255, 255, 255, 0.012) 40px,
-                    rgba(255, 255, 255, 0.012) 41px
-                );
+                content: ""; position: absolute; inset: 0;
+                background: repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px);
                 pointer-events: none;
             }
             .founding-ribbon {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                background: var(--amber-light);
-                color: var(--amber);
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                padding: 5px 14px;
-                border-radius: 100px;
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--amber-light); color: var(--amber);
+                font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+                padding: 5px 14px; border-radius: 100px;
                 margin-bottom: 28px;
                 animation: fadeUp 0.5s ease both;
             }
-            .ribbon-dot {
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: var(--gold);
-                animation: pulse 2s infinite;
-            }
-            @keyframes pulse {
-                0%,
-                100% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0.3;
-                }
-            }
-            @keyframes fadeUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(12px);
-                }
-                to {
-                    opacity: 1;
-                    transform: none;
-                }
-            }
+            .ribbon-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+            @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+            @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
             .hero h1 {
                 font-family: "DM Serif Display", serif;
                 font-size: clamp(36px, 6vw, 68px);
-                line-height: 1.08;
-                letter-spacing: -0.025em;
+                line-height: 1.08; letter-spacing: -0.025em;
                 margin-bottom: 20px;
                 animation: fadeUp 0.5s 0.1s ease both;
             }
-            .hero h1 em {
-                font-style: italic;
-                color: #9fe1cb;
-            }
+            .hero h1 em { font-style: italic; color: #9fe1cb; }
             .hero-sub {
-                font-size: 18px;
-                font-weight: 300;
-                color: rgba(255, 255, 255, 0.65);
-                max-width: 560px;
-                margin: 0 auto 40px;
+                font-size: 18px; font-weight: 300;
+                color: rgba(255,255,255,0.65);
+                max-width: 580px; margin: 0 auto 40px;
                 animation: fadeUp 0.5s 0.2s ease both;
             }
+
+            .free-month-chip {
+                display: inline-flex; align-items: center; gap: 10px;
+                background: linear-gradient(135deg, rgba(159,225,203,0.18), rgba(200,150,26,0.12));
+                border: 1px solid rgba(159,225,203,0.3);
+                border-radius: 100px;
+                padding: 7px 16px 7px 8px;
+                margin-bottom: 22px;
+                font-size: 13px; color: rgba(255,255,255,0.9);
+                animation: fadeUp 0.5s 0.15s ease both;
+            }
+            .free-month-chip-pill {
+                background: #9fe1cb; color: var(--ink);
+                font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+                padding: 3px 9px; border-radius: 100px;
+            }
+
             .hero-counter {
-                display: inline-flex;
-                align-items: center;
-                gap: 16px;
-                background: rgba(255, 255, 255, 0.07);
-                border: 1px solid rgba(255, 255, 255, 0.12);
+                display: inline-flex; align-items: center; gap: 16px;
+                background: rgba(255,255,255,0.07);
+                border: 1px solid rgba(255,255,255,0.12);
                 border-radius: 12px;
                 padding: 16px 28px;
-                margin-bottom: 44px;
+                margin-bottom: 18px;
                 animation: fadeUp 0.5s 0.3s ease both;
+                flex-wrap: wrap; justify-content: center;
             }
-            .counter-num {
-                font-family: "DM Serif Display", serif;
-                font-size: 42px;
-                line-height: 1;
-                color: #9fe1cb;
-            }
-            .counter-meta {
-                text-align: left;
-            }
-            .counter-label {
-                font-size: 13px;
-                font-weight: 500;
-                color: var(--white);
-            }
-            .counter-sub {
-                font-size: 11px;
-                color: rgba(255, 255, 255, 0.45);
-            }
-            .counter-divider {
-                width: 1px;
-                height: 44px;
-                background: rgba(255, 255, 255, 0.12);
-            }
-            .hero-ratio {
-                font-size: 13px;
-                color: rgba(255, 255, 255, 0.45);
-                margin-bottom: 0;
-                animation: fadeUp 0.5s 0.35s ease both;
-            }
-            .hero-ratio strong {
-                color: rgba(255, 255, 255, 0.75);
-            }
+            .counter-num { font-family: "DM Serif Display", serif; font-size: 42px; line-height: 1; color: #9fe1cb; }
+            .counter-num-free { color: #f5d97a; }
+            .counter-meta { text-align: left; }
+            .counter-label { font-size: 13px; font-weight: 500; color: var(--white); }
+            .counter-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
+            .counter-divider { width: 1px; height: 44px; background: rgba(255,255,255,0.12); }
+            .hero-ratio { font-size: 13px; color: rgba(255,255,255,0.45); margin: 22px auto 0; max-width: 560px; animation: fadeUp 0.5s 0.35s ease both; }
+            .hero-ratio strong { color: rgba(255,255,255,0.75); }
+            .hero-terms-mini { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 6px; animation: fadeUp 0.5s 0.4s ease both; }
 
-            .section {
-                padding: 72px 40px;
-                max-width: 1100px;
-                margin: 0 auto;
-            }
-            .section-sm {
-                padding: 56px 40px;
-                max-width: 860px;
-                margin: 0 auto;
-            }
-            .section-label {
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: var(--green);
-                margin-bottom: 10px;
-            }
-            .section-title {
-                font-family: "DM Serif Display", serif;
-                font-size: clamp(28px, 4vw, 42px);
-                line-height: 1.12;
-                letter-spacing: -0.02em;
-                color: var(--ink);
-                margin-bottom: 16px;
-            }
-            .section-title em {
-                font-style: italic;
-            }
-            .section-body {
-                font-size: 16px;
-                color: var(--ink-mid);
-                line-height: 1.7;
-                max-width: 620px;
-            }
+            .section { padding: 72px 40px; max-width: 1100px; margin: 0 auto; }
+            .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+            .section-title { font-family: "DM Serif Display", serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 16px; }
+            .section-title em { font-style: italic; }
+            .section-body { font-size: 16px; color: var(--ink-mid); line-height: 1.7; max-width: 620px; }
 
-            .why-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                gap: 1px;
-                background: var(--rule);
-                border: 1px solid var(--rule);
-                border-radius: 12px;
-                overflow: hidden;
-                margin-top: 48px;
-            }
-            .why-card {
-                background: var(--white);
-                padding: 28px 28px 32px;
-            }
-            .why-icon {
-                font-size: 22px;
-                margin-bottom: 14px;
-                width: 44px;
-                height: 44px;
-                background: var(--green-pale);
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .why-card h3 {
-                font-size: 15px;
-                font-weight: 600;
-                color: var(--ink);
-                margin-bottom: 8px;
-            }
-            .why-card p {
-                font-size: 14px;
-                color: var(--ink-soft);
-                line-height: 1.6;
-            }
+            .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; margin-top: 48px; }
+            .why-card { background: var(--white); padding: 28px 28px 32px; }
+            .why-icon { font-size: 22px; margin-bottom: 14px; width: 44px; height: 44px; background: var(--green-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+            .why-card h3 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+            .why-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
 
-            .ratio-band {
-                background: var(--green);
-                color: var(--white);
-                padding: 56px 40px;
-            }
-            .ratio-inner {
-                max-width: 1100px;
-                margin: 0 auto;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 60px;
-                align-items: center;
-            }
-            .ratio-text h2 {
-                font-family: "DM Serif Display", serif;
-                font-size: 34px;
-                line-height: 1.15;
-                margin-bottom: 16px;
-            }
-            .ratio-text h2 em {
-                font-style: italic;
-                color: #9fe1cb;
-            }
-            .ratio-text p {
-                font-size: 15px;
-                color: rgba(255, 255, 255, 0.75);
-                line-height: 1.7;
-            }
-            .ratio-visual {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-            }
-            .ratio-bar-label {
-                display: flex;
-                justify-content: space-between;
-                font-size: 12px;
-                margin-bottom: 5px;
-            }
-            .ratio-bar-label span:first-child {
-                color: rgba(255, 255, 255, 0.6);
-            }
-            .ratio-bar-label span:last-child {
-                font-weight: 600;
-                color: var(--white);
-            }
-            .ratio-bar-bg {
-                height: 8px;
-                border-radius: 4px;
-                background: rgba(255, 255, 255, 0.15);
-                overflow: hidden;
-            }
-            .ratio-bar-fill {
-                height: 100%;
-                border-radius: 4px;
-                background: #9fe1cb;
-                transition: width 1s ease;
-            }
-            .ratio-note {
-                margin-top: 16px;
-                font-size: 12px;
-                color: rgba(255, 255, 255, 0.5);
-                border-top: 1px solid rgba(255, 255, 255, 0.15);
-                padding-top: 14px;
-            }
+            .ratio-band { background: var(--green); color: var(--white); padding: 56px 40px; }
+            .ratio-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+            .ratio-text h2 { font-family: "DM Serif Display", serif; font-size: 34px; line-height: 1.15; margin-bottom: 16px; }
+            .ratio-text h2 em { font-style: italic; color: #9fe1cb; }
+            .ratio-text p { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+            .ratio-visual { display: flex; flex-direction: column; gap: 12px; }
+            .ratio-bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+            .ratio-bar-label span:first-child { color: rgba(255,255,255,0.6); }
+            .ratio-bar-label span:last-child { font-weight: 600; color: var(--white); }
+            .ratio-bar-bg { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.15); overflow: hidden; }
+            .ratio-bar-fill { height: 100%; border-radius: 4px; background: #9fe1cb; transition: width 1s ease; }
+            .ratio-note { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.5); border-top: 1px solid rgba(255,255,255,0.15); padding-top: 14px; }
 
-            /* ── PRICING ─────────────────────────────────────── */
-            .pricing-section {
-                background: var(--white);
-                padding: 80px 40px;
-            }
-            .pricing-inner {
-                max-width: 1100px;
-                margin: 0 auto;
-            }
-            .pricing-hero-grid {
-                display: grid;
-                grid-template-columns: 1.05fr 1fr;
-                gap: 48px;
-                align-items: stretch;
-                margin-top: 52px;
-            }
+            .pricing-section { background: var(--white); padding: 80px 40px; }
+            .pricing-inner { max-width: 1100px; margin: 0 auto; }
+            .pricing-hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: stretch; margin-top: 52px; }
 
-            /* The single hero plan card — the only purchasable option */
             .plan-card-hero {
                 background: var(--ink);
                 border: 1px solid var(--gold);
@@ -386,648 +163,167 @@
                 padding: 40px 40px 36px;
                 color: var(--white);
                 position: relative;
-                box-shadow: 0 0 0 4px rgba(200, 150, 26, 0.12);
-                display: flex;
-                flex-direction: column;
+                box-shadow: 0 0 0 4px rgba(200,150,26,0.12);
+                display: flex; flex-direction: column;
             }
-            .plan-card-hero::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: 18px;
-                background: radial-gradient(
-                    circle at top right,
-                    rgba(200, 150, 26, 0.08),
-                    transparent 60%
-                );
-                pointer-events: none;
-            }
-            .hero-plan-badge {
-                position: absolute;
-                top: -13px;
-                left: 32px;
-                background: var(--gold);
-                color: var(--ink);
-                font-size: 10px;
-                font-weight: 700;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                padding: 5px 13px;
-                border-radius: 100px;
-            }
-            .hero-plan-name {
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                color: rgba(255, 255, 255, 0.5);
-                margin-bottom: 14px;
-                margin-top: 6px;
-            }
-            .hero-plan-pricerow {
-                display: flex;
-                align-items: baseline;
-                gap: 14px;
-                margin-bottom: 6px;
-            }
-            .hero-plan-price {
-                font-family: "DM Serif Display", serif;
-                font-size: 72px;
-                line-height: 1;
-                color: #f5d97a;
-            }
-            .hero-plan-price sup {
-                font-size: 32px;
-                vertical-align: top;
-                margin-top: 14px;
-                display: inline-block;
-            }
-            .hero-plan-permonth {
-                font-size: 14px;
-                color: rgba(255, 255, 255, 0.5);
-            }
-            .hero-plan-introtag {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.05em;
-                color: var(--gold);
-                background: rgba(200, 150, 26, 0.1);
-                border: 1px solid rgba(200, 150, 26, 0.28);
-                padding: 5px 12px;
-                border-radius: 100px;
-                margin-bottom: 22px;
-            }
-            .hero-plan-tagline {
-                font-size: 15px;
-                line-height: 1.6;
-                color: rgba(255, 255, 255, 0.78);
-                margin-bottom: 24px;
-            }
-            .hero-plan-divider {
-                height: 1px;
-                background: rgba(255, 255, 255, 0.1);
-                margin-bottom: 22px;
-            }
-            .hero-plan-features {
-                list-style: none;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 11px 22px;
-                margin-bottom: 30px;
-                flex: 1;
-            }
-            .hero-plan-features li {
-                display: flex;
-                align-items: flex-start;
-                gap: 10px;
-                font-size: 13px;
-                color: rgba(255, 255, 255, 0.78);
-                line-height: 1.45;
-            }
-            .hero-feat-check {
-                width: 17px;
-                height: 17px;
-                border-radius: 50%;
-                background: rgba(159, 225, 203, 0.15);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-                margin-top: 1px;
-            }
-            .hero-feat-check::after {
-                content: "";
-                width: 5px;
-                height: 3px;
-                border-left: 1.5px solid #9fe1cb;
-                border-bottom: 1.5px solid #9fe1cb;
-                transform: rotate(-45deg) translate(0.5px, -0.5px);
-            }
-            .hero-plan-cta {
-                display: block;
-                text-align: center;
-                background: var(--gold);
-                color: var(--ink);
-                padding: 16px;
-                border-radius: 10px;
-                font-size: 15px;
-                font-weight: 700;
-                text-decoration: none;
-                transition: background 0.15s;
-            }
-            .hero-plan-cta:hover {
-                background: #e6b830;
-            }
-            .hero-plan-finepath {
-                margin-top: 14px;
-                font-size: 11px;
-                text-align: center;
-                color: rgba(255, 255, 255, 0.32);
-            }
+            .plan-card-hero::before { content: ""; position: absolute; inset: 0; border-radius: 18px; background: radial-gradient(circle at top right, rgba(200,150,26,0.08), transparent 60%); pointer-events: none; }
+            .hero-plan-badge { position: absolute; top: -13px; left: 32px; background: var(--gold); color: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 13px; border-radius: 100px; }
+            .hero-plan-badge-free { position: absolute; top: -13px; right: 32px; background: #9fe1cb; color: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 13px; border-radius: 100px; }
+            .hero-plan-name { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 14px; margin-top: 6px; }
+            .hero-plan-pricerow { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+            .hero-plan-price { font-family: "DM Serif Display", serif; font-size: 72px; line-height: 1; color: #f5d97a; }
+            .hero-plan-price sup { font-size: 32px; vertical-align: top; margin-top: 14px; display: inline-block; }
+            .hero-plan-permonth { font-size: 14px; color: rgba(255,255,255,0.5); }
+            .hero-plan-permonth strong { color: #9fe1cb; font-weight: 600; }
+            .hero-plan-introtag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; color: var(--gold); background: rgba(200,150,26,0.1); border: 1px solid rgba(200,150,26,0.28); padding: 5px 12px; border-radius: 100px; margin-bottom: 22px; }
+            .hero-plan-tagline { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.78); margin-bottom: 24px; }
+            .hero-plan-divider { height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 22px; }
+            .hero-plan-features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 11px 22px; margin-bottom: 30px; flex: 1; }
+            .hero-plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.45; }
+            .hero-feat-check { width: 17px; height: 17px; border-radius: 50%; background: rgba(159,225,203,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+            .hero-feat-check::after { content: ""; width: 5px; height: 3px; border-left: 1.5px solid #9fe1cb; border-bottom: 1.5px solid #9fe1cb; transform: rotate(-45deg) translate(0.5px, -0.5px); }
+            .hero-plan-cta { display: block; text-align: center; background: var(--gold); color: var(--ink); padding: 16px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; transition: background 0.15s; }
+            .hero-plan-cta:hover { background: #e6b830; }
+            .hero-plan-finepath { margin-top: 14px; font-size: 11px; text-align: center; color: rgba(255,255,255,0.32); line-height: 1.5; }
 
-            /* The "future tiers" panel — informational only */
-            .future-panel {
-                background: var(--paper);
-                border: 1px dashed var(--rule);
-                border-radius: 18px;
-                padding: 36px 32px;
-                display: flex;
-                flex-direction: column;
-            }
-            .future-eyebrow {
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: var(--ink-soft);
-                margin-bottom: 12px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
-            .future-eyebrow::before {
-                content: "";
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: var(--ink-faint);
-            }
-            .future-title {
-                font-family: "DM Serif Display", serif;
-                font-size: 26px;
-                line-height: 1.2;
-                color: var(--ink);
-                margin-bottom: 12px;
-                letter-spacing: -0.015em;
-            }
-            .future-title em {
-                font-style: italic;
-            }
-            .future-intro {
-                font-size: 14px;
-                color: var(--ink-mid);
-                line-height: 1.6;
-                margin-bottom: 24px;
-            }
-            .future-tier {
-                display: flex;
-                align-items: flex-start;
-                justify-content: space-between;
-                gap: 16px;
-                padding: 14px 0;
-                border-top: 1px solid var(--rule);
-            }
-            .future-tier:last-child {
-                border-bottom: 1px solid var(--rule);
-            }
-            .future-tier-name {
-                font-size: 14px;
-                font-weight: 600;
-                color: var(--ink);
-                margin-bottom: 3px;
-            }
-            .future-tier-desc {
-                font-size: 12px;
-                color: var(--ink-soft);
-                line-height: 1.5;
-                max-width: 240px;
-            }
-            .future-tier-price {
-                font-family: "DM Serif Display", serif;
-                font-size: 18px;
-                color: var(--ink-faint);
-                white-space: nowrap;
-                font-style: italic;
-            }
-            .future-footnote {
-                margin-top: 20px;
-                font-size: 12px;
-                color: var(--ink-faint);
-                line-height: 1.5;
-            }
+            .trial-timeline { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px 18px 14px; margin-bottom: 24px; }
+            .trial-timeline-row { display: flex; align-items: flex-start; gap: 12px; font-size: 12.5px; color: rgba(255,255,255,0.7); line-height: 1.5; padding: 6px 0; position: relative; }
+            .trial-timeline-row + .trial-timeline-row { border-top: 1px dashed rgba(255,255,255,0.06); margin-top: 4px; padding-top: 10px; }
+            .trial-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; flex-shrink: 0; margin-top: 1px; min-width: 70px; text-align: center; }
+            .trial-tag-free { background: rgba(159,225,203,0.18); color: #9fe1cb; }
+            .trial-tag-paid { background: rgba(200,150,26,0.18); color: #f5d97a; }
+            .trial-tag-after { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); }
+            .trial-timeline-row strong { color: rgba(255,255,255,0.92); font-weight: 600; }
 
-            .stripe-note {
-                text-align: center;
-                margin-top: 36px;
-                font-size: 12px;
-                color: var(--ink-faint);
+            .activation-band {
+                background: linear-gradient(135deg, #1a1a18 0%, #16302a 100%);
+                padding: 64px 40px; color: var(--white);
             }
-            .stripe-note code {
-                font-size: 11px;
-                background: #f3f3ef;
-                padding: 2px 7px;
-                border-radius: 4px;
-                color: var(--ink-soft);
-            }
+            .activation-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; }
+            .activation-text .section-label { color: #9fe1cb; }
+            .activation-text h2 { font-family: "DM Serif Display", serif; font-size: 34px; line-height: 1.15; margin-bottom: 16px; color: var(--white); }
+            .activation-text h2 em { font-style: italic; color: #9fe1cb; }
+            .activation-text p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 14px; }
+            .activation-cards { display: flex; flex-direction: column; gap: 14px; }
+            .activation-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start; }
+            .activation-state { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; flex-shrink: 0; margin-top: 2px; min-width: 92px; text-align: center; }
+            .activation-state-unlocked { background: rgba(159,225,203,0.18); color: #9fe1cb; }
+            .activation-state-locked { background: rgba(200,150,26,0.15); color: #f5d97a; }
+            .activation-card h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+            .activation-card p { font-size: 12.5px; color: rgba(255,255,255,0.55); line-height: 1.55; margin: 0; }
 
-            .how-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 32px;
-                margin-top: 52px;
-            }
-            .how-step {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-            }
-            .step-num {
-                font-family: "DM Serif Display", serif;
-                font-size: 48px;
-                line-height: 1;
-                color: var(--green-light);
-            }
-            .how-step h3 {
-                font-size: 16px;
-                font-weight: 600;
-                color: var(--ink);
-            }
-            .how-step p {
-                font-size: 14px;
-                color: var(--ink-soft);
-                line-height: 1.65;
-            }
+            .future-panel { background: var(--paper); border: 1px dashed var(--rule); border-radius: 18px; padding: 36px 32px; display: flex; flex-direction: column; }
+            .future-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+            .future-eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-faint); }
+            .future-title { font-family: "DM Serif Display", serif; font-size: 26px; line-height: 1.2; color: var(--ink); margin-bottom: 12px; letter-spacing: -0.015em; }
+            .future-title em { font-style: italic; }
+            .future-intro { font-size: 14px; color: var(--ink-mid); line-height: 1.6; margin-bottom: 24px; }
+            .future-tier { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--rule); }
+            .future-tier:last-child { border-bottom: 1px solid var(--rule); }
+            .future-tier-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+            .future-tier-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; max-width: 240px; }
+            .future-tier-price { font-family: "DM Serif Display", serif; font-size: 18px; color: var(--ink-faint); white-space: nowrap; font-style: italic; }
+            .future-footnote { margin-top: 20px; font-size: 12px; color: var(--ink-faint); line-height: 1.5; }
 
-            .algo-band {
-                background: var(--green-pale);
-                border-top: 1px solid var(--green-light);
-                border-bottom: 1px solid var(--green-light);
-                padding: 56px 40px;
-            }
-            .algo-inner {
-                max-width: 1100px;
-                margin: 0 auto;
-            }
-            .algo-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 56px;
-                align-items: center;
-                margin-top: 32px;
-            }
-            .factor-list {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-            }
-            .factor-item {
-                display: flex;
-                align-items: flex-start;
-                gap: 14px;
-                background: var(--white);
-                border: 1px solid var(--rule);
-                border-radius: 10px;
-                padding: 14px 16px;
-            }
-            .factor-num {
-                width: 26px;
-                height: 26px;
-                border-radius: 50%;
-                background: var(--green);
-                color: var(--white);
-                font-size: 12px;
-                font-weight: 700;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-            }
-            .factor-body h4 {
-                font-size: 14px;
-                font-weight: 600;
-                color: var(--ink);
-                margin-bottom: 3px;
-            }
-            .factor-body p {
-                font-size: 12px;
-                color: var(--ink-soft);
-                line-height: 1.5;
-            }
-            .factor-new {
-                font-size: 10px;
-                font-weight: 700;
-                letter-spacing: 0.08em;
-                background: var(--amber-light);
-                color: var(--amber);
-                padding: 1px 6px;
-                border-radius: 4px;
-                margin-left: 6px;
-            }
-            .factor-gold {
-                background: rgba(200, 150, 26, 0.18);
-                color: var(--amber);
-            }
-            .formula-display {
-                background: var(--ink);
-                border-radius: 12px;
-                padding: 28px;
-                color: var(--white);
-            }
-            .formula-display pre {
-                font-family: "DM Mono", "Courier New", monospace;
-                font-size: 13px;
-                line-height: 1.8;
-                color: #9fe1cb;
-                white-space: pre-wrap;
-            }
-            .formula-note {
-                margin-top: 16px;
-                font-size: 12px;
-                color: rgba(255, 255, 255, 0.45);
-                line-height: 1.6;
-            }
+            .stripe-note { text-align: center; margin-top: 36px; font-size: 12px; color: var(--ink-faint); }
+            .stripe-note code { font-size: 11px; background: #f3f3ef; padding: 2px 7px; border-radius: 4px; color: var(--ink-soft); }
 
-            .agents-grid {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 16px;
-                margin-top: 40px;
-            }
-            @media (max-width: 1100px) {
-                .agents-grid {
-                    grid-template-columns: repeat(3, 1fr);
-                }
-            }
-            .agent-card {
-                border: 1px solid var(--rule);
-                border-radius: 12px;
-                padding: 20px;
-                background: var(--white);
-                transition:
-                    border-color 0.15s,
-                    transform 0.15s;
-            }
-            .agent-card:hover {
-                border-color: var(--green-mid);
-                transform: translateY(-2px);
-            }
-            .agent-avatar-wrap {
-                width: 44px;
-                height: 44px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 700;
-                font-size: 15px;
-                margin-bottom: 12px;
-            }
-            .agent-card h3 {
-                font-size: 15px;
-                font-weight: 600;
-                color: var(--ink);
-                margin-bottom: 4px;
-            }
-            .agent-card .agent-trade {
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.07em;
-                text-transform: uppercase;
-                color: var(--green);
-                margin-bottom: 8px;
-            }
-            .agent-card p {
-                font-size: 13px;
-                color: var(--ink-soft);
-                line-height: 1.55;
-            }
+            .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 52px; }
+            .how-step { display: flex; flex-direction: column; gap: 12px; }
+            .step-num { font-family: "DM Serif Display", serif; font-size: 48px; line-height: 1; color: var(--green-light); }
+            .how-step h3 { font-size: 16px; font-weight: 600; color: var(--ink); }
+            .how-step p { font-size: 14px; color: var(--ink-soft); line-height: 1.65; }
 
-            .form-section {
-                background: var(--ink);
-                padding: 80px 40px;
-            }
-            .form-inner {
-                max-width: 600px;
-                margin: 0 auto;
-                text-align: center;
-            }
-            .form-inner .section-label {
-                color: #9fe1cb;
-            }
-            .form-inner .section-title {
-                color: var(--white);
-            }
-            .form-inner .section-title em {
-                color: #9fe1cb;
-            }
-            .form-sub {
-                font-size: 15px;
-                color: rgba(255, 255, 255, 0.55);
-                margin-bottom: 40px;
-            }
-            .invite-form {
-                display: flex;
-                flex-direction: column;
-                gap: 14px;
-                text-align: left;
-            }
-            .form-row {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-            }
-            .form-group {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-            }
-            .form-group label {
-                font-size: 12px;
-                font-weight: 500;
-                color: rgba(255, 255, 255, 0.55);
-            }
-            .form-group input,
-            .form-group select {
-                background: rgba(255, 255, 255, 0.07);
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                border-radius: 8px;
-                padding: 11px 14px;
-                font-size: 14px;
-                color: var(--white);
-                font-family: "DM Sans", sans-serif;
-                transition: border-color 0.15s;
-                outline: none;
-            }
-            .form-group input::placeholder {
-                color: rgba(255, 255, 255, 0.25);
-            }
-            .form-group input:focus,
-            .form-group select:focus {
-                border-color: var(--green-mid);
-            }
-            .form-group select option {
-                background: var(--ink);
-                color: var(--white);
-            }
-            .form-submit {
-                background: var(--gold);
-                color: var(--ink);
-                border: none;
-                border-radius: 8px;
-                padding: 14px;
-                font-size: 15px;
-                font-weight: 700;
-                font-family: "DM Sans", sans-serif;
-                cursor: pointer;
-                transition: background 0.15s;
-                margin-top: 6px;
-                width: 100%;
-            }
-            .form-submit:hover {
-                background: #e6b830;
-            }
-            .form-submit:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
-            }
-            .form-legal {
-                font-size: 11px;
-                color: rgba(255, 255, 255, 0.3);
-                text-align: center;
-                line-height: 1.5;
-                margin-top: 4px;
-            }
+            .algo-band { background: var(--green-pale); border-top: 1px solid var(--green-light); border-bottom: 1px solid var(--green-light); padding: 56px 40px; }
+            .algo-inner { max-width: 1100px; margin: 0 auto; }
+            .algo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 32px; }
+            .factor-list { display: flex; flex-direction: column; gap: 12px; }
+            .factor-item { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
+            .factor-num { width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: var(--white); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+            .factor-body h4 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+            .factor-body p { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+            .factor-new { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; background: var(--amber-light); color: var(--amber); padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+            .factor-gold { background: rgba(200,150,26,0.18); color: var(--amber); }
+            .formula-display { background: var(--ink); border-radius: 12px; padding: 28px; color: var(--white); }
+            .formula-display pre { font-family: "DM Mono", "Courier New", monospace; font-size: 13px; line-height: 1.8; color: #9fe1cb; white-space: pre-wrap; }
+            .formula-note { margin-top: 16px; font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
 
-            .slots-bar {
-                background: var(--amber-light);
-                border-bottom: 1px solid rgba(200, 150, 26, 0.2);
-                padding: 10px 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 12px;
-                font-size: 13px;
-                color: var(--amber);
-            }
-            .slots-bar strong {
-                font-weight: 700;
-            }
-            .slots-progress {
-                width: 160px;
-                height: 5px;
-                border-radius: 3px;
-                background: rgba(133, 79, 11, 0.15);
-                overflow: hidden;
-            }
-            .slots-fill {
-                height: 100%;
-                border-radius: 3px;
-                background: var(--gold);
-                width: 14%;
-            }
+            .agents-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+            @media (max-width: 1100px) { .agents-grid { grid-template-columns: repeat(3, 1fr); } }
+            .agent-card { border: 1px solid var(--rule); border-radius: 12px; padding: 20px; background: var(--white); transition: border-color 0.15s, transform 0.15s; }
+            .agent-card:hover { border-color: var(--green-mid); transform: translateY(-2px); }
+            .agent-avatar-wrap { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; margin-bottom: 12px; }
+            .agent-card h3 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+            .agent-card .agent-trade { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+            .agent-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
 
-            footer {
-                background: #111110;
-                padding: 32px 40px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-            .footer-logo {
-                font-family: "DM Serif Display", serif;
-                font-size: 18px;
-                color: rgba(255, 255, 255, 0.5);
-            }
-            .footer-logo span {
-                color: var(--green-mid);
-            }
-            footer p {
-                font-size: 12px;
-                color: rgba(255, 255, 255, 0.25);
-            }
+            .form-section { background: var(--ink); padding: 80px 40px; }
+            .form-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+            .form-inner .section-label { color: #9fe1cb; }
+            .form-inner .section-title { color: var(--white); }
+            .form-inner .section-title em { color: #9fe1cb; }
+            .form-sub { font-size: 15px; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
 
-            .reveal {
-                opacity: 0;
-                transform: translateY(18px);
-                transition:
-                    opacity 0.5s ease,
-                    transform 0.5s ease;
-            }
-            .reveal.visible {
-                opacity: 1;
-                transform: none;
-            }
+            .terms-summary { background: rgba(159,225,203,0.06); border: 1px solid rgba(159,225,203,0.15); border-radius: 12px; padding: 18px 22px; margin-bottom: 28px; text-align: left; }
+            .terms-summary-title { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #9fe1cb; margin-bottom: 10px; }
+            .terms-summary-row { display: flex; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.55; padding: 4px 0; }
+            .terms-summary-row::before { content: "→"; color: #9fe1cb; flex-shrink: 0; margin-top: 1px; }
+            .terms-summary-row strong { color: var(--white); font-weight: 600; }
 
-            @media (max-width: 980px) {
-                .pricing-hero-grid {
-                    grid-template-columns: 1fr;
-                }
-                .hero-plan-features {
-                    grid-template-columns: 1fr;
-                }
-            }
-            @media (max-width: 900px) {
-                .ratio-inner {
-                    grid-template-columns: 1fr;
-                    gap: 32px;
-                }
-                .algo-grid {
-                    grid-template-columns: 1fr;
-                }
-                .how-grid {
-                    grid-template-columns: 1fr;
-                }
-                .agents-grid {
-                    grid-template-columns: 1fr 1fr;
-                }
-                .form-row {
-                    grid-template-columns: 1fr;
-                }
-            }
+            .invite-form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+            .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+            .form-group { display: flex; flex-direction: column; gap: 5px; }
+            .form-group label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); }
+            .form-group input, .form-group select { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 11px 14px; font-size: 14px; color: var(--white); font-family: "DM Sans", sans-serif; transition: border-color 0.15s; outline: none; }
+            .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+            .form-group input:focus, .form-group select:focus { border-color: var(--green-mid); }
+            .form-group select option { background: var(--ink); color: var(--white); }
+
+            .form-submit { background: var(--gold); color: var(--ink); border: none; border-radius: 8px; padding: 14px; font-size: 15px; font-weight: 700; font-family: "DM Sans", sans-serif; cursor: pointer; transition: background 0.15s; margin-top: 6px; width: 100%; }
+            .form-submit:hover { background: #e6b830; }
+            .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+            .form-legal { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; line-height: 1.5; margin-top: 4px; }
+
+            .slots-bar { background: var(--amber-light); border-bottom: 1px solid rgba(200,150,26,0.2); padding: 10px 40px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13px; color: var(--amber); }
+            .slots-bar strong { font-weight: 700; }
+            .slots-progress { width: 160px; height: 5px; border-radius: 3px; background: rgba(133,79,11,0.15); overflow: hidden; }
+            .slots-fill { height: 100%; border-radius: 3px; background: var(--gold); width: 14%; }
+
+            footer { background: #111110; padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+            .footer-logo { font-family: "DM Serif Display", serif; font-size: 18px; color: rgba(255,255,255,0.5); }
+            .footer-logo span { color: var(--green-mid); }
+            footer p { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+            .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+            .reveal.visible { opacity: 1; transform: none; }
+
+            @media (max-width: 980px) { .pricing-hero-grid, .activation-inner { grid-template-columns: 1fr; gap: 32px; } .hero-plan-features { grid-template-columns: 1fr; } }
+            @media (max-width: 900px) { .ratio-inner, .algo-grid, .how-grid { grid-template-columns: 1fr; gap: 32px; } .agents-grid { grid-template-columns: 1fr 1fr; } .form-row { grid-template-columns: 1fr; } }
             @media (max-width: 600px) {
-                nav {
-                    padding: 0 20px;
-                }
-                .hero {
-                    padding: 56px 20px 48px;
-                }
-                .section {
-                    padding: 48px 20px;
-                }
-                .pricing-section {
-                    padding: 56px 20px;
-                }
-                .plan-card-hero {
-                    padding: 32px 24px 28px;
-                }
-                .hero-plan-price {
-                    font-size: 60px;
-                }
-                .agents-grid {
-                    grid-template-columns: 1fr;
-                }
-                .form-section {
-                    padding: 56px 20px;
-                }
-                footer {
-                    padding: 24px 20px;
-                }
-                .slots-bar {
-                    padding: 10px 20px;
-                }
+                nav { padding: 0 20px; }
+                .hero { padding: 56px 20px 48px; }
+                .section { padding: 48px 20px; }
+                .pricing-section, .activation-band { padding: 56px 20px; }
+                .plan-card-hero { padding: 32px 24px 28px; }
+                .hero-plan-price { font-size: 60px; }
+                .agents-grid { grid-template-columns: 1fr; }
+                .form-section { padding: 56px 20px; }
+                footer { padding: 24px 20px; }
+                .slots-bar { padding: 10px 20px; }
+                .hero-plan-badge-free { right: auto; left: 32px; top: -36px; }
             }
         </style>
     </head>
     <body>
         <div class="slots-bar">
-            <div class="slots-progress">
-                <div class="slots-fill" id="slots-fill"></div>
-            </div>
-            <strong id="slots-remaining">43 of 50</strong> founding contractor
-            spots remaining
+            <div class="slots-progress"><div class="slots-fill" id="slots-fill"></div></div>
+            <strong id="slots-remaining">43 of 50</strong> founding contractor spots remaining
             <span style="opacity: 0.5">·</span>
-            <span>Charlotte, NC · Pilot launch</span>
+            <span>First month free · Cancel anytime · Charlotte, NC pilot</span>
         </div>
 
         <nav>
-            <a href="https://yskaipe.com" class="nav-logo"
-                >YSK<span>AI</span>PE</a
-            >
+            <a href="https://yskaipe.com" class="nav-logo">YSK<span>AI</span>PE</a>
             <div class="nav-right">
                 <a href="#pricing" class="nav-link">Pricing</a>
                 <a href="#how" class="nav-link">How It Works</a>
@@ -1038,60 +334,55 @@
 
         <section class="hero">
             <div class="founding-ribbon">
-                <span class="ribbon-dot"></span>Invitation-Only · First Fifty
-                Program
+                <span class="ribbon-dot"></span>Invitation-Only · First Fifty Program
             </div>
-            <h1>
-                The first <em>fifty</em> Pro Contractors<br />shape everything.
-            </h1>
+            <div class="free-month-chip">
+                <span class="free-month-chip-pill">New</span>
+                <span>First month free · Cancel anytime</span>
+            </div>
+            <h1>The first <em>fifty</em> Pro Contractors<br />shape everything.</h1>
             <p class="hero-sub">
-                Join YSKAIPE's founding cohort at our special introductory rate
-                and take 100% of early homeowner traffic as we build the market
-                around you.
+                Try YSKAIPE free for 30 days. Then $99/mo at our introductory
+                founding rate — cancel anytime. Take 100% of early homeowner
+                traffic as we build the market around you.
             </p>
             <div class="hero-counter">
                 <div>
                     <div class="counter-num" id="hero-slots">43</div>
                     <div class="counter-meta">
                         <div class="counter-label">Spots remaining</div>
-                        <div class="counter-sub">
-                            of 50 total · Charlotte metro
-                        </div>
+                        <div class="counter-sub">of 50 total · Charlotte metro</div>
+                    </div>
+                </div>
+                <div class="counter-divider"></div>
+                <div>
+                    <div class="counter-num counter-num-free">$0</div>
+                    <div class="counter-meta">
+                        <div class="counter-label">Due today</div>
+                        <div class="counter-sub">First 30 days free · card on file</div>
                     </div>
                 </div>
                 <div class="counter-divider"></div>
                 <div>
                     <div class="counter-num">$99</div>
                     <div class="counter-meta">
-                        <div class="counter-label">Founding rate</div>
-                        <div class="counter-sub">
-                            Special pilot price · First Fifty only
-                        </div>
-                    </div>
-                </div>
-                <div class="counter-divider"></div>
-                <div>
-                    <div class="counter-num">3,300</div>
-                    <div class="counter-meta">
-                        <div class="counter-label">Homeowners per 100 pros</div>
-                        <div class="counter-sub">
-                            Target ratio for lead saturation
-                        </div>
+                        <div class="counter-label">Then per month</div>
+                        <div class="counter-sub">Founding rate · cancel anytime</div>
                     </div>
                 </div>
             </div>
             <p class="hero-ratio">
-                Early market means
-                <strong>you absorb all incoming leads</strong> — no queue
-                competition until the ratio fills.
+                Early market means <strong>you absorb all incoming leads</strong> —
+                no queue competition until the ratio fills.
+            </p>
+            <p class="hero-terms-mini">
+                Cancel anytime in the first 30 days for $0. Month-to-month after — no contracts.
             </p>
         </section>
 
         <section class="section reveal" id="why">
             <div class="section-label">Why founding contractor</div>
-            <h2 class="section-title">
-                The rarest window<br />is the <em>first</em> one.
-            </h2>
+            <h2 class="section-title">The rarest window<br />is the <em>first</em> one.</h2>
             <p class="section-body">
                 Every marketplace has a moment before saturation — when demand
                 comes in and the supply side is thin. That's where you are right
@@ -1100,59 +391,34 @@
             </p>
             <div class="why-grid">
                 <div class="why-card">
+                    <div class="why-icon">🎁</div>
+                    <h3>First month free</h3>
+                    <p>30 days at zero cost to try the platform. Card on file, cancel anytime — no charge if you cancel before day 30.</p>
+                </div>
+                <div class="why-card">
                     <div class="why-icon">⚡</div>
                     <h3>100% of traffic is yours</h3>
-                    <p>
-                        Until the 3,300:100 homeowner-to-contractor ratio fills,
-                        every qualifying lead routes to the founding cohort — no
-                        late-joiners competing for the same job.
-                    </p>
+                    <p>Until the 3,300:100 homeowner-to-contractor ratio fills, every qualifying lead routes to the founding cohort.</p>
                 </div>
                 <div class="why-card">
                     <div class="why-icon">🎟️</div>
                     <h3>Special pilot pricing</h3>
-                    <p>
-                        $99/month is our introductory founding rate, reserved
-                        for the First Fifty cohort only. After we close, we'll
-                        adjust pricing to closer match our fair market value
-                        analysis.
-                    </p>
+                    <p>$99/month is our introductory founding rate, reserved for the First Fifty cohort only. Cancel anytime — no contracts.</p>
                 </div>
                 <div class="why-card">
                     <div class="why-icon">📈</div>
                     <h3>Loyalty score head start</h3>
-                    <p>
-                        Our algorithm rewards tenure. Every month you're on the
-                        platform before a competitor joins is a scoring
-                        advantage they can never recover.
-                    </p>
+                    <p>Our algorithm rewards tenure. Every month you're on the platform before a competitor joins is a scoring advantage they can never recover.</p>
                 </div>
                 <div class="why-card">
                     <div class="why-icon">🤖</div>
                     <h3>AI agent-matched leads</h3>
-                    <p>
-                        A dedicated trade agent processes every homeowner
-                        request in real time — scoring, routing, and presenting
-                        it to the best-fit contractor in milliseconds.
-                    </p>
+                    <p>A dedicated trade agent processes every homeowner request in real time — scoring, routing, and presenting to the best-fit contractor in milliseconds.</p>
                 </div>
                 <div class="why-card">
                     <div class="why-icon">🏆</div>
                     <h3>Founding Pro badge</h3>
-                    <p>
-                        Permanent "Founding Contractor" designation on your
-                        public profile. Homeowners see who helped build the
-                        platform — trust that compounds over time.
-                    </p>
-                </div>
-                <div class="why-card">
-                    <div class="why-icon">📊</div>
-                    <h3>Pro dashboard access</h3>
-                    <p>
-                        Full access to the contractor command center: live lead
-                        queue, algorithm scoring simulator, loyalty tracker, and
-                        performance analytics.
-                    </p>
+                    <p>Permanent "Founding Contractor" designation on your public profile after profile completion. Trust that compounds over time.</p>
                 </div>
             </div>
         </section>
@@ -1161,64 +427,23 @@
             <div class="ratio-inner">
                 <div class="ratio-text">
                     <h2>The 3,300:100<br /><em>balance model</em></h2>
-                    <p>
-                        YSKAIPE's matching engine is designed to keep every
-                        contractor at optimal lead velocity — enough jobs to
-                        justify the subscription, not so many that quality
-                        suffers. The target ratio is 3,300 active homeowners per
-                        100 contractors per market.
-                    </p>
-                    <p style="margin-top: 14px">
-                        Charlotte is at the start of that curve. Founding
-                        contractors are positioned at the widest part of the
-                        funnel — before the market fills.
-                    </p>
+                    <p>YSKAIPE's matching engine is designed to keep every contractor at optimal lead velocity — enough jobs to justify the subscription, not so many that quality suffers. The target ratio is 3,300 active homeowners per 100 contractors per market.</p>
+                    <p style="margin-top: 14px">Charlotte is at the start of that curve. Founding contractors are positioned at the widest part of the funnel — before the market fills.</p>
                 </div>
                 <div class="ratio-visual">
                     <div class="ratio-bar-wrap">
-                        <div class="ratio-bar-label">
-                            <span>Homeowners in market</span
-                            ><span id="hw-count">0</span>
-                        </div>
-                        <div class="ratio-bar-bg">
-                            <div
-                                class="ratio-bar-fill"
-                                id="hw-bar"
-                                style="width: 0%"
-                            ></div>
-                        </div>
+                        <div class="ratio-bar-label"><span>Homeowners in market</span><span id="hw-count">0</span></div>
+                        <div class="ratio-bar-bg"><div class="ratio-bar-fill" id="hw-bar" style="width: 0%"></div></div>
                     </div>
                     <div class="ratio-bar-wrap">
-                        <div class="ratio-bar-label">
-                            <span>Founding contractors</span
-                            ><span id="ct-count">0</span>
-                        </div>
-                        <div class="ratio-bar-bg">
-                            <div
-                                class="ratio-bar-fill"
-                                id="ct-bar"
-                                style="width: 0%"
-                            ></div>
-                        </div>
+                        <div class="ratio-bar-label"><span>Founding contractors</span><span id="ct-count">0</span></div>
+                        <div class="ratio-bar-bg"><div class="ratio-bar-fill" id="ct-bar" style="width: 0%"></div></div>
                     </div>
                     <div class="ratio-bar-wrap">
-                        <div class="ratio-bar-label">
-                            <span>Lead saturation</span
-                            ><span id="sat-count">0%</span>
-                        </div>
-                        <div class="ratio-bar-bg">
-                            <div
-                                class="ratio-bar-fill"
-                                id="sat-bar"
-                                style="width: 0%; background: #f5d97a"
-                            ></div>
-                        </div>
+                        <div class="ratio-bar-label"><span>Lead saturation</span><span id="sat-count">0%</span></div>
+                        <div class="ratio-bar-bg"><div class="ratio-bar-fill" id="sat-bar" style="width: 0%; background: #f5d97a"></div></div>
                     </div>
-                    <div class="ratio-note">
-                        Target: 3,300 homeowners : 100 contractors. At target
-                        ratio, every active contractor receives enough leads to
-                        generate meaningful ROI.
-                    </div>
+                    <div class="ratio-note">Target: 3,300 homeowners : 100 contractors. At target ratio, every active contractor receives enough leads to generate meaningful ROI.</div>
                 </div>
             </div>
         </div>
@@ -1226,209 +451,151 @@
         <section class="pricing-section" id="pricing">
             <div class="pricing-inner">
                 <div class="section-label">The First Fifty offer</div>
-                <h2 class="section-title">
-                    One plan. One price.<br />
-                    <em>Fifty seats.</em>
-                </h2>
+                <h2 class="section-title">First month free.<br />Then <em>$99/mo, cancel anytime.</em></h2>
                 <p class="section-body">
-                    During pilot, we're keeping it simple. Every founding
-                    contractor gets the same all-in plan at the same
-                    introductory rate. Standard tiers will roll out after the
-                    cohort closes.
+                    Try the platform free for 30 days. After the trial, $99/mo
+                    at our introductory founding rate, billed monthly. No
+                    contracts, no commitments — cancel anytime from your
+                    dashboard.
                 </p>
 
                 <div class="pricing-hero-grid">
-                    <!-- HERO PLAN: the only purchasable option -->
                     <div class="plan-card-hero">
-                        <span class="hero-plan-badge"
-                            >Founding · 50 seats only</span
-                        >
+                        <span class="hero-plan-badge">Founding · 50 seats only</span>
+                        <span class="hero-plan-badge-free">First month free</span>
                         <div class="hero-plan-name">Founding Contractor</div>
                         <div class="hero-plan-pricerow">
-                            <div class="hero-plan-price">
-                                <sup>$</sup>99
-                            </div>
-                            <div class="hero-plan-permonth">per month</div>
+                            <div class="hero-plan-price"><sup>$</sup>0</div>
+                            <div class="hero-plan-permonth"><strong>due today</strong> · then $99/mo</div>
                         </div>
-                        <div class="hero-plan-introtag">
-                            Special introductory rate · First Fifty cohort
-                        </div>
+                        <div class="hero-plan-introtag">30-day free trial · Introductory rate · First Fifty only</div>
                         <div class="hero-plan-tagline">
-                            Take 100% of early traffic. Shape the platform.
-                            Lock in a price reserved exclusively for the First
-                            Fifty before standard tiers launch.
+                            Take 100% of early traffic. Try the platform free
+                            for 30 days. Lock in $99/mo at our founding rate —
+                            cancel anytime.
                         </div>
+
+                        <div class="trial-timeline">
+                            <div class="trial-timeline-row">
+                                <div class="trial-tag trial-tag-free">Today</div>
+                                <div><strong>$0 due now.</strong> Card on file. Account activates immediately. Founding seat reserved.</div>
+                            </div>
+                            <div class="trial-timeline-row">
+                                <div class="trial-tag trial-tag-free">Days 1–30</div>
+                                <div><strong>Free trial.</strong> Full platform access. Cancel anytime for $0 — no charge if you cancel before day 30.</div>
+                            </div>
+                            <div class="trial-timeline-row">
+                                <div class="trial-tag trial-tag-paid">Day 31</div>
+                                <div><strong>First $99 charge.</strong> Trial converts to the founding plan, billed monthly.</div>
+                            </div>
+                            <div class="trial-timeline-row">
+                                <div class="trial-tag trial-tag-after">Anytime</div>
+                                <div><strong>Cancel from your dashboard.</strong> Month-to-month, no contracts. Your founding rate stays with you as long as you're subscribed.</div>
+                            </div>
+                        </div>
+
                         <div class="hero-plan-divider"></div>
                         <ul class="hero-plan-features">
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Unlimited AI-matched leads</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>All trade categories</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Instant lead delivery — no delay</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>First-look on every lead</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Founding Pro badge — permanent</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Loyalty score from day one</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Pro Dashboard + algorithm simulator</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Trade-specific AI agent</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Direct line to founder + product team</span>
-                            </li>
-                            <li>
-                                <div class="hero-feat-check"></div>
-                                <span>Input on platform roadmap</span>
-                            </li>
+                            <li><div class="hero-feat-check"></div><span>Unlimited AI-matched leads</span></li>
+                            <li><div class="hero-feat-check"></div><span>All trade categories</span></li>
+                            <li><div class="hero-feat-check"></div><span>Lead delivery during trial &amp; paid</span></li>
+                            <li><div class="hero-feat-check"></div><span>Founding Pro badge*</span></li>
+                            <li><div class="hero-feat-check"></div><span>Priority routing weight*</span></li>
+                            <li><div class="hero-feat-check"></div><span>Loyalty score from day one</span></li>
+                            <li><div class="hero-feat-check"></div><span>Pro Dashboard + algorithm simulator</span></li>
+                            <li><div class="hero-feat-check"></div><span>Trade-specific AI agent</span></li>
+                            <li><div class="hero-feat-check"></div><span>Direct line to founder + product team</span></li>
+                            <li><div class="hero-feat-check"></div><span>Input on platform roadmap</span></li>
                         </ul>
-                        <a href="#apply" class="hero-plan-cta"
-                            >Claim founding spot — $99/mo →</a
-                        >
+                        <a href="#apply" class="hero-plan-cta">Start free month — $0 today →</a>
                         <div class="hero-plan-finepath">
-                            Stripe checkout ·
-                            <code
-                                style="
-                                    color: rgba(255, 255, 255, 0.4);
-                                    font-size: 10px;
-                                    background: rgba(255, 255, 255, 0.05);
-                                    padding: 1px 6px;
-                                    border-radius: 3px;
-                                "
-                                >founding_contractor_pilot_v1</code
-                            >
+                            * Founding Pro badge &amp; priority routing activate after profile completion.<br />
+                            Stripe checkout · 30-day trial ·
+                            <code style="color: rgba(255,255,255,0.4); font-size: 10px; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 3px;">founding_contractor_pilot_v1</code>
                         </div>
                     </div>
 
-                    <!-- FUTURE TIERS PANEL: informational only -->
                     <div class="future-panel">
                         <div class="future-eyebrow">After the cohort closes</div>
-                        <h3 class="future-title">
-                            Standard tiers<br /><em>coming soon.</em>
-                        </h3>
-                        <p class="future-intro">
-                            Once the First Fifty fills, we'll open standard
-                            subscription tiers calibrated to actual lead volume
-                            and fair market value. Pricing is being finalized.
-                        </p>
-                        <div class="future-tier">
-                            <div>
-                                <div class="future-tier-name">Starter</div>
-                                <div class="future-tier-desc">
-                                    For part-time pros testing the platform.
-                                </div>
-                            </div>
-                            <div class="future-tier-price">TBD</div>
-                        </div>
-                        <div class="future-tier">
-                            <div>
-                                <div class="future-tier-name">Pro</div>
-                                <div class="future-tier-desc">
-                                    For active contractors with steady volume.
-                                </div>
-                            </div>
-                            <div class="future-tier-price">TBD</div>
-                        </div>
-                        <div class="future-tier">
-                            <div>
-                                <div class="future-tier-name">Elite</div>
-                                <div class="future-tier-desc">
-                                    For full-time contractors maximizing flow.
-                                </div>
-                            </div>
-                            <div class="future-tier-price">TBD</div>
-                        </div>
-                        <p class="future-footnote">
-                            Founding contractors keep first-look priority over
-                            every standard tier — that advantage is structural,
-                            not a one-time discount.
-                        </p>
+                        <h3 class="future-title">Standard tiers<br /><em>coming soon.</em></h3>
+                        <p class="future-intro">Once the First Fifty fills, we'll open standard subscription tiers calibrated to actual lead volume and fair market value. Pricing is being finalized.</p>
+                        <div class="future-tier"><div><div class="future-tier-name">Starter</div><div class="future-tier-desc">For part-time pros testing the platform.</div></div><div class="future-tier-price">TBD</div></div>
+                        <div class="future-tier"><div><div class="future-tier-name">Pro</div><div class="future-tier-desc">For active contractors with steady volume.</div></div><div class="future-tier-price">TBD</div></div>
+                        <div class="future-tier"><div><div class="future-tier-name">Elite</div><div class="future-tier-desc">For full-time contractors maximizing flow.</div></div><div class="future-tier-price">TBD</div></div>
+                        <p class="future-footnote">Founding contractors keep first-look priority over every standard tier — that advantage is structural, not a one-time discount.</p>
                     </div>
                 </div>
 
-                <div class="stripe-note">
-                    Powered by Stripe · Secure checkout · Cancel anytime
-                </div>
+                <div class="stripe-note">Powered by Stripe · Secure checkout · $0 due today · Cancel anytime</div>
             </div>
         </section>
+
+        <div class="activation-band">
+            <div class="activation-inner">
+                <div class="activation-text">
+                    <div class="section-label">After signup</div>
+                    <h2>Complete your profile<br />to <em>unlock everything.</em></h2>
+                    <p>Your free month is yours the moment you sign up — full platform access, lead notifications, and your trade agent. No gates, no penalties.</p>
+                    <p>Two premium perks (Founding Pro badge on your public profile + priority routing weight in the matching algorithm) activate as soon as your business profile is complete. Most contractors finish it in under 5 minutes.</p>
+                </div>
+                <div class="activation-cards">
+                    <div class="activation-card">
+                        <div class="activation-state activation-state-unlocked">Day one</div>
+                        <div>
+                            <h4>Full platform access</h4>
+                            <p>Lead notifications · trade agent · loyalty score accumulation · dashboard · algorithm simulator. No waiting.</p>
+                        </div>
+                    </div>
+                    <div class="activation-card">
+                        <div class="activation-state activation-state-locked">After profile</div>
+                        <div>
+                            <h4>Founding Pro badge</h4>
+                            <p>Permanent "Founding Contractor" designation on your public profile, visible to every homeowner viewing your bids.</p>
+                        </div>
+                    </div>
+                    <div class="activation-card">
+                        <div class="activation-state activation-state-locked">After profile</div>
+                        <div>
+                            <h4>Priority routing weight</h4>
+                            <p>Founding status factor activates in the 4-factor scoring algorithm — moving you toward the top of the queue on matching leads.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="algo-band">
             <div class="algo-inner">
                 <div class="section-label">WinWinAI matching engine</div>
-                <h2 class="section-title">
-                    How every lead finds<br />the right contractor.
-                </h2>
+                <h2 class="section-title">How every lead finds<br />the right contractor.</h2>
                 <div class="algo-grid">
                     <div class="factor-list">
                         <div class="factor-item">
                             <div class="factor-num">1</div>
                             <div class="factor-body">
                                 <h4>Trade match</h4>
-                                <p>
-                                    Primary trade = 100pts. Secondary trade =
-                                    50pts. No match = hard exclusion. This is a
-                                    gate, not a penalty.
-                                </p>
+                                <p>Primary trade = 100pts. Secondary trade = 50pts. No match = hard exclusion. This is a gate, not a penalty.</p>
                             </div>
                         </div>
                         <div class="factor-item">
                             <div class="factor-num">2</div>
                             <div class="factor-body">
-                                <h4>
-                                    Founding status
-                                    <span class="factor-new factor-gold"
-                                        >First Fifty</span
-                                    >
-                                </h4>
-                                <p>
-                                    Founding pros get instant lead delivery and
-                                    a structural priority weight. When standard
-                                    tiers launch, they'll slot in below founding
-                                    on this same axis.
-                                </p>
+                                <h4>Founding status <span class="factor-new factor-gold">First Fifty</span></h4>
+                                <p>Activates after profile completion. When active, founding pros get a structural priority weight. When standard tiers launch, they'll slot in below founding on this same axis.</p>
                             </div>
                         </div>
                         <div class="factor-item">
                             <div class="factor-num">3</div>
                             <div class="factor-body">
                                 <h4>Geographic proximity</h4>
-                                <p>
-                                    0–10mi = 100%. 11–25mi = 70%. 26–50mi = 40%.
-                                    Beyond service radius = excluded.
-                                </p>
+                                <p>0–10mi = 100%. 11–25mi = 70%. 26–50mi = 40%. Beyond service radius = excluded.</p>
                             </div>
                         </div>
                         <div class="factor-item">
                             <div class="factor-num">4</div>
                             <div class="factor-body">
-                                <h4>
-                                    Loyalty score
-                                    <span class="factor-new">v2</span>
-                                </h4>
-                                <p>
-                                    Tenure + jobs completed + response rate +
-                                    referrals + review average. Founding
-                                    contractors start accumulating on day one.
-                                </p>
+                                <h4>Loyalty score <span class="factor-new">v2</span></h4>
+                                <p>Tenure + jobs completed + response rate + referrals + review average. Founding contractors start accumulating on day one — including during the free trial.</p>
                             </div>
                         </div>
                     </div>
@@ -1454,12 +621,8 @@ Founding contractor advantage:
 Tie-breaking order:
   1. Composite score
   2. Review average
-  3. Jobs completed</pre
-                        >
-                        <div class="formula-note">
-                            Algorithm v2 · leadScoring.ts · WinWinAI model ·
-                            Updates continuously as market data grows.
-                        </div>
+  3. Jobs completed</pre>
+                        <div class="formula-note">Algorithm v2 · leadScoring.ts · WinWinAI model · Updates continuously as market data grows.</div>
                     </div>
                 </div>
             </div>
@@ -1467,41 +630,22 @@ Tie-breaking order:
 
         <section class="section reveal" id="how">
             <div class="section-label">Workflow</div>
-            <h2 class="section-title">
-                From homeowner request<br />to your phone, in seconds.
-            </h2>
+            <h2 class="section-title">From homeowner request<br />to your phone, in seconds.</h2>
             <div class="how-grid">
                 <div class="how-step">
                     <div class="step-num">01</div>
                     <h3>Homeowner submits a request</h3>
-                    <p>
-                        They describe the job on yskaipe.com. The platform
-                        instantly generates a Premium Auto-Quote — estimated
-                        cost breakdown, difficulty score, DIY shopping list, and
-                        pro options.
-                    </p>
+                    <p>They describe the job on yskaipe.com. The platform instantly generates a Premium Auto-Quote — estimated cost breakdown, difficulty score, DIY shopping list, and pro options.</p>
                 </div>
                 <div class="how-step">
                     <div class="step-num">02</div>
                     <h3>AI trade agent takes over</h3>
-                    <p>
-                        A dedicated agent for that trade (HVAC, Plumbing,
-                        Electrical, Roofing, Landscaping, Painting,
-                        Automotive, or General Contracting) walks the homeowner
-                        through their options — while simultaneously running
-                        the 4-factor scoring algorithm against the contractor
-                        queue.
-                    </p>
+                    <p>A dedicated agent for that trade walks the homeowner through their options — while simultaneously running the 4-factor scoring algorithm against the contractor queue.</p>
                 </div>
                 <div class="how-step">
                     <div class="step-num">03</div>
                     <h3>Best-fit contractor receives the lead</h3>
-                    <p>
-                        The highest-scored eligible contractor gets the lead
-                        instantly. Founding pros sit at the top of the queue
-                        with structural priority. They can accept the job on
-                        the homeowner's proposed terms or negotiate directly.
-                    </p>
+                    <p>The highest-scored eligible contractor gets the lead instantly. Founding pros with completed profiles sit at the top of the queue with structural priority. They can accept on the homeowner's terms or negotiate directly.</p>
                 </div>
             </div>
         </section>
@@ -1510,191 +654,40 @@ Tie-breaking order:
             <div class="section-label">AI trade agents</div>
             <h2 class="section-title">Eight agents.<br />One for every trade.</h2>
             <div class="agents-grid">
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #e6f1fb; color: #0c447c"
-                    >
-                        A
-                    </div>
-                    <div class="agent-trade">HVAC</div>
-                    <h3>Agent Aria</h3>
-                    <p>
-                        Climate systems, installs, emergency response. Routes
-                        heating and cooling jobs to the closest qualified pro.
-                    </p>
-                </div>
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #e1f5ee; color: #085041"
-                    >
-                        R
-                    </div>
-                    <div class="agent-trade">Plumbing</div>
-                    <h3>Agent River</h3>
-                    <p>
-                        Leaks, installs, drain systems, emergency calls.
-                        Prioritizes response time and trade match score.
-                    </p>
-                </div>
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #faeeda; color: #633806"
-                    >
-                        V
-                    </div>
-                    <div class="agent-trade">Electrical</div>
-                    <h3>Agent Volt</h3>
-                    <p>
-                        Panels, wiring, EV chargers, code compliance. Routes
-                        high-ticket electrical jobs to licensed pros only.
-                    </p>
-                </div>
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #faece7; color: #712b13"
-                    >
-                        Ri
-                    </div>
-                    <div class="agent-trade">Roofing</div>
-                    <h3>Agent Ridge</h3>
-                    <p>
-                        Storm damage, full replacements, inspections. Includes
-                        storm-alert early access for founding contractors.
-                    </p>
-                </div>
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #eaf3de; color: #27500a"
-                    >
-                        T
-                    </div>
-                    <div class="agent-trade">Landscaping</div>
-                    <h3>Agent Terra</h3>
-                    <p>
-                        Lawn care, irrigation, hardscape, recurring seasonal
-                        work. Routes return homeowners back to their preferred
-                        pro.
-                    </p>
-                </div>
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #fbeaf0; color: #72243e"
-                    >
-                        H
-                    </div>
-                    <div class="agent-trade">Painting</div>
-                    <h3>Agent Hue</h3>
-                    <p>
-                        Interior, exterior, specialty finishes. Founding
-                        painters get the Fair Rate Index as a client-facing
-                        pitch tool.
-                    </p>
-                </div>
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #ecedf0; color: #2a2e3a"
-                    >
-                        Ax
-                    </div>
-                    <div class="agent-trade">Automotive</div>
-                    <h3>Agent Axle</h3>
-                    <p>
-                        Mobile mechanics, fleet service, in-driveway repairs.
-                        Routes time-sensitive work to the closest qualified
-                        pro.
-                    </p>
-                </div>
-                <div class="agent-card">
-                    <div
-                        class="agent-avatar-wrap"
-                        style="background: #f3ede1; color: #5a4317"
-                    >
-                        F
-                    </div>
-                    <div class="agent-trade">General Contracting</div>
-                    <h3>Agent Forge</h3>
-                    <p>
-                        Multi-trade projects, remodels, additions. Coordinates
-                        scope across trades and routes complex jobs to
-                        licensed GCs.
-                    </p>
-                </div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #e6f1fb; color: #0c447c">A</div><div class="agent-trade">HVAC</div><h3>Agent Aria</h3><p>Climate systems, installs, emergency response. Routes heating and cooling jobs to the closest qualified pro.</p></div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #e1f5ee; color: #085041">R</div><div class="agent-trade">Plumbing</div><h3>Agent River</h3><p>Leaks, installs, drain systems, emergency calls. Prioritizes response time and trade match score.</p></div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #faeeda; color: #633806">V</div><div class="agent-trade">Electrical</div><h3>Agent Volt</h3><p>Panels, wiring, EV chargers, code compliance. Routes high-ticket electrical jobs to licensed pros only.</p></div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #faece7; color: #712b13">Ri</div><div class="agent-trade">Roofing</div><h3>Agent Ridge</h3><p>Storm damage, full replacements, inspections. Includes storm-alert early access for founding contractors.</p></div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #eaf3de; color: #27500a">T</div><div class="agent-trade">Landscaping</div><h3>Agent Terra</h3><p>Lawn care, irrigation, hardscape, recurring seasonal work. Routes return homeowners back to their preferred pro.</p></div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #fbeaf0; color: #72243e">H</div><div class="agent-trade">Painting</div><h3>Agent Hue</h3><p>Interior, exterior, specialty finishes. Founding painters get the Fair Rate Index as a client-facing pitch tool.</p></div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #ecedf0; color: #2a2e3a">Ax</div><div class="agent-trade">Automotive</div><h3>Agent Axle</h3><p>Mobile mechanics, fleet service, in-driveway repairs. Routes time-sensitive work to the closest qualified pro.</p></div>
+                <div class="agent-card"><div class="agent-avatar-wrap" style="background: #f3ede1; color: #5a4317">F</div><div class="agent-trade">General Contracting</div><h3>Agent Forge</h3><p>Multi-trade projects, remodels, additions. Coordinates scope across trades and routes complex jobs to licensed GCs.</p></div>
             </div>
         </section>
 
         <section class="form-section" id="apply">
             <div class="form-inner">
                 <div class="section-label">Founding contractor application</div>
-                <h2 class="section-title" style="font-size: 32px">
-                    Claim your founding spot.<br /><em>Before it's gone.</em>
-                </h2>
-                <p class="form-sub">
-                    Complete the form below to secure your spot at the $99/mo
-                    introductory founding rate. You'll be taken to a secure
-                    Stripe checkout — then your account is created
-                    automatically.
-                </p>
+                <h2 class="section-title" style="font-size: 32px">Claim your founding spot.<br /><em>$0 due today.</em></h2>
+                <p class="form-sub">Complete the form below to start your 30-day free trial. You'll be taken to a secure Stripe checkout to put a card on file — no charge today. Your account activates immediately.</p>
 
-                <form
-                    class="invite-form"
-                    id="founding-form"
-                    onsubmit="handleSubmit(event)"
-                >
+                <div class="terms-summary">
+                    <div class="terms-summary-title">What you're agreeing to</div>
+                    <div class="terms-summary-row"><span><strong>$0 today.</strong> Card on file. Founding seat reserved immediately.</span></div>
+                    <div class="terms-summary-row"><span><strong>30-day free trial.</strong> Full platform access. Cancel anytime before day 30 for $0 — no charge.</span></div>
+                    <div class="terms-summary-row"><span><strong>Then $99/mo, billed monthly.</strong> Introductory founding rate. Cancel anytime from your dashboard — month-to-month, no contracts.</span></div>
+                    <div class="terms-summary-row"><span><strong>Founding Pro perks unlock after profile completion.</strong> Full trial access from day one — the Founding Pro badge &amp; priority routing activate once your business profile is complete (5 min).</span></div>
+                </div>
+
+                <form class="invite-form" id="founding-form" onsubmit="handleSubmit(event)">
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>First name</label
-                            ><input
-                                type="text"
-                                id="firstName"
-                                placeholder="Mike"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label>Last name</label
-                            ><input
-                                type="text"
-                                id="lastName"
-                                placeholder="Torres"
-                                required
-                            />
-                        </div>
+                        <div class="form-group"><label>First name</label><input type="text" id="firstName" placeholder="Mike" required /></div>
+                        <div class="form-group"><label>Last name</label><input type="text" id="lastName" placeholder="Torres" required /></div>
                     </div>
-                    <div class="form-group">
-                        <label>Company name</label
-                        ><input
-                            type="text"
-                            id="company"
-                            placeholder="Torres HVAC &amp; Heating"
-                            required
-                        />
-                    </div>
+                    <div class="form-group"><label>Company name</label><input type="text" id="company" placeholder="Torres HVAC &amp; Heating" required /></div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Email address</label
-                            ><input
-                                type="email"
-                                id="email"
-                                placeholder="mike@torreshvac.com"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label>Phone number</label
-                            ><input
-                                type="tel"
-                                id="phone"
-                                placeholder="(704) 555-0182"
-                                required
-                            />
-                        </div>
+                        <div class="form-group"><label>Email address</label><input type="email" id="email" placeholder="mike@torreshvac.com" required /></div>
+                        <div class="form-group"><label>Phone number</label><input type="tel" id="phone" placeholder="(704) 555-0182" required /></div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -1703,9 +696,7 @@ Tie-breaking order:
                                 <option value="">Select trade&hellip;</option>
                                 <option value="automotive">Automotive</option>
                                 <option value="electrical">Electrical</option>
-                                <option value="general_contracting">
-                                    General Contracting
-                                </option>
+                                <option value="general_contracting">General Contracting</option>
                                 <option value="hvac">HVAC</option>
                                 <option value="landscaping">Landscaping</option>
                                 <option value="painting">Painting</option>
@@ -1724,151 +715,54 @@ Tie-breaking order:
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Primary service area (city / zip)</label
-                        ><input
-                            type="text"
-                            id="zip"
-                            placeholder="Charlotte, NC 28202"
-                        />
-                    </div>
-                    <button type="submit" class="form-submit" id="submit-btn">
-                        Claim founding spot — $99/mo →
-                    </button>
+                    <div class="form-group"><label>Primary service area (city / zip)</label><input type="text" id="zip" placeholder="Charlotte, NC 28202" /></div>
+
+                    <button type="submit" class="form-submit" id="submit-btn">Start free month — $0 today →</button>
+
                     <div class="form-legal">
                         By submitting, you agree to the
-                        <a
-                            href="/legal/contractor-agreement.html"
-                            style="color: #9fe1cb; text-decoration: underline"
-                            >Contractor Subscription Agreement</a
-                        >,
-                        <a
-                            href="/legal/terms.html"
-                            style="color: #9fe1cb; text-decoration: underline"
-                            >Terms</a
-                        >,
-                        <a
-                            href="/legal/privacy.html"
-                            style="color: #9fe1cb; text-decoration: underline"
-                            >Privacy Policy</a
-                        >, and
-                        <a
-                            href="/legal/fair-rate-disclaimer.html"
-                            style="color: #9fe1cb; text-decoration: underline"
-                            >Fair Rate Index disclaimer</a
-                        >. You'll be taken to a secure Stripe checkout to
-                        complete your subscription. The $99/month rate is a
-                        special introductory price for the First Fifty
-                        founding cohort; standard tier pricing will be
-                        announced after the cohort closes.
+                        <a href="/legal/contractor-agreement.html" style="color: #9fe1cb; text-decoration: underline">Contractor Subscription Agreement</a>,
+                        <a href="/legal/terms.html" style="color: #9fe1cb; text-decoration: underline">Terms</a>,
+                        <a href="/legal/privacy.html" style="color: #9fe1cb; text-decoration: underline">Privacy Policy</a>, and
+                        <a href="/legal/fair-rate-disclaimer.html" style="color: #9fe1cb; text-decoration: underline">Fair Rate Index disclaimer</a>.
+                        You'll be taken to a secure Stripe checkout to put a card on file — $0 is charged today.
+                        The 30-day free trial is fully refundable: cancel anytime before day 30 and you'll be charged nothing.
+                        After the trial, your subscription begins at $99/mo, billed monthly, at our introductory founding rate.
+                        Cancel anytime from your contractor dashboard — no contracts, no early-termination fees.
+                        Founding Pro badge and priority routing weight in the matching algorithm activate once your business profile is complete.
+                        Standard tier pricing will be announced after the First Fifty cohort closes.
                     </div>
                 </form>
 
-                <div
-                    id="form-error"
-                    style="
-                        display: none;
-                        margin-top: 16px;
-                        padding: 12px 16px;
-                        background: rgba(192, 57, 43, 0.15);
-                        border: 1px solid rgba(192, 57, 43, 0.3);
-                        border-radius: 8px;
-                        color: #ff8a80;
-                        font-size: 14px;
-                    "
-                ></div>
+                <div id="form-error" style="display: none; margin-top: 16px; padding: 12px 16px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3); border-radius: 8px; color: #ff8a80; font-size: 14px;"></div>
             </div>
         </section>
 
         <footer>
             <div class="footer-logo">YSK<span>AI</span>PE</div>
-            <p>
-                First Fifty Founding Contractor Program · Charlotte, NC ·
-                yskaipe.com
-            </p>
-            <p style="font-size: 11px">
-                Founding rate: $99/mo introductory pilot pricing · Stripe:
-                founding_contractor_pilot_v1
-            </p>
-            <p
-                style="
-                    font-size: 11px;
-                    display: flex;
-                    gap: 16px;
-                    flex-wrap: wrap;
-                    width: 100%;
-                    justify-content: center;
-                    margin-top: 8px;
-                "
-            >
-                <a
-                    href="/legal/terms.html"
-                    style="
-                        color: rgba(255, 255, 255, 0.35);
-                        text-decoration: none;
-                    "
-                    >Terms</a
-                >
-                <a
-                    href="/legal/privacy.html"
-                    style="
-                        color: rgba(255, 255, 255, 0.35);
-                        text-decoration: none;
-                    "
-                    >Privacy</a
-                >
-                <a
-                    href="/legal/contractor-agreement.html"
-                    style="
-                        color: rgba(255, 255, 255, 0.35);
-                        text-decoration: none;
-                    "
-                    >Contractor Agreement</a
-                >
-                <a
-                    href="/legal/fair-rate-disclaimer.html"
-                    style="
-                        color: rgba(255, 255, 255, 0.35);
-                        text-decoration: none;
-                    "
-                    >Fair Rate Index</a
-                >
+            <p>First Fifty Founding Contractor Program · Charlotte, NC · yskaipe.com</p>
+            <p style="font-size: 11px">First month free, then $99/mo billed monthly · Cancel anytime · Stripe: founding_contractor_pilot_v1</p>
+            <p style="font-size: 11px; display: flex; gap: 16px; flex-wrap: wrap; width: 100%; justify-content: center; margin-top: 8px;">
+                <a href="/legal/terms.html" style="color: rgba(255,255,255,0.35); text-decoration: none;">Terms</a>
+                <a href="/legal/privacy.html" style="color: rgba(255,255,255,0.35); text-decoration: none;">Privacy</a>
+                <a href="/legal/contractor-agreement.html" style="color: rgba(255,255,255,0.35); text-decoration: none;">Contractor Agreement</a>
+                <a href="/legal/fair-rate-disclaimer.html" style="color: rgba(255,255,255,0.35); text-decoration: none;">Fair Rate Index</a>
             </p>
         </footer>
 
         <script>
             let slotsRemaining = 43;
             document.getElementById("hero-slots").textContent = slotsRemaining;
-            document.getElementById("slots-remaining").innerHTML =
-                `<strong>${slotsRemaining} of 50</strong>`;
-            document.getElementById("slots-fill").style.width =
-                ((50 - slotsRemaining) / 50) * 100 + "%";
+            document.getElementById("slots-remaining").innerHTML = `<strong>${slotsRemaining} of 50</strong>`;
+            document.getElementById("slots-fill").style.width = ((50 - slotsRemaining) / 50) * 100 + "%";
 
             const ratioAnimated = { done: false };
             function animateRatioBars() {
                 if (ratioAnimated.done) return;
                 const targets = {
-                    hw: {
-                        val: 847,
-                        max: 3300,
-                        el: "hw",
-                        label: "hw-count",
-                        pct: false,
-                    },
-                    ct: {
-                        val: 7,
-                        max: 50,
-                        el: "ct",
-                        label: "ct-count",
-                        pct: false,
-                    },
-                    sat: {
-                        val: 26,
-                        max: 100,
-                        el: "sat",
-                        label: "sat-count",
-                        pct: true,
-                    },
+                    hw:  { val: 847,  max: 3300, el: "hw",  label: "hw-count",  pct: false },
+                    ct:  { val: 7,    max: 50,   el: "ct",  label: "ct-count",  pct: false },
+                    sat: { val: 26,   max: 100,  el: "sat", label: "sat-count", pct: true  },
                 };
                 Object.values(targets).forEach((t) => {
                     let current = 0;
@@ -1878,33 +772,24 @@ Tie-breaking order:
                         document.getElementById(t.label).textContent = t.pct
                             ? Math.round(current) + "%"
                             : Math.round(current).toLocaleString();
-                        document.getElementById(t.el + "-bar").style.width =
-                            Math.min((current / t.max) * 100, 100) + "%";
+                        document.getElementById(t.el + "-bar").style.width = Math.min((current / t.max) * 100, 100) + "%";
                         if (current >= t.val) clearInterval(interval);
                     }, 30);
                 });
                 ratioAnimated.done = true;
             }
 
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add("visible");
-                            if (
-                                entry.target.classList.contains("ratio-band") ||
-                                entry.target.closest(".ratio-band")
-                            )
-                                animateRatioBars();
-                        }
-                    });
-                },
-                { threshold: 0.15 },
-            );
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        if (entry.target.classList.contains("ratio-band") || entry.target.closest(".ratio-band"))
+                            animateRatioBars();
+                    }
+                });
+            }, { threshold: 0.15 });
 
-            document
-                .querySelectorAll(".reveal")
-                .forEach((el) => observer.observe(el));
+            document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
             const ratioSection = document.querySelector(".ratio-band");
             if (ratioSection) observer.observe(ratioSection);
 
@@ -1921,39 +806,34 @@ Tie-breaking order:
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            firstName: document
-                                .getElementById("firstName")
-                                .value.trim(),
-                            lastName: document
-                                .getElementById("lastName")
-                                .value.trim(),
-                            company: document
-                                .getElementById("company")
-                                .value.trim(),
-                            email: document
-                                .getElementById("email")
-                                .value.trim(),
-                            phone: document
-                                .getElementById("phone")
-                                .value.trim(),
+                            firstName: document.getElementById("firstName").value.trim(),
+                            lastName: document.getElementById("lastName").value.trim(),
+                            company: document.getElementById("company").value.trim(),
+                            email: document.getElementById("email").value.trim(),
+                            phone: document.getElementById("phone").value.trim(),
                             trade: document.getElementById("trade").value,
                             years: document.getElementById("years").value,
                             zip: document.getElementById("zip").value.trim(),
-                        }),
+                            acceptedTerms: {
+                                accepted: true,
+                                acceptedAt: new Date().toISOString(),
+                                offer: "founding_first_month_free_v2",
+                                trialDays: 30,
+                                postTrialPriceUsd: 99,
+                                cancelPolicy: "anytime"
+                            }
+                        })
                     });
                     const data = await res.json();
                     if (data.url) {
                         window.location.href = data.url;
                     } else {
-                        throw new Error(
-                            data.error ||
-                                "Something went wrong. Please try again.",
-                        );
+                        throw new Error(data.error || "Something went wrong. Please try again.");
                     }
                 } catch (err) {
                     errBox.textContent = err.message;
                     errBox.style.display = "block";
-                    btn.textContent = "Claim founding spot — $99/mo →";
+                    btn.textContent = "Start free month — $0 today →";
                     btn.disabled = false;
                 }
             }
