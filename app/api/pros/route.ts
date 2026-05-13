@@ -1,25 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const TRADE_TO_QUERY: Record<string, string> = {
-  Plumber: "plumber",
-  Electrician: "electrician",
-  "HVAC Technician": "hvac contractor",
-  Roofer: "roofing contractor",
-  "General Contractor": "general contractor",
-  "Welder / Fabricator": "welder fabricator",
-  "Home Inspector": "home inspector",
-  "Pest Control": "pest control",
-  Arborist: "tree service arborist",
-  "EV Infrastructure Tech": "EV charger installer",
-  "Smart Home Integrator": "smart home installer",
-  Landscaper: "landscaping",
-  Painter: "house painter",
-  "Flooring Specialist": "flooring contractor",
+  automotive: "auto mechanic",
+  electrical: "electrician",
+  general_contracting: "general contractor",
+  hvac: "hvac contractor",
+  landscaping: "landscaping",
+  painting: "house painter",
+  plumbing: "plumber",
+  roofing: "roofing contractor",
 };
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const trade = searchParams.get("trade") || "General Contractor";
+  const trade = searchParams.get("trade") || "general_contracting";
   const zip = searchParams.get("zip") || "28036";
 
   const apiKey = process.env.FOURSQUARE_API_KEY;
