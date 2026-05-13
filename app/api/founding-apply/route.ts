@@ -116,6 +116,26 @@ export async function POST(req: Request) {
 
     const email = body.email.trim().toLowerCase();
 
+    // Phone validation — must match what the client normalizes to.
+    // Accepts +1XXXXXXXXXX (E.164 US) or 10/11 digits we can normalize.
+    function normalizePhone(raw: string): string | null {
+      const digits = String(raw || "").replace(/\D/g, "");
+      if (digits.length === 10) return "+1" + digits;
+      if (digits.length === 11 && digits.startsWith("1")) return "+" + digits;
+      return null;
+    }
+
+    const normalizedPhone = normalizePhone(body.phone);
+    if (!normalizedPhone) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid phone number. Please enter a valid US 10-digit number.",
+        },
+        { status: 400 },
+      );
+    }
+
     // ─── Terms acceptance — must match server-side offer ─────────
     const t = body.acceptedTerms;
     if (
@@ -164,7 +184,7 @@ export async function POST(req: Request) {
       const customer = await stripe.customers.create({
         email,
         name: `${body.firstName.trim()} ${body.lastName.trim()}`,
-        phone: body.phone.trim(),
+        phone: normalizedPhone,
         metadata: {
           company: body.company.trim(),
           trade: body.trade,
@@ -188,7 +208,7 @@ export async function POST(req: Request) {
           first_name: body.firstName.trim(),
           last_name: body.lastName.trim(),
           company: body.company.trim(),
-          phone: body.phone.trim(),
+          phone: normalizedPhone,
           trade: body.trade,
           years: body.years ?? null,
           zip: body.zip ?? null,
@@ -258,7 +278,7 @@ export async function POST(req: Request) {
     resend.emails
       .send({
         from: "gr8@yskaipe.com",
-        to: "nick@yskaipe.com",
+        to: "gr8@yskaipe.com",
         subject: `Founding seat reserved: ${body.company.trim()} (${body.trade})`,
         text: [
           `New founding application started.`,
@@ -266,7 +286,7 @@ export async function POST(req: Request) {
           `Name: ${body.firstName} ${body.lastName}`,
           `Company: ${body.company}`,
           `Email: ${email}`,
-          `Phone: ${body.phone}`,
+          `Phone: ${normalizedPhone}`,
           `Trade: ${body.trade}`,
           `Years: ${body.years ?? "—"}`,
           `Zip: ${body.zip ?? "—"}`,
