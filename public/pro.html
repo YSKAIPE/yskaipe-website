@@ -975,12 +975,16 @@
                             <label>Primary Trade</label>
                             <select id="f-trade" required>
                                 <option value="">Select trade…</option>
-                                <option>HVAC</option>
-                                <option>Plumbing</option>
-                                <option>Electrical</option>
-                                <option>Roofing</option>
-                                <option>Landscaping</option>
-                                <option>Painting</option>
+                                <option value="automotive">Automotive</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="general_contracting">
+                                    General Contracting
+                                </option>
+                                <option value="hvac">HVAC</option>
+                                <option value="landscaping">Landscaping</option>
+                                <option value="painting">Painting</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="roofing">Roofing</option>
                             </select>
                         </div>
                         <div class="fg">
@@ -1096,71 +1100,85 @@
         </footer>
 
         <script>
+            // Phone normalization — mirrors /api/request-invitation and /api/founding-apply
+            function normalizePhone(raw) {
+                var digits = String(raw || "").replace(/\D/g, "");
+                if (digits.length === 10) return "+1" + digits;
+                if (digits.length === 11 && digits.charAt(0) === "1")
+                    return "+" + digits;
+                return null;
+            }
+
             async function submitRequest() {
                 var first = document.getElementById("f-first").value.trim();
                 var last = document.getElementById("f-last").value.trim();
                 var biz = document.getElementById("f-biz").value.trim();
                 var trade = document.getElementById("f-trade").value;
                 var email = document.getElementById("f-email").value.trim();
-                var phone = document.getElementById("f-phone").value.trim();
+                var phoneRaw = document.getElementById("f-phone").value.trim();
                 var zip = document.getElementById("f-zip").value.trim();
                 var years = document.getElementById("f-years").value;
                 var why = document.getElementById("f-why").value.trim();
                 var errEl = document.getElementById("f-err");
                 var btn = document.getElementById("submit-btn");
 
-                if (!first || !last || !biz || !trade || !email) {
+                if (!first || !last || !biz || !trade || !email || !phoneRaw) {
                     errEl.style.display = "block";
-                    errEl.textContent = "Please fill in all required fields.";
+                    errEl.textContent =
+                        "Please fill in all required fields (including phone).";
                     return;
                 }
+
+                var phone = normalizePhone(phoneRaw);
+                if (!phone) {
+                    errEl.style.display = "block";
+                    errEl.textContent =
+                        "Please enter a valid US phone number (10 digits, e.g. 704-555-0182).";
+                    return;
+                }
+
                 errEl.style.display = "none";
                 btn.disabled = true;
                 btn.textContent = "Sending request…";
 
                 try {
-                    // Send to pilot_invitations table via Supabase
-                    var res = await fetch(
-                        "https://ygfhaoksicgtazcmqdfk.supabase.co/rest/v1/pilot_invitations",
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88",
-                                Authorization:
-                                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88",
-                                Prefer: "return=minimal",
-                            },
-                            body: JSON.stringify({
-                                name: first + " " + last,
-                                business: biz,
-                                trade: trade,
-                                email: email,
-                                phone: phone || null,
-                                zip: zip || null,
-                                years_in_business: years || null,
-                                why: why || null,
-                                status: "pending",
-                                invited_at: new Date().toISOString(),
-                            }),
-                        },
-                    );
+                    var res = await fetch("/api/request-invitation", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            firstName: first,
+                            lastName: last,
+                            business: biz,
+                            trade: trade,
+                            email: email,
+                            phone: phone,
+                            zip: zip || undefined,
+                            years: years || undefined,
+                            why: why || undefined,
+                        }),
+                    });
 
-                    if (res.ok || res.status === 201) {
+                    var data = await res.json();
+
+                    if (res.ok) {
                         document.getElementById("form-body").style.display =
                             "none";
                         document
                             .getElementById("form-success")
                             .classList.add("show");
                     } else {
-                        throw new Error("Submission failed");
+                        throw new Error(
+                            data.error ||
+                                "Something went wrong. Please try again.",
+                        );
                     }
                 } catch (err) {
-                    // Fallback — show success anyway so no one gets stuck
-                    document.getElementById("form-body").style.display = "none";
-                    document
-                        .getElementById("form-success")
-                        .classList.add("show");
+                    errEl.style.display = "block";
+                    errEl.textContent =
+                        err.message ||
+                        "Submission failed. Please email gr8@yskaipe.com if this keeps happening.";
+                    btn.disabled = false;
+                    btn.textContent = "Send request →";
                 }
             }
         </script>
