@@ -33,11 +33,25 @@ export type TradeSlug =
   | 'general_contracting'
   | 'automotive'
 
+/**
+ * Canonical Pro Core trade display names — what users see anywhere a trade is surfaced.
+ * Tight union so any string literal mismatch fails at type-check time.
+ */
+export type TradeType =
+  | 'HVAC'
+  | 'Plumbing'
+  | 'Electrical'
+  | 'Roofing'
+  | 'Landscaping'
+  | 'Painting'
+  | 'General Contracting'
+  | 'Automotive'
+
 export interface ProCoreTrade {
   /** Canonical storage key — used in DB, API payloads, RATES_DB lookups */
   slug: TradeSlug
   /** User-facing display name — used in dropdowns, cards, emails, anywhere a human reads it */
-  displayName: string
+  displayName: TradeType
   /** AI agent persona name for this trade */
   agentName: string
   /** Email plus-address handle for lead routing → gr8+<emailHandle>@yskaipe.com */

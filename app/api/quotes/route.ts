@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { RATES_DB, getRegionalMultiplier } from '@/lib/rates'
 import {
   resolveTrade,
+  TRADE_BY_SLUG,
   LEGACY_TRADE_ALIAS,
   REJECTED_TRADES,
   type TradeSlug,
@@ -81,8 +82,10 @@ export async function POST(req: NextRequest) {
     const adjustedLaborMin = Math.round(rates.laborMin * multiplier)
     const adjustedLaborMax = Math.round(rates.laborMax * multiplier)
 
-    // Resolve the display name for the AI prompt + the returned quote
-    const tradeDisplay = resolveTrade(tradeSlug)?.displayName ?? tradeSlug
+    // Resolve the display name for the AI prompt + the returned quote.
+    // TRADE_BY_SLUG is a Record<TradeSlug, ProCoreTrade>, so this is guaranteed to be a TradeType.
+    const tradeRecord = TRADE_BY_SLUG[tradeSlug]
+    const tradeDisplay = tradeRecord.displayName
 
     const systemPrompt = `You are an expert trade cost estimator for YSKAIPE — a North Carolina home services marketplace.
 You estimate jobs using verified industry rates, adjusted for regional cost of living.
