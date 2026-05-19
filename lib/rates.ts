@@ -1,86 +1,167 @@
-import { TradeType } from '@/types/quote'
+/**
+ * RATES_DB — Pro Core trade rate definitions for AutoQuote
+ *
+ * Keys are CANONICAL slugs from canonical-trades.ts.
+ * Do not add non-Pro-Core trades here — Pro Core is locked at 8.
+ *
+ * Labor rates are 2026 NC midpoints. Regional multipliers adjust by ZIP.
+ */
+
+import type { TradeSlug } from './canonical-trades'
 
 export interface TradeRates {
+  /** Lower bound for hourly labor rate (USD), 2026 NC baseline */
   laborMin: number
+  /** Upper bound for hourly labor rate (USD), 2026 NC baseline */
   laborMax: number
-  commonJobs: string[]
+  /** Whether a permit is typically required (drives a $150–$500 add to materials) */
   permitRequired: boolean
-  typicalMaterialsRatio: number // materials as % of labor
+  /** Representative jobs in this trade — used to ground the AI estimate */
+  commonJobs: string[]
 }
 
-// Keys MUST match the trade_type Postgres enum exactly:
-// 'plumbing' | 'electrical' | 'hvac' | 'roofing' | 'landscaping'
-// 'painting' | 'general_contracting' | 'automotive'
-export const RATES_DB: Record<TradeType, TradeRates> = {
+export const RATES_DB: Record<TradeSlug, TradeRates> = {
+  hvac: {
+    laborMin: 110,
+    laborMax: 165,
+    permitRequired: false,
+    commonJobs: [
+      'AC repair / service',
+      'Furnace repair',
+      'Full HVAC system replacement',
+      'Ductwork inspection / repair',
+      'Mini-split install',
+      'Thermostat / smart thermostat install',
+      'Refrigerant recharge',
+      'Annual maintenance / tune-up',
+    ],
+  },
   plumbing: {
-    laborMin: 95, laborMax: 145,
-    commonJobs: ['faucet repair', 'pipe replacement', 'water heater', 'drain unclog', 'shutoff valve'],
-    permitRequired: true,
-    typicalMaterialsRatio: 0.4,
+    laborMin: 100,
+    laborMax: 155,
+    permitRequired: false,
+    commonJobs: [
+      'Water heater replacement',
+      'Leak repair (under sink, behind wall, slab)',
+      'Drain clearing',
+      'Fixture install (faucet, toilet, garbage disposal)',
+      'Sump pump install / repair',
+      'Repipe (PEX / copper)',
+      'Sewer line camera / repair',
+      'Tankless water heater install',
+    ],
   },
   electrical: {
-    laborMin: 100, laborMax: 155,
-    commonJobs: ['panel upgrade', 'outlet install', 'EV charger', 'light fixture', 'circuit breaker'],
+    laborMin: 105,
+    laborMax: 160,
     permitRequired: true,
-    typicalMaterialsRatio: 0.35,
-  },
-  hvac: {
-    laborMin: 90, laborMax: 140,
-    commonJobs: ['AC tune-up', 'furnace repair', 'duct cleaning', 'thermostat install', 'refrigerant recharge'],
-    permitRequired: false,
-    typicalMaterialsRatio: 0.45,
+    commonJobs: [
+      'Panel upgrade / replacement',
+      'Outlet / switch repair or install',
+      'Lighting install (interior, exterior, landscape)',
+      'EV charger install (Level 2)',
+      'Generator install (whole-home, portable hookup)',
+      'Ceiling fan install',
+      'Code compliance / inspection prep',
+      'Smoke / CO detector hardwire',
+    ],
   },
   roofing: {
-    laborMin: 80, laborMax: 130,
-    commonJobs: ['shingle replacement', 'leak repair', 'full reroof', 'gutter install', 'storm damage'],
-    permitRequired: false,
-    typicalMaterialsRatio: 0.6,
+    laborMin: 95,
+    laborMax: 150,
+    permitRequired: true,
+    commonJobs: [
+      'Full roof replacement (shingle, metal)',
+      'Leak repair / patch',
+      'Storm damage assessment / repair',
+      'Gutter install / repair',
+      'Skylight install / reseal',
+      'Soffit / fascia repair',
+      'Annual roof inspection',
+      'Ridge vent install',
+    ],
   },
   landscaping: {
-    laborMin: 55, laborMax: 95,
-    commonJobs: ['weekly lawn service', 'mulch install', 'hedge trimming', 'leaf cleanup', 'sod install', 'irrigation repair'],
+    laborMin: 65,
+    laborMax: 110,
     permitRequired: false,
-    typicalMaterialsRatio: 0.3,
+    commonJobs: [
+      'Lawn maintenance / mowing program',
+      'Bed install / refresh (mulch, plants, edging)',
+      'Hardscape (patio, walkway, retaining wall)',
+      'Irrigation install / repair',
+      'Sod install',
+      'Tree / shrub planting',
+      'Drainage / grading',
+      'Lake-house grounds maintenance',
+    ],
   },
   painting: {
-    laborMin: 60, laborMax: 95,
-    commonJobs: ['interior repaint', 'exterior repaint', 'cabinet refinish', 'trim and doors', 'deck staining'],
+    laborMin: 55,
+    laborMax: 95,
     permitRequired: false,
-    typicalMaterialsRatio: 0.25,
+    commonJobs: [
+      'Interior painting (single room, whole-house)',
+      'Exterior painting (full exterior, trim, doors)',
+      'Cabinet painting / refinishing',
+      'Deck staining / sealing',
+      'Pressure wash + paint prep',
+      'Drywall repair + repaint',
+      'Wallpaper removal',
+      'Accent wall / specialty finish',
+    ],
   },
   general_contracting: {
-    laborMin: 85, laborMax: 135,
-    commonJobs: ['kitchen remodel', 'bathroom remodel', 'addition', 'deck build', 'basement finish'],
+    laborMin: 95,
+    laborMax: 160,
     permitRequired: true,
-    typicalMaterialsRatio: 0.55,
+    commonJobs: [
+      'Kitchen renovation',
+      'Bathroom renovation',
+      'Home addition',
+      'Deck build / rebuild',
+      'Basement finishing',
+      'Whole-home renovation',
+      'Structural repair',
+      'Garage build / conversion',
+    ],
   },
   automotive: {
-    laborMin: 90, laborMax: 150,
-    commonJobs: ['oil change', 'brake pad replacement', 'diagnostic scan', 'battery replacement', 'tire rotation', 'alternator replacement'],
+    laborMin: 85,
+    laborMax: 145,
     permitRequired: false,
-    typicalMaterialsRatio: 0.5,
+    commonJobs: [
+      'Mobile diagnostic / repair',
+      'Tire replacement / rotation',
+      'Brake service',
+      'Battery replacement / jump',
+      'Oil change (mobile)',
+      'Pre-purchase inspection',
+      'Boat trailer repair',
+      'Headlight restoration / electrical',
+    ],
   },
 }
 
-// Regional cost multipliers by state (from zip prefix)
-export function getRegionalMultiplier(zip: string): number {
-  if (!zip || zip.length < 3) return 1.0
-  const prefix = parseInt(zip.substring(0, 3))
+// ----- Regional multipliers -----
+// Adjusts the base NC midpoint rate by ZIP. Lake Norman, Charlotte metro, and
+// downtown Charlotte run higher than rural NC; coastal and mountain regions
+// trend close to baseline.
 
-  // NYC/NJ area
-  if ((prefix >= 100 && prefix <= 119) || (prefix >= 70 && prefix <= 89)) return 1.45
-  // CA
-  if (prefix >= 900 && prefix <= 961) return 1.35
-  // MA/CT
-  if ((prefix >= 10 && prefix <= 27) || (prefix >= 60 && prefix <= 69)) return 1.25
-  // WA/OR
-  if ((prefix >= 970 && prefix <= 994)) return 1.2
-  // TX
-  if (prefix >= 750 && prefix <= 799) return 0.95
-  // Southeast / NC (default area)
-  if ((prefix >= 270 && prefix <= 289) || (prefix >= 290 && prefix <= 299)) return 1.0
-  // Midwest
-  if (prefix >= 460 && prefix <= 499) return 0.92
-  // Rural areas
+const LKN_ZIPS = new Set(['28031', '28036', '28078', '28115', '28117'])              // Cornelius, Davidson, Huntersville, Mooresville
+const CHARLOTTE_METRO_PREFIXES = ['280', '281', '282']                                // Greater Charlotte
+const CHARLOTTE_DOWNTOWN_ZIPS = new Set(['28202', '28203', '28204', '28205', '28207']) // Downtown Charlotte
+const COASTAL_PREFIXES = ['284', '285']                                               // Wilmington / coastal NC
+const MOUNTAIN_PREFIXES = ['287', '288', '289']                                       // Asheville / western NC
+
+export function getRegionalMultiplier(zip?: string): number {
+  if (!zip || !/^\d{5}$/.test(zip)) return 1.0
+
+  if (LKN_ZIPS.has(zip)) return 1.12                          // Lake Norman premium
+  if (CHARLOTTE_DOWNTOWN_ZIPS.has(zip)) return 1.18           // Uptown premium
+  if (CHARLOTTE_METRO_PREFIXES.some((p) => zip.startsWith(p))) return 1.08
+  if (COASTAL_PREFIXES.some((p) => zip.startsWith(p))) return 1.05
+  if (MOUNTAIN_PREFIXES.some((p) => zip.startsWith(p))) return 1.02
+
   return 1.0
 }

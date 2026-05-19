@@ -1,1854 +1,1653 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>YSKAIPE · Fair Price. Smart Choice. Everybody Wins.</title>
-        <meta
-            name="description"
-            content="A win-win North Carolina home services network. Fair Rate Index pricing, AutoQuote in 60 seconds, one vetted local pro per job. Built in Cornelius. First in Freedom. First in Flight. First in Fair."
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            *,
-            *::before,
-            *::after {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YSKAIPE · Fair Price. Smart Choice. Everybody Wins.</title>
+<meta name="description" content="A win-win North Carolina home services network. Fair Rate Index pricing, AutoQuote in 60 seconds, one vetted local pro per job. Built in Cornelius. First in Freedom. First in Flight. First in Fair." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-            :root {
-                --bg: #e8eef5;
-                --bg-mist: #dfe7ed;
-                --bg-parchment: #f4ede0;
-                --bg-paper: #efe6d4;
+  :root {
+    --bg: #e8eef5;
+    --bg-mist: #dfe7ed;
+    --bg-parchment: #f4ede0;
+    --bg-paper: #efe6d4;
 
-                --surface: #f7f0e2;
-                --surface-cool: #ecf1f5;
-                --surface-warm: #f0e4cc;
+    --surface: #f7f0e2;
+    --surface-cool: #ecf1f5;
+    --surface-warm: #f0e4cc;
 
-                --border: rgba(58, 50, 40, 0.15);
-                --border-strong: rgba(58, 50, 40, 0.28);
-                --border-cool: rgba(30, 90, 138, 0.18);
+    --border: rgba(58, 50, 40, 0.15);
+    --border-strong: rgba(58, 50, 40, 0.28);
+    --border-cool: rgba(30, 90, 138, 0.18);
 
-                --coast-deep: #1e5a8a;
-                --coast: #3d7a9c;
-                --coast-foam: #a8c9d8;
-                --coast-glass: #7da89a;
+    --coast-deep: #1e5a8a;
+    --coast: #3d7a9c;
+    --coast-foam: #a8c9d8;
+    --coast-glass: #7da89a;
 
-                --piedmont-clay: #a04a2a;
-                --piedmont-deep: #8b3e1f;
-                --piedmont-warm: #c97250;
+    --piedmont-clay: #a04a2a;
+    --piedmont-deep: #8b3e1f;
+    --piedmont-warm: #c97250;
 
-                --mtn-forest: #4a6b4a;
-                --mtn-sage: #7a8a6a;
-                --mtn-soil: #8a6a4a;
+    --mtn-forest: #4a6b4a;
+    --mtn-sage: #7a8a6a;
+    --mtn-soil: #8a6a4a;
 
-                --gold: #c89545;
-                --gold-deep: #a87530;
-                --gold-soft: #e4c182;
-                --honey: #d4a85a;
-                --blush: #d4a89a;
-                --pine: #4a6b4a;
+    --gold: #c89545;
+    --gold-deep: #a87530;
+    --gold-soft: #e4c182;
+    --honey: #d4a85a;
+    --blush: #d4a89a;
+    --pine: #4a6b4a;
 
-                --ink: #1a1410;
-                --ink-warm: #2a2419;
-                --text: #3a3228;
-                --text-soft: #5a5040;
-                --muted: #766a58;
-                --dim: #9a8e7c;
+    --ink: #1a1410;
+    --ink-warm: #2a2419;
+    --text: #3a3228;
+    --text-soft: #5a5040;
+    --muted: #766a58;
+    --dim: #9a8e7c;
 
-                --serif: "Fraunces", serif;
-                --sans: "DM Sans", sans-serif;
-                --mono: "DM Mono", monospace;
-            }
+    --serif: "Fraunces", serif;
+    --sans: "DM Sans", sans-serif;
+    --mono: "DM Mono", monospace;
+  }
 
-            html {
-                scroll-behavior: smooth;
-            }
-            body {
-                background: var(--bg);
-                color: var(--text);
-                font-family: var(--sans);
-                line-height: 1.6;
-                -webkit-font-smoothing: antialiased;
-                overflow-x: hidden;
-            }
-            ::selection {
-                background: var(--gold);
-                color: var(--ink);
-            }
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--gold); color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
 
-            .motto-ribbon {
-                background: linear-gradient(
-                    90deg,
-                    var(--coast-deep) 0%,
-                    var(--gold-deep) 50%,
-                    var(--piedmont-clay) 100%
-                );
-                padding: 7px 28px;
-                text-align: center;
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--bg-parchment);
-                letter-spacing: 0.28em;
-                text-transform: uppercase;
-                border-bottom: 1px solid var(--border-strong);
-            }
-            .motto-ribbon .dot {
-                color: var(--gold-soft);
-                margin: 0 14px;
-            }
+  .motto-ribbon {
+    background: linear-gradient(90deg, var(--coast-deep) 0%, var(--gold-deep) 50%, var(--piedmont-clay) 100%);
+    padding: 7px 28px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--bg-parchment);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-strong);
+  }
+  .motto-ribbon .dot { color: var(--gold-soft); margin: 0 14px; }
 
-            .nav {
-                position: sticky;
-                top: 0;
-                z-index: 50;
-                background: rgba(232, 238, 245, 0.88);
-                backdrop-filter: blur(14px);
-                -webkit-backdrop-filter: blur(14px);
-                border-bottom: 1px solid var(--border);
-            }
-            .nav-inner {
-                max-width: 1280px;
-                margin: 0 auto;
-                padding: 14px 28px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 16px;
-            }
-            .brand {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .logo-mark {
-                width: 32px;
-                height: 32px;
-            }
-            .brand-name {
-                font-family: var(--serif);
-                font-size: 20px;
-                font-weight: 500;
-                color: var(--ink);
-                letter-spacing: -0.01em;
-            }
-            .nav-links {
-                display: flex;
-                gap: 28px;
-                align-items: center;
-            }
-            .nav-link {
-                font-family: var(--sans);
-                font-size: 13.5px;
-                color: var(--text);
-                transition: color 0.15s;
-            }
-            .nav-link:hover {
-                color: var(--gold-deep);
-            }
-            .nav-cta {
-                font-family: var(--sans);
-                font-size: 13px;
-                font-weight: 600;
-                background: var(--ink);
-                color: var(--bg-parchment);
-                padding: 9px 18px;
-                border-radius: 999px;
-                transition:
-                    background 0.15s,
-                    transform 0.15s;
-            }
-            .nav-cta:hover {
-                background: var(--gold-deep);
-                transform: translateY(-1px);
-            }
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(232, 238, 245, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { width: 32px; height: 32px; }
+  .brand-name {
+    font-family: var(--serif);
+    font-size: 20px; font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-link {
+    font-family: var(--sans);
+    font-size: 13.5px;
+    color: var(--text);
+    transition: color 0.15s;
+  }
+  .nav-link:hover { color: var(--gold-deep); }
+  .nav-cta {
+    font-family: var(--sans);
+    font-size: 13px; font-weight: 600;
+    background: var(--ink);
+    color: var(--bg-parchment);
+    padding: 9px 18px;
+    border-radius: 999px;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--gold-deep); transform: translateY(-1px); }
 
-            .wrap {
-                max-width: 1280px;
-                margin: 0 auto;
-                padding: 0 28px;
-            }
-            .narrow {
-                max-width: 820px;
-                margin: 0 auto;
-                padding: 0 28px;
-            }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+  .narrow { max-width: 820px; margin: 0 auto; padding: 0 28px; }
 
-            .hero {
-                padding: 88px 0 96px;
-                position: relative;
-                overflow: hidden;
-                border-bottom: 1px solid var(--border);
-            }
-            .hero::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background:
-                    radial-gradient(
-                        ellipse 90% 50% at 25% 5%,
-                        rgba(61, 122, 156, 0.1),
-                        transparent 60%
-                    ),
-                    radial-gradient(
-                        ellipse 70% 30% at 50% 55%,
-                        rgba(200, 149, 69, 0.08),
-                        transparent 65%
-                    ),
-                    radial-gradient(
-                        ellipse 90% 50% at 75% 100%,
-                        rgba(160, 74, 42, 0.08),
-                        transparent 60%
-                    );
-                pointer-events: none;
-            }
-            .hero-inner {
-                position: relative;
-                z-index: 1;
-                display: grid;
-                grid-template-columns: 1.15fr 1fr;
-                gap: 72px;
-                align-items: center;
-            }
+  .hero {
+    padding: 88px 0 96px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 90% 50% at 25% 5%, rgba(61, 122, 156, 0.10), transparent 60%),
+      radial-gradient(ellipse 70% 30% at 50% 55%, rgba(200, 149, 69, 0.08), transparent 65%),
+      radial-gradient(ellipse 90% 50% at 75% 100%, rgba(160, 74, 42, 0.08), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
 
-            .hero-stamp {
-                display: inline-flex;
-                align-items: center;
-                gap: 10px;
-                padding: 7px 14px;
-                border-radius: 999px;
-                background: var(--surface);
-                border: 1px solid var(--border);
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--gold-deep);
-                letter-spacing: 0.18em;
-                text-transform: uppercase;
-                margin-bottom: 28px;
-            }
-            .hero-stamp::before {
-                content: "";
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: var(--gold);
-                box-shadow: 0 0 8px var(--gold);
-            }
+  .hero-stamp {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold-deep);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-stamp::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 8px var(--gold);
+  }
 
-            h1.hero-title {
-                font-family: var(--serif);
-                font-size: clamp(48px, 7vw, 92px);
-                font-weight: 500;
-                line-height: 0.95;
-                letter-spacing: -0.025em;
-                color: var(--ink);
-                margin-bottom: 28px;
-            }
-            h1.hero-title em {
-                font-style: italic;
-                color: var(--gold-deep);
-                font-weight: 400;
-            }
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 92px);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  h1.hero-title em { font-style: italic; color: var(--gold-deep); font-weight: 400; }
 
-            .hero-sub {
-                font-family: var(--serif);
-                font-size: clamp(18px, 1.6vw, 22px);
-                font-weight: 400;
-                line-height: 1.5;
-                color: var(--text);
-                max-width: 540px;
-                margin-bottom: 32px;
-            }
-            .hero-sub strong {
-                color: var(--ink);
-                font-weight: 500;
-            }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 540px;
+    margin-bottom: 32px;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 500; }
 
-            .hero-ctas {
-                display: flex;
-                gap: 12px;
-                flex-wrap: wrap;
-                align-items: center;
-                margin-bottom: 36px;
-            }
-            .hero-trust {
-                display: flex;
-                gap: 28px;
-                flex-wrap: wrap;
-                padding-top: 28px;
-                border-top: 1px solid var(--border);
-            }
-            .hero-trust-item {
-                display: flex;
-                flex-direction: column;
-                gap: 2px;
-            }
-            .hero-trust-val {
-                font-family: var(--serif);
-                font-size: 24px;
-                font-weight: 500;
-                color: var(--ink);
-                line-height: 1;
-                letter-spacing: -0.015em;
-            }
-            .hero-trust-val em {
-                font-style: italic;
-                color: var(--gold-deep);
-            }
-            .hero-trust-label {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--muted);
-                letter-spacing: 0.14em;
-                text-transform: uppercase;
-            }
+  .hero-ctas {
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    margin-bottom: 36px;
+  }
+  .hero-trust {
+    display: flex; gap: 28px; flex-wrap: wrap;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .hero-trust-item { display: flex; flex-direction: column; gap: 2px; }
+  .hero-trust-val {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+  .hero-trust-val em { font-style: italic; color: var(--gold-deep); }
+  .hero-trust-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 
-            .quote-card {
-                background: var(--surface);
-                border: 1px solid var(--border-strong);
-                border-radius: 20px;
-                padding: 32px;
-                position: relative;
-                box-shadow:
-                    0 1px 0 rgba(255, 255, 255, 0.7) inset,
-                    0 12px 40px rgba(58, 50, 40, 0.08),
-                    0 2px 8px rgba(58, 50, 40, 0.06);
-                overflow: hidden;
-            }
-            .quote-card::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: linear-gradient(
-                    90deg,
-                    var(--coast-deep),
-                    var(--gold),
-                    var(--piedmont-clay)
-                );
-                border-radius: 20px 20px 0 0;
-            }
-            .quote-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 24px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid var(--border);
-            }
-            .quote-label {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--gold-deep);
-                letter-spacing: 0.18em;
-                text-transform: uppercase;
-            }
-            .quote-badge {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--coast-deep);
-                background: var(--surface-cool);
-                border: 1px solid var(--border-cool);
-                padding: 5px 11px;
-                border-radius: 999px;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                font-weight: 600;
-            }
-            .quote-h {
-                font-family: var(--serif);
-                font-size: 26px;
-                font-weight: 500;
-                color: var(--ink);
-                line-height: 1.2;
-                margin-bottom: 18px;
-                letter-spacing: -0.015em;
-            }
-            .quote-h em {
-                font-style: italic;
-                color: var(--gold-deep);
-            }
+  .quote-card {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.7) inset,
+      0 12px 40px rgba(58, 50, 40, 0.08),
+      0 2px 8px rgba(58, 50, 40, 0.06);
+    overflow: hidden;
+  }
+  .quote-card::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--coast-deep), var(--gold), var(--piedmont-clay));
+    border-radius: 20px 20px 0 0;
+  }
+  .quote-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .quote-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold-deep);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .quote-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--coast-deep);
+    background: var(--surface-cool);
+    border: 1px solid var(--border-cool);
+    padding: 5px 11px;
+    border-radius: 999px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .quote-h {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+  }
+  .quote-h em { font-style: italic; color: var(--gold-deep); }
 
-            .quote-field {
-                background: var(--bg);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 14px 16px;
-                margin-bottom: 12px;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                cursor: text;
-                transition:
-                    border-color 0.15s,
-                    background 0.15s;
-            }
-            .quote-field:hover {
-                border-color: var(--border-strong);
-            }
-            .quote-field-label {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--muted);
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                flex-shrink: 0;
-            }
-            .quote-field-val {
-                font-family: var(--sans);
-                font-size: 14px;
-                color: var(--text);
-                flex: 1;
-            }
-            .quote-field-val.placeholder {
-                color: var(--dim);
-            }
-            .quote-field-required {
-                color: var(--piedmont-clay);
-                font-family: var(--mono);
-                font-size: 10px;
-                margin-left: 2px;
-                font-weight: 600;
-            }
+  .quote-field {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    display: flex; align-items: stretch; gap: 10px;
+    cursor: text;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    flex-direction: column;
+  }
+  .quote-field:hover { border-color: var(--border-strong); }
+  .quote-field:focus-within {
+    border-color: var(--gold-deep);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(200, 149, 69, 0.12);
+  }
+  .quote-field-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+  .quote-field input,
+  .quote-field select,
+  .quote-field textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--text);
+    padding: 2px 0 0 0;
+    margin: 0;
+    line-height: 1.4;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .quote-field input::placeholder,
+  .quote-field textarea::placeholder { color: var(--dim); }
+  .quote-field select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23766a58' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    padding-right: 22px;
+  }
+  .quote-field select:not(:valid) { color: var(--dim); }
+  .quote-field select option { color: var(--text); }
+  .quote-field textarea {
+    resize: vertical;
+    min-height: 56px;
+    line-height: 1.5;
+  }
+  .quote-field-val.placeholder { color: var(--dim); }
 
-            .quote-confirm-note {
-                background: var(--surface-cool);
-                border: 1px solid var(--border-cool);
-                border-radius: 10px;
-                padding: 12px 14px;
-                margin-top: 14px;
-                margin-bottom: 4px;
-                display: flex;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .quote-confirm-note-icon {
-                flex-shrink: 0;
-                width: 16px;
-                height: 16px;
-                border-radius: 50%;
-                background: var(--coast-deep);
-                color: var(--bg-parchment);
-                font-family: var(--serif);
-                font-size: 10px;
-                font-weight: 600;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-top: 1px;
-            }
-            .quote-confirm-note-txt {
-                font-size: 12px;
-                line-height: 1.55;
-                color: var(--text);
-            }
-            .quote-confirm-note-txt strong {
-                color: var(--coast-deep);
-                font-weight: 600;
-            }
+  .quote-field-required {
+    color: var(--piedmont-clay);
+    font-family: var(--mono);
+    font-size: 10px;
+    margin-left: 2px;
+    font-weight: 600;
+  }
 
-            .hero-storylink {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                margin-top: 18px;
-                font-family: var(--sans);
-                font-size: 14px;
-                color: var(--coast-deep);
-                border-bottom: 1px solid var(--coast-deep);
-                padding-bottom: 2px;
-                transition:
-                    color 0.15s,
-                    border-color 0.15s,
-                    gap 0.15s;
-            }
-            .hero-storylink:hover {
-                color: var(--gold-deep);
-                border-color: var(--gold-deep);
-                gap: 12px;
-            }
-            .hero-storylink em {
-                font-family: var(--serif);
-                font-style: italic;
-                font-weight: 500;
-            }
-            .hero-storylink-arrow {
-                font-size: 13px;
-                opacity: 0.8;
-            }
+  /* Loading / result / error states inside the card */
+  .quote-loading {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px;
+    margin-top: 14px;
+    background: var(--surface-cool);
+    border: 1px solid var(--border-cool);
+    border-radius: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coast-deep);
+  }
+  .quote-loading.active { display: flex; }
+  .quote-loading-dots { display: flex; gap: 4px; }
+  .quote-loading-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--coast-deep);
+    animation: q-blink 1.2s ease-in-out infinite;
+  }
+  .quote-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+  .quote-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes q-blink {
+    0%, 80%, 100% { opacity: 0.2; }
+    40% { opacity: 1; }
+  }
 
-            .quote-row {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                margin-bottom: 12px;
-            }
-            .quote-row .quote-field {
-                margin-bottom: 0;
-            }
+  .quote-error {
+    display: none;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: rgba(160, 74, 42, 0.08);
+    border: 1px solid rgba(160, 74, 42, 0.3);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--piedmont-deep);
+    line-height: 1.5;
+  }
+  .quote-error.active { display: block; }
 
-            .quote-cta {
-                width: 100%;
-                margin-top: 12px;
-                background: var(--gold-deep);
-                color: var(--bg-parchment);
-                border: none;
-                font-family: var(--sans);
-                font-size: 15px;
-                font-weight: 600;
-                padding: 16px;
-                border-radius: 12px;
-                cursor: pointer;
-                transition:
-                    background 0.15s,
-                    transform 0.15s;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                text-decoration: none;
-            }
-            .quote-cta:hover {
-                background: var(--gold);
-                transform: translateY(-1px);
-            }
+  .quote-success {
+    display: none;
+    margin-top: 14px;
+    padding: 22px 22px 20px;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-warm) 100%);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-success.active { display: block; }
+  .quote-success::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--coast-deep), var(--gold), var(--piedmont-clay));
+  }
+  .quote-success-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .quote-success-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold-deep);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .quote-success-label::before {
+    content: "✓";
+    color: var(--mtn-forest);
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .quote-success-confirm {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--coast-deep);
+    background: var(--surface-cool);
+    border: 1px solid var(--border-cool);
+    padding: 5px 11px;
+    border-radius: 999px;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .quote-success-total-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .quote-success-total {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 10px;
+  }
+  .quote-success-total em { font-style: italic; color: var(--gold-deep); }
+  .quote-success-meta {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .quote-success-meta-item {
+    display: flex; flex-direction: column;
+  }
+  .quote-success-meta-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .quote-success-meta-val {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .quote-success-breakdown {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .quote-success-actions {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .quote-success-btn {
+    flex: 1 1 auto;
+    min-width: 140px;
+    padding: 11px 14px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    transition: background 0.15s, transform 0.15s, border-color 0.15s;
+  }
+  .quote-success-btn-primary {
+    background: var(--gold-deep);
+    color: var(--bg-parchment);
+  }
+  .quote-success-btn-primary:hover { background: var(--gold); transform: translateY(-1px); }
+  .quote-success-btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .quote-success-btn-ghost:hover { background: var(--surface); }
 
-            .quote-note {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--muted);
-                margin-top: 14px;
-                text-align: center;
-                letter-spacing: 0.08em;
-            }
+  .quote-confirm-note {
+    background: var(--surface-cool);
+    border: 1px solid var(--border-cool);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .quote-confirm-note-icon {
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--coast-deep);
+    color: var(--bg-parchment);
+    font-family: var(--serif);
+    font-size: 10px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .quote-confirm-note-txt {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .quote-confirm-note-txt strong { color: var(--coast-deep); font-weight: 600; }
 
-            .btn {
-                font-family: var(--sans);
-                font-size: 14px;
-                font-weight: 500;
-                padding: 14px 26px;
-                border-radius: 999px;
-                border: 1px solid transparent;
-                cursor: pointer;
-                text-decoration: none;
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                transition:
-                    transform 0.15s,
-                    background 0.15s,
-                    border-color 0.15s,
-                    box-shadow 0.2s;
-            }
-            .btn-primary {
-                background: var(--gold-deep);
-                color: var(--bg-parchment);
-                font-weight: 600;
-            }
-            .btn-primary:hover {
-                background: var(--gold);
-                transform: translateY(-1px);
-                box-shadow: 0 6px 20px rgba(200, 149, 69, 0.3);
-            }
-            .btn-coast {
-                background: var(--coast-deep);
-                color: var(--bg-parchment);
-                font-weight: 600;
-            }
-            .btn-coast:hover {
-                background: var(--coast);
-                transform: translateY(-1px);
-                box-shadow: 0 6px 20px rgba(30, 90, 138, 0.28);
-            }
-            .btn-clay {
-                background: var(--piedmont-clay);
-                color: var(--bg-parchment);
-                font-weight: 600;
-            }
-            .btn-clay:hover {
-                background: var(--piedmont-warm);
-                transform: translateY(-1px);
-                box-shadow: 0 6px 20px rgba(160, 74, 42, 0.28);
-            }
-            .btn-ghost {
-                background: transparent;
-                color: var(--text);
-                border-color: var(--border-strong);
-            }
-            .btn-ghost:hover {
-                background: var(--surface);
-            }
-            .btn-arrow {
-                font-size: 13px;
-                opacity: 0.85;
-            }
+  .hero-storylink {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 18px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--coast-deep);
+    border-bottom: 1px solid var(--coast-deep);
+    padding-bottom: 2px;
+    transition: color 0.15s, border-color 0.15s, gap 0.15s;
+  }
+  .hero-storylink:hover {
+    color: var(--gold-deep);
+    border-color: var(--gold-deep);
+    gap: 12px;
+  }
+  .hero-storylink em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero-storylink-arrow { font-size: 13px; opacity: 0.8; }
 
-            .pillars {
-                padding: 96px 0;
-                background: var(--bg-parchment);
-                border-bottom: 1px solid var(--border);
-                position: relative;
-                overflow: hidden;
-            }
-            .pillars::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background:
-                    radial-gradient(
-                        ellipse 40% 50% at 20% 50%,
-                        rgba(30, 90, 138, 0.04),
-                        transparent 60%
-                    ),
-                    radial-gradient(
-                        ellipse 40% 50% at 80% 50%,
-                        rgba(160, 74, 42, 0.04),
-                        transparent 60%
-                    );
-                pointer-events: none;
-            }
-            .pillars-inner {
-                position: relative;
-                z-index: 1;
-            }
-            .pillars-head {
-                text-align: center;
-                max-width: 820px;
-                margin: 0 auto 56px;
-            }
-            .pillars-eyebrow {
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--gold-deep);
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
-                margin-bottom: 18px;
-                display: inline-flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .pillars-eyebrow::before,
-            .pillars-eyebrow::after {
-                content: "";
-                width: 22px;
-                height: 1px;
-                background: var(--gold);
-                opacity: 0.6;
-            }
-            .pillars-title {
-                font-family: var(--serif);
-                font-size: clamp(34px, 4.8vw, 56px);
-                font-weight: 500;
-                line-height: 1.05;
-                letter-spacing: -0.02em;
-                color: var(--ink);
-            }
-            .pillars-title em {
-                font-style: italic;
-                color: var(--gold-deep);
-            }
+  .quote-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .quote-row .quote-field { margin-bottom: 0; }
 
-            .pillars-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 20px;
-            }
-            .pillar {
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 18px;
-                padding: 36px 32px;
-                position: relative;
-                overflow: hidden;
-                transition:
-                    transform 0.2s,
-                    box-shadow 0.2s,
-                    border-color 0.2s;
-            }
-            .pillar::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 2px;
-                background: var(--pillar-color, var(--gold));
-            }
-            .pillar:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 12px 32px rgba(58, 50, 40, 0.1);
-                border-color: var(--border-strong);
-            }
-            .pillar-icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 10px;
-                background: var(--pillar-bg, var(--surface-warm));
-                border: 1px solid var(--border);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 22px;
-            }
-            .pillar-icon svg {
-                width: 22px;
-                height: 22px;
-            }
-            .pillar-num {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--pillar-color, var(--gold-deep));
-                letter-spacing: 0.18em;
-                margin-bottom: 8px;
-            }
-            .pillar-title {
-                font-family: var(--serif);
-                font-size: 24px;
-                font-weight: 500;
-                color: var(--ink);
-                line-height: 1.2;
-                letter-spacing: -0.015em;
-                margin-bottom: 12px;
-            }
-            .pillar-title em {
-                font-style: italic;
-                color: var(--pillar-color, var(--gold-deep));
-            }
-            .pillar-body {
-                font-size: 15px;
-                color: var(--text);
-                line-height: 1.65;
-            }
+  .quote-cta {
+    width: 100%;
+    margin-top: 12px;
+    background: var(--gold-deep);
+    color: var(--bg-parchment);
+    border: none;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none;
+  }
+  .quote-cta:hover { background: var(--gold); transform: translateY(-1px); }
+  .quote-cta:disabled {
+    opacity: 0.5;
+    cursor: wait;
+    transform: none;
+  }
+  .quote-cta:disabled:hover {
+    background: var(--gold-deep);
+    transform: none;
+  }
 
-            .trades {
-                padding: 96px 0;
-                background: var(--bg);
-                border-bottom: 1px solid var(--border);
-            }
-            .trades-head {
-                text-align: center;
-                max-width: 820px;
-                margin: 0 auto 56px;
-                padding: 0 28px;
-            }
-            .trades-eyebrow {
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--gold-deep);
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
-                margin-bottom: 18px;
-            }
-            .trades-title {
-                font-family: var(--serif);
-                font-size: clamp(34px, 4.8vw, 56px);
-                font-weight: 500;
-                line-height: 1.05;
-                letter-spacing: -0.02em;
-                color: var(--ink);
-                margin-bottom: 18px;
-            }
-            .trades-title em {
-                font-style: italic;
-                color: var(--gold-deep);
-            }
-            .trades-sub {
-                font-family: var(--serif);
-                font-size: 18px;
-                color: var(--text-soft);
-                line-height: 1.55;
-            }
+  .quote-note {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 14px;
+    text-align: center;
+    letter-spacing: 0.08em;
+  }
 
-            .trades-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                gap: 12px;
-                max-width: 1180px;
-                margin: 0 auto;
-                padding: 0 28px;
-            }
-            .trade {
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 14px;
-                padding: 24px 22px;
-                transition:
-                    transform 0.2s,
-                    box-shadow 0.2s,
-                    border-color 0.2s;
-                cursor: pointer;
-                position: relative;
-            }
-            .trade:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 24px rgba(58, 50, 40, 0.08);
-                border-color: var(--border-strong);
-            }
-            .trade-agent {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--gold-deep);
-                letter-spacing: 0.16em;
-                text-transform: uppercase;
-                margin-bottom: 8px;
-            }
-            .trade-name {
-                font-family: var(--serif);
-                font-size: 20px;
-                font-weight: 500;
-                color: var(--ink);
-                line-height: 1.2;
-                margin-bottom: 6px;
-                letter-spacing: -0.01em;
-            }
-            .trade-desc {
-                font-size: 13px;
-                color: var(--text-soft);
-                line-height: 1.55;
-            }
+  .btn {
+    font-family: var(--sans);
+    font-size: 14px; font-weight: 500;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: transform 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.2s;
+  }
+  .btn-primary { background: var(--gold-deep); color: var(--bg-parchment); font-weight: 600; }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200, 149, 69, 0.3); }
+  .btn-coast { background: var(--coast-deep); color: var(--bg-parchment); font-weight: 600; }
+  .btn-coast:hover { background: var(--coast); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30, 90, 138, 0.28); }
+  .btn-clay { background: var(--piedmont-clay); color: var(--bg-parchment); font-weight: 600; }
+  .btn-clay:hover { background: var(--piedmont-warm); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(160, 74, 42, 0.28); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+  .btn-ghost:hover { background: var(--surface); }
+  .btn-arrow { font-size: 13px; opacity: 0.85; }
 
-            .journey-teaser {
-                padding: 80px 0;
-                background: var(--bg-parchment);
-                border-bottom: 1px solid var(--border);
-                position: relative;
-                overflow: hidden;
-            }
-            .journey-teaser::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: radial-gradient(
-                    ellipse 60% 60% at 50% 50%,
-                    rgba(200, 149, 69, 0.05),
-                    transparent 70%
-                );
-                pointer-events: none;
-            }
-            .journey-inner {
-                position: relative;
-                z-index: 1;
-                max-width: 1180px;
-                margin: 0 auto;
-                padding: 0 28px;
-                display: grid;
-                grid-template-columns: 1fr auto;
-                gap: 48px;
-                align-items: center;
-            }
-            .journey-eyebrow {
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--gold-deep);
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
-                margin-bottom: 14px;
-                display: inline-flex;
-                align-items: center;
-                gap: 10px;
-            }
-            .journey-eyebrow::before {
-                content: "";
-                width: 22px;
-                height: 1px;
-                background: var(--gold);
-            }
-            .journey-title {
-                font-family: var(--serif);
-                font-size: clamp(28px, 3.5vw, 42px);
-                font-weight: 500;
-                line-height: 1.1;
-                letter-spacing: -0.02em;
-                color: var(--ink);
-                margin-bottom: 12px;
-            }
-            .journey-title em {
-                font-style: italic;
-                color: var(--gold-deep);
-            }
-            .journey-body {
-                font-family: var(--serif);
-                font-size: 17px;
-                color: var(--text-soft);
-                line-height: 1.55;
-                max-width: 580px;
-            }
-            .journey-pins {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            }
-            .journey-pin {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 6px;
-            }
-            .journey-pin-dot {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                border: 2px solid var(--bg-parchment);
-            }
-            .journey-pin-1 .journey-pin-dot {
-                background: var(--coast-deep);
-                box-shadow: 0 0 0 1px var(--coast-deep);
-            }
-            .journey-pin-2 .journey-pin-dot {
-                background: var(--gold-deep);
-                box-shadow:
-                    0 0 0 1px var(--gold-deep),
-                    0 0 12px rgba(200, 149, 69, 0.5);
-                width: 16px;
-                height: 16px;
-            }
-            .journey-pin-3 .journey-pin-dot {
-                background: var(--piedmont-clay);
-                box-shadow: 0 0 0 1px var(--piedmont-clay);
-            }
-            .journey-pin-4 .journey-pin-dot {
-                background: var(--mtn-forest);
-                box-shadow: 0 0 0 1px var(--mtn-forest);
-            }
-            .journey-pin-label {
-                font-family: var(--mono);
-                font-size: 9px;
-                color: var(--muted);
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                white-space: nowrap;
-            }
-            .journey-pin-2 .journey-pin-label {
-                color: var(--gold-deep);
-                font-weight: 600;
-            }
-            .journey-line {
-                flex: 1;
-                height: 1px;
-                background: var(--border-strong);
-                margin-bottom: 22px;
-                min-width: 24px;
-            }
+  .pillars {
+    padding: 96px 0;
+    background: var(--bg-parchment);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .pillars::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 40% 50% at 20% 50%, rgba(30, 90, 138, 0.04), transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 50%, rgba(160, 74, 42, 0.04), transparent 60%);
+    pointer-events: none;
+  }
+  .pillars-inner { position: relative; z-index: 1; }
+  .pillars-head { text-align: center; max-width: 820px; margin: 0 auto 56px; }
+  .pillars-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold-deep);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .pillars-eyebrow::before, .pillars-eyebrow::after {
+    content: ""; width: 22px; height: 1px; background: var(--gold); opacity: 0.6;
+  }
+  .pillars-title {
+    font-family: var(--serif);
+    font-size: clamp(34px, 4.8vw, 56px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .pillars-title em { font-style: italic; color: var(--gold-deep); }
 
-            .founder {
-                padding: 96px 0;
-                background: var(--bg);
-                border-bottom: 1px solid var(--border);
-                position: relative;
-                overflow: hidden;
-            }
-            .founder::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: radial-gradient(
-                    ellipse 50% 50% at 50% 50%,
-                    rgba(200, 149, 69, 0.04),
-                    transparent 70%
-                );
-                pointer-events: none;
-            }
-            .founder-inner {
-                position: relative;
-                z-index: 1;
-                max-width: 760px;
-                margin: 0 auto;
-                padding: 0 28px;
-                text-align: center;
-            }
-            .founder-eyebrow {
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--gold-deep);
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
-                margin-bottom: 22px;
-                display: inline-flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .founder-eyebrow::before,
-            .founder-eyebrow::after {
-                content: "";
-                width: 22px;
-                height: 1px;
-                background: var(--gold);
-                opacity: 0.6;
-            }
-            .founder-quote {
-                font-family: var(--serif);
-                font-style: italic;
-                font-size: clamp(22px, 3vw, 32px);
-                font-weight: 400;
-                line-height: 1.4;
-                color: var(--ink);
-                letter-spacing: -0.005em;
-                margin-bottom: 32px;
-            }
-            .founder-quote .mark {
-                color: var(--gold-deep);
-                font-style: normal;
-            }
-            .founder-quote em {
-                color: var(--gold-deep);
-            }
-            .founder-sig {
-                display: inline-flex;
-                align-items: center;
-                gap: 14px;
-                padding-top: 20px;
-                border-top: 1px solid var(--border);
-            }
-            .founder-sig-avatar {
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                background: linear-gradient(
-                    135deg,
-                    var(--gold),
-                    var(--gold-deep)
-                );
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: var(--serif);
-                color: var(--bg-parchment);
-                font-size: 16px;
-                font-weight: 500;
-            }
-            .founder-sig-name {
-                font-family: var(--serif);
-                font-size: 16px;
-                color: var(--ink);
-                font-weight: 500;
-                text-align: left;
-            }
-            .founder-sig-meta {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--muted);
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                margin-top: 2px;
-                text-align: left;
-            }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .pillar::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--pillar-color, var(--gold));
+  }
+  .pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(58, 50, 40, 0.1);
+    border-color: var(--border-strong);
+  }
+  .pillar-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: var(--pillar-bg, var(--surface-warm));
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 22px;
+  }
+  .pillar-icon svg { width: 22px; height: 22px; }
+  .pillar-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--pillar-color, var(--gold-deep));
+    letter-spacing: 0.18em;
+    margin-bottom: 8px;
+  }
+  .pillar-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+  }
+  .pillar-title em { font-style: italic; color: var(--pillar-color, var(--gold-deep)); }
+  .pillar-body {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.65;
+  }
 
-            .cta {
-                padding: 128px 0;
-                text-align: center;
-                position: relative;
-                overflow: hidden;
-                background: var(--bg);
-            }
-            .cta::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background:
-                    radial-gradient(
-                        ellipse 70% 50% at 30% 20%,
-                        rgba(30, 90, 138, 0.08),
-                        transparent 65%
-                    ),
-                    radial-gradient(
-                        ellipse 70% 50% at 70% 80%,
-                        rgba(160, 74, 42, 0.08),
-                        transparent 65%
-                    ),
-                    radial-gradient(
-                        ellipse 50% 30% at 50% 50%,
-                        rgba(200, 149, 69, 0.08),
-                        transparent 70%
-                    );
-                pointer-events: none;
-            }
-            .cta-inner {
-                position: relative;
-                z-index: 1;
-                padding: 0 28px;
-            }
-            .cta-eyebrow {
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--gold-deep);
-                letter-spacing: 0.22em;
-                text-transform: uppercase;
-                margin-bottom: 26px;
-                display: inline-flex;
-                align-items: center;
-                gap: 12px;
-            }
-            .cta-eyebrow::before,
-            .cta-eyebrow::after {
-                content: "";
-                width: 22px;
-                height: 1px;
-                background: var(--gold);
-                opacity: 0.6;
-            }
-            .cta-title {
-                font-family: var(--serif);
-                font-size: clamp(40px, 6vw, 80px);
-                font-weight: 500;
-                line-height: 1;
-                color: var(--ink);
-                letter-spacing: -0.025em;
-                margin-bottom: 26px;
-                max-width: 900px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .cta-title em {
-                font-style: italic;
-                color: var(--gold-deep);
-            }
-            .cta-sub {
-                font-size: 17px;
-                color: var(--text-soft);
-                max-width: 600px;
-                margin: 0 auto 44px;
-                line-height: 1.65;
-            }
-            .cta-row {
-                display: flex;
-                gap: 14px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            .cta-meta {
-                margin-top: 48px;
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--muted);
-                letter-spacing: 0.16em;
-                text-transform: uppercase;
-            }
+  .trades {
+    padding: 96px 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .trades-head {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto 56px;
+    padding: 0 28px;
+  }
+  .trades-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold-deep);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .trades-title {
+    font-family: var(--serif);
+    font-size: clamp(34px, 4.8vw, 56px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .trades-title em { font-style: italic; color: var(--gold-deep); }
+  .trades-sub {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
 
-            .footer {
-                padding: 56px 0 48px;
-                border-top: 1px solid var(--border);
-                background: var(--bg-parchment);
-            }
-            .footer-inner {
-                max-width: 1280px;
-                margin: 0 auto;
-                padding: 0 28px;
-                display: grid;
-                grid-template-columns: 2fr 1fr 1fr 1fr;
-                gap: 48px;
-            }
-            .footer-brand .brand-name {
-                font-size: 22px;
-            }
-            .footer-tag {
-                font-family: var(--serif);
-                font-style: italic;
-                font-size: 16px;
-                color: var(--text-soft);
-                margin-top: 12px;
-                line-height: 1.4;
-            }
-            .footer-tag em {
-                color: var(--gold-deep);
-            }
-            .footer-col-title {
-                font-family: var(--mono);
-                font-size: 10px;
-                color: var(--muted);
-                letter-spacing: 0.16em;
-                text-transform: uppercase;
-                margin-bottom: 14px;
-            }
-            .footer-col a {
-                display: block;
-                font-family: var(--sans);
-                font-size: 14px;
-                color: var(--text);
-                padding: 4px 0;
-                transition: color 0.15s;
-            }
-            .footer-col a:hover {
-                color: var(--gold-deep);
-            }
-            .footer-bottom {
-                max-width: 1280px;
-                margin: 56px auto 0;
-                padding: 28px 28px 0;
-                border-top: 1px solid var(--border);
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                gap: 14px;
-            }
-            .footer-txt {
-                font-family: var(--mono);
-                font-size: 11px;
-                color: var(--muted);
-                letter-spacing: 0.06em;
-            }
-            .footer-mottos .coast {
-                color: var(--coast-deep);
-            }
-            .footer-mottos .clay {
-                color: var(--piedmont-clay);
-            }
-            .footer-mottos .gold {
-                color: var(--gold-deep);
-            }
+  .trades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  .trade {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 22px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .trade:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(58, 50, 40, 0.08);
+    border-color: var(--border-strong);
+  }
+  .trade-agent {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold-deep);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .trade-name {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .trade-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
 
-            @media (max-width: 1000px) {
-                .hero-inner {
-                    grid-template-columns: 1fr;
-                    gap: 48px;
-                }
-                .journey-inner {
-                    grid-template-columns: 1fr;
-                    gap: 28px;
-                }
-                .footer-inner {
-                    grid-template-columns: 1fr 1fr;
-                    gap: 36px;
-                }
-            }
-            @media (max-width: 700px) {
-                .nav-links {
-                    gap: 14px;
-                }
-                .nav-links .nav-link:not(.nav-cta) {
-                    display: none;
-                }
-                .footer-inner {
-                    grid-template-columns: 1fr;
-                    gap: 28px;
-                }
-            }
-            @media (max-width: 600px) {
-                .motto-ribbon {
-                    font-size: 9px;
-                    letter-spacing: 0.2em;
-                    padding: 6px 16px;
-                }
-                .motto-ribbon .dot {
-                    margin: 0 8px;
-                }
-                .hero {
-                    padding: 56px 0 72px;
-                }
-                .pillars,
-                .trades,
-                .founder,
-                .journey-teaser {
-                    padding: 64px 0;
-                }
-                .cta {
-                    padding: 80px 0;
-                }
-                .quote-card {
-                    padding: 24px;
-                }
-                .quote-row {
-                    grid-template-columns: 1fr;
-                }
-                .hero-trust {
-                    gap: 18px;
-                }
-                .journey-pins {
-                    flex-wrap: wrap;
-                    gap: 12px;
-                }
-                .journey-line {
-                    display: none;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="motto-ribbon">
-            First in Freedom <span class="dot">✦</span> First in Flight
-            <span class="dot">✦</span> First in Fair
+  .journey-teaser {
+    padding: 80px 0;
+    background: var(--bg-parchment);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .journey-teaser::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200, 149, 69, 0.05), transparent 70%);
+    pointer-events: none;
+  }
+  .journey-inner {
+    position: relative; z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+  .journey-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold-deep);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .journey-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
+  .journey-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .journey-title em { font-style: italic; color: var(--gold-deep); }
+  .journey-body {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--text-soft);
+    line-height: 1.55;
+    max-width: 580px;
+  }
+  .journey-pins {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .journey-pin {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .journey-pin-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-parchment);
+  }
+  .journey-pin-1 .journey-pin-dot { background: var(--coast-deep); box-shadow: 0 0 0 1px var(--coast-deep); }
+  .journey-pin-2 .journey-pin-dot {
+    background: var(--gold-deep);
+    box-shadow: 0 0 0 1px var(--gold-deep), 0 0 12px rgba(200, 149, 69, 0.5);
+    width: 16px; height: 16px;
+  }
+  .journey-pin-3 .journey-pin-dot { background: var(--piedmont-clay); box-shadow: 0 0 0 1px var(--piedmont-clay); }
+  .journey-pin-4 .journey-pin-dot { background: var(--mtn-forest); box-shadow: 0 0 0 1px var(--mtn-forest); }
+  .journey-pin-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .journey-pin-2 .journey-pin-label { color: var(--gold-deep); font-weight: 600; }
+  .journey-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border-strong);
+    margin-bottom: 22px;
+    min-width: 24px;
+  }
+
+  .founder {
+    padding: 96px 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .founder::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(200, 149, 69, 0.04), transparent 70%);
+    pointer-events: none;
+  }
+  .founder-inner {
+    position: relative; z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px;
+    text-align: center;
+  }
+  .founder-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold-deep);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .founder-eyebrow::before, .founder-eyebrow::after {
+    content: ""; width: 22px; height: 1px; background: var(--gold); opacity: 0.6;
+  }
+  .founder-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 32px;
+  }
+  .founder-quote .mark { color: var(--gold-deep); font-style: normal; }
+  .founder-quote em { color: var(--gold-deep); }
+  .founder-sig {
+    display: inline-flex; align-items: center; gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .founder-sig-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    color: var(--bg-parchment);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .founder-sig-name {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+    font-weight: 500;
+    text-align: left;
+  }
+  .founder-sig-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    text-align: left;
+  }
+
+  .cta {
+    padding: 128px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .cta::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 30% 20%, rgba(30, 90, 138, 0.08), transparent 65%),
+      radial-gradient(ellipse 70% 50% at 70% 80%, rgba(160, 74, 42, 0.08), transparent 65%),
+      radial-gradient(ellipse 50% 30% at 50% 50%, rgba(200, 149, 69, 0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; z-index: 1; padding: 0 28px; }
+  .cta-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold-deep);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .cta-eyebrow::before, .cta-eyebrow::after {
+    content: ""; width: 22px; height: 1px; background: var(--gold); opacity: 0.6;
+  }
+  .cta-title {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    margin-bottom: 26px;
+    max-width: 900px;
+    margin-left: auto; margin-right: auto;
+  }
+  .cta-title em { font-style: italic; color: var(--gold-deep); }
+  .cta-sub {
+    font-size: 17px;
+    color: var(--text-soft);
+    max-width: 600px;
+    margin: 0 auto 44px;
+    line-height: 1.65;
+  }
+  .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .cta-meta {
+    margin-top: 48px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .footer {
+    padding: 56px 0 48px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-parchment);
+  }
+  .footer-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 28px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .footer-brand .brand-name { font-size: 22px; }
+  .footer-tag {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-soft);
+    margin-top: 12px;
+    line-height: 1.4;
+  }
+  .footer-tag em { color: var(--gold-deep); }
+  .footer-col-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .footer-col a {
+    display: block;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--text);
+    padding: 4px 0;
+    transition: color 0.15s;
+  }
+  .footer-col a:hover { color: var(--gold-deep); }
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 56px auto 0;
+    padding: 28px 28px 0;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+  }
+  .footer-txt {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .footer-mottos .coast { color: var(--coast-deep); }
+  .footer-mottos .clay { color: var(--piedmont-clay); }
+  .footer-mottos .gold { color: var(--gold-deep); }
+
+  @media (max-width: 1000px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .journey-inner { grid-template-columns: 1fr; gap: 28px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+  @media (max-width: 700px) {
+    .nav-links { gap: 14px; }
+    .nav-links .nav-link:not(.nav-cta) { display: none; }
+    .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 600px) {
+    .motto-ribbon { font-size: 9px; letter-spacing: 0.2em; padding: 6px 16px; }
+    .motto-ribbon .dot { margin: 0 8px; }
+    .hero { padding: 56px 0 72px; }
+    .pillars, .trades, .founder, .journey-teaser { padding: 64px 0; }
+    .cta { padding: 80px 0; }
+    .quote-card { padding: 24px; }
+    .quote-row { grid-template-columns: 1fr; }
+    .hero-trust { gap: 18px; }
+    .journey-pins { flex-wrap: wrap; gap: 12px; }
+    .journey-line { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="motto-ribbon">
+  First in Freedom <span class="dot">✦</span> First in Flight <span class="dot">✦</span> First in Fair
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <svg class="logo-mark" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5" fill="#c89545" />
+        <polygon points="21,9 31,14.8 31,26.2 21,32 11,26.2 11,14.8" fill="#f4ede0" />
+        <polygon points="21,15 27,18.5 27,25.5 21,29 15,25.5 15,18.5" fill="#c89545" />
+      </svg>
+      <span class="brand-name">YSKAIPE</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#trades">Trades</a>
+      <a class="nav-link" href="/we-want-you.html">The story</a>
+      <a class="nav-link" href="/public/founding.html">For pros</a>
+      <a class="nav-cta nav-link" href="#autoquote">Get my Fair Rate →</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="hero-stamp">Cornelius · NC · Summer 2026</div>
+      <h1 class="hero-title">
+        Fair price.<br />
+        Smart choice.<br />
+        <em>Everybody wins.</em>
+      </h1>
+      <p class="hero-sub">
+        YSKAIPE is the <strong>honest bridge</strong> between Lake Norman <span style="color: var(--coast-deep); font-style: italic;">homeowners</span> and the <span style="color: var(--piedmont-clay); font-style: italic;">local pros</span> who do good work. Fair Rate Index pricing. AutoQuote in 60 seconds. One vetted neighbor per job — never four strangers.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#autoquote">
+          Get my Fair Rate
+          <span class="btn-arrow">→</span>
+        </a>
+        <a class="btn btn-coast" href="/we-want-you.html">
+          Why we built this
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+      <a class="hero-storylink" href="/we-want-you.html">
+        Read the full story — <em>First in Freedom, First in Flight, First in Fair</em>
+        <span class="hero-storylink-arrow">→</span>
+      </a>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <div class="hero-trust-val">60<em>s</em></div>
+          <div class="hero-trust-label">AutoQuote time</div>
         </div>
+        <div class="hero-trust-item">
+          <div class="hero-trust-val">8</div>
+          <div class="hero-trust-label">Pro core trades</div>
+        </div>
+        <div class="hero-trust-item">
+          <div class="hero-trust-val">1<em>:</em>1</div>
+          <div class="hero-trust-label">One pro per ZIP</div>
+        </div>
+        <div class="hero-trust-item">
+          <div class="hero-trust-val">$0</div>
+          <div class="hero-trust-label">Homeowner cost</div>
+        </div>
+      </div>
+    </div>
 
-        <nav class="nav">
-            <div class="nav-inner">
-                <a class="brand" href="/">
-                    <svg
-                        class="logo-mark"
-                        viewBox="0 0 42 42"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                    >
-                        <polygon
-                            points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5"
-                            fill="#c89545"
-                        />
-                        <polygon
-                            points="21,9 31,14.8 31,26.2 21,32 11,26.2 11,14.8"
-                            fill="#f4ede0"
-                        />
-                        <polygon
-                            points="21,15 27,18.5 27,25.5 21,29 15,25.5 15,18.5"
-                            fill="#c89545"
-                        />
-                    </svg>
-                    <span class="brand-name">YSKAIPE</span>
-                </a>
-                <div class="nav-links">
-                    <a class="nav-link" href="#how">How it works</a>
-                    <a class="nav-link" href="#trades">Trades</a>
-                    <a class="nav-link" href="/we-want-you.html">The story</a>
-                    <a class="nav-link" href="/public/founding.html"
-                        >For pros</a
-                    >
-                    <a class="nav-cta nav-link" href="#autoquote"
-                        >Get my Fair Rate →</a
-                    >
-                </div>
-            </div>
-        </nav>
+    <div class="quote-card" id="autoquote">
+      <div class="quote-header">
+        <div class="quote-label">⬡ AutoQuote</div>
+        <div class="quote-badge">Fair Rate Index</div>
+      </div>
+      <h2 class="quote-h">Tell us about the <em>job</em>.</h2>
 
-        <section class="hero">
-            <div class="wrap hero-inner">
-                <div>
-                    <div class="hero-stamp">Cornelius · NC · Summer 2026</div>
-                    <h1 class="hero-title">
-                        Fair price.<br />
-                        Smart choice.<br />
-                        <em>Everybody wins.</em>
-                    </h1>
-                    <p class="hero-sub">
-                        YSKAIPE is the <strong>honest bridge</strong> between
-                        Lake Norman
-                        <span
-                            style="color: var(--coast-deep); font-style: italic"
-                            >homeowners</span
-                        >
-                        and the
-                        <span
-                            style="
-                                color: var(--piedmont-clay);
-                                font-style: italic;
-                            "
-                            >local pros</span
-                        >
-                        who do good work. Fair Rate Index pricing. AutoQuote in
-                        60 seconds. One vetted neighbor per job — never four
-                        strangers.
-                    </p>
-                    <div class="hero-ctas">
-                        <a class="btn btn-primary" href="#autoquote">
-                            Get my Fair Rate
-                            <span class="btn-arrow">→</span>
-                        </a>
-                        <a class="btn btn-coast" href="/we-want-you.html">
-                            Why we built this
-                            <span class="btn-arrow">→</span>
-                        </a>
-                    </div>
-                    <a class="hero-storylink" href="/we-want-you.html">
-                        Read the full story —
-                        <em
-                            >First in Freedom, First in Flight, First in
-                            Fair</em
-                        >
-                        <span class="hero-storylink-arrow">→</span>
-                    </a>
-                    <div class="hero-trust">
-                        <div class="hero-trust-item">
-                            <div class="hero-trust-val">60<em>s</em></div>
-                            <div class="hero-trust-label">AutoQuote time</div>
-                        </div>
-                        <div class="hero-trust-item">
-                            <div class="hero-trust-val">8</div>
-                            <div class="hero-trust-label">Pro core trades</div>
-                        </div>
-                        <div class="hero-trust-item">
-                            <div class="hero-trust-val">1<em>:</em>1</div>
-                            <div class="hero-trust-label">One pro per ZIP</div>
-                        </div>
-                        <div class="hero-trust-item">
-                            <div class="hero-trust-val">$0</div>
-                            <div class="hero-trust-label">Homeowner cost</div>
-                        </div>
-                    </div>
-                </div>
+      <form id="quoteForm" onsubmit="return false;" autocomplete="on">
+        <div class="quote-field">
+          <span class="quote-field-label">Trade <span class="quote-field-required">*</span></span>
+          <select id="q-trade" required>
+            <option value="" disabled selected>Select a trade…</option>
+            <option value="HVAC">HVAC · Aria</option>
+            <option value="Plumbing">Plumbing · River</option>
+            <option value="Electrical">Electrical · Volt</option>
+            <option value="Roofing">Roofing · Ridge</option>
+            <option value="Landscaping">Landscaping · Terra</option>
+            <option value="Painting">Painting · Hue</option>
+            <option value="General Contracting">General Contracting · Forge</option>
+            <option value="Automotive">Automotive · Axle</option>
+          </select>
+        </div>
+        <div class="quote-field">
+          <span class="quote-field-label">What needs doing <span class="quote-field-required">*</span></span>
+          <textarea id="q-description" required placeholder='e.g. "AC stopped cooling Saturday — house is at 82° and won''t come down"' rows="2"></textarea>
+        </div>
+        <div class="quote-row">
+          <div class="quote-field">
+            <span class="quote-field-label">ZIP <span class="quote-field-required">*</span></span>
+            <input type="text" id="q-zip" required maxlength="10" inputmode="numeric" pattern="[0-9]{5}" placeholder="28031" autocomplete="postal-code" />
+          </div>
+          <div class="quote-field">
+            <span class="quote-field-label">Scope <span style="color: var(--muted); font-weight: 400;">(optional)</span></span>
+            <input type="text" id="q-scope" placeholder="2,200 sq ft / small bath" />
+          </div>
+        </div>
+        <div class="quote-row">
+          <div class="quote-field">
+            <span class="quote-field-label">Email <span class="quote-field-required">*</span></span>
+            <input type="email" id="q-email" required placeholder="you@home.com" autocomplete="email" />
+          </div>
+          <div class="quote-field">
+            <span class="quote-field-label">Phone <span class="quote-field-required">*</span></span>
+            <input type="tel" id="q-phone" required placeholder="(704) 555-0100" autocomplete="tel" />
+          </div>
+        </div>
+        <div class="quote-confirm-note">
+          <div class="quote-confirm-note-icon">#</div>
+          <div class="quote-confirm-note-txt">
+            You'll get a <strong>confirmation number</strong> — that's your job's home base. It links your AutoQuote to your matched pro, so we can text or email you when your local contractor accepts.
+          </div>
+        </div>
+        <button type="submit" class="quote-cta" id="q-submit" onclick="submitQuote()">
+          <span id="q-submit-text">Show me the Fair Rate</span>
+          <span style="opacity: 0.8;">→</span>
+        </button>
+        <div class="quote-note">Never resold · Never blasted to four strangers · Free for homeowners always</div>
+      </form>
 
-                <div class="quote-card" id="autoquote">
-                    <div class="quote-header">
-                        <div class="quote-label">⬡ AutoQuote</div>
-                        <div class="quote-badge">Fair Rate Index</div>
-                    </div>
-                    <h2 class="quote-h">Tell us about the <em>job</em>.</h2>
-                    <div class="quote-field">
-                        <span class="quote-field-label"
-                            >Trade
-                            <span class="quote-field-required">*</span></span
-                        >
-                        <span class="quote-field-val placeholder"
-                            >HVAC, plumbing, roofing…</span
-                        >
-                    </div>
-                    <div class="quote-field">
-                        <span class="quote-field-label"
-                            >What needs doing
-                            <span class="quote-field-required">*</span></span
-                        >
-                        <span class="quote-field-val placeholder"
-                            >"AC stopped cooling Saturday"</span
-                        >
-                    </div>
-                    <div class="quote-row">
-                        <div class="quote-field">
-                            <span class="quote-field-label"
-                                >ZIP
-                                <span class="quote-field-required"
-                                    >*</span
-                                ></span
-                            >
-                            <span class="quote-field-val placeholder"
-                                >28031</span
-                            >
-                        </div>
-                        <div class="quote-field">
-                            <span class="quote-field-label"
-                                >When
-                                <span class="quote-field-required"
-                                    >*</span
-                                ></span
-                            >
-                            <span class="quote-field-val placeholder"
-                                >ASAP</span
-                            >
-                        </div>
-                    </div>
-                    <div class="quote-row">
-                        <div class="quote-field">
-                            <span class="quote-field-label"
-                                >Email
-                                <span class="quote-field-required"
-                                    >*</span
-                                ></span
-                            >
-                            <span class="quote-field-val placeholder"
-                                >you@home.com</span
-                            >
-                        </div>
-                        <div class="quote-field">
-                            <span class="quote-field-label"
-                                >Phone
-                                <span class="quote-field-required"
-                                    >*</span
-                                ></span
-                            >
-                            <span class="quote-field-val placeholder"
-                                >(704) 555-0100</span
-                            >
-                        </div>
-                    </div>
-                    <div class="quote-confirm-note">
-                        <div class="quote-confirm-note-icon">#</div>
-                        <div class="quote-confirm-note-txt">
-                            You'll get a <strong>confirmation number</strong> —
-                            that's your job's home base. It links your AutoQuote
-                            to your matched pro, so we can text or email you
-                            when your local contractor accepts.
-                        </div>
-                    </div>
-                    <a class="quote-cta" href="/autoquote.html">
-                        Show me the Fair Rate
-                        <span style="opacity: 0.8">→</span>
-                    </a>
-                    <div class="quote-note">
-                        Never resold · Never blasted to four strangers · Free
-                        for homeowners always
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- Loading state -->
+      <div class="quote-loading" id="q-loading">
+        <div class="quote-loading-dots">
+          <div class="quote-loading-dot"></div>
+          <div class="quote-loading-dot"></div>
+          <div class="quote-loading-dot"></div>
+        </div>
+        <span>Calculating your Fair Rate</span>
+      </div>
 
-        <section class="pillars" id="how">
-            <div class="wrap pillars-inner">
-                <div class="pillars-head">
-                    <div class="pillars-eyebrow">
-                        Three things that make us different
-                    </div>
-                    <h2 class="pillars-title">
-                        Built different. <em>On purpose.</em>
-                    </h2>
-                </div>
-                <div class="pillars-grid">
-                    <div
-                        class="pillar"
-                        style="--pillar-color: #c89545; --pillar-bg: #f0e4cc"
-                    >
-                        <div class="pillar-icon">
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M3 12h18M12 3v18M5 7l14 10M5 17l14-10"
-                                    stroke="#a87530"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                />
-                            </svg>
-                        </div>
-                        <div class="pillar-num">01 · Pricing</div>
-                        <div class="pillar-title">
-                            The <em>Fair Rate Index</em>
-                        </div>
-                        <div class="pillar-body">
-                            A transparent, market-based price for every job in
-                            your ZIP. See what fair looks like before you ever
-                            pick up the phone. No more $400-to-$2,400 quote
-                            spreads on the same work.
-                        </div>
-                    </div>
+      <!-- Error state -->
+      <div class="quote-error" id="q-error"></div>
 
-                    <div
-                        class="pillar"
-                        style="--pillar-color: #1e5a8a; --pillar-bg: #ecf1f5"
-                    >
-                        <div class="pillar-icon">
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                            >
-                                <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="9"
-                                    stroke="#1e5a8a"
-                                    stroke-width="1.5"
-                                />
-                                <path
-                                    d="M12 7v5l3 2"
-                                    stroke="#1e5a8a"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                />
-                            </svg>
-                        </div>
-                        <div class="pillar-num">02 · Speed</div>
-                        <div class="pillar-title">
-                            AutoQuote in <em>60 seconds</em>
-                        </div>
-                        <div class="pillar-body">
-                            Describe the job in plain English. Get an instant
-                            estimate. No waiting three days for a callback. No
-                            five contractors competing for your phone number.
-                            Just a real number, fast.
-                        </div>
-                    </div>
+      <!-- Success state -->
+      <div class="quote-success" id="q-success">
+        <div class="quote-success-header">
+          <span class="quote-success-label">Your Fair Rate is ready</span>
+          <span class="quote-success-confirm" id="q-confirm-num">#</span>
+        </div>
+        <div class="quote-success-total-label">Standard estimate</div>
+        <div class="quote-success-total" id="q-total">$<em>—</em></div>
+        <div class="quote-success-meta">
+          <div class="quote-success-meta-item">
+            <span class="quote-success-meta-label">Trade</span>
+            <span class="quote-success-meta-val" id="q-r-trade">—</span>
+          </div>
+          <div class="quote-success-meta-item">
+            <span class="quote-success-meta-label">Labor</span>
+            <span class="quote-success-meta-val" id="q-r-labor">—</span>
+          </div>
+          <div class="quote-success-meta-item">
+            <span class="quote-success-meta-label">Materials</span>
+            <span class="quote-success-meta-val" id="q-r-materials">—</span>
+          </div>
+          <div class="quote-success-meta-item">
+            <span class="quote-success-meta-label">Time</span>
+            <span class="quote-success-meta-val" id="q-r-time">—</span>
+          </div>
+        </div>
+        <p class="quote-success-breakdown" id="q-r-breakdown">—</p>
+        <div class="quote-success-actions">
+          <a class="quote-success-btn quote-success-btn-primary" id="q-view-full" href="/autoquote.html">
+            See full breakdown
+            <span style="opacity: 0.85;">→</span>
+          </a>
+          <button class="quote-success-btn quote-success-btn-ghost" onclick="resetQuote()">
+            New quote
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                    <div
-                        class="pillar"
-                        style="--pillar-color: #a04a2a; --pillar-bg: #f0e4cc"
-                    >
-                        <div class="pillar-icon">
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M12 2L3 7v10l9 5 9-5V7l-9-5z"
-                                    stroke="#a04a2a"
-                                    stroke-width="1.5"
-                                    stroke-linejoin="round"
-                                />
-                                <path
-                                    d="M9 12l2 2 4-4"
-                                    stroke="#a04a2a"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-                        </div>
-                        <div class="pillar-num">03 · Trust</div>
-                        <div class="pillar-title">
-                            One <em>vetted neighbor</em>
-                        </div>
-                        <div class="pillar-body">
-                            Your job routes to one founding contractor in your
-                            ZIP — not auctioned to four. Your phone number stays
-                            yours. The pro who shows up actually wants the work
-                            and gives a damn about doing it right.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section class="pillars" id="how">
+  <div class="wrap pillars-inner">
+    <div class="pillars-head">
+      <div class="pillars-eyebrow">Three things that make us different</div>
+      <h2 class="pillars-title">Built different. <em>On purpose.</em></h2>
+    </div>
+    <div class="pillars-grid">
 
-        <section class="trades" id="trades">
-            <div class="trades-head">
-                <div class="trades-eyebrow">
-                    ⬡ Pro Core · Eight trades · Eight specialists
-                </div>
-                <h2 class="trades-title">
-                    Everything a home <em>actually</em> needs.
-                </h2>
-                <p class="trades-sub">
-                    Each trade has its own AI specialist — built to understand
-                    your job, not just collect your number. They route, they
-                    triage, they help you describe what's going on. Then a real
-                    local pro takes it from there.
-                </p>
-            </div>
+      <div class="pillar" style="--pillar-color: #c89545; --pillar-bg: #f0e4cc;">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 12h18M12 3v18M5 7l14 10M5 17l14-10" stroke="#a87530" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="pillar-num">01 · Pricing</div>
+        <div class="pillar-title">The <em>Fair Rate Index</em></div>
+        <div class="pillar-body">A transparent, market-based price for every job in your ZIP. See what fair looks like before you ever pick up the phone. No more $400-to-$2,400 quote spreads on the same work.</div>
+      </div>
 
-            <div class="trades-grid">
-                <div class="trade">
-                    <div class="trade-agent">Aria · HVAC</div>
-                    <div class="trade-name">Heating & Cooling</div>
-                    <div class="trade-desc">
-                        AC service, furnace work, ductwork, mini-splits, summer
-                        emergencies.
-                    </div>
-                </div>
-                <div class="trade">
-                    <div class="trade-agent">River · Plumbing</div>
-                    <div class="trade-name">Plumbing</div>
-                    <div class="trade-desc">
-                        Water heaters, leaks, drains, fixtures, repipes. The
-                        Tuesday-night calls.
-                    </div>
-                </div>
-                <div class="trade">
-                    <div class="trade-agent">Volt · Electrical</div>
-                    <div class="trade-name">Electrical</div>
-                    <div class="trade-desc">
-                        Panels, outlets, lighting, EV chargers, generators, code
-                        upgrades.
-                    </div>
-                </div>
-                <div class="trade">
-                    <div class="trade-agent">Ridge · Roofing</div>
-                    <div class="trade-name">Roofing</div>
-                    <div class="trade-desc">
-                        Shingles, leaks, full replacements, storm damage,
-                        gutters.
-                    </div>
-                </div>
-                <div class="trade">
-                    <div class="trade-agent">Terra · Landscaping</div>
-                    <div class="trade-name">Landscaping</div>
-                    <div class="trade-desc">
-                        Lawns, beds, hardscape, irrigation, lake-house grounds.
-                    </div>
-                </div>
-                <div class="trade">
-                    <div class="trade-agent">Hue · Painting</div>
-                    <div class="trade-name">Painting</div>
-                    <div class="trade-desc">
-                        Interior, exterior, decks, cabinets, that one room
-                        before company.
-                    </div>
-                </div>
-                <div class="trade">
-                    <div class="trade-agent">Forge · General</div>
-                    <div class="trade-name">General Contracting</div>
-                    <div class="trade-desc">
-                        Renovations, additions, kitchens, baths, deck rebuilds,
-                        the bigger jobs.
-                    </div>
-                </div>
-                <div class="trade">
-                    <div class="trade-agent">Axle · Automotive</div>
-                    <div class="trade-name">Automotive</div>
-                    <div class="trade-desc">
-                        Mobile repair, tire and brake, batteries, boat trailer
-                        fixes.
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="pillar" style="--pillar-color: #1e5a8a; --pillar-bg: #ecf1f5;">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke="#1e5a8a" stroke-width="1.5"/>
+            <path d="M12 7v5l3 2" stroke="#1e5a8a" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="pillar-num">02 · Speed</div>
+        <div class="pillar-title">AutoQuote in <em>60 seconds</em></div>
+        <div class="pillar-body">Describe the job in plain English. Get an instant estimate. No waiting three days for a callback. No five contractors competing for your phone number. Just a real number, fast.</div>
+      </div>
 
-        <section class="journey-teaser">
-            <div class="journey-inner">
-                <div>
-                    <div class="journey-eyebrow">
-                        The YSKAIPE Game · NC journey
-                    </div>
-                    <h2 class="journey-title">
-                        Lake Norman first. <em>Then the state.</em>
-                    </h2>
-                    <p class="journey-body">
-                        We're building this state one region at a time — from
-                        the Piedmont we live in, to the coast where flight was
-                        born, to the mountains in the west. Each one earns the
-                        right to be next.
-                    </p>
-                    <a
-                        class="btn btn-ghost"
-                        style="margin-top: 20px"
-                        href="/we-want-you.html"
-                    >
-                        Read the full story
-                        <span class="btn-arrow">→</span>
-                    </a>
-                </div>
-                <div>
-                    <div class="journey-pins">
-                        <div class="journey-pin journey-pin-1">
-                            <div class="journey-pin-dot"></div>
-                            <div class="journey-pin-label">Charlotte</div>
-                        </div>
-                        <div class="journey-line"></div>
-                        <div class="journey-pin journey-pin-2">
-                            <div class="journey-pin-dot"></div>
-                            <div class="journey-pin-label">Lake Norman</div>
-                        </div>
-                        <div class="journey-line"></div>
-                        <div class="journey-pin journey-pin-3">
-                            <div class="journey-pin-dot"></div>
-                            <div class="journey-pin-label">Coast</div>
-                        </div>
-                        <div class="journey-line"></div>
-                        <div class="journey-pin journey-pin-4">
-                            <div class="journey-pin-dot"></div>
-                            <div class="journey-pin-label">Blue Ridge</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="pillar" style="--pillar-color: #a04a2a; --pillar-bg: #f0e4cc;">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke="#a04a2a" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 12l2 2 4-4" stroke="#a04a2a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="pillar-num">03 · Trust</div>
+        <div class="pillar-title">One <em>vetted neighbor</em></div>
+        <div class="pillar-body">Your job routes to one founding contractor in your ZIP — not auctioned to four. Your phone number stays yours. The pro who shows up actually wants the work and gives a damn about doing it right.</div>
+      </div>
 
-        <section class="founder">
-            <div class="founder-inner">
-                <div class="founder-eyebrow">A note from the founder</div>
-                <p class="founder-quote">
-                    <span class="mark">"</span>I built YSKAIPE because I'm tired
-                    of watching good contractors get nickeled by lead-resale
-                    platforms and good homeowners get fleeced by the contractors
-                    who do show up. The middle is broken. <em>Let's fix it.</em
-                    ><span class="mark">"</span>
-                </p>
-                <div class="founder-sig">
-                    <div class="founder-sig-avatar">N</div>
-                    <div>
-                        <div class="founder-sig-name">Nick · Founder</div>
-                        <div class="founder-sig-meta">
-                            Cornelius · North Carolina
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </div>
+  </div>
+</section>
 
-        <section class="cta">
-            <div class="cta-inner">
-                <div class="cta-eyebrow">
-                    First in Freedom · First in Flight · First in Fair
-                </div>
-                <h2 class="cta-title">
-                    Two great groups.<br />
-                    <em>One honest network.</em>
-                </h2>
-                <p class="cta-sub">
-                    Whichever side of the bridge you're on — we'd love you in.
-                    Built for the people who actually live and work in North
-                    Carolina.
-                </p>
-                <div class="cta-row">
-                    <a class="btn btn-coast" href="#autoquote">
-                        I'm a homeowner
-                        <span class="btn-arrow">→</span>
-                    </a>
-                    <a class="btn btn-clay" href="/public/founding.html">
-                        I'm a pro
-                        <span class="btn-arrow">→</span>
-                    </a>
-                </div>
-                <div class="cta-meta">
-                    North Carolina · Lake Norman · Built by your neighbor ·
-                    Peaking Waters LLC
-                </div>
-            </div>
-        </section>
+<section class="trades" id="trades">
+  <div class="trades-head">
+    <div class="trades-eyebrow">⬡ Pro Core · Eight trades · Eight specialists</div>
+    <h2 class="trades-title">Everything a home <em>actually</em> needs.</h2>
+    <p class="trades-sub">
+      Each trade has its own AI specialist — built to understand your job, not just collect your number. They route, they triage, they help you describe what's going on. Then a real local pro takes it from there.
+    </p>
+  </div>
 
-        <footer class="footer">
-            <div class="footer-inner">
-                <div class="footer-brand">
-                    <div class="brand">
-                        <svg
-                            class="logo-mark"
-                            viewBox="0 0 42 42"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                        >
-                            <polygon
-                                points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5"
-                                fill="#c89545"
-                            />
-                            <polygon
-                                points="21,9 31,14.8 31,26.2 21,32 11,26.2 11,14.8"
-                                fill="#f4ede0"
-                            />
-                            <polygon
-                                points="21,15 27,18.5 27,25.5 21,29 15,25.5 15,18.5"
-                                fill="#c89545"
-                            />
-                        </svg>
-                        <span class="brand-name">YSKAIPE</span>
-                    </div>
-                    <p class="footer-tag">
-                        Fair Price. Smart Choice. <em>Everybody Wins.</em>
-                    </p>
-                </div>
-                <div class="footer-col">
-                    <div class="footer-col-title">For homeowners</div>
-                    <a href="#autoquote">Get a Fair Rate</a>
-                    <a href="#how">How it works</a>
-                    <a href="#trades">Eight trades</a>
-                    <a href="/we-want-you.html">The story</a>
-                </div>
-                <div class="footer-col">
-                    <div class="footer-col-title">For pros</div>
-                    <a href="/public/founding.html">Founding Fifty</a>
-                    <a href="/public/pro.html">Pro overview</a>
-                    <a href="/we-want-you.html">The mission</a>
-                </div>
-                <div class="footer-col">
-                    <div class="footer-col-title">Company</div>
-                    <a href="/we-want-you.html">About</a>
-                    <a href="/public/terms.html">Terms</a>
-                    <a href="/public/privacy.html">Privacy</a>
-                    <a href="mailto:hello@yskaipe.com">hello@yskaipe.com</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-txt">
-                    © 2026 Peaking Waters LLC · Cornelius, NC
-                </div>
-                <div class="footer-txt footer-mottos">
-                    <span class="coast">First in Freedom</span> ·
-                    <span class="clay">First in Flight</span> ·
-                    <span class="gold">First in Fair</span>
-                </div>
-            </div>
-        </footer>
-    </body>
+  <div class="trades-grid">
+    <div class="trade">
+      <div class="trade-agent">Aria · HVAC</div>
+      <div class="trade-name">HVAC</div>
+      <div class="trade-desc">AC service, furnace work, ductwork, mini-splits, summer emergencies.</div>
+    </div>
+    <div class="trade">
+      <div class="trade-agent">River · Plumbing</div>
+      <div class="trade-name">Plumbing</div>
+      <div class="trade-desc">Water heaters, leaks, drains, fixtures, repipes. The Tuesday-night calls.</div>
+    </div>
+    <div class="trade">
+      <div class="trade-agent">Volt · Electrical</div>
+      <div class="trade-name">Electrical</div>
+      <div class="trade-desc">Panels, outlets, lighting, EV chargers, generators, code upgrades.</div>
+    </div>
+    <div class="trade">
+      <div class="trade-agent">Ridge · Roofing</div>
+      <div class="trade-name">Roofing</div>
+      <div class="trade-desc">Shingles, leaks, full replacements, storm damage, gutters.</div>
+    </div>
+    <div class="trade">
+      <div class="trade-agent">Terra · Landscaping</div>
+      <div class="trade-name">Landscaping</div>
+      <div class="trade-desc">Lawns, beds, hardscape, irrigation, lake-house grounds.</div>
+    </div>
+    <div class="trade">
+      <div class="trade-agent">Hue · Painting</div>
+      <div class="trade-name">Painting</div>
+      <div class="trade-desc">Interior, exterior, decks, cabinets, that one room before company.</div>
+    </div>
+    <div class="trade">
+      <div class="trade-agent">Forge · General</div>
+      <div class="trade-name">General Contracting</div>
+      <div class="trade-desc">Renovations, additions, kitchens, baths, deck rebuilds, the bigger jobs.</div>
+    </div>
+    <div class="trade">
+      <div class="trade-agent">Axle · Automotive</div>
+      <div class="trade-name">Automotive</div>
+      <div class="trade-desc">Mobile repair, tire and brake, batteries, boat trailer fixes.</div>
+    </div>
+  </div>
+</section>
+
+<section class="journey-teaser">
+  <div class="journey-inner">
+    <div>
+      <div class="journey-eyebrow">The YSKAIPE Game · NC journey</div>
+      <h2 class="journey-title">Lake Norman first. <em>Then the state.</em></h2>
+      <p class="journey-body">
+        We're building this state one region at a time — from the Piedmont we live in, to the coast where flight was born, to the mountains in the west. Each one earns the right to be next.
+      </p>
+      <a class="btn btn-ghost" style="margin-top: 20px;" href="/we-want-you.html">
+        Read the full story
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+    <div>
+      <div class="journey-pins">
+        <div class="journey-pin journey-pin-1">
+          <div class="journey-pin-dot"></div>
+          <div class="journey-pin-label">Charlotte</div>
+        </div>
+        <div class="journey-line"></div>
+        <div class="journey-pin journey-pin-2">
+          <div class="journey-pin-dot"></div>
+          <div class="journey-pin-label">Lake Norman</div>
+        </div>
+        <div class="journey-line"></div>
+        <div class="journey-pin journey-pin-3">
+          <div class="journey-pin-dot"></div>
+          <div class="journey-pin-label">Coast</div>
+        </div>
+        <div class="journey-line"></div>
+        <div class="journey-pin journey-pin-4">
+          <div class="journey-pin-dot"></div>
+          <div class="journey-pin-label">Blue Ridge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder">
+  <div class="founder-inner">
+    <div class="founder-eyebrow">A note from the founder</div>
+    <p class="founder-quote">
+      <span class="mark">"</span>I built YSKAIPE because I'm tired of watching good contractors get nickeled by lead-resale platforms and good homeowners get fleeced by the contractors who do show up. The middle is broken. <em>Let's fix it.</em><span class="mark">"</span>
+    </p>
+    <div class="founder-sig">
+      <div class="founder-sig-avatar">N</div>
+      <div>
+        <div class="founder-sig-name">Nick · Founder</div>
+        <div class="founder-sig-meta">Cornelius · North Carolina</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">First in Freedom · First in Flight · First in Fair</div>
+    <h2 class="cta-title">
+      Two great groups.<br />
+      <em>One honest network.</em>
+    </h2>
+    <p class="cta-sub">
+      Whichever side of the bridge you're on — we'd love you in. Built for the people who actually live and work in North Carolina.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-coast" href="#autoquote">
+        I'm a homeowner
+        <span class="btn-arrow">→</span>
+      </a>
+      <a class="btn btn-clay" href="/public/founding.html">
+        I'm a pro
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+    <div class="cta-meta">North Carolina · Lake Norman · Built by your neighbor · Peaking Waters LLC</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand">
+        <svg class="logo-mark" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5" fill="#c89545" />
+          <polygon points="21,9 31,14.8 31,26.2 21,32 11,26.2 11,14.8" fill="#f4ede0" />
+          <polygon points="21,15 27,18.5 27,25.5 21,29 15,25.5 15,18.5" fill="#c89545" />
+        </svg>
+        <span class="brand-name">YSKAIPE</span>
+      </div>
+      <p class="footer-tag">
+        Fair Price. Smart Choice. <em>Everybody Wins.</em>
+      </p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">For homeowners</div>
+      <a href="#autoquote">Get a Fair Rate</a>
+      <a href="#how">How it works</a>
+      <a href="#trades">Eight trades</a>
+      <a href="/we-want-you.html">The story</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">For pros</div>
+      <a href="/public/founding.html">Founding Fifty</a>
+      <a href="/public/pro.html">Pro overview</a>
+      <a href="/we-want-you.html">The mission</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <a href="/we-want-you.html">About</a>
+      <a href="/public/terms.html">Terms</a>
+      <a href="/public/privacy.html">Privacy</a>
+      <a href="mailto:hello@yskaipe.com">hello@yskaipe.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-txt">© 2026 Peaking Waters LLC · Cornelius, NC</div>
+    <div class="footer-txt footer-mottos">
+      <span class="coast">First in Freedom</span> · <span class="clay">First in Flight</span> · <span class="gold">First in Fair</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== AutoQuote homepage form =====
+  // Posts to /api/quotes — matches the existing system from /public/autoquote.html
+  // Includes customerPhone (the open follow-up fix from the launch milestone)
+
+  function fmtUSD(n) {
+    if (n == null || isNaN(n)) return '—';
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function makeConfirmNumber(quote) {
+    // Prefer the real Supabase id if returned; otherwise generate a local fallback
+    if (quote && quote.id) {
+      const short = String(quote.id).replace(/-/g, '').slice(-6).toUpperCase();
+      return 'YSK-' + short;
+    }
+    return 'YSK-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+  }
+
+  function showError(msg) {
+    const errEl = document.getElementById('q-error');
+    errEl.textContent = msg;
+    errEl.classList.add('active');
+    document.getElementById('q-loading').classList.remove('active');
+    document.getElementById('q-success').classList.remove('active');
+  }
+
+  function clearError() {
+    const errEl = document.getElementById('q-error');
+    errEl.classList.remove('active');
+    errEl.textContent = '';
+  }
+
+  async function submitQuote() {
+    clearError();
+
+    const trade = document.getElementById('q-trade').value.trim();
+    const description = document.getElementById('q-description').value.trim();
+    const zip = document.getElementById('q-zip').value.trim();
+    const scope = document.getElementById('q-scope').value.trim();
+    const email = document.getElementById('q-email').value.trim();
+    const phone = document.getElementById('q-phone').value.trim();
+
+    // Client-side validation — match the API contract + the threshold for use
+    if (!trade) return showError('Please select a trade.');
+    if (!description) return showError('Please describe the job in a sentence or two.');
+    if (!zip || !/^\d{5}$/.test(zip)) return showError('Please enter a valid 5-digit ZIP code.');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('Please enter a valid email address.');
+    if (!phone || phone.replace(/\D/g, '').length < 10) return showError('Please enter a valid phone number.');
+
+    const submitBtn = document.getElementById('q-submit');
+    const submitText = document.getElementById('q-submit-text');
+    submitBtn.disabled = true;
+    submitText.textContent = 'Calculating…';
+    document.getElementById('q-loading').classList.add('active');
+    document.getElementById('q-success').classList.remove('active');
+
+    try {
+      const res = await fetch('/api/quotes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          trade,
+          zip,
+          scope,
+          description,
+          customerName: '',
+          customerEmail: email,
+          customerPhone: phone,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Could not generate a quote right now.');
+
+      const q = data.quote;
+      const confirmNum = makeConfirmNumber(q);
+
+      // Stash for the full /autoquote.html page to pick up
+      try {
+        sessionStorage.setItem('yskaipe_last_quote', JSON.stringify({
+          quote: q,
+          confirmNumber: confirmNum,
+          ts: Date.now(),
+        }));
+      } catch (e) { /* sessionStorage may be unavailable; non-fatal */ }
+
+      // Populate the success state
+      document.getElementById('q-confirm-num').textContent = confirmNum;
+      document.getElementById('q-total').innerHTML = '$<em>' + Math.round(q.grand_total).toLocaleString('en-US') + '</em>';
+      document.getElementById('q-r-trade').textContent = q.trade;
+      document.getElementById('q-r-labor').textContent = fmtUSD(q.labor_total) + (q.labor_hours ? ' (' + q.labor_hours + 'h)' : '');
+      document.getElementById('q-r-materials').textContent = fmtUSD(q.materials_total);
+      document.getElementById('q-r-time').textContent = q.time_estimate || '—';
+      document.getElementById('q-r-breakdown').textContent = q.breakdown || '';
+
+      // The full-breakdown link carries the confirm number so /autoquote.html can rehydrate
+      const fullLink = document.getElementById('q-view-full');
+      fullLink.href = '/autoquote.html?confirm=' + encodeURIComponent(confirmNum) + (q.id ? '&id=' + encodeURIComponent(q.id) : '');
+
+      document.getElementById('q-loading').classList.remove('active');
+      document.getElementById('q-success').classList.add('active');
+
+      // Scroll the success state into view
+      document.getElementById('q-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    } catch (err) {
+      console.error('AutoQuote error:', err);
+      showError(err.message || 'Something went wrong. Please try again, or visit the full AutoQuote page.');
+    } finally {
+      submitBtn.disabled = false;
+      submitText.textContent = 'Show me the Fair Rate';
+    }
+  }
+
+  function resetQuote() {
+    document.getElementById('quoteForm').reset();
+    document.getElementById('q-success').classList.remove('active');
+    document.getElementById('q-loading').classList.remove('active');
+    clearError();
+    document.getElementById('autoquote').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Allow Cmd/Ctrl+Enter to submit from the description textarea
+  document.addEventListener('DOMContentLoaded', function() {
+    const desc = document.getElementById('q-description');
+    if (desc) {
+      desc.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+          e.preventDefault();
+          submitQuote();
+        }
+      });
+    }
+  });
+</script>
+
+</body>
 </html>

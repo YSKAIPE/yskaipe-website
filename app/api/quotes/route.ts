@@ -1,10 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { RATES_DB, getRegionalMultiplier } from '@/lib/rates'
+import {
+  resolveTrade,
+  LEGACY_TRADE_ALIAS,
+  REJECTED_TRADES,
+  type TradeSlug,
+} from '@/lib/canonical-trades'
 import { saveQuote } from '@/lib/supabase'
 import { QuoteRequest, QuoteResult } from '@/types/quote'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
+/**
+ * Normalize the incoming `trade` value to a canonical Pro Core slug.
+ *
+ *   1. If it's already a canonical slug or canonical display name → use it.
+ *   2. If it's a known legacy role-name alias ("Plumber" → "plumbing") → map it.
+ *   3. If it's a REJECTED legacy trade ("Welder", "EMT") → return null (will 400).
+ *   4. Otherwise → return null (will 400 with "Unknown trade type").
+ */
+function normalizeTrade(input: string): TradeSlug | null {
+  if (!input) return null
+
+  // First: try canonical resolution (slug, displayName, agent name, etc.)
+  const canonical = resolveTrade(input)
+  if (canonical) return canonical.slug
+
+  // Second: legacy alias mapping (for /public/autoquote.html and blog page during transition)
+  if (LEGACY_TRADE_ALIAS[input]) return LEGACY_TRADE_ALIAS[input]
+
+  // Third: rejected legacy trade — explicit "no, this isn't Pro Core"
+  if (REJECTED_TRADES.has(input)) return null
+
+  return null
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,24 +50,46 @@ export async function POST(req: NextRequest) {
     } = body
 
     if (!trade || !description) {
-      return NextResponse.json({ error: 'trade and description are required' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'trade and description are required' },
+        { status: 400 }
+      )
     }
 
-    const rates = RATES_DB[trade]
+    // ===== CANONICAL TRADE GATE =====
+    // Only the 8 Pro Core trades are accepted. Legacy aliases get mapped at the boundary.
+    const tradeSlug = normalizeTrade(trade)
+    if (!tradeSlug) {
+      return NextResponse.json(
+        {
+          error: `"${trade}" is not a Pro Core trade. Valid trades: HVAC, Plumbing, Electrical, Roofing, Landscaping, Painting, General Contracting, Automotive.`,
+        },
+        { status: 400 }
+      )
+    }
+
+    const rates = RATES_DB[tradeSlug]
     if (!rates) {
-      return NextResponse.json({ error: 'Unknown trade type' }, { status: 400 })
+      // This should be unreachable if canonical-trades and RATES_DB stay in sync.
+      return NextResponse.json(
+        { error: `Rate table missing for trade: ${tradeSlug}` },
+        { status: 500 }
+      )
     }
 
     const multiplier = getRegionalMultiplier(zip)
     const adjustedLaborMin = Math.round(rates.laborMin * multiplier)
     const adjustedLaborMax = Math.round(rates.laborMax * multiplier)
 
-    const systemPrompt = `You are an expert trade cost estimator for YSKAIPE — a platform for skilled trade professionals in the US.
+    // Resolve the display name for the AI prompt + the returned quote
+    const tradeDisplay = resolveTrade(tradeSlug)?.displayName ?? tradeSlug
+
+    const systemPrompt = `You are an expert trade cost estimator for YSKAIPE — a North Carolina home services marketplace.
 You estimate jobs using verified industry rates, adjusted for regional cost of living.
 
-TRADE: ${trade}
-VERIFIED LABOR RATE: $${adjustedLaborMin}–$${adjustedLaborMax}/hr (regional adjustment: ${(multiplier * 100).toFixed(0)}% of base)
-PERMIT REQUIRED: ${rates.permitRequired ? 'Yes — include permit cost estimate' : 'No'}
+TRADE: ${tradeDisplay}
+VERIFIED LABOR RATE: $${adjustedLaborMin}–$${adjustedLaborMax}/hr (regional adjustment: ${(multiplier * 100).toFixed(0)}% of NC baseline)
+PERMIT REQUIRED: ${rates.permitRequired ? 'Yes — include permit cost estimate of $150–$500 in materials_total' : 'No'}
 COMMON JOBS IN THIS TRADE: ${rates.commonJobs.join(', ')}
 
 Return ONLY a valid JSON object with exactly these fields — no markdown, no extra text:
@@ -57,12 +109,12 @@ Return ONLY a valid JSON object with exactly these fields — no markdown, no ex
 Rules:
 - labor_total = labor_hours * labor_rate (use midpoint of rate range unless complexity warrants otherwise)
 - grand_total = labor_total + materials_total
-- Be specific and realistic — not a range, a single best estimate
+- Be specific and realistic — a single best estimate, not a range
 - If scope or home size affects cost significantly, factor it in
 - For permits: add $150–$500 to materials_total if required`
 
-    const userMsg = `Trade: ${trade}
-Location zip: ${zip || 'not provided — use NC (28036) as default'}
+    const userMsg = `Trade: ${tradeDisplay}
+Location zip: ${zip || 'not provided — use NC (28031) as default'}
 Scope / home size: ${scope || 'not specified'}
 Job description: ${description}`
 
@@ -83,8 +135,10 @@ Job description: ${description}`
     const parsed = JSON.parse(rawText)
 
     const quote: QuoteResult = {
-      trade,
-      zip: zip || '28036',
+      // Trade is stored canonically (slug) AND surfaces as display name
+      trade: tradeDisplay,
+      trade_slug: tradeSlug, // <-- NEW: canonical slug for downstream routing
+      zip: zip || '28031',
       scope,
       description,
       customerName,
@@ -111,7 +165,10 @@ Job description: ${description}`
     return NextResponse.json({ quote }, { status: 200 })
   } catch (err) {
     console.error('Quote generation error:', err)
-    return NextResponse.json({ error: 'Failed to generate quote' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Failed to generate quote' },
+      { status: 500 }
+    )
   }
 }
 
