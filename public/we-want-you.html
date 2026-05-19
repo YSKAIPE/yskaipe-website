@@ -1,0 +1,2453 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            YSKAIPE · First in Freedom. First in Flight. First in Fair.
+        </title>
+        <meta
+            name="description"
+            content="A win-win North Carolina network. Smart homeowners and honest contractors, matched fairly. Fair Rate Index. From Lake Norman to the coast to the mountains. Built here."
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            :root {
+                /* ============ THE DAYLIGHT PALETTE ============ */
+                /* Background — Carolina morning sky, warm haze */
+                --bg: #e8eef5;
+                --bg-mist: #dfe7ed;
+                --bg-parchment: #f4ede0;
+                --bg-paper: #efe6d4;
+
+                /* Card surfaces — aged map / sketchbook */
+                --surface: #f7f0e2;
+                --surface-cool: #ecf1f5;
+                --surface-warm: #f0e4cc;
+
+                /* Borders — soft sepia/blue */
+                --border: rgba(58, 50, 40, 0.15);
+                --border-strong: rgba(58, 50, 40, 0.28);
+                --border-cool: rgba(30, 90, 138, 0.18);
+
+                /* ============ THREE REGIONS — THE YSKAIPE GAME ============ */
+                /* Coast — Wrightsville / Atlantic */
+                --coast-deep: #1e5a8a; /* deep Atlantic sailing */
+                --coast: #3d7a9c; /* shallow water blue */
+                --coast-foam: #a8c9d8; /* sea foam */
+                --coast-glass: #7da89a; /* sea glass green */
+
+                /* Piedmont — Lake Norman / Charlotte (HOME) */
+                --piedmont-clay: #a04a2a; /* Piedmont red clay */
+                --piedmont-deep: #8b3e1f; /* deep terracotta */
+                --piedmont-warm: #c97250; /* warmed clay */
+                --piedmont-water: #3d7a9c; /* LKN water echoes coast */
+
+                /* Mountains — Blue Ridge / Asheville */
+                --mtn-forest: #4a6b4a; /* deep Blue Ridge forest */
+                --mtn-sage: #7a8a6a; /* afternoon sage */
+                --mtn-soil: #8a6a4a; /* trail soil */
+                --mtn-stone: #6a6660; /* mountain stone */
+
+                /* ============ THE THREADS — connections ============ */
+                --gold: #c89545; /* sun-warmed afternoon gold, the primary thread */
+                --gold-deep: #a87530; /* deeper gold */
+                --gold-soft: #e4c182; /* warm wheat */
+                --honey: #d4a85a; /* tobacco honey */
+                --blush: #d4a89a; /* dogwood/dawn */
+                --pine: #4a6b4a; /* pine green echo */
+
+                /* ============ INK / TYPE ============ */
+                --ink: #1a1410; /* manuscript ink */
+                --ink-warm: #2a2419; /* warm headline */
+                --text: #3a3228; /* body */
+                --text-soft: #5a5040; /* secondary */
+                --muted: #766a58; /* muted */
+                --dim: #9a8e7c; /* dim */
+
+                --serif: "Fraunces", serif;
+                --sans: "DM Sans", sans-serif;
+                --mono: "DM Mono", monospace;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                background: var(--bg);
+                color: var(--text);
+                font-family: var(--sans);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+                overflow-x: hidden;
+            }
+            ::selection {
+                background: var(--gold);
+                color: var(--ink);
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            /* ============ STATE MOTTO RIBBON ============ */
+            .motto-ribbon {
+                background: linear-gradient(
+                    90deg,
+                    var(--coast-deep) 0%,
+                    var(--gold-deep) 50%,
+                    var(--piedmont-clay) 100%
+                );
+                padding: 7px 28px;
+                text-align: center;
+                font-family: var(--mono);
+                font-size: 10px;
+                color: var(--bg-parchment);
+                letter-spacing: 0.28em;
+                text-transform: uppercase;
+                border-bottom: 1px solid var(--border-strong);
+            }
+            .motto-ribbon .dot {
+                color: var(--gold-soft);
+                margin: 0 14px;
+            }
+
+            /* ============ NAV ============ */
+            .nav {
+                position: sticky;
+                top: 0;
+                z-index: 50;
+                background: rgba(232, 238, 245, 0.88);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-inner {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 14px 28px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .logo-mark {
+                width: 30px;
+                height: 30px;
+            }
+            .brand-name {
+                font-family: var(--serif);
+                font-size: 19px;
+                font-weight: 500;
+                color: var(--ink);
+                letter-spacing: -0.01em;
+            }
+            .nav-place {
+                font-family: var(--mono);
+                font-size: 10px;
+                color: var(--muted);
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .nav-place-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--gold);
+                box-shadow: 0 0 6px rgba(200, 149, 69, 0.6);
+            }
+
+            /* ============ SHARED ============ */
+            .wrap {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 28px;
+            }
+            .narrow {
+                max-width: 820px;
+                margin: 0 auto;
+                padding: 0 28px;
+            }
+
+            /* ============ HERO ============ */
+            .hero {
+                padding: 96px 0 80px;
+                position: relative;
+                overflow: hidden;
+                border-bottom: 1px solid var(--border);
+            }
+            /* DaVinci atmospheric wash — coast above, piedmont below, gold horizon */
+            .hero::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(
+                        ellipse 90% 50% at 25% 5%,
+                        rgba(61, 122, 156, 0.1),
+                        transparent 60%
+                    ),
+                    radial-gradient(
+                        ellipse 70% 30% at 50% 50%,
+                        rgba(200, 149, 69, 0.07),
+                        transparent 65%
+                    ),
+                    radial-gradient(
+                        ellipse 90% 50% at 75% 100%,
+                        rgba(160, 74, 42, 0.08),
+                        transparent 60%
+                    );
+                pointer-events: none;
+            }
+            .hero::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 55%;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(200, 149, 69, 0) 8%,
+                    rgba(200, 149, 69, 0.45) 50%,
+                    rgba(200, 149, 69, 0) 92%,
+                    transparent
+                );
+                pointer-events: none;
+            }
+            .hero-inner {
+                position: relative;
+                z-index: 1;
+            }
+
+            .hero-mottos {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                align-items: center;
+                margin-bottom: 32px;
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+            }
+            .hero-motto {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 7px 14px;
+                border-radius: 999px;
+                background: var(--surface);
+                border: 1px solid var(--border);
+            }
+            .hero-motto-1 {
+                color: var(--coast-deep);
+            }
+            .hero-motto-1::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--coast-deep);
+            }
+            .hero-motto-2 {
+                color: var(--piedmont-clay);
+            }
+            .hero-motto-2::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--piedmont-clay);
+            }
+            .hero-motto-3 {
+                color: var(--gold-deep);
+            }
+            .hero-motto-3::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--gold);
+                box-shadow: 0 0 8px var(--gold);
+            }
+
+            h1.hero-title {
+                font-family: var(--serif);
+                font-size: clamp(48px, 8.5vw, 124px);
+                font-weight: 500;
+                line-height: 0.94;
+                letter-spacing: -0.025em;
+                color: var(--ink);
+                margin-bottom: 36px;
+                max-width: 1100px;
+            }
+            h1.hero-title .coast-word {
+                color: var(--coast-deep);
+                font-style: italic;
+                font-weight: 400;
+            }
+            h1.hero-title .clay-word {
+                color: var(--piedmont-clay);
+                font-style: italic;
+                font-weight: 400;
+            }
+            h1.hero-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+                font-weight: 400;
+            }
+
+            .hero-sub {
+                font-family: var(--serif);
+                font-size: clamp(19px, 2vw, 26px);
+                font-weight: 400;
+                line-height: 1.5;
+                color: var(--text);
+                max-width: 820px;
+                margin-bottom: 44px;
+            }
+            .hero-sub strong {
+                color: var(--ink);
+                font-weight: 500;
+            }
+            .hero-sub .em-pine {
+                color: var(--pine);
+                font-style: italic;
+            }
+
+            .hero-scene {
+                display: flex;
+                gap: 22px;
+                flex-wrap: wrap;
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--muted);
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding-top: 32px;
+                border-top: 1px solid var(--border);
+                margin-top: 8px;
+            }
+            .hero-scene span {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .hero-scene span::before {
+                content: "";
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: var(--gold);
+                opacity: 0.7;
+            }
+
+            /* ============ FIRSTS BAND ============ */
+            .firsts {
+                padding: 72px 0;
+                background: var(--bg-parchment);
+                border-bottom: 1px solid var(--border);
+                position: relative;
+                overflow: hidden;
+            }
+            .firsts::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(
+                        ellipse 40% 60% at 0% 50%,
+                        rgba(30, 90, 138, 0.05),
+                        transparent 60%
+                    ),
+                    radial-gradient(
+                        ellipse 40% 60% at 100% 50%,
+                        rgba(160, 74, 42, 0.05),
+                        transparent 60%
+                    );
+                pointer-events: none;
+            }
+            .firsts-inner {
+                position: relative;
+                z-index: 1;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 56px;
+                max-width: 1180px;
+                margin: 0 auto;
+                padding: 0 28px;
+            }
+            .first {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                padding-left: 28px;
+                position: relative;
+            }
+            .first::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 4px;
+                bottom: 4px;
+                width: 2px;
+                border-radius: 1px;
+            }
+            .first-1::before {
+                background: linear-gradient(
+                    to bottom,
+                    var(--coast-deep),
+                    var(--coast)
+                );
+            }
+            .first-2::before {
+                background: linear-gradient(
+                    to bottom,
+                    var(--piedmont-clay),
+                    var(--piedmont-deep)
+                );
+            }
+
+            .first-year {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--gold-deep);
+            }
+            .first-title {
+                font-family: var(--serif);
+                font-size: clamp(28px, 3.5vw, 38px);
+                font-weight: 500;
+                line-height: 1.1;
+                color: var(--ink);
+                letter-spacing: -0.015em;
+            }
+            .first-title em {
+                font-style: italic;
+            }
+            .first-1 .first-title em {
+                color: var(--coast-deep);
+            }
+            .first-2 .first-title em {
+                color: var(--piedmont-clay);
+            }
+            .first-body {
+                font-size: 15.5px;
+                color: var(--text-soft);
+                line-height: 1.7;
+            }
+
+            /* ============ LANES ============ */
+            .lanes {
+                padding: 96px 0 72px;
+                position: relative;
+            }
+            .lanes-head {
+                text-align: center;
+                margin-bottom: 64px;
+                max-width: 820px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 0 28px;
+            }
+            .lanes-eyebrow {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--gold-deep);
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .lanes-eyebrow::before,
+            .lanes-eyebrow::after {
+                content: "";
+                width: 22px;
+                height: 1px;
+                background: var(--gold);
+                opacity: 0.6;
+            }
+            .lanes-title {
+                font-family: var(--serif);
+                font-size: clamp(34px, 4.8vw, 56px);
+                font-weight: 500;
+                line-height: 1.05;
+                letter-spacing: -0.02em;
+                color: var(--ink);
+                margin-bottom: 18px;
+            }
+            .lanes-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+            .lanes-sub {
+                font-family: var(--serif);
+                font-size: 19px;
+                color: var(--text-soft);
+                line-height: 1.55;
+            }
+
+            .lanes-grid {
+                display: grid;
+                grid-template-columns: 1fr 72px 1fr;
+                gap: 0;
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 28px;
+                align-items: stretch;
+                position: relative;
+            }
+
+            .lane {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 20px;
+                padding: 44px 38px;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                box-shadow:
+                    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+                    0 4px 24px rgba(58, 50, 40, 0.06);
+            }
+            .lane::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+            }
+            .lane-coast::before {
+                background: linear-gradient(
+                    90deg,
+                    var(--coast-foam),
+                    var(--coast),
+                    var(--coast-deep)
+                );
+            }
+            .lane-coast {
+                background:
+                    radial-gradient(
+                        ellipse 80% 40% at 50% 0%,
+                        rgba(61, 122, 156, 0.06),
+                        transparent 60%
+                    ),
+                    var(--surface-cool);
+            }
+            .lane-clay::before {
+                background: linear-gradient(
+                    90deg,
+                    var(--honey),
+                    var(--piedmont-warm),
+                    var(--piedmont-clay)
+                );
+            }
+            .lane-clay {
+                background:
+                    radial-gradient(
+                        ellipse 80% 40% at 50% 100%,
+                        rgba(160, 74, 42, 0.06),
+                        transparent 60%
+                    ),
+                    var(--surface-warm);
+            }
+
+            .lane-tag {
+                font-family: var(--mono);
+                font-size: 10px;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                margin-bottom: 22px;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                align-self: flex-start;
+            }
+            .lane-tag::before {
+                content: "";
+                width: 24px;
+                height: 1px;
+            }
+            .lane-coast .lane-tag {
+                color: var(--coast-deep);
+            }
+            .lane-coast .lane-tag::before {
+                background: var(--coast-deep);
+            }
+            .lane-clay .lane-tag {
+                color: var(--piedmont-deep);
+            }
+            .lane-clay .lane-tag::before {
+                background: var(--piedmont-deep);
+            }
+
+            .lane-h2 {
+                font-family: var(--serif);
+                font-size: clamp(34px, 4.5vw, 52px);
+                font-weight: 500;
+                line-height: 1;
+                letter-spacing: -0.025em;
+                color: var(--ink);
+                margin-bottom: 20px;
+            }
+            .lane-h2 em {
+                font-style: italic;
+                font-weight: 400;
+            }
+            .lane-coast .lane-h2 em {
+                color: var(--coast-deep);
+            }
+            .lane-clay .lane-h2 em {
+                color: var(--piedmont-clay);
+            }
+
+            .lane-lead {
+                font-family: var(--serif);
+                font-size: 19px;
+                line-height: 1.6;
+                color: var(--ink-warm);
+                margin-bottom: 28px;
+            }
+
+            .lane-section {
+                margin-top: 24px;
+                padding-top: 24px;
+                border-top: 1px solid var(--border);
+            }
+            .lane-section:first-of-type {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+            }
+            .lane-section h3 {
+                font-family: var(--mono);
+                font-size: 10px;
+                color: var(--muted);
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                margin-bottom: 12px;
+                font-weight: 500;
+            }
+            .lane-section p {
+                font-size: 15.5px;
+                line-height: 1.7;
+                color: var(--text);
+                margin-bottom: 10px;
+            }
+            .lane-section p:last-child {
+                margin-bottom: 0;
+            }
+            .lane-section .accent-word {
+                font-family: var(--serif);
+                font-style: italic;
+            }
+            .lane-coast .accent-word {
+                color: var(--coast-deep);
+            }
+            .lane-clay .accent-word {
+                color: var(--piedmont-deep);
+            }
+
+            .lane-checklist {
+                list-style: none;
+                margin-top: 14px;
+            }
+            .lane-checklist li {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                font-size: 14.5px;
+                color: var(--text);
+                padding: 7px 0;
+                line-height: 1.55;
+            }
+            .lane-checklist li::before {
+                content: "✓";
+                color: var(--gold-deep);
+                font-weight: 700;
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+
+            .lane-cta {
+                margin-top: 32px;
+                padding-top: 24px;
+                border-top: 1px solid var(--border);
+            }
+
+            /* The bridge — horizon */
+            .bridge {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0 8px;
+                position: relative;
+            }
+            .bridge-line {
+                position: absolute;
+                left: 50%;
+                top: 60px;
+                bottom: 60px;
+                width: 1px;
+                background: linear-gradient(
+                    to bottom,
+                    transparent,
+                    var(--coast) 10%,
+                    var(--gold) 50%,
+                    var(--piedmont-clay) 90%,
+                    transparent
+                );
+                transform: translateX(-50%);
+            }
+            .bridge-hex {
+                width: 64px;
+                height: 64px;
+                position: relative;
+                z-index: 2;
+                background: var(--bg);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow:
+                    0 0 0 1px var(--gold),
+                    0 0 24px rgba(200, 149, 69, 0.4),
+                    0 0 0 6px var(--bg);
+            }
+            .bridge-hex svg {
+                width: 34px;
+                height: 34px;
+            }
+            .bridge-label {
+                font-family: var(--mono);
+                font-size: 9px;
+                color: var(--gold-deep);
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                margin-top: 16px;
+                text-align: center;
+                line-height: 1.5;
+            }
+            .bridge-label strong {
+                color: var(--ink);
+                font-weight: 600;
+                display: block;
+                margin-top: 4px;
+            }
+
+            /* ============ BUTTONS ============ */
+            .btn {
+                font-family: var(--sans);
+                font-size: 14px;
+                font-weight: 500;
+                padding: 14px 26px;
+                border-radius: 999px;
+                border: 1px solid transparent;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                transition:
+                    transform 0.15s,
+                    background 0.15s,
+                    border-color 0.15s,
+                    box-shadow 0.2s;
+            }
+            .btn-primary {
+                background: var(--gold-deep);
+                color: var(--bg-parchment);
+                font-weight: 600;
+            }
+            .btn-primary:hover {
+                background: var(--gold);
+                transform: translateY(-1px);
+                box-shadow: 0 6px 20px rgba(200, 149, 69, 0.3);
+            }
+            .btn-coast {
+                background: var(--coast-deep);
+                color: var(--bg-parchment);
+                font-weight: 600;
+            }
+            .btn-coast:hover {
+                background: var(--coast);
+                transform: translateY(-1px);
+                box-shadow: 0 6px 20px rgba(30, 90, 138, 0.28);
+            }
+            .btn-clay {
+                background: var(--piedmont-clay);
+                color: var(--bg-parchment);
+                font-weight: 600;
+            }
+            .btn-clay:hover {
+                background: var(--piedmont-warm);
+                transform: translateY(-1px);
+                box-shadow: 0 6px 20px rgba(160, 74, 42, 0.28);
+            }
+            .btn-ghost {
+                background: transparent;
+                color: var(--text);
+                border-color: var(--border-strong);
+            }
+            .btn-ghost:hover {
+                background: var(--surface);
+            }
+            .btn-arrow {
+                font-size: 13px;
+                opacity: 0.85;
+            }
+
+            /* ============ YSKAIPE GAME — THE NC JOURNEY ============ */
+            .game {
+                padding: 96px 0;
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+                background: var(--bg-parchment);
+                position: relative;
+                overflow: hidden;
+            }
+            .game::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(
+                        ellipse 50% 40% at 15% 50%,
+                        rgba(30, 90, 138, 0.05),
+                        transparent 60%
+                    ),
+                    radial-gradient(
+                        ellipse 50% 40% at 50% 50%,
+                        rgba(160, 74, 42, 0.04),
+                        transparent 60%
+                    ),
+                    radial-gradient(
+                        ellipse 50% 40% at 85% 50%,
+                        rgba(74, 107, 74, 0.05),
+                        transparent 60%
+                    );
+                pointer-events: none;
+            }
+            .game-inner {
+                position: relative;
+                z-index: 1;
+            }
+
+            .game-head {
+                text-align: center;
+                max-width: 820px;
+                margin: 0 auto 64px;
+                padding: 0 28px;
+            }
+            .game-eyebrow {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--gold-deep);
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                margin-bottom: 22px;
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .game-eyebrow::before,
+            .game-eyebrow::after {
+                content: "";
+                width: 22px;
+                height: 1px;
+                background: var(--gold);
+                opacity: 0.6;
+            }
+            .game-title {
+                font-family: var(--serif);
+                font-size: clamp(36px, 5vw, 60px);
+                font-weight: 500;
+                line-height: 1.05;
+                letter-spacing: -0.025em;
+                color: var(--ink);
+                margin-bottom: 22px;
+            }
+            .game-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+            .game-sub {
+                font-family: var(--serif);
+                font-size: 19px;
+                color: var(--text-soft);
+                line-height: 1.55;
+            }
+
+            /* The journey row — coast to piedmont to mountains */
+            .journey {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 12px;
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 28px;
+                position: relative;
+            }
+            /* Connecting line behind cards */
+            .journey::before {
+                content: "";
+                position: absolute;
+                left: 60px;
+                right: 60px;
+                top: 50px;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    var(--coast-deep) 0%,
+                    var(--coast) 25%,
+                    var(--gold) 50%,
+                    var(--piedmont-clay) 75%,
+                    var(--mtn-forest) 100%
+                );
+                opacity: 0.35;
+                z-index: 0;
+                border-radius: 1px;
+            }
+
+            .stage {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 24px 22px;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                z-index: 1;
+                transition:
+                    transform 0.2s,
+                    box-shadow 0.2s,
+                    border-color 0.2s;
+                min-height: 280px;
+            }
+            .stage:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 28px rgba(58, 50, 40, 0.12);
+                border-color: var(--border-strong);
+            }
+
+            .stage-pin {
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                margin-bottom: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 3px solid var(--bg);
+                position: relative;
+                z-index: 2;
+            }
+            .stage-pin::after {
+                content: "";
+                width: 8px;
+                height: 8px;
+                background: var(--bg);
+                border-radius: 50%;
+            }
+
+            .stage-1 .stage-pin {
+                background: var(--coast-deep);
+                box-shadow: 0 0 0 1px var(--coast-deep);
+            }
+            .stage-2 .stage-pin {
+                background: var(--coast);
+                box-shadow: 0 0 0 1px var(--coast);
+            }
+            .stage-3 .stage-pin {
+                background: var(--gold-deep);
+                box-shadow:
+                    0 0 0 1px var(--gold-deep),
+                    0 0 16px rgba(200, 149, 69, 0.4);
+                width: 26px;
+                height: 26px;
+            }
+            .stage-3 .stage-pin::after {
+                width: 10px;
+                height: 10px;
+            }
+            .stage-4 .stage-pin {
+                background: var(--piedmont-clay);
+                box-shadow: 0 0 0 1px var(--piedmont-clay);
+            }
+            .stage-5 .stage-pin {
+                background: var(--mtn-forest);
+                box-shadow: 0 0 0 1px var(--mtn-forest);
+            }
+
+            .stage-num {
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 6px;
+            }
+            .stage-region {
+                font-family: var(--serif);
+                font-size: 21px;
+                font-weight: 500;
+                color: var(--ink);
+                line-height: 1.15;
+                margin-bottom: 4px;
+                letter-spacing: -0.01em;
+            }
+            .stage-region em {
+                font-style: italic;
+            }
+            .stage-1 .stage-region em {
+                color: var(--coast-deep);
+            }
+            .stage-2 .stage-region em {
+                color: var(--coast);
+            }
+            .stage-3 .stage-region em {
+                color: var(--gold-deep);
+            }
+            .stage-4 .stage-region em {
+                color: var(--piedmont-clay);
+            }
+            .stage-5 .stage-region em {
+                color: var(--mtn-forest);
+            }
+
+            .stage-where {
+                font-family: var(--mono);
+                font-size: 10px;
+                color: var(--muted);
+                letter-spacing: 0.06em;
+                margin-bottom: 14px;
+            }
+            .stage-body {
+                font-size: 13px;
+                line-height: 1.55;
+                color: var(--text);
+                margin-bottom: 16px;
+                flex: 1;
+            }
+            .stage-status {
+                font-family: var(--mono);
+                font-size: 9px;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                padding: 5px 10px;
+                border-radius: 999px;
+                align-self: flex-start;
+                font-weight: 600;
+            }
+            .stage-1 .stage-status,
+            .stage-2 .stage-status,
+            .stage-4 .stage-status,
+            .stage-5 .stage-status {
+                background: var(--surface-cool);
+                color: var(--muted);
+                border: 1px solid var(--border);
+            }
+            .stage-3 .stage-status {
+                background: var(--gold-deep);
+                color: var(--bg-parchment);
+            }
+
+            /* ============ WIN-WIN MOMENTS ============ */
+            .winwin {
+                padding: 96px 0;
+                border-bottom: 1px solid var(--border);
+                background: var(--bg);
+                position: relative;
+                overflow: hidden;
+            }
+            .winwin::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(
+                        ellipse 50% 40% at 20% 20%,
+                        rgba(61, 122, 156, 0.05),
+                        transparent 60%
+                    ),
+                    radial-gradient(
+                        ellipse 50% 40% at 80% 80%,
+                        rgba(160, 74, 42, 0.05),
+                        transparent 60%
+                    );
+                pointer-events: none;
+            }
+            .winwin-inner {
+                position: relative;
+                z-index: 1;
+            }
+
+            .winwin-head {
+                text-align: center;
+                max-width: 880px;
+                margin: 0 auto 64px;
+                padding: 0 28px;
+            }
+            .winwin-eyebrow {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--gold-deep);
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                margin-bottom: 22px;
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .winwin-eyebrow::before,
+            .winwin-eyebrow::after {
+                content: "";
+                width: 22px;
+                height: 1px;
+                background: var(--gold);
+                opacity: 0.6;
+            }
+            .winwin-title {
+                font-family: var(--serif);
+                font-size: clamp(36px, 5.5vw, 64px);
+                font-weight: 500;
+                line-height: 1.05;
+                letter-spacing: -0.025em;
+                color: var(--ink);
+                margin-bottom: 22px;
+            }
+            .winwin-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+            .winwin-sub {
+                font-family: var(--serif);
+                font-size: 19px;
+                color: var(--text-soft);
+                line-height: 1.55;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .scenes {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 16px;
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 28px;
+            }
+            .scene {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                padding: 30px 28px;
+                position: relative;
+                overflow: hidden;
+                transition:
+                    border-color 0.2s,
+                    transform 0.2s,
+                    box-shadow 0.2s;
+            }
+            .scene::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    var(--coast),
+                    var(--gold),
+                    var(--piedmont-clay)
+                );
+                opacity: 0.55;
+            }
+            .scene:hover {
+                border-color: var(--border-strong);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 28px rgba(58, 50, 40, 0.1);
+            }
+            .scene-when {
+                font-family: var(--mono);
+                font-size: 10px;
+                color: var(--gold-deep);
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                margin-bottom: 14px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .scene-when::before {
+                content: "";
+                width: 16px;
+                height: 1px;
+                background: var(--gold-deep);
+            }
+            .scene-title {
+                font-family: var(--serif);
+                font-size: 22px;
+                font-weight: 500;
+                color: var(--ink);
+                line-height: 1.2;
+                letter-spacing: -0.01em;
+                margin-bottom: 12px;
+            }
+            .scene-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+            .scene-body {
+                font-size: 14.5px;
+                color: var(--text);
+                line-height: 1.7;
+                margin-bottom: 18px;
+            }
+            .scene-pair {
+                display: flex;
+                gap: 10px;
+                padding-top: 14px;
+                border-top: 1px solid var(--border);
+                font-family: var(--mono);
+                font-size: 10px;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            .scene-pair span {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .scene-pair .coast-tag {
+                color: var(--coast-deep);
+            }
+            .scene-pair .clay-tag {
+                color: var(--piedmont-deep);
+            }
+            .scene-pair .coast-tag::before,
+            .scene-pair .clay-tag::before {
+                content: "";
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+            }
+            .scene-pair .coast-tag::before {
+                background: var(--coast-deep);
+            }
+            .scene-pair .clay-tag::before {
+                background: var(--piedmont-clay);
+            }
+            .scene-pair .arrow {
+                color: var(--gold);
+                opacity: 0.7;
+            }
+
+            /* ============ HOW ============ */
+            .how {
+                padding: 96px 0;
+                border-bottom: 1px solid var(--border);
+                background: var(--bg-parchment);
+            }
+            .how-head {
+                max-width: 760px;
+                margin: 0 auto 56px;
+                text-align: center;
+                padding: 0 28px;
+            }
+            .how-eyebrow {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--gold-deep);
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                margin-bottom: 18px;
+            }
+            .how-title {
+                font-family: var(--serif);
+                font-size: clamp(32px, 4.5vw, 52px);
+                font-weight: 500;
+                line-height: 1.05;
+                letter-spacing: -0.02em;
+                color: var(--ink);
+            }
+            .how-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+
+            .steps {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 16px;
+                max-width: 1180px;
+                margin: 0 auto;
+                padding: 0 28px;
+            }
+            .step {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                padding: 28px 24px;
+                position: relative;
+            }
+            .step-num {
+                font-family: var(--mono);
+                font-size: 10px;
+                color: var(--gold-deep);
+                letter-spacing: 0.18em;
+                margin-bottom: 14px;
+            }
+            .step-title {
+                font-family: var(--serif);
+                font-size: 20px;
+                font-weight: 500;
+                color: var(--ink);
+                line-height: 1.25;
+                margin-bottom: 10px;
+                letter-spacing: -0.01em;
+            }
+            .step-body {
+                font-size: 14px;
+                color: var(--text-soft);
+                line-height: 1.65;
+            }
+
+            /* ============ LKN LIFESTYLE — HOW WE FIT ============ */
+            .lifestyle {
+                padding: 96px 0;
+                border-bottom: 1px solid var(--border);
+                background: var(--bg);
+                position: relative;
+                overflow: hidden;
+            }
+            .lifestyle::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                    ellipse 60% 50% at 50% 50%,
+                    rgba(200, 149, 69, 0.05),
+                    transparent 65%
+                );
+                pointer-events: none;
+            }
+            .lifestyle-inner {
+                position: relative;
+                z-index: 1;
+                max-width: 1180px;
+                margin: 0 auto;
+                padding: 0 28px;
+            }
+            .lifestyle-head {
+                text-align: center;
+                max-width: 760px;
+                margin: 0 auto 56px;
+            }
+            .lifestyle-eyebrow {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--gold-deep);
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                margin-bottom: 18px;
+            }
+            .lifestyle-title {
+                font-family: var(--serif);
+                font-size: clamp(32px, 4.5vw, 52px);
+                font-weight: 500;
+                line-height: 1.05;
+                letter-spacing: -0.02em;
+                color: var(--ink);
+                margin-bottom: 18px;
+            }
+            .lifestyle-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+            .lifestyle-sub {
+                font-family: var(--serif);
+                font-size: 18px;
+                color: var(--text-soft);
+                line-height: 1.55;
+            }
+
+            .rhythms {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 16px;
+            }
+            .rhythm {
+                padding: 24px 22px;
+                border-left: 2px solid var(--gold);
+                background: var(--surface);
+                border-radius: 0 12px 12px 0;
+            }
+            .rhythm-season {
+                font-family: var(--mono);
+                font-size: 10px;
+                color: var(--gold-deep);
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+            .rhythm-title {
+                font-family: var(--serif);
+                font-size: 19px;
+                font-weight: 500;
+                color: var(--ink);
+                line-height: 1.25;
+                margin-bottom: 8px;
+                letter-spacing: -0.01em;
+            }
+            .rhythm-body {
+                font-size: 14px;
+                color: var(--text);
+                line-height: 1.65;
+            }
+            .rhythm-body .em {
+                font-family: var(--serif);
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+
+            /* ============ PULL ============ */
+            .pull {
+                padding: 104px 0;
+                border-bottom: 1px solid var(--border);
+                text-align: center;
+                background: var(--bg-parchment);
+                position: relative;
+                overflow: hidden;
+            }
+            .pull::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                    ellipse 50% 60% at 50% 50%,
+                    rgba(200, 149, 69, 0.06),
+                    transparent 70%
+                );
+                pointer-events: none;
+            }
+            .pull-inner {
+                position: relative;
+                z-index: 1;
+            }
+            .pull-quote {
+                font-family: var(--serif);
+                font-style: italic;
+                font-size: clamp(26px, 4vw, 44px);
+                font-weight: 400;
+                line-height: 1.28;
+                color: var(--ink);
+                letter-spacing: -0.01em;
+                max-width: 920px;
+                margin: 0 auto 24px;
+            }
+            .pull-quote .mark {
+                color: var(--gold-deep);
+                font-style: normal;
+            }
+            .pull-quote em {
+                color: var(--gold-deep);
+            }
+            .pull-attr {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--muted);
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+            }
+
+            /* ============ CTA ============ */
+            .cta {
+                padding: 128px 0;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+                background: var(--bg);
+            }
+            .cta::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(
+                        ellipse 70% 50% at 30% 20%,
+                        rgba(30, 90, 138, 0.08),
+                        transparent 65%
+                    ),
+                    radial-gradient(
+                        ellipse 70% 50% at 70% 80%,
+                        rgba(160, 74, 42, 0.08),
+                        transparent 65%
+                    ),
+                    radial-gradient(
+                        ellipse 50% 30% at 50% 50%,
+                        rgba(200, 149, 69, 0.08),
+                        transparent 70%
+                    );
+                pointer-events: none;
+            }
+            .cta-inner {
+                position: relative;
+                z-index: 1;
+                padding: 0 28px;
+            }
+            .cta-eyebrow {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--gold-deep);
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                margin-bottom: 26px;
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .cta-eyebrow::before,
+            .cta-eyebrow::after {
+                content: "";
+                width: 22px;
+                height: 1px;
+                background: var(--gold);
+                opacity: 0.6;
+            }
+            .cta-title {
+                font-family: var(--serif);
+                font-size: clamp(40px, 6.5vw, 88px);
+                font-weight: 500;
+                line-height: 1;
+                color: var(--ink);
+                letter-spacing: -0.025em;
+                margin-bottom: 26px;
+                max-width: 900px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .cta-title em {
+                font-style: italic;
+                color: var(--gold-deep);
+            }
+            .cta-title .coast-word {
+                font-style: italic;
+                color: var(--coast-deep);
+                font-weight: 400;
+            }
+            .cta-title .clay-word {
+                font-style: italic;
+                color: var(--piedmont-clay);
+                font-weight: 400;
+            }
+            .cta-sub {
+                font-size: 17px;
+                color: var(--text-soft);
+                max-width: 620px;
+                margin: 0 auto 44px;
+                line-height: 1.65;
+            }
+            .cta-row {
+                display: flex;
+                gap: 14px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .cta-meta {
+                margin-top: 48px;
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--muted);
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+            }
+
+            /* ============ FOOTER ============ */
+            .footer {
+                padding: 40px 0 48px;
+                border-top: 1px solid var(--border);
+                background: var(--bg-parchment);
+            }
+            .footer-inner {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 28px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 14px;
+            }
+            .footer-txt {
+                font-family: var(--mono);
+                font-size: 11px;
+                color: var(--muted);
+                letter-spacing: 0.06em;
+            }
+            .footer-accent {
+                color: var(--gold-deep);
+                font-weight: 500;
+            }
+            .footer-mottos .coast {
+                color: var(--coast-deep);
+            }
+            .footer-mottos .clay {
+                color: var(--piedmont-clay);
+            }
+            .footer-mottos .gold {
+                color: var(--gold-deep);
+            }
+
+            /* ============ RESPONSIVE ============ */
+            @media (max-width: 1100px) {
+                .journey {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                }
+                .journey::before {
+                    display: none;
+                }
+            }
+            @media (max-width: 900px) {
+                .firsts-inner {
+                    grid-template-columns: 1fr;
+                    gap: 36px;
+                }
+                .lanes-grid {
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                }
+                .bridge {
+                    flex-direction: row;
+                    gap: 16px;
+                    padding: 16px 0;
+                }
+                .bridge-line {
+                    left: 50px;
+                    right: 50px;
+                    top: 50%;
+                    bottom: auto;
+                    width: auto;
+                    height: 1px;
+                    background: linear-gradient(
+                        to right,
+                        transparent,
+                        var(--coast) 10%,
+                        var(--gold) 50%,
+                        var(--piedmont-clay) 90%,
+                        transparent
+                    );
+                    transform: translateY(-50%);
+                }
+                .bridge-label {
+                    margin-top: 0;
+                    text-align: left;
+                }
+            }
+            @media (max-width: 600px) {
+                .motto-ribbon {
+                    font-size: 9px;
+                    letter-spacing: 0.2em;
+                    padding: 6px 16px;
+                }
+                .motto-ribbon .dot {
+                    margin: 0 8px;
+                }
+                .hero {
+                    padding: 64px 0 56px;
+                }
+                .hero-mottos {
+                    gap: 8px;
+                }
+                .hero-motto {
+                    padding: 6px 10px;
+                    font-size: 10px;
+                }
+                .firsts,
+                .lanes,
+                .game,
+                .winwin,
+                .how,
+                .lifestyle {
+                    padding: 64px 0;
+                }
+                .lane {
+                    padding: 32px 24px;
+                }
+                .pull {
+                    padding: 64px 0;
+                }
+                .cta {
+                    padding: 80px 0;
+                }
+                .hero-scene {
+                    font-size: 10px;
+                    gap: 14px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="motto-ribbon">
+            First in Freedom <span class="dot">✦</span> First in Flight
+            <span class="dot">✦</span> First in Fair
+        </div>
+
+        <nav class="nav">
+            <div class="nav-inner">
+                <a class="brand" href="/">
+                    <svg
+                        class="logo-mark"
+                        viewBox="0 0 42 42"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                    >
+                        <polygon
+                            points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5"
+                            fill="#c89545"
+                        />
+                        <polygon
+                            points="21,9 31,14.8 31,26.2 21,32 11,26.2 11,14.8"
+                            fill="#f4ede0"
+                        />
+                        <polygon
+                            points="21,15 27,18.5 27,25.5 21,29 15,25.5 15,18.5"
+                            fill="#c89545"
+                        />
+                    </svg>
+                    <span class="brand-name">YSKAIPE</span>
+                </a>
+                <div class="nav-place">
+                    <span class="nav-place-dot"></span>
+                    <span>Cornelius · NC · Summer 2026</span>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="wrap hero-inner">
+                <div class="hero-mottos">
+                    <span class="hero-motto hero-motto-1"
+                        >First in Freedom · 1775</span
+                    >
+                    <span class="hero-motto hero-motto-2"
+                        >First in Flight · 1903</span
+                    >
+                    <span class="hero-motto hero-motto-3"
+                        >First in Fair · 2026</span
+                    >
+                </div>
+                <h1 class="hero-title">
+                    Great <span class="coast-word">homeowners</span>.<br />
+                    Great <span class="clay-word">pros</span>.<br />
+                    Matched <em>fairly</em>.
+                </h1>
+                <p class="hero-sub">
+                    YSKAIPE is built in <strong>North Carolina</strong> — a
+                    frictionless bridge between two groups of neighbors who'd
+                    really like to find each other.
+                    <span class="em-pine"
+                        >From the coast to the mountains.</span
+                    >
+                    Homeowner meets pro. Everybody wins.
+                </p>
+                <div class="hero-scene">
+                    <span>Cornelius</span>
+                    <span>Davidson</span>
+                    <span>Huntersville</span>
+                    <span>Mooresville</span>
+                    <span>Charlotte</span>
+                    <span>Wrightsville · Asheville · Wilmington next</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="firsts">
+            <div class="firsts-inner">
+                <div class="first first-1">
+                    <span class="first-year">May 20, 1775 · Mecklenburg</span>
+                    <h2 class="first-title">First in <em>Freedom</em>.</h2>
+                    <p class="first-body">
+                        A year before Philadelphia, twenty-seven men in
+                        Charlotte signed the Mecklenburg Declaration — the first
+                        formal break from the Crown on American soil. North
+                        Carolina led. North Carolina didn't ask permission.
+                    </p>
+                </div>
+                <div class="first first-2">
+                    <span class="first-year"
+                        >December 17, 1903 · Kitty Hawk</span
+                    >
+                    <h2 class="first-title">First in <em>Flight</em>.</h2>
+                    <p class="first-body">
+                        Two bicycle mechanics from Ohio came to the Outer Banks,
+                        ran a wooden machine into Carolina wind, and lifted off
+                        — the first time anyone had ever flown. The state didn't
+                        invent the dream; we made the room for it.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="lanes">
+            <div class="lanes-head">
+                <div class="lanes-eyebrow">
+                    ⬡ The third first · First in Fair
+                </div>
+                <h2 class="lanes-title">
+                    Two great groups.<br /><em>One honest bridge.</em>
+                </h2>
+                <p class="lanes-sub">
+                    The homeowner has the problem. The contractor has the
+                    solution. The middle's been broken for twenty years. We're
+                    rebuilding it — from Carolina soil, in the same tradition
+                    that's been pioneering things here for two hundred fifty
+                    years.
+                </p>
+            </div>
+
+            <div class="lanes-grid">
+                <div class="lane lane-coast">
+                    <span class="lane-tag"
+                        >The Homeowner · Point of origin</span
+                    >
+                    <h2 class="lane-h2">If you <em>live</em> here.</h2>
+                    <p class="lane-lead">
+                        You own a home in Cornelius, Davidson, Huntersville, or
+                        Mooresville. You take care of it. You take pride in it.
+                        And every few months something needs
+                        <em class="accent-word">doing</em>.
+                    </p>
+
+                    <div class="lane-section">
+                        <h3>Who you are</h3>
+                        <p>
+                            You're 34 to 52. You've been at this house three to
+                            twelve years. The kids are in club soccer or band or
+                            both. The boat's at the dock or on the trailer. The
+                            water heater's making a sound you don't love.
+                        </p>
+                        <p>
+                            You Google before you call. You ask the neighborhood
+                            Facebook group before you Google. You're
+                            <em class="accent-word">smart</em> — and you're
+                            tired of being treated like you're not.
+                        </p>
+                    </div>
+
+                    <div class="lane-section">
+                        <h3>What you're tired of</h3>
+                        <p>
+                            Getting three quotes that range from $400 to $2,400
+                            for the same job. Being told the part is rare when
+                            you can Amazon it for $38. Sales pitches for a
+                            "system upgrade" when you asked for a fix.
+                        </p>
+                        <p>
+                            Most of all:
+                            <em class="accent-word"
+                                >not knowing what fair looks like</em
+                            >.
+                        </p>
+                    </div>
+
+                    <div class="lane-section">
+                        <h3>What we built for you</h3>
+                        <ul class="lane-checklist">
+                            <li>
+                                The Fair Rate Index — what the job actually
+                                costs in your ZIP
+                            </li>
+                            <li>
+                                AutoQuote in 60 seconds — describe it, see the
+                                range, no callbacks
+                            </li>
+                            <li>
+                                One vetted local pro per job — no auctioned
+                                bidding wars
+                            </li>
+                            <li>
+                                Your phone number never gets resold to four
+                                strangers
+                            </li>
+                            <li>
+                                Built by your neighbor in Cornelius — not a VC
+                                in San Francisco
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lane-cta">
+                        <a class="btn btn-coast" href="https://yskaipe.com">
+                            Get my Fair Rate
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bridge" aria-hidden="true">
+                    <div class="bridge-line"></div>
+                    <div class="bridge-hex">
+                        <svg
+                            viewBox="0 0 42 42"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <polygon
+                                points="21,2 38,11.5 38,30.5 21,40 4,30.5 4,11.5"
+                                fill="#c89545"
+                            />
+                            <polygon
+                                points="21,9 31,14.8 31,26.2 21,32 11,26.2 11,14.8"
+                                fill="#f4ede0"
+                            />
+                            <polygon
+                                points="21,15 27,18.5 27,25.5 21,29 15,25.5 15,18.5"
+                                fill="#c89545"
+                            />
+                        </svg>
+                    </div>
+                    <div class="bridge-label">
+                        The Bridge
+                        <strong>YSKAIPE</strong>
+                    </div>
+                </div>
+
+                <div class="lane lane-clay">
+                    <span class="lane-tag">The Pro · Honest hands</span>
+                    <h2 class="lane-h2">If you <em>work</em> here.</h2>
+                    <p class="lane-lead">
+                        You're an owner-operator or a small crew. HVAC,
+                        plumbing, electrical, roofing, landscaping, painting,
+                        GC, or auto. You do
+                        <em class="accent-word">good work</em> for fair pay.
+                        You'd love a steadier stream of it.
+                    </p>
+
+                    <div class="lane-section">
+                        <h3>Who you are</h3>
+                        <p>
+                            Two to twenty trucks. You answer your own phone half
+                            the time. You're at your kid's t-ball game on
+                            Saturday and back on a job at sunup Monday. Maybe
+                            you go to church off Old Statesville Road. Maybe
+                            you're on a disc golf course Sunday afternoon.
+                        </p>
+                        <p>
+                            You're a <em class="accent-word">neighbor</em>.
+                            You'd like to be treated like one.
+                        </p>
+                    </div>
+
+                    <div class="lane-section">
+                        <h3>What you're tired of</h3>
+                        <p>
+                            Paying $80 a lead to compete with three other shops
+                            for one job. Tire-kickers who already got four
+                            quotes. Reviews from people you never even worked
+                            for. A platform that takes your money
+                            <em class="accent-word">and</em> gives your number
+                            to your competition.
+                        </p>
+                        <p>
+                            You didn't start a business to be a line item in
+                            someone else's auction.
+                        </p>
+                    </div>
+
+                    <div class="lane-section">
+                        <h3>What we built for you</h3>
+                        <ul class="lane-checklist">
+                            <li>
+                                Exclusive ZIP routing — one founding pro per
+                                area per trade
+                            </li>
+                            <li>
+                                $99/month flat — no per-lead fees, no credit
+                                games
+                            </li>
+                            <li>
+                                Fair Rate Index — homeowners arrive knowing the
+                                right price
+                            </li>
+                            <li>
+                                Zero lead reselling, ever — your customer stays
+                                your customer
+                            </li>
+                            <li>
+                                Direct line to the founder — you shape the
+                                roadmap with me
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lane-cta">
+                        <a
+                            class="btn btn-clay"
+                            href="https://yskaipe.com/public/founding.html"
+                        >
+                            Claim my ZIP
+                            <span class="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ THE YSKAIPE GAME — NC JOURNEY ============ -->
+        <section class="game">
+            <div class="game-inner">
+                <div class="game-head">
+                    <div class="game-eyebrow">
+                        The YSKAIPE Game · Coast to Mountains
+                    </div>
+                    <h2 class="game-title">
+                        A North Carolina <em>journey</em>.
+                    </h2>
+                    <p class="game-sub">
+                        We start where we live — Lake Norman. We build outward
+                        across the state we know by heart. Each region is its
+                        own chapter. Each one earns the right to be next.
+                    </p>
+                </div>
+
+                <div class="journey">
+                    <div class="stage stage-1">
+                        <div class="stage-pin"></div>
+                        <div class="stage-num">Stage 01</div>
+                        <div class="stage-region">
+                            Lake Norman · <em>Cornelius</em>
+                        </div>
+                        <div class="stage-where">
+                            Origin · Davidson, Huntersville, Mooresville
+                        </div>
+                        <div class="stage-body">
+                            Where the founder lives. Where the Founding Fifty
+                            cohort gets built. The proving ground.
+                        </div>
+                        <div class="stage-status">Live now</div>
+                    </div>
+
+                    <div class="stage stage-2">
+                        <div class="stage-pin"></div>
+                        <div class="stage-num">Stage 02</div>
+                        <div class="stage-region">Charlotte <em>Metro</em></div>
+                        <div class="stage-where">
+                            Mecklenburg · Union · Cabarrus · Iredell
+                        </div>
+                        <div class="stage-body">
+                            The Queen City and its ring. Where First in Freedom
+                            was signed. Two and a half million neighbors, same
+                            Piedmont.
+                        </div>
+                        <div class="stage-status">2026 Q3</div>
+                    </div>
+
+                    <div class="stage stage-3">
+                        <div class="stage-pin"></div>
+                        <div class="stage-num">Stage 03 · Current</div>
+                        <div class="stage-region">
+                            Piedmont <em>Heartland</em>
+                        </div>
+                        <div class="stage-where">
+                            Lake Norman → Charlotte corridor
+                        </div>
+                        <div class="stage-body">
+                            The bridge between origin and metro. Where the proof
+                            of concept becomes the proof of scale. You are here.
+                        </div>
+                        <div class="stage-status">You are here</div>
+                    </div>
+
+                    <div class="stage stage-4">
+                        <div class="stage-pin"></div>
+                        <div class="stage-num">Stage 04</div>
+                        <div class="stage-region">Coastal <em>NC</em></div>
+                        <div class="stage-where">
+                            Wilmington · Wrightsville · Outer Banks
+                        </div>
+                        <div class="stage-body">
+                            Sea-glass mornings and salt air. Beach houses that
+                            need year-round care. The coast where flight was
+                            born.
+                        </div>
+                        <div class="stage-status">2027</div>
+                    </div>
+
+                    <div class="stage stage-5">
+                        <div class="stage-pin"></div>
+                        <div class="stage-num">Stage 05</div>
+                        <div class="stage-region">Blue Ridge <em>West</em></div>
+                        <div class="stage-where">
+                            Asheville · Boone · Brevard
+                        </div>
+                        <div class="stage-body">
+                            Mountain cabins. Wood stoves. Snow loads on the
+                            roof. A whole different kind of home, same honest
+                            network.
+                        </div>
+                        <div class="stage-status">2027</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ LKN LIFESTYLE — RHYTHMS OF THE YEAR ============ -->
+        <section class="lifestyle">
+            <div class="lifestyle-inner">
+                <div class="lifestyle-head">
+                    <div class="lifestyle-eyebrow">
+                        How we fit · The rhythm of the year
+                    </div>
+                    <h2 class="lifestyle-title">
+                        A network that runs on <em>Carolina time</em>.
+                    </h2>
+                    <p class="lifestyle-sub">
+                        Life in Lake Norman has its own calendar. Boating
+                        season, club ball, hosting weekends, fall festivals,
+                        holiday companies. We're built to match the rhythm — so
+                        the home stays ready for whatever comes next.
+                    </p>
+                </div>
+
+                <div class="rhythms">
+                    <div class="rhythm">
+                        <div class="rhythm-season">Spring · March to May</div>
+                        <div class="rhythm-title">Open the lake house.</div>
+                        <div class="rhythm-body">
+                            Dogwoods bloom. The boat needs a check. The HVAC
+                            needs spring service before the first hot weekend.
+                            We help you
+                            <span class="em">open the season clean</span>.
+                        </div>
+                    </div>
+                    <div class="rhythm">
+                        <div class="rhythm-season">Summer · June to August</div>
+                        <div class="rhythm-title">Host the season.</div>
+                        <div class="rhythm-body">
+                            The 4th. Pool parties. Out-of-town family. Memorial
+                            Day to Labor Day is one long open-house. You need
+                            things to <span class="em">just work</span>.
+                        </div>
+                    </div>
+                    <div class="rhythm">
+                        <div class="rhythm-season">
+                            Fall · September to November
+                        </div>
+                        <div class="rhythm-title">
+                            Get ready before the freeze.
+                        </div>
+                        <div class="rhythm-body">
+                            Club soccer. Davidson home games. The first cold
+                            snap. Time to check the heat, clean the gutters,
+                            winterize the dock — <span class="em">before</span>,
+                            not during.
+                        </div>
+                    </div>
+                    <div class="rhythm">
+                        <div class="rhythm-season">
+                            Winter · December to February
+                        </div>
+                        <div class="rhythm-title">Welcome the company.</div>
+                        <div class="rhythm-body">
+                            Christmas in Davidson. Holiday hosting. Family
+                            flying in. The pipes can't freeze, the oven can't
+                            quit, the company can't see anything other than
+                            <span class="em">ready</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="winwin">
+            <div class="winwin-inner">
+                <div class="winwin-head">
+                    <div class="winwin-eyebrow">
+                        Win-win moments · Carolina summer
+                    </div>
+                    <h2 class="winwin-title">
+                        When both sides win, <em>so does the state</em>.
+                    </h2>
+                    <p class="winwin-sub">
+                        These aren't hypotheticals. This is what summer in North
+                        Carolina looks like when the bridge actually works.
+                    </p>
+                </div>
+
+                <div class="scenes">
+                    <div class="scene">
+                        <div class="scene-when">Memorial Day weekend</div>
+                        <div class="scene-title">
+                            AC dies. Lake plans <em>not</em> dying.
+                        </div>
+                        <p class="scene-body">
+                            90° Saturday. AC quits at 11am. AutoQuote runs while
+                            the kids are still in the boat. One Cornelius HVAC
+                            pro accepts at 11:18. Cool air by sundown. Boat in
+                            the water Sunday like nothing happened.
+                        </p>
+                        <div class="scene-pair">
+                            <span class="coast-tag"
+                                >Homeowner saved a weekend</span
+                            >
+                            <span class="arrow">↔</span>
+                            <span class="clay-tag">Pro got the job</span>
+                        </div>
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-when">Two weeks before the 4th</div>
+                        <div class="scene-title">
+                            Deck refinished <em>before</em> the BBQ.
+                        </div>
+                        <p class="scene-body">
+                            You're hosting Independence Day. Twenty people
+                            coming. Deck looks rough. One quote, one local pro,
+                            one weekend of work. Photos on Nextdoor afterward —
+                            three neighbors ask who did it. He gets two more
+                            jobs by July 8th.
+                        </p>
+                        <div class="scene-pair">
+                            <span class="coast-tag">Homeowner hosts proud</span>
+                            <span class="arrow">↔</span>
+                            <span class="clay-tag">Pro gets referrals</span>
+                        </div>
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-when">
+                            After Wednesday night service
+                        </div>
+                        <div class="scene-title">
+                            Roof leak. Same week, <em>not</em> same headache.
+                        </div>
+                        <p class="scene-body">
+                            Storm Tuesday night. Stain on the ceiling Wednesday
+                            morning. You're at church that evening. AutoQuote
+                            done in the parking lot afterward. Local roofing pro
+                            on the house Thursday. No
+                            four-strangers-calling-all-night routine.
+                        </p>
+                        <div class="scene-pair">
+                            <span class="coast-tag"
+                                >Homeowner kept their peace</span
+                            >
+                            <span class="arrow">↔</span>
+                            <span class="clay-tag">Pro filled a slot</span>
+                        </div>
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-when">
+                            Davidson Farmer's Market Saturday
+                        </div>
+                        <div class="scene-title">
+                            You bump into your contractor.
+                            <em>It's friendly.</em>
+                        </div>
+                        <p class="scene-body">
+                            You both live here. Both at the market. Last month
+                            he fixed your water heater for a fair price. Today
+                            he's getting peaches. You wave. That's the version
+                            of this we're trying to build — where the pro stays
+                            your neighbor, not a stranger you'll never call
+                            again.
+                        </p>
+                        <div class="scene-pair">
+                            <span class="coast-tag">Trust earned</span>
+                            <span class="arrow">↔</span>
+                            <span class="clay-tag">Trust kept</span>
+                        </div>
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-when">Back-to-school week</div>
+                        <div class="scene-title">
+                            Painted bedrooms before <em>first day photos</em>.
+                        </div>
+                        <p class="scene-body">
+                            New paint by Sunday so first-day-of-school photos
+                            look right Monday. Local painter, fair quote, one
+                            weekend. He gets paid. You get the shot. Grandma in
+                            Concord gets a text photo she'll print out.
+                        </p>
+                        <div class="scene-pair">
+                            <span class="coast-tag">Memory made</span>
+                            <span class="arrow">↔</span>
+                            <span class="clay-tag">Pro made rent</span>
+                        </div>
+                    </div>
+
+                    <div class="scene">
+                        <div class="scene-when">Pre-Christmas in Davidson</div>
+                        <div class="scene-title">
+                            Plumbing pre-checked before
+                            <em>company arrives</em>.
+                        </div>
+                        <p class="scene-body">
+                            Family's flying in for the tree lighting and three
+                            nights at your house. Bathroom's been making a
+                            noise. Pro does a check, swaps the part, in and out
+                            before grandparents land. No frozen pipe on
+                            Christmas morning. Holiday saved on both sides.
+                        </p>
+                        <div class="scene-pair">
+                            <span class="coast-tag">Holiday hosted right</span>
+                            <span class="arrow">↔</span>
+                            <span class="clay-tag">Pro got a winter job</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how">
+            <div class="how-head">
+                <div class="how-eyebrow">How the bridge actually works</div>
+                <h2 class="how-title">
+                    Four steps. <em>No middlemen tax.</em>
+                </h2>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">01 · You describe it</div>
+                    <div class="step-title">
+                        A real description, in plain words.
+                    </div>
+                    <div class="step-body">
+                        Tell us the job — water heater leaking, HVAC needs
+                        service, deck needs refinishing. Plain English. Photos
+                        help.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">02 · We show the Fair Rate</div>
+                    <div class="step-title">
+                        What it costs in your ZIP. Honest.
+                    </div>
+                    <div class="step-body">
+                        The Fair Rate Index gives you a real, market-based range
+                        before you talk to anyone. No more $400-to-$2,400 quote
+                        spread.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">03 · One local pro</div>
+                    <div class="step-title">Not four. One vetted neighbor.</div>
+                    <div class="step-body">
+                        Your job routes to one founding contractor in your ZIP —
+                        not auctioned to four shops fighting over the same phone
+                        number.
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">04 · Job done · trust kept</div>
+                    <div class="step-title">Both sides walk away ahead.</div>
+                    <div class="step-body">
+                        You got a fair price and a real pro. The pro got a real
+                        job at a real margin. Both of you got your weekend back.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pull">
+            <div class="narrow pull-inner">
+                <p class="pull-quote">
+                    <span class="mark">"</span>If you do good work and treat
+                    folks right, you should be able to make a living. If you
+                    take care of your home, you shouldn't have to be a detective
+                    to find an honest pro. <em>That's the whole thing.</em
+                    ><span class="mark">"</span>
+                </p>
+                <p class="pull-attr">
+                    — Nick · Founder · Cornelius, North Carolina
+                </p>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta-inner">
+                <div class="cta-eyebrow">
+                    First in Freedom · First in Flight · First in Fair
+                </div>
+                <h2 class="cta-title">
+                    Two great groups.<br />
+                    <em>One honest network.</em>
+                </h2>
+                <p class="cta-sub">
+                    We're building this for the people who actually live and
+                    work in North Carolina. Whichever side of the bridge you're
+                    on — we'd love you in.
+                </p>
+                <div class="cta-row">
+                    <a class="btn btn-coast" href="https://yskaipe.com">
+                        I'm a homeowner
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <a
+                        class="btn btn-clay"
+                        href="https://yskaipe.com/public/founding.html"
+                    >
+                        I'm a pro
+                        <span class="btn-arrow">→</span>
+                    </a>
+                </div>
+                <div class="cta-meta">
+                    North Carolina · Lake Norman · Built by your neighbor ·
+                    Peaking Waters LLC
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-inner">
+                <div class="footer-txt">
+                    YSKAIPE ·
+                    <span class="footer-accent"
+                        >Fair Price. Smart Choice. Everybody Wins.</span
+                    >
+                </div>
+                <div class="footer-txt footer-mottos">
+                    <span class="coast">First in Freedom</span> ·
+                    <span class="clay">First in Flight</span> ·
+                    <span class="gold">First in Fair</span>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
