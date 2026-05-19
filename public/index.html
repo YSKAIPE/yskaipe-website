@@ -417,6 +417,79 @@
             .quote-field-val.placeholder {
                 color: var(--dim);
             }
+            .quote-field-required {
+                color: var(--piedmont-clay);
+                font-family: var(--mono);
+                font-size: 10px;
+                margin-left: 2px;
+                font-weight: 600;
+            }
+
+            .quote-confirm-note {
+                background: var(--surface-cool);
+                border: 1px solid var(--border-cool);
+                border-radius: 10px;
+                padding: 12px 14px;
+                margin-top: 14px;
+                margin-bottom: 4px;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .quote-confirm-note-icon {
+                flex-shrink: 0;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: var(--coast-deep);
+                color: var(--bg-parchment);
+                font-family: var(--serif);
+                font-size: 10px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 1px;
+            }
+            .quote-confirm-note-txt {
+                font-size: 12px;
+                line-height: 1.55;
+                color: var(--text);
+            }
+            .quote-confirm-note-txt strong {
+                color: var(--coast-deep);
+                font-weight: 600;
+            }
+
+            .hero-storylink {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 18px;
+                font-family: var(--sans);
+                font-size: 14px;
+                color: var(--coast-deep);
+                border-bottom: 1px solid var(--coast-deep);
+                padding-bottom: 2px;
+                transition:
+                    color 0.15s,
+                    border-color 0.15s,
+                    gap 0.15s;
+            }
+            .hero-storylink:hover {
+                color: var(--gold-deep);
+                border-color: var(--gold-deep);
+                gap: 12px;
+            }
+            .hero-storylink em {
+                font-family: var(--serif);
+                font-style: italic;
+                font-weight: 500;
+            }
+            .hero-storylink-arrow {
+                font-size: 13px;
+                opacity: 0.8;
+            }
 
             .quote-row {
                 display: grid;
@@ -1282,10 +1355,19 @@
                             Get my Fair Rate
                             <span class="btn-arrow">→</span>
                         </a>
-                        <a class="btn btn-ghost" href="/we-want-you.html">
-                            See how it works
+                        <a class="btn btn-coast" href="/we-want-you.html">
+                            Why we built this
+                            <span class="btn-arrow">→</span>
                         </a>
                     </div>
+                    <a class="hero-storylink" href="/we-want-you.html">
+                        Read the full story —
+                        <em
+                            >First in Freedom, First in Flight, First in
+                            Fair</em
+                        >
+                        <span class="hero-storylink-arrow">→</span>
+                    </a>
                     <div class="hero-trust">
                         <div class="hero-trust-item">
                             <div class="hero-trust-val">60<em>s</em></div>
@@ -1313,29 +1395,78 @@
                     </div>
                     <h2 class="quote-h">Tell us about the <em>job</em>.</h2>
                     <div class="quote-field">
-                        <span class="quote-field-label">Trade</span>
+                        <span class="quote-field-label"
+                            >Trade
+                            <span class="quote-field-required">*</span></span
+                        >
                         <span class="quote-field-val placeholder"
                             >HVAC, plumbing, roofing…</span
                         >
                     </div>
                     <div class="quote-field">
-                        <span class="quote-field-label">What needs doing</span>
+                        <span class="quote-field-label"
+                            >What needs doing
+                            <span class="quote-field-required">*</span></span
+                        >
                         <span class="quote-field-val placeholder"
                             >"AC stopped cooling Saturday"</span
                         >
                     </div>
                     <div class="quote-row">
                         <div class="quote-field">
-                            <span class="quote-field-label">ZIP</span>
+                            <span class="quote-field-label"
+                                >ZIP
+                                <span class="quote-field-required"
+                                    >*</span
+                                ></span
+                            >
                             <span class="quote-field-val placeholder"
                                 >28031</span
                             >
                         </div>
                         <div class="quote-field">
-                            <span class="quote-field-label">When</span>
+                            <span class="quote-field-label"
+                                >When
+                                <span class="quote-field-required"
+                                    >*</span
+                                ></span
+                            >
                             <span class="quote-field-val placeholder"
                                 >ASAP</span
                             >
+                        </div>
+                    </div>
+                    <div class="quote-row">
+                        <div class="quote-field">
+                            <span class="quote-field-label"
+                                >Email
+                                <span class="quote-field-required"
+                                    >*</span
+                                ></span
+                            >
+                            <span class="quote-field-val placeholder"
+                                >you@home.com</span
+                            >
+                        </div>
+                        <div class="quote-field">
+                            <span class="quote-field-label"
+                                >Phone
+                                <span class="quote-field-required"
+                                    >*</span
+                                ></span
+                            >
+                            <span class="quote-field-val placeholder"
+                                >(704) 555-0100</span
+                            >
+                        </div>
+                    </div>
+                    <div class="quote-confirm-note">
+                        <div class="quote-confirm-note-icon">#</div>
+                        <div class="quote-confirm-note-txt">
+                            You'll get a <strong>confirmation number</strong> —
+                            that's your job's home base. It links your AutoQuote
+                            to your matched pro, so we can text or email you
+                            when your local contractor accepts.
                         </div>
                     </div>
                     <a class="quote-cta" href="/autoquote.html">
@@ -1343,8 +1474,8 @@
                         <span style="opacity: 0.8">→</span>
                     </a>
                     <div class="quote-note">
-                        No spam · No four-stranger callbacks · Always free for
-                        homeowners
+                        Never resold · Never blasted to four strangers · Free
+                        for homeowners always
                     </div>
                 </div>
             </div>
