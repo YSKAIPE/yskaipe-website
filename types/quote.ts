@@ -31,6 +31,7 @@ export interface QuoteRequest {
 export interface QuoteResult {
   /** Supabase row id (set after saveQuote completes) */
   id?: string;
+  created_at?: string;
 
   /** Canonical display name — e.g., "HVAC" */
   trade: TradeType;

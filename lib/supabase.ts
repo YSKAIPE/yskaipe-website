@@ -1,16 +1,18 @@
-import { createClient } from '@supabase/supabase-js'
-import { QuoteResult } from '@/types/quote'
+import { createClient } from "@supabase/supabase-js";
+import { QuoteResult } from "@/types/quote";
+import type { TradeSlug, TradeType } from "@/lib/canonical-trades";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY!
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 // ─── SQL to run once in Supabase SQL editor ────────────────────────────────
 //
 // create table quotes (
 //   id uuid default gen_random_uuid() primary key,
 //   trade text not null,
+//   trade_slug varchar(32),                           -- added 2026-05-19 (canonical taxonomy)
 //   zip text,
 //   scope text,
 //   description text not null,
@@ -45,13 +47,20 @@ export const supabase = createClient(supabaseUrl, supabaseKey)
 //
 // -- Migration for existing deployments (idempotent):
 // alter table quotes add column if not exists customer_phone text;
+// alter table quotes add column if not exists trade_slug varchar(32);
+// alter table quotes add constraint quotes_trade_slug_canonical
+//   check (trade_slug is null or trade_slug in
+//     ('hvac','plumbing','electrical','roofing','landscaping','painting','general_contracting','automotive'));
 // ──────────────────────────────────────────────────────────────────────────
 
-export async function saveQuote(quote: QuoteResult): Promise<{ id: string } | null> {
+export async function saveQuote(
+  quote: QuoteResult,
+): Promise<{ id: string } | null> {
   const { data, error } = await supabase
-    .from('quotes')
+    .from("quotes")
     .insert({
       trade: quote.trade,
+      trade_slug: quote.trade_slug, // canonical taxonomy — written on every new quote
       zip: quote.zip,
       scope: quote.scope,
       description: quote.description,
@@ -69,29 +78,34 @@ export async function saveQuote(quote: QuoteResult): Promise<{ id: string } | nu
       materials_list: quote.materials_list,
       notes: quote.notes,
     })
-    .select('id')
-    .single()
+    .select("id")
+    .single();
 
   if (error) {
-    console.error('Supabase insert error:', error)
-    return null
+    console.error("Supabase insert error:", error);
+    return null;
   }
 
-  return data
+  return data;
 }
 
 export async function getQuoteById(id: string): Promise<QuoteResult | null> {
   const { data, error } = await supabase
-    .from('quotes')
-    .select('*')
-    .eq('id', id)
-    .single()
+    .from("quotes")
+    .select("*")
+    .eq("id", id)
+    .single();
 
-  if (error || !data) return null
+  if (error || !data) return null;
 
+  // Supabase client is untyped here — `data` is effectively `any`.
+  // We cast trade and trade_slug to the canonical unions; the DB CHECK constraint
+  // (quotes_trade_slug_canonical) guarantees these are valid at write time.
   return {
     id: data.id,
-    trade: data.trade,
+    created_at: data.created_at,
+    trade: data.trade as TradeType,
+    trade_slug: data.trade_slug as TradeSlug,
     zip: data.zip,
     scope: data.scope,
     description: data.description,
@@ -108,6 +122,5 @@ export async function getQuoteById(id: string): Promise<QuoteResult | null> {
     breakdown: data.breakdown,
     materials_list: data.materials_list,
     notes: data.notes,
-    created_at: data.created_at,
-  }
+  };
 }
