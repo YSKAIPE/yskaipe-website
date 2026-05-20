@@ -1,9 +1,21 @@
 // ============================================================
 // FILE: app/api/match/route.ts
 // POST /api/match
-// Body: { request_id, exclude_contractor_ids? }
+//
+// Two call modes:
+//   A) { request_id, exclude_contractor_ids? }
+//      — match an EXISTING homeowner_requests row (original behavior).
+//   B) { request: {...}, exclude_contractor_ids? }
+//      — CREATE a homeowner_requests row from the payload, then match it.
+//        Used by the public AutoQuote "Book my pro" button. The insert
+//        runs via supabaseAdmin (service role) so it satisfies the
+//        service_role_requests_insert RLS policy — the anon key is never
+//        used for real (non-TEST) homeowner requests.
+//
 // Runs the 4-factor scoring engine, writes to BOTH leads and
 // lead_assignments so founder dashboards and admin queues reflect state.
+// The response always includes `request_id` so the caller can redirect
+// to /match.html?request_id=<id>.
 // ============================================================
 
 import { NextRequest, NextResponse } from "next/server";
@@ -14,15 +26,77 @@ import {
   type ContractorProfile,
 } from "@/lib/leadScoring";
 
+/** Fields accepted when creating a homeowner_requests row via mode B. */
+interface IncomingRequest {
+  homeowner_name?: string;
+  homeowner_email?: string;
+  homeowner_phone?: string;
+  trade?: string;
+  zip_code?: string;
+  description?: string;
+  quote_low?: number;
+  quote_high?: number;
+  difficulty_score?: number;
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { request_id } = body;
+  let request_id: string | undefined = body.request_id;
   const excludeIds: string[] = Array.isArray(body.exclude_contractor_ids)
     ? body.exclude_contractor_ids
     : [];
 
+  // ── Mode B: create the homeowner_requests row first ──
+  if (!request_id && body.request) {
+    const r: IncomingRequest = body.request;
+
+    // Minimum fields the matcher + notification flow need.
+    if (!r.trade || !r.homeowner_email || !r.homeowner_phone) {
+      return NextResponse.json(
+        { error: "request payload requires trade, homeowner_email, homeowner_phone" },
+        { status: 400 },
+      );
+    }
+
+    const insertRow = {
+      homeowner_name: r.homeowner_name || "",
+      homeowner_email: r.homeowner_email,
+      homeowner_phone: r.homeowner_phone,
+      trade: r.trade,
+      zip_code: r.zip_code || null,
+      description: r.description || "",
+      quote_low: r.quote_low ?? null,
+      quote_high: r.quote_high ?? null,
+      difficulty_score: r.difficulty_score ?? 5,
+      status: "pending",
+    };
+
+    const { data: createdReq, error: createErr } = await supabaseAdmin
+      .from("homeowner_requests")
+      .insert([insertRow])
+      .select("id")
+      .single();
+
+    if (createErr || !createdReq) {
+      console.error("[/api/match] homeowner_requests insert", createErr);
+      return NextResponse.json(
+        {
+          error: "Failed to create request",
+          detail: createErr?.message,
+          code: createErr?.code,
+        },
+        { status: 500 },
+      );
+    }
+
+    request_id = createdReq.id;
+  }
+
   if (!request_id)
-    return NextResponse.json({ error: "Missing request_id" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing request_id (or a `request` payload to create one)" },
+      { status: 400 },
+    );
 
   // 1. Load the homeowner request
   const { data: request, error: reqErr } = await supabaseAdmin
@@ -80,8 +154,14 @@ export async function POST(req: NextRequest) {
   }
 
   if (!allRaw.length) {
+    // No coverage. request_id is returned so the caller can still route to
+    // /match.html, which shows the no-coverage / waitlist state.
     return NextResponse.json(
-      { error: "No eligible contractors in this market for that trade." },
+      {
+        request_id,
+        error: "No eligible contractors in this market for that trade.",
+        no_coverage: true,
+      },
       { status: 200 },
     );
   }
@@ -120,7 +200,11 @@ export async function POST(req: NextRequest) {
 
   if (!ranked.length) {
     return NextResponse.json(
-      { error: "No contractors matched after scoring." },
+      {
+        request_id,
+        error: "No contractors matched after scoring.",
+        no_coverage: true,
+      },
       { status: 200 },
     );
   }
@@ -191,10 +275,11 @@ export async function POST(req: NextRequest) {
     .update({ status: "assigned", matched_at: new Date().toISOString() })
     .eq("id", request_id);
 
-  // 9. Return top match + queue tail (unchanged)
+  // 9. Return top match + queue tail (request_id included for redirect)
   const topRaw = allRaw.find((c: any) => c.id === ranked[0].contractor.id);
 
   return NextResponse.json({
+    request_id,
     match: {
       ...ranked[0].result,
       compositeScore: ranked[0].result.compositeScore,

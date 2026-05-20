@@ -787,18 +787,6 @@
 </footer>
 
 <script>
-  // ===== Supabase REST config =====
-  // Anon key — safe to expose client-side, scoped by RLS policies server-side.
-  // Mirrors the pattern in match.html and batch-test.html for consistency.
-  const SUPABASE_URL = 'https://ygfhaoksicgtazcmqdfk.supabase.co/rest/v1';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlnZmhhb2tzaWNndGF6Y21xZGZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyOTY2OTIsImV4cCI6MjA4OTg3MjY5Mn0.gaPfFxzhh3mu8zAWm5_vP1fcIy4NVuQkBmL7Y2NSx88';
-  const SB_HEADERS = {
-    apikey: SUPABASE_ANON_KEY,
-    Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
-    'Content-Type': 'application/json',
-    Prefer: 'return=representation',
-  };
-
   // ===== AutoQuote Full-Page Form =====
   // Same /api/quotes contract as the homepage hero. Picks up sessionStorage from homepage if present.
 
@@ -993,20 +981,22 @@
 
   // ===== Book my pro =====
   // The bridge from AutoQuote (Fair Rate Index estimate, stored in `quotes`)
-  // to the live matching pipeline (homeowner_requests → /api/match → assignment + Resend notification).
+  // to the live matching pipeline.
   //
   // Flow:
-  //   1. Translate the AutoQuote into a homeowner_requests row (the table the matcher reads)
-  //   2. POST { request_id } to /api/match — scoring engine assigns the top-ranked pro,
-  //      creates a lead_assignments row, fires the Resend email to that contractor
-  //   3. Redirect to /match.html?request_id=<id> — UI shows matching → match → terms → confirmed
+  //   1. POST { request: {...} } to /api/match — the server creates the
+  //      homeowner_requests row with the service role (satisfies the
+  //      service_role_requests_insert RLS policy — no anon key needed),
+  //      then runs the scoring engine, writes the lead_assignments row,
+  //      and notifies the matched contractor.
+  //   2. Redirect to /match.html?request_id=<id> — the existing UI shows
+  //      matching → match → terms → confirmed.
   //
-  // The homeowner sees a confirmation number on /match.html; the contractor gets an email
-  // alert with the job details and accept/decline link to their Pro Dashboard.
+  // The homeowner gets a confirmation number on /match.html; the contractor
+  // gets an email alert and the lead in their Pro Dashboard.
 
   function difficultyFromComplexity(complexity) {
     // Map our 3-level AI complexity to the matcher's 1–10 difficulty score.
-    // Defensible midpoints: simple ≈ light service call, moderate ≈ typical job, complex ≈ multi-day or specialty.
     switch ((complexity || '').toLowerCase()) {
       case 'simple': return 3;
       case 'complex': return 8;
@@ -1033,56 +1023,41 @@
     setStatus('Routing your job to a local pro…', '');
 
     try {
-      // 1. Create homeowner_requests row — fields match what /api/match + /api/lead read.
       const grand = Number(lastQuote.grand_total) || 0;
-      const requestPayload = {
-        homeowner_name: lastQuote.customerName || '',
-        homeowner_email: lastQuote.customerEmail,
-        homeowner_phone: lastQuote.customerPhone,
-        trade: lastQuote.trade_slug || (lastQuote.trade || '').toLowerCase().replace(/\s+/g, '_'),
-        zip_code: lastQuote.zip,
-        description: lastQuote.description,
-        quote_low: Math.round(grand * 0.85),
-        quote_high: Math.round(grand * 1.15),
-        difficulty_score: difficultyFromComplexity(lastQuote.complexity),
-        status: 'pending',
-      };
 
-      const createRes = await fetch(SUPABASE_URL + '/homeowner_requests', {
-        method: 'POST',
-        headers: SB_HEADERS,
-        body: JSON.stringify(requestPayload),
-      });
-
-      if (!createRes.ok) {
-        const errTxt = await createRes.text();
-        throw new Error('Could not save your request: ' + errTxt);
-      }
-
-      const createdRows = await createRes.json();
-      const created = Array.isArray(createdRows) ? createdRows[0] : createdRows;
-      if (!created || !created.id) {
-        throw new Error('Request saved but no ID returned — please try again.');
-      }
-      const requestId = created.id;
-
-      // 2. Trigger the matching pipeline. /api/match scores eligible contractors,
-      //    upserts the leads row, creates the lead_assignments row, and (via /api/lead
-      //    or its own send path) notifies the matched contractor.
+      // /api/match in "create" mode: it inserts the homeowner_requests row
+      // server-side (service role), then matches. Returns { request_id, ... }.
       const matchRes = await fetch('/api/match', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ request_id: requestId }),
+        body: JSON.stringify({
+          request: {
+            homeowner_name: lastQuote.customerName || '',
+            homeowner_email: lastQuote.customerEmail,
+            homeowner_phone: lastQuote.customerPhone,
+            trade: lastQuote.trade_slug || (lastQuote.trade || '').toLowerCase().replace(/\s+/g, '_'),
+            zip_code: lastQuote.zip,
+            description: lastQuote.description,
+            quote_low: Math.round(grand * 0.85),
+            quote_high: Math.round(grand * 1.15),
+            difficulty_score: difficultyFromComplexity(lastQuote.complexity),
+          },
+        }),
       });
 
+      const data = await matchRes.json().catch(() => ({}));
+
       if (!matchRes.ok) {
-        // The request row exists; matching failed (likely no contractor coverage in this trade+zip).
-        // Take the homeowner to /match.html anyway — the page will show whatever state the pipeline left.
-        console.warn('Match call failed, redirecting to match.html for status:', await matchRes.text());
+        throw new Error(data.error || 'Could not route your job — please try again.');
       }
 
-      // 3. Hand off to the existing match.html UI — it polls/displays the assignment state.
-      window.location.href = '/match.html?request_id=' + encodeURIComponent(requestId);
+      // Whether matched or no-coverage, the server returns request_id.
+      // /match.html displays the appropriate state from there.
+      if (!data.request_id) {
+        throw new Error('Routing did not return a request id — please try again.');
+      }
+
+      window.location.href = '/match.html?request_id=' + encodeURIComponent(data.request_id);
 
     } catch (err) {
       console.error('Book my pro error:', err);
