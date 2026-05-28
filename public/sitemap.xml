@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ============================================================
+       Core conversion surfaces — highest priority
+       ============================================================ -->
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.yskaipe.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- AutoQuote — primary homeowner conversion surface -->
+  <url>
+    <loc>https://www.yskaipe.com/autoquote.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Founding Pros landing — primary contractor conversion surface -->
+  <url>
+    <loc>https://www.yskaipe.com/founding.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ============================================================
+       Pro-side content
+       ============================================================ -->
+
+  <url>
+    <loc>https://www.yskaipe.com/pro.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ============================================================
+       Homeowner-side content
+       ============================================================ -->
+
+  <url>
+    <loc>https://www.yskaipe.com/diy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ============================================================
+       Story / mission / brand pages
+       ============================================================ -->
+
+  <url>
+    <loc>https://www.yskaipe.com/we-want-you.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/why-yskaipe.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/yskaipe-mission.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/peaking-waters.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ============================================================
+       Standard company pages
+       ============================================================ -->
+
+  <url>
+    <loc>https://www.yskaipe.com/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/contact.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/pricing.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/careers.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/roadmap.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ============================================================
+       Auth surface — discoverable but low priority
+       ============================================================ -->
+
+  <url>
+    <loc>https://www.yskaipe.com/login.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- ============================================================
+       Blog
+       ============================================================ -->
+
+  <url>
+    <loc>https://www.yskaipe.com/yskaipe-blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/yskaipe-blog/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/yskaipe-blog/posts/welcome-to-yskaipe.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/yskaipe-blog/posts/human-ai-teaming-2026.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ============================================================
+       Legal — required for trust signals, low priority
+       ============================================================ -->
+
+  <url>
+    <loc>https://www.yskaipe.com/legal/terms.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/legal/privacy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/legal/contractor-agreement.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://www.yskaipe.com/legal/fair-rate-disclaimer.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+</urlset>

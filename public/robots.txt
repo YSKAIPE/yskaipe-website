@@ -1,0 +1,15 @@
+# YSKAIPE — robots.txt
+# Tells search engines what they can and cannot crawl.
+
+User-agent: *
+Allow: /
+
+# Block API endpoints (server-only, not for indexing)
+Disallow: /api/
+
+# Block private/internal paths if any exist later
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Sitemap location — Google and other crawlers will discover it from here
+Sitemap: https://www.yskaipe.com/sitemap.xml
