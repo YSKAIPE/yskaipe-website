@@ -1103,6 +1103,238 @@
     .journey-line { display: none; }
   }
 </style>
+
+
+
+<!--
+  YSKAIPE — Schema.org structured data for index.html (homepage)
+  =================================================================
+  Paste this ENTIRE block inside the <head> of /public/index.html,
+  ideally just before the closing </head> tag.
+
+  Three schemas in one <script>:
+    1. LocalBusiness  — establishes YSKAIPE as a real NC business
+    2. Service (×8)   — one per trade, all listed under @graph
+    3. FAQPage        — 7 homeowner-intent Q&As, eligible for FAQ rich results
+
+  After pasting, validate at:  https://search.google.com/test/rich-results
+  Paste the live URL https://www.yskaipe.com/ and it'll show what Google sees.
+-->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.yskaipe.com/#business",
+      "name": "YSKAIPE",
+      "legalName": "Peaking Waters LLC",
+      "alternateName": "YSKAIPE by Peaking Waters",
+      "description": "YSKAIPE is a North Carolina home services network. Homeowners get an AI-generated Fair Rate Index price on any job in 60 seconds, then are matched with one vetted local pro — never auctioned to four strangers.",
+      "url": "https://www.yskaipe.com/",
+      "logo": "https://www.yskaipe.com/logo.png",
+      "image": "https://www.yskaipe.com/og-image.png",
+      "email": "gr8@yskaipe.com",
+      "foundingDate": "2023-02-16",
+      "founder": {
+        "@type": "Person",
+        "name": "Nick Conenna"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cornelius",
+        "addressRegion": "NC",
+        "postalCode": "28031",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "North Carolina"
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday",
+          "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      }],
+      "priceRange": "$$",
+      "slogan": "Fair Price. Smart Choice. Everybody Wins.",
+      "knowsAbout": [
+        "HVAC repair", "plumbing", "electrical work", "roofing",
+        "landscaping", "painting", "general contracting", "automotive repair",
+        "fair-price home services", "home services pricing transparency"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "YSKAIPE Pro Core — Eight Trades",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-hvac" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-plumbing" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-electrical" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-roofing" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-landscaping" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-painting" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-general-contracting" } },
+          { "@type": "Offer", "itemOffered": { "@id": "https://www.yskaipe.com/#service-automotive" } }
+        ]
+      },
+      "sameAs": []
+    },
+
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-hvac",
+      "name": "HVAC — Heating, Cooling, & Air Conditioning",
+      "description": "AC service, furnace work, ductwork, mini-splits, and summer emergencies. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local HVAC pro.",
+      "serviceType": "HVAC",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Home Services"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-plumbing",
+      "name": "Plumbing",
+      "description": "Water heaters, leaks, drains, fixtures, and repipes. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local plumber.",
+      "serviceType": "Plumbing",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Home Services"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-electrical",
+      "name": "Electrical",
+      "description": "Panels, outlets, lighting, EV chargers, generators, and code upgrades. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local electrician.",
+      "serviceType": "Electrical",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Home Services"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-roofing",
+      "name": "Roofing",
+      "description": "Shingles, leaks, full replacements, storm damage, and gutters. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local roofer.",
+      "serviceType": "Roofing",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Home Services"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-landscaping",
+      "name": "Landscaping",
+      "description": "Lawns, beds, hardscape, irrigation, and lake-house grounds. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local landscaper.",
+      "serviceType": "Landscaping",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Home Services"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-painting",
+      "name": "Painting",
+      "description": "Interior, exterior, decks, and cabinets. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local painter.",
+      "serviceType": "Painting",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Home Services"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-general-contracting",
+      "name": "General Contracting",
+      "description": "Renovations, additions, kitchens, baths, and deck rebuilds — the bigger jobs. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local general contractor.",
+      "serviceType": "General Contracting",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Home Services"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.yskaipe.com/#service-automotive",
+      "name": "Automotive",
+      "description": "Mobile repair, tire and brake, batteries, and boat trailer fixes. Get a Fair Rate Index estimate in 60 seconds, then matched with one vetted local mechanic.",
+      "serviceType": "Automotive Repair",
+      "provider": { "@id": "https://www.yskaipe.com/#business" },
+      "areaServed": { "@type": "State", "name": "North Carolina" },
+      "category": "Automotive Services"
+    },
+
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.yskaipe.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is YSKAIPE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "YSKAIPE (pronounced 'escape') is a North Carolina home services network that connects homeowners with one vetted local pro — never auctioned to four strangers. Homeowners get an AI-generated Fair Rate Index estimate on any job in about 60 seconds, then route directly to a matched local contractor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the Fair Rate Index work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Fair Rate Index is a transparent, market-based price for every home services job in North Carolina, calibrated against 2026 labor and material rates. Homeowners see what fair looks like before they ever pick up the phone — no more $400-to-$2,400 quote spreads on the same work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is YSKAIPE free for homeowners?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. AutoQuote and Fair Rate Index pricing are completely free for homeowners, with no signup required. We do not resell homeowner contact information and we do not blast jobs to multiple contractors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What trades does YSKAIPE cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "YSKAIPE covers eight core trades: HVAC, plumbing, electrical, roofing, landscaping, painting, general contracting, and automotive. Each trade has its own AI specialist that helps homeowners describe the job and routes it to a matched local pro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is YSKAIPE different from lead-resale platforms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traditional lead platforms sell the same homeowner's information to four or five competing contractors. YSKAIPE routes each job to one vetted local pro based primarily on trade and geography — no auction, no bidding war, no shared leads. The homeowner's phone number stays theirs until a contractor accepts the job."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does YSKAIPE match homeowners with contractors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pros are matched to homeowners primarily by way of trade and geography (for example, General Contracting and Cornelius). Each job routes to one local contractor, not a bidding pool, so the pro who shows up actually wants the work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does YSKAIPE operate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "YSKAIPE serves homeowners and contractors across North Carolina, with headquarters in Cornelius, NC. The platform launched in 2023 and is operated by Peaking Waters LLC."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+
+
+
 </head>
 <body>
 
