@@ -1,0 +1,2816 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>YSKAIPE · Week 1 Video Script · HVAC</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --bg: #f7f4ee;
+                --surface: #ffffff;
+                --ink: #111;
+                --muted: #888;
+                --rule: #e0dbd0;
+                --accent: #c84b11;
+                --accent2: #1a5c38;
+                --highlight: #fff8e1;
+                --speaker: #1a3a5f;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: var(--bg);
+                color: var(--ink);
+                font-family: "DM Sans", sans-serif;
+                font-weight: 300;
+                line-height: 1.6;
+                max-width: 780px;
+                margin: 0 auto;
+                padding: 2rem 1.5rem 5rem;
+            }
+
+            /* HEADER */
+            .doc-header {
+                border-bottom: 3px solid var(--ink);
+                padding-bottom: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .doc-eyebrow {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 0.5rem;
+            }
+
+            .doc-title {
+                font-family: "Syne", sans-serif;
+                font-size: clamp(1.8rem, 5vw, 2.8rem);
+                font-weight: 800;
+                line-height: 1.05;
+                letter-spacing: -0.02em;
+                margin-bottom: 1rem;
+            }
+
+            .doc-title em {
+                font-style: normal;
+                color: var(--accent);
+            }
+
+            .meta-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .meta-chip {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.08em;
+                padding: 0.25rem 0.65rem;
+                border: 1px solid var(--rule);
+                color: var(--muted);
+            }
+
+            .meta-chip.accent {
+                background: var(--accent);
+                color: white;
+                border-color: var(--accent);
+            }
+
+            /* BRIEF BOX */
+            .brief-box {
+                background: var(--ink);
+                color: #f0ece2;
+                padding: 1.5rem 1.75rem;
+                margin-bottom: 2rem;
+            }
+
+            .brief-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--accent);
+                margin-bottom: 0.75rem;
+            }
+
+            .brief-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem 2rem;
+                font-size: 0.82rem;
+                color: #ccc;
+            }
+
+            .brief-grid dt {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: #888;
+                margin-bottom: 0.2rem;
+            }
+
+            .brief-grid dd {
+                color: #f0ece2;
+                font-weight: 400;
+            }
+
+            /* SECTION */
+            .section-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 1px solid var(--rule);
+                margin-top: 2.5rem;
+            }
+
+            /* SCRIPT BLOCKS */
+            .script-section {
+                margin-bottom: 0.5rem;
+            }
+
+            .segment {
+                display: grid;
+                grid-template-columns: 110px 1fr;
+                gap: 0;
+                margin-bottom: 2px;
+                border: 1px solid var(--rule);
+            }
+
+            .seg-meta {
+                background: var(--surface);
+                border-right: 1px solid var(--rule);
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 0.4rem;
+            }
+
+            .seg-tag {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                font-weight: 500;
+            }
+
+            .seg-tag.hook {
+                color: var(--accent);
+            }
+            .seg-tag.setup {
+                color: #7a5c00;
+            }
+            .seg-tag.reveal {
+                color: var(--accent2);
+            }
+            .seg-tag.education {
+                color: var(--speaker);
+            }
+            .seg-tag.cta {
+                color: var(--accent);
+            }
+            .seg-tag.note {
+                color: var(--muted);
+            }
+
+            .seg-time {
+                font-family: "DM Mono", monospace;
+                font-size: 0.58rem;
+                color: var(--muted);
+            }
+
+            .seg-body {
+                background: var(--surface);
+                padding: 1rem 1.25rem;
+            }
+
+            .seg-body.highlight {
+                background: var(--highlight);
+            }
+
+            .speak {
+                font-size: 0.92rem;
+                line-height: 1.75;
+                color: #1a1a1a;
+                font-weight: 400;
+            }
+
+            .speak em {
+                font-style: italic;
+                color: var(--muted);
+                font-size: 0.82rem;
+            }
+
+            .speak strong {
+                font-weight: 600;
+                color: var(--ink);
+            }
+
+            .speak mark {
+                background: #ffe066;
+                padding: 0 2px;
+                border-radius: 2px;
+            }
+
+            /* DIRECTOR NOTES */
+            .dir-note {
+                background: #f0f0f0;
+                border-left: 3px solid var(--muted);
+                padding: 0.5rem 0.75rem;
+                margin-top: 0.6rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                color: var(--muted);
+                line-height: 1.5;
+            }
+
+            /* CLIP CALLOUTS */
+            .clip-flag {
+                display: inline-block;
+                background: var(--accent);
+                color: white;
+                font-family: "DM Mono", monospace;
+                font-size: 0.58rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.15rem 0.45rem;
+                margin-top: 0.5rem;
+                vertical-align: middle;
+            }
+
+            .clip-flag.green {
+                background: var(--accent2);
+            }
+
+            /* DATA CALLOUT */
+            .data-box {
+                background: var(--highlight);
+                border: 1px solid #e8c547;
+                padding: 1rem 1.25rem;
+                margin: 1.5rem 0;
+            }
+
+            .data-box-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: #7a5c00;
+                margin-bottom: 0.5rem;
+            }
+
+            .data-item {
+                font-size: 0.82rem;
+                color: #3a3000;
+                padding: 0.25rem 0;
+                border-bottom: 1px solid rgba(232, 197, 71, 0.3);
+                display: flex;
+                gap: 1rem;
+                align-items: baseline;
+            }
+
+            .data-item:last-child {
+                border-bottom: none;
+            }
+
+            .data-label {
+                color: #7a5c00;
+                min-width: 160px;
+                font-size: 0.78rem;
+            }
+            .data-range {
+                font-weight: 600;
+                font-family: "DM Mono", monospace;
+                font-size: 0.88rem;
+            }
+
+            /* PRODUCTION CHECKLIST */
+            .checklist {
+                list-style: none;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.4rem;
+                font-size: 0.82rem;
+                color: #444;
+            }
+
+            .checklist li {
+                padding: 0.5rem 0.75rem;
+                background: var(--surface);
+                border: 1px solid var(--rule);
+                display: flex;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .checklist li::before {
+                content: "☐";
+                font-size: 0.9rem;
+                flex-shrink: 0;
+                margin-top: 0.05rem;
+            }
+
+            /* DERIVATIVES */
+            .deriv-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1px;
+                background: var(--rule);
+                border: 1px solid var(--rule);
+                margin-top: 1rem;
+            }
+
+            .deriv-card {
+                background: var(--surface);
+                padding: 1rem;
+            }
+
+            .deriv-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 0.4rem;
+            }
+
+            .deriv-action {
+                font-size: 0.8rem;
+                color: #333;
+                line-height: 1.5;
+            }
+
+            @media (max-width: 600px) {
+                .segment {
+                    grid-template-columns: 80px 1fr;
+                }
+                .brief-grid {
+                    grid-template-columns: 1fr;
+                }
+                .checklist {
+                    grid-template-columns: 1fr;
+                }
+                .deriv-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="doc-header">
+            <div class="doc-eyebrow">
+                YSKAIPE · Pillar Video Script · Week 1 of 3
+            </div>
+            <h1 class="doc-title">
+                HVAC — The <em>Price Truth</em><br />Lake Norman Homeowners Need
+            </h1>
+            <div class="meta-row">
+                <span class="meta-chip accent">Nick on Camera</span>
+                <span class="meta-chip">Target: 3–4 min</span>
+                <span class="meta-chip">Publish: Monday</span>
+                <span class="meta-chip">Trade: HVAC</span>
+                <span class="meta-chip">YouTube + cross-post</span>
+            </div>
+        </div>
+
+        <!-- BRIEF -->
+        <div class="brief-label">Production Brief</div>
+        <div class="brief-box">
+            <dl class="brief-grid">
+                <div>
+                    <dt>Setup</dt>
+                    <dd>
+                        Phone on tripod or propped up. Anywhere in your home or
+                        office. Good natural light. No studio needed.
+                    </dd>
+                </div>
+                <div>
+                    <dt>Tone</dt>
+                    <dd>
+                        Knowledgeable neighbor, not salesperson. You're pulling
+                        back the curtain — slightly indignant on behalf of
+                        homeowners.
+                    </dd>
+                </div>
+                <div>
+                    <dt>Wardrobe</dt>
+                    <dd>
+                        Casual but put-together. YSKAIPE shirt if you have one,
+                        otherwise anything solid.
+                    </dd>
+                </div>
+                <div>
+                    <dt>Teleprompter?</dt>
+                    <dd>
+                        Not recommended — know the beats, not the lines. Bullet
+                        points on a sticky note if needed.
+                    </dd>
+                </div>
+                <div>
+                    <dt>YouTube Title</dt>
+                    <dd>
+                        "How Much Does HVAC Service Cost in Lake Norman NC?
+                        (2026 Fair Price Guide)"
+                    </dd>
+                </div>
+                <div>
+                    <dt>YouTube Description Line 1</dt>
+                    <dd>
+                        "Get your free fair price estimate at yskaipe.com —
+                        takes 8 seconds, no signup."
+                    </dd>
+                </div>
+            </dl>
+        </div>
+
+        <!-- PRICE DATA -->
+        <div class="section-label">
+            Real NC Price Data — Know These Before You Record
+        </div>
+        <div class="data-box">
+            <div class="data-box-label">
+                Fair Rate Index — HVAC · North Carolina / Lake Norman Area ·
+                2026
+            </div>
+            <div class="data-item">
+                <span class="data-label">Annual tune-up / maintenance</span>
+                <span class="data-range">$71 – $200</span>
+                <span style="font-size: 0.72rem; color: #888"
+                    >NC avg ~$143</span
+                >
+            </div>
+            <div class="data-item">
+                <span class="data-label">Service / diagnostic call</span>
+                <span class="data-range">$75 – $200</span>
+                <span style="font-size: 0.72rem; color: #888"
+                    >often rolled in if you approve repair</span
+                >
+            </div>
+            <div class="data-item">
+                <span class="data-label">AC repair (average)</span>
+                <span class="data-range">$150 – $650</span>
+                <span style="font-size: 0.72rem; color: #888"
+                    >NC avg ~$333</span
+                >
+            </div>
+            <div class="data-item">
+                <span class="data-label">Refrigerant recharge</span>
+                <span class="data-range">$200 – $1,500</span>
+                <span style="font-size: 0.72rem; color: #888"
+                    >varies hugely by refrigerant type</span
+                >
+            </div>
+            <div class="data-item">
+                <span class="data-label">Capacitor replacement</span>
+                <span class="data-range">$120 – $500</span>
+                <span style="font-size: 0.72rem; color: #888"
+                    >most common repair after drain clogs</span
+                >
+            </div>
+            <div class="data-item">
+                <span class="data-label">Compressor replacement</span>
+                <span class="data-range">$1,500 – $3,500</span>
+                <span style="font-size: 0.72rem; color: #888"
+                    >compare to new system at this point</span
+                >
+            </div>
+            <div class="data-item">
+                <span class="data-label">Annual maintenance contract</span>
+                <span class="data-range">$120 – $500/yr</span>
+                <span style="font-size: 0.72rem; color: #888"
+                    >includes 2 tune-ups + priority service</span
+                >
+            </div>
+        </div>
+
+        <!-- SCRIPT -->
+        <div class="section-label">Script — Beat by Beat</div>
+
+        <!-- HOOK -->
+        <div class="segment">
+            <div class="seg-meta">
+                <span class="seg-tag hook">Hook</span>
+                <span class="seg-time">0:00–0:25</span>
+            </div>
+            <div class="seg-body highlight">
+                <div class="speak">
+                    "If you've ever gotten an HVAC quote in Lake Norman and
+                    thought —
+                    <em
+                        >is this actually a fair price or am I getting
+                        taken?</em
+                    >
+                    — this video is for you. I'm going to tell you exactly what
+                    HVAC service should cost in this area in 2026. The tune-up,
+                    the diagnostic, the repair. Real numbers — not ranges so
+                    wide they're useless."
+                </div>
+                <div class="dir-note">
+                    📌 Open mid-sentence energy. Don't introduce yourself yet.
+                    Earn attention first.
+                </div>
+                <span class="clip-flag">🎬 Clip 1 candidate — price hook</span>
+            </div>
+        </div>
+
+        <!-- SETUP -->
+        <div class="segment">
+            <div class="seg-meta">
+                <span class="seg-tag setup">Setup</span>
+                <span class="seg-time">0:25–0:50</span>
+            </div>
+            <div class="seg-body">
+                <div class="speak">
+                    "I'm Nick. I built YSKAIPE — it's a free tool that gives
+                    Lake Norman homeowners fair price ranges for any home
+                    service job before they call a contractor. The reason I
+                    built it: I got a quote once that I had no idea how to
+                    evaluate. And I realized most homeowners are in that same
+                    position — you're just guessing whether you're being treated
+                    fairly."
+                </div>
+                <div class="dir-note">
+                    📌 Keep this tight. Credibility without self-promotion. "I
+                    built a tool" is enough — don't explain the whole product.
+                </div>
+            </div>
+        </div>
+
+        <!-- REVEAL 1 -->
+        <div class="segment">
+            <div class="seg-meta">
+                <span class="seg-tag reveal">Reveal</span>
+                <span class="seg-time">0:50–1:30</span>
+            </div>
+            <div class="seg-body highlight">
+                <div class="speak">
+                    "Let's start with the tune-up — because this is where most
+                    homeowners get their first HVAC bill of the season. A fair
+                    HVAC tune-up in North Carolina runs
+                    <mark>$71 to $200</mark>. The average is around $143. If
+                    someone's quoting you $250 or $300 for a basic tune-up —
+                    that's above market. You should be asking what's included.
+                    Now — the service call fee. Most HVAC companies charge
+                    <mark>$75 to $200</mark> just to show up and diagnose the
+                    problem. That's normal. What's NOT normal is a company that
+                    won't tell you that fee upfront. Always ask: 'Is the
+                    diagnostic fee rolled in if I approve the repair?' A good
+                    company will say yes."
+                </div>
+                <div class="dir-note">
+                    📌 Slow down on the dollar figures. Let them land. Slight
+                    pause after each number.
+                </div>
+                <span class="clip-flag green"
+                    >🎬 Clip 2 candidate — tune-up reveal + diagnostic tip</span
+                >
+            </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="segment">
+            <div class="seg-meta">
+                <span class="seg-tag education">Depth</span>
+                <span class="seg-time">1:30–2:30</span>
+            </div>
+            <div class="seg-body">
+                <div class="speak">
+                    "For actual repairs — if something's broken — the fair range
+                    in NC is <mark>$150 to $650</mark> for most common fixes.
+                    The state average is around $333. The two most common
+                    repairs out here? Drain line clogs and capacitor
+                    replacements. Drain line — $75 to $275. Capacitor — $120 to
+                    $500 depending on the unit. Both are quick fixes if caught
+                    early. Now here's the one that catches people off guard:
+                    refrigerant. If your system needs a refrigerant recharge,
+                    the cost can swing wildly — anywhere from
+                    <mark>$200 to $1,500</mark>. That huge range comes down to
+                    what refrigerant your system uses. Older R-22 systems? Much
+                    more expensive. Newer R-410A? More reasonable. If a
+                    technician tells you your system needs refrigerant, ask them
+                    which type and what the per-pound cost is before they start.
+                    And if they quote you a compressor replacement — $1,500 to
+                    $3,500 — that's actually the point where you should compare
+                    it to a new system. At that price, a replacement often makes
+                    more financial sense."
+                </div>
+                <div class="dir-note">
+                    📌 This is the meat. Lean in slightly. You're the informed
+                    friend explaining this at dinner — not reading a price list.
+                </div>
+                <span class="clip-flag green"
+                    >🎬 Clip 3 candidate — refrigerant trap / compressor
+                    decision</span
+                >
+            </div>
+        </div>
+
+        <!-- LOCAL ANGLE -->
+        <div class="segment">
+            <div class="seg-meta">
+                <span class="seg-tag education">Local</span>
+                <span class="seg-time">2:30–3:00</span>
+            </div>
+            <div class="seg-body">
+                <div class="speak">
+                    "One thing specific to us here in Lake Norman — we're in
+                    what's called a Mixed-Humid climate zone. That means our AC
+                    systems work hard in summer and our heat runs through
+                    winter. We're not a mild climate. That's why annual
+                    maintenance isn't optional — a system that skips tune-ups
+                    out here will cost you in repairs. The fair range for an
+                    annual maintenance contract — which includes two tune-ups
+                    and priority service — is <mark>$120 to $500 a year</mark>.
+                    That's worth it. It's what keeps the $333 average repair
+                    from becoming a $2,000 one."
+                </div>
+                <div class="dir-note">
+                    📌 "Us here in Lake Norman" — own the local angle. This is
+                    why this video beats any national content.
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="segment">
+            <div class="seg-meta">
+                <span class="seg-tag cta">CTA</span>
+                <span class="seg-time">3:00–3:20</span>
+            </div>
+            <div class="seg-body highlight">
+                <div class="speak">
+                    "If you want the fair price range for your specific HVAC
+                    situation — the repair you're looking at, or a tune-up, or a
+                    full replacement — go to <strong>yskaipe.com</strong>. Tell
+                    it what you need, it gives you a fair range for Lake Norman
+                    in about 8 seconds. Free. No signup. You should never be
+                    guessing whether a quote is fair."
+                </div>
+                <div class="dir-note">
+                    📌 Say "yskaipe.com" clearly and confidently — pause
+                    slightly before it. Don't rush the close.
+                </div>
+            </div>
+        </div>
+
+        <!-- OPTIONAL CLOSER -->
+        <div class="segment">
+            <div class="seg-meta">
+                <span class="seg-tag note">Optional</span>
+                <span class="seg-time">3:20–3:35</span>
+            </div>
+            <div class="seg-body">
+                <div class="speak">
+                    <em>(Only if it feels natural)</em> "Next week I'm breaking
+                    down plumbing quotes — specifically how to read one line by
+                    line and spot what's negotiable. Subscribe if you want
+                    that."
+                </div>
+                <div class="dir-note">
+                    📌 Skip this if energy drops. Better to end clean at the CTA
+                    than drag out.
+                </div>
+            </div>
+        </div>
+
+        <!-- CLIP SUMMARY -->
+        <div class="section-label">The 3 Clips Person 1 Should Pull</div>
+        <div class="deriv-grid">
+            <div class="deriv-card">
+                <div class="deriv-label">🎬 Clip 1 · Reel Tuesday</div>
+                <div class="deriv-action">
+                    <strong>The hook (0:00–0:25)</strong><br />Caption: "Most
+                    LKN homeowners have no idea if their HVAC quote is fair.
+                    Here's the actual number. → yskaipe.com"
+                </div>
+            </div>
+            <div class="deriv-card">
+                <div class="deriv-label">🎬 Clip 2 · Reel Thursday</div>
+                <div class="deriv-action">
+                    <strong>Tune-up + diagnostic tip (0:50–1:30)</strong
+                    ><br />Caption: "Always ask this one question before you
+                    approve any HVAC repair. 🔑"
+                </div>
+            </div>
+            <div class="deriv-card">
+                <div class="deriv-label">🎬 Clip 3 · Reel Saturday</div>
+                <div class="deriv-action">
+                    <strong
+                        >Refrigerant trap or compressor close
+                        (2:00–2:30)</strong
+                    ><br />Caption: "Refrigerant recharge quoted at $1,200?
+                    Here's whether that's fair or a rip-off."
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCTION CHECKLIST -->
+        <div class="section-label">Before You Hit Record</div>
+        <ul class="checklist">
+            <li>Phone fully charged + airplane mode on</li>
+            <li>Camera at eye level — prop it up if needed</li>
+            <li>Shoot horizontal (landscape) for YouTube</li>
+            <li>Face a window — natural light, not backlit</li>
+            <li>Read data box above once more before recording</li>
+            <li>Know the 4 beats: Hook → Tune-up/diagnostic → Repairs → CTA</li>
+            <li>Upload raw file to shared drive immediately after</li>
+            <li>Tag file: <code>wk1-hvac-raw-[date].mp4</code></li>
+        </ul>
+    </body>
+</html>
+
+2. For website Make a new page for every trade that the existing trade agent in
+each of the 8 fields can be helpful with? For yskaipe.com. Start with the HVAC
+page, knowledge base, and future agentic and augmented helper Make a new page
+for every trade that the existing trade agent in each of the 8 fields can be
+helpful with? For yskaipe.com. Start with the HVAC page, knowledge base, and
+future agentic and augmented helper. Yskaipe is in a unique position to bridge
+problem solving in so many forms education, matchmaking, diy, etc 🔥❄️🔥❄️🔥❄️
+HVAC AGENT PAGE
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="HVAC help for Lake Norman homeowners — fair pricing, DIY guides, problem diagnosis, and vetted local pros. Powered by Aria, YSKAIPE's HVAC specialist."
+        />
+        <title>HVAC · Aria · YSKAIPE</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            /* ─── TOKENS ─────────────────────────────────────────────── */
+            :root {
+                --bg: #0b0f0e;
+                --surface: #111714;
+                --surface2: #172019;
+                --border: #1e2b23;
+                --text: #e8ede9;
+                --muted: #6b7d6e;
+                --faint: #2a3a2d;
+
+                --hvac: #3ecf6e; /* Aria green */
+                --hvac-dim: #1e6638;
+                --hvac-glow: rgba(62, 207, 110, 0.12);
+                --warm: #e8c547;
+                --alert: #e05c2a;
+
+                --hex-size: 52px;
+            }
+
+            /* ─── RESET ──────────────────────────────────────────────── */
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background: var(--bg);
+                color: var(--text);
+                font-family: "Lora", Georgia, serif;
+                font-size: 16px;
+                line-height: 1.7;
+                min-height: 100vh;
+            }
+
+            /* ─── NAV ────────────────────────────────────────────────── */
+            nav {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 0.75rem 2rem;
+                background: rgba(11, 15, 14, 0.92);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-logo {
+                font-family: "Syne", sans-serif;
+                font-weight: 800;
+                font-size: 1rem;
+                letter-spacing: 0.04em;
+                color: var(--hvac);
+                text-decoration: none;
+            }
+
+            .nav-trade {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--muted);
+            }
+
+            .nav-trade span {
+                color: var(--hvac);
+            }
+
+            nav a.nav-cta {
+                margin-left: auto;
+                font-family: "Syne", sans-serif;
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                color: var(--bg);
+                background: var(--hvac);
+                padding: 0.4rem 1rem;
+                text-decoration: none;
+                transition: opacity 0.15s;
+            }
+            nav a.nav-cta:hover {
+                opacity: 0.85;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 1.5rem;
+                list-style: none;
+                margin-left: 1.5rem;
+            }
+            .nav-links a {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--muted);
+                text-decoration: none;
+                transition: color 0.15s;
+            }
+            .nav-links a:hover {
+                color: var(--hvac);
+            }
+
+            /* ─── HERO ───────────────────────────────────────────────── */
+            .hero {
+                position: relative;
+                overflow: hidden;
+                padding: 5rem 2rem 4rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .hero-grid-bg {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(var(--border) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+                background-size: 40px 40px;
+                opacity: 0.35;
+                pointer-events: none;
+            }
+
+            .hero-glow {
+                position: absolute;
+                top: -80px;
+                left: -80px;
+                width: 500px;
+                height: 500px;
+                background: radial-gradient(
+                    circle,
+                    rgba(62, 207, 110, 0.1) 0%,
+                    transparent 70%
+                );
+                pointer-events: none;
+            }
+
+            .hero-inner {
+                position: relative;
+                max-width: 900px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                gap: 3rem;
+                align-items: center;
+            }
+
+            .hero-eyebrow {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--hvac);
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .hero-eyebrow::before {
+                content: "";
+                display: inline-block;
+                width: 20px;
+                height: 1px;
+                background: var(--hvac);
+            }
+
+            .hero h1 {
+                font-family: "Syne", sans-serif;
+                font-size: clamp(2.4rem, 6vw, 4rem);
+                font-weight: 800;
+                line-height: 1;
+                letter-spacing: -0.02em;
+                margin-bottom: 1.25rem;
+            }
+
+            .hero h1 em {
+                font-style: normal;
+                color: var(--hvac);
+                font-family: "Lora", serif;
+                font-style: italic;
+                font-weight: 400;
+            }
+
+            .hero-sub {
+                font-size: 1rem;
+                color: #a0b0a3;
+                max-width: 480px;
+                margin-bottom: 2rem;
+                font-family: "Lora", serif;
+                font-style: italic;
+            }
+
+            .hero-actions {
+                display: flex;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
+
+            .btn-primary {
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                font-size: 0.82rem;
+                letter-spacing: 0.04em;
+                padding: 0.75rem 1.5rem;
+                background: var(--hvac);
+                color: var(--bg);
+                text-decoration: none;
+                border: none;
+                cursor: pointer;
+                transition: opacity 0.15s;
+            }
+            .btn-primary:hover {
+                opacity: 0.85;
+            }
+
+            .btn-secondary {
+                font-family: "DM Mono", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.08em;
+                padding: 0.75rem 1.25rem;
+                background: transparent;
+                color: var(--muted);
+                border: 1px solid var(--border);
+                text-decoration: none;
+                cursor: pointer;
+                transition:
+                    color 0.15s,
+                    border-color 0.15s;
+            }
+            .btn-secondary:hover {
+                color: var(--hvac);
+                border-color: var(--hvac-dim);
+            }
+
+            /* ARIA BADGE */
+            .aria-badge {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .hex {
+                position: relative;
+                width: var(--hex-size);
+                height: calc(var(--hex-size) * 1.155);
+                background: var(--hvac);
+                clip-path: polygon(
+                    50% 0%,
+                    100% 25%,
+                    100% 75%,
+                    50% 100%,
+                    0% 75%,
+                    0% 25%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "Syne", sans-serif;
+                font-size: 1.1rem;
+                font-weight: 800;
+                color: var(--bg);
+                animation: hex-pulse 3s ease-in-out infinite;
+            }
+
+            @keyframes hex-pulse {
+                0%,
+                100% {
+                    box-shadow: 0 0 0 0 var(--hvac-glow);
+                }
+                50% {
+                    filter: brightness(1.15);
+                }
+            }
+
+            .aria-name {
+                font-family: "Syne", sans-serif;
+                font-size: 0.7rem;
+                font-weight: 700;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--hvac);
+            }
+
+            .aria-status {
+                font-family: "DM Mono", monospace;
+                font-size: 0.58rem;
+                letter-spacing: 0.1em;
+                color: var(--muted);
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+            }
+
+            .status-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--hvac);
+                animation: blink 2s ease-in-out infinite;
+            }
+
+            @keyframes blink {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.3;
+                }
+            }
+
+            /* ─── SECTION WRAPPER ────────────────────────────────────── */
+            .section {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 4rem 2rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .section-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--hvac);
+                margin-bottom: 0.5rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .section-label::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: var(--border);
+            }
+
+            .section-title {
+                font-family: "Syne", sans-serif;
+                font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+                font-weight: 800;
+                line-height: 1.1;
+                letter-spacing: -0.01em;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-title em {
+                color: var(--hvac);
+                font-style: italic;
+                font-family: "Lora", serif;
+                font-weight: 400;
+            }
+
+            .section-sub {
+                font-size: 0.92rem;
+                color: var(--muted);
+                margin-bottom: 2.5rem;
+                max-width: 560px;
+                font-family: "Lora", serif;
+                font-style: italic;
+            }
+
+            /* ─── ARIA CHAT ──────────────────────────────────────────── */
+            .chat-shell {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                overflow: hidden;
+            }
+
+            .chat-bar {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.75rem 1.25rem;
+                background: var(--surface2);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .chat-bar-hex {
+                width: 28px;
+                height: 32px;
+                background: var(--hvac);
+                clip-path: polygon(
+                    50% 0%,
+                    100% 25%,
+                    100% 75%,
+                    50% 100%,
+                    0% 75%,
+                    0% 25%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "Syne", sans-serif;
+                font-size: 0.6rem;
+                font-weight: 800;
+                color: var(--bg);
+                flex-shrink: 0;
+            }
+
+            .chat-bar-name {
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                font-size: 0.85rem;
+            }
+
+            .chat-bar-sub {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                color: var(--muted);
+                display: flex;
+                align-items: center;
+                gap: 0.35rem;
+            }
+
+            .chat-messages {
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                min-height: 220px;
+                max-height: 360px;
+                overflow-y: auto;
+            }
+
+            .msg {
+                display: flex;
+                gap: 0.75rem;
+                align-items: flex-start;
+            }
+
+            .msg.user {
+                flex-direction: row-reverse;
+            }
+
+            .msg-avatar {
+                width: 28px;
+                height: 32px;
+                background: var(--hvac);
+                clip-path: polygon(
+                    50% 0%,
+                    100% 25%,
+                    100% 75%,
+                    50% 100%,
+                    0% 75%,
+                    0% 25%
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "Syne", sans-serif;
+                font-size: 0.55rem;
+                font-weight: 800;
+                color: var(--bg);
+                flex-shrink: 0;
+            }
+
+            .msg.user .msg-avatar {
+                background: var(--faint);
+                color: var(--muted);
+            }
+
+            .msg-bubble {
+                background: var(--surface2);
+                border: 1px solid var(--border);
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+                line-height: 1.6;
+                max-width: 75%;
+                font-family: "Lora", serif;
+            }
+
+            .msg.user .msg-bubble {
+                background: var(--faint);
+                border-color: var(--hvac-dim);
+            }
+
+            .msg-bubble strong {
+                color: var(--hvac);
+                font-family: "Syne", sans-serif;
+                font-size: 0.8rem;
+            }
+            .msg-bubble ul {
+                padding-left: 1rem;
+                margin-top: 0.4rem;
+            }
+            .msg-bubble li {
+                margin-bottom: 0.25rem;
+                color: #a0b0a3;
+            }
+
+            .chat-chips {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+                padding: 1rem 1.5rem;
+                border-top: 1px solid var(--border);
+                background: var(--surface2);
+            }
+
+            .chip {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.06em;
+                padding: 0.35rem 0.75rem;
+                border: 1px solid var(--border);
+                color: var(--muted);
+                cursor: pointer;
+                transition: all 0.15s;
+                background: transparent;
+            }
+            .chip:hover {
+                border-color: var(--hvac);
+                color: var(--hvac);
+                background: var(--hvac-glow);
+            }
+
+            .chat-input-row {
+                display: flex;
+                border-top: 1px solid var(--border);
+            }
+
+            .chat-input {
+                flex: 1;
+                padding: 0.85rem 1.25rem;
+                background: var(--surface);
+                border: none;
+                outline: none;
+                color: var(--text);
+                font-family: "Lora", serif;
+                font-size: 0.88rem;
+                caret-color: var(--hvac);
+            }
+            .chat-input::placeholder {
+                color: var(--muted);
+            }
+
+            .chat-send {
+                padding: 0.85rem 1.25rem;
+                background: var(--hvac);
+                border: none;
+                cursor: pointer;
+                color: var(--bg);
+                font-family: "Syne", sans-serif;
+                font-size: 0.72rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                transition: opacity 0.15s;
+            }
+            .chat-send:hover {
+                opacity: 0.85;
+            }
+
+            /* ─── HELP MODES GRID ────────────────────────────────────── */
+            .modes-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1px;
+                background: var(--border);
+                border: 1px solid var(--border);
+                margin-bottom: 2rem;
+            }
+
+            .mode-card {
+                background: var(--surface);
+                padding: 1.75rem;
+                transition: background 0.2s;
+                cursor: default;
+            }
+            .mode-card:hover {
+                background: var(--surface2);
+            }
+
+            .mode-icon {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .mode-tag {
+                font-family: "DM Mono", monospace;
+                font-size: 0.58rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--hvac);
+                margin-bottom: 0.4rem;
+            }
+
+            .mode-title {
+                font-family: "Syne", sans-serif;
+                font-size: 1rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            .mode-desc {
+                font-size: 0.82rem;
+                color: var(--muted);
+                line-height: 1.6;
+                font-family: "Lora", serif;
+            }
+
+            .mode-examples {
+                margin-top: 0.75rem;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+
+            .example-tag {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                padding: 0.2rem 0.5rem;
+                background: var(--faint);
+                color: #8aaa8e;
+                letter-spacing: 0.04em;
+            }
+
+            .mode-badge {
+                display: inline-block;
+                margin-top: 0.75rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.55rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.2rem 0.5rem;
+                border: 1px solid;
+            }
+
+            .mode-badge.live {
+                color: var(--hvac);
+                border-color: var(--hvac-dim);
+            }
+            .mode-badge.soon {
+                color: var(--warm);
+                border-color: #5c4a00;
+            }
+            .mode-badge.future {
+                color: var(--muted);
+                border-color: var(--border);
+            }
+
+            /* ─── KNOWLEDGE BASE ─────────────────────────────────────── */
+            .kb-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1px;
+                background: var(--border);
+                border: 1px solid var(--border);
+            }
+
+            .kb-card {
+                background: var(--surface);
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .kb-icon {
+                font-size: 1.2rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .kb-title {
+                font-family: "Syne", sans-serif;
+                font-size: 0.9rem;
+                font-weight: 700;
+                margin-bottom: 0.35rem;
+            }
+
+            .kb-desc {
+                font-size: 0.78rem;
+                color: var(--muted);
+                line-height: 1.6;
+                font-family: "Lora", serif;
+                flex: 1;
+            }
+
+            .kb-link {
+                display: inline-block;
+                margin-top: 0.75rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.08em;
+                color: var(--hvac);
+                text-decoration: none;
+                transition: opacity 0.15s;
+            }
+            .kb-link:hover {
+                opacity: 0.7;
+            }
+            .kb-link::after {
+                content: " →";
+            }
+
+            /* ─── FAIR RATE STRIP ────────────────────────────────────── */
+            .rate-strip {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1px;
+                background: var(--border);
+                border: 1px solid var(--border);
+                margin-bottom: 1.5rem;
+            }
+
+            .rate-cell {
+                background: var(--surface);
+                padding: 1.25rem 1rem;
+            }
+
+            .rate-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 0.4rem;
+            }
+
+            .rate-range {
+                font-family: "Syne", sans-serif;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--hvac);
+                line-height: 1.1;
+            }
+
+            .rate-note {
+                font-family: "DM Mono", monospace;
+                font-size: 0.58rem;
+                color: var(--muted);
+                margin-top: 0.25rem;
+            }
+
+            /* ─── DIY SECTION ────────────────────────────────────────── */
+            .diy-accordion {
+                display: flex;
+                flex-direction: column;
+                gap: 1px;
+            }
+
+            .diy-item {
+                border: 1px solid var(--border);
+                overflow: hidden;
+            }
+
+            .diy-header {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem 1.25rem;
+                cursor: pointer;
+                background: var(--surface);
+                transition: background 0.15s;
+                list-style: none;
+            }
+            .diy-header:hover {
+                background: var(--surface2);
+            }
+
+            .diy-difficulty {
+                font-family: "DM Mono", monospace;
+                font-size: 0.58rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.15rem 0.45rem;
+                border: 1px solid;
+            }
+
+            .diy-difficulty.easy {
+                color: var(--hvac);
+                border-color: var(--hvac-dim);
+            }
+            .diy-difficulty.medium {
+                color: var(--warm);
+                border-color: #5c4a00;
+            }
+            .diy-difficulty.hard {
+                color: var(--alert);
+                border-color: #5c2210;
+            }
+
+            .diy-name {
+                font-family: "Syne", sans-serif;
+                font-size: 0.9rem;
+                font-weight: 700;
+            }
+
+            .diy-savings {
+                margin-left: auto;
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                color: var(--hvac);
+            }
+
+            .diy-toggle {
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                color: var(--muted);
+                flex-shrink: 0;
+            }
+
+            .diy-body {
+                display: none;
+                padding: 1.25rem;
+                background: var(--surface2);
+                border-top: 1px solid var(--border);
+            }
+            .diy-body.open {
+                display: block;
+            }
+
+            .diy-body p {
+                font-size: 0.85rem;
+                color: #a0b0a3;
+                line-height: 1.7;
+                margin-bottom: 0.75rem;
+                font-family: "Lora", serif;
+            }
+
+            .diy-steps {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .diy-steps li {
+                font-size: 0.82rem;
+                color: var(--text);
+                padding-left: 1.5rem;
+                position: relative;
+                line-height: 1.5;
+            }
+
+            .diy-steps li::before {
+                content: counter(step);
+                counter-increment: step;
+                position: absolute;
+                left: 0;
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                color: var(--hvac);
+                font-weight: 500;
+                top: 0.15rem;
+            }
+
+            .diy-steps {
+                counter-reset: step;
+            }
+
+            .diy-warn {
+                background: rgba(224, 92, 42, 0.08);
+                border-left: 2px solid var(--alert);
+                padding: 0.6rem 0.75rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                color: #d4805a;
+                line-height: 1.5;
+            }
+
+            /* ─── MATCHMAKING ────────────────────────────────────────── */
+            .match-panel {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1px;
+                background: var(--border);
+                border: 1px solid var(--border);
+            }
+
+            .match-side {
+                background: var(--surface);
+                padding: 2rem;
+            }
+
+            .match-side-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 1rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .match-feature {
+                display: flex;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+                align-items: flex-start;
+            }
+
+            .match-feature-icon {
+                font-size: 1rem;
+                margin-top: 0.1rem;
+                flex-shrink: 0;
+            }
+
+            .match-feature-text {
+                font-size: 0.82rem;
+                line-height: 1.6;
+            }
+
+            .match-feature-text strong {
+                display: block;
+                font-family: "Syne", sans-serif;
+                font-size: 0.82rem;
+                font-weight: 700;
+                color: var(--text);
+                margin-bottom: 0.15rem;
+            }
+
+            /* ─── AGENTIC FUTURE ─────────────────────────────────────── */
+            .future-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1px;
+                background: var(--border);
+                border: 1px solid var(--border);
+            }
+
+            .future-card {
+                background: var(--surface);
+                padding: 1.5rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .future-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--hvac),
+                    transparent
+                );
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+            .future-card:hover::before {
+                opacity: 1;
+            }
+
+            .future-horizon {
+                font-family: "DM Mono", monospace;
+                font-size: 0.55rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 0.6rem;
+            }
+
+            .future-title {
+                font-family: "Syne", sans-serif;
+                font-size: 0.95rem;
+                font-weight: 700;
+                margin-bottom: 0.4rem;
+                color: var(--text);
+            }
+
+            .future-desc {
+                font-size: 0.78rem;
+                color: var(--muted);
+                line-height: 1.6;
+                font-family: "Lora", serif;
+            }
+
+            .future-tag {
+                display: inline-block;
+                margin-top: 0.75rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.55rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.2rem 0.5rem;
+                color: var(--muted);
+                border: 1px solid var(--border);
+            }
+
+            .future-tag.aria {
+                color: var(--hvac);
+                border-color: var(--hvac-dim);
+            }
+            .future-tag.soon {
+                color: var(--warm);
+                border-color: #5c4a00;
+            }
+
+            /* ─── TRADE NAV ──────────────────────────────────────────── */
+            .trade-nav {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .trade-nav-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 1rem;
+            }
+
+            .trade-row {
+                display: flex;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .trade-pill {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.06em;
+                padding: 0.4rem 0.85rem;
+                border: 1px solid var(--border);
+                color: var(--muted);
+                text-decoration: none;
+                transition: all 0.15s;
+            }
+            .trade-pill:hover {
+                border-color: var(--hvac);
+                color: var(--hvac);
+            }
+            .trade-pill.active {
+                background: var(--hvac);
+                border-color: var(--hvac);
+                color: var(--bg);
+                font-weight: 500;
+            }
+
+            /* ─── FOOTER ─────────────────────────────────────────────── */
+            footer {
+                background: var(--surface2);
+                border-top: 1px solid var(--border);
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .footer-logo {
+                font-family: "Syne", sans-serif;
+                font-weight: 800;
+                font-size: 1.1rem;
+                color: var(--hvac);
+                margin-bottom: 0.5rem;
+            }
+
+            .footer-tagline {
+                font-family: "Lora", serif;
+                font-style: italic;
+                font-size: 0.82rem;
+                color: var(--muted);
+                margin-bottom: 1rem;
+            }
+
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                margin-bottom: 1rem;
+            }
+
+            .footer-links a {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--muted);
+                text-decoration: none;
+                transition: color 0.15s;
+            }
+            .footer-links a:hover {
+                color: var(--hvac);
+            }
+
+            .footer-copy {
+                font-family: "DM Mono", monospace;
+                font-size: 0.58rem;
+                color: var(--faint);
+                letter-spacing: 0.08em;
+            }
+
+            /* ─── RESPONSIVE ─────────────────────────────────────────── */
+            @media (max-width: 680px) {
+                .hero-inner {
+                    grid-template-columns: 1fr;
+                }
+                .aria-badge {
+                    flex-direction: row;
+                }
+                .modes-grid {
+                    grid-template-columns: 1fr;
+                }
+                .kb-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+                .rate-strip {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .future-grid {
+                    grid-template-columns: 1fr;
+                }
+                .match-panel {
+                    grid-template-columns: 1fr;
+                }
+                .nav-links {
+                    display: none;
+                }
+            }
+
+            /* ─── ANIMATIONS ─────────────────────────────────────────── */
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(16px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .hero-inner {
+                animation: fadeUp 0.6s ease both;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- NAV -->
+        <nav>
+            <a href="https://yskaipe.com" class="nav-logo">YSKAIPE</a>
+            <span class="nav-trade">⬡ <span>HVAC · Aria</span></span>
+            <ul class="nav-links">
+                <li><a href="#aria">Ask Aria</a></li>
+                <li><a href="#modes">How Aria Helps</a></li>
+                <li><a href="#pricing">Fair Rates</a></li>
+                <li><a href="#diy">DIY Guides</a></li>
+                <li><a href="#match">Find a Pro</a></li>
+                <li><a href="#future">Coming Soon</a></li>
+            </ul>
+            <a href="https://yskaipe.com#autoquote" class="nav-cta"
+                >Get My Fair Rate →</a
+            >
+        </nav>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-grid-bg"></div>
+            <div class="hero-glow"></div>
+            <div class="hero-inner">
+                <div>
+                    <div class="hero-eyebrow">HVAC · Lake Norman, NC</div>
+                    <h1>Your HVAC,<br />finally <em>explained.</em></h1>
+                    <p class="hero-sub">
+                        Aria knows HVAC. Ask her anything — what your quote
+                        should cost, whether you can fix it yourself, when to
+                        call a pro. No sales pitch. Just answers.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#aria" class="btn-primary"
+                            >Ask Aria a question</a
+                        >
+                        <a href="#pricing" class="btn-secondary"
+                            >See fair rates</a
+                        >
+                        <a
+                            href="https://yskaipe.com#autoquote"
+                            class="btn-secondary"
+                            >Get a quote</a
+                        >
+                    </div>
+                </div>
+                <div class="aria-badge">
+                    <div class="hex">A</div>
+                    <div class="aria-name">Aria</div>
+                    <div class="aria-status">
+                        <span class="status-dot"></span> HVAC Specialist ·
+                        Online
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASK ARIA -->
+        <section class="section" id="aria">
+            <div class="section-label">Ask Aria</div>
+            <h2 class="section-title">
+                What's going on with<br />your <em>system?</em>
+            </h2>
+            <p class="section-sub">
+                Describe the problem, ask a pricing question, or pick a common
+                scenario below. Aria will triage, explain, and guide.
+            </p>
+
+            <div class="chat-shell">
+                <div class="chat-bar">
+                    <div class="chat-bar-hex">A</div>
+                    <div>
+                        <div class="chat-bar-name">Aria · HVAC Specialist</div>
+                        <div class="chat-bar-sub">
+                            <span class="status-dot"></span> Online · Lake
+                            Norman, NC
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="msg">
+                        <div class="msg-avatar">A</div>
+                        <div class="msg-bubble">
+                            Hey — I'm Aria, YSKAIPE's HVAC specialist. I can
+                            help you figure out what's wrong, whether it's worth
+                            fixing, what it should cost in Lake Norman, and
+                            whether you need a pro or can handle it yourself.<br /><br />
+                            What's going on with your system?
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-chips" id="chatChips">
+                    <button class="chip" onclick="sendChip(this)">
+                        My AC stopped blowing cold
+                    </button>
+                    <button class="chip" onclick="sendChip(this)">
+                        Is my HVAC quote fair?
+                    </button>
+                    <button class="chip" onclick="sendChip(this)">
+                        Can I do my own tune-up?
+                    </button>
+                    <button class="chip" onclick="sendChip(this)">
+                        Strange noise from the unit
+                    </button>
+                    <button class="chip" onclick="sendChip(this)">
+                        When should I replace vs. repair?
+                    </button>
+                    <button class="chip" onclick="sendChip(this)">
+                        What's a fair service call fee?
+                    </button>
+                </div>
+                <div class="chat-input-row">
+                    <input
+                        class="chat-input"
+                        id="chatInput"
+                        type="text"
+                        placeholder="Describe your HVAC issue or ask a pricing question…"
+                    />
+                    <button class="chat-send" onclick="sendMessage()">
+                        Ask Aria →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW ARIA HELPS -->
+        <section class="section" id="modes">
+            <div class="section-label">How Aria Helps</div>
+            <h2 class="section-title">
+                One agent.<br /><em>Every mode</em> of help.
+            </h2>
+            <p class="section-sub">
+                HVAC problems don't come in one shape. Aria meets you where you
+                are.
+            </p>
+
+            <div class="modes-grid">
+                <div class="mode-card">
+                    <div class="mode-icon">💬</div>
+                    <div class="mode-tag">Education</div>
+                    <div class="mode-title">
+                        Explain it like I'm not an HVAC tech
+                    </div>
+                    <div class="mode-desc">
+                        What's a heat exchanger? Why does refrigerant matter?
+                        What's the difference between R-22 and R-410A? Aria
+                        translates technical into plain English so you can have
+                        an informed conversation with any contractor.
+                    </div>
+                    <div class="mode-examples">
+                        <span class="example-tag">what is a capacitor</span>
+                        <span class="example-tag">how refrigerant works</span>
+                        <span class="example-tag">SEER ratings explained</span>
+                    </div>
+                    <div class="mode-badge live">Live Now</div>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">🔎</div>
+                    <div class="mode-tag">Diagnosis</div>
+                    <div class="mode-title">
+                        What's actually wrong with my system
+                    </div>
+                    <div class="mode-desc">
+                        Describe the symptoms — the sound, the smell, what it's
+                        doing wrong — and Aria walks through the most likely
+                        causes ranked by probability and repair cost. Not a
+                        replacement for a tech, but a head start.
+                    </div>
+                    <div class="mode-examples">
+                        <span class="example-tag"
+                            >clicking noise on startup</span
+                        >
+                        <span class="example-tag">ice on the lines</span>
+                        <span class="example-tag">blowing warm air</span>
+                    </div>
+                    <div class="mode-badge live">Live Now</div>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">💰</div>
+                    <div class="mode-tag">Pricing</div>
+                    <div class="mode-title">Is this quote actually fair?</div>
+                    <div class="mode-desc">
+                        Paste your quote or describe the job. Aria benchmarks it
+                        against the Fair Rate Index for Lake Norman — line by
+                        line. Know before you sign whether you're being treated
+                        fairly or padding someone's truck payment.
+                    </div>
+                    <div class="mode-examples">
+                        <span class="example-tag">tune-up fair price</span>
+                        <span class="example-tag"
+                            >refrigerant recharge cost</span
+                        >
+                        <span class="example-tag">new unit install range</span>
+                    </div>
+                    <div class="mode-badge live">Live Now</div>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">🔧</div>
+                    <div class="mode-tag">DIY Guidance</div>
+                    <div class="mode-title">What can I safely fix myself</div>
+                    <div class="mode-desc">
+                        Filter changes, drain line flushes, thermostat swaps —
+                        Aria tells you what's genuinely safe to DIY, gives you
+                        the step-by-step, and is honest about where a licensed
+                        tech is the smarter call.
+                    </div>
+                    <div class="mode-examples">
+                        <span class="example-tag">change air filter</span>
+                        <span class="example-tag">flush drain line</span>
+                        <span class="example-tag">reset circuit breaker</span>
+                    </div>
+                    <div class="mode-badge live">Live Now</div>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">🤝</div>
+                    <div class="mode-tag">Matchmaking</div>
+                    <div class="mode-title">
+                        Connect me with the right local pro
+                    </div>
+                    <div class="mode-desc">
+                        When the job needs a pro, Aria hands off to YSKAIPE's
+                        vetted contractor network. One match per job. Your
+                        number stays private. The pro who shows up actually
+                        wants the work — not a lead auction winner.
+                    </div>
+                    <div class="mode-examples">
+                        <span class="example-tag">find HVAC pro near me</span>
+                        <span class="example-tag">schedule a tune-up</span>
+                        <span class="example-tag">get a replacement quote</span>
+                    </div>
+                    <div class="mode-badge live">Live Now</div>
+                </div>
+                <div class="mode-card">
+                    <div class="mode-icon">📋</div>
+                    <div class="mode-tag">Decision Support</div>
+                    <div class="mode-title">
+                        Repair or replace — what makes sense
+                    </div>
+                    <div class="mode-desc">
+                        The 5,000-rule, system age, refrigerant type, warranty
+                        status — Aria runs the numbers and gives you a straight
+                        answer on whether repair or replacement is the better
+                        financial decision for your specific situation.
+                    </div>
+                    <div class="mode-examples">
+                        <span class="example-tag"
+                            >repair vs replace 15yr unit</span
+                        >
+                        <span class="example-tag"
+                            >compressor cost vs new AC</span
+                        >
+                        <span class="example-tag"
+                            >is my warranty still valid</span
+                        >
+                    </div>
+                    <div class="mode-badge soon">Coming Soon</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAIR RATE INDEX -->
+        <section class="section" id="pricing">
+            <div class="section-label">Fair Rate Index</div>
+            <h2 class="section-title">
+                What HVAC actually<br />costs in <em>Lake Norman.</em>
+            </h2>
+            <p class="section-sub">
+                Real market pricing for this area. Not national averages. Not
+                padded ranges. What a fair contractor should charge — and what
+                you should push back on.
+            </p>
+
+            <div class="rate-strip">
+                <div class="rate-cell">
+                    <div class="rate-label">Annual Tune-Up</div>
+                    <div class="rate-range">$71 – $200</div>
+                    <div class="rate-note">NC avg ~$143</div>
+                </div>
+                <div class="rate-cell">
+                    <div class="rate-label">Service / Diagnostic</div>
+                    <div class="rate-range">$75 – $200</div>
+                    <div class="rate-note">Ask if it rolls into repair</div>
+                </div>
+                <div class="rate-cell">
+                    <div class="rate-label">AC Repair (common)</div>
+                    <div class="rate-range">$150 – $650</div>
+                    <div class="rate-note">NC avg ~$333</div>
+                </div>
+                <div class="rate-cell">
+                    <div class="rate-label">Capacitor Replace</div>
+                    <div class="rate-range">$120 – $500</div>
+                    <div class="rate-note">Most common LKN repair</div>
+                </div>
+                <div class="rate-cell">
+                    <div class="rate-label">Refrigerant Recharge</div>
+                    <div class="rate-range">$200 – $1,500</div>
+                    <div class="rate-note">Depends on type — ask first</div>
+                </div>
+                <div class="rate-cell">
+                    <div class="rate-label">Drain Line Clear</div>
+                    <div class="rate-range">$75 – $275</div>
+                    <div class="rate-note">#1 repair in humid climates</div>
+                </div>
+                <div class="rate-cell">
+                    <div class="rate-label">Annual Maint. Plan</div>
+                    <div class="rate-range">$120 – $500/yr</div>
+                    <div class="rate-note">2 tune-ups + priority service</div>
+                </div>
+                <div class="rate-cell">
+                    <div class="rate-label">New System Install</div>
+                    <div class="rate-range">$4,500 – $12,000</div>
+                    <div class="rate-note">Size, SEER, brand dependent</div>
+                </div>
+            </div>
+
+            <p
+                style="
+                    font-family: &quot;DM Mono&quot;, monospace;
+                    font-size: 0.65rem;
+                    color: var(--muted);
+                    line-height: 1.6;
+                "
+            >
+                Rates reflect Lake Norman / Mecklenburg County area pricing. Get
+                a personalized fair rate estimate for your specific job at
+                <a
+                    href="https://yskaipe.com#autoquote"
+                    style="color: var(--hvac)"
+                    >yskaipe.com</a
+                >.
+            </p>
+        </section>
+
+        <!-- DIY GUIDES -->
+        <section class="section" id="diy">
+            <div class="section-label">DIY Guides</div>
+            <h2 class="section-title">
+                What you can fix<br /><em>yourself</em> — safely.
+            </h2>
+            <p class="section-sub">
+                Aria tells you the truth: some HVAC tasks are genuinely
+                homeowner-friendly. Others will void your warranty or hurt you.
+                Know the difference.
+            </p>
+
+            <div class="diy-accordion">
+                <div class="diy-item">
+                    <div class="diy-header" onclick="toggleDIY(this)">
+                        <span class="diy-difficulty easy">Easy</span>
+                        <span class="diy-name">Change Your Air Filter</span>
+                        <span class="diy-savings">Save $50–$100/yr</span>
+                        <span class="diy-toggle">+ Expand</span>
+                    </div>
+                    <div class="diy-body">
+                        <p>
+                            The single highest-impact DIY HVAC task. A clogged
+                            filter forces your system to work harder, raises
+                            energy bills, and is the hidden cause of dozens of
+                            expensive repairs. Do this every 30–90 days.
+                        </p>
+                        <ol class="diy-steps">
+                            <li>
+                                Turn off your HVAC system at the thermostat.
+                            </li>
+                            <li>
+                                Find your filter — usually in the return air
+                                vent or inside the air handler. Check both if
+                                unsure.
+                            </li>
+                            <li>
+                                Note the size printed on the frame (e.g.
+                                20x25x1) and the direction of the airflow arrow.
+                            </li>
+                            <li>
+                                Remove the old filter. Hold it up to light — if
+                                you can't see through it, it was overdue.
+                            </li>
+                            <li>
+                                Insert the new filter with the arrow pointing
+                                toward the air handler (the direction air flows
+                                in).
+                            </li>
+                            <li>Turn system back on. Done.</li>
+                        </ol>
+                        <div class="diy-warn">
+                            ⚠ Cheap fiberglass filters let more particles
+                            through. MERV 8–11 is the sweet spot for most LKN
+                            homes — high enough to protect the system, not so
+                            restrictive it starves airflow.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diy-item">
+                    <div class="diy-header" onclick="toggleDIY(this)">
+                        <span class="diy-difficulty easy">Easy</span>
+                        <span class="diy-name"
+                            >Flush the Condensate Drain Line</span
+                        >
+                        <span class="diy-savings">Save $75–$200</span>
+                        <span class="diy-toggle">+ Expand</span>
+                    </div>
+                    <div class="diy-body">
+                        <p>
+                            In Lake Norman's humid summers, drain line clogs are
+                            the #1 HVAC service call. The good news: they're
+                            almost entirely preventable with a $2 bottle of
+                            white vinegar.
+                        </p>
+                        <ol class="diy-steps">
+                            <li>
+                                Locate the drain line — it's the white PVC pipe
+                                near your indoor air handler, usually 3/4"
+                                diameter.
+                            </li>
+                            <li>
+                                Find the access port (a T-shaped cap) on the
+                                drain line near the air handler.
+                            </li>
+                            <li>
+                                Pour about 1/4 cup of distilled white vinegar
+                                into the access port.
+                            </li>
+                            <li>
+                                Wait 30 minutes. The vinegar kills algae and
+                                mold that cause clogs.
+                            </li>
+                            <li>
+                                Flush with a cup of water to clear the line.
+                            </li>
+                            <li>
+                                Do this once a month in summer, every 2–3 months
+                                otherwise.
+                            </li>
+                        </ol>
+                        <div class="diy-warn">
+                            ⚠ If your drain pan is overflowing or your system is
+                            shutting itself off, the clog may be beyond the
+                            access point. At that stage — call a pro. A wet-vac
+                            from the outdoor drain end can help, but line damage
+                            is possible if you're not careful.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diy-item">
+                    <div class="diy-header" onclick="toggleDIY(this)">
+                        <span class="diy-difficulty easy">Easy</span>
+                        <span class="diy-name"
+                            >Reset a Tripped Circuit Breaker</span
+                        >
+                        <span class="diy-savings">Save $75–$150</span>
+                        <span class="diy-toggle">+ Expand</span>
+                    </div>
+                    <div class="diy-body">
+                        <p>
+                            If your AC suddenly stops running entirely, a
+                            tripped breaker is the most common — and most
+                            overlooked — cause. Before you call a tech, check
+                            this first.
+                        </p>
+                        <ol class="diy-steps">
+                            <li>
+                                Go to your electrical panel (breaker box —
+                                usually in the garage or utility room).
+                            </li>
+                            <li>
+                                Look for a breaker labeled AC, HVAC, Air
+                                Handler, or Condenser that's in the middle
+                                "tripped" position.
+                            </li>
+                            <li>
+                                Push the breaker fully to OFF first, then back
+                                to ON. Don't just flip it from middle to on.
+                            </li>
+                            <li>
+                                Wait 5 minutes, then try the AC. It needs time
+                                to reset pressure.
+                            </li>
+                            <li>
+                                If it trips again immediately — stop. Something
+                                is drawing too much current. Call a tech.
+                            </li>
+                        </ol>
+                        <div class="diy-warn">
+                            ⚠ A breaker that trips repeatedly is telling you
+                            something — compressor struggling, refrigerant
+                            issue, or wiring fault. Do not keep resetting it.
+                            That's how fires start.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diy-item">
+                    <div class="diy-header" onclick="toggleDIY(this)">
+                        <span class="diy-difficulty medium">Medium</span>
+                        <span class="diy-name">Install a Smart Thermostat</span>
+                        <span class="diy-savings">Save $150–$300/yr</span>
+                        <span class="diy-toggle">+ Expand</span>
+                    </div>
+                    <div class="diy-body">
+                        <p>
+                            A smart thermostat (Nest, Ecobee, Honeywell T6) can
+                            cut HVAC energy use by 10–15%. Most are
+                            homeowner-installable in under an hour if your
+                            wiring is standard. Lake Norman homes built after
+                            2000 almost always qualify.
+                        </p>
+                        <ol class="diy-steps">
+                            <li>
+                                Turn off power to your HVAC at the breaker
+                                before touching any wires.
+                            </li>
+                            <li>
+                                Remove the old thermostat and photograph the
+                                wires before disconnecting anything.
+                            </li>
+                            <li>
+                                Check your wires: you need at least R, G, Y, C
+                                (common) wires. If no C-wire, use the adapter
+                                that comes with most smart thermostats.
+                            </li>
+                            <li>
+                                Mount the new baseplate and connect wires to
+                                matching terminals.
+                            </li>
+                            <li>
+                                Attach the display, restore power, and follow
+                                the thermostat's setup wizard.
+                            </li>
+                            <li>
+                                Test heating and cooling modes before closing
+                                everything up.
+                            </li>
+                        </ol>
+                        <div class="diy-warn">
+                            ⚠ Heat pumps have different wiring (O/B wire for
+                            reversing valve). If you have a heat pump, make sure
+                            your thermostat is heat-pump compatible and follow
+                            its specific wiring diagram.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diy-item">
+                    <div class="diy-header" onclick="toggleDIY(this)">
+                        <span class="diy-difficulty hard">Call a Pro</span>
+                        <span class="diy-name">Refrigerant Recharge</span>
+                        <span class="diy-savings">Legal reason — not DIY</span>
+                        <span class="diy-toggle">+ Why</span>
+                    </div>
+                    <div class="diy-body">
+                        <p>
+                            Refrigerant handling requires EPA 608 certification
+                            — it's illegal for uncertified individuals to
+                            purchase or handle refrigerants like R-410A or R-22.
+                            Beyond the legal issue, refrigerant work requires
+                            specialized equipment (manifold gauges, recovery
+                            machines) and the ability to diagnose why levels are
+                            low in the first place.
+                        </p>
+                        <p>
+                            Low refrigerant almost always means a leak — and
+                            recharging without finding the leak just delays the
+                            real problem.
+                        </p>
+                        <div class="diy-warn">
+                            ⚠ If someone offers to recharge your refrigerant
+                            cheaply without checking for leaks first — walk
+                            away. You'll pay again in 6 months. Get the leak
+                            found and fixed, then recharge.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATCHMAKING -->
+        <section class="section" id="match">
+            <div class="section-label">Pro Matchmaking</div>
+            <h2 class="section-title">
+                When it's time for<br />a <em>real pro.</em>
+            </h2>
+            <p class="section-sub">
+                Aria tells you when DIY ends and a licensed tech begins. YSKAIPE
+                connects you to one vetted HVAC contractor in your ZIP — not
+                four strangers competing for your number.
+            </p>
+
+            <div class="match-panel">
+                <div class="match-side">
+                    <div class="match-side-label">How the Match Works</div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">⬡</div>
+                        <div class="match-feature-text">
+                            <strong>One pro per job</strong>
+                            Your AutoQuote routes to a single vetted HVAC
+                            contractor in your ZIP code — not auctioned to four
+                            companies who'll all call within the hour.
+                        </div>
+                    </div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">🔒</div>
+                        <div class="match-feature-text">
+                            <strong>Your number stays yours</strong>
+                            YSKAIPE never sells or shares your contact
+                            information. The pro gets the job scope — not a
+                            license to market to you forever.
+                        </div>
+                    </div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">✓</div>
+                        <div class="match-feature-text">
+                            <strong>Vetted, local, motivated</strong>
+                            Founding contractors are Lake Norman area pros
+                            who've committed to fair pricing and quality work.
+                            They take the job because they want it — not because
+                            they won a lead auction.
+                        </div>
+                    </div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">💰</div>
+                        <div class="match-feature-text">
+                            <strong>Free for homeowners, always</strong>
+                            YSKAIPE doesn't charge homeowners. Ever. The network
+                            is funded by contractors who value better leads over
+                            cheaper ones.
+                        </div>
+                    </div>
+                </div>
+                <div class="match-side">
+                    <div class="match-side-label">
+                        When Aria Recommends a Pro
+                    </div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">🌡️</div>
+                        <div class="match-feature-text">
+                            <strong>Refrigerant issues</strong>
+                            Any refrigerant work — recharge, leak detection,
+                            recovery — requires EPA certification. This is never
+                            DIY.
+                        </div>
+                    </div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">⚡</div>
+                        <div class="match-feature-text">
+                            <strong>Electrical within the unit</strong>
+                            Capacitors, contactors, control boards — replaceable
+                            with skill, but high-voltage risk. Aria will tell
+                            you honestly if it's borderline.
+                        </div>
+                    </div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">🔁</div>
+                        <div class="match-feature-text">
+                            <strong>Compressor or coil failure</strong>
+                            Major components. At this cost level you need a
+                            second opinion on repair vs. replacement — and a
+                            licensed tech to do either.
+                        </div>
+                    </div>
+                    <div class="match-feature">
+                        <div class="match-feature-icon">📋</div>
+                        <div class="match-feature-text">
+                            <strong>Warranty or permit work</strong>
+                            System replacements, new installs, and any work that
+                            opens the refrigerant system requires permits in NC.
+                            A vetted pro handles this correctly.
+                        </div>
+                    </div>
+                    <a
+                        href="https://yskaipe.com#autoquote"
+                        class="btn-primary"
+                        style="display: inline-block; margin-top: 1rem"
+                        >Get Matched with an HVAC Pro →</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- AGENTIC FUTURE -->
+        <section class="section" id="future">
+            <div class="section-label">Coming from Aria</div>
+            <h2 class="section-title">What Aria is<br /><em>becoming.</em></h2>
+            <p class="section-sub">
+                YSKAIPE's position lets Aria do more than answer questions.
+                Here's where the HVAC agent is headed — across every mode of
+                help a homeowner might need.
+            </p>
+
+            <div class="future-grid">
+                <div class="future-card">
+                    <div class="future-horizon">Near · This Summer</div>
+                    <div class="future-title">Photo Diagnosis</div>
+                    <div class="future-desc">
+                        Send Aria a photo of your unit, the drain pan, or the
+                        error code on your display. She identifies the issue
+                        visually and gives you a repair path before any tech
+                        shows up.
+                    </div>
+                    <span class="future-tag aria">Aria · Vision</span>
+                </div>
+                <div class="future-card">
+                    <div class="future-horizon">Near · This Summer</div>
+                    <div class="future-title">
+                        Seasonal Maintenance Reminders
+                    </div>
+                    <div class="future-desc">
+                        Aria tracks your system profile — age, type, last
+                        service date — and alerts you when it's time for spring
+                        startup checks, filter changes, and fall heat prep. Set
+                        it once, never miss it.
+                    </div>
+                    <span class="future-tag aria">Aria · Memory</span>
+                </div>
+                <div class="future-card">
+                    <div class="future-horizon">Near · This Summer</div>
+                    <div class="future-title">Live Quote Review</div>
+                    <div class="future-desc">
+                        Photograph or paste an HVAC quote and Aria breaks it
+                        down line by line — flagging what's fair, what's padded,
+                        and what questions to ask before signing. The informed
+                        homeowner's secret weapon.
+                    </div>
+                    <span class="future-tag soon">In Development</span>
+                </div>
+                <div class="future-card">
+                    <div class="future-horizon">Later · Fall 2026</div>
+                    <div class="future-title">System History Log</div>
+                    <div class="future-desc">
+                        Every repair, tune-up, and quote stored in one place.
+                        When you sell your home or call a new tech, you have a
+                        complete HVAC history that proves value and prevents
+                        duplicate work.
+                    </div>
+                    <span class="future-tag">Planned</span>
+                </div>
+                <div class="future-card">
+                    <div class="future-horizon">Later · Fall 2026</div>
+                    <div class="future-title">Energy Cost Modeling</div>
+                    <div class="future-desc">
+                        Aria calculates whether upgrading to a higher SEER
+                        system pays off in your ZIP code — using actual Duke
+                        Energy rates and your home's square footage. ROI in
+                        months, not guesses.
+                    </div>
+                    <span class="future-tag">Planned</span>
+                </div>
+                <div class="future-card">
+                    <div class="future-horizon">2027</div>
+                    <div class="future-title">Agentic Scheduling</div>
+                    <div class="future-desc">
+                        Aria doesn't just recommend a pro — she books the
+                        appointment, confirms the scope and price upfront, and
+                        follows up after the job to verify the work matched the
+                        quote. Full-loop, zero phone tag.
+                    </div>
+                    <span class="future-tag">Vision</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRADE NAV -->
+        <div class="trade-nav">
+            <div class="trade-nav-label">All 8 YSKAIPE Trades</div>
+            <div class="trade-row">
+                <a href="/hvac.html" class="trade-pill active">⬡ Aria · HVAC</a>
+                <a href="/plumbing.html" class="trade-pill">River · Plumbing</a>
+                <a href="/electrical.html" class="trade-pill"
+                    >Volt · Electrical</a
+                >
+                <a href="/roofing.html" class="trade-pill">Ridge · Roofing</a>
+                <a href="/landscaping.html" class="trade-pill"
+                    >Terra · Landscaping</a
+                >
+                <a href="/painting.html" class="trade-pill">Hue · Painting</a>
+                <a href="/general-contracting.html" class="trade-pill"
+                    >Forge · General</a
+                >
+                <a href="/automotive.html" class="trade-pill"
+                    >Axle · Automotive</a
+                >
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-logo">YSKAIPE</div>
+            <div class="footer-tagline">
+                Fair Price. Smart Choice. Everybody Wins.
+            </div>
+            <div class="footer-links">
+                <a href="https://yskaipe.com">Home</a>
+                <a href="https://yskaipe.com#autoquote">Get a Fair Rate</a>
+                <a href="https://yskaipe.com/founding.html">For Pros</a>
+                <a href="https://yskaipe.com/we-want-you.html">Our Story</a>
+                <a href="https://yskaipe.com/legal/terms.html">Terms</a>
+                <a href="https://yskaipe.com/legal/privacy.html">Privacy</a>
+            </div>
+            <div class="footer-copy">
+                © 2026 Peaking Waters LLC · Cornelius, NC · First in Freedom ·
+                First in Flight · First in Fair
+            </div>
+        </footer>
+
+        <script>
+            /* ── ARIA CHAT ─────────────────────────────────────────────── */
+            const ARIA_RESPONSES = {
+                "My AC stopped blowing cold": `That's the most common summer call in Lake Norman — let's narrow it down.\n\n**Most likely causes (in order):**\n- Low refrigerant (leak or gradual loss)\n- Dirty evaporator or condenser coil\n- Failed capacitor — super common, ~$120–$500 to fix\n- Refrigerant metering device stuck\n\n**First check yourself:** Is the outdoor condenser unit running? Go outside and listen/look. If the fan isn't spinning but the indoor unit is on, that points to capacitor or contactor — both are repair-level fixes.\n\nIf the outdoor unit is running but air is still warm, that's likely refrigerant — which needs a licensed tech. Want me to get you a fair rate for an HVAC diagnostic?`,
+
+                "Is my HVAC quote fair?": `Good question to ask before signing anything.\n\n**Quick benchmarks for Lake Norman:**\n- Tune-up / annual service: $71–$200 (avg $143)\n- Diagnostic call: $75–$200 (should roll into repair cost)\n- Common repairs: $150–$650\n- Refrigerant recharge: $200–$1,500 (ask the type first)\n- New system install: $4,500–$12,000\n\nIf you paste your specific quote here, I can go line by line and flag anything that looks off. What's the job?`,
+
+                "Can I do my own tune-up?": `Partly — here's what you can and can't do yourself:\n\n**Safe for homeowners:**\n- Replace air filter (every 30–90 days)\n- Flush condensate drain with white vinegar monthly\n- Clean around the outdoor condenser (clear debris, hose it off)\n- Check and clear the drain pan\n\n**Needs a licensed tech:**\n- Refrigerant check and recharge (EPA 608 required)\n- Electrical component inspection (capacitors, contactors)\n- Coil cleaning with chemicals\n- Any warranty-preserving service documentation\n\nA proper annual tune-up from a pro should run $71–$200 in this area. Worth doing once a year — especially before summer in LKN's humidity.`,
+
+                "Strange noise from the unit": `Noises tell a story — describe what you're hearing:\n\n**Clicking** on startup/shutdown → normal. Clicking continuously → failed capacitor or contactor ($120–$500).\n\n**Banging or clanking** → something loose or broken inside. Turn it off. This can cause cascading damage.\n\n**Squealing or screeching** → belt (older units) or motor bearing failing. Soon-to-fail.\n\n**Humming without starting** → capacitor struggling. Common, fixable, call soon.\n\n**Hissing** → possible refrigerant leak. Don't ignore this one.\n\nWhich of these sounds closest to what you're hearing?`,
+
+                "When should I replace vs. repair?": `The standard rule: if repair cost exceeds **50% of the system's value** — replace.\n\nBut here's a better framework for LKN:\n\n**Replace if:**\n- System is 15+ years old (LKN humidity ages them faster)\n- Uses R-22 refrigerant (discontinued, expensive to recharge)\n- You're facing compressor or coil replacement ($1,500–$3,500)\n- You've repaired it twice in the last 2 years\n\n**Repair if:**\n- System is under 10 years, single failure\n- Repair is under $600 for a well-maintained unit\n- Still under manufacturer warranty\n\nWhat's the age of your unit and what repair are you looking at? I can run the numbers.`,
+
+                "What's a fair service call fee?": `For Lake Norman / Mecklenburg County:\n\n**Fair range: $75–$200**\n\nThis covers the tech driving out and diagnosing the problem. The important thing: **ask upfront if this fee gets applied to the repair cost if you approve the work.** Any reputable company will say yes.\n\nRed flags:\n- "Free diagnostic" (the cost is hidden in inflated repair prices)\n- Diagnostic fee quoted over $200 without explanation\n- Unwilling to give a written estimate before starting work\n\nThe diagnostic fee is the first test of whether a contractor is operating fairly.`,
+            };
+
+            function addMessage(content, isUser = false) {
+                const msgs = document.getElementById("chatMessages");
+                const msg = document.createElement("div");
+                msg.className = "msg" + (isUser ? " user" : "");
+
+                const avatar = document.createElement("div");
+                avatar.className = "msg-avatar";
+                avatar.textContent = isUser ? "You" : "A";
+
+                const bubble = document.createElement("div");
+                bubble.className = "msg-bubble";
+
+                // Simple markdown-ish rendering
+                bubble.innerHTML = content
+                    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                    .replace(/\n\n/g, "<br><br>")
+                    .replace(/\n/g, "<br>")
+                    .replace(/^- (.*)/gm, "<li>$1</li>")
+                    .replace(/(<li>.*<\/li>)+/g, "<ul>$&</ul>");
+
+                msg.appendChild(avatar);
+                msg.appendChild(bubble);
+                msgs.appendChild(msg);
+                msgs.scrollTop = msgs.scrollHeight;
+            }
+
+            function sendChip(btn) {
+                const text = btn.textContent;
+                document.getElementById("chatChips").style.display = "none";
+                addMessage(text, true);
+
+                setTimeout(() => {
+                    const response =
+                        ARIA_RESPONSES[text] ||
+                        "Let me look into that for you. Can you tell me a bit more about the issue — how old is your system, and what's it doing (or not doing)?";
+                    addMessage(response);
+                }, 600);
+            }
+
+            function sendMessage() {
+                const input = document.getElementById("chatInput");
+                const text = input.value.trim();
+                if (!text) return;
+
+                document.getElementById("chatChips").style.display = "none";
+                addMessage(text, true);
+                input.value = "";
+
+                setTimeout(() => {
+                    addMessage(
+                        "Thanks — I'm working through this. For your specific situation, the most useful next step is usually a fair-rate estimate so you know what the job *should* cost before any tech shows up. You can get that at **yskaipe.com** in about 8 seconds — or describe more details here and I'll give you a more specific answer.",
+                    );
+                }, 700);
+            }
+
+            document
+                .getElementById("chatInput")
+                .addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") sendMessage();
+                });
+
+            /* ── DIY ACCORDION ─────────────────────────────────────────── */
+            function toggleDIY(header) {
+                const body = header.nextElementSibling;
+                const toggle = header.querySelector(".diy-toggle");
+                const isOpen = body.classList.contains("open");
+
+                // Close all
+                document
+                    .querySelectorAll(".diy-body")
+                    .forEach((b) => b.classList.remove("open"));
+                document.querySelectorAll(".diy-toggle").forEach((t) => {
+                    t.textContent = t.textContent.includes("Collapse")
+                        ? "+ Expand"
+                        : t.textContent;
+                    t.textContent = t.textContent.includes("Why")
+                        ? "+ Why"
+                        : t.textContent;
+                });
+
+                if (!isOpen) {
+                    body.classList.add("open");
+                    toggle.textContent = toggle.textContent.includes("Why")
+                        ? "− Hide"
+                        : "− Collapse";
+                }
+            }
+        </script>
+    </body>
+</html>
