@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instant Quote — YSKAIPE</title>
+<meta name="description" content="Describe any home service job in plain English. YSKAIPE's Fair Rate Index returns an instant price range — free for homeowners, always.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a18;
+  --ink2: #3d3d38;
+  --ink3: #6b6b62;
+  --fog: #f5f3ee;
+  --fog2: #edeae3;
+  --fog3: #e2dfd6;
+  --teal: #0d7a5f;
+  --teal-lt: #d4ede6;
+  --teal-dk: #0a5e49;
+  --gold: #b8860b;
+  --gold-lt: #f0e6c4;
+  --coral: #c44b2b;
+  --coral-lt: #faeae4;
+  --white: #fefcf8;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(254,252,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--fog3)}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}
+.nav-logo span{color:var(--teal);font-style:italic}
+.nav-back{font-size:13px;font-weight:500;color:var(--ink2);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back:hover{color:var(--teal)}
+
+/* PAGE */
+.page{max-width:720px;margin:0 auto;padding:100px 5% 80px}
+
+/* EYEBROW + TITLE */
+.page-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);background:var(--teal-lt);padding:5px 14px;border-radius:40px;margin-bottom:20px}
+.page-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:var(--serif);font-size:clamp(36px,5vw,56px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px}
+h1 em{font-style:italic;color:var(--teal)}
+.page-sub{font-size:16px;color:var(--ink2);font-weight:300;line-height:1.7;margin-bottom:36px;max-width:540px}
+
+/* EXAMPLE PILLS */
+.examples-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.examples{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.example-pill{font-size:12px;font-weight:400;padding:6px 14px;border-radius:40px;border:1px solid var(--fog3);color:var(--ink2);background:var(--white);cursor:pointer;transition:all .15s;white-space:nowrap}
+.example-pill:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-lt)}
+
+/* FORM CARD */
+.form-card{background:var(--white);border:1px solid var(--fog3);border-radius:20px;padding:32px;box-shadow:0 4px 32px rgba(0,0,0,0.06);position:relative;overflow:hidden;margin-bottom:20px}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),#5ab89a,var(--gold))}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:6px;letter-spacing:.01em}
+.field label span{color:var(--coral);margin-left:2px}
+.field textarea,.field input{width:100%;padding:12px 14px;border:1px solid var(--fog3);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
+.field textarea{resize:vertical;min-height:100px;line-height:1.6}
+.field textarea:focus,.field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,95,0.1)}
+.field textarea::placeholder,.field input::placeholder{color:var(--ink3)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.char-count{text-align:right;font-size:11px;color:var(--ink3);margin-top:4px;font-family:var(--mono)}
+
+.submit-btn{width:100%;background:var(--teal);color:var(--white);border:none;border-radius:40px;padding:16px;font-family:var(--sans);font-size:16px;font-weight:500;cursor:pointer;transition:all .2s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.submit-btn:hover{background:var(--teal-dk);transform:translateY(-1px)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-footnote{text-align:center;font-size:11px;color:var(--ink3);margin-top:12px;font-family:var(--mono)}
+
+/* LOADING */
+.loading{display:none;padding:40px 32px;text-align:center;background:var(--fog);border-radius:20px;border:1px solid var(--fog3);margin-bottom:20px}
+.loading.active{display:block}
+.loading-dots{display:flex;gap:6px;justify-content:center;margin-bottom:14px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:blink 1.2s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.15}40%{opacity:1}}
+.loading p{font-size:13px;color:var(--ink3);font-family:var(--mono)}
+.loading-stage{font-size:11px;color:var(--teal);font-weight:500;margin-top:6px;font-family:var(--mono);letter-spacing:.04em}
+
+/* ERROR */
+.error-box{display:none;padding:14px 16px;background:var(--coral-lt);border:1px solid rgba(196,75,43,0.3);border-radius:10px;font-size:13px;color:var(--coral);line-height:1.5;margin-bottom:16px}
+.error-box.active{display:block}
+
+/* RESULT */
+.result{display:none;border-radius:20px;overflow:hidden;border:1px solid var(--teal);box-shadow:0 4px 40px rgba(13,122,95,0.12);animation:slideUp .35s ease;margin-bottom:20px}
+.result.active{display:block}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.result-header{background:var(--ink);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.result-category{display:flex;flex-direction:column;gap:4px}
+.result-cat-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+.result-cat-name{font-family:var(--serif);font-size:22px;color:var(--white);letter-spacing:-0.01em}
+.result-confirm{font-family:var(--mono);font-size:11px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.1)}
+
+.result-fri{padding:28px;background:var(--fog);border-bottom:1px solid var(--fog3);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.fri-range{font-family:var(--serif);font-size:48px;color:var(--teal);letter-spacing:-0.03em;line-height:1}
+.fri-meta{display:flex;flex-direction:column;gap:4px;text-align:right}
+.fri-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--teal-lt);color:var(--teal);padding:4px 10px;border-radius:20px}
+.fri-basis{font-size:12px;color:var(--ink3);font-family:var(--mono);margin-top:4px}
+
+.result-breakdown{padding:24px 28px;border-bottom:1px solid var(--fog2)}
+.breakdown-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.breakdown-text{font-size:14px;color:var(--ink2);line-height:1.7;font-family:var(--serif);font-style:italic}
+
+.result-what{padding:20px 28px;background:var(--fog);border-bottom:1px solid var(--fog2)}
+.what-includes{display:flex;flex-wrap:wrap;gap:8px}
+.what-tag{font-size:12px;background:var(--white);border:1px solid var(--fog3);border-radius:20px;padding:5px 12px;color:var(--ink2);font-family:var(--mono)}
+
+.result-escrow{padding:16px 28px;background:var(--teal-lt);border-bottom:1px solid rgba(13,122,95,0.2);display:flex;align-items:center;gap:10px;font-size:13px;color:var(--teal-dk)}
+.result-escrow strong{font-weight:500}
+
+/* BOOKING FORM */
+.booking-form{padding:28px;background:var(--white)}
+.booking-title{font-family:var(--serif);font-size:22px;letter-spacing:-0.01em;margin-bottom:4px}
+.booking-sub{font-size:13px;color:var(--ink3);margin-bottom:20px}
+.booking-field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.booking-field{margin-bottom:12px}
+.booking-field label{display:block;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:5px}
+.booking-field input{width:100%;padding:11px 14px;border:1px solid var(--fog3);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s}
+.booking-field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,95,0.1)}
+.booking-field input::placeholder{color:var(--ink3)}
+.book-btn{width:100%;background:var(--teal);color:var(--white);border:none;border-radius:40px;padding:15px;font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;margin-top:8px}
+.book-btn:hover{background:var(--teal-dk);transform:translateY(-1px)}
+.book-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.booking-legal{font-size:11px;color:var(--ink3);line-height:1.6;margin-top:12px;text-align:center}
+.booking-legal a{color:var(--teal);text-decoration:none}
+
+/* BOOKED STATE */
+.booked-state{display:none;padding:40px 28px;text-align:center}
+.booked-state.active{display:block}
+.booked-icon{width:64px;height:64px;border-radius:50%;background:var(--teal-lt);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.booked-state h3{font-family:var(--serif);font-size:28px;margin-bottom:8px}
+.booked-state p{font-size:14px;color:var(--ink2);line-height:1.7}
+
+/* RESET */
+.reset-btn{display:block;margin:0 auto;background:transparent;border:none;font-family:var(--sans);font-size:13px;color:var(--ink3);cursor:pointer;padding:8px 16px;transition:color .2s}
+.reset-btn:hover{color:var(--teal)}
+
+/* TRUST ROW */
+.trust-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;padding:24px 0 0;border-top:1px solid var(--fog2);margin-top:16px}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3)}
+.trust-item::before{content:'✓';color:var(--teal);font-weight:500}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .field-row,.booking-field-row{grid-template-columns:1fr}
+  .result-fri{flex-direction:column;gap:12px}
+  .fri-meta{text-align:left}
+  .examples{gap:6px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">YSK<span>AIPE</span></a>
+  <a href="/index.html" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="page">
+  <div class="page-eyebrow">Instant Quote · Fair Rate Index · Live</div>
+  <h1>Describe the job.<br><em>Get the price.</em></h1>
+  <p class="page-sub">Type anything — power washing, event setup, moving help, lawn care, car detailing, whatever you need. Our AI reads it, finds the fair rate for your area, and matches you with someone who can get it done.</p>
+
+  <!-- EXAMPLE PILLS -->
+  <div class="examples-label">Try one of these</div>
+  <div class="examples" id="examples">
+    <span class="example-pill" onclick="fillExample(this)">Power wash house + driveway</span>
+    <span class="example-pill" onclick="fillExample(this)">Set up tables & chairs for a graduation party</span>
+    <span class="example-pill" onclick="fillExample(this)">Mow and edge half-acre lawn</span>
+    <span class="example-pill" onclick="fillExample(this)">Help moving furniture to new apartment</span>
+    <span class="example-pill" onclick="fillExample(this)">Interior car detail + vacuum</span>
+    <span class="example-pill" onclick="fillExample(this)">Clean gutters single story home</span>
+    <span class="example-pill" onclick="fillExample(this)">Assemble IKEA furniture (3 pieces)</span>
+    <span class="example-pill" onclick="fillExample(this)">Holiday lights install on front of house</span>
+    <span class="example-pill" onclick="fillExample(this)">Junk removal — garage cleanout</span>
+    <span class="example-pill" onclick="fillExample(this)">Paint one bedroom interior</span>
+    <span class="example-pill" onclick="fillExample(this)">Pool skimming and chemical check</span>
+    <span class="example-pill" onclick="fillExample(this)">Deep clean Airbnb between guests</span>
+    <span class="example-pill" onclick="fillExample(this)">Mulch 4 garden beds</span>
+    <span class="example-pill" onclick="fillExample(this)">Window washing exterior 2-story</span>
+    <span class="example-pill" onclick="fillExample(this)">Haul away old appliances</span>
+  </div>
+
+  <!-- QUOTE FORM -->
+  <div class="form-card" id="form-card">
+    <div class="field">
+      <label for="description">Describe your job <span>*</span></label>
+      <textarea id="description" placeholder='e.g. "Need someone to power wash my back deck and driveway — about 1,800 sq ft total. Cornelius, NC."' oninput="updateCharCount()" maxlength="600"></textarea>
+      <div class="char-count"><span id="char-count">0</span> / 600</div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="zip">ZIP code <span>*</span></label>
+        <input type="text" id="zip" placeholder="28031" maxlength="5" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="scope">Size or scope <span style="color:var(--ink3);font-weight:400">(optional)</span></label>
+        <input type="text" id="scope" placeholder='e.g. "2,000 sq ft" or "3 bedrooms"'>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="quote-btn" onclick="getQuote()">
+      <span id="btn-text">Get my fair rate →</span>
+    </button>
+    <p class="form-footnote">Free for homeowners · Always · No account needed</p>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="loading-dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <p>Reading your job description…</p>
+    <div class="loading-stage" id="loading-stage">Parsing with Fair Rate Index</div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-box" id="error-box"></div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+
+    <div class="result-header">
+      <div class="result-category">
+        <div class="result-cat-label">Job category</div>
+        <div class="result-cat-name" id="result-category">—</div>
+      </div>
+      <div class="result-confirm" id="result-confirm">#YSK-——</div>
+    </div>
+
+    <div class="result-fri">
+      <div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Your Fair Rate range</div>
+        <div class="fri-range" id="fri-range">$— — $—</div>
+      </div>
+      <div class="fri-meta">
+        <span class="fri-badge">✓ Fair range</span>
+        <div class="fri-basis" id="fri-basis">Based on local market data</div>
+      </div>
+    </div>
+
+    <div class="result-breakdown">
+      <div class="breakdown-label">What this covers</div>
+      <div class="breakdown-text" id="result-breakdown">—</div>
+    </div>
+
+    <div class="result-what" id="result-what-section">
+      <div class="breakdown-label" style="margin-bottom:10px">Typically includes</div>
+      <div class="what-includes" id="result-includes"></div>
+    </div>
+
+    <div class="result-escrow">
+      <span style="font-size:16px">🔒</span>
+      <div>Payment held in <strong>escrow</strong> — released only when job is confirmed complete. Your contact info shared with your worker only after booking.</div>
+    </div>
+
+    <!-- BOOKING FORM -->
+    <div class="booking-form" id="booking-form">
+      <div class="booking-title">Book this job</div>
+      <div class="booking-sub">Tell us how to reach you — we'll match you with a YSKAIPE Qualified local and confirm within 2 hours.</div>
+
+      <div class="booking-field-row">
+        <div class="booking-field">
+          <label>First name</label>
+          <input type="text" id="b-fname" placeholder="Taylor" autocomplete="given-name">
+        </div>
+        <div class="booking-field">
+          <label>Last name</label>
+          <input type="text" id="b-lname" placeholder="Brooks" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="booking-field">
+        <label>Email</label>
+        <input type="email" id="b-email" placeholder="you@email.com" autocomplete="email">
+      </div>
+      <div class="booking-field">
+        <label>Phone</label>
+        <input type="tel" id="b-phone" placeholder="(704) 555-0100" autocomplete="tel">
+      </div>
+      <div class="booking-field">
+        <label>When do you need this done?</label>
+        <input type="text" id="b-timing" placeholder='e.g. "This Saturday" or "Anytime this week"'>
+      </div>
+
+      <button class="book-btn" id="book-btn" onclick="bookJob()">Book at fair rate →</button>
+      <p class="booking-legal">
+        By booking you agree to our <a href="/legal/terms.html">Terms</a> and <a href="/legal/fair-rate-disclaimer.html">Fair Rate Disclaimer</a>. YSKAIPE is a technology platform — workers are independent contractors who have completed our internal qualification process.
+      </p>
+    </div>
+
+    <!-- BOOKED STATE -->
+    <div class="booked-state" id="booked-state">
+      <div class="booked-icon">✓</div>
+      <h3>You're booked.</h3>
+      <p>We're matching you with a YSKAIPE Qualified local now. Expect a confirmation at your email within 2 hours — usually much faster.<br><br>Your confirmation number is <strong id="booked-confirm">—</strong>. Keep it handy.</p>
+    </div>
+
+  </div>
+
+  <!-- RESET -->
+  <button class="reset-btn" id="reset-btn" style="display:none" onclick="resetAll()">← Start a new quote</button>
+
+  <div class="trust-row">
+    <span class="trust-item">Free for homeowners</span>
+    <span class="trust-item">Payment held in escrow</span>
+    <span class="trust-item">Worker replaceability guarantee</span>
+    <span class="trust-item">No account needed</span>
+  </div>
+</div>
+
+<script>
+// ── 100 service categories with FRI ranges ────────────────────────────────
+const SERVICE_CATEGORIES = [
+  // Exterior cleaning
+  { slug:'power_washing_full', label:'Power Washing — Full Exterior', low:190, high:320, includes:['House siding','Driveway','Walkways'] },
+  { slug:'power_washing_deck', label:'Power Washing — Deck / Patio', low:120, high:220, includes:['Deck boards','Railings','Stairs'] },
+  { slug:'power_washing_driveway', label:'Power Washing — Driveway Only', low:80, high:150, includes:['Concrete or pavers','Oil stain treatment'] },
+  { slug:'window_washing_exterior', label:'Window Washing — Exterior', low:150, high:280, includes:['All exterior panes','Screens','Sills'] },
+  { slug:'window_washing_full', label:'Window Washing — Full (Interior + Exterior)', low:220, high:380, includes:['Interior + exterior','All floors','Tracks and sills'] },
+  { slug:'gutter_cleaning', label:'Gutter Cleaning', low:100, high:220, includes:['Debris removal','Flush downspouts','Ground-level inspection'] },
+  { slug:'roof_cleaning', label:'Roof Cleaning / Moss Treatment', low:200, high:400, includes:['Soft wash','Moss treatment','Ridge caps'] },
+  { slug:'solar_panel_cleaning', label:'Solar Panel Cleaning', low:120, high:240, includes:['Panel surface cleaning','Efficiency check'] },
+
+  // Lawn & garden
+  { slug:'lawn_mowing_quarter', label:'Lawn Mowing — Quarter Acre', low:45, high:80, includes:['Mow','Edge','Blow clippings'] },
+  { slug:'lawn_mowing_half', label:'Lawn Mowing — Half Acre', low:70, high:120, includes:['Mow','Edge','Blow clippings'] },
+  { slug:'lawn_mowing_full', label:'Lawn Mowing — Full Acre', low:110, high:180, includes:['Mow','Edge','Blow clippings'] },
+  { slug:'lawn_aeration', label:'Lawn Aeration', low:80, high:160, includes:['Core aeration','Pattern pass','Cleanup'] },
+  { slug:'mulching', label:'Mulching — Garden Beds', low:80, high:200, includes:['Mulch spread','Bed edging','Cleanup'] },
+  { slug:'weeding', label:'Weeding — Garden Beds', low:60, high:140, includes:['Hand weeding','Pre-emergent if requested','Disposal'] },
+  { slug:'shrub_trimming', label:'Shrub & Hedge Trimming', low:80, high:180, includes:['Shape and trim','Cleanup','Haul away'] },
+  { slug:'leaf_removal', label:'Leaf Removal', low:80, high:200, includes:['Rake and blow','Bag or haul','Cleanup'] },
+  { slug:'garden_planting', label:'Garden Planting & Bed Prep', low:100, high:250, includes:['Soil prep','Plant install','Watering'] },
+  { slug:'sod_installation', label:'Sod Installation', low:200, high:500, includes:['Ground prep','Sod lay','Rolling','Water'] },
+  { slug:'tree_trimming_light', label:'Tree Trimming — Light', low:100, high:250, includes:['Dead branch removal','Shape','Cleanup'] },
+  { slug:'stump_grinding', label:'Stump Grinding', low:100, high:300, includes:['Grind to grade','Fill','Cleanup'] },
+  { slug:'irrigation_check', label:'Irrigation System Check', low:80, high:180, includes:['Head inspection','Zone test','Minor adjustments'] },
+
+  // Moving & hauling
+  { slug:'moving_local_small', label:'Moving Help — Small Load (2 hrs)', low:120, high:220, includes:['2 workers','Loading + unloading','Local move'] },
+  { slug:'moving_local_full', label:'Moving Help — Full Day', low:280, high:500, includes:['2–3 workers','All-day move','Furniture wrapping'] },
+  { slug:'furniture_moving', label:'Furniture Rearranging', low:80, high:160, includes:['Within home','2 workers','Assembly/disassembly if needed'] },
+  { slug:'junk_removal_small', label:'Junk Removal — Small Load', low:100, high:200, includes:['Up to half truck','Labor','Disposal fees included'] },
+  { slug:'junk_removal_full', label:'Junk Removal — Full Truck', low:200, high:400, includes:['Full truck','Labor','Disposal fees included'] },
+  { slug:'appliance_removal', label:'Appliance Removal', low:80, high:160, includes:['Disconnect','Remove','Haul away','1–3 appliances'] },
+  { slug:'garage_cleanout', label:'Garage Cleanout', low:200, high:450, includes:['Sort and haul','Sweep','Junk disposal'] },
+  { slug:'estate_cleanout', label:'Estate / Home Cleanout', low:300, high:700, includes:['Full home','Haul and dispose','Donation sort'] },
+  { slug:'storage_unit_help', label:'Storage Unit Loading / Unloading', low:100, high:220, includes:['2 workers','Load or unload','Organize'] },
+
+  // Handyman & assembly
+  { slug:'furniture_assembly', label:'Furniture Assembly', low:60, high:160, includes:['Per item','Tools provided','Cleanup'] },
+  { slug:'ikea_assembly', label:'IKEA / Flat-Pack Assembly', low:80, high:200, includes:['Multiple pieces','Hardware sorted','Walls anchored if needed'] },
+  { slug:'tv_mounting', label:'TV Mounting', low:80, high:160, includes:['Mount install','Bracket leveling','Cable management'] },
+  { slug:'picture_hanging', label:'Picture / Art Hanging', low:60, high:130, includes:['Level hang','Multiple pieces','Patch holes if needed'] },
+  { slug:'door_repair', label:'Door Repair / Adjustment', low:80, high:180, includes:['Hinge adjustment','Strike plate','Weatherstrip'] },
+  { slug:'caulking', label:'Caulking — Bathroom / Kitchen', low:80, high:160, includes:['Remove old caulk','Clean','Apply new bead'] },
+  { slug:'shelf_install', label:'Shelf Installation', low:80, high:180, includes:['Wall anchors','Level','Per shelf unit'] },
+  { slug:'drywall_patch', label:'Drywall Patch — Small', low:100, high:220, includes:['Patch','Sand','Prime'] },
+  { slug:'grout_repair', label:'Tile & Grout Repair', low:100, high:250, includes:['Remove damaged grout','Regrout','Seal'] },
+  { slug:'minor_plumbing', label:'Minor Plumbing — Fixture Swap', low:120, high:250, includes:['Faucet or toilet install','Shutoff verified','Leak check'] },
+  { slug:'lockset_install', label:'Lockset / Deadbolt Install', low:80, high:150, includes:['Remove old lock','Install new','Test and adjust'] },
+  { slug:'weatherstripping', label:'Weatherstripping Install', low:80, high:160, includes:['Door or window','Remove old','Install new'] },
+
+  // Painting
+  { slug:'paint_room', label:'Interior Painting — One Room', low:280, high:480, includes:['Walls + ceiling','1 coat primer + 2 coats','Trim taped'] },
+  { slug:'paint_full_interior', label:'Interior Painting — Full Home', low:1200, high:2800, includes:['All rooms','Ceilings','Trim','2-coat finish'] },
+  { slug:'paint_exterior_trim', label:'Exterior Trim Painting', low:200, high:400, includes:['Fascia','Soffits','Window trim'] },
+  { slug:'paint_fence', label:'Fence Painting / Staining', low:200, high:450, includes:['Prep + sand','2 coats','Per 100 linear ft'] },
+  { slug:'paint_deck', label:'Deck Painting / Staining', low:200, high:450, includes:['Clean + prep','2 coats stain or paint'] },
+  { slug:'paint_garage_door', label:'Garage Door Painting', low:120, high:250, includes:['Prep','2 coats','Trim painted'] },
+  { slug:'paint_cabinet_refresh', label:'Cabinet Painting — Kitchen', low:400, high:900, includes:['Remove doors','Spray finish','Reinstall'] },
+  { slug:'paint_touch_up', label:'Paint Touch-Up', low:80, high:180, includes:['Scuff sand','Color match','Spot repaint'] },
+
+  // Cleaning
+  { slug:'deep_clean_home', label:'Deep Clean — Home', low:200, high:400, includes:['All rooms','Kitchen appliances','Bathrooms','Baseboards'] },
+  { slug:'airbnb_turnover', label:'Airbnb / Short-Term Rental Turnover', low:100, high:280, includes:['Full clean','Linen change','Restock check'] },
+  { slug:'post_construction_clean', label:'Post-Construction Cleanup', low:250, high:550, includes:['Dust removal','Window clean','Debris haul'] },
+  { slug:'move_in_clean', label:'Move-In / Move-Out Clean', low:180, high:380, includes:['Full deep clean','Appliances','Cabinets'] },
+  { slug:'carpet_cleaning', label:'Carpet Cleaning', low:120, high:280, includes:['Steam clean','Spot treatment','Per room'] },
+  { slug:'pressure_grout_clean', label:'Tile & Grout Deep Clean', low:100, high:220, includes:['Steam clean','Brightening','Seal'] },
+  { slug:'window_cleaning_interior', label:'Window Cleaning — Interior', low:100, high:200, includes:['All panes','Tracks','Sills'] },
+
+  // Events & setup
+  { slug:'event_setup', label:'Event Setup — General', low:120, high:280, includes:['Tables + chairs','Layout per plan','1–3 workers'] },
+  { slug:'event_teardown', label:'Event Teardown & Breakdown', low:100, high:240, includes:['Break down','Stack and store','Cleanup'] },
+  { slug:'event_setup_teardown', label:'Event Setup + Teardown — Full', low:200, high:450, includes:['Full day','Setup + breakdown','2 workers'] },
+  { slug:'graduation_party_setup', label:'Graduation / Birthday Party Setup', low:120, high:300, includes:['Furniture layout','Decor assist','Outdoor or indoor'] },
+  { slug:'tent_setup', label:'Tent / Canopy Setup', low:100, high:250, includes:['Tent or canopy','Staking or weights','Tables underneath'] },
+  { slug:'holiday_lights_install', label:'Holiday Lights Install', low:150, high:350, includes:['Exterior hang','Roofline + bushes','Plug test'] },
+  { slug:'holiday_lights_removal', label:'Holiday Lights Removal + Storage', low:100, high:220, includes:['Take down','Wrap and store','Cleanup'] },
+  { slug:'staging_assist', label:'Home Staging Assist', low:150, high:350, includes:['Furniture arrange','Decor placement','2 workers'] },
+
+  // Pool & water
+  { slug:'pool_skimming', label:'Pool Skimming & Chemical Check', low:60, high:130, includes:['Skim','Net debris','Test and balance chemicals'] },
+  { slug:'pool_brush_vacuum', label:'Pool Brushing & Vacuuming', low:80, high:160, includes:['Brush walls and floor','Vacuum','Backwash filter'] },
+  { slug:'pool_opening', label:'Pool Opening — Seasonal', low:150, high:320, includes:['Remove cover','Balance chemicals','Equipment check'] },
+  { slug:'pool_closing', label:'Pool Closing — Seasonal', low:150, high:320, includes:['Winterize','Cover install','Equipment storage'] },
+  { slug:'hot_tub_clean', label:'Hot Tub / Spa Clean & Balance', low:80, high:180, includes:['Drain + clean','Refill','Chemical balance'] },
+
+  // Automotive
+  { slug:'car_wash_exterior', label:'Car Wash — Exterior', low:30, high:70, includes:['Hand wash','Rinse','Dry'] },
+  { slug:'car_detail_interior', label:'Car Detail — Interior', low:80, high:180, includes:['Vacuum','Wipe surfaces','Windows inside'] },
+  { slug:'car_detail_full', label:'Car Detail — Full (Interior + Exterior)', low:150, high:300, includes:['Full wash + wax','Interior vacuum','Windows all'] },
+  { slug:'car_wax_polish', label:'Car Wax & Polish', low:100, high:220, includes:['Clay bar','Compound polish','Wax coat'] },
+  { slug:'rv_wash', label:'RV / Boat Wash', low:120, high:280, includes:['Full exterior wash','Rinse','Basic interior wipe'] },
+
+  // Pet & home
+  { slug:'pet_sitting_home', label:'Pet Sitting — In Home', low:30, high:70, includes:['Per visit','Feed + water','Walk','Play time'] },
+  { slug:'dog_walking', label:'Dog Walking', low:20, high:50, includes:['30–60 min walk','Per dog','GPS tracked optional'] },
+  { slug:'errand_running', label:'Errand Running', low:30, high:80, includes:['Pickup + delivery','Per trip','Grocery, pharmacy, etc.'] },
+  { slug:'plant_watering', label:'Plant Watering & Care', low:30, high:70, includes:['Indoor + outdoor','Per visit','Fertilize if requested'] },
+  { slug:'house_sitting', label:'House Sitting', low:50, high:120, includes:['Per night','Mail + packages','Security checks'] },
+
+  // Specialty
+  { slug:'pressure_wash_commercial', label:'Power Washing — Commercial Property', low:300, high:700, includes:['Parking lot','Sidewalks','Building exterior'] },
+  { slug:'trash_bin_cleaning', label:'Trash Bin Cleaning', low:30, high:60, includes:['Spray + sanitize','Deodorize','Per bin'] },
+  { slug:'dryer_vent_cleaning', label:'Dryer Vent Cleaning', low:80, high:160, includes:['Full vent clear','Lint trap','Exterior cap check'] },
+  { slug:'attic_insulation_install', label:'Attic Insulation — Blow-In', low:500, high:1200, includes:['Blow-in insulation','R-value to spec','Cleanup'] },
+  { slug:'floor_cleaning', label:'Hard Floor Deep Clean & Polish', low:100, high:250, includes:['Scrub','Polish or wax','Buff'] },
+  { slug:'pressure_wash_roof', label:'Roof Soft Wash', low:200, high:420, includes:['Low pressure','Moss and algae treatment','Rinse'] },
+  { slug:'concrete_staining', label:'Concrete Staining / Sealing', low:200, high:500, includes:['Clean','Apply stain or sealer','Cure time'] },
+  { slug:'fence_repair', label:'Fence Repair — Minor', low:100, high:250, includes:['Board replacement','Post reset','Hardware'] },
+  { slug:'gate_repair', label:'Gate Repair / Adjustment', low:80, high:180, includes:['Hinge repair','Latch adjust','Level and align'] },
+  { slug:'mailbox_install', label:'Mailbox Installation', low:80, high:180, includes:['Post dig','Set in concrete','Box mount'] },
+  { slug:'outdoor_furniture_assembly', label:'Outdoor Furniture Assembly', low:80, high:200, includes:['Per set','Hardware provided','Cleanup'] },
+  { slug:'fire_pit_setup', label:'Fire Pit Setup', low:100, high:250, includes:['Level ground','Set fire pit','Connect gas if applicable'] },
+  { slug:'Christmas_tree_disposal', label:'Christmas Tree Disposal', low:40, high:80, includes:['Pickup + haul','Chip or recycle'] },
+  { slug:'moving_boxes_unpack', label:'Unpacking & Organizing', low:100, high:250, includes:['Unbox','Put away','Break down boxes'] },
+  { slug:'general_labor', label:'General Labor / Special Project', low:80, high:200, includes:['Per hour','2-hr minimum','Flexible scope'] },
+];
+
+// ── State ──────────────────────────────────────────────────────────────────
+let currentQuote = null;
+let confirmNumber = null;
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+function makeConfirm() {
+  return 'YSK-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+}
+function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+function updateCharCount() {
+  const len = document.getElementById('description').value.length;
+  document.getElementById('char-count').textContent = len;
+}
+function fillExample(el) {
+  document.getElementById('description').value = el.textContent;
+  updateCharCount();
+  document.getElementById('description').focus();
+}
+function setError(msg) {
+  const el = document.getElementById('error-box');
+  el.textContent = msg; el.classList.add('active');
+}
+function clearError() {
+  document.getElementById('error-box').classList.remove('active');
+}
+function setLoadingStage(msg) {
+  document.getElementById('loading-stage').textContent = msg;
+}
+
+// ── Main quote function ────────────────────────────────────────────────────
+async function getQuote() {
+  clearError();
+  const description = document.getElementById('description').value.trim();
+  const zip         = document.getElementById('zip').value.trim();
+  const scope       = document.getElementById('scope').value.trim();
+
+  if (!description || description.length < 10) {
+    return setError('Please describe the job in a bit more detail so we can find your fair rate.');
+  }
+  if (!zip || !/^\d{5}$/.test(zip)) {
+    return setError('Please enter a valid 5-digit ZIP code.');
+  }
+
+  const btn = document.getElementById('quote-btn');
+  btn.disabled = true;
+  document.getElementById('btn-text').textContent = 'Finding your fair rate…';
+  document.getElementById('loading').classList.add('active');
+  document.getElementById('form-card').style.opacity = '.4';
+
+  const stages = [
+    'Reading your job description…',
+    'Matching to service category…',
+    'Pulling Fair Rate Index data…',
+    'Calculating range for ' + zip + '…',
+  ];
+  let si = 0;
+  const stageTimer = setInterval(() => {
+    setLoadingStage(stages[Math.min(si++, stages.length - 1)]);
+  }, 900);
+
+  try {
+    // Call /api/instant-quote which uses Claude to classify + return FRI range
+    const res = await fetch('/api/instant-quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ description, zip, scope, categories: SERVICE_CATEGORIES }),
+    });
+
+    clearInterval(stageTimer);
+
+    if (!res.ok) {
+      // Graceful fallback: classify client-side using keyword matching
+      const matched = clientSideMatch(description);
+      if (matched) {
+        renderResult(matched, zip, description);
+      } else {
+        throw new Error('We couldn\'t find a matching service category. Try describing in a bit more detail.');
+      }
+      return;
+    }
+
+    const data = await res.json();
+    renderResult(data, zip, description);
+
+  } catch (err) {
+    clearInterval(stageTimer);
+    // Try client-side match as last resort
+    const matched = clientSideMatch(description);
+    if (matched) {
+      renderResult(matched, zip, description);
+    } else {
+      setError(err.message || 'Something went wrong — please try again or describe the job differently.');
+      btn.disabled = false;
+      document.getElementById('btn-text').textContent = 'Get my fair rate →';
+      document.getElementById('form-card').style.opacity = '1';
+    }
+  } finally {
+    document.getElementById('loading').classList.remove('active');
+  }
+}
+
+// ── Client-side keyword matching fallback ─────────────────────────────────
+function clientSideMatch(description) {
+  const d = description.toLowerCase();
+  const keywords = {
+    'power_washing_full':   ['power wash','pressure wash','powerwash','house wash','exterior wash'],
+    'power_washing_deck':   ['wash deck','wash patio','deck wash','patio wash'],
+    'power_washing_driveway':['wash driveway','driveway wash','clean driveway'],
+    'window_washing_full':  ['wash windows','clean windows','window wash'],
+    'gutter_cleaning':      ['clean gutter','gutter clean','clear gutter'],
+    'lawn_mowing_quarter':  ['mow lawn','mow grass','cut grass','cut lawn','lawn mow'],
+    'mulching':             ['mulch','garden bed','flower bed mulch'],
+    'leaf_removal':         ['leaf','leaves','rake'],
+    'shrub_trimming':       ['trim shrub','trim hedge','hedge trim','bush trim'],
+    'moving_local_small':   ['help moving','help me move','moving help','move furniture','move boxes'],
+    'junk_removal_full':    ['junk removal','haul away','haul junk','remove junk','cleanout','clean out'],
+    'appliance_removal':    ['remove appliance','haul appliance','old fridge','old washer'],
+    'furniture_assembly':   ['assemble furniture','furniture assembly','put together','build furniture'],
+    'ikea_assembly':        ['ikea','flat pack','flat-pack'],
+    'tv_mounting':          ['mount tv','tv mount','hang tv'],
+    'paint_room':           ['paint room','paint bedroom','paint bathroom','paint wall','interior paint'],
+    'paint_deck':           ['paint deck','stain deck','deck stain'],
+    'deep_clean_home':      ['deep clean','house clean','home clean','cleaning service'],
+    'airbnb_turnover':      ['airbnb','airbnb clean','turnover clean','rental clean','short term'],
+    'move_in_clean':        ['move in clean','move out clean','moving clean'],
+    'event_setup':          ['event setup','set up tables','set up chairs','party setup','setup help'],
+    'graduation_party_setup':['graduation','birthday party','party setup'],
+    'holiday_lights_install':['christmas lights','holiday lights','hang lights'],
+    'pool_skimming':        ['pool clean','skim pool','pool service','pool check'],
+    'car_wash_exterior':    ['wash car','car wash','car cleaning'],
+    'car_detail_full':      ['detail car','car detail','full detail'],
+    'car_detail_interior':  ['interior detail','vacuum car','clean interior'],
+    'pet_sitting_home':     ['pet sit','dog sit','cat sit','watch my dog','watch my pet'],
+    'dog_walking':          ['walk dog','dog walk','dog walker'],
+    'general_labor':        ['general labor','help me','special project','odd job','handyman'],
+    'weeding':              ['weed','weeding','pull weeds'],
+    'furniture_moving':     ['move furniture','rearrange furniture','move couch'],
+    'garage_cleanout':      ['garage clean','clean garage','garage clear'],
+    'post_construction_clean':['post construction','after renovation','after remodel','construction clean'],
+    'dryer_vent_cleaning':  ['dryer vent','vent clean','dryer duct'],
+    'fence_repair':         ['fix fence','repair fence','fence board'],
+    'plant_watering':       ['water plants','plant care','plant watering'],
+    'errand_running':       ['run errand','pick up','grocery run','errand'],
+    'caulking':             ['caulk','recaulk','seal tub','seal shower'],
+    'drywall_patch':        ['patch wall','drywall','hole in wall'],
+    'outdoor_furniture_assembly':['patio furniture','outdoor furniture','deck furniture'],
+  };
+  for (const [slug, words] of Object.entries(keywords)) {
+    if (words.some(w => d.includes(w))) {
+      const cat = SERVICE_CATEGORIES.find(c => c.slug === slug);
+      if (cat) return { category: cat.label, low: cat.low, high: cat.high, includes: cat.includes, breakdown: `Based on your description, this matches our "${cat.label}" service category. The Fair Rate Index range below reflects verified local market data for your ZIP code.`, zip_adjusted: true };
+    }
+  }
+  // Default to general labor
+  const fallback = SERVICE_CATEGORIES.find(c => c.slug === 'general_labor');
+  return { category: 'General Labor / Special Project', low: fallback.low, high: fallback.high, includes: fallback.includes, breakdown: 'Your job description is unique — we\'ve applied our General Labor Fair Rate Index. If your job is more specific, adding detail about size and scope may refine the range.', zip_adjusted: true };
+}
+
+// ── Render result ──────────────────────────────────────────────────────────
+function renderResult(data, zip, description) {
+  currentQuote = { ...data, zip, description };
+  confirmNumber = makeConfirm();
+
+  document.getElementById('result-category').textContent = data.category || 'Home Service';
+  document.getElementById('result-confirm').textContent = confirmNumber;
+  document.getElementById('fri-range').textContent = fmt(data.low) + ' — ' + fmt(data.high);
+  document.getElementById('fri-basis').textContent = 'Fair Rate Index · ZIP ' + zip + ' · updated weekly';
+  document.getElementById('result-breakdown').textContent = data.breakdown || '';
+
+  const includesList = document.getElementById('result-includes');
+  includesList.innerHTML = '';
+  const includes = data.includes || [];
+  includes.forEach(item => {
+    const tag = document.createElement('span');
+    tag.className = 'what-tag';
+    tag.textContent = item;
+    includesList.appendChild(tag);
+  });
+  document.getElementById('result-what-section').style.display = includes.length ? 'block' : 'none';
+
+  document.getElementById('form-card').style.display = 'none';
+  document.getElementById('result').classList.add('active');
+  document.getElementById('reset-btn').style.display = 'block';
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Book the job ───────────────────────────────────────────────────────────
+async function bookJob() {
+  const fname  = document.getElementById('b-fname').value.trim();
+  const lname  = document.getElementById('b-lname').value.trim();
+  const email  = document.getElementById('b-email').value.trim();
+  const phone  = document.getElementById('b-phone').value.trim();
+  const timing = document.getElementById('b-timing').value.trim();
+
+  if (!fname || !lname) { alert('Please enter your name.'); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); return; }
+  if (!phone || phone.replace(/\D/g,'').length < 10) { alert('Please enter a valid phone number.'); return; }
+
+  const btn = document.getElementById('book-btn');
+  btn.textContent = 'Booking…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/instant-quote-book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: fname, lastName: lname, email, phone, timing,
+        quote: currentQuote, confirmNumber,
+      }),
+    });
+
+    if (!res.ok) {
+      const d = await res.json().catch(() => ({}));
+      throw new Error(d.error || 'Could not process booking. Please try again.');
+    }
+
+    document.getElementById('booking-form').style.display = 'none';
+    document.getElementById('booked-state').classList.add('active');
+    document.getElementById('booked-confirm').textContent = confirmNumber;
+
+  } catch (err) {
+    btn.textContent = 'Book at fair rate →';
+    btn.disabled = false;
+    alert(err.message);
+  }
+}
+
+// ── Reset ──────────────────────────────────────────────────────────────────
+function resetAll() {
+  document.getElementById('description').value = '';
+  document.getElementById('zip').value = '';
+  document.getElementById('scope').value = '';
+  document.getElementById('char-count').textContent = '0';
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('form-card').style.display = 'block';
+  document.getElementById('form-card').style.opacity = '1';
+  document.getElementById('reset-btn').style.display = 'none';
+  document.getElementById('booking-form').style.display = 'block';
+  document.getElementById('booked-state').classList.remove('active');
+  document.getElementById('quote-btn').disabled = false;
+  document.getElementById('btn-text').textContent = 'Get my fair rate →';
+  clearError();
+  currentQuote = null;
+  confirmNumber = null;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Cmd/Ctrl+Enter to submit ───────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('description').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); getQuote(); }
+  });
+});
+</script>
+
+</body>
+</html>
