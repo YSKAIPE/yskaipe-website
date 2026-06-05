@@ -1,314 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About YSKAIPE – Human Cohesive AI</title>
-    <meta name="description" content="YSKAIPE: Where humans and AI collaborate as true teammates to build better outcomes — faster.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
-      
-        :root {
-            --primary: #00f5ff;
-        }
-      
-        .tail-container {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-      
-        .logo-font {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-        .hero-bg {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .section-title {
-            position: relative;
-        }
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, #00f5ff, #00b8ff);
-            bottom: -12px;
-            left: 0;
-            border-radius: 9999px;
-        }
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px -15px rgb(0 245 255 / 0.2);
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #00f5ff;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover:after {
-            width: 100%;
-        }
-        .hero-glow {
-            text-shadow: 0 0 40px rgb(0 245 255 / 0.4);
-        }
-        .maze-escape {
-            background-image: linear-gradient(rgba(10, 10, 10, 0.75), rgba(26, 26, 46, 0.85)),
-                              url('https://gh.cdn.sewest.net/assets/ident/news/b3f0a8f8/FF7RIntergrade_May_KeyVisual-fkl3lqa71.jpeg?quality=65');
-            background-size: cover;
-            background-position: center 40%;
-            background-attachment: fixed;
-        }
-        .escape-glow {
-            animation: glow-pulse 6s ease-in-out infinite;
-        }
-        @keyframes glow-pulse {
-            0%, 100% { text-shadow: 0 0 30px rgba(0, 245, 255, 0.4); }
-            50% { text-shadow: 0 0 60px rgba(0, 245, 255, 0.7); }
-        }
-        .maze-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — YSKAIPE</title>
+<meta name="description" content="YSKAIPE is a fair-price home services marketplace built by Nick Conenna and Deb Conenna in Cornelius, NC. Know the price. Get it done.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a18;
+  --ink2: #3d3d38;
+  --ink3: #6b6b62;
+  --fog: #f5f3ee;
+  --fog2: #edeae3;
+  --fog3: #e2dfd6;
+  --teal: #0d7a5f;
+  --teal-lt: #d4ede6;
+  --teal-dk: #0a5e49;
+  --gold: #b8860b;
+  --gold-lt: #f0e6c4;
+  --white: #fefcf8;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(254,252,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--fog3)}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}
+.nav-logo span{color:var(--teal);font-style:italic}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{background:var(--ink);color:var(--white)!important;padding:9px 22px;border-radius:40px}
+.nav-cta:hover{background:var(--teal)!important}
+
+/* HERO */
+.hero{min-height:56vh;background:var(--ink);display:flex;align-items:flex-end;padding:120px 5% 64px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 85% 20%, #0d7a5f1a 0%, transparent 60%),radial-gradient(ellipse 40% 50% at 15% 80%, #b8860b0f 0%, transparent 60%)}
+.hero-inner{position:relative;z-index:1;max-width:1200px;width:100%;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#9fd5c4;background:rgba(13,122,95,0.25);padding:5px 14px;border-radius:40px;margin-bottom:20px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:#9fd5c4;display:inline-block}
+h1{font-family:var(--serif);font-size:clamp(44px,6vw,72px);line-height:1.05;letter-spacing:-0.02em;color:var(--white);margin-bottom:20px}
+h1 em{font-style:italic;color:#9fd5c4}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.55);font-weight:300;max-width:560px;line-height:1.7}
+
+/* MISSION BAND */
+.mission{background:var(--fog);padding:80px 5%}
+.mission-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mission-text h2{font-family:var(--serif);font-size:clamp(28px,3vw,44px);letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px}
+.mission-text h2 em{font-style:italic;color:var(--teal)}
+.mission-text p{font-size:15px;color:var(--ink2);font-weight:300;line-height:1.75;margin-bottom:14px}
+.mission-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--fog3);border-radius:16px;overflow:hidden}
+.stat-box{background:var(--white);padding:24px 20px;text-align:center}
+.stat-num{font-family:var(--serif);font-size:36px;color:var(--teal);letter-spacing:-0.02em;line-height:1}
+.stat-lbl{font-size:12px;color:var(--ink3);margin-top:4px;line-height:1.4}
+
+/* FOUNDERS */
+.founders{padding:80px 5%;max-width:1200px;margin:0 auto}
+.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+.founders h2{font-family:var(--serif);font-size:clamp(28px,3vw,44px);letter-spacing:-0.02em;margin-bottom:48px}
+.founders h2 em{font-style:italic;color:var(--teal)}
+.founder-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.founder-card{border:1px solid var(--fog3);border-radius:20px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.founder-card:hover{border-color:var(--teal);box-shadow:0 4px 32px rgba(13,122,95,0.1)}
+.founder-card-top{background:var(--ink);padding:40px 36px 32px;position:relative;overflow:hidden}
+.founder-card-top::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 90% 10%, #0d7a5f20 0%, transparent 60%)}
+.founder-avatar{width:80px;height:80px;border-radius:50%;background:var(--teal-lt);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:32px;color:var(--teal);margin-bottom:20px;position:relative;z-index:1;flex-shrink:0;border:2px solid rgba(255,255,255,0.1)}
+.founder-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.founder-name{font-family:var(--serif);font-size:28px;color:var(--white);letter-spacing:-0.02em;margin-bottom:4px;position:relative;z-index:1}
+.founder-title{font-size:12px;font-weight:500;color:#9fd5c4;letter-spacing:.06em;text-transform:uppercase;position:relative;z-index:1}
+.founder-card-body{padding:28px 36px}
+.founder-card-body p{font-size:14px;color:var(--ink2);line-height:1.75;margin-bottom:12px;font-weight:300}
+.founder-card-body p:last-of-type{margin-bottom:0}
+.founder-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;padding-top:20px;border-top:1px solid var(--fog2)}
+.founder-link{font-size:12px;font-weight:500;color:var(--teal);text-decoration:none;display:flex;align-items:center;gap:4px;transition:opacity .2s}
+.founder-link:hover{opacity:.7}
+
+/* VALUES */
+.values{background:var(--ink);padding:80px 5%}
+.values-inner{max-width:1200px;margin:0 auto}
+.values h2{font-family:var(--serif);font-size:clamp(28px,3vw,44px);color:var(--white);letter-spacing:-0.02em;margin-bottom:8px}
+.values h2 em{font-style:italic;color:#9fd5c4}
+.values-sub{font-size:15px;color:rgba(255,255,255,0.5);font-weight:300;margin-bottom:48px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.06);border-radius:16px;overflow:hidden}
+.value-box{background:rgba(255,255,255,0.03);padding:32px 26px;border:1px solid rgba(255,255,255,0.06);transition:background .2s}
+.value-box:hover{background:rgba(255,255,255,0.06)}
+.value-icon{font-size:24px;margin-bottom:14px}
+.value-box h3{font-size:15px;font-weight:500;color:var(--white);margin-bottom:8px}
+.value-box p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65}
+
+/* BUILT WITH AI */
+.ai-band{background:var(--fog);padding:80px 5%}
+.ai-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.ai-text h2{font-family:var(--serif);font-size:clamp(28px,3vw,44px);letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px}
+.ai-text h2 em{font-style:italic;color:var(--teal)}
+.ai-text p{font-size:15px;color:var(--ink2);font-weight:300;line-height:1.75;margin-bottom:14px}
+.ai-stack{display:flex;flex-direction:column;gap:10px}
+.ai-item{background:var(--white);border:1px solid var(--fog3);border-radius:12px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.ai-item-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.ai-item h4{font-size:14px;font-weight:500;margin-bottom:3px}
+.ai-item p{font-size:12px;color:var(--ink3);line-height:1.5;margin:0}
+
+/* CTA */
+.cta{padding:100px 5%;text-align:center}
+.cta h2{font-family:var(--serif);font-size:clamp(32px,4vw,56px);letter-spacing:-0.02em;margin-bottom:16px}
+.cta h2 em{font-style:italic;color:var(--teal)}
+.cta p{font-size:16px;color:var(--ink2);font-weight:300;max-width:440px;margin:0 auto 36px}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:var(--white);padding:14px 32px;border-radius:40px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s}
+.btn-primary:hover{background:var(--teal-dk);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--ink);border:1px solid var(--fog3);padding:14px 28px;border-radius:40px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s}
+.btn-secondary:hover{border-color:var(--teal);color:var(--teal)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:var(--serif);font-size:18px;color:var(--white)}
+.footer-logo span{color:#9fd5c4;font-style:italic}
+.footer-legal{font-size:11px;color:rgba(255,255,255,0.3);max-width:480px;text-align:center;line-height:1.6}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .mission-inner,.ai-inner,.founder-cards{grid-template-columns:1fr;gap:40px}
+  .values-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  .values-grid{grid-template-columns:1fr}
+  .mission-stats{grid-template-columns:1fr 1fr}
+}
+</style>
 </head>
-<body class="tail-container bg-zinc-950 text-white overflow-x-hidden">
+<body>
 
-    <!-- NAVBAR (unchanged) -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-2xl font-bold logo-font shadow-lg shadow-cyan-500/40">Y</div>
-                <span class="logo-font text-3xl font-semibold tracking-tighter">YSKAIPE</span>
-            </div>
-            <div class="hidden md:flex items-center gap-x-10 text-base font-medium">
-                <a href="https://www.yskaipe.com/" class="nav-link text-zinc-300 hover:text-white">Home</a>
-                <a href="#philosophy" class="nav-link text-zinc-300 hover:text-white">Philosophy</a>
-                <a href="#how" class="nav-link text-zinc-300 hover:text-white">How It Works</a>
-                <a href="#story" class="nav-link text-zinc-300 hover:text-white">Our Story</a>
-            </div>
-            <a href="https://x.com/yskaipe" target="_blank"
-               class="px-7 py-3.5 bg-gradient-to-r from-cyan-400 to-blue-500 text-zinc-950 rounded-3xl font-semibold text-sm flex items-center gap-x-2 hover:brightness-110 transition-all shadow-md">
-                <i class="fab fa-x-twitter"></i> @yskaipe
-            </a>
-        </div>
-    </nav>
+<nav>
+  <a href="/index.html" class="nav-logo">YSK<span>AIPE</span></a>
+  <div class="nav-links">
+    <a href="/index.html#how-it-works">How it works</a>
+    <a href="/yskaipe-workers.html">For workers</a>
+    <a href="/founding.html">For Pros <span style="font-size:9px;font-weight:600;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5)">LICENSED</span></a>
+    <a href="/contact.html">Contact</a>
+    <a href="/autoquote.html" class="nav-cta">Get a free quote →</a>
+  </div>
+</nav>
 
-    <!-- HERO (unchanged) -->
-    <section class="hero-bg min-h-screen flex items-center pt-32 pb-20">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-x-3 px-6 py-3 rounded-full bg-cyan-400/10 text-cyan-300 text-sm font-medium mb-10 border border-cyan-400/20">
-                <i class="fas fa-robot text-xl animate-pulse"></i>
-                HUMAN COHESIVE AI
-            </div>
-            <h1 class="text-7xl md:text-8xl font-extrabold tracking-tighter logo-font leading-none hero-glow mb-8">
-                YSKAIPE<br>
-                <span class="text-cyan-400">pronounced “escape”</span>
-            </h1>
-            <p class="text-2xl md:text-3xl text-zinc-300 font-light max-w-4xl mx-auto leading-relaxed">
-                We don’t just use AI.<br>
-                We work alongside it — as true teammates.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center mt-16">
-                <a href="#philosophy" class="px-12 py-6 bg-gradient-to-r from-cyan-400 to-blue-500 text-zinc-950 rounded-3xl font-bold text-lg flex items-center justify-center gap-x-3 hover:scale-105 transition-transform shadow-xl shadow-cyan-500/40">
-                    Meet the Philosophy
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="https://x.com/yskaipe" target="_blank" class="px-12 py-6 border-2 border-cyan-400/60 hover:border-cyan-300 rounded-3xl font-bold text-lg flex items-center justify-center gap-x-3 transition-all">
-                    <i class="fab fa-x-twitter text-xl"></i> Follow the Journey
-                </a>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">About YSKAIPE</div>
+    <h1>Built in Cornelius.<br><em>Built for everyone.</em></h1>
+    <p class="hero-sub">A two-person team with deep roots in the Lake Norman community, building the fairest home services platform in the market.</p>
+  </div>
+</section>
 
-    <!-- GLORIOUS MAZE ESCAPE SECTION -->
-    <section class="relative h-[80vh] md:h-[100vh] overflow-hidden maze-escape">
-        <div class="absolute inset-0 maze-overlay flex items-center justify-center text-center px-6">
-            <div class="max-w-5xl z-10">
-                <h2 class="text-6xl md:text-9xl font-extrabold tracking-tighter text-white escape-glow mb-6 md:mb-10 leading-none">
-                    THE JOURNEY<br>IS THE REWARD
-                </h2>
-                <p class="text-xl md:text-3xl text-zinc-200 font-light max-w-4xl mx-auto leading-relaxed opacity-90">
-                    Every twist, every wall, every moment of doubt in the maze...<br>
-                    leads to the glorious break into open sky.<br>
-                    <span class="text-cyan-300 font-medium">Escape mediocre. Build with true teammates. The path itself is the prize.</span>
-                </p>
-                <div class="mt-10 md:mt-16">
-                    <a href="#how" class="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-3xl font-bold text-lg hover:scale-105 transition-transform shadow-2xl shadow-cyan-500/40">
-                        <i class="fas fa-door-open text-xl"></i>
-                        Start Your Escape
-                    </a>
-                </div>
-            </div>
+<!-- MISSION -->
+<section class="mission">
+  <div class="mission-inner">
+    <div class="mission-text">
+      <div class="section-eyebrow">Our mission</div>
+      <h2>Price transparency.<br><em>Before anyone shows up.</em></h2>
+      <p>Home services have a price problem. Homeowners get quoted blind. Workers get underpaid or undercut. Platforms profit from the chaos. YSKAIPE was built to fix all three — with a Fair Rate Index that anchors every transaction before it begins.</p>
+      <p>We're a technology platform that connects homeowners with YSKAIPE Qualified locals — power washers, movers, landscapers, handymen, painters, and more — matched by AI, paid through escrow, and guaranteed by our worker replaceability promise.</p>
+      <p>Licensed trade pros — HVAC, Plumbing, Electrical, Roofing, and more — join through our Founding Contractor program, with their own dedicated matching pipeline.</p>
+    </div>
+    <div>
+      <div class="mission-stats">
+        <div class="stat-box">
+          <div class="stat-num">15%</div>
+          <div class="stat-lbl">Platform fee — all we take from workers</div>
         </div>
-        <!-- Subtle floating cyan particles / glow effect -->
-        <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-1/4 left-1/4 w-4 h-4 bg-cyan-400 rounded-full opacity-40 animate-ping-slow"></div>
-            <div class="absolute bottom-1/3 right-1/3 w-6 h-6 bg-cyan-300 rounded-full opacity-30 animate-ping-slower"></div>
-            <div class="absolute top-2/3 left-1/2 w-5 h-5 bg-cyan-500 rounded-full opacity-50 animate-ping"></div>
+        <div class="stat-box">
+          <div class="stat-num">$0</div>
+          <div class="stat-lbl">Cost to homeowners — always free</div>
         </div>
-    </section>
-    <style>
-        @keyframes ping-slow {
-            0% { transform: scale(1); opacity: 0.4; }
-            70% { transform: scale(2.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 0; }
-        }
-        @keyframes ping-slower {
-            0% { transform: scale(1); opacity: 0.3; }
-            90% { transform: scale(3); opacity: 0; }
-            100% { transform: scale(1); opacity: 0; }
-        }
-        @keyframes ping {
-            0% { transform: scale(1); opacity: 0.5; }
-            60% { transform: scale(2); opacity: 0; }
-            100% { transform: scale(1); opacity: 0; }
-        }
-        .animate-ping-slow { animation: ping-slow 8s infinite; }
-        .animate-ping-slower { animation: ping-slower 12s infinite; }
-        .animate-ping { animation: ping 6s infinite; }
-    </style>
+        <div class="stat-box">
+          <div class="stat-num">8</div>
+          <div class="stat-lbl">Licensed trade categories served</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">LKN</div>
+          <div class="stat-lbl">Lake Norman — where we launched</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- PHILOSOPHY (unchanged) -->
-    <section id="philosophy" class="py-32 bg-zinc-900 border-t border-white/5">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="grid md:grid-cols-12 gap-16 items-start">
-                <div class="md:col-span-5 sticky top-24">
-                    <span class="px-5 py-2 text-xs font-mono bg-cyan-400/10 text-cyan-400 rounded-full">CHAPTER 01</span>
-                    <h2 class="section-title text-6xl font-extrabold tracking-tighter mt-8">Our Philosophy</h2>
-                </div>
-                <div class="md:col-span-7 text-zinc-300 text-xl leading-relaxed space-y-10">
-                    <p>The biggest breakthroughs happen when humans and AI operate as genuine collaborators — not boss and tool, but true teammates sharing the same goal.</p>
-                    <p>That’s exactly how we built YSKAIPE itself. We worked hand-in-hand with Grok as our reasoning partner and Figma as our design partner — co-creating every wireframe, logic flow, and prototype in real time.</p>
-                    <p>These weren’t passive tools. They were active teammates that helped us break through bottlenecks and ship something truly special.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FOUNDERS -->
+<section class="founders">
+  <div class="section-eyebrow">The founders</div>
+  <h2>Two builders.<br><em>One mission.</em></h2>
 
-    <!-- HOW IT WORKS (unchanged) -->
-    <section id="how" class="py-32 bg-black">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <span class="text-xs font-mono text-cyan-400">CHAPTER 02</span>
-                <h2 class="section-title text-6xl font-extrabold tracking-tighter mt-6">How YSKAIPE Brings This to Life</h2>
-            </div>
-            
-            <div class="max-w-4xl mx-auto glass rounded-3xl p-12 md:p-16">
-                <p class="text-xl text-zinc-300 leading-relaxed mb-10">
-                    Our intelligent AI Orchestrator (AI-O) steps in as a co-founder-level teammate the moment you give it a simple seed input.
-                </p>
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div class="space-y-8">
-                        <div class="flex gap-5">
-                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">1</div>
-                            <div>Matches vibe-aligned humans using advanced similarity algorithms</div>
-                        </div>
-                        <div class="flex gap-5">
-                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">2</div>
-                            <div>Designs tailored workspaces, tools, and workflows</div>
-                        </div>
-                    </div>
-                    <div class="space-y-8">
-                        <div class="flex gap-5">
-                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">3</div>
-                            <div>Runs real-time monitoring and dynamic refinements</div>
-                        </div>
-                        <div class="flex gap-5">
-                            <div class="flex-shrink-0 w-8 h-8 bg-cyan-400/10 rounded-2xl flex items-center justify-center text-cyan-400 font-bold">4</div>
-                            <div>Brings in human + AI specialists exactly when needed</div>
-                        </div>
-                    </div>
-                </div>
-                <p class="mt-12 text-center text-zinc-400 italic">From vibe-coding sessions to full startup strategy sprints — every pod feels perfectly crewed.</p>
-            </div>
-        </div>
-    </section>
+  <div class="founder-cards">
 
-    <!-- OUR STORY + FOUNDER (unchanged, male image intact) -->
-    <section id="story" class="py-32 bg-zinc-900">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="grid md:grid-cols-12 gap-16">
-                <div class="md:col-span-5">
-                    <span class="px-5 py-2 text-xs font-mono bg-cyan-400/10 text-cyan-400 rounded-full">CHAPTER 03</span>
-                    <h2 class="section-title text-6xl font-extrabold tracking-tighter mt-8">Our Story</h2>
-                </div>
-                <div class="md:col-span-7 text-zinc-300 text-lg leading-relaxed space-y-8">
-                    <p>Founded in 2025 in Cornelius, North Carolina, YSKAIPE was born from real frustration: mismatched teams, fragmented threads, and platforms that treat people like checklist items.</p>
-                    <p>We’re proudly bootstrapped and founder-led — shipping daily and staying laser-focused on what actually makes collaboration feel magical.</p>
-                    
-                    <div class="mt-12 glass rounded-3xl p-10 card-hover">
-                        <div class="flex flex-col md:flex-row gap-8 items-center">
-                            <img src="/images/npc-on-X.jpg" 
-                                 alt="Nicks Conenna" 
-                                 class="w-48 h-48 rounded-3xl object-cover flex-shrink-0 border-2 border-cyan-400/30 shadow-xl shadow-cyan-500/20">
-                            <div>
-                                <h4 class="text-3xl font-semibold">Nicholas Conenna</h4>
-                                <p class="text-cyan-400 font-medium">Founder & Lead Builder</p>
-                                <p class="mt-6 text-zinc-300">
-                                    Applied AI engineer who built YSKAIPE hand-in-hand with Grok and Figma — because the best outcomes happen when AI isn’t just a tool, but a real collaborator.
-                                </p>
-                                <div class="mt-8 flex flex-wrap gap-6 text-sm">
-                                    <a href="https://x.com/yskaipe" target="_blank" class="hover:text-cyan-300 transition">X (@yskaipe)</a>
-                                    <a href="https://x.com/Bitcoin_Natives" target="_blank" class="hover:text-cyan-300 transition">X (@Bitcoin_Natives)</a>
-                                    <a href="nick-conenna-yskaipe.html" class="hover:text-cyan-300 transition">Full Bio</a>
-                                    <a href="https://www.linkedin.com/in/nickconenna/" target="_blank" class="hover:text-cyan-300 transition">LinkedIn</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- NICK -->
+    <div class="founder-card">
+      <div class="founder-card-top">
+        <div class="founder-avatar">
+          <img src="/images/npc-on-X.jpg" alt="Nick Conenna" onerror="this.style.display='none';this.parentElement.textContent='NC'">
         </div>
-    </section>
-
-    <!-- VISION CTA (unchanged) -->
-    <section class="py-32 border-t border-white/5 bg-black">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-5xl font-extrabold tracking-tighter mb-8">Every ambitious project deserves the right crew.</h2>
-            <p class="text-2xl text-zinc-400 max-w-2xl mx-auto">Humans and AI working in seamless sync — before you even hit go.</p>
-            
-            <div class="mt-16 flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="build-in-public.html" class="px-14 py-7 bg-gradient-to-r from-cyan-400 to-blue-500 text-zinc-950 rounded-3xl font-bold text-xl hover:scale-105 transition-transform shadow-2xl shadow-cyan-500/30">
-                    Make Your YSKAIPE Pod →
-                </a>
-                <a href="waitlist.html" class="px-14 py-7 border-2 border-cyan-400 hover:bg-cyan-400/10 rounded-3xl font-bold text-xl transition">
-                    Join the Waitlist
-                </a>
-            </div>
+        <div class="founder-name">Nick Conenna</div>
+        <div class="founder-title">Co-Founder · Developer</div>
+      </div>
+      <div class="founder-card-body">
+        <p>Nick is the builder behind YSKAIPE's full technology stack — Next.js, Supabase, Stripe, Resend, and the Anthropic-powered Fair Rate Index. He codes, ships, and iterates daily from Cornelius, NC.</p>
+        <p>With deep interests in Bitcoin, land stewardship, gardening, and sustainability, Nick brings a founder's mindset to every technical decision — lean, deployable, and built to last. YSKAIPE is his conviction that AI and human judgment together can make markets genuinely fair.</p>
+        <p>He built YSKAIPE's matching engine, escrow architecture, legal stack, and the agentic AI layer that makes instant pricing and dispatch possible at scale.</p>
+        <div class="founder-links">
+          <a href="https://x.com/yskaipe" target="_blank" class="founder-link">𝕏 @yskaipe →</a>
+          <a href="https://x.com/Bitcoin_Natives" target="_blank" class="founder-link">𝕏 @Bitcoin_Natives →</a>
+          <a href="https://www.linkedin.com/in/nickconenna/" target="_blank" class="founder-link">LinkedIn →</a>
+          <a href="/nick-conenna-yskaipe.html" class="founder-link">Full bio →</a>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- FOOTER (unchanged) -->
-    <footer class="bg-black py-16 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500 text-sm">
-            <div class="flex items-center justify-center gap-x-8 flex-wrap">
-                <a href="https://www.yskaipe.com/" class="hover:text-white transition">YSKAIPE.com</a>
-                <a href="https://x.com/yskaipe" class="hover:text-white transition">X (@yskaipe)</a>
-                <a href="https://x.com/Bitcoin_Natives" class="hover:text-white transition">Bitcoin Natives</a>
-                <span>© 2026 YSKAIPE • Built with love and real AI teammates</span>
-            </div>
+    <!-- DEB -->
+    <div class="founder-card">
+      <div class="founder-card-top">
+        <div class="founder-avatar" style="background:var(--gold-lt);color:var(--gold)">DC</div>
+        <div class="founder-name">Deb Conenna</div>
+        <div class="founder-title">Co-Founder · Operations & Community</div>
+      </div>
+      <div class="founder-card-body">
+        <p>Deb brings deep community roots and operational expertise to YSKAIPE. As the founder of Peaking Waters LLC, she has spent years building relationships with homeowners, contractors, and the Lake Norman community she calls home.</p>
+        <p>Deb leads worker qualification, community outreach, and the on-the-ground relationships that make the platform real — not just technical. She is YSKAIPE's first founding contractor in the landscaping category, and her instincts for what homeowners and workers actually need shape every product decision.</p>
+        <p>Her values around sustainability, land stewardship, and community trust are woven into the YSKAIPE brand at every level.</p>
+        <div class="founder-links">
+          <a href="/peaking-waters.html" class="founder-link">Peaking Waters LLC →</a>
+          <a href="mailto:gr8@yskaipe.com" class="founder-link">Contact Deb →</a>
         </div>
-    </footer>
+      </div>
+    </div>
 
-    <script>
-        console.log('%cYSKAIPE — Escape the maze, build with teammates 🚀', 'color:#00f5ff; font-family:monospace');
-    </script>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values-inner">
+    <div class="section-eyebrow" style="color:#9fd5c4">What we believe</div>
+    <h2>The principles behind<br><em>everything we build.</em></h2>
+    <p class="values-sub">Not a manifesto — just the things we come back to every day.</p>
+    <div class="values-grid">
+      <div class="value-box">
+        <div class="value-icon">⚖️</div>
+        <h3>Transparency first</h3>
+        <p>The Fair Rate Index exists because homeowners deserve to know what's fair before any worker arrives. Price clarity is a right, not a feature.</p>
+      </div>
+      <div class="value-box">
+        <div class="value-icon">🔒</div>
+        <h3>Payment integrity</h3>
+        <p>We hold escrow. Workers are paid only on confirmed completion. Homeowners are never at risk. The money flow is designed around trust, not hope.</p>
+      </div>
+      <div class="value-box">
+        <div class="value-icon">🌱</div>
+        <h3>Community roots</h3>
+        <p>We launched in Lake Norman because we live here. Every design decision is tested against what actually works for real neighbors, not hypothetical users.</p>
+      </div>
+      <div class="value-box">
+        <div class="value-icon">🔄</div>
+        <h3>Replaceability as a guarantee</h3>
+        <p>If a worker underdelivers, we swap — not argue. Homeowners are never stranded. This is only possible because we control the full transaction.</p>
+      </div>
+      <div class="value-box">
+        <div class="value-icon">🤖</div>
+        <h3>AI as a teammate</h3>
+        <p>Claude powers our Fair Rate Index, matching engine, dispatch, and dispute triage. We build with AI the way good contractors build — precisely and without waste.</p>
+      </div>
+      <div class="value-box">
+        <div class="value-icon">🌍</div>
+        <h3>Sustainability & stewardship</h3>
+        <p>From Deb's land work to Nick's Bitcoin and garden ethos — we believe in building things that last, consuming less, and leaving places better than we found them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT WITH AI -->
+<section class="ai-band">
+  <div class="ai-inner">
+    <div class="ai-text">
+      <div class="section-eyebrow">Built with AI</div>
+      <h2>Claude is our<br><em>co-builder.</em></h2>
+      <p>YSKAIPE is built on Anthropic's Claude — not as a chatbot feature, but as the intelligence layer powering every core function. From the first instant quote to the final payment release, Claude is working.</p>
+      <p>We believe AI should make markets fairer, not just faster. Every agentic function in YSKAIPE is designed around that principle.</p>
+    </div>
+    <div class="ai-stack">
+      <div class="ai-item">
+        <div class="ai-item-icon">⚡</div>
+        <div>
+          <h4>Fair Rate Index — Instant Quote</h4>
+          <p>Claude parses job descriptions and returns transparent price bands for any ZIP code, calibrated to real market data.</p>
+        </div>
+      </div>
+      <div class="ai-item">
+        <div class="ai-item-icon">🎯</div>
+        <div>
+          <h4>WinWinAI Matching Engine</h4>
+          <p>Four-factor scoring: trade match, founding status, geographic proximity, loyalty score. Best-fit worker dispatched in real time.</p>
+        </div>
+      </div>
+      <div class="ai-item">
+        <div class="ai-item-icon">🔄</div>
+        <div>
+          <h4>Dispute Triage</h4>
+          <p>Quality complaints classified and routed automatically. Swap, refund, or release — resolved before it becomes a standoff.</p>
+        </div>
+      </div>
+      <div class="ai-item">
+        <div class="ai-item-icon">📋</div>
+        <div>
+          <h4>Worker Qualification</h4>
+          <p>Applications scored against a readiness checklist. YSKAIPE Qualified badge issued automatically. Humans review flagged cases only.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Know the price.<br><em>Get it done.</em></h2>
+  <p>Free for homeowners. Fair for workers. Built in the Lake Norman community.</p>
+  <div class="cta-actions">
+    <a href="/autoquote.html" class="btn-primary">Get my free quote →</a>
+    <a href="/contact.html" class="btn-secondary">Get in touch</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">YSK<span>AIPE</span></div>
+  <div class="footer-legal">YSKAIPE is a technology platform operated by Peaking Waters LLC, Cornelius, NC. YSKAIPE does not employ, supervise, or control service providers. All independent service providers have completed YSKAIPE's internal qualification process.</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.25)">© 2026 Peaking Waters LLC</div>
+</footer>
+
 </body>
 </html>

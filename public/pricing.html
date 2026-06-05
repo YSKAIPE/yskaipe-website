@@ -1,218 +1,315 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pricing - YSKAIPE | AI-Orchestrated Project Teams</title>
-  <meta name="description" content="Choose the plan that fits your AI-powered project orchestration needs. Start free and scale with premium features and powerful partnerships."/>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#6366f1',     // Indigo-500
-            primaryDark: '#4f46e5', // Indigo-600
-            accent: '#8b5cf6',      // Violet-500
-          }
-        }
-      }
-    }
-  </script>
-  <!-- Optional: Google Fonts for modern typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — YSKAIPE</title>
+<meta name="description" content="YSKAIPE is free for homeowners, always. Workers earn with a simple 15% platform fee. Licensed pros join the founding contractor program.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a18;
+  --ink2: #3d3d38;
+  --ink3: #6b6b62;
+  --fog: #f5f3ee;
+  --fog2: #edeae3;
+  --fog3: #e2dfd6;
+  --teal: #0d7a5f;
+  --teal-lt: #d4ede6;
+  --teal-dk: #0a5e49;
+  --gold: #b8860b;
+  --gold-lt: #f0e6c4;
+  --coral: #c44b2b;
+  --coral-lt: #faeae4;
+  --white: #fefcf8;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(254,252,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--fog3)}
+.nav-logo{font-family:var(--serif);font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-0.02em}
+.nav-logo span{color:var(--teal);font-style:italic}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{background:var(--ink);color:var(--white)!important;padding:9px 22px;border-radius:40px;font-size:13px!important}
+.nav-cta:hover{background:var(--teal)!important}
+
+.hero{padding:120px 5% 80px;text-align:center;max-width:800px;margin:0 auto}
+.eyebrow{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);background:var(--teal-lt);padding:5px 14px;border-radius:40px;margin-bottom:20px}
+h1{font-family:var(--serif);font-size:clamp(40px,5vw,64px);line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px}
+h1 em{font-style:italic;color:var(--teal)}
+.hero-sub{font-size:17px;color:var(--ink2);font-weight:300;line-height:1.7;max-width:520px;margin:0 auto}
+
+.cards{padding:0 5% 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+
+.card{border-radius:20px;overflow:hidden;border:1px solid var(--fog3);background:var(--white);display:flex;flex-direction:column}
+.card.featured{border-color:var(--teal);border-width:1.5px;box-shadow:0 4px 40px rgba(13,122,95,0.12)}
+.card-header{padding:32px 28px 24px}
+.card-icon{font-size:28px;margin-bottom:16px}
+.card-title{font-family:var(--serif);font-size:26px;letter-spacing:-0.02em;margin-bottom:6px}
+.card-sub{font-size:13px;color:var(--ink3);line-height:1.5}
+.card-price{margin-top:20px;padding-top:20px;border-top:1px solid var(--fog2)}
+.price-num{font-family:var(--serif);font-size:52px;line-height:1;color:var(--ink);letter-spacing:-0.02em}
+.price-num.teal{color:var(--teal)}
+.price-label{font-size:13px;color:var(--ink3);margin-top:4px}
+.card-body{padding:24px 28px;flex:1;display:flex;flex-direction:column}
+.feature-list{list-style:none;padding:0;flex:1}
+.feature-list li{font-size:13px;color:var(--ink2);padding:7px 0;border-bottom:1px solid var(--fog2);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.feature-list li:last-child{border-bottom:none}
+.feature-list li::before{content:'✓';color:var(--teal);font-weight:500;flex-shrink:0;margin-top:1px}
+.feature-list li.no::before{content:'—';color:var(--fog3)}
+.feature-list li.no{color:var(--ink3)}
+.card-cta{margin-top:24px}
+.btn-full{display:block;width:100%;padding:14px;border-radius:40px;font-family:var(--sans);font-size:14px;font-weight:500;text-align:center;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-teal{background:var(--teal);color:var(--white)}
+.btn-teal:hover{background:var(--teal-dk)}
+.btn-ink{background:var(--ink);color:var(--white)}
+.btn-ink:hover{background:#2d2d2a}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--fog3)}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+
+.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.badge-teal{background:var(--teal-lt);color:var(--teal)}
+.badge-gold{background:var(--gold-lt);color:var(--gold)}
+
+.explainer{background:var(--fog);padding:80px 5%}
+.explainer-inner{max-width:1200px;margin:0 auto}
+.explainer h2{font-family:var(--serif);font-size:clamp(28px,3vw,42px);letter-spacing:-0.02em;margin-bottom:8px}
+.explainer h2 em{font-style:italic;color:var(--teal)}
+.explainer-sub{font-size:15px;color:var(--ink2);font-weight:300;margin-bottom:48px}
+.math-row{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;background:var(--fog3);border-radius:16px;overflow:hidden}
+.math-box{background:var(--white);padding:24px 20px;text-align:center}
+.math-box:first-child{border-radius:16px 0 0 16px}
+.math-box:last-child{border-radius:0 16px 16px 0}
+.math-num{font-family:var(--serif);font-size:32px;color:var(--teal);letter-spacing:-0.02em;margin-bottom:4px}
+.math-lbl{font-size:11px;color:var(--ink3);line-height:1.4}
+.math-op{display:flex;align-items:center;justify-content:center;background:var(--fog);font-size:20px;color:var(--ink3);font-weight:300}
+
+.faq{padding:80px 5%;max-width:800px;margin:0 auto}
+.faq h2{font-family:var(--serif);font-size:clamp(28px,3vw,42px);letter-spacing:-0.02em;margin-bottom:40px;text-align:center}
+.faq h2 em{font-style:italic;color:var(--teal)}
+.faq-item{border-bottom:1px solid var(--fog3);padding:20px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-size:15px;font-weight:500;margin-bottom:8px}
+.faq-a{font-size:13px;color:var(--ink2);line-height:1.7}
+.faq-a a{color:var(--teal);text-decoration:none}
+
+.cta-band{background:var(--ink);padding:80px 5%;text-align:center}
+.cta-band h2{font-family:var(--serif);font-size:clamp(32px,4vw,52px);color:var(--white);letter-spacing:-0.02em;margin-bottom:16px}
+.cta-band h2 em{font-style:italic;color:#9fd5c4}
+.cta-band p{font-size:16px;color:rgba(255,255,255,0.55);font-weight:300;margin-bottom:36px}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-cta-teal{background:var(--teal);color:var(--white);padding:15px 36px;border-radius:40px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s}
+.btn-cta-teal:hover{background:var(--teal-dk)}
+.btn-cta-ghost{background:transparent;color:var(--white);padding:15px 32px;border-radius:40px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all .2s}
+.btn-cta-ghost:hover{border-color:rgba(255,255,255,0.5)}
+
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.08);padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:var(--serif);font-size:18px;color:var(--white)}
+.footer-logo span{color:#9fd5c4;font-style:italic}
+.footer-legal{font-size:11px;color:rgba(255,255,255,0.3);max-width:480px;text-align:center;line-height:1.6}
+
+@media(max-width:900px){.cards{grid-template-columns:1fr}.math-row{grid-template-columns:1fr 1fr}.math-op{display:none}.nav-links{display:none}}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-900 antialiased">
+<body>
 
-  <!-- Header / Hero -->
-  <header class="bg-gradient-to-br from-indigo-600 via-indigo-700 to-violet-800 text-white py-20 px-6 text-center">
-    <div class="max-w-5xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Simple, powerful pricing</h1>
-      <p class="text-xl md:text-2xl opacity-90 mb-8 max-w-3xl mx-auto">
-        Start building AI-orchestrated teams for free. Upgrade for unlimited projects, advanced matching, partner integrations, and enterprise-grade orchestration.
-      </p>
-      <div class="flex items-center justify-center gap-4 flex-wrap">
-        <button class="bg-white text-indigo-700 font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-gray-100 transition text-lg">
-          Get Started Free
-        </button>
-        <a href="#compare" class="border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition text-lg">
-          Compare Plans
-        </a>
+<nav>
+  <a href="/index.html" class="nav-logo">YSK<span>AIPE</span></a>
+  <div class="nav-links">
+    <a href="/index.html#how-it-works">How it works</a>
+    <a href="/yskaipe-workers.html">For workers</a>
+    <a href="/founding.html">For Pros <span style="font-size:9px;font-weight:600;padding:2px 6px;border-radius:10px;background:var(--fog2);color:var(--ink3)">LICENSED</span></a>
+    <a href="/autoquote.html" class="nav-cta">Get a free quote →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Pricing</div>
+  <h1>Simple. Transparent.<br><em>Fair for everyone.</em></h1>
+  <p class="hero-sub">Free for homeowners. A simple 15% fee for workers. A subscription for licensed pros. No surprises — just like the Fair Rate Index itself.</p>
+</div>
+
+<div class="cards">
+
+  <!-- HOMEOWNERS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏠</div>
+      <div class="badge badge-teal">Homeowners</div>
+      <div class="card-title">Always free.</div>
+      <div class="card-sub">Get an instant fair-rate quote for any job. No account required, no credit card, no catch.</div>
+      <div class="card-price">
+        <div class="price-num teal">$0</div>
+        <div class="price-label">Free forever · No account needed</div>
       </div>
     </div>
-  </header>
-
-  <!-- Billing Toggle -->
-  <section class="py-12 bg-white">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <div class="inline-flex items-center bg-gray-100 rounded-full p-1.5 shadow-inner">
-        <button class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 bg-white shadow text-gray-900" id="monthly-btn">
-          Monthly
-        </button>
-        <button class="px-6 py-2.5 rounded-full font-medium transition-all duration-300 text-gray-600 hover:text-gray-900" id="yearly-btn">
-          Yearly <span class="text-green-600 font-semibold">— Save 20%</span>
-        </button>
+    <div class="card-body">
+      <ul class="feature-list">
+        <li>Instant Fair Rate Index quote for any service</li>
+        <li>Know the price before anyone shows up</li>
+        <li>YSKAIPE Qualified worker matched to your job</li>
+        <li>Payment held in escrow — released on completion only</li>
+        <li>Worker replaceability guarantee — quality issue = swap</li>
+        <li>Post-job review and rating</li>
+        <li>Access to licensed pros via For Pros tier</li>
+      </ul>
+      <div class="card-cta">
+        <a href="/autoquote.html" class="btn-full btn-teal">Get my free quote →</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Pricing Cards -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 lg:gap-10">
-      
-      <!-- Free Tier -->
-      <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col h-full">
-        <div class="p-8 pb-6 bg-gradient-to-br from-gray-50 to-white">
-          <h3 class="text-2xl font-bold mb-2">Free</h3>
-          <p class="text-gray-600 mb-6">Perfect for exploring AI team orchestration</p>
-          <div class="text-5xl font-bold mb-1">$0</div>
-          <p class="text-gray-500 text-sm">forever</p>
-        </div>
-        <div class="p-8 flex-grow flex flex-col">
-          <ul class="space-y-4 mb-8 flex-grow">
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>1 active project</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Basic team matching (up to 3 members, attitude-based)</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Standard workspace (email/chat)</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Core AI services: prompt workshops, basic prototyping</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Community access & waitlist perks</li>
-          </ul>
-          <a href="/signup" class="mt-auto block bg-indigo-600 text-white font-semibold text-center py-4 rounded-xl hover:bg-indigo-700 transition">
-            Get Started Free
-          </a>
-        </div>
-      </div>
-
-      <!-- Pro Tier (Recommended) -->
-      <div class="bg-gradient-to-br from-indigo-50 to-violet-50 rounded-2xl shadow-2xl border-2 border-indigo-200 overflow-hidden flex flex-col h-full relative scale-105 z-10">
-        <div class="absolute top-0 right-0 bg-indigo-600 text-white text-xs font-bold px-4 py-1 rounded-bl-lg">Recommended</div>
-        <div class="p-8 pb-6 bg-gradient-to-br from-indigo-600 to-violet-700 text-white">
-          <h3 class="text-2xl font-bold mb-2">Pro</h3>
-          <p class="opacity-90 mb-6">For creators & small teams scaling fast</p>
-          <div class="text-5xl font-bold mb-1" id="pro-price">$9.99</div>
-          <p class="opacity-80 text-sm" id="pro-billing">/month</p>
-        </div>
-        <div class="p-8 flex-grow flex flex-col">
-          <p class="text-indigo-700 font-semibold mb-4">Everything in Free, plus:</p>
-          <ul class="space-y-4 mb-8 flex-grow">
-            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Unlimited active projects</li>
-            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Advanced matching (up to 10 members, interest & vibe)</li>
-            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Partner integrations (Slack, Figma, GitHub, OpenAI credits)</li>
-            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>$10/month partner credit bundle</li>
-            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Priority AI + 1 human adjustment per project</li>
-            <li class="flex items-start"><span class="text-green-600 mr-3 text-xl">✓</span>Premium services: strategy sprints, vibe coding</li>
-          </ul>
-          <a href="/signup?plan=pro" class="mt-auto block bg-indigo-700 text-white font-semibold text-center py-4 rounded-xl hover:bg-indigo-800 transition shadow-lg">
-            Start Pro Trial
-          </a>
-        </div>
-      </div>
-
-      <!-- Enterprise Tier -->
-      <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col h-full">
-        <div class="p-8 pb-6 bg-gradient-to-br from-gray-800 to-gray-900 text-white">
-          <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
-          <p class="opacity-90 mb-6">For organizations & complex initiatives</p>
-          <div class="text-4xl font-bold mb-1">Custom</div>
-          <p class="opacity-80 text-sm">Contact us</p>
-        </div>
-        <div class="p-8 flex-grow flex flex-col">
-          <p class="text-gray-700 font-semibold mb-4">Everything in Pro, plus:</p>
-          <ul class="space-y-4 mb-8 flex-grow">
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Unlimited team sizes & multi-pod orchestration</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Unlimited human prompt engineer support</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Advanced analytics & ROI tracking</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Exclusive partner bundles (Eventbrite, custom Slack, OpenAI)</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>API access & custom integrations</li>
-            <li class="flex items-start"><span class="text-green-500 mr-3 text-xl">✓</span>Dedicated manager & white-label options</li>
-          </ul>
-          <a href="/contact-sales" class="mt-auto block bg-gray-900 text-white font-semibold text-center py-4 rounded-xl hover:bg-black transition">
-            Contact Sales
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Comparison Table -->
-  <section id="compare" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Compare Plans</h2>
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-gray-100">
-              <th class="p-6 font-semibold text-lg">Feature</th>
-              <th class="p-6 text-center font-bold text-indigo-700 text-xl">Free</th>
-              <th class="p-6 text-center font-bold text-indigo-700 text-xl bg-indigo-50">Pro</th>
-              <th class="p-6 text-center font-bold text-indigo-700 text-xl">Enterprise</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y">
-            <tr><td class="p-6 font-medium">Active Projects</td><td class="p-6 text-center">1</td><td class="p-6 text-center bg-indigo-50">Unlimited</td><td class="p-6 text-center">Unlimited</td></tr>
-            <tr><td class="p-6 font-medium">Team Size per Pod</td><td class="p-6 text-center">Up to 3</td><td class="p-6 text-center bg-indigo-50">Up to 10</td><td class="p-6 text-center">Unlimited</td></tr>
-            <tr><td class="p-6 font-medium">Matching Algorithms</td><td class="p-6 text-center">Basic (attitude)</td><td class="p-6 text-center bg-indigo-50">Advanced (interest + vibe)</td><td class="p-6 text-center">Full + custom</td></tr>
-            <tr><td class="p-6 font-medium">Partner Integrations & Credits</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">$10/mo bundle</td><td class="p-6 text-center">Exclusive bundles</td></tr>
-            <tr><td class="p-6 font-medium">Human Prompt Engineer Support</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">1 per project</td><td class="p-6 text-center">Unlimited</td></tr>
-            <tr><td class="p-6 font-medium">Advanced Analytics & ROI</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">—</td><td class="p-6 text-center">Full access</td></tr>
-            <tr><td class="p-6 font-medium">API Access & White-Label</td><td class="p-6 text-center">—</td><td class="p-6 text-center bg-indigo-50">—</td><td class="p-6 text-center">Yes</td></tr>
-            <tr><td class="p-6 font-medium">Dedicated Support</td><td class="p-6 text-center">Community</td><td class="p-6 text-center bg-indigo-50">Priority</td><td class="p-6 text-center">Account Manager</td></tr>
-          </tbody>
-        </table>
+  <!-- WORKERS -->
+  <div class="card featured">
+    <div class="card-header">
+      <div class="card-icon">🔧</div>
+      <div class="badge badge-teal">YSKAIPE Qualified Workers</div>
+      <div class="card-title">Earn on every job.</div>
+      <div class="card-sub">Free to join. Claim jobs in your ZIP. Get paid same day. YSKAIPE takes 15% — that's the whole equation.</div>
+      <div class="card-price">
+        <div class="price-num teal">15%</div>
+        <div class="price-label">Platform fee · Free to join · Same-day Stripe payout</div>
       </div>
     </div>
-  </section>
-
-  <!-- CTA Footer -->
-  <section class="bg-gradient-to-br from-indigo-700 to-violet-800 text-white py-20 px-6 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to orchestrate your next big project?</h2>
-      <p class="text-xl opacity-90 mb-10">Join thousands building smarter teams with AI. Start free — no credit card required.</p>
-      <a href="/signup" class="inline-block bg-white text-indigo-700 font-bold px-10 py-5 rounded-xl text-xl shadow-2xl hover:bg-gray-100 transition transform hover:scale-105">
-        Create Your Free Account
-      </a>
+    <div class="card-body">
+      <ul class="feature-list">
+        <li>Free to apply and join the network</li>
+        <li>Jobs matched to your ZIP and skills in real time</li>
+        <li>Fair Rate Index sets the price — no negotiating</li>
+        <li>Claim jobs instantly or bid within the FRI range</li>
+        <li>Full address revealed only after payment captured</li>
+        <li>Same-day Stripe Connect payout on completion</li>
+        <li>YSKAIPE Qualified badge — builds with every job</li>
+        <li>Age 14+ with parental consent (Junior Program)</li>
+        <li>Crew lead roles available for 18+ workers</li>
+      </ul>
+      <div class="card-cta">
+        <a href="/yskaipe-workers.html" class="btn-full btn-teal">Join the network →</a>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Simple Footer -->
-  <footer class="bg-gray-900 text-gray-400 py-12 px-6 text-center">
-    <p>&copy; 2026 YSKAIPE. All rights reserved.</p>
-    <div class="mt-4 space-x-6">
-      <a href="/privacy" class="hover:text-white">Privacy</a>
-      <a href="/terms" class="hover:text-white">Terms</a>
-      <a href="/contact" class="hover:text-white">Contact</a>
+  <!-- LICENSED PROS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏅</div>
+      <div class="badge badge-gold">Licensed Pros</div>
+      <div class="card-title">Founding rate.</div>
+      <div class="card-sub">Hold a trade license? Join as a Founding Pro — HVAC, Plumbing, Electrical, Roofing, GC, Landscaping, Painting, Automotive.</div>
+      <div class="card-price">
+        <div class="price-num">$99</div>
+        <div class="price-label">Per month · First month free · Cancel anytime</div>
+      </div>
     </div>
-  </footer>
+    <div class="card-body">
+      <ul class="feature-list">
+        <li>First 30 days free — $0 due today</li>
+        <li>Priority routing in WinWinAI matching engine</li>
+        <li>Founding Pro badge on public profile</li>
+        <li>Unlimited AI-matched leads in your trade</li>
+        <li>One licensed pro per ZIP per trade — no sharing</li>
+        <li>Loyalty score accumulates from day one</li>
+        <li>Pro Dashboard with lead management</li>
+        <li>Direct line to founder + product team</li>
+        <li>Founding rate locked as long as subscribed</li>
+      </ul>
+      <div class="card-cta">
+        <a href="/founding.html" class="btn-full btn-ink">Start free month →</a>
+      </div>
+    </div>
+  </div>
 
-  <!-- Basic JS for toggle -->
-  <script>
-    const monthlyBtn = document.getElementById('monthly-btn');
-    const yearlyBtn = document.getElementById('yearly-btn');
-    const proPrice = document.getElementById('pro-price');
-    const proBilling = document.getElementById('pro-billing');
+</div>
 
-    monthlyBtn.addEventListener('click', () => {
-      monthlyBtn.classList.add('bg-white', 'shadow', 'text-gray-900');
-      monthlyBtn.classList.remove('text-gray-600');
-      yearlyBtn.classList.remove('bg-white', 'shadow', 'text-gray-900');
-      yearlyBtn.classList.add('text-gray-600');
-      proPrice.textContent = '$9.99';
-      proBilling.textContent = '/month';
-    });
+<!-- TAKE RATE EXPLAINER -->
+<div class="explainer">
+  <div class="explainer-inner">
+    <div style="max-width:600px;margin-bottom:48px">
+      <div style="font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">How the 15% works</div>
+      <h2>The math is simple.<br><em>On purpose.</em></h2>
+      <p class="explainer-sub" style="margin-top:8px">Every dollar a homeowner pays flows through YSKAIPE. We keep 15%. The rest goes directly to the worker via Stripe, same day. No hidden fees, no tip prompts, no surprises.</p>
+    </div>
+    <div class="math-row">
+      <div class="math-box">
+        <div class="math-num">$220</div>
+        <div class="math-lbl">Homeowner pays<br>(avg job value)</div>
+      </div>
+      <div class="math-op">×15%</div>
+      <div class="math-box">
+        <div class="math-num" style="color:var(--ink3)">$33</div>
+        <div class="math-lbl">YSKAIPE keeps<br>(platform fee)</div>
+      </div>
+      <div class="math-op">=</div>
+      <div class="math-box">
+        <div class="math-num">$187</div>
+        <div class="math-lbl">Worker receives<br>(same-day Stripe)</div>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:12px;color:var(--ink3);text-align:center">Payment captured at booking · held in escrow · released on confirmed completion</p>
+  </div>
+</div>
 
-    yearlyBtn.addEventListener('click', () => {
-      yearlyBtn.classList.add('bg-white', 'shadow', 'text-gray-900');
-      yearlyBtn.classList.remove('text-gray-600');
-      monthlyBtn.classList.remove('bg-white', 'shadow', 'text-gray-900');
-      monthlyBtn.classList.add('text-gray-600');
-      proPrice.textContent = '$99';
-      proBilling.textContent = '/year';
-    });
-  </script>
+<!-- FAQ -->
+<div class="faq">
+  <h2>Common <em>questions.</em></h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Is it really free for homeowners?</div>
+    <div class="faq-a">Yes, completely. Getting an Instant Quote from the Fair Rate Index costs nothing and requires no account. When you book a job, you pay the agreed price — no markup, no platform surcharge on top. The 15% fee comes out of what the worker receives, not from you.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">How does escrow work?</div>
+    <div class="faq-a">When you book a job, YSKAIPE captures payment via Stripe and holds it. The worker's contact details and your address are only shared after payment is captured. When the job is complete and you confirm, YSKAIPE releases the worker's payment same day. If there's an issue, YSKAIPE resolves it — swap the worker or issue a refund.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What does "YSKAIPE Qualified" mean?</div>
+    <div class="faq-a">It's our internal designation — not a license claim. Workers complete an application, verify their identity, sign an Independent Contractor agreement, and connect Stripe for payouts. They earn the badge, can lose it, and can be replaced under it. It signals vetting, not certification.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Can workers under 18 join?</div>
+    <div class="faq-a">Yes — through the <a href="/yskaipe-workers.html#junior">YSKAIPE Junior Program</a>. Workers aged 14+ can join with parental co-signature on the IC agreement. Jobs are age-tiered: 14–15 year olds get light physical work, 15–17 year olds unlock most Tier 2 jobs, 18+ gets full access. Payment goes to a custodial Stripe account under the parent's name.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What's the difference between a worker and a licensed pro?</div>
+    <div class="faq-a">Workers are YSKAIPE Qualified locals — no license required — who handle Tier 2 services: power washing, moving help, lawn care, painting, handyman work, event setup, and more. Licensed pros are trade-certified contractors (HVAC, Plumbing, Electrical, Roofing, etc.) who subscribe at $99/month for matched leads in their licensed trade. Both use the same FRI pricing and escrow system.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">What if I'm unhappy with the work?</div>
+    <div class="faq-a">Contact YSKAIPE before confirming completion. We'll triage the issue — if warranted, we swap the worker (sending someone else to finish or redo the job) or issue a refund. Payment is never released until you confirm, so you're never left without recourse.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Is the $99/month licensed pro rate going up?</div>
+    <div class="faq-a">The founding rate is locked for as long as you stay subscribed. Standard tiers will be announced after the First Fifty cohort closes — at higher prices. Founding pros keep their rate permanently. <a href="/founding.html">Learn more about the Founding Pro program →</a></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <h2>Know the price.<br><em>Get it done.</em></h2>
+  <p>Free for homeowners. Fair for workers. Built for the Lake Norman community and beyond.</p>
+  <div class="cta-actions">
+    <a href="/autoquote.html" class="btn-cta-teal">Get my free quote →</a>
+    <a href="/yskaipe-workers.html" class="btn-cta-ghost">Join as a worker</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">YSK<span>AIPE</span></div>
+  <div class="footer-legal">YSKAIPE is a technology platform operated by Peaking Waters LLC, Cornelius, NC. YSKAIPE does not employ, supervise, or control service providers. All independent service providers have completed YSKAIPE's internal qualification process. This designation does not constitute a professional license or certification.</div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.25)">© 2026 Peaking Waters LLC</div>
+</footer>
 
 </body>
 </html>
