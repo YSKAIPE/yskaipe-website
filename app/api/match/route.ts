@@ -146,7 +146,7 @@ async function dispatchToLicensedContractors({
     await resend.emails.send({
       from: FROM,
       to: c.email,
-      reply_to: 'gr8@yskaipe.com',
+      replyTo: 'gr8@yskaipe.com',
       subject: `New job opportunity — ${task.label}`,
       html: `
         <div style="font-family:sans-serif;max-width:520px">

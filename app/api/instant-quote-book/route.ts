@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: FROM,
       to: ADMIN,
-      reply_to: email,
+      replyTo: email,
       subject: `[${confirmNumber}] New job — ${task.label} · ${zip ?? 'no ZIP'} · ${task.tier_min} tier`,
       html: `
         <h2 style="font-family:sans-serif">New YSKAIPE Job Booking</h2>
