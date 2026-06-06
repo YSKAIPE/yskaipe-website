@@ -434,7 +434,7 @@ function renderResult(data,zip){
   const tc=TIER[currentTier]||TIER.primary;
   const price=data.book_price||Math.round(((data.fri_low||80)+(data.fri_high||200))/2);
   const payout=data.worker_payout||Math.round(price*.85);
-  const needsConsult=!!data.needs_consultation;
+  const siteAssess=!!data.needs_site_assessment;
 
   // Header
   document.getElementById('result-header').className='result-header tier-'+tc.css;
@@ -454,16 +454,15 @@ function renderResult(data,zip){
   document.getElementById('permit-strip').style.display=data.permit_likely?'flex':'none';
 
   // Price block
-  document.getElementById('price-eyebrow').textContent=needsConsult?'Estimated starting price':'Your fair price';
-  document.getElementById('price-starting').style.display=needsConsult?'block':'none';
+  document.getElementById('price-eyebrow').textContent=siteAssess?'Starting price — pro confirms final scope on site':'Your fair price';
+  document.getElementById('price-starting').style.display=siteAssess?'block':'none';
   const pn=document.getElementById('price-number');
   pn.className='price-number '+tc.css;
   pn.textContent=fmt(price);
   document.getElementById('price-unit').textContent=UNIT_MAP[data.fri_unit||'flat']||'flat rate';
   document.getElementById('price-rationale').textContent=data.rationale||'';
-  document.getElementById('payout-number').style.display=needsConsult?'none':'flex';
   document.getElementById('payout-number').textContent=fmt(payout);
-  document.getElementById('fri-band').textContent=`Fair Rate Index reference · ZIP ${zip} · $${(data.fri_low||price).toLocaleString()}–$${(data.fri_high||price).toLocaleString()}`;
+  document.getElementById('fri-band').textContent=`Fair Rate Index · ZIP ${zip} · Band: ${fmt(data.fri_low||price)}–${fmt(data.fri_high||price)}`;
 
   // Includes
   const incEl=document.getElementById('result-includes');
@@ -473,27 +472,18 @@ function renderResult(data,zip){
   });
   document.getElementById('result-includes-section').style.display=(data.includes||[]).length?'block':'none';
 
-  // Booking section — consultation jobs get a different CTA
+  // Booking section
   const bookSubs={
     licensed:'Your job broadcasts to our licensed pro network — state-licensed, insured, credentials on file. First to claim gets it.',
     primary:'Broadcasting to YSKAIPE Primary Workers in your ZIP now. First qualified worker to claim gets the job.',
     youth:'Broadcasting to YSKAIPE Youth Workers in your area. Supervised, motivated, and perfect for this job.',
   };
-  const consultSub='This job requires a free on-site consultation before a final price is locked. A licensed pro will contact you within 2 hours to schedule.';
-  document.getElementById('booking-sub').textContent=needsConsult?consultSub:(bookSubs[currentTier]||bookSubs.primary);
+  document.getElementById('booking-sub').textContent=bookSubs[currentTier]||bookSubs.primary;
   const bookBtn=document.getElementById('book-btn');
   bookBtn.className='book-btn '+tc.css;
-  bookBtn.textContent=needsConsult?`Request free consultation →`:`Book now for ${fmt(price)} →`;
+  bookBtn.textContent=(siteAssess?`Book — starting at ${fmt(price)} →`:`Book now for ${fmt(price)} →`);
   document.getElementById('booked-icon').className='booked-icon '+tc.css;
   document.getElementById('booked-tier-label').textContent=tc.label;
-
-  // Update booked confirmation copy for consultation jobs
-  const bookedNext=document.getElementById('booked-next');
-  if(needsConsult){
-    bookedNext.innerHTML='<strong>What happens next</strong>A licensed YSKAIPE pro will contact you within 2 hours to schedule a free on-site consultation. They will assess the scope, confirm the final price, and you approve before any work begins.';
-  } else {
-    bookedNext.innerHTML='<strong>What happens next</strong>The first qualified worker in your area to claim this job will be introduced to you by email within 2 hours — usually faster. Payment is held in escrow and released only after you confirm the job is complete.';
-  }
 
   // Show result
   document.getElementById('form-card').style.display='none';
