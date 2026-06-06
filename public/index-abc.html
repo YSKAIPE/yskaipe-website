@@ -1,0 +1,1858 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>YSKAIPE — The Home Services Platform</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --green: #b8f073;
+                --black: #0d0e0c;
+                --off: #111210;
+                --dim: #1a1c18;
+                --mid: #2a2e27;
+                --text: #e8ede0;
+                --muted: #7a8070;
+                --primary-col: #b8f073;
+                --licensed-col: #73c8f0;
+                --youth-col: #f0c473;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: "DM Sans", sans-serif;
+                background: var(--black);
+                color: var(--text);
+                overflow-x: hidden;
+                cursor: default;
+            }
+
+            /* ── NOISE OVERLAY ── */
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+                pointer-events: none;
+                z-index: 9999;
+                opacity: 0.4;
+            }
+
+            /* ── NAV ── */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1.25rem 3rem;
+                border-bottom: 1px solid rgba(184, 240, 115, 0.08);
+                background: rgba(13, 14, 12, 0.85);
+                backdrop-filter: blur(16px);
+            }
+
+            .nav-logo {
+                font-family: "Fraunces", serif;
+                font-size: 1.5rem;
+                font-weight: 900;
+                color: var(--green);
+                letter-spacing: -0.02em;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 2.5rem;
+                list-style: none;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+                font-weight: 500;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--muted);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            .nav-links a:hover {
+                color: var(--green);
+            }
+
+            .nav-cta {
+                background: var(--green);
+                color: var(--black);
+                font-size: 0.78rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding: 0.6rem 1.4rem;
+                border: none;
+                cursor: pointer;
+                transition: opacity 0.2s;
+            }
+            .nav-cta:hover {
+                opacity: 0.85;
+            }
+
+            /* ── HERO ── */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 8rem 2rem 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero-grid {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(
+                        rgba(184, 240, 115, 0.04) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(184, 240, 115, 0.04) 1px,
+                        transparent 1px
+                    );
+                background-size: 80px 80px;
+                animation: gridDrift 40s linear infinite;
+            }
+
+            @keyframes gridDrift {
+                0% {
+                    transform: translateY(0);
+                }
+                100% {
+                    transform: translateY(80px);
+                }
+            }
+
+            .hero-glow {
+                position: absolute;
+                width: 900px;
+                height: 900px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    ellipse,
+                    rgba(184, 240, 115, 0.06) 0%,
+                    transparent 70%
+                );
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                animation: breathe 8s ease-in-out infinite;
+            }
+
+            @keyframes breathe {
+                0%,
+                100% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 0.6;
+                }
+                50% {
+                    transform: translate(-50%, -50%) scale(1.1);
+                    opacity: 1;
+                }
+            }
+
+            .hero-eyebrow {
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.22em;
+                text-transform: uppercase;
+                color: var(--green);
+                margin-bottom: 1.5rem;
+                position: relative;
+                animation: fadeUp 0.8s ease both;
+            }
+
+            .hero-eyebrow::before,
+            .hero-eyebrow::after {
+                content: "——";
+                opacity: 0.4;
+                margin: 0 0.8rem;
+            }
+
+            .hero-headline {
+                font-family: "Fraunces", serif;
+                font-size: clamp(3.5rem, 8vw, 8rem);
+                font-weight: 900;
+                line-height: 0.92;
+                letter-spacing: -0.03em;
+                position: relative;
+                animation: fadeUp 0.8s 0.1s ease both;
+                max-width: 1000px;
+            }
+
+            .hero-headline em {
+                font-style: italic;
+                font-weight: 300;
+                color: var(--green);
+            }
+
+            .hero-sub {
+                font-size: 1.15rem;
+                font-weight: 300;
+                color: var(--muted);
+                max-width: 600px;
+                margin: 2rem auto 0;
+                line-height: 1.7;
+                position: relative;
+                animation: fadeUp 0.8s 0.2s ease both;
+            }
+
+            .hero-actions {
+                display: flex;
+                gap: 1rem;
+                margin-top: 3rem;
+                position: relative;
+                animation: fadeUp 0.8s 0.3s ease both;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn-primary {
+                background: var(--green);
+                color: var(--black);
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 1rem 2.5rem;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 40px rgba(184, 240, 115, 0.25);
+            }
+
+            .btn-ghost {
+                background: transparent;
+                color: var(--text);
+                font-size: 0.82rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 1rem 2.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .btn-ghost:hover {
+                border-color: var(--green);
+                color: var(--green);
+            }
+
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* ── TICKER ── */
+            .ticker {
+                border-top: 1px solid rgba(184, 240, 115, 0.12);
+                border-bottom: 1px solid rgba(184, 240, 115, 0.12);
+                padding: 0.9rem 0;
+                overflow: hidden;
+                background: var(--off);
+                position: relative;
+            }
+
+            .ticker-track {
+                display: flex;
+                gap: 0;
+                animation: tickerScroll 30s linear infinite;
+                white-space: nowrap;
+            }
+
+            .ticker-item {
+                font-family: "DM Mono", monospace;
+                font-size: 0.68rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--muted);
+                padding: 0 3rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-shrink: 0;
+            }
+
+            .ticker-dot {
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: var(--green);
+                display: inline-block;
+            }
+
+            @keyframes tickerScroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+
+            /* ── SECTION COMMONS ── */
+            section {
+                padding: 7rem 3rem;
+            }
+
+            .section-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--green);
+                margin-bottom: 1rem;
+            }
+
+            .section-headline {
+                font-family: "Fraunces", serif;
+                font-size: clamp(2.5rem, 5vw, 4.5rem);
+                font-weight: 900;
+                line-height: 1;
+                letter-spacing: -0.02em;
+                max-width: 700px;
+            }
+
+            .section-headline em {
+                font-style: italic;
+                font-weight: 300;
+                color: var(--green);
+            }
+
+            /* ── THREE PILLARS ── */
+            .pillars {
+                background: var(--off);
+                text-align: center;
+            }
+
+            .pillars-intro {
+                max-width: 700px;
+                margin: 0 auto 5rem;
+            }
+
+            .pillars-intro p {
+                color: var(--muted);
+                font-size: 1.1rem;
+                line-height: 1.7;
+                margin-top: 1.5rem;
+            }
+
+            .pillars-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2px;
+                max-width: 1300px;
+                margin: 0 auto;
+            }
+
+            .pillar {
+                background: var(--dim);
+                padding: 3.5rem 2.5rem;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s;
+            }
+
+            .pillar:hover {
+                transform: translateY(-4px);
+            }
+
+            .pillar::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+            }
+
+            .pillar.primary::before {
+                background: var(--primary-col);
+            }
+            .pillar.licensed::before {
+                background: var(--licensed-col);
+            }
+            .pillar.youth::before {
+                background: var(--youth-col);
+            }
+
+            .pillar-glow {
+                position: absolute;
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                top: -100px;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: opacity 0.4s;
+            }
+
+            .pillar:hover .pillar-glow {
+                opacity: 1;
+            }
+            .pillar.primary .pillar-glow {
+                background: radial-gradient(
+                    ellipse,
+                    rgba(184, 240, 115, 0.08) 0%,
+                    transparent 70%
+                );
+            }
+            .pillar.licensed .pillar-glow {
+                background: radial-gradient(
+                    ellipse,
+                    rgba(115, 200, 240, 0.08) 0%,
+                    transparent 70%
+                );
+            }
+            .pillar.youth .pillar-glow {
+                background: radial-gradient(
+                    ellipse,
+                    rgba(240, 196, 115, 0.08) 0%,
+                    transparent 70%
+                );
+            }
+
+            .pillar-badge {
+                display: inline-block;
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                padding: 0.35rem 0.9rem;
+                margin-bottom: 2rem;
+                border: 1px solid;
+            }
+
+            .pillar.primary .pillar-badge {
+                color: var(--primary-col);
+                border-color: rgba(184, 240, 115, 0.3);
+            }
+            .pillar.licensed .pillar-badge {
+                color: var(--licensed-col);
+                border-color: rgba(115, 200, 240, 0.3);
+            }
+            .pillar.youth .pillar-badge {
+                color: var(--youth-col);
+                border-color: rgba(240, 196, 115, 0.3);
+            }
+
+            .pillar-icon {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+                display: block;
+                line-height: 1;
+            }
+
+            .pillar-title {
+                font-family: "Fraunces", serif;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                letter-spacing: -0.02em;
+            }
+
+            .pillar-tagline {
+                font-family: "DM Mono", monospace;
+                font-size: 0.68rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 1.5rem;
+            }
+            .pillar.primary .pillar-tagline {
+                color: var(--primary-col);
+            }
+            .pillar.licensed .pillar-tagline {
+                color: var(--licensed-col);
+            }
+            .pillar.youth .pillar-tagline {
+                color: var(--youth-col);
+            }
+
+            .pillar-desc {
+                color: var(--muted);
+                font-size: 0.95rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+            }
+
+            .pillar-perks {
+                list-style: none;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+
+            .pillar-perks li {
+                font-size: 0.85rem;
+                color: var(--text);
+                display: flex;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .pillar-perks li::before {
+                content: "→";
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+
+            .pillar.primary .pillar-perks li::before {
+                color: var(--primary-col);
+            }
+            .pillar.licensed .pillar-perks li::before {
+                color: var(--licensed-col);
+            }
+            .pillar.youth .pillar-perks li::before {
+                color: var(--youth-col);
+            }
+
+            /* ── PLATFORM STATS ── */
+            .stats {
+                background: var(--black);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1px;
+                max-width: 1200px;
+                width: 100%;
+                margin: 4rem auto 0;
+                background: rgba(184, 240, 115, 0.1);
+            }
+
+            .stat-cell {
+                background: var(--off);
+                padding: 3rem 2rem;
+                text-align: center;
+            }
+
+            .stat-num {
+                font-family: "Fraunces", serif;
+                font-size: 3.5rem;
+                font-weight: 900;
+                color: var(--green);
+                line-height: 1;
+                letter-spacing: -0.03em;
+            }
+
+            .stat-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-top: 0.75rem;
+            }
+
+            /* ── HOW IT WORKS ── */
+            .how {
+                background: var(--dim);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .how::before {
+                content: "";
+                position: absolute;
+                right: -200px;
+                top: -200px;
+                width: 700px;
+                height: 700px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    ellipse,
+                    rgba(184, 240, 115, 0.04) 0%,
+                    transparent 70%
+                );
+            }
+
+            .how-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 6rem;
+                align-items: start;
+            }
+
+            .how-steps {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 3rem;
+            }
+
+            .how-step {
+                display: flex;
+                gap: 2rem;
+                padding: 2rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+                position: relative;
+                transition: padding-left 0.3s;
+                cursor: default;
+            }
+
+            .how-step:hover {
+                padding-left: 0.5rem;
+            }
+
+            .step-num {
+                font-family: "Fraunces", serif;
+                font-size: 3rem;
+                font-weight: 900;
+                color: rgba(184, 240, 115, 0.15);
+                line-height: 1;
+                flex-shrink: 0;
+                width: 60px;
+                transition: color 0.3s;
+            }
+
+            .how-step:hover .step-num {
+                color: var(--green);
+            }
+
+            .step-content h3 {
+                font-family: "Fraunces", serif;
+                font-size: 1.4rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            .step-content p {
+                color: var(--muted);
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+
+            .how-visual {
+                position: sticky;
+                top: 8rem;
+            }
+
+            .dispatch-card {
+                background: var(--off);
+                border: 1px solid rgba(184, 240, 115, 0.12);
+                padding: 2rem;
+                margin-top: 3rem;
+            }
+
+            .dispatch-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.5rem;
+            }
+
+            .dispatch-title {
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: var(--green);
+            }
+
+            .dispatch-live {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                color: var(--muted);
+            }
+
+            .live-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #4ade80;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 0.5;
+                    transform: scale(0.8);
+                }
+            }
+
+            .dispatch-jobs {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .dispatch-job {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+                background: var(--dim);
+                border-left: 2px solid transparent;
+                transition: all 0.3s;
+            }
+
+            .dispatch-job:nth-child(1) {
+                border-left-color: var(--primary-col);
+                animation: jobPop 0.5s 0.5s both;
+            }
+            .dispatch-job:nth-child(2) {
+                border-left-color: var(--licensed-col);
+                animation: jobPop 0.5s 0.8s both;
+            }
+            .dispatch-job:nth-child(3) {
+                border-left-color: var(--youth-col);
+                animation: jobPop 0.5s 1.1s both;
+            }
+            .dispatch-job:nth-child(4) {
+                border-left-color: var(--primary-col);
+                animation: jobPop 0.5s 1.4s both;
+            }
+
+            @keyframes jobPop {
+                from {
+                    opacity: 0;
+                    transform: translateX(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .job-emoji {
+                font-size: 1.3rem;
+                flex-shrink: 0;
+            }
+
+            .job-info {
+                flex: 1;
+            }
+
+            .job-name {
+                font-size: 0.85rem;
+                font-weight: 500;
+                margin-bottom: 0.2rem;
+            }
+
+            .job-meta {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                color: var(--muted);
+                letter-spacing: 0.08em;
+            }
+
+            .job-rate {
+                font-family: "Fraunces", serif;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--green);
+            }
+
+            .job-tier {
+                font-family: "DM Mono", monospace;
+                font-size: 0.55rem;
+                letter-spacing: 0.12em;
+                padding: 0.2rem 0.6rem;
+            }
+
+            .tier-p {
+                background: rgba(184, 240, 115, 0.12);
+                color: var(--primary-col);
+            }
+            .tier-l {
+                background: rgba(115, 200, 240, 0.12);
+                color: var(--licensed-col);
+            }
+            .tier-y {
+                background: rgba(240, 196, 115, 0.12);
+                color: var(--youth-col);
+            }
+
+            /* ── FAIR RATE INDEX ── */
+            .fri {
+                background: var(--black);
+                text-align: center;
+            }
+
+            .fri-inner {
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            .fri-card {
+                background: var(--off);
+                border: 1px solid rgba(184, 240, 115, 0.12);
+                padding: 4rem;
+                margin-top: 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .fri-card::before {
+                content: "FAIR RATE INDEX™";
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.2em;
+                color: rgba(184, 240, 115, 0.25);
+            }
+
+            .fri-trades {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1px;
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .fri-trade {
+                background: var(--dim);
+                padding: 1.5rem 1rem;
+                text-align: center;
+                transition: background 0.2s;
+            }
+
+            .fri-trade:hover {
+                background: var(--mid);
+            }
+
+            .fri-trade-icon {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+                display: block;
+            }
+
+            .fri-trade-name {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 0.5rem;
+            }
+
+            .fri-trade-rate {
+                font-family: "Fraunces", serif;
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: var(--green);
+            }
+
+            .fri-trade-range {
+                font-size: 0.7rem;
+                color: rgba(184, 240, 115, 0.5);
+                margin-top: 0.2rem;
+            }
+
+            /* ── NETWORK SCALE ── */
+            .network {
+                background: var(--dim);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .network-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem;
+                align-items: center;
+            }
+
+            .network-visual {
+                position: relative;
+                height: 500px;
+            }
+
+            .node-map {
+                position: absolute;
+                inset: 0;
+            }
+
+            .node {
+                position: absolute;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9rem;
+            }
+
+            .node-center {
+                width: 80px;
+                height: 80px;
+                background: var(--green);
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 1.5rem;
+                animation: nodePulse 3s ease-in-out infinite;
+                z-index: 2;
+            }
+
+            @keyframes nodePulse {
+                0%,
+                100% {
+                    box-shadow: 0 0 0 0 rgba(184, 240, 115, 0.4);
+                }
+                50% {
+                    box-shadow: 0 0 0 30px rgba(184, 240, 115, 0);
+                }
+            }
+
+            .orbit {
+                position: absolute;
+                border-radius: 50%;
+                border: 1px dashed rgba(184, 240, 115, 0.1);
+                top: 50%;
+                left: 50%;
+            }
+
+            .orbit-1 {
+                width: 180px;
+                height: 180px;
+                transform: translate(-50%, -50%);
+                animation: spin 20s linear infinite;
+            }
+            .orbit-2 {
+                width: 300px;
+                height: 300px;
+                transform: translate(-50%, -50%);
+                animation: spin 35s linear infinite reverse;
+            }
+            .orbit-3 {
+                width: 430px;
+                height: 430px;
+                transform: translate(-50%, -50%);
+                animation: spin 50s linear infinite;
+            }
+
+            @keyframes spin {
+                from {
+                    rotate: 0deg;
+                }
+                to {
+                    rotate: 360deg;
+                }
+            }
+
+            .orbit-node {
+                position: absolute;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.75rem;
+                background: var(--off);
+                border: 1px solid;
+                color: var(--text);
+                width: 40px;
+                height: 40px;
+            }
+
+            .orbit-node.p {
+                border-color: rgba(184, 240, 115, 0.4);
+                color: var(--primary-col);
+            }
+            .orbit-node.l {
+                border-color: rgba(115, 200, 240, 0.4);
+                color: var(--licensed-col);
+            }
+            .orbit-node.y {
+                border-color: rgba(240, 196, 115, 0.4);
+                color: var(--youth-col);
+            }
+
+            /* orbit 1 nodes */
+            .o1-n1 {
+                top: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .o1-n2 {
+                bottom: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            /* orbit 2 nodes */
+            .o2-n1 {
+                top: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .o2-n2 {
+                right: -20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .o2-n3 {
+                bottom: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .o2-n4 {
+                left: -20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            /* orbit 3 nodes */
+            .o3-n1 {
+                top: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .o3-n2 {
+                top: 25%;
+                right: -20px;
+            }
+            .o3-n3 {
+                bottom: 25%;
+                right: -20px;
+            }
+            .o3-n4 {
+                bottom: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .o3-n5 {
+                bottom: 25%;
+                left: -20px;
+            }
+            .o3-n6 {
+                top: 25%;
+                left: -20px;
+            }
+
+            .network-content {
+                position: relative;
+            }
+
+            .network-feature {
+                padding: 1.5rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            }
+
+            .network-feature-title {
+                font-family: "Fraunces", serif;
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin-bottom: 0.4rem;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .network-feature-title span {
+                font-family: "DM Mono", monospace;
+                font-size: 0.6rem;
+                letter-spacing: 0.12em;
+                padding: 0.25rem 0.6rem;
+                background: rgba(184, 240, 115, 0.1);
+                color: var(--green);
+            }
+
+            .network-feature p {
+                color: var(--muted);
+                font-size: 0.9rem;
+                line-height: 1.65;
+            }
+
+            /* ── VISION BANNER ── */
+            .vision {
+                background: var(--green);
+                padding: 7rem 3rem;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .vision::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(
+                        rgba(13, 14, 12, 0.06) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(13, 14, 12, 0.06) 1px,
+                        transparent 1px
+                    );
+                background-size: 40px 40px;
+            }
+
+            .vision h2 {
+                font-family: "Fraunces", serif;
+                font-size: clamp(3rem, 6vw, 6rem);
+                font-weight: 900;
+                color: var(--black);
+                line-height: 0.95;
+                letter-spacing: -0.03em;
+                position: relative;
+                max-width: 900px;
+                margin: 0 auto 2rem;
+            }
+
+            .vision p {
+                font-size: 1.1rem;
+                color: rgba(13, 14, 12, 0.65);
+                max-width: 580px;
+                margin: 0 auto 3rem;
+                line-height: 1.7;
+                position: relative;
+            }
+
+            .vision-btns {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                position: relative;
+                flex-wrap: wrap;
+            }
+
+            .btn-dark {
+                background: var(--black);
+                color: var(--green);
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 1rem 2.5rem;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+
+            .btn-dark:hover {
+                opacity: 0.85;
+            }
+
+            .btn-outline-dark {
+                background: transparent;
+                color: var(--black);
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 1rem 2.5rem;
+                border: 2px solid rgba(13, 14, 12, 0.3);
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+
+            .btn-outline-dark:hover {
+                border-color: var(--black);
+            }
+
+            /* ── FOOTER ── */
+            footer {
+                background: var(--off);
+                border-top: 1px solid rgba(184, 240, 115, 0.08);
+                padding: 3rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .footer-logo {
+                font-family: "Fraunces", serif;
+                font-size: 1.2rem;
+                font-weight: 900;
+                color: var(--green);
+            }
+
+            .footer-copy {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.12em;
+                color: var(--muted);
+            }
+
+            .footer-links {
+                display: flex;
+                gap: 2rem;
+                list-style: none;
+            }
+
+            .footer-links a {
+                font-size: 0.75rem;
+                color: var(--muted);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+            .footer-links a:hover {
+                color: var(--green);
+            }
+
+            /* ── RESPONSIVE ── */
+            @media (max-width: 900px) {
+                nav {
+                    padding: 1rem 1.5rem;
+                }
+                .nav-links {
+                    display: none;
+                }
+                section {
+                    padding: 5rem 1.5rem;
+                }
+                .pillars-grid {
+                    grid-template-columns: 1fr;
+                }
+                .stats-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .how-inner {
+                    grid-template-columns: 1fr;
+                    gap: 3rem;
+                }
+                .how-visual {
+                    position: static;
+                }
+                .network-inner {
+                    grid-template-columns: 1fr;
+                }
+                .network-visual {
+                    height: 350px;
+                }
+                .fri-trades {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                footer {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                .footer-links {
+                    justify-content: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- NAV -->
+        <nav>
+            <div class="nav-logo">YSKAIPE</div>
+            <ul class="nav-links">
+                <li><a href="#workers">For Workers</a></li>
+                <li><a href="#how">How It Works</a></li>
+                <li><a href="#fair-rate">Fair Rate Index</a></li>
+                <li><a href="#platform">Platform</a></li>
+            </ul>
+            <button class="nav-cta">Get Started</button>
+        </nav>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-glow"></div>
+
+            <div class="hero-eyebrow">
+                The Home Services Platform · Est. 2026 · Lake Norman, NC
+            </div>
+
+            <h1 class="hero-headline">
+                Every Home.<br />
+                <em>Every Worker.</em><br />
+                One Network.
+            </h1>
+
+            <p class="hero-sub">
+                Primary workers. Licensed pros. Youth crews. YSKAIPE deploys the
+                right person at the right rate — automatically — across every
+                home service in America.
+            </p>
+
+            <div class="hero-actions">
+                <button class="btn-primary">Find a Pro Near You</button>
+                <button class="btn-ghost">Join the Network →</button>
+            </div>
+        </section>
+
+        <!-- TICKER -->
+        <div class="ticker">
+            <div class="ticker-track">
+                <!-- First set -->
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> HVAC / Aria
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Plumbing / River
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Electrical / Volt
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Roofing / Ridge
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Landscaping / Terra
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Painting / Hue
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> General Contracting / Forge
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Automotive / Axle
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Fair Rate Guaranteed
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> ZIP-Code Territories
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> AutoQuote Pricing
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Instant Match
+                </div>
+                <!-- Mirror for seamless loop -->
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> HVAC / Aria
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Plumbing / River
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Electrical / Volt
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Roofing / Ridge
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Landscaping / Terra
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Painting / Hue
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> General Contracting / Forge
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Automotive / Axle
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Fair Rate Guaranteed
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> ZIP-Code Territories
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> AutoQuote Pricing
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-dot"></span> Instant Match
+                </div>
+            </div>
+        </div>
+
+        <!-- THREE PILLARS -->
+        <section class="pillars" id="workers">
+            <div class="pillars-intro">
+                <div class="section-label">The Worker Network</div>
+                <h2 class="section-headline">
+                    Three Tiers.<br /><em>One Platform.</em>
+                </h2>
+                <p>
+                    YSKAIPE is the first home services marketplace to recognize
+                    that not every job needs a licensed contractor — and not
+                    every crew member has to wait years to earn. We match task
+                    complexity to worker tier, automatically.
+                </p>
+            </div>
+
+            <div class="pillars-grid">
+                <!-- PRIMARY WORKERS -->
+                <div class="pillar primary">
+                    <div class="pillar-glow"></div>
+                    <div class="pillar-badge">Tier 01</div>
+                    <span class="pillar-icon">🔧</span>
+                    <div class="pillar-title">Primary Workers</div>
+                    <div class="pillar-tagline">The Core Workforce</div>
+                    <p class="pillar-desc">
+                        Skilled tradespeople and handymen with verified
+                        experience across our 8 Pro Core trades. The backbone of
+                        YSKAIPE — vetted, rated, and dispatched daily.
+                    </p>
+                    <ul class="pillar-perks">
+                        <li>
+                            Verified trade experience across all 8 core
+                            categories
+                        </li>
+                        <li>ZIP-code exclusive territory protection</li>
+                        <li>AutoQuote pricing — no more haggling</li>
+                        <li>Direct lead delivery, no shared bids</li>
+                        <li>Fair Rate Index protects your earning floor</li>
+                    </ul>
+                </div>
+
+                <!-- LICENSED PROS -->
+                <div class="pillar licensed">
+                    <div class="pillar-glow"></div>
+                    <div class="pillar-badge">Tier 02</div>
+                    <span class="pillar-icon">⚡</span>
+                    <div class="pillar-title">Licensed Pros</div>
+                    <div class="pillar-tagline">
+                        Certified. Insured. Premium.
+                    </div>
+                    <p class="pillar-desc">
+                        State-licensed contractors for complex, code-required
+                        work. Electricians, master plumbers, HVAC engineers,
+                        structural roofers. The jobs that demand credentials.
+                    </p>
+                    <ul class="pillar-perks">
+                        <li>License + insurance verification on file</li>
+                        <li>
+                            Premium pricing tier — command what you're worth
+                        </li>
+                        <li>Priority dispatch on high-value permits</li>
+                        <li>Contractor dashboard with full lead lifecycle</li>
+                        <li>Founding member program — lock your territory</li>
+                    </ul>
+                </div>
+
+                <!-- YOUTH WORKERS -->
+                <div class="pillar youth">
+                    <div class="pillar-glow"></div>
+                    <div class="pillar-badge">Tier 03</div>
+                    <span class="pillar-icon">🌱</span>
+                    <div class="pillar-title">Youth Workers</div>
+                    <div class="pillar-tagline">First Paycheck. Real Work.</div>
+                    <p class="pillar-desc">
+                        Teens and young adults earning through lawn care, moving
+                        help, light landscaping, and home prep. YSKAIPE gives
+                        first-time workers a legitimate, safe entry into the
+                        trades economy.
+                    </p>
+                    <ul class="pillar-perks">
+                        <li>Supervised job categories sized for entry-level</li>
+                        <li>Transparent, fair wages — no exploitation</li>
+                        <li>
+                            Skill-building ratings that follow them up tiers
+                        </li>
+                        <li>Parent-approved job flow for minors</li>
+                        <li>The on-ramp to the primary worker network</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats">
+            <div class="section-label">Platform Scale</div>
+            <h2
+                class="section-headline"
+                style="margin: 0 auto; text-align: center"
+            >
+                Built to <em>Move</em> at Scale
+            </h2>
+
+            <div class="stats-grid">
+                <div class="stat-cell">
+                    <div class="stat-num">8</div>
+                    <div class="stat-label">Pro Core Trades</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-num">3</div>
+                    <div class="stat-label">Worker Tiers</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-num">1</div>
+                    <div class="stat-label">Pro per ZIP per Trade</div>
+                </div>
+                <div class="stat-cell">
+                    <div class="stat-num">$0</div>
+                    <div class="stat-label">Shared Leads. Ever.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="how" id="how">
+            <div class="how-inner">
+                <div>
+                    <div class="section-label">The Engine</div>
+                    <h2 class="section-headline">
+                        Amazon Logistics.<br /><em>Uber Speed.</em>
+                    </h2>
+
+                    <div class="how-steps">
+                        <div class="how-step">
+                            <div class="step-num">01</div>
+                            <div class="step-content">
+                                <h3>Homeowner Describes the Job</h3>
+                                <p>
+                                    AutoQuote captures the scope — instantly
+                                    generating a fair-rate price range before a
+                                    single pro is contacted. No surprises. No
+                                    negotiation theater.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="how-step">
+                            <div class="step-num">02</div>
+                            <div class="step-content">
+                                <h3>The Engine Selects the Tier</h3>
+                                <p>
+                                    Job complexity logic routes to the right
+                                    worker tier — youth for light work, primary
+                                    for skilled trades, licensed for
+                                    code-required projects.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="how-step">
+                            <div class="step-num">03</div>
+                            <div class="step-content">
+                                <h3>The Exclusive Pro Gets the Lead</h3>
+                                <p>
+                                    One vetted, territory-owning pro receives
+                                    the lead. Not 4 contractors competing. Not a
+                                    shared auction. Theirs.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="how-step">
+                            <div class="step-num">04</div>
+                            <div class="step-content">
+                                <h3>Job Completed. Rate Confirmed.</h3>
+                                <p>
+                                    After completion, the Fair Rate Index
+                                    updates. Every job makes the pricing data
+                                    smarter for the entire North Carolina
+                                    market.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="how-visual">
+                    <div class="dispatch-card">
+                        <div class="dispatch-header">
+                            <div class="dispatch-title">
+                                Live Dispatch Queue
+                            </div>
+                            <div class="dispatch-live">
+                                <span class="live-dot"></span> 4 Jobs Active
+                            </div>
+                        </div>
+                        <div class="dispatch-jobs">
+                            <div class="dispatch-job">
+                                <div class="job-emoji">❄️</div>
+                                <div class="job-info">
+                                    <div class="job-name">AC Unit Tune-Up</div>
+                                    <div class="job-meta">
+                                        Cornelius, NC · HVAC / Aria · 2.4mi
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="job-rate">$189</div>
+                                    <div class="job-tier tier-l">Licensed</div>
+                                </div>
+                            </div>
+                            <div class="dispatch-job">
+                                <div class="job-emoji">🌿</div>
+                                <div class="job-info">
+                                    <div class="job-name">Weekly Lawn Care</div>
+                                    <div class="job-meta">
+                                        Davidson, NC · Terra · 1.1mi
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="job-rate">$65</div>
+                                    <div class="job-tier tier-y">Youth</div>
+                                </div>
+                            </div>
+                            <div class="dispatch-job">
+                                <div class="job-emoji">🎨</div>
+                                <div class="job-info">
+                                    <div class="job-name">
+                                        Interior Bedroom Paint
+                                    </div>
+                                    <div class="job-meta">
+                                        Mooresville, NC · Hue · 3.8mi
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="job-rate">$420</div>
+                                    <div class="job-tier tier-p">Primary</div>
+                                </div>
+                            </div>
+                            <div class="dispatch-job">
+                                <div class="job-emoji">💧</div>
+                                <div class="job-info">
+                                    <div class="job-name">Pipe Leak Repair</div>
+                                    <div class="job-meta">
+                                        Huntersville, NC · River · 5.2mi
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="job-rate">$275</div>
+                                    <div class="job-tier tier-l">Licensed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAIR RATE INDEX -->
+        <section class="fri" id="fair-rate">
+            <div class="fri-inner">
+                <div class="section-label">Transparency Infrastructure</div>
+                <h2
+                    class="section-headline"
+                    style="margin: 0 auto; text-align: center"
+                >
+                    The Fair Rate<br /><em>Index™</em>
+                </h2>
+                <p
+                    style="
+                        color: var(--muted);
+                        margin-top: 1.5rem;
+                        font-size: 1rem;
+                        line-height: 1.7;
+                        max-width: 580px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    "
+                >
+                    Real pricing data from real completed jobs across North
+                    Carolina. Every homeowner sees it. Every pro earns it. No
+                    guessing. No gouging.
+                </p>
+
+                <div class="fri-card">
+                    <div class="fri-trades">
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">❄️</span>
+                            <div class="fri-trade-name">HVAC / Aria</div>
+                            <div class="fri-trade-rate">$145–$380</div>
+                            <div class="fri-trade-range">per service call</div>
+                        </div>
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">💧</span>
+                            <div class="fri-trade-name">Plumbing / River</div>
+                            <div class="fri-trade-rate">$120–$290</div>
+                            <div class="fri-trade-range">per service call</div>
+                        </div>
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">⚡</span>
+                            <div class="fri-trade-name">Electrical / Volt</div>
+                            <div class="fri-trade-rate">$95–$320</div>
+                            <div class="fri-trade-range">per service call</div>
+                        </div>
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">🏠</span>
+                            <div class="fri-trade-name">Roofing / Ridge</div>
+                            <div class="fri-trade-rate">$350–$900</div>
+                            <div class="fri-trade-range">per project</div>
+                        </div>
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">🌿</span>
+                            <div class="fri-trade-name">
+                                Landscaping / Terra
+                            </div>
+                            <div class="fri-trade-rate">$55–$180</div>
+                            <div class="fri-trade-range">per visit</div>
+                        </div>
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">🎨</span>
+                            <div class="fri-trade-name">Painting / Hue</div>
+                            <div class="fri-trade-rate">$280–$700</div>
+                            <div class="fri-trade-range">per room</div>
+                        </div>
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">🔨</span>
+                            <div class="fri-trade-name">
+                                Contracting / Forge
+                            </div>
+                            <div class="fri-trade-rate">$500–$2,400</div>
+                            <div class="fri-trade-range">per project</div>
+                        </div>
+                        <div class="fri-trade">
+                            <span class="fri-trade-icon">🚗</span>
+                            <div class="fri-trade-name">Automotive / Axle</div>
+                            <div class="fri-trade-rate">$75–$220</div>
+                            <div class="fri-trade-range">per service</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NETWORK -->
+        <section class="network" id="platform">
+            <div class="network-inner">
+                <div class="network-visual">
+                    <div class="node-map">
+                        <!-- Center hub -->
+                        <div class="node node-center">⚡</div>
+
+                        <!-- Orbit rings -->
+                        <div class="orbit orbit-1">
+                            <div class="orbit-node p o1-n1">🔧</div>
+                            <div class="orbit-node l o1-n2">⚡</div>
+                        </div>
+                        <div class="orbit orbit-2">
+                            <div class="orbit-node y o2-n1">🌱</div>
+                            <div class="orbit-node p o2-n2">🎨</div>
+                            <div class="orbit-node l o2-n3">💧</div>
+                            <div class="orbit-node y o2-n4">🌿</div>
+                        </div>
+                        <div class="orbit orbit-3">
+                            <div class="orbit-node p o3-n1">❄️</div>
+                            <div class="orbit-node l o3-n2">🔌</div>
+                            <div class="orbit-node y o3-n3">🌱</div>
+                            <div class="orbit-node p o3-n4">🏠</div>
+                            <div class="orbit-node l o3-n5">🔨</div>
+                            <div class="orbit-node y o3-n6">🚗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="network-content">
+                    <div class="section-label">Platform Architecture</div>
+                    <h2 class="section-headline">
+                        A Living<br /><em>Network.</em>
+                    </h2>
+
+                    <div style="margin-top: 3rem">
+                        <div class="network-feature">
+                            <div class="network-feature-title">
+                                AutoMatch Engine <span>AI-Powered</span>
+                            </div>
+                            <p>
+                                Tier selection, territory matching, and instant
+                                lead routing happen in milliseconds. No
+                                dispatcher. No call center. Pure algorithmic
+                                precision.
+                            </p>
+                        </div>
+                        <div class="network-feature">
+                            <div class="network-feature-title">
+                                Territory Ownership <span>ZIP-Exclusive</span>
+                            </div>
+                            <p>
+                                Each licensed trade pro owns their ZIP code. One
+                                contractor per trade per ZIP. Your territory,
+                                your leads, your business.
+                            </p>
+                        </div>
+                        <div class="network-feature">
+                            <div class="network-feature-title">
+                                Youth Pipeline <span>New</span>
+                            </div>
+                            <p>
+                                Youth workers earning experience and ratings
+                                today become primary workers tomorrow. The
+                                platform builds its own supply chain from the
+                                ground up.
+                            </p>
+                        </div>
+                        <div class="network-feature">
+                            <div class="network-feature-title">
+                                Fair Rate Flywheel <span>Proprietary Data</span>
+                            </div>
+                            <p>
+                                Every completed job feeds the Fair Rate Index.
+                                The data moat deepens with every transaction —
+                                making YSKAIPE harder to replicate by the day.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISION BANNER -->
+        <section class="vision">
+            <h2>
+                The Amazon + Uber of Home Services. It's Being Built Right Now.
+            </h2>
+            <p>
+                Three worker tiers. Eight trades. One ZIP-code-protected
+                territory per pro. Fair pricing for every homeowner. This is
+                what the home services industry should have always been.
+            </p>
+            <div class="vision-btns">
+                <button class="btn-dark">Get an Instant Quote</button>
+                <button class="btn-outline-dark">Join as a Founding Pro</button>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-logo">YSKAIPE</div>
+            <div class="footer-copy">
+                © 2026 Peaking Waters LLC · Cornelius, NC · Know What's Fair.
+            </div>
+            <ul class="footer-links">
+                <li><a href="#">Fair Rate Index</a></li>
+                <li><a href="#">For Pros</a></li>
+                <li><a href="#">For Homeowners</a></li>
+                <li><a href="#">Legal</a></li>
+            </ul>
+        </footer>
+    </body>
+</html>
