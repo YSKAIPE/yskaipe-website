@@ -1,191 +1,202 @@
 /**
  * app/api/instant-quote/route.ts
  * ─────────────────────────────────────────────────────────────────
- * Unified AI classifier + FRI pricer.
+ * Uber-model instant pricing.
  *
- * Flow:
- *   1. Load all active service_tasks from Supabase (cached 5 min)
- *   2. Send description + full task list to Claude for classification
- *   3. Claude returns { slug, confidence }
- *   4. Look up matched task for tier flags + FRI band
- *   5. Ask Claude for a breakdown — ANCHORED to DB price, not invented
- *   6. Return structured response to client
+ * Returns a single book-now price, not a range.
+ * Price is AI-generated within the FRI band, adjusted for scope.
+ * Complex/licensed jobs → "Starting from $X" (pro confirms on site)
+ * Commodity jobs → "Book now for $X" (fixed, no asterisk)
  *
- * CRITICAL: Claude writes the breakdown explanation only.
- * Prices come exclusively from service_tasks DB rows.
- * Claude is never allowed to invent or adjust pricing.
+ * Worker payout = price × 0.85 (15% platform fee)
  * ─────────────────────────────────────────────────────────────────
  */
 
-import { NextRequest, NextResponse } from "next/server";
-import Anthropic from "@anthropic-ai/sdk";
-import { getAllTasks, classifyByKeywords } from "@/lib/service-tasks";
+import { NextRequest, NextResponse } from 'next/server'
+import Anthropic from '@anthropic-ai/sdk'
+import { getAllTasks, classifyByKeywords } from '@/lib/service-tasks'
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
+
+// Jobs where scope is too variable for a single fixed price —
+// licensed pro confirms final price on site. We still show a
+// "starting from" number so homeowners have an anchor.
+const SITE_ASSESSMENT_TIERS = ['licensed']
+const COMPLEX_SLUGS = new Set([
+  'gc_room_addition','gc_kitchen_remodel','gc_bath_remodel',
+  'gc_deck_build','gc_new_home_construction','gc_custom_home_large',
+  'gc_adu_build','gc_basement_finish','gc_pool_install',
+  'hvac_ac_replacement','hvac_furnace_replacement','hvac_mini_split',
+  'elec_panel_upgrade','elec_generator',
+  'roof_full_replace','roof_partial_repair',
+  'plumb_water_heater','plumb_main_line',
+  'land_irrigation','land_tree_removal',
+])
 
 export async function POST(req: NextRequest) {
   try {
-    const { description, zip } = await req.json();
+    const { description, zip } = await req.json()
 
-    if (!description || typeof description !== "string") {
-      return NextResponse.json(
-        { error: "description is required" },
-        { status: 400 },
-      );
+    if (!description || typeof description !== 'string') {
+      return NextResponse.json({ error: 'description is required' }, { status: 400 })
     }
 
-    // 1. Load task catalogue from DB (cached 5 min)
-    const tasks = await getAllTasks();
+    // 1. Load task catalogue (cached 5 min)
+    const tasks = await getAllTasks()
 
-    // Build compact task list for classifier prompt
     const taskList = tasks
-      .map(
-        (t) =>
-          `${t.slug} | ${t.label} | ${t.category} | keywords: ${(t.ai_keywords ?? []).join(", ")}`,
-      )
-      .join("\n");
+      .map((t) => `${t.slug} | ${t.label} | $${t.fri_low?.toLocaleString()}–$${t.fri_high?.toLocaleString()} | keywords: ${(t.ai_keywords ?? []).join(', ')}`)
+      .join('\n')
 
-    // 2. Classify via Claude
-    let matchedSlug: string | null = null;
-    let confidence = 0;
+    // 2. Classify
+    let matchedSlug: string | null = null
+    let confidence = 0
 
     try {
       const classifyResp = await anthropic.messages.create({
-        model: "claude-sonnet-4-20250514",
+        model: 'claude-sonnet-4-20250514',
         max_tokens: 200,
-        system: `You are YSKAIPE's job classifier. Given a homeowner's job description, pick the single best matching slug from the list below.
+        system: `You are YSKAIPE's job classifier. Match the homeowner's description to the single best slug.
 
-Rules:
-- Match to the SPECIFIC task described, not the broadest category. "Room addition" = gc_room_addition, not gc_kitchen_remodel.
-- If the homeowner says "room addition", pick gc_room_addition. Not a house build. Not a remodel.
-- Match to what was ACTUALLY said. Do not infer unstated scope.
-- Return ONLY valid JSON: {"slug":"<slug>","confidence":<0-1 float>}
-- No markdown, no explanation. If nothing matches well, use "life_handyman_misc".
+Each task: slug | label | FRI price range | keywords
+
+RULES:
+- Match SPECIFIC task and REALISTIC SCALE. "20,000 sq ft new home" = gc_custom_home_large.
+- "New home" / "build a house" = gc_new_home_construction.
+- "Room addition" = gc_room_addition. Not a full build.
+- Use the FRI price range to sanity-check your match. If a homeowner says "20k sf home", the $20k–$80k room addition slug is clearly wrong — pick the large custom home slug.
+- Return ONLY valid JSON: {"slug":"<slug>","confidence":<0-1>}
+- No markdown. No explanation. Default: "life_handyman_misc".
 
 TASK LIST:
 ${taskList}`,
-        messages: [{ role: "user", content: description }],
-      });
+        messages: [{ role: 'user', content: description }],
+      })
 
       const raw = classifyResp.content
-        .filter((b) => b.type === "text")
-        .map((b) => (b as { type: "text"; text: string }).text)
-        .join("")
-        .replace(/```[a-z]*|```/g, "")
-        .trim();
+        .filter((b) => b.type === 'text')
+        .map((b) => (b as { type: 'text'; text: string }).text)
+        .join('')
+        .replace(/```[a-z]*|```/g, '')
+        .trim()
 
-      const parsed = JSON.parse(raw);
-      matchedSlug = parsed.slug ?? null;
-      confidence = parsed.confidence ?? 0;
-    } catch {
-      // AI failed — fall through to keyword fallback
-    }
+      const parsed = JSON.parse(raw)
+      matchedSlug = parsed.slug ?? null
+      confidence  = parsed.confidence ?? 0
+    } catch { /* fall through */ }
 
-    // 3. Resolve task from slug; fall back to keyword classifier
-    let task = matchedSlug
-      ? (tasks.find((t) => t.slug === matchedSlug) ?? null)
-      : null;
+    // 3. Resolve task
+    let task = matchedSlug ? tasks.find((t) => t.slug === matchedSlug) ?? null : null
+    if (!task) { task = await classifyByKeywords(description); confidence = task ? 0.5 : 0 }
+    if (!task) { task = tasks.find((t) => t.slug === 'life_handyman_misc') ?? tasks[0]; confidence = 0.3 }
 
-    if (!task) {
-      task = await classifyByKeywords(description);
-      confidence = task ? 0.5 : 0;
-    }
+    const friLow  = task.fri_low  ?? 80
+    const friHigh = task.fri_high ?? 300
+    const friUnit = task.fri_unit ?? 'flat'
 
-    // Ultimate fallback: handyman
-    if (!task) {
-      task = tasks.find((t) => t.slug === "life_handyman_misc") ?? tasks[0];
-      confidence = 0.3;
-    }
+    // Is this a fixed-price commodity job or a site-assessment job?
+    const needsSiteAssessment =
+      COMPLEX_SLUGS.has(task.slug) ||
+      (SITE_ASSESSMENT_TIERS.includes(task.tier_min) && task.requires_license)
 
-    // Prices come ONLY from the DB — never invented by Claude
-    const friLow = task.fri_low ?? 80;
-    const friHigh = task.fri_high ?? 300;
-    const friUnit = task.fri_unit ?? "flat";
+    // 4. AI pricing — single number within FRI band, scope-adjusted
+    const PRICING_SYSTEM = `You are YSKAIPE's AutoQuote engine. Generate a single fair book-now price for a home service job.
 
-    // 4. Ask Claude for a breakdown explanation ONLY
-    // Claude explains the DB price — it does not set or modify it
-    let breakdown = "";
-    let includes: string[] = [];
-    let permitNote = "";
+The Fair Rate Index defines the valid price band for this job type.
+Your price MUST fall within that band — never below fri_low, never above fri_high.
 
-    const BREAKDOWN_SYSTEM = `You are YSKAIPE's Fair Rate Index writer. Your only job is to write a 2-sentence explanation of why a given price range applies to a specific home service job.
+HOW TO PICK THE PRICE:
+- Start at the midpoint of the band
+- Adjust UP if: large sq footage, multiple stories, premium materials mentioned, complex scope, tight timeline
+- Adjust DOWN if: small scope, simple job, basic finish, flexible timing
+- For jobs marked needs_site_assessment=true: return fri_low as the "starting from" price — the pro will confirm final price on arrival
+- Round to nearest $25 for jobs under $500, nearest $100 for jobs $500–$5000, nearest $500 for jobs over $5000
 
-STRICT RULES — any violation is wrong output:
-1. The price range is fixed. It comes from a verified database. Do NOT suggest a different number. Do NOT say the cost could be higher or lower than the range shown.
-2. Never invent scope the homeowner did not describe. If they said "room addition," explain a room addition. Not a whole house. Not a renovation. Exactly what they said.
-3. Exactly 2 sentences in the breakdown. Specific to their job, not generic filler.
-4. The includes array lists 3-4 items typically covered at this price for this task.
-5. permit_note: one sentence only if permits are genuinely likely, otherwise empty string.
-
-Return ONLY this JSON — no markdown, no preamble:
+Return ONLY valid JSON — no markdown:
 {
-  "breakdown": "sentence 1. sentence 2.",
-  "includes": ["item 1", "item 2", "item 3"],
-  "permit_note": ""
-}`;
+  "price": <number>,
+  "worker_payout": <number — price * 0.85, rounded same way>,
+  "rationale": "one sentence explaining what in the description drove this specific price",
+  "includes": ["item 1", "item 2", "item 3", "item 4"],
+  "permit_note": "one sentence if permits required, else empty string"
+}`
 
-    const breakdownUserMsg = `Homeowner's exact words: "${description}"
-Matched task: ${task.label} (${task.category})
-FRI price range from database: $${friLow.toLocaleString()}–$${friHigh.toLocaleString()} (${friUnit.replace("_", " ")})
+    const pricingUserMsg = `Homeowner's exact words: "${description}"
+Task: ${task.label} (${task.category})
+FRI band: $${friLow.toLocaleString()}–$${friHigh.toLocaleString()} (${friUnit.replace('_',' ')})
+Tier: ${task.tier_min}
+Needs site assessment: ${needsSiteAssessment}
 Permit likely: ${task.permit_likely}
-ZIP: ${zip ?? "NC"}
+ZIP: ${zip ?? 'NC'}`
 
-Write 2 sentences explaining this specific job at this price range. Do not invent scope beyond what the homeowner stated.`;
+    let bookPrice    = needsSiteAssessment ? friLow : Math.round((friLow + friHigh) / 2)
+    let workerPayout = Math.round(bookPrice * 0.85)
+    let rationale    = ''
+    let includes: string[] = []
+    let permitNote   = ''
 
     try {
-      const breakdownResp = await anthropic.messages.create({
-        model: "claude-sonnet-4-20250514",
+      const pricingResp = await anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
         max_tokens: 400,
-        system: BREAKDOWN_SYSTEM,
-        messages: [{ role: "user", content: breakdownUserMsg }],
-      });
+        system: PRICING_SYSTEM,
+        messages: [{ role: 'user', content: pricingUserMsg }],
+      })
 
-      const raw = breakdownResp.content
-        .filter((b) => b.type === "text")
-        .map((b) => (b as { type: "text"; text: string }).text)
-        .join("")
-        .replace(/```[a-z]*|```/g, "")
-        .trim();
+      const raw = pricingResp.content
+        .filter((b) => b.type === 'text')
+        .map((b) => (b as { type: 'text'; text: string }).text)
+        .join('')
+        .replace(/```[a-z]*|```/g, '')
+        .trim()
 
-      const parsed = JSON.parse(raw);
-      breakdown = parsed.breakdown ?? "";
-      includes = parsed.includes ?? [];
-      permitNote = parsed.permit_note ?? "";
+      const parsed = JSON.parse(raw)
+
+      // Hard clamp — price can never escape the FRI band
+      const clampedPrice = Math.min(Math.max(parsed.price ?? bookPrice, friLow), friHigh)
+      bookPrice    = clampedPrice
+      workerPayout = Math.round(clampedPrice * 0.85)
+      rationale    = parsed.rationale    ?? ''
+      includes     = parsed.includes     ?? []
+      permitNote   = parsed.permit_note  ?? ''
+
     } catch {
-      // Hardcoded fallback — still uses DB prices, never invents
-      breakdown = `${task.label} in NC typically runs $${friLow.toLocaleString()}–$${friHigh.toLocaleString()} ${friUnit.replace("_", " ")}. Final price depends on your specific site conditions, materials selected, and ZIP code.`;
-      includes = ["Labor", "Standard materials", "Cleanup"];
+      // Fallback: midpoint with no scope adjustment
+      rationale = `${task.label} priced at Fair Rate Index midpoint for NC.`
+      includes  = ['Labor', 'Standard materials', 'Cleanup']
     }
 
-    // 5. Return — prices always from DB, never from Claude
     return NextResponse.json({
-      slug: task.slug,
-      label: task.label,
+      // Classification
+      slug:     task.slug,
+      label:    task.label,
       category: task.category,
-      domain: task.domain,
+      domain:   task.domain,
       confidence,
 
-      tier_min: task.tier_min,
-      requires_license: task.requires_license,
+      // Tier / dispatch flags
+      tier_min:           task.tier_min,
+      requires_license:   task.requires_license,
       requires_insurance: task.requires_insurance,
-      permit_likely: task.permit_likely,
-      youth_ok: task.youth_ok,
+      permit_likely:      task.permit_likely,
+      youth_ok:           task.youth_ok,
 
-      // Prices — DB values only
-      fri_low: friLow,
-      fri_high: friHigh,
-      fri_unit: friUnit,
+      // Pricing — single book-now number
+      book_price:          bookPrice,
+      worker_payout:       workerPayout,
+      needs_site_assessment: needsSiteAssessment,
+      fri_low:             friLow,
+      fri_high:            friHigh,
+      fri_unit:            friUnit,
 
-      // Human-readable explanation
-      breakdown,
+      // Human-readable
+      rationale,
       includes,
       permit_note: permitNote,
-    });
+    })
+
   } catch (err) {
-    console.error("[instant-quote] Fatal error:", err);
-    return NextResponse.json(
-      { error: "Quote generation failed. Please try again." },
-      { status: 500 },
-    );
+    console.error('[instant-quote] Fatal error:', err)
+    return NextResponse.json({ error: 'Quote generation failed. Please try again.' }, { status: 500 })
   }
 }

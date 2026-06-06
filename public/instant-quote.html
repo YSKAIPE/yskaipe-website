@@ -4,207 +4,184 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Instant Quote — YSKAIPE</title>
-<meta name="description" content="Describe any home service job in plain English. YSKAIPE's Fair Rate Index returns an instant price range and matches you to the right tier of worker — free for homeowners, always.">
+<meta name="description" content="Describe any home service job. Get a single fair price instantly. Book it. Done.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
 <style>
 :root {
-  --black:  #0d0e0c;
-  --off:    #111210;
-  --dim:    #1a1c18;
-  --mid:    #2a2e27;
-  --border: rgba(255,255,255,0.08);
-  --text:   #e8ede0;
-  --muted:  #7a8070;
-  --faint:  #4a4e45;
-
-  /* tier colours */
-  --green:  #b8f073;   /* primary worker */
-  --blue:   #73c8f0;   /* licensed pro   */
-  --amber:  #f0c473;   /* youth worker   */
-
-  --serif: 'Fraunces', Georgia, serif;
-  --sans:  'DM Sans', sans-serif;
-  --mono:  'DM Mono', monospace;
+  --black:#0d0e0c; --off:#111210; --dim:#1a1c18; --mid:#2a2e27;
+  --border:rgba(255,255,255,0.08); --text:#e8ede0; --muted:#7a8070; --faint:#4a4e45;
+  --green:#b8f073; --blue:#73c8f0; --amber:#f0c473; --coral:#e07a60;
+  --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',sans-serif; --mono:'DM Mono',monospace;
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--black);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden;min-height:100vh}
-
-/* noise overlay */
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(13,14,12,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--green);text-decoration:none;letter-spacing:-.02em}
-.nav-back{font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.nav-back{font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
 .nav-back:hover{color:var(--green)}
 
-/* PAGE SHELL */
-.page{max-width:680px;margin:0 auto;padding:110px 5% 100px}
+.page{max-width:660px;margin:0 auto;padding:110px 5% 100px}
 
-/* EYEBROW */
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:20px}
 .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 
-h1{font-family:var(--serif);font-size:clamp(2.6rem,6vw,4.2rem);line-height:.95;letter-spacing:-.03em;margin-bottom:16px;font-weight:900}
+h1{font-family:var(--serif);font-size:clamp(2.6rem,6vw,4rem);line-height:.95;letter-spacing:-.03em;margin-bottom:14px;font-weight:900}
 h1 em{font-style:italic;font-weight:300;color:var(--green)}
-.page-sub{font-size:1rem;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:32px;max-width:520px}
+.page-sub{font-size:.95rem;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:28px;max-width:500px}
 
-/* EXAMPLE PILLS */
-.pills-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
-.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px}
-.pill{font-size:.75rem;padding:5px 13px;border-radius:40px;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:var(--sans)}
+/* pills */
+.pills-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.pill{font-size:.72rem;padding:5px 12px;border-radius:40px;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:var(--sans)}
 .pill:hover{border-color:var(--green);color:var(--green);background:rgba(184,240,115,.06)}
 .pill.licensed{border-color:rgba(115,200,240,.3);color:var(--blue)}
 .pill.licensed:hover{background:rgba(115,200,240,.06)}
 .pill.youth{border-color:rgba(240,196,115,.3);color:var(--amber)}
 .pill.youth:hover{background:rgba(240,196,115,.06)}
+.pill-legend{display:flex;gap:14px;margin-bottom:24px;flex-wrap:wrap}
+.pill-legend span{font-family:var(--mono);font-size:.58rem;letter-spacing:.07em;display:flex;align-items:center;gap:5px}
+.pip{width:7px;height:7px;border-radius:2px;display:inline-block}
 
-/* FORM CARD */
-.form-card{background:var(--off);border:1px solid var(--border);border-radius:4px;padding:28px;position:relative;overflow:hidden;margin-bottom:16px}
+/* form */
+.form-card{background:var(--off);border:1px solid var(--border);border-radius:4px;padding:26px;position:relative;overflow:hidden;margin-bottom:14px}
 .form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--blue),var(--amber))}
-
-.field{margin-bottom:14px}
-.field label{display:block;font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field{margin-bottom:13px}
+.field label{display:block;font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .field label .req{color:var(--green);margin-left:2px}
-.field textarea,.field input{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:3px;font-family:var(--sans);font-size:.9rem;color:var(--text);background:var(--dim);outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
-.field textarea{resize:vertical;min-height:96px;line-height:1.65}
+.field textarea,.field input{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:3px;font-family:var(--sans);font-size:.88rem;color:var(--text);background:var(--dim);outline:none;transition:border-color .2s,box-shadow .2s}
+.field textarea{resize:vertical;min-height:90px;line-height:1.65}
 .field textarea:focus,.field input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(184,240,115,.08)}
 .field textarea::placeholder,.field input::placeholder{color:var(--faint)}
-.char-count{text-align:right;font-family:var(--mono);font-size:.6rem;color:var(--faint);margin-top:4px}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-.submit-btn{width:100%;background:var(--green);color:var(--black);border:none;border-radius:40px;padding:15px;font-family:var(--sans);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.02em}
+.char-count{text-align:right;font-family:var(--mono);font-size:.58rem;color:var(--faint);margin-top:3px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.submit-btn{width:100%;background:var(--green);color:var(--black);border:none;border-radius:40px;padding:15px;font-family:var(--sans);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px}
 .submit-btn:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 8px 32px rgba(184,240,115,.2)}
-.submit-btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
-.form-footnote{text-align:center;font-family:var(--mono);font-size:.6rem;color:var(--faint);margin-top:10px;letter-spacing:.06em}
+.submit-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.form-footnote{text-align:center;font-family:var(--mono);font-size:.58rem;color:var(--faint);margin-top:9px;letter-spacing:.06em}
 
-/* LOADING */
-.loading{display:none;padding:36px 28px;text-align:center;background:var(--off);border:1px solid var(--border);border-radius:4px;margin-bottom:16px}
+/* loading */
+.loading{display:none;padding:32px 24px;text-align:center;background:var(--off);border:1px solid var(--border);border-radius:4px;margin-bottom:14px}
 .loading.active{display:block}
-.dots{display:flex;gap:6px;justify-content:center;margin-bottom:14px}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:dotblink 1.2s ease-in-out infinite}
-.dot:nth-child(2){animation-delay:.2s;background:var(--blue)}
-.dot:nth-child(3){animation-delay:.4s;background:var(--amber)}
-@keyframes dotblink{0%,80%,100%{opacity:.12}40%{opacity:1}}
-.loading-msg{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em}
-.loading-stage{font-family:var(--mono);font-size:.62rem;color:var(--green);margin-top:6px;letter-spacing:.1em}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.dot{width:7px;height:7px;border-radius:50%;animation:dotblink 1.2s ease-in-out infinite}
+.dot:nth-child(1){background:var(--green)}
+.dot:nth-child(2){background:var(--blue);animation-delay:.2s}
+.dot:nth-child(3){background:var(--amber);animation-delay:.4s}
+@keyframes dotblink{0%,80%,100%{opacity:.1}40%{opacity:1}}
+.loading-msg{font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.08em}
+.loading-stage{font-family:var(--mono);font-size:.6rem;color:var(--green);margin-top:5px;letter-spacing:.1em}
 
-/* ERROR */
-.error-box{display:none;padding:12px 16px;background:rgba(196,75,43,.12);border:1px solid rgba(196,75,43,.35);border-radius:3px;font-size:.85rem;color:#e07a60;line-height:1.5;margin-bottom:14px}
+.error-box{display:none;padding:11px 14px;background:rgba(224,122,96,.1);border:1px solid rgba(224,122,96,.3);border-radius:3px;font-size:.83rem;color:var(--coral);line-height:1.5;margin-bottom:12px}
 .error-box.active{display:block}
 
 /* ── RESULT ── */
-.result{display:none;border-radius:4px;overflow:hidden;border:1px solid var(--border);animation:slideUp .3s ease;margin-bottom:16px}
+.result{display:none;border-radius:4px;overflow:hidden;border:1px solid var(--border);animation:slideUp .3s ease;margin-bottom:14px}
 .result.active{display:block}
-@keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-/* result header — colour coded by tier */
-.result-header{padding:22px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.result-header.tier-licensed{background:rgba(115,200,240,.08);border-bottom:1px solid rgba(115,200,240,.15)}
-.result-header.tier-primary  {background:rgba(184,240,115,.06);border-bottom:1px solid rgba(184,240,115,.12)}
+/* header */
+.result-header{padding:20px 26px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.result-header.tier-licensed{background:rgba(115,200,240,.07);border-bottom:1px solid rgba(115,200,240,.14)}
+.result-header.tier-primary  {background:rgba(184,240,115,.05);border-bottom:1px solid rgba(184,240,115,.1)}
 .result-header.tier-youth    {background:rgba(240,196,115,.06);border-bottom:1px solid rgba(240,196,115,.12)}
-
-.rh-left{display:flex;flex-direction:column;gap:6px}
-.rh-cat-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.rh-cat-name{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.1}
-.rh-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.rh-confirm{font-family:var(--mono);font-size:.62rem;color:var(--faint);background:rgba(255,255,255,.05);padding:5px 11px;border-radius:20px;border:1px solid var(--border)}
-
-/* TIER BADGE — the key new element */
-.tier-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.62rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:3px;border:1px solid}
+.rh-cat-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.rh-cat-name{font-family:var(--serif);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-bottom:8px}
+.tier-badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.58rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:3px;border:1px solid}
 .tier-badge.licensed{color:var(--blue);border-color:rgba(115,200,240,.35);background:rgba(115,200,240,.08)}
 .tier-badge.primary  {color:var(--green);border-color:rgba(184,240,115,.3);background:rgba(184,240,115,.07)}
 .tier-badge.youth    {color:var(--amber);border-color:rgba(240,196,115,.3);background:rgba(240,196,115,.07)}
 .tier-badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.rh-confirm{font-family:var(--mono);font-size:.6rem;color:var(--faint);background:rgba(255,255,255,.04);padding:5px 10px;border-radius:20px;border:1px solid var(--border);white-space:nowrap}
 
-/* tier explanation strip */
-.tier-strip{padding:12px 28px;font-size:.82rem;line-height:1.6;display:flex;align-items:flex-start;gap:10px}
-.tier-strip.licensed{background:rgba(115,200,240,.05);border-bottom:1px solid rgba(115,200,240,.1);color:rgba(115,200,240,.8)}
-.tier-strip.primary  {background:rgba(184,240,115,.04);border-bottom:1px solid rgba(184,240,115,.1);color:rgba(184,240,115,.75)}
-.tier-strip.youth    {background:rgba(240,196,115,.05);border-bottom:1px solid rgba(240,196,115,.1);color:rgba(240,196,115,.8)}
-.tier-strip-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+/* tier strip */
+.tier-strip{padding:11px 26px;font-size:.8rem;line-height:1.6;display:flex;align-items:flex-start;gap:9px}
+.tier-strip.licensed{background:rgba(115,200,240,.04);border-bottom:1px solid rgba(115,200,240,.09);color:rgba(115,200,240,.8)}
+.tier-strip.primary  {background:rgba(184,240,115,.03);border-bottom:1px solid rgba(184,240,115,.08);color:rgba(184,240,115,.72)}
+.tier-strip.youth    {background:rgba(240,196,115,.04);border-bottom:1px solid rgba(240,196,115,.1);color:rgba(240,196,115,.78)}
+.tier-icon{font-size:.95rem;flex-shrink:0;margin-top:1px}
 
-/* permit flag */
-.permit-strip{padding:10px 28px;background:rgba(240,196,115,.06);border-bottom:1px solid rgba(240,196,115,.15);display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;color:var(--amber)}
+/* permit */
+.permit-strip{padding:9px 26px;background:rgba(240,196,115,.05);border-bottom:1px solid rgba(240,196,115,.13);display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--amber)}
 
-/* FRI price */
-.result-fri{padding:24px 28px;background:var(--dim);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.fri-price{font-family:var(--serif);font-size:3.2rem;font-weight:900;line-height:1;letter-spacing:-.04em}
-.fri-price.licensed{color:var(--blue)}
-.fri-price.primary  {color:var(--green)}
-.fri-price.youth    {color:var(--amber)}
-.fri-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;text-align:right}
-.fri-valid{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:rgba(184,240,115,.1);color:var(--green)}
-.fri-unit{font-family:var(--mono);font-size:.65rem;color:var(--muted);letter-spacing:.06em;margin-top:2px}
-
-/* breakdown */
-.result-breakdown{padding:20px 28px;border-bottom:1px solid var(--border)}
-.block-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:9px}
-.breakdown-text{font-family:var(--serif);font-style:italic;font-size:.95rem;color:rgba(232,237,224,.75);line-height:1.75}
+/* ── THE PRICE BLOCK — most important element ── */
+.price-block{padding:28px 26px;background:var(--dim);border-bottom:1px solid var(--border)}
+.price-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.price-main{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.price-number{font-family:var(--serif);font-size:4rem;font-weight:900;line-height:1;letter-spacing:-.04em}
+.price-number.licensed{color:var(--blue)}
+.price-number.primary  {color:var(--green)}
+.price-number.youth    {color:var(--amber)}
+.price-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);align-self:center}
+.price-starting{font-family:var(--mono);font-size:.65rem;color:var(--amber);letter-spacing:.08em;margin-bottom:4px}
+.price-rationale{font-size:.82rem;color:var(--muted);line-height:1.6;font-style:italic;margin-top:8px;font-family:var(--serif)}
+.price-payout{display:inline-flex;align-items:center;gap:7px;margin-top:12px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--faint);background:rgba(255,255,255,.03);padding:6px 12px;border-radius:20px;border:1px solid var(--border)}
+.price-payout strong{color:var(--muted)}
+.fri-band{font-family:var(--mono);font-size:.6rem;color:var(--faint);margin-top:6px;letter-spacing:.06em}
 
 /* includes */
-.result-includes{padding:18px 28px;background:var(--off);border-bottom:1px solid var(--border)}
-.includes-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
-.inc-tag{font-family:var(--mono);font-size:.65rem;padding:4px 11px;border-radius:20px;border:1px solid var(--border);color:var(--muted)}
+.result-includes{padding:16px 26px;background:var(--off);border-bottom:1px solid var(--border)}
+.block-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.includes-tags{display:flex;flex-wrap:wrap;gap:6px}
+.inc-tag{font-family:var(--mono);font-size:.62rem;padding:4px 10px;border-radius:20px;border:1px solid var(--border);color:var(--muted)}
 
 /* escrow */
-.result-escrow{padding:14px 28px;display:flex;align-items:center;gap:10px;font-size:.82rem;color:rgba(184,240,115,.7);background:rgba(184,240,115,.04);border-bottom:1px solid rgba(184,240,115,.1)}
-.result-escrow strong{font-weight:500;color:var(--green)}
+.result-escrow{padding:13px 26px;display:flex;align-items:center;gap:9px;font-size:.8rem;color:rgba(184,240,115,.65);background:rgba(184,240,115,.03);border-bottom:1px solid rgba(184,240,115,.08)}
+.result-escrow strong{color:var(--green);font-weight:500}
 
-/* BOOKING FORM */
-.booking-form{padding:28px;background:var(--off)}
-.booking-title{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
-.booking-sub{font-size:.82rem;color:var(--muted);margin-bottom:20px;line-height:1.6}
-.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.bf{margin-bottom:12px}
-.bf label{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.bf input{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:3px;font-family:var(--sans);font-size:.88rem;color:var(--text);background:var(--dim);outline:none;transition:border-color .2s,box-shadow .2s}
+/* booking form */
+.booking-form{padding:26px;background:var(--off)}
+.booking-title{font-family:var(--serif);font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:3px}
+.booking-sub{font-size:.8rem;color:var(--muted);margin-bottom:18px;line-height:1.6}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.bf{margin-bottom:10px}
+.bf label{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.bf input{width:100%;padding:10px 13px;border:1px solid var(--border);border-radius:3px;font-family:var(--sans);font-size:.86rem;color:var(--text);background:var(--dim);outline:none;transition:border-color .2s,box-shadow .2s}
 .bf input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(184,240,115,.08)}
 .bf input::placeholder{color:var(--faint)}
 
-.book-btn{width:100%;border:none;border-radius:40px;padding:15px;font-family:var(--sans);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:8px;letter-spacing:.02em}
+/* book button — big, price-forward */
+.book-btn{width:100%;border:none;border-radius:40px;padding:18px;font-family:var(--sans);font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:10px;letter-spacing:.01em;display:flex;align-items:center;justify-content:center;gap:8px}
 .book-btn.licensed{background:var(--blue);color:var(--black)}
 .book-btn.licensed:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 8px 28px rgba(115,200,240,.25)}
 .book-btn.primary  {background:var(--green);color:var(--black)}
 .book-btn.primary:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 8px 28px rgba(184,240,115,.2)}
 .book-btn.youth    {background:var(--amber);color:var(--black)}
 .book-btn.youth:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 8px 28px rgba(240,196,115,.2)}
-.book-btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
-.booking-legal{font-family:var(--mono);font-size:.6rem;color:var(--faint);line-height:1.7;margin-top:12px;text-align:center}
+.book-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.booking-legal{font-family:var(--mono);font-size:.58rem;color:var(--faint);line-height:1.75;margin-top:11px;text-align:center}
 .booking-legal a{color:var(--muted);text-decoration:none;transition:color .15s}
 .booking-legal a:hover{color:var(--green)}
 
-/* BOOKED */
-.booked-state{display:none;padding:40px 28px;text-align:center}
+/* booked */
+.booked-state{display:none;padding:36px 26px;text-align:center}
 .booked-state.active{display:block}
-.booked-icon{width:60px;height:60px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:24px}
-.booked-icon.licensed{background:rgba(115,200,240,.15)}
+.booked-icon{width:56px;height:56px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.booked-icon.licensed{background:rgba(115,200,240,.14)}
 .booked-icon.primary  {background:rgba(184,240,115,.12)}
 .booked-icon.youth    {background:rgba(240,196,115,.12)}
-.booked-state h3{font-family:var(--serif);font-size:1.8rem;font-weight:700;margin-bottom:8px}
-.booked-state p{font-size:.88rem;color:var(--muted);line-height:1.75}
+.booked-state h3{font-family:var(--serif);font-size:1.7rem;font-weight:700;margin-bottom:7px}
+.booked-state p{font-size:.85rem;color:var(--muted);line-height:1.75}
 .booked-num{font-family:var(--mono);color:var(--green)}
+.booked-next{margin-top:16px;padding:14px 20px;background:var(--dim);border-radius:3px;font-size:.8rem;color:var(--muted);line-height:1.7;text-align:left}
+.booked-next strong{color:var(--text);display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 
-/* RESET */
-.reset-btn{display:block;margin:0 auto;background:transparent;border:none;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);cursor:pointer;padding:8px 16px;transition:color .2s}
+.reset-btn{display:block;margin:0 auto;background:transparent;border:none;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);cursor:pointer;padding:8px 14px;transition:color .2s}
 .reset-btn:hover{color:var(--green)}
 
-/* TRUST */
-.trust-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding:24px 0 0;border-top:1px solid var(--border);margin-top:16px}
-.trust-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-.trust-item::before{content:'✓';color:var(--green);font-weight:500}
+.trust-row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;padding:22px 0 0;border-top:1px solid var(--border);margin-top:14px}
+.trust-item{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+.trust-item::before{content:'✓';color:var(--green);font-weight:600}
 
-@media(max-width:600px){
+@media(max-width:580px){
   .field-row,.bf-row{grid-template-columns:1fr}
-  .result-fri{flex-direction:column;gap:12px}
-  .fri-right{align-items:flex-start;text-align:left}
-  h1{font-size:2.4rem}
+  .price-number{font-size:3rem}
+  h1{font-size:2.2rem}
 }
 </style>
 </head>
@@ -216,46 +193,39 @@ h1 em{font-style:italic;font-weight:300;color:var(--green)}
 </nav>
 
 <div class="page">
-  <div class="eyebrow"><span class="eyebrow-dot"></span> Instant Quote · Fair Rate Index · Live</div>
-  <h1>Describe the job.<br><em>Get the price.</em></h1>
-  <p class="page-sub">Plain language. Any job. Our AI classifies the work, selects the right worker tier, and returns a verified Fair Rate Index price range — before anyone is contacted.</p>
+  <div class="eyebrow"><span class="eyebrow-dot"></span> AutoQuote · Fair Rate Index · Live</div>
+  <h1>Describe the job.<br><em>Get the price.<br>Book it.</em></h1>
+  <p class="page-sub">Plain language. Any job. One fair price — instantly. We broadcast to the right worker network. First to claim gets it.</p>
 
-  <!-- EXAMPLE PILLS — grouped by tier so homeowners know what's possible -->
-  <div class="pills-label">Examples — try one</div>
-  <div class="pills" id="pills">
-    <!-- Licensed (blue) -->
+  <div class="pills-label">Try one of these</div>
+  <div class="pills">
     <span class="pill licensed" onclick="fill(this)">Replace AC unit — 3-bed home</span>
     <span class="pill licensed" onclick="fill(this)">Electrical panel upgrade to 200 amp</span>
     <span class="pill licensed" onclick="fill(this)">Water heater replacement — gas</span>
-    <span class="pill licensed" onclick="fill(this)">Full roof replacement — 2,200 sq ft</span>
+    <span class="pill licensed" onclick="fill(this)">Full roof replacement 2,200 sq ft</span>
     <span class="pill licensed" onclick="fill(this)">Install EV charger in garage</span>
-    <span class="pill licensed" onclick="fill(this)">Plumbing — fix pipe leak under sink</span>
-    <!-- Primary (default green) -->
     <span class="pill" onclick="fill(this)">Power wash house + driveway</span>
     <span class="pill" onclick="fill(this)">Paint one bedroom interior</span>
-    <span class="pill" onclick="fill(this)">Help moving furniture to new apartment</span>
+    <span class="pill" onclick="fill(this)">Help moving furniture — 2 hours</span>
     <span class="pill" onclick="fill(this)">Junk removal — garage cleanout</span>
-    <span class="pill" onclick="fill(this)">Interior car detail + vacuum</span>
-    <span class="pill" onclick="fill(this)">Deep clean Airbnb between guests</span>
-    <!-- Youth (amber) -->
+    <span class="pill" onclick="fill(this)">Full car detail interior + exterior</span>
     <span class="pill youth" onclick="fill(this)">Mow and edge half-acre lawn</span>
-    <span class="pill youth" onclick="fill(this)">Assemble IKEA furniture (3 pieces)</span>
-    <span class="pill youth" onclick="fill(this)">Clean gutters single story home</span>
+    <span class="pill youth" onclick="fill(this)">Assemble 3 IKEA pieces</span>
+    <span class="pill youth" onclick="fill(this)">Clean gutters single story</span>
     <span class="pill youth" onclick="fill(this)">Holiday lights install front of house</span>
-    <span class="pill youth" onclick="fill(this)">Set up tables for graduation party</span>
-    <span class="pill youth" onclick="fill(this)">Mulch 4 garden beds</span>
+    <span class="pill youth" onclick="fill(this)">Deep clean Airbnb between guests</span>
   </div>
-  <div style="display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap">
-    <span style="font-family:var(--mono);font-size:.6rem;color:var(--blue);display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:rgba(115,200,240,.25);border:1px solid rgba(115,200,240,.4);display:inline-block"></span> Licensed pro required</span>
-    <span style="font-family:var(--mono);font-size:.6rem;color:var(--green);display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:rgba(184,240,115,.2);border:1px solid rgba(184,240,115,.3);display:inline-block"></span> Primary worker</span>
-    <span style="font-family:var(--mono);font-size:.6rem;color:var(--amber);display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:2px;background:rgba(240,196,115,.2);border:1px solid rgba(240,196,115,.3);display:inline-block"></span> Youth worker ok</span>
+  <div class="pill-legend">
+    <span><span class="pip" style="background:rgba(115,200,240,.25);border:1px solid rgba(115,200,240,.4)"></span><span style="color:var(--blue)">Licensed pro required</span></span>
+    <span><span class="pip" style="background:rgba(184,240,115,.2);border:1px solid rgba(184,240,115,.3)"></span><span style="color:var(--green)">Primary worker</span></span>
+    <span><span class="pip" style="background:rgba(240,196,115,.2);border:1px solid rgba(240,196,115,.3)"></span><span style="color:var(--amber)">Youth worker</span></span>
   </div>
 
   <!-- FORM -->
   <div class="form-card" id="form-card">
     <div class="field">
       <label for="description">Describe your job <span class="req">*</span></label>
-      <textarea id="description" placeholder='e.g. "My AC unit stopped working — needs full replacement, 3-bedroom home in Cornelius NC 28031" or "mow and edge half-acre backyard, Davidson NC"' oninput="updateChar()" maxlength="600"></textarea>
+      <textarea id="description" placeholder='e.g. "Power wash my back deck and driveway — about 1,800 sq ft, Cornelius NC 28031" or "Replace AC unit, 3-bedroom ranch"' oninput="updateChar()" maxlength="600"></textarea>
       <div class="char-count"><span id="char-count">0</span> / 600</div>
     </div>
     <div class="field-row">
@@ -269,7 +239,7 @@ h1 em{font-style:italic;font-weight:300;color:var(--green)}
       </div>
     </div>
     <button class="submit-btn" id="quote-btn" onclick="getQuote()">
-      <span id="btn-text">Get my fair rate →</span>
+      <span id="btn-text">Get my price →</span>
     </button>
     <p class="form-footnote">FREE FOR HOMEOWNERS · ALWAYS · NO ACCOUNT NEEDED</p>
   </div>
@@ -277,396 +247,300 @@ h1 em{font-style:italic;font-weight:300;color:var(--green)}
   <!-- LOADING -->
   <div class="loading" id="loading">
     <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-    <div class="loading-msg">Reading your job description…</div>
+    <div class="loading-msg">Reading your job…</div>
     <div class="loading-stage" id="loading-stage">Classifying work type</div>
   </div>
 
-  <!-- ERROR -->
   <div class="error-box" id="error-box"></div>
 
   <!-- RESULT -->
   <div class="result" id="result">
 
-    <!-- header: tier-coloured -->
     <div class="result-header" id="result-header">
-      <div class="rh-left">
-        <div class="rh-cat-label">Job category</div>
-        <div class="rh-cat-name" id="result-cat">—</div>
-        <div class="tier-badge" id="tier-badge">
-          <span class="tier-badge-dot"></span>
-          <span id="tier-badge-text">—</span>
-        </div>
-      </div>
-      <div class="rh-right">
-        <div class="rh-confirm" id="result-confirm">#YSK-——</div>
-      </div>
-    </div>
-
-    <!-- tier explanation -->
-    <div class="tier-strip" id="tier-strip">
-      <span class="tier-strip-icon" id="tier-icon">—</span>
-      <span id="tier-desc">—</span>
-    </div>
-
-    <!-- permit notice (conditional) -->
-    <div class="permit-strip" id="permit-strip" style="display:none">
-      <span>⚠</span>
-      <span>This type of job may require a local permit. Your YSKAIPE pro will advise you before work begins.</span>
-    </div>
-
-    <!-- FRI range -->
-    <div class="result-fri">
       <div>
-        <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Your Fair Rate range</div>
-        <div class="fri-price" id="fri-price">$— — $—</div>
-        <div style="font-family:var(--mono);font-size:.65rem;color:var(--faint);margin-top:6px" id="fri-unit-label">flat rate</div>
+        <div class="rh-cat-label">Job</div>
+        <div class="rh-cat-name" id="result-cat">—</div>
+        <div class="tier-badge" id="tier-badge"><span class="tier-badge-dot"></span><span id="tier-badge-text">—</span></div>
       </div>
-      <div class="fri-right">
-        <span class="fri-valid">✓ Fair Rate Index</span>
-        <div class="fri-unit" id="fri-basis">Based on local market data</div>
-      </div>
+      <div class="rh-confirm" id="result-confirm">#YSK-——</div>
     </div>
 
-    <!-- breakdown -->
-    <div class="result-breakdown">
-      <div class="block-label">What drives this price</div>
-      <div class="breakdown-text" id="result-breakdown">—</div>
+    <div class="tier-strip" id="tier-strip">
+      <span class="tier-icon" id="tier-icon"></span>
+      <span id="tier-desc"></span>
     </div>
 
-    <!-- includes -->
+    <div class="permit-strip" id="permit-strip" style="display:none">
+      <span>⚠</span><span>This job may require a local permit. Your YSKAIPE pro will advise before work begins.</span>
+    </div>
+
+    <!-- THE PRICE — single number, front and center -->
+    <div class="price-block">
+      <div class="price-eyebrow" id="price-eyebrow">Your fair price</div>
+      <div class="price-starting" id="price-starting" style="display:none">Starting from — pro confirms exact scope on site</div>
+      <div class="price-main">
+        <div class="price-number primary" id="price-number">$—</div>
+        <div class="price-label" id="price-unit">flat rate</div>
+      </div>
+      <div class="price-rationale" id="price-rationale"></div>
+      <div class="price-payout" id="price-payout">
+        Worker receives: <strong id="payout-number">$—</strong> &nbsp;·&nbsp; YSKAIPE fee: 15%
+      </div>
+      <div class="fri-band" id="fri-band"></div>
+    </div>
+
     <div class="result-includes" id="result-includes-section">
       <div class="block-label">Typically includes</div>
       <div class="includes-tags" id="result-includes"></div>
     </div>
 
-    <!-- escrow -->
     <div class="result-escrow">
       <span style="font-size:1rem">🔒</span>
-      <div>Payment held in <strong>escrow</strong> — released only when the job is confirmed complete. Worker contact info shared only after booking.</div>
+      <div>Payment held in <strong>escrow</strong> — released only when the job is confirmed complete. Worker contact shared only after booking.</div>
     </div>
 
-    <!-- BOOKING FORM -->
+    <!-- BOOKING -->
     <div class="booking-form" id="booking-form">
-      <div class="booking-title">Book this job</div>
-      <div class="booking-sub" id="booking-sub">Tell us how to reach you — we'll match you to the right YSKAIPE worker and confirm within 2 hours.</div>
-
+      <div class="booking-title" id="booking-title">Book this job</div>
+      <div class="booking-sub" id="booking-sub">Enter your details — we broadcast to the right worker network immediately. First to claim gets it.</div>
       <div class="bf-row">
         <div class="bf"><label>First name</label><input type="text" id="b-fname" placeholder="Taylor" autocomplete="given-name"></div>
         <div class="bf"><label>Last name</label><input type="text" id="b-lname" placeholder="Brooks" autocomplete="family-name"></div>
       </div>
       <div class="bf"><label>Email</label><input type="email" id="b-email" placeholder="you@email.com" autocomplete="email"></div>
       <div class="bf"><label>Phone</label><input type="tel" id="b-phone" placeholder="(704) 555-0100" autocomplete="tel"></div>
-      <div class="bf"><label>When do you need this done?</label><input type="text" id="b-timing" placeholder='e.g. "This Saturday" or "Flexible"'></div>
-
-      <button class="book-btn primary" id="book-btn" onclick="bookJob()">Book at fair rate →</button>
+      <div class="bf"><label>When do you need this?</label><input type="text" id="b-timing" placeholder='e.g. "This Saturday" or "Flexible"'></div>
+      <button class="book-btn primary" id="book-btn" onclick="bookJob()">Book now for $— →</button>
       <p class="booking-legal">
         By booking you agree to our <a href="/legal/terms.html">Terms</a> and <a href="/legal/fair-rate-disclaimer.html">Fair Rate Disclaimer</a>.
         YSKAIPE is a technology platform — workers are independent contractors who have completed our internal qualification process.
       </p>
     </div>
 
-    <!-- BOOKED STATE -->
+    <!-- BOOKED -->
     <div class="booked-state" id="booked-state">
       <div class="booked-icon primary" id="booked-icon">✓</div>
       <h3>You're booked.</h3>
-      <p>We're matching you now. Expect a confirmation within 2 hours — usually faster.<br><br>
-        Confirmation number: <span class="booked-num" id="booked-num">—</span></p>
+      <p>Broadcasting to the <span id="booked-tier-label">YSKAIPE</span> network now.<br>
+      Confirmation: <span class="booked-num" id="booked-num">—</span></p>
+      <div class="booked-next">
+        <strong>What happens next</strong>
+        The first qualified worker in your area to claim this job will be introduced to you by email within 2 hours — usually faster. Payment is held in escrow and released only after you confirm the job is complete.
+      </div>
     </div>
   </div>
 
-  <button class="reset-btn" id="reset-btn" style="display:none" onclick="resetAll()">← Start a new quote</button>
+  <button class="reset-btn" id="reset-btn" style="display:none" onclick="resetAll()">← New quote</button>
 
   <div class="trust-row">
     <span class="trust-item">Free for homeowners</span>
     <span class="trust-item">Payment in escrow</span>
-    <span class="trust-item">Worker replaceability guarantee</span>
+    <span class="trust-item">First claim wins</span>
     <span class="trust-item">No account needed</span>
   </div>
 </div>
 
 <script>
-// ─── Tier config ───────────────────────────────────────────────────────────
 const TIER = {
-  licensed: {
-    label:    'Licensed Pro Required',
-    icon:     '⚡',
-    desc:     'This job requires a state-licensed, insured contractor. YSKAIPE will match you with a verified Licensed Pro — credentials on file, priority dispatch.',
-    cssClass: 'licensed',
-    bookText: 'Book with a Licensed Pro →',
-  },
-  primary: {
-    label:    'YSKAIPE Primary Worker',
-    icon:     '🔧',
-    desc:     'This job is matched to a YSKAIPE Primary Worker — a vetted, experienced tradesperson in your ZIP code. Rated, insured where required, and dispatched exclusively to you.',
-    cssClass: 'primary',
-    bookText: 'Book at fair rate →',
-  },
-  youth: {
-    label:    'YSKAIPE Youth Worker',
-    icon:     '🌱',
-    desc:     'This job is a great fit for a YSKAIPE Youth Worker — a supervised, motivated young worker earning real experience. Perfect for light, safe, entry-level tasks.',
-    cssClass: 'youth',
-    bookText: 'Book at fair rate →',
-  },
+  licensed:{label:'Licensed Pro Required',icon:'⚡',css:'licensed',desc:'State-licensed, insured contractor. Credentials verified. Your job broadcasts to YSKAIPE\'s licensed pro network.'},
+  primary: {label:'YSKAIPE Primary Worker',icon:'🔧',css:'primary',desc:'Vetted, experienced tradesperson dispatched exclusively to your ZIP. Rated and insured where required.'},
+  youth:   {label:'YSKAIPE Youth Worker',  icon:'🌱',css:'youth',  desc:'Supervised, motivated young worker — perfect for this job. Safe, reliable, and earning real experience.'},
 };
+const UNIT_MAP={flat:'flat rate',per_hour:'per hour',per_visit:'per visit',per_sqft:'per sq ft'};
 
-// ─── Fallback keyword classifier (mirrors service_tasks seeds) ─────────────
-// Used when API is unreachable. Returns the same shape as the API response.
-const FALLBACK = [
-  // Licensed
-  { slugParts:['ac','air condition','hvac','furnace','heat pump','cooling system','replace.*unit'],tier:'licensed',requires_license:true, label:'HVAC — System Replacement',    fri_low:2500,fri_high:7200,fri_unit:'flat',   permit_likely:true,  includes:['Equipment','Labor','Refrigerant charge','Permit advisory'] },
-  { slugParts:['panel','breaker','electrical.*upgrade','200 amp','amp service','rewir'],          tier:'licensed',requires_license:true, label:'Electrical — Panel Upgrade',    fri_low:1200,fri_high:3500,fri_unit:'flat',   permit_likely:true,  includes:['Panel','Labor','Permit advisory','Inspection'] },
-  { slugParts:['water heater','hot water tank','heater replace'],                                 tier:'licensed',requires_license:true, label:'Plumbing — Water Heater',       fri_low:900, fri_high:1800,fri_unit:'flat',   permit_likely:true,  includes:['Unit','Labor','Permit advisory','Haul-away'] },
-  { slugParts:['roof replace','new roof','reroof','full roof','roofing'],                          tier:'licensed',requires_license:true, label:'Roofing — Full Replacement',    fri_low:8000,fri_high:22000,fri_unit:'flat', permit_likely:true,  includes:['Materials','Labor','Permit','Debris removal'] },
-  { slugParts:['ev charger','electric vehicle charger','level 2'],                                tier:'licensed',requires_license:true, label:'Electrical — EV Charger',       fri_low:600, fri_high:1400,fri_unit:'flat',   permit_likely:true,  includes:['Charger unit','Labor','Permit advisory'] },
-  { slugParts:['pipe leak','burst pipe','main line','plumb'],                                     tier:'licensed',requires_license:true, label:'Plumbing — Pipe Repair',        fri_low:150, fri_high:500, fri_unit:'flat',   permit_likely:false, includes:['Labor','Parts','Leak test'] },
-  { slugParts:['ductwork','duct repair','vent repair'],                                           tier:'licensed',requires_license:true, label:'HVAC — Ductwork Repair',        fri_low:300, fri_high:900, fri_unit:'flat',   permit_likely:false, includes:['Materials','Labor','Seal test'] },
-  { slugParts:['tree removal','remove tree','fell tree','cut down tree'],                         tier:'licensed',requires_license:true, label:'Landscaping — Tree Removal',    fri_low:500, fri_high:2000,fri_unit:'flat',   permit_likely:false, includes:['Takedown','Debris removal','Stump optional'] },
-  // Primary
-  { slugParts:['power wash','pressure wash','soft wash','house wash'],                            tier:'primary', requires_license:false,label:'Power Washing',                 fri_low:150, fri_high:400, fri_unit:'flat',   permit_likely:false, includes:['House','Driveway','Deck','Cleanup'] },
-  { slugParts:['paint.*room','room.*paint','interior paint','bedroom paint','bathroom paint'],    tier:'primary', requires_license:false,label:'Interior Painting — Room',      fri_low:280, fri_high:600, fri_unit:'flat',   permit_likely:false, includes:['Walls','Ceiling','Trim masking','2 coats'] },
-  { slugParts:['full.*interior paint','paint.*whole house','paint.*entire'],                     tier:'primary', requires_license:false,label:'Interior Painting — Full Home', fri_low:1800,fri_high:5500,fri_unit:'flat',   permit_likely:false, includes:['All rooms','Ceilings','Trim','2-coat finish'] },
-  { slugParts:['exterior paint','paint.*outside','outside.*paint','house.*paint'],               tier:'primary', requires_license:false,label:'Exterior Painting',             fri_low:2500,fri_high:8000,fri_unit:'flat',   permit_likely:false, includes:['Prep','Prime','2 coats','Cleanup'] },
-  { slugParts:['moving','help me move','move furniture','move boxes','loading.*unload'],          tier:'primary', requires_license:false,label:'Moving Help',                   fri_low:150, fri_high:500, fri_unit:'flat',   permit_likely:false, includes:['2 workers','Loading','Unloading','Local'] },
-  { slugParts:['junk removal','haul away','cleanout','garage clean','estate clean'],              tier:'primary', requires_license:false,label:'Junk & Debris Removal',         fri_low:150, fri_high:500, fri_unit:'flat',   permit_likely:false, includes:['Labor','Haul','Disposal fees'] },
-  { slugParts:['car detail','full detail','auto detail'],                                         tier:'primary', requires_license:false,label:'Auto Detailing — Full',         fri_low:150, fri_high:350, fri_unit:'flat',   permit_likely:false, includes:['Interior vacuum','Exterior wash','Windows'] },
-  { slugParts:['deep clean','house clean','airbnb clean','rental clean','turnover'],              tier:'primary', requires_license:false,label:'Deep Cleaning / Turnover',      fri_low:120, fri_high:400, fri_unit:'flat',   permit_likely:false, includes:['All rooms','Kitchen','Bathrooms','Linen'] },
-  { slugParts:['faucet','fixture swap','garbage disposal','drain snake','drain clean'],           tier:'primary', requires_license:false,label:'Minor Plumbing — Fixture',      fri_low:80,  fri_high:250, fri_unit:'flat',   permit_likely:false, includes:['Labor','Parts','Leak check'] },
-  { slugParts:['ceiling fan','smart switch','dimmer','light fixture swap'],                       tier:'primary', requires_license:false,label:'Minor Electrical — Fixture',    fri_low:60,  fri_high:180, fri_unit:'flat',   permit_likely:false, includes:['Install','Test','Cleanup'] },
-  { slugParts:['deck repair','deck refinish','fence repair','shingle patch'],                     tier:'primary', requires_license:false,label:'Minor Home Repairs',            fri_low:150, fri_high:500, fri_unit:'flat',   permit_likely:false, includes:['Materials','Labor','Cleanup'] },
-  { slugParts:['oil change','brake','tire rotation','windshield chip'],                           tier:'primary', requires_license:false,label:'Automotive — Service',          fri_low:40,  fri_high:200, fri_unit:'flat',   permit_likely:false, includes:['Labor','Parts'] },
-  // Youth
-  { slugParts:['mow','lawn mow','cut grass','mow.*lawn','grass cut'],                             tier:'youth',   requires_license:false,label:'Lawn Mowing',                   fri_low:40,  fri_high:90,  fri_unit:'per_visit',permit_likely:false,includes:['Mow','Edge','Blow clippings'] },
-  { slugParts:['assemble','furniture assembly','ikea','flat.?pack'],                              tier:'youth',   requires_license:false,label:'Furniture Assembly',             fri_low:40,  fri_high:120, fri_unit:'flat',   permit_likely:false, includes:['Assembly','Tools provided','Cleanup'] },
-  { slugParts:['gutter clean','clean gutter','clear gutter'],                                    tier:'youth',   requires_license:false,label:'Gutter Cleaning',                fri_low:80,  fri_high:200, fri_unit:'flat',   permit_likely:false, includes:['Debris removal','Flush downspouts'] },
-  { slugParts:['holiday light','christmas light','hang light'],                                   tier:'youth',   requires_license:false,label:'Holiday Light Install',         fri_low:150, fri_high:500, fri_unit:'flat',   permit_likely:false, includes:['Exterior hang','Roofline','Plug test'] },
-  { slugParts:['event setup','set up table','set up chair','party setup'],                        tier:'youth',   requires_license:false,label:'Event Setup',                   fri_low:80,  fri_high:250, fri_unit:'flat',   permit_likely:false, includes:['Tables','Chairs','Layout'] },
-  { slugParts:['mulch','mulching','garden bed'],                                                  tier:'youth',   requires_license:false,label:'Mulching',                      fri_low:80,  fri_high:250, fri_unit:'flat',   permit_likely:false, includes:['Mulch spread','Bed edging','Cleanup'] },
-  { slugParts:['car wash','wash car','wash my car'],                                              tier:'youth',   requires_license:false,label:'Car Wash',                      fri_low:35,  fri_high:80,  fri_unit:'flat',   permit_likely:false, includes:['Exterior wash','Rinse','Dry'] },
-  { slugParts:['dog walk','walk.*dog','pet sit'],                                                 tier:'youth',   requires_license:false,label:'Pet Care',                      fri_low:20,  fri_high:50,  fri_unit:'per_visit',permit_likely:false,includes:['Walk','Feed','Water'] },
-  { slugParts:['window wash','clean window','exterior window'],                                   tier:'youth',   requires_license:false,label:'Window Cleaning',               fri_low:80,  fri_high:250, fri_unit:'flat',   permit_likely:false, includes:['Exterior panes','Screens','Sills'] },
-  { slugParts:['grocery','errand','pick up','drop off'],                                          tier:'youth',   requires_license:false,label:'Errand Running',                fri_low:20,  fri_high:60,  fri_unit:'flat',   permit_likely:false, includes:['Pickup','Delivery','Per trip'] },
+// Fallback classifier — same tier logic, now returns book_price as midpoint
+const FALLBACK=[
+  {p:/ac unit|air condition|hvac|furnace|heat pump|cooling system/i, tier:'licensed',label:'HVAC — System Service',       low:2500,  high:7200,  unit:'flat'},
+  {p:/panel|breaker|200 amp|electrical.*upgrade/i,                    tier:'licensed',label:'Electrical — Panel Upgrade',  low:1200,  high:3500,  unit:'flat'},
+  {p:/water heater|hot water tank/i,                                  tier:'licensed',label:'Plumbing — Water Heater',     low:900,   high:1800,  unit:'flat'},
+  {p:/roof replace|new roof|reroof|full roof/i,                       tier:'licensed',label:'Roofing — Full Replacement',  low:8000,  high:22000, unit:'flat'},
+  {p:/ev charger|electric vehicle charger/i,                          tier:'licensed',label:'Electrical — EV Charger',     low:600,   high:1400,  unit:'flat'},
+  {p:/pipe leak|burst pipe|plumb/i,                                   tier:'licensed',label:'Plumbing — Pipe Repair',      low:150,   high:500,   unit:'flat'},
+  {p:/new home|build.*house|custom home|home construction/i,          tier:'licensed',label:'New Home Construction',       low:300000,high:1500000,unit:'flat'},
+  {p:/room addition|add.*room/i,                                      tier:'licensed',label:'Room Addition',               low:20000, high:80000, unit:'flat'},
+  {p:/power wash|pressure wash/i,                                     tier:'primary', label:'Power Washing',               low:150,   high:400,   unit:'flat'},
+  {p:/paint.*room|room.*paint|interior paint/i,                       tier:'primary', label:'Interior Painting — Room',    low:280,   high:600,   unit:'flat'},
+  {p:/moving|help.*move|move furniture/i,                             tier:'primary', label:'Moving Help',                 low:150,   high:500,   unit:'flat'},
+  {p:/junk removal|haul away|cleanout/i,                              tier:'primary', label:'Junk Removal',                low:150,   high:500,   unit:'flat'},
+  {p:/car detail|full detail|auto detail/i,                           tier:'primary', label:'Auto Detailing',              low:150,   high:350,   unit:'flat'},
+  {p:/deep clean|airbnb clean|turnover/i,                             tier:'primary', label:'Deep Clean / Turnover',       low:120,   high:400,   unit:'flat'},
+  {p:/mow|lawn mow|cut grass/i,                                       tier:'youth',   label:'Lawn Mowing',                 low:40,    high:90,    unit:'per_visit'},
+  {p:/assembl|ikea|flat.?pack/i,                                      tier:'youth',   label:'Furniture Assembly',          low:40,    high:120,   unit:'flat'},
+  {p:/gutter clean/i,                                                 tier:'youth',   label:'Gutter Cleaning',             low:80,    high:200,   unit:'flat'},
+  {p:/holiday light|christmas light/i,                                tier:'youth',   label:'Holiday Light Install',       low:150,   high:500,   unit:'flat'},
+  {p:/event setup|set up table/i,                                     tier:'youth',   label:'Event Setup',                 low:80,    high:250,   unit:'flat'},
+  {p:/mulch/i,                                                        tier:'youth',   label:'Mulching',                    low:80,    high:250,   unit:'flat'},
 ];
 
-function clientMatch(desc) {
-  const d = desc.toLowerCase();
-  for (const row of FALLBACK) {
-    const hit = row.slugParts.some(p => { try { return new RegExp(p,'i').test(d); } catch(e){ return d.includes(p); } });
-    if (hit) return {
-      label: row.label,
-      tier_min: row.tier,
-      requires_license: row.requires_license,
-      permit_likely: row.permit_likely,
-      fri_low: row.fri_low,
-      fri_high: row.fri_high,
-      fri_unit: row.fri_unit,
-      includes: row.includes,
-      breakdown: `This matches our "${row.label}" category in the Fair Rate Index. The range shown reflects verified market data for NC — final price depends on exact scope, your ZIP, and materials.`,
-      confidence: 0.6,
-    };
+function clientMatch(desc){
+  for(const row of FALLBACK){
+    if(row.p.test(desc)){
+      const mid=Math.round((row.low+row.high)/2);
+      return {label:row.label,tier_min:row.tier,requires_license:row.tier==='licensed',
+        permit_likely:row.tier==='licensed',book_price:mid,worker_payout:Math.round(mid*.85),
+        needs_site_assessment:row.tier==='licensed',fri_low:row.low,fri_high:row.high,fri_unit:row.unit,
+        rationale:`Fair Rate Index midpoint for ${row.label} in NC.`,
+        includes:['Labor','Materials','Cleanup','Site inspection if needed'],permit_note:''};
+    }
   }
-  return {
-    label:'General Home Service',tier_min:'primary',requires_license:false,permit_likely:false,
-    fri_low:80,fri_high:200,fri_unit:'per_hour',includes:['Labor','2-hr minimum','Flexible scope'],
-    breakdown:"Your job description is unique — we've applied the General Home Service rate. Adding more detail about size and scope may sharpen the range.",
-    confidence:0.3,
-  };
+  return {label:'General Home Service',tier_min:'primary',requires_license:false,permit_likely:false,
+    book_price:140,worker_payout:119,needs_site_assessment:false,fri_low:80,fri_high:200,fri_unit:'per_hour',
+    rationale:'Priced at Fair Rate Index midpoint for general home services in NC.',
+    includes:['Labor','2-hr minimum','Flexible scope'],permit_note:''};
 }
 
-// ─── State ─────────────────────────────────────────────────────────────────
-let currentQuote = null;
-let currentTier  = 'primary';
-let confirmNum   = null;
+let currentQuote=null, currentTier='primary', confirmNum=null;
 
-// ─── Helpers ───────────────────────────────────────────────────────────────
-function makeConfirm(){ return 'YSK-' + Math.random().toString(36).slice(2,8).toUpperCase(); }
-function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
-function updateChar(){ document.getElementById('char-count').textContent = document.getElementById('description').value.length; }
-function fill(el){ document.getElementById('description').value = el.textContent; updateChar(); document.getElementById('description').focus(); }
-function setError(m){ const e=document.getElementById('error-box'); e.textContent=m; e.classList.add('active'); }
-function clearError(){ document.getElementById('error-box').classList.remove('active'); }
+function makeConfirm(){return 'YSK-'+Math.random().toString(36).slice(2,8).toUpperCase();}
+function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+function updateChar(){document.getElementById('char-count').textContent=document.getElementById('description').value.length;}
+function fill(el){document.getElementById('description').value=el.textContent.trim();updateChar();document.getElementById('description').focus();}
+function setError(m){const e=document.getElementById('error-box');e.textContent=m;e.classList.add('active');}
+function clearError(){document.getElementById('error-box').classList.remove('active');}
 
-// ─── Get quote ─────────────────────────────────────────────────────────────
 async function getQuote(){
   clearError();
-  const description = document.getElementById('description').value.trim();
-  const zip         = document.getElementById('zip').value.trim();
-  const scope       = document.getElementById('scope').value.trim();
+  const description=document.getElementById('description').value.trim();
+  const zip=document.getElementById('zip').value.trim();
+  const scope=document.getElementById('scope').value.trim();
+  if(!description||description.length<8) return setError('Please describe the job in a bit more detail.');
+  if(!zip||!/^\d{5}$/.test(zip)) return setError('Please enter a valid 5-digit ZIP code.');
 
-  if(!description || description.length < 10) return setError('Please describe the job in a bit more detail.');
-  if(!zip || !/^\d{5}$/.test(zip)) return setError('Please enter a valid 5-digit ZIP code.');
-
-  const btn = document.getElementById('quote-btn');
-  btn.disabled = true;
-  document.getElementById('btn-text').textContent = 'Finding your fair rate…';
+  const btn=document.getElementById('quote-btn');
+  btn.disabled=true;
+  document.getElementById('btn-text').textContent='Pricing your job…';
   document.getElementById('loading').classList.add('active');
-  document.getElementById('form-card').style.opacity = '.35';
+  document.getElementById('form-card').style.opacity='.3';
 
-  const stages = [
-    'Classifying work type…',
-    'Checking license requirements…',
-    'Pulling Fair Rate Index data…',
-    'Calculating range for ' + zip + '…',
-  ];
-  let si = 0;
-  const stageTimer = setInterval(() => {
-    document.getElementById('loading-stage').textContent = stages[Math.min(si++, stages.length-1)];
-  }, 850);
+  const stages=['Classifying work type…','Checking license requirements…','Calculating fair price…','Almost done…'];
+  let si=0;
+  const t=setInterval(()=>{ document.getElementById('loading-stage').textContent=stages[Math.min(si++,stages.length-1)]; },900);
 
-  let data = null;
-  try {
-    const res = await fetch('/api/instant-quote', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ description, zip, scope }),
-    });
-    clearInterval(stageTimer);
-    if(res.ok){
-      data = await res.json();
-    } else {
-      data = clientMatch(description);
-    }
-  } catch(e){
-    clearInterval(stageTimer);
-    data = clientMatch(description);
-  } finally {
-    document.getElementById('loading').classList.remove('active');
-  }
+  let data=null;
+  try{
+    const res=await fetch('/api/instant-quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description,zip,scope})});
+    clearInterval(t);
+    data=res.ok ? await res.json() : clientMatch(description);
+  }catch(e){ clearInterval(t); data=clientMatch(description); }
+  finally{ document.getElementById('loading').classList.remove('active'); }
 
-  renderResult(data, zip);
+  renderResult(data,zip);
 }
 
-// ─── Render ────────────────────────────────────────────────────────────────
-function renderResult(data, zip){
-  currentQuote = { ...data, zip };
-  currentTier  = data.tier_min || 'primary';
-  confirmNum   = makeConfirm();
-
-  const tc = TIER[currentTier] || TIER.primary;
+function renderResult(data,zip){
+  currentQuote={...data,zip};
+  currentTier=data.tier_min||'primary';
+  confirmNum=makeConfirm();
+  const tc=TIER[currentTier]||TIER.primary;
+  const price=data.book_price||Math.round(((data.fri_low||80)+(data.fri_high||200))/2);
+  const payout=data.worker_payout||Math.round(price*.85);
+  const siteAssess=!!data.needs_site_assessment;
 
   // Header
-  const header = document.getElementById('result-header');
-  header.className = 'result-header tier-' + tc.cssClass;
-  document.getElementById('result-cat').textContent   = data.label || 'Home Service';
-  document.getElementById('result-confirm').textContent = confirmNum;
-
-  // Tier badge
-  const badge = document.getElementById('tier-badge');
-  badge.className = 'tier-badge ' + tc.cssClass;
-  document.getElementById('tier-badge-text').textContent = tc.label;
+  document.getElementById('result-header').className='result-header tier-'+tc.css;
+  document.getElementById('result-cat').textContent=data.label||'Home Service';
+  document.getElementById('result-confirm').textContent=confirmNum;
+  const badge=document.getElementById('tier-badge');
+  badge.className='tier-badge '+tc.css;
+  document.getElementById('tier-badge-text').textContent=tc.label;
 
   // Tier strip
-  const strip = document.getElementById('tier-strip');
-  strip.className = 'tier-strip ' + tc.cssClass;
-  document.getElementById('tier-icon').textContent = tc.icon;
-  document.getElementById('tier-desc').textContent = tc.desc;
+  const strip=document.getElementById('tier-strip');
+  strip.className='tier-strip '+tc.css;
+  document.getElementById('tier-icon').textContent=tc.icon;
+  document.getElementById('tier-desc').textContent=tc.desc;
 
   // Permit
-  document.getElementById('permit-strip').style.display = data.permit_likely ? 'flex' : 'none';
+  document.getElementById('permit-strip').style.display=data.permit_likely?'flex':'none';
 
-  // FRI
-  const friPrice = document.getElementById('fri-price');
-  friPrice.className = 'fri-price ' + tc.cssClass;
-  friPrice.textContent = fmt(data.fri_low) + ' — ' + fmt(data.fri_high);
-
-  const unitMap = { flat:'flat rate', per_hour:'per hour', per_visit:'per visit', per_sqft:'per sq ft' };
-  document.getElementById('fri-unit-label').textContent = unitMap[data.fri_unit] || 'flat rate';
-  document.getElementById('fri-basis').textContent = 'Fair Rate Index · ZIP ' + zip + ' · NC baseline';
-
-  // Breakdown
-  document.getElementById('result-breakdown').textContent = data.breakdown || '';
+  // Price block
+  document.getElementById('price-eyebrow').textContent=siteAssess?'Starting price — pro confirms final scope on site':'Your fair price';
+  document.getElementById('price-starting').style.display=siteAssess?'block':'none';
+  const pn=document.getElementById('price-number');
+  pn.className='price-number '+tc.css;
+  pn.textContent=fmt(price);
+  document.getElementById('price-unit').textContent=UNIT_MAP[data.fri_unit||'flat']||'flat rate';
+  document.getElementById('price-rationale').textContent=data.rationale||'';
+  document.getElementById('payout-number').textContent=fmt(payout);
+  document.getElementById('fri-band').textContent=`Fair Rate Index · ZIP ${zip} · Band: ${fmt(data.fri_low||price)}–${fmt(data.fri_high||price)}`;
 
   // Includes
-  const incEl = document.getElementById('result-includes');
-  incEl.innerHTML = '';
-  const incList = data.includes || [];
-  incList.forEach(item => {
-    const tag = document.createElement('span');
-    tag.className = 'inc-tag';
-    tag.textContent = item;
-    incEl.appendChild(tag);
+  const incEl=document.getElementById('result-includes');
+  incEl.innerHTML='';
+  (data.includes||[]).forEach(item=>{
+    const tag=document.createElement('span');tag.className='inc-tag';tag.textContent=item;incEl.appendChild(tag);
   });
-  document.getElementById('result-includes-section').style.display = incList.length ? 'block' : 'none';
+  document.getElementById('result-includes-section').style.display=(data.includes||[]).length?'block':'none';
 
-  // Booking sub-copy + button colour
-  const bookSubCopy = {
-    licensed: "A state-licensed, insured YSKAIPE Pro will be matched to your job. Credentials verified. Priority dispatch.",
-    primary:  "We'll match you with a YSKAIPE Primary Worker in your ZIP — vetted, rated, and dispatched exclusively to you.",
-    youth:    "We'll match you with a YSKAIPE Youth Worker — supervised, motivated, and perfect for this type of job.",
+  // Booking section
+  const bookSubs={
+    licensed:'Your job broadcasts to our licensed pro network — state-licensed, insured, credentials on file. First to claim gets it.',
+    primary:'Broadcasting to YSKAIPE Primary Workers in your ZIP now. First qualified worker to claim gets the job.',
+    youth:'Broadcasting to YSKAIPE Youth Workers in your area. Supervised, motivated, and perfect for this job.',
   };
-  document.getElementById('booking-sub').textContent = bookSubCopy[currentTier] || bookSubCopy.primary;
-
-  const bookBtn = document.getElementById('book-btn');
-  bookBtn.className = 'book-btn ' + tc.cssClass;
-  bookBtn.textContent = tc.bookText;
-
-  document.getElementById('booked-icon').className = 'booked-icon ' + tc.cssClass;
+  document.getElementById('booking-sub').textContent=bookSubs[currentTier]||bookSubs.primary;
+  const bookBtn=document.getElementById('book-btn');
+  bookBtn.className='book-btn '+tc.css;
+  bookBtn.textContent=(siteAssess?`Book — starting at ${fmt(price)} →`:`Book now for ${fmt(price)} →`);
+  document.getElementById('booked-icon').className='booked-icon '+tc.css;
+  document.getElementById('booked-tier-label').textContent=tc.label;
 
   // Show result
-  document.getElementById('form-card').style.display = 'none';
+  document.getElementById('form-card').style.display='none';
   document.getElementById('result').classList.add('active');
-  document.getElementById('reset-btn').style.display = 'block';
-  document.getElementById('result').scrollIntoView({ behavior:'smooth', block:'start' });
+  document.getElementById('reset-btn').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ─── Book ──────────────────────────────────────────────────────────────────
 async function bookJob(){
-  const fname  = document.getElementById('b-fname').value.trim();
-  const lname  = document.getElementById('b-lname').value.trim();
-  const email  = document.getElementById('b-email').value.trim();
-  const phone  = document.getElementById('b-phone').value.trim();
-  const timing = document.getElementById('b-timing').value.trim();
+  const fname=document.getElementById('b-fname').value.trim();
+  const lname=document.getElementById('b-lname').value.trim();
+  const email=document.getElementById('b-email').value.trim();
+  const phone=document.getElementById('b-phone').value.trim();
+  const timing=document.getElementById('b-timing').value.trim();
+  if(!fname||!lname){alert('Please enter your name.');return;}
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email.');return;}
+  if(!phone||phone.replace(/\D/g,'').length<10){alert('Please enter a valid phone number.');return;}
 
-  if(!fname||!lname){ alert('Please enter your name.'); return; }
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('Please enter a valid email.'); return; }
-  if(!phone||phone.replace(/\D/g,'').length<10){ alert('Please enter a valid phone number.'); return; }
+  const btn=document.getElementById('book-btn');
+  const origText=btn.textContent;
+  btn.textContent='Booking…';btn.disabled=true;
 
-  const btn = document.getElementById('book-btn');
-  btn.textContent = 'Booking…';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch('/api/instant-quote-book', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        firstName:fname, lastName:lname, email, phone, timing,
-        slug:       currentQuote.slug || 'life_handyman_misc',
-        description:currentQuote.description || '',
-        zip:        currentQuote.zip,
-        tier_min:   currentTier,
-        requires_license: currentQuote.requires_license || false,
-        permit_likely:    currentQuote.permit_likely || false,
-        label:      currentQuote.label,
-        category:   currentQuote.category,
-        domain:     currentQuote.domain || 'home',
-        fri_low:    currentQuote.fri_low,
-        fri_high:   currentQuote.fri_high,
-        fri_unit:   currentQuote.fri_unit,
+  try{
+    const res=await fetch('/api/instant-quote-book',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        firstName:fname,lastName:lname,email,phone,timing,
+        slug:currentQuote.slug||'life_handyman_misc',
+        description:currentQuote.description||'',
+        zip:currentQuote.zip,
+        tier_min:currentTier,
+        requires_license:currentQuote.requires_license||false,
+        permit_likely:currentQuote.permit_likely||false,
+        label:currentQuote.label,
+        category:currentQuote.category,
+        domain:currentQuote.domain||'home',
+        book_price:currentQuote.book_price,
+        worker_payout:currentQuote.worker_payout,
+        needs_site_assessment:currentQuote.needs_site_assessment||false,
+        fri_low:currentQuote.fri_low,
+        fri_high:currentQuote.fri_high,
+        fri_unit:currentQuote.fri_unit,
       }),
     });
-
-    if(!res.ok){
-      const d = await res.json().catch(()=>({}));
-      throw new Error(d.error || 'Could not process booking. Please try again.');
-    }
-    const d = await res.json().catch(()=>({}));
-
-    document.getElementById('booking-form').style.display = 'none';
+    if(!res.ok){const d=await res.json().catch(()=>({}));throw new Error(d.error||'Booking failed.');}
+    const d=await res.json().catch(()=>({}));
+    document.getElementById('booking-form').style.display='none';
     document.getElementById('booked-state').classList.add('active');
-    document.getElementById('booked-num').textContent = d.confirm_number || confirmNum;
-
-  } catch(err){
-    btn.textContent = TIER[currentTier]?.bookText || 'Book at fair rate →';
-    btn.disabled = false;
-    alert(err.message);
+    document.getElementById('booked-num').textContent=d.confirm_number||confirmNum;
+  }catch(err){
+    btn.textContent=origText;btn.disabled=false;alert(err.message);
   }
 }
 
-// ─── Reset ─────────────────────────────────────────────────────────────────
 function resetAll(){
   ['description','zip','scope','b-fname','b-lname','b-email','b-phone','b-timing'].forEach(id=>{
-    const el = document.getElementById(id); if(el) el.value='';
+    const el=document.getElementById(id);if(el)el.value='';
   });
   document.getElementById('char-count').textContent='0';
   document.getElementById('result').classList.remove('active');
@@ -676,16 +550,14 @@ function resetAll(){
   document.getElementById('booking-form').style.display='block';
   document.getElementById('booked-state').classList.remove('active');
   document.getElementById('quote-btn').disabled=false;
-  document.getElementById('btn-text').textContent='Get my fair rate →';
-  clearError();
-  currentQuote=null; currentTier='primary'; confirmNum=null;
+  document.getElementById('btn-text').textContent='Get my price →';
+  clearError();currentQuote=null;currentTier='primary';confirmNum=null;
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ─── Cmd+Enter ─────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('description').addEventListener('keydown', e=>{
-    if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){ e.preventDefault(); getQuote(); }
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('description').addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();getQuote();}
   });
 });
 </script>

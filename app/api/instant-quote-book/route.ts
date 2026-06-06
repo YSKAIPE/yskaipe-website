@@ -99,6 +99,9 @@ export async function POST(req: NextRequest) {
         timing: timing ?? null,
 
         // FRI pricing snapshot
+        book_price: body.book_price ?? null,
+        worker_payout: body.worker_payout ?? null,
+        needs_site_assessment: body.needs_site_assessment ?? false,
         fri_low: task.fri_low,
         fri_high: task.fri_high,
         fri_unit: task.fri_unit,
