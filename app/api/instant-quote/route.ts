@@ -1,89 +1,169 @@
-// app/api/instant-quote/route.ts
-// Receives free-text job description from instant-quote.html
-// Uses Claude to classify the job against our service categories
-// Returns: category, FRI low/high range, breakdown text, includes list
+/**
+ * app/api/instant-quote/route.ts
+ * ─────────────────────────────────────────────────────────────────
+ * Unified AI classifier + FRI pricer.
+ *
+ * Flow:
+ *   1. Load all active service_tasks from Supabase (cached 5 min)
+ *   2. Send description + full task list to Claude for classification
+ *   3. Claude returns { slug, confidence }
+ *   4. Look up matched task for tier flags + FRI band
+ *   5. Ask Claude for a natural-language price breakdown using FRI band
+ *   6. Return structured response to client
+ *
+ * On any AI failure → keyword fallback classifier runs instead.
+ * This means the page always returns something useful.
+ *
+ * Replaces the old instant-quote route that used a hardcoded
+ * 100-category list embedded in the prompt.
+ * ─────────────────────────────────────────────────────────────────
+ */
 
-import Anthropic from '@anthropic-ai/sdk'
 import { NextRequest, NextResponse } from 'next/server'
+import Anthropic from '@anthropic-ai/sdk'
+import { getAllTasks, classifyByKeywords } from '@/lib/service-tasks'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 export async function POST(req: NextRequest) {
   try {
-    const { description, zip, scope, categories } = await req.json()
+    const { description, zip } = await req.json()
 
-    if (!description || !zip || !categories?.length) {
-      return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
+    if (!description || typeof description !== 'string') {
+      return NextResponse.json({ error: 'description is required' }, { status: 400 })
     }
 
-    const categoryList = categories
-      .map((c: { slug: string; label: string; low: number; high: number }) =>
-        `- slug: ${c.slug} | label: ${c.label} | low: $${c.low} | high: $${c.high}`
-      )
+    // 1. Load task catalogue from DB (cached)
+    const tasks = await getAllTasks()
+
+    // Build a compact task list for the prompt — slug + label + keywords
+    const taskList = tasks
+      .map((t) => `${t.slug} | ${t.label} | ${t.category} | keywords: ${(t.ai_keywords ?? []).join(', ')}`)
       .join('\n')
 
-    const prompt = `You are the YSKAIPE Fair Rate Index engine. A homeowner has described a home service job in plain English. Your job is to:
+    // 2. Classify via Claude
+    let matchedSlug: string | null = null
+    let confidence = 0
 
-1. Classify the job into exactly ONE of the provided service categories
-2. Return the FRI price range for that category (adjusted slightly for the ZIP code region if relevant)
-3. Write a 1-2 sentence breakdown explaining what the quote covers
-4. List 3-5 specific things included in this job
+    try {
+      const classifyResp = await anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 200,
+        system: `You are YSKAIPE's job classifier. Given a homeowner's job description, pick the single best matching slug from the list below.
+Return ONLY valid JSON: {"slug":"<slug>","confidence":<0-1 float>}
+No markdown, no explanation. If nothing matches well, use "life_handyman_misc".
 
-Homeowner's description: "${description}"
-ZIP code: ${zip}
-${scope ? `Size/scope context: ${scope}` : ''}
+TASK LIST:
+${taskList}`,
+        messages: [{ role: 'user', content: description }],
+      })
 
-Available service categories:
-${categoryList}
+      const raw = classifyResp.content
+        .filter((b) => b.type === 'text')
+        .map((b) => (b as { type: 'text'; text: string }).text)
+        .join('')
+        .replace(/```[a-z]*|```/g, '')
+        .trim()
 
-Respond ONLY with valid JSON in this exact format (no markdown, no preamble):
-{
-  "category": "Human-readable category label",
-  "slug": "category_slug",
-  "low": 000,
-  "high": 000,
-  "breakdown": "One or two sentences explaining what this quote covers and why the range exists.",
-  "includes": ["Item 1", "Item 2", "Item 3", "Item 4"],
-  "zip_adjusted": true,
-  "confidence": "high" | "medium" | "low"
-}
-
-Rules:
-- Pick the single best matching category. If the job spans multiple categories, pick the primary one.
-- Low and high must be integers from the category range (you may adjust ±15% for scope or complexity signals in the description)
-- breakdown should be specific to what the homeowner described, not generic
-- includes should be specific to the described job
-- If confidence is low, still return your best match — never return an error
-- If truly no category fits well, use general_labor (slug: general_labor)`
-
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 600,
-      messages: [{ role: 'user', content: prompt }],
-    })
-
-    const raw = message.content
-      .filter(b => b.type === 'text')
-      .map(b => (b as { type: 'text'; text: string }).text)
-      .join('')
-      .trim()
-
-    // Strip any accidental markdown fences
-    const clean = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim()
-    const parsed = JSON.parse(clean)
-
-    // Validate required fields
-    if (!parsed.category || !parsed.low || !parsed.high) {
-      throw new Error('Invalid response structure from AI')
+      const parsed = JSON.parse(raw)
+      matchedSlug = parsed.slug ?? null
+      confidence = parsed.confidence ?? 0
+    } catch {
+      // AI failed — fall through to keyword fallback
     }
 
-    return NextResponse.json(parsed, { status: 200 })
+    // 3. Resolve task from slug; fall back to keyword classifier
+    let task = matchedSlug ? tasks.find((t) => t.slug === matchedSlug) ?? null : null
+
+    if (!task) {
+      task = await classifyByKeywords(description)
+      confidence = task ? 0.5 : 0
+    }
+
+    // Ultimate fallback: handyman
+    if (!task) {
+      task = tasks.find((t) => t.slug === 'life_handyman_misc') ?? tasks[0]
+      confidence = 0.3
+    }
+
+    const friLow = task.fri_low ?? 80
+    const friHigh = task.fri_high ?? 300
+    const friUnit = task.fri_unit ?? 'flat'
+
+    // 4. Ask Claude for a human-readable breakdown
+    let breakdown = ''
+    let includes: string[] = []
+    let permitNote = ''
+
+    try {
+      const breakdownResp = await anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        system: `You are YSKAIPE's Fair Rate Index explainer. Given a job and its price range, write a short friendly explanation.
+Return ONLY valid JSON:
+{
+  "breakdown": "2-3 sentence plain English explanation of what drives this price range",
+  "includes": ["item 1","item 2","item 3"],
+  "permit_note": "one sentence about permits if required, else empty string"
+}
+No markdown, no extra text.`,
+        messages: [{
+          role: 'user',
+          content: `Job: ${description}
+Task: ${task.label} (${task.category})
+FRI range: $${friLow}–$${friHigh} ${friUnit.replace('_', ' ')}
+Permit likely: ${task.permit_likely}
+Zip: ${zip ?? 'NC'}`,
+        }],
+      })
+
+      const raw = breakdownResp.content
+        .filter((b) => b.type === 'text')
+        .map((b) => (b as { type: 'text'; text: string }).text)
+        .join('')
+        .replace(/```[a-z]*|```/g, '')
+        .trim()
+
+      const parsed = JSON.parse(raw)
+      breakdown = parsed.breakdown ?? ''
+      includes = parsed.includes ?? []
+      permitNote = parsed.permit_note ?? ''
+    } catch {
+      breakdown = `Typical ${task.label} jobs in NC run $${friLow}–$${friHigh}. Final price depends on scope, materials, and your specific ZIP code.`
+      includes = ['Labor', 'Standard materials', 'Cleanup']
+    }
+
+    // 5. Build response
+    return NextResponse.json({
+      // Classification
+      slug: task.slug,
+      label: task.label,
+      category: task.category,
+      domain: task.domain,
+      confidence,
+
+      // Tier / eligibility flags (used by booking + dispatch)
+      tier_min: task.tier_min,
+      requires_license: task.requires_license,
+      requires_insurance: task.requires_insurance,
+      permit_likely: task.permit_likely,
+      youth_ok: task.youth_ok,
+
+      // Pricing
+      fri_low: friLow,
+      fri_high: friHigh,
+      fri_unit: friUnit,
+
+      // Human-readable
+      breakdown,
+      includes,
+      permit_note: permitNote,
+    })
 
   } catch (err) {
-    console.error('[instant-quote] Error:', err)
-    // Return 500 — the frontend has a client-side fallback classifier
+    console.error('[instant-quote] Fatal error:', err)
     return NextResponse.json(
-      { error: 'Quote generation failed — using fallback classifier.' },
+      { error: 'Quote generation failed. Please try again.' },
       { status: 500 }
     )
   }

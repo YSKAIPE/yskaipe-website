@@ -1,334 +1,315 @@
-// ============================================================
-// FILE: app/api/match/route.ts
-// POST /api/match
-//
-// Two call modes:
-//   A) { request_id, exclude_contractor_ids? }
-//      — match an EXISTING homeowner_requests row (original behavior).
-//   B) { request: {...}, exclude_contractor_ids? }
-//      — CREATE a homeowner_requests row from the payload, then match it.
-//        Used by the public AutoQuote "Book my pro" button. The insert
-//        runs via supabaseAdmin (service role) so it satisfies the
-//        service_role_requests_insert RLS policy — the anon key is never
-//        used for real (non-TEST) homeowner requests.
-//
-// Runs the 4-factor scoring engine, writes to BOTH leads and
-// lead_assignments so founder dashboards and admin queues reflect state.
-// The response always includes `request_id` so the caller can redirect
-// to /match.html?request_id=<id>.
-// ============================================================
+/**
+ * app/api/match/route.ts
+ * ─────────────────────────────────────────────────────────────────
+ * Worker/contractor matching with tier enforcement.
+ *
+ * Two dispatch paths depending on job type:
+ *
+ *   Path A — Licensed jobs (tier_min = 'licensed'):
+ *     Queries the `contractors` table (existing founding contractors).
+ *     These are verified, licensed, insured. Uses lead scoring.
+ *     Writes to `lead_assignments` table (existing flow).
+ *
+ *   Path B — Primary / Youth jobs (tier_min = 'primary' | 'youth'):
+ *     Queries the `workers` table (new Phase 1 table).
+ *     First-come-first-serve dispatch model.
+ *     Filters by: status='qualified', tier eligibility, ZIP proximity, skills.
+ *     Writes to `job_claims` table.
+ *
+ * Tier gate rule (hard-enforced):
+ *   - requires_license=true → licensed contractors only, full stop
+ *   - tier_min='primary'   → primary OR licensed workers
+ *   - tier_min='youth'     → any worker tier (but youth_ok must be true on task)
+ *
+ * Called by:
+ *   - instant-quote-book (Phase 3: after payment capture)
+ *   - Admin dashboard (manual dispatch override)
+ * ─────────────────────────────────────────────────────────────────
+ */
 
-import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import {
-  rankContractors,
-  type ScoringWeights,
-  type ContractorProfile,
-} from "@/lib/leadScoring";
+import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
+import { getTaskBySlug, isWorkerEligible, WorkerTier } from '@/lib/service-tasks'
 
-/** Fields accepted when creating a homeowner_requests row via mode B. */
-interface IncomingRequest {
-  homeowner_name?: string;
-  homeowner_email?: string;
-  homeowner_phone?: string;
-  trade?: string;
-  zip_code?: string;
-  description?: string;
-  quote_low?: number;
-  quote_high?: number;
-  difficulty_score?: number;
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+const resend = new Resend(process.env.RESEND_API_KEY!)
+const FROM   = 'YSKAIPE <gr8@yskaipe.com>'
+
+// ── Tier rank helper ───────────────────────────────────────────────
+const TIER_RANK: Record<WorkerTier, number> = { youth: 0, primary: 1, licensed: 2 }
+
+function workerMeetsTierMin(workerTier: WorkerTier, taskTierMin: WorkerTier): boolean {
+  return TIER_RANK[workerTier] >= TIER_RANK[taskTierMin]
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  let request_id: string | undefined = body.request_id;
-  const excludeIds: string[] = Array.isArray(body.exclude_contractor_ids)
-    ? body.exclude_contractor_ids
-    : [];
+  try {
+    const body = await req.json()
+    const { job_id, task_slug, zip_code, override_tier } = body
 
-  // ── Mode B: create the homeowner_requests row first ──
-  if (!request_id && body.request) {
-    const r: IncomingRequest = body.request;
-
-    // Minimum fields the matcher + notification flow need.
-    if (!r.trade || !r.homeowner_email || !r.homeowner_phone) {
-      return NextResponse.json(
-        { error: "request payload requires trade, homeowner_email, homeowner_phone" },
-        { status: 400 },
-      );
+    if (!task_slug) {
+      return NextResponse.json({ error: 'task_slug is required' }, { status: 400 })
     }
 
-    const insertRow = {
-      homeowner_name: r.homeowner_name || "",
-      homeowner_email: r.homeowner_email,
-      homeowner_phone: r.homeowner_phone,
-      trade: r.trade,
-      zip_code: r.zip_code || null,
-      description: r.description || "",
-      quote_low: r.quote_low ?? null,
-      quote_high: r.quote_high ?? null,
-      difficulty_score: r.difficulty_score ?? 5,
-      status: "pending",
-    };
-
-    const { data: createdReq, error: createErr } = await supabaseAdmin
-      .from("homeowner_requests")
-      .insert([insertRow])
-      .select("id")
-      .single();
-
-    if (createErr || !createdReq) {
-      console.error("[/api/match] homeowner_requests insert", createErr);
-      return NextResponse.json(
-        {
-          error: "Failed to create request",
-          detail: createErr?.message,
-          code: createErr?.code,
-        },
-        { status: 500 },
-      );
+    // ── Resolve task + flags ──────────────────────────────────────
+    const task = await getTaskBySlug(task_slug)
+    if (!task) {
+      return NextResponse.json({ error: `Unknown task: ${task_slug}` }, { status: 400 })
     }
 
-    request_id = createdReq.id;
+    const effectiveTierMin = (override_tier as WorkerTier | undefined) ?? task.tier_min
+
+    // ── PATH A: Licensed jobs → contractors table ─────────────────
+    if (task.requires_license || effectiveTierMin === 'licensed') {
+      return await dispatchToLicensedContractors({
+        job_id,
+        task,
+        zip_code,
+        supabaseAdmin,
+        resend,
+      })
+    }
+
+    // ── PATH B: Primary / Youth jobs → workers table ──────────────
+    return await dispatchToWorkers({
+      job_id,
+      task,
+      zip_code,
+      effectiveTierMin,
+      supabaseAdmin,
+      resend,
+    })
+
+  } catch (err) {
+    console.error('[match] Fatal error:', err)
+    return NextResponse.json({ error: 'Match failed.' }, { status: 500 })
   }
-
-  if (!request_id)
-    return NextResponse.json(
-      { error: "Missing request_id (or a `request` payload to create one)" },
-      { status: 400 },
-    );
-
-  // 1. Load the homeowner request
-  const { data: request, error: reqErr } = await supabaseAdmin
-    .from("homeowner_requests")
-    .select("*")
-    .eq("id", request_id)
-    .single();
-
-  if (reqErr || !request) {
-    return NextResponse.json({ error: "Request not found" }, { status: 404 });
-  }
-
-  // 2. Load algorithm weights from DB
-  const { data: config } = await supabaseAdmin
-    .from("scoring_config")
-    .select("*")
-    .single();
-
-  const weights: ScoringWeights = {
-    trade: config?.w_trade ?? 50,
-    tier: config?.w_tier ?? 30,
-    geo: config?.w_geo ?? 20,
-    loyalty: config?.w_loyalty ?? 15,
-  };
-
-  // 3. Fetch eligible contractors for this trade (capacity pre-filter via view)
-  const { data: primary, error: ctErr } = await supabaseAdmin
-    .from("eligible_contractors")
-    .select("*")
-    .eq("primary_trade", request.trade);
-
-  if (ctErr) {
-    console.error("[/api/match] contractor fetch", ctErr);
-    return NextResponse.json(
-      { error: "Failed to fetch contractors" },
-      { status: 500 },
-    );
-  }
-
-  // Secondary trade match — union, deduplicate by id
-  const { data: secondary } = await supabaseAdmin
-    .from("eligible_contractors")
-    .select("*")
-    .contains("secondary_trades", [request.trade]);
-
-  const primaryIds = new Set((primary ?? []).map((c: any) => c.id));
-  let allRaw = [
-    ...(primary ?? []),
-    ...(secondary ?? []).filter((c: any) => !primaryIds.has(c.id)),
-  ];
-
-  // Apply exclude list (used for reassignment flows)
-  if (excludeIds.length) {
-    allRaw = allRaw.filter((c: any) => !excludeIds.includes(c.id));
-  }
-
-  if (!allRaw.length) {
-    // No coverage. request_id is returned so the caller can still route to
-    // /match.html, which shows the no-coverage / waitlist state.
-    return NextResponse.json(
-      {
-        request_id,
-        error: "No eligible contractors in this market for that trade.",
-        no_coverage: true,
-      },
-      { status: 200 },
-    );
-  }
-
-  // 4. Map DB rows → ContractorProfile for leadScoring.ts
-  const tierMap: Record<string, string> = {
-    founding: "Founding",
-    elite: "Elite",
-    pro: "Pro",
-    starter: "Starter",
-  };
-
-  const profiles: ContractorProfile[] = allRaw.map((c: any) => ({
-    id: c.id,
-    name: c.company_name || c.name,
-    primaryTrade: c.primary_trade,
-    secondaryTrades: c.secondary_trades ?? [],
-    tier: (tierMap[c.tier] ?? "Starter") as any,
-    serviceRadiusMiles: c.service_radius_miles,
-    monthsOnPlatform: c.months_on_platform,
-    jobsCompleted: c.jobs_completed,
-    responseRatePct: c.response_rate_pct,
-    referralsMade: c.referrals_made,
-    reviewAverage: parseFloat(c.review_average),
-  }));
-
-  // 5. Build the lead object
-  const lead = {
-    id: request.id,
-    trade: request.trade,
-    distanceMiles: 0,
-  };
-
-  // 6. Run the scoring engine
-  const ranked = rankContractors(lead, profiles, weights);
-
-  if (!ranked.length) {
-    return NextResponse.json(
-      {
-        request_id,
-        error: "No contractors matched after scoring.",
-        no_coverage: true,
-      },
-      { status: 200 },
-    );
-  }
-
-  // 7. Write leads rows for top 5 (scoring record)
-  const now = Date.now();
-  const topRanked = ranked.slice(0, 5);
-
-  const leadsRows = topRanked.map((r) => {
-    const delayMins = getDelayMinutes(r.contractor.tier);
-    return {
-      request_id,
-      contractor_id: r.contractor.id,
-      composite_score: r.result.compositeScore ?? 0,
-      trade_pts: r.result.breakdown?.tradePts ?? 0,
-      tier_pts: r.result.breakdown?.tierPts ?? 0,
-      geo_pts: r.result.breakdown?.geoPts ?? 0,
-      loyalty_pts: r.result.breakdown?.loyaltyPts ?? 0,
-      loyalty_raw: r.result.breakdown?.loyaltyRaw ?? 0,
-      rank_position: r.rank,
-      status: r.rank === 1 ? "assigned" : "pending",
-      notification_delay_minutes: delayMins,
-      notify_at: new Date(now + delayMins * 60 * 1000).toISOString(),
-    };
-  });
-
-  const { error: leadsErr } = await supabaseAdmin
-    .from("leads")
-    .upsert(leadsRows, { onConflict: "request_id,contractor_id" });
-
-  if (leadsErr) {
-    console.error("[/api/match] upsert leads", leadsErr);
-    return NextResponse.json(
-      {
-        error: "Failed to write leads",
-        detail: leadsErr.message,
-        code: leadsErr.code,
-      },
-      { status: 500 },
-    );
-  }
-
-  // 7b. Write a lead_assignment row ONLY for the top-ranked contractor.
-  // This is what founder-dashboard reads. status='active' so it shows up
-  // in the contractor's queue with Accept/Decline buttons.
-  const topMatch = topRanked[0];
-  const topAssignment = {
-    request_id,
-    contractor_id: topMatch.contractor.id,
-    status: "active",
-    assigned_at: new Date().toISOString(),
-    rank_at_assignment: 1,
-    assigned_by: "system",
-  };
-
-  const { error: assignErr } = await supabaseAdmin
-    .from("lead_assignments")
-    .upsert([topAssignment], { onConflict: "request_id,contractor_id" });
-
-  if (assignErr) {
-    // Log but don't fail the whole match — leads row is still written.
-    console.error("[/api/match] upsert lead_assignments", assignErr);
-  }
-
-  // 8. Mark request as assigned
-  await supabaseAdmin
-    .from("homeowner_requests")
-    .update({ status: "assigned", matched_at: new Date().toISOString() })
-    .eq("id", request_id);
-
-  // 9. Return top match + queue tail (request_id included for redirect)
-  const topRaw = allRaw.find((c: any) => c.id === ranked[0].contractor.id);
-
-  return NextResponse.json({
-    request_id,
-    match: {
-      ...ranked[0].result,
-      compositeScore: ranked[0].result.compositeScore,
-      contractor: {
-        id: topRaw.id,
-        name: topRaw.name,
-        company_name: topRaw.company_name,
-        email: topRaw.email,
-        phone: topRaw.phone,
-        avatar_initials: topRaw.avatar_initials,
-        tier: topRaw.tier,
-        primary_trade: topRaw.primary_trade,
-        review_average: topRaw.review_average,
-        jobs_completed: topRaw.jobs_completed,
-        is_founding: topRaw.is_founding,
-        notification_delay_minutes: getDelayMinutes(ranked[0].contractor.tier),
-      },
-    },
-    queue: ranked.slice(1, 4).map((r) => {
-      const raw = allRaw.find((c: any) => c.id === r.contractor.id);
-      return {
-        id: raw?.id,
-        rank: r.rank,
-        name: raw?.company_name || r.contractor.name,
-        company_name: raw?.company_name,
-        tier: raw?.tier ?? r.contractor.tier,
-        is_founding: raw?.is_founding ?? false,
-        avatar_initials: raw?.avatar_initials,
-        primary_trade: raw?.primary_trade,
-        review_average: raw?.review_average,
-        jobs_completed: raw?.jobs_completed,
-        notification_delay_minutes: getDelayMinutes(raw?.tier ?? r.contractor.tier),
-        compositeScore: r.result.compositeScore,
-        breakdown: r.result.breakdown,
-      };
-    }),
-  });
 }
 
-function getDelayMinutes(tier: string): number {
-  const map: Record<string, number> = {
-    Founding: 0,
-    founding: 0,
-    Elite: 0,
-    elite: 0,
-    Pro: 2,
-    pro: 2,
-    Starter: 5,
-    starter: 5,
-  };
-  return map[tier] ?? 5;
+// ─────────────────────────────────────────────────────────────────
+// PATH A: Licensed contractor dispatch (existing lead scoring flow)
+// ─────────────────────────────────────────────────────────────────
+async function dispatchToLicensedContractors({
+  job_id, task, zip_code, supabaseAdmin, resend,
+}: any) {
+  // Query contractors table — only licensed, active, matching category
+  const { data: contractors, error } = await supabaseAdmin
+    .from('contractors')
+    .select('id, name, email, phone, trade, zip_code')
+    .eq('active', true)
+    .ilike('trade', `%${task.category}%`)
+
+  if (error) {
+    console.error('[match/licensed] contractors query error:', error)
+    return NextResponse.json({ error: 'Contractor query failed.' }, { status: 500 })
+  }
+
+  if (!contractors || contractors.length === 0) {
+    // No match — notify admin to manually assign
+    await resend.emails.send({
+      from: FROM,
+      to: 'gr8@yskaipe.com',
+      subject: `⚠️ No licensed contractor match — ${task.label} · ZIP ${zip_code ?? '?'}`,
+      html: `<p>Job ${job_id ?? '(no id)'} for <strong>${task.label}</strong> in ZIP ${zip_code ?? '?'} has no licensed contractor match. Manual assignment required.</p>`,
+    }).catch(() => {})
+
+    return NextResponse.json({
+      dispatched: false,
+      path: 'licensed',
+      reason: 'No licensed contractors available for this category and ZIP. Admin notified.',
+    })
+  }
+
+  // Write lead_assignment rows for matched contractors
+  const assignments = contractors.map((c: any) => ({
+    job_id: job_id ?? null,
+    contractor_id: c.id,
+    task_slug: task.slug,
+    status: 'pending',
+    requires_license: task.requires_license,
+  }))
+
+  const { error: assignError } = await supabaseAdmin
+    .from('lead_assignments')
+    .insert(assignments)
+
+  if (assignError) {
+    console.error('[match/licensed] lead_assignments insert error:', assignError)
+  }
+
+  // Notify each matched contractor
+  for (const c of contractors) {
+    await resend.emails.send({
+      from: FROM,
+      to: c.email,
+      reply_to: 'gr8@yskaipe.com',
+      subject: `New job opportunity — ${task.label}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px">
+          <h2>You've been matched to a new job, ${c.name.split(' ')[0]}.</h2>
+          <p><strong>Service:</strong> ${task.label}</p>
+          <p><strong>Category:</strong> ${task.category}</p>
+          <p><strong>Area:</strong> ZIP ${zip_code ?? 'nearby'}</p>
+          ${task.permit_likely ? '<p>⚠️ This job may require a permit.</p>' : ''}
+          <p>Log in to your YSKAIPE dashboard to accept or decline this job.</p>
+          <p style="font-size:12px;color:#999">This is a licensed-pro job. Your credentials are on file.</p>
+        </div>
+      `,
+    }).catch((e) => console.error(`[match/licensed] Notify contractor ${c.id} failed:`, e))
+  }
+
+  return NextResponse.json({
+    dispatched: true,
+    path: 'licensed',
+    matched_count: contractors.length,
+    task_slug: task.slug,
+    requires_license: true,
+  })
+}
+
+// ─────────────────────────────────────────────────────────────────
+// PATH B: Primary/Youth worker dispatch (new workers table)
+// ─────────────────────────────────────────────────────────────────
+async function dispatchToWorkers({
+  job_id, task, zip_code, effectiveTierMin, supabaseAdmin, resend,
+}: any) {
+  // Query workers table
+  // Filter: qualified status, correct tier, skills includes task slug or category
+  const { data: allWorkers, error } = await supabaseAdmin
+    .from('workers')
+    .select('id, full_name, email, tier, zip_code, skills, status')
+    .eq('status', 'qualified')
+
+  if (error) {
+    console.error('[match/workers] workers query error:', error)
+    return NextResponse.json({ error: 'Worker query failed.' }, { status: 500 })
+  }
+
+  if (!allWorkers || allWorkers.length === 0) {
+    await resend.emails.send({
+      from: FROM,
+      to: 'gr8@yskaipe.com',
+      subject: `⚠️ No workers available — ${task.label} · ZIP ${zip_code ?? '?'}`,
+      html: `<p>No qualified workers found for <strong>${task.label}</strong> (${task.slug}) in ZIP ${zip_code ?? '?'}. Manual assignment needed.</p>`,
+    }).catch(() => {})
+
+    return NextResponse.json({
+      dispatched: false,
+      path: 'workers',
+      reason: 'No qualified workers available. Admin notified.',
+    })
+  }
+
+  // Apply tier gate — HARD RULE
+  const eligible = allWorkers.filter((w: any) => {
+    const wTier = (w.tier ?? 'primary') as WorkerTier
+
+    // License hard block
+    if (task.requires_license && wTier !== 'licensed') return false
+
+    // Tier minimum
+    if (!workerMeetsTierMin(wTier, effectiveTierMin)) return false
+
+    // Skills match (task slug or category in worker skills array)
+    const skills: string[] = w.skills ?? []
+    const slugMatch = skills.includes(task.slug)
+    const catMatch  = skills.some((s) => s.toLowerCase() === task.category.toLowerCase())
+    const handyman  = skills.includes('life_handyman_misc')
+    if (!slugMatch && !catMatch && !handyman) return false
+
+    return true
+  })
+
+  // ZIP proximity sort — exact match first, then fallback to all eligible
+  const zipMatched = eligible.filter((w: any) => w.zip_code === zip_code)
+  const targets = zipMatched.length > 0 ? zipMatched : eligible
+
+  if (targets.length === 0) {
+    await resend.emails.send({
+      from: FROM,
+      to: 'gr8@yskaipe.com',
+      subject: `⚠️ No eligible workers — ${task.label} · tier=${effectiveTierMin} · ZIP ${zip_code ?? '?'}`,
+      html: `<p>Found ${allWorkers.length} qualified workers but none passed the tier gate (tier_min=${effectiveTierMin}, requires_license=${task.requires_license}) or skills filter for <strong>${task.slug}</strong>. Manual assignment needed.</p>`,
+    }).catch(() => {})
+
+    return NextResponse.json({
+      dispatched: false,
+      path: 'workers',
+      reason: `No workers meet tier requirement (${effectiveTierMin}) for this job type.`,
+      tier_gate: effectiveTierMin,
+      requires_license: task.requires_license,
+    })
+  }
+
+  // Write job_claims rows (first-come-first-serve: workers notified, first accept wins)
+  const claims = targets.map((w: any) => ({
+    job_id: job_id ?? null,
+    worker_id: w.id,
+    task_slug: task.slug,
+    status: 'offered',        // offered → accepted | declined | expired
+  }))
+
+  const { error: claimError } = await supabaseAdmin
+    .from('job_claims')
+    .insert(claims)
+
+  if (claimError) {
+    console.error('[match/workers] job_claims insert error:', claimError)
+  }
+
+  // Notify eligible workers
+  const notified: string[] = []
+  for (const w of targets) {
+    const { error: emailError } = await resend.emails.send({
+      from: FROM,
+      to: w.email,
+      subject: `New job available — ${task.label} · First come first serve`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px">
+          <h2>Hey ${w.full_name.split(' ')[0]}, there's a job near you.</h2>
+
+          <div style="background:#f5f5f0;border-radius:8px;padding:16px 20px;margin:20px 0">
+            <p style="margin:0 0 4px;font-size:13px;color:#666">Job type</p>
+            <p style="margin:0;font-weight:600;font-size:16px">${task.label}</p>
+            <p style="margin:4px 0 0;font-size:13px;color:#444">${task.category} · ${task.domain}</p>
+          </div>
+
+          <div style="background:#f5f5f0;border-radius:8px;padding:16px 20px;margin:20px 0">
+            <p style="margin:0 0 4px;font-size:13px;color:#666">Estimated payout (your cut after 15% platform fee)</p>
+            <p style="margin:0;font-weight:600;font-size:18px;color:#0d0e0c">
+              $${Math.round((task.fri_low ?? 80) * 0.85)}–$${Math.round((task.fri_high ?? 300) * 0.85)}
+            </p>
+            <p style="margin:4px 0 0;font-size:12px;color:#666">${task.fri_unit === 'flat' ? 'flat rate' : task.fri_unit.replace('_',' ')}</p>
+          </div>
+
+          <p><strong>Area:</strong> ZIP ${zip_code ?? 'nearby'}</p>
+          ${task.permit_likely ? '<p style="color:#b8860b">⚠️ This job may involve a permit. Advise the homeowner.</p>' : ''}
+
+          <p><strong>First worker to accept gets the job.</strong> Log in to your YSKAIPE worker dashboard to claim it.</p>
+
+          <p style="font-size:12px;color:#999;margin-top:24px">
+            Homeowner address and contact info are revealed after you accept and payment is confirmed.
+          </p>
+        </div>
+      `,
+    })
+
+    if (!emailError) notified.push(w.id)
+    else console.error(`[match/workers] Notify worker ${w.id} failed:`, emailError)
+  }
+
+  return NextResponse.json({
+    dispatched: true,
+    path: 'workers',
+    matched_count: targets.length,
+    notified_count: notified.length,
+    task_slug: task.slug,
+    tier_gate: effectiveTierMin,
+    requires_license: task.requires_license,
+    zip_matched: zipMatched.length,
+  })
 }
