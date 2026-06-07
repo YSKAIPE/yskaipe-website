@@ -398,8 +398,8 @@ async function dispatchWorkers({
     job_id: jobId,
     worker_id: w.id,
     task_slug: taskSlug ?? null,
-    claim_type: "offered",
-    status: "offered",
+    claim_type: "instant",
+    status: "pending",
     notified_at: new Date().toISOString(),
   }));
 
