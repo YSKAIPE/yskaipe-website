@@ -1609,12 +1609,16 @@
                         .classList.remove("active");
                 }
 
-                renderResult(data, zip);
+                renderResult(data, zip, description);
             }
 
-            function renderResult(data, zip) {
+            function renderResult(data, zip, description) {
                 try {
-                    currentQuote = { ...data, zip };
+                    currentQuote = {
+                        ...data,
+                        zip,
+                        description: description || "",
+                    };
                     currentTier = data.tier_min || "primary";
                     confirmNum = makeConfirm();
                     const tc = TIER[currentTier] || TIER.primary;
