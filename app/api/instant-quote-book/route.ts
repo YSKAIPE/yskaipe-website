@@ -179,6 +179,14 @@ export async function POST(req: NextRequest) {
 
     if (jobErr) {
       console.error("[book] jobs insert error:", jobErr);
+      return NextResponse.json(
+        {
+          error: "jobs insert failed",
+          detail: jobErr.message,
+          code: jobErr.code,
+        },
+        { status: 500 },
+      );
     }
 
     const jobId = jobRow?.id ?? null;
