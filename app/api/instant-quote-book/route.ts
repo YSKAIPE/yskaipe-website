@@ -147,7 +147,13 @@ export async function POST(req: NextRequest) {
       .insert({
         homeowner_request_id: hrId,
         confirm_number: confirmNumber,
-        status: "pending",
+        status: "posted",
+        age_tier_required:
+          taskTierMin === "youth"
+            ? "junior_ok"
+            : taskTierMin === "licensed"
+              ? "adult_only"
+              : "standard",
         description,
         zip_code: zip ?? null,
         task_slug: slug ?? null,
