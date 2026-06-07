@@ -148,6 +148,7 @@ export async function POST(req: NextRequest) {
         homeowner_request_id: hrId,
         confirm_number: confirmNumber,
         status: "posted",
+        trade: toTradeEnum(taskCat, slug) as any,
         age_tier_required:
           taskTierMin === "youth"
             ? "junior_ok"
