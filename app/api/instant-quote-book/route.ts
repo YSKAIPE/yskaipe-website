@@ -1,31 +1,28 @@
 /**
  * app/api/instant-quote-book/route.ts
  * ─────────────────────────────────────────────────────────────────
- * Booking flow: captures homeowner intent after quote is shown.
+ * Booking flow — captures homeowner contact, saves job, dispatches
+ * to the correct worker tier network immediately.
  *
- * What this does:
- *   1. Validates payload (homeowner contact + quote data)
- *   2. Writes a row to the `jobs` table with task_slug + tier_min
- *   3. Fires admin alert to gr8@yskaipe.com
- *   4. Fires homeowner confirmation email
- *   5. Triggers worker dispatch (calls /api/job-notify internally)
+ * Dispatch logic:
+ *   - requires_license=true  → licensed contractors table (existing flow)
+ *   - tier_min=primary       → workers table, tier IN ('primary','licensed')
+ *   - tier_min=youth         → workers table, any tier (youth_ok=true on task)
  *
- * Phase 2 TODO: Stripe payment capture before dispatch reveal.
- * Phase 3 TODO: /api/job-notify broadcasts to matched workers by ZIP + tier.
- *
- * Tier enforcement:
- *   - tier_min comes from service_tasks (passed through from instant-quote)
- *   - job row carries tier_min so the dispatch query can filter workers
- *   - No licensed job ever reaches a Primary/Youth worker feed
+ * Worker matching:
+ *   1. Filter workers by: status='qualified', tier eligibility, ZIP match
+ *   2. Filter by skills: worker.skills array contains task_slug OR category match
+ *   3. Email all matched workers — first to reply claims the job
+ *   4. Worker payout shown in email so they know what they're claiming
  * ─────────────────────────────────────────────────────────────────
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
-import { getTaskBySlug } from '@/lib/service-tasks'
+import { getTaskBySlug, isWorkerEligible, WorkerTier } from '@/lib/service-tasks'
 
-const supabaseAdmin = createClient(
+const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
@@ -33,187 +30,313 @@ const resend = new Resend(process.env.RESEND_API_KEY!)
 const FROM   = 'YSKAIPE <gr8@yskaipe.com>'
 const ADMIN  = 'gr8@yskaipe.com'
 
-function generateConfirmNumber(): string {
+function makeConfirm() {
   return 'YSK-' + Math.random().toString(36).slice(2, 8).toUpperCase()
 }
+
+function fmt(n: number | null | undefined) {
+  if (!n) return '$—'
+  return '$' + Math.round(n).toLocaleString('en-US')
+}
+
+const TIER_RANK: Record<WorkerTier, number> = { youth: 0, primary: 1, licensed: 2 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
 
     const {
-      // Homeowner contact
-      firstName, lastName, email, phone,
-      // Job details
-      slug,           // task slug from instant-quote response
-      description,    // original homeowner description
-      zip,
-      timing,         // e.g. "this week", "flexible"
-      // Quote data (passed through from UI for record-keeping)
-      fri_low, fri_high, fri_unit,
-      label, category, domain,
+      firstName, lastName, email, phone, timing,
+      slug, description, zip,
       tier_min, requires_license, permit_likely,
+      label, category, domain,
+      book_price, worker_payout, needs_consultation,
+      fri_low, fri_high, fri_unit,
     } = body
 
     // ── Validation ────────────────────────────────────────────────
-    if (!firstName || !lastName || !email || !phone || !slug || !description) {
+    if (!firstName || !lastName || !email || !phone || !description) {
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
     }
-
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRe.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 })
     }
 
-    // Verify slug is valid in service_tasks
-    const task = await getTaskBySlug(slug)
-    if (!task) {
-      return NextResponse.json({ error: 'Unknown service type.' }, { status: 400 })
-    }
+    // Resolve task — fall back gracefully if slug missing
+    const task = slug ? await getTaskBySlug(slug) : null
+    const taskLabel    = task?.label    ?? label    ?? 'Home Service'
+    const taskCategory = task?.category ?? category ?? 'General'
+    const taskDomain   = task?.domain   ?? domain   ?? 'home'
+    const taskTierMin  = (task?.tier_min ?? tier_min ?? 'primary') as WorkerTier
+    const taskLicReq   = task?.requires_license ?? requires_license ?? false
+    const taskPermit   = task?.permit_likely    ?? permit_likely    ?? false
 
-    const confirmNumber = generateConfirmNumber()
+    const confirmNumber = makeConfirm()
+    const homeownerName = `${firstName} ${lastName}`
 
-    // ── Write to jobs table ───────────────────────────────────────
-    const { data: job, error: jobError } = await supabaseAdmin
+    // ── Save job ──────────────────────────────────────────────────
+    const { data: job, error: jobError } = await supabase
       .from('jobs')
       .insert({
-        // Identity
-        confirm_number: confirmNumber,
-        status: 'pending',                // pending → claimed → in_progress → complete
-
-        // Task classification (from service_tasks)
-        task_slug: task.slug,
-        task_label: task.label,
-        task_category: task.category,
-        domain: task.domain,
-        tier_min: task.tier_min,          // dispatch gate lives here
-        requires_license: task.requires_license,
-        permit_likely: task.permit_likely,
-
-        // Homeowner (address revealed only after payment/claim)
-        homeowner_name: `${firstName} ${lastName}`,
-        homeowner_email: email,
-        homeowner_phone: phone,
-        zip_code: zip ?? null,
+        confirm_number:       confirmNumber,
+        status:               'pending',
+        task_slug:            slug ?? null,
+        task_label:           taskLabel,
+        task_category:        taskCategory,
+        domain:               taskDomain,
+        tier_min:             taskTierMin,
+        requires_license:     taskLicReq,
+        permit_likely:        taskPermit,
+        homeowner_name:       homeownerName,
+        homeowner_email:      email,
+        homeowner_phone:      phone,
+        zip_code:             zip ?? null,
         description,
-        timing: timing ?? null,
-
-        // FRI pricing snapshot
-        book_price: body.book_price ?? null,
-        worker_payout: body.worker_payout ?? null,
-        needs_site_assessment: body.needs_site_assessment ?? false,
-        fri_low: task.fri_low,
-        fri_high: task.fri_high,
-        fri_unit: task.fri_unit,
+        timing:               timing ?? null,
+        book_price:           book_price ?? null,
+        worker_payout:        worker_payout ?? null,
+        needs_site_assessment: needs_consultation ?? false,
+        fri_low:              fri_low ?? null,
+        fri_high:             fri_high ?? null,
+        fri_unit:             fri_unit ?? 'flat',
       })
       .select('id')
       .single()
 
     if (jobError) {
-      console.error('[instant-quote-book] DB error:', jobError)
-      // Don't expose DB error to client — still send emails, return success
+      console.error('[book] DB insert error:', jobError)
+      // Continue — don't block emails on DB error
     }
 
     const jobId = job?.id ?? null
 
     // ── Admin alert ───────────────────────────────────────────────
-    await resend.emails.send({
-      from: FROM,
-      to: ADMIN,
-      replyTo: email,
-      subject: `[${confirmNumber}] New job — ${task.label} · ${zip ?? 'no ZIP'} · ${task.tier_min} tier`,
-      html: `
-        <h2 style="font-family:sans-serif">New YSKAIPE Job Booking</h2>
-        <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Confirm #</td><td><strong>${confirmNumber}</strong></td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Homeowner</td><td>${firstName} ${lastName}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Email</td><td>${email}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Phone</td><td>${phone}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">ZIP</td><td>${zip ?? '—'}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Task</td><td>${task.label} (${task.category})</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Slug</td><td>${task.slug}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Domain</td><td>${task.domain}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Min tier</td><td><strong>${task.tier_min}</strong></td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">License req.</td><td>${task.requires_license ? '⚠️ YES' : 'No'}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Permit likely</td><td>${task.permit_likely ? '⚠️ YES' : 'No'}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">FRI range</td><td>$${task.fri_low ?? '?'}–$${task.fri_high ?? '?'} ${task.fri_unit}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Timing</td><td>${timing ?? 'Not specified'}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#666">Description</td><td style="max-width:400px">${description}</td></tr>
-          ${jobId ? `<tr><td style="padding:4px 12px 4px 0;color:#666">Job ID</td><td style="font-family:monospace;font-size:12px">${jobId}</td></tr>` : ''}
-        </table>
-        <p style="font-family:sans-serif;font-size:12px;color:#999;margin-top:24px">
-          Dispatch: Find ${task.tier_min}+ workers in ZIP ${zip ?? '?'} for task_slug=${task.slug}
-        </p>
-      `,
-    }).catch((e) => console.error('[instant-quote-book] Admin email failed:', e))
+    const priceDisplay = needs_consultation
+      ? `Starting from ${fmt(book_price)} (consultation required)`
+      : fmt(book_price)
 
-    // ── Homeowner confirmation ─────────────────────────────────────
     await resend.emails.send({
       from: FROM,
-      to: email,
-      subject: `Your YSKAIPE quote is confirmed — ${confirmNumber}`,
+      to:   ADMIN,
+      replyTo: email,
+      subject: `[${confirmNumber}] New booking — ${taskLabel} · ${zip ?? '?'} · ${taskTierMin}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:560px">
+          <h2 style="color:#0d0e0c">New YSKAIPE Booking</h2>
+          <table style="font-size:14px;border-collapse:collapse;width:100%">
+            <tr><td style="padding:4px 16px 4px 0;color:#666;white-space:nowrap">Confirm #</td><td><strong>${confirmNumber}</strong></td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Homeowner</td><td>${homeownerName}</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Email</td><td>${email}</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Phone</td><td>${phone}</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">ZIP</td><td>${zip ?? '—'}</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Timing</td><td>${timing ?? 'Not specified'}</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Job</td><td><strong>${taskLabel}</strong> (${taskCategory})</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Tier</td><td>${taskTierMin}${taskLicReq ? ' · LICENSE REQUIRED' : ''}</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Price</td><td>${priceDisplay}</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Worker payout</td><td>${fmt(worker_payout)} (85%)</td></tr>
+            <tr><td style="padding:4px 16px 4px 0;color:#666">Description</td><td>${description}</td></tr>
+            ${jobId ? `<tr><td style="padding:4px 16px 4px 0;color:#666">Job ID</td><td style="font-family:monospace;font-size:12px">${jobId}</td></tr>` : ''}
+          </table>
+        </div>`,
+    }).catch((e) => console.error('[book] Admin email failed:', e))
+
+    // ── Homeowner confirmation ────────────────────────────────────
+    const unitLabel: Record<string, string> = { flat:'flat rate', per_hour:'per hour', per_visit:'per visit', per_sqft:'per sq ft' }
+    await resend.emails.send({
+      from: FROM,
+      to:   email,
+      subject: `Booked — ${confirmNumber} · ${taskLabel}`,
       html: `
         <div style="font-family:sans-serif;max-width:520px;margin:0 auto">
-          <h2 style="color:#0d0e0c">We've got your request, ${firstName}.</h2>
-          <p>Your confirmation number is <strong>${confirmNumber}</strong>. Save this — you can use it to check your job status.</p>
+          <h2 style="color:#0d0e0c">You're booked, ${firstName}.</h2>
+          <p style="color:#444">Confirmation number: <strong style="font-family:monospace">${confirmNumber}</strong></p>
 
           <div style="background:#f5f5f0;border-radius:8px;padding:16px 20px;margin:20px 0">
-            <p style="margin:0 0 8px;font-size:13px;color:#666">What you requested</p>
-            <p style="margin:0;font-weight:500">${task.label}</p>
-            <p style="margin:4px 0 0;font-size:14px;color:#444">${description}</p>
+            <p style="margin:0 0 6px;font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em">Job</p>
+            <p style="margin:0;font-size:18px;font-weight:600;color:#0d0e0c">${taskLabel}</p>
+            <p style="margin:4px 0 0;font-size:14px;color:#555">${description}</p>
           </div>
 
           <div style="background:#f5f5f0;border-radius:8px;padding:16px 20px;margin:20px 0">
-            <p style="margin:0 0 8px;font-size:13px;color:#666">Fair Rate Index estimate</p>
-            <p style="margin:0;font-size:22px;font-weight:600;color:#0d0e0c">$${task.fri_low ?? '?'}–$${task.fri_high ?? '?'}</p>
-            <p style="margin:4px 0 0;font-size:12px;color:#666">${task.fri_unit === 'flat' ? 'flat rate' : task.fri_unit.replace('_',' ')} · NC Fair Rate Index baseline</p>
+            <p style="margin:0 0 6px;font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em">
+              ${needs_consultation ? 'Estimated starting price' : 'Your fair rate'}
+            </p>
+            <p style="margin:0;font-size:28px;font-weight:700;color:#0d0e0c">${fmt(book_price)}</p>
+            <p style="margin:4px 0 0;font-size:12px;color:#888">${unitLabel[fri_unit ?? 'flat'] ?? 'flat rate'} · NC Fair Rate Index</p>
           </div>
 
-          <h3>What happens next</h3>
-          <ol style="padding-left:20px;line-height:1.8;color:#333">
-            <li>We match your job to a qualified YSKAIPE worker in your area</li>
-            <li>The first available worker claims your job</li>
-            <li>You'll receive an email introduction with their name and contact info</li>
-            <li>Payment is processed securely through YSKAIPE — your worker is paid after the job is complete</li>
-          </ol>
+          ${needs_consultation ? `
+          <div style="border-left:3px solid #f0c473;padding:10px 14px;margin:16px 0;background:#fffbf0;font-size:13px;color:#7a5800">
+            <strong>Next step:</strong> A licensed YSKAIPE pro will contact you within 2 hours to schedule a free on-site assessment and confirm the final price before any work begins.
+          </div>` : `
+          <h3 style="margin-top:24px">What happens next</h3>
+          <ol style="padding-left:20px;line-height:1.9;color:#444;font-size:14px">
+            <li>We're broadcasting your job to qualified YSKAIPE workers in your area right now</li>
+            <li>The first worker to claim gets introduced to you by email — usually within 2 hours</li>
+            <li>Payment of ${fmt(book_price)} is held in escrow — released only when you confirm the job is complete</li>
+          </ol>`}
 
-          ${task.permit_likely ? `<div style="border-left:3px solid #f0a500;padding:10px 14px;margin:16px 0;background:#fffbf0;font-size:13px;color:#7a5800">
-            <strong>Heads up:</strong> This type of job may require a local permit. Your YSKAIPE pro will advise you on next steps.
-          </div>` : ''}
+          ${taskPermit ? `<div style="border-left:3px solid #f0c473;padding:10px 14px;margin:16px 0;background:#fffbf0;font-size:13px;color:#7a5800"><strong>Permit note:</strong> This job may require a local permit. Your YSKAIPE pro will advise before work begins.</div>` : ''}
+          ${taskLicReq ? `<div style="border-left:3px solid #b8f073;padding:10px 14px;margin:16px 0;background:#f7fff0;font-size:13px;color:#3a5a00"><strong>Licensed pro:</strong> This job is matched to a state-licensed, insured YSKAIPE professional.</div>` : ''}
 
-          ${task.requires_license ? `<div style="border-left:3px solid #b8f073;padding:10px 14px;margin:16px 0;background:#f7fff0;font-size:13px;color:#3a5a00">
-            <strong>Licensed pro required:</strong> We'll match you with a state-licensed, insured professional for this job.
-          </div>` : ''}
+          <p style="font-size:12px;color:#999;margin-top:32px">YSKAIPE · Cornelius, NC · yskaipe.com · gr8@yskaipe.com</p>
+        </div>`,
+    }).catch((e) => console.error('[book] Confirmation email failed:', e))
 
-          <p style="font-size:12px;color:#999;margin-top:32px">
-            Questions? Reply to this email or contact us at gr8@yskaipe.com<br>
-            YSKAIPE · Cornelius, NC · yskaipe.com
-          </p>
-        </div>
-      `,
-    }).catch((e) => console.error('[instant-quote-book] Confirmation email failed:', e))
+    // ── Dispatch to workers ───────────────────────────────────────
+    // Skip dispatch for consultation jobs — admin handles manually
+    if (!needs_consultation) {
+      await dispatchToWorkers({
+        jobId, confirmNumber, taskSlug: slug, taskLabel, taskCategory,
+        taskTierMin, taskLicReq, taskPermit,
+        description, zip, timing,
+        bookPrice: book_price, workerPayout: worker_payout,
+        homeownerName,
+      })
+    }
 
-    // ── Phase 3 hook: trigger worker dispatch ─────────────────────
-    // TODO Phase 3: uncomment once /api/job-notify is live
-    // if (jobId) {
-    //   fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/job-notify`, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ job_id: jobId }),
-    //   }).catch((e) => console.error('[instant-quote-book] Dispatch failed:', e))
-    // }
-
-    return NextResponse.json({
-      success: true,
-      confirm_number: confirmNumber,
-      job_id: jobId,
-    })
+    return NextResponse.json({ success: true, confirm_number: confirmNumber, job_id: jobId })
 
   } catch (err) {
-    console.error('[instant-quote-book] Fatal error:', err)
+    console.error('[book] Fatal error:', err)
     return NextResponse.json(
       { error: 'Booking failed. Please try again or email gr8@yskaipe.com.' },
       { status: 500 }
     )
   }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Worker dispatch
+// ─────────────────────────────────────────────────────────────────
+async function dispatchToWorkers({
+  jobId, confirmNumber, taskSlug, taskLabel, taskCategory,
+  taskTierMin, taskLicReq, taskPermit,
+  description, zip, timing,
+  bookPrice, workerPayout,
+  homeownerName,
+}: {
+  jobId: string | null
+  confirmNumber: string
+  taskSlug: string | null | undefined
+  taskLabel: string
+  taskCategory: string
+  taskTierMin: WorkerTier
+  taskLicReq: boolean
+  taskPermit: boolean
+  description: string
+  zip: string | null | undefined
+  timing: string | null | undefined
+  bookPrice: number | null | undefined
+  workerPayout: number | null | undefined
+  homeownerName: string
+}) {
+  // Pull all qualified workers
+  const { data: allWorkers, error } = await supabase
+    .from('workers')
+    .select('id, first_name, last_name, email, age_tier, worker_type, zip_code, skills, status')
+    .eq('status', 'qualified')
+
+  if (error || !allWorkers?.length) {
+    console.error('[dispatch] No workers found or query error:', error)
+    await resend.emails.send({
+      from: FROM, to: 'gr8@yskaipe.com',
+      subject: `⚠️ No workers for dispatch — ${confirmNumber} · ${taskLabel}`,
+      html: `<p>Job <strong>${confirmNumber}</strong> (${taskLabel}) in ZIP ${zip ?? '?'} has no qualified workers to dispatch to. Manual assignment needed.</p>`,
+    }).catch(() => {})
+    return
+  }
+
+  // Filter by tier eligibility + skills
+  const eligible = allWorkers.filter((w) => {
+    // Map age_tier → WorkerTier for gate logic
+    // junior = youth, standard/adult = primary (no licensed workers in this table)
+    const ageTier = w.age_tier ?? 'standard'
+    const wTier: WorkerTier = ageTier === 'junior' ? 'youth' : 'primary'
+
+    // License hard block — licensed jobs go to contractors table, not workers
+    if (taskLicReq) return false
+
+    // Tier minimum — youth jobs go to everyone, primary jobs exclude juniors
+    if (taskTierMin === 'primary' && wTier === 'youth') return false
+
+    // Skills match
+    const skills: string[] = w.skills ?? []
+    if (skills.length === 0) return true // no skills listed = general worker, include
+    const slugMatch = taskSlug ? skills.includes(taskSlug) : false
+    const catMatch  = skills.some((s) => s.toLowerCase().includes(taskCategory.toLowerCase().split(' ')[0]))
+    const handyman  = skills.includes('life_handyman_misc')
+    return slugMatch || catMatch || handyman
+  })
+
+  // ZIP sort — exact match first, then all eligible
+  const zipMatched = zip ? eligible.filter((w) => w.zip_code === zip) : []
+  const targets = zipMatched.length > 0 ? zipMatched : eligible
+
+  if (!targets.length) {
+    await resend.emails.send({
+      from: FROM, to: 'gr8@yskaipe.com',
+      subject: `⚠️ No eligible workers — ${confirmNumber} · ${taskLabel} · ${taskTierMin}`,
+      html: `<p>Found ${allWorkers.length} qualified workers but none passed tier/skills gate for <strong>${taskLabel}</strong> (tier_min=${taskTierMin}). Manual assignment needed.</p>`,
+    }).catch(() => {})
+    return
+  }
+
+  // Write job_claims rows
+  if (jobId) {
+    const claims = targets.map((w) => ({
+      job_id:    jobId,
+      worker_id: w.id,
+      task_slug: taskSlug ?? null,
+      status:    'offered',
+    }))
+    await supabase.from('job_claims').insert(claims)
+      .then(({ error: e }) => { if (e) console.error('[dispatch] job_claims insert error:', e) })
+  }
+
+  // Email each eligible worker
+  const fmt2 = (n: number | null | undefined) => n ? '$' + Math.round(n).toLocaleString('en-US') : '$—'
+
+  for (const w of targets) {
+    const firstName = w.first_name ?? 'there'
+    await resend.emails.send({
+      from:    FROM,
+      to:      w.email,
+      subject: `🔔 Job available — ${taskLabel} · ${zip ?? 'nearby'} · First claim wins`,
+      html: `
+        <div style="font-family:sans-serif;max-width:520px;margin:0 auto">
+          <h2 style="color:#0d0e0c">Hey ${firstName}, there's a job for you.</h2>
+          <p style="color:#444;font-size:14px">First YSKAIPE worker to claim gets it — homeowner is ready to book.</p>
+
+          <div style="background:#f5f5f0;border-radius:8px;padding:16px 20px;margin:20px 0">
+            <p style="margin:0 0 6px;font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.08em">Job</p>
+            <p style="margin:0;font-size:18px;font-weight:600;color:#0d0e0c">${taskLabel}</p>
+            <p style="margin:4px 0 0;font-size:14px;color:#555">${description}</p>
+            <p style="margin:8px 0 0;font-size:13px;color:#888">Area: ZIP ${zip ?? 'nearby'}${timing ? ` · Timing: ${timing}` : ''}</p>
+          </div>
+
+          <div style="background:#f0fff4;border-radius:8px;padding:16px 20px;margin:20px 0;border:1px solid #b8f073">
+            <p style="margin:0 0 4px;font-size:12px;color:#3a5a00;text-transform:uppercase;letter-spacing:.08em">Your payout</p>
+            <p style="margin:0;font-size:26px;font-weight:700;color:#0d0e0c">${fmt2(workerPayout)}</p>
+            <p style="margin:4px 0 0;font-size:12px;color:#666">After YSKAIPE 15% platform fee · Total job: ${fmt2(bookPrice)}</p>
+          </div>
+
+          ${taskPermit ? '<p style="color:#b8860b;font-size:13px">⚠️ This job may require a permit — advise the homeowner before work begins.</p>' : ''}
+          ${taskLicReq ? '<p style="color:#3a5a00;font-size:13px">✓ Licensed pro job — your credentials are on file.</p>' : ''}
+
+          <div style="background:#fff8e1;border-radius:8px;padding:14px 18px;margin:20px 0;border:1px solid #f0c473">
+            <p style="margin:0;font-size:13px;color:#7a5800;line-height:1.6">
+              <strong>To claim this job:</strong> Reply to this email with "I'll take it" — or log in to your YSKAIPE worker dashboard.
+              Homeowner name, address, and phone are revealed after you claim.
+            </p>
+          </div>
+
+          <p style="font-size:12px;color:#999;margin-top:24px">
+            Job ref: <span style="font-family:monospace">${confirmNumber}</span> · YSKAIPE · Cornelius, NC
+          </p>
+        </div>`,
+    }).catch((e) => console.error(`[dispatch] Worker email failed for ${w.email}:`, e))
+  }
+
+  console.log(`[dispatch] ${confirmNumber} — ${targets.length} workers notified for ${taskLabel}`)
 }
