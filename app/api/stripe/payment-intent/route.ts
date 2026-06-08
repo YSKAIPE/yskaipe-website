@@ -18,56 +18,61 @@
 // Amount = book_price in cents. Metadata links to job.
 // ══════════════════════════════════════════════════════════════════
 
-import { NextRequest, NextResponse } from 'next/server'
-import Stripe from 'stripe'
-import { createClient } from '@supabase/supabase-js'
+import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-03-25.dahlia' as any })
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2026-03-25.dahlia" as any,
+});
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+);
 
 export async function POST(req: NextRequest) {
   try {
-    const { job_id, book_price, label, homeowner_email, confirm_number } = await req.json()
+    const { job_id, book_price, label, homeowner_email, confirm_number } =
+      await req.json();
 
-    if (!job_id || !book_price || book_price < 1) {
-      return NextResponse.json({ error: 'Invalid job or price.' }, { status: 400 })
+    if (!book_price || book_price < 1) {
+      return NextResponse.json(
+        { error: "Invalid job or price." },
+        { status: 400 },
+      );
     }
 
-    const amountCents = Math.round(book_price * 100)
+    const amountCents = Math.round(book_price * 100);
 
     // Create PaymentIntent — capture_method=manual so we capture after job complete
     const intent = await stripe.paymentIntents.create({
-      amount:           amountCents,
-      currency:         'usd',
-      capture_method:   'manual',          // authorize now, capture on completion
-      receipt_email:    homeowner_email,
-      description:      `YSKAIPE: ${label} — ${confirm_number}`,
+      amount: amountCents,
+      currency: "usd",
+      capture_method: "manual", // authorize now, capture on completion
+      receipt_email: homeowner_email,
+      description: `YSKAIPE: ${label} — ${confirm_number}`,
       metadata: {
         job_id,
         confirm_number,
         label,
-        platform: 'yskaipe',
+        platform: "yskaipe",
       },
       automatic_payment_methods: { enabled: true },
-    })
+    });
 
     // Store payment intent ID on job row
     await supabase
-      .from('jobs')
+      .from("jobs")
       .update({ stripe_payment_intent_id: intent.id })
-      .eq('id', job_id)
+      .eq("id", job_id);
 
     return NextResponse.json({
-      client_secret:      intent.client_secret,
-      payment_intent_id:  intent.id,
-      amount_cents:       amountCents,
-    })
-
+      client_secret: intent.client_secret,
+      payment_intent_id: intent.id,
+      amount_cents: amountCents,
+    });
   } catch (err: any) {
-    console.error('[stripe/payment-intent]', err)
-    return NextResponse.json({ error: err.message }, { status: 500 })
+    console.error("[stripe/payment-intent]", err);
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
