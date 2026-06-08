@@ -261,6 +261,23 @@ export async function POST(req: NextRequest) {
     </div>`,
   }).catch((e) => console.error('[claim] Worker win email failed:', e))
 
+  // Generate completion token for homeowner
+  const COMPLETE_SECRET = new TextEncoder().encode(
+    process.env.CLAIM_TOKEN_SECRET ?? 'yskaipe-claim-secret-change-in-prod'
+  )
+  const completeToken = await new jose.SignJWT({
+    job_id: job_id,
+    hr_id:  job.homeowner_request_id ?? '',
+    type:   'complete'
+  })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setExpirationTime('30d')
+    .setIssuedAt()
+    .sign(COMPLETE_SECRET)
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.yskaipe.com'
+  const completeUrl = `${siteUrl}/complete.html?token=${encodeURIComponent(completeToken)}`
+
   // 5. Email homeowner — worker assigned
   if (hr?.homeowner_email) {
     await resend.emails.send({
@@ -292,7 +309,22 @@ export async function POST(req: NextRequest) {
 
         <p style="font-size:13px;color:#444;line-height:1.7">
           ${worker.first_name} will be in touch to confirm timing. 
-          Once the job is done, you'll receive a completion confirmation — reply to release payment from escrow.
+          When the job is complete, use the button below to release payment.
+        </p>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0">
+          <tr><td align="center">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr><td align="center" bgcolor="#b8f073" style="border-radius:8px;padding:0">
+                <a href="${completeUrl}" target="_blank"
+                   style="display:inline-block;background:#b8f073;color:#0d0e0c;font-family:sans-serif;font-size:15px;font-weight:700;padding:14px 32px;text-decoration:none;border-radius:8px">
+                  ✓ Confirm job complete &amp; release payment
+                </a>
+              </td></tr>
+            </table>
+          </td></tr>
+        </table>
+        <p style="font-size:12px;color:#888;text-align:center">
+          Or copy: <a href="${completeUrl}" style="color:#b8f073;word-break:break-all">${completeUrl}</a>
         </p>
 
         <p style="font-size:11px;color:#999;margin-top:24px">YSKAIPE · Cornelius, NC · gr8@yskaipe.com</p>

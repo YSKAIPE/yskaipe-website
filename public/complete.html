@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirm Job Complete — YSKAIPE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0d0e0c;--off:#111210;--dim:#1a1c18;--border:rgba(255,255,255,0.08);--text:#e8ede0;--muted:#7a8070;--faint:#4a4e45;--green:#b8f073;--amber:#f0c473;--coral:#e07a60;--serif:'Fraunces',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--black);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(13,14,12,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--green);text-decoration:none}
+.page{max-width:520px;margin:0 auto;padding:60px 5% 100px;flex:1}
+.state{display:none}.state.active{display:block}
+.loading-wrap{text-align:center;padding:80px 0}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:16px}
+.dot{width:8px;height:8px;border-radius:50%;animation:db 1.2s ease-in-out infinite}
+.dot:nth-child(1){background:var(--green)}
+.dot:nth-child(2){background:var(--amber);animation-delay:.2s}
+.dot:nth-child(3){background:var(--green);animation-delay:.4s}
+@keyframes db{0%,80%,100%{opacity:.1}40%{opacity:1}}
+.loading-wrap p{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--muted)}
+
+.card{background:var(--off);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.card-header{padding:22px 26px;background:rgba(184,240,115,.05);border-bottom:1px solid rgba(184,240,115,.1)}
+.card-eyebrow{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.card-title{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.card-sub{font-size:.82rem;color:var(--muted);line-height:1.6}
+.card-confirm{font-family:var(--mono);font-size:.6rem;color:var(--faint);background:rgba(255,255,255,.04);padding:4px 10px;border-radius:20px;border:1px solid var(--border);display:inline-block;margin-top:8px}
+
+.price-row{padding:22px 26px;background:var(--dim);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.price-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.price-num{font-family:var(--serif);font-size:2.8rem;font-weight:900;letter-spacing:-.04em;color:var(--green);line-height:1}
+.price-sub{font-family:var(--mono);font-size:.6rem;color:var(--faint);margin-top:4px}
+.escrow-note{font-size:.82rem;color:rgba(184,240,115,.65);text-align:right;max-width:200px;line-height:1.5}
+
+.detail-row{padding:16px 26px;border-bottom:1px solid var(--border);font-size:.85rem;display:flex;gap:10px}
+.detail-icon{flex-shrink:0;opacity:.5}
+.detail-text{color:var(--muted);line-height:1.6}
+.detail-text strong{color:var(--text);font-weight:500}
+
+.confirm-action{padding:24px 26px}
+.confirm-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.confirm-sub{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.confirm-btn{width:100%;background:var(--green);color:var(--black);border:none;border-radius:40px;padding:16px;font-family:var(--sans);font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s}
+.confirm-btn:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 8px 32px rgba(184,240,115,.25)}
+.confirm-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.confirm-legal{font-family:var(--mono);font-size:.58rem;color:var(--faint);text-align:center;margin-top:10px;line-height:1.7}
+
+.done-wrap{text-align:center;padding:40px 0}
+.done-icon{width:64px;height:64px;border-radius:50%;background:rgba(184,240,115,.12);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.done-wrap h2{font-family:var(--serif);font-size:2rem;font-weight:700;margin-bottom:8px}
+.done-wrap p{color:var(--muted);font-size:.88rem;line-height:1.75}
+.done-amount{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--green)}
+
+.error-wrap{text-align:center;padding:60px 0}
+.error-wrap h2{font-family:var(--serif);font-size:2rem;font-weight:700;margin-bottom:10px;color:var(--coral)}
+.error-wrap p{color:var(--muted);font-size:.88rem;line-height:1.7}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/index.html" class="nav-logo">YSKAIPE</a>
+</nav>
+
+<div class="page">
+
+  <div class="state active" id="state-loading">
+    <div class="loading-wrap">
+      <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <p>Loading job details…</p>
+    </div>
+  </div>
+
+  <div class="state" id="state-confirm">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-eyebrow">Confirm job complete</div>
+        <div class="card-title" id="job-title">—</div>
+        <div class="card-sub" id="job-desc">—</div>
+        <div class="card-confirm" id="job-confirm">—</div>
+      </div>
+      <div class="price-row">
+        <div>
+          <div class="price-label">Payment to release</div>
+          <div class="price-num" id="job-price">$—</div>
+          <div class="price-sub">Held in escrow · charged to your card</div>
+        </div>
+        <div class="escrow-note">🔒 Only released when you confirm the job is complete</div>
+      </div>
+      <div class="detail-row">
+        <span class="detail-icon">🔧</span>
+        <span class="detail-text">Worker: <strong id="worker-name">—</strong></span>
+      </div>
+      <div class="confirm-action">
+        <div class="confirm-title">Happy with the work?</div>
+        <div class="confirm-sub">Tapping below releases payment to your worker and closes this job. Only confirm if the work is complete and you're satisfied.</div>
+        <button class="confirm-btn" id="confirm-btn" onclick="confirmComplete()">
+          Yes — release payment →
+        </button>
+        <p class="confirm-legal">Payment of <span id="legal-price">$—</span> will be charged to your card on file. <span id="worker-payout-note"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="state" id="state-done">
+    <div class="done-wrap">
+      <div class="done-icon">✓</div>
+      <h2>All done.</h2>
+      <p>Payment released. <span class="done-amount" id="done-amount">$—</span> on its way to your worker.<br><br>
+      Thank you for using YSKAIPE. Reply to your confirmation email if you need anything.</p>
+    </div>
+  </div>
+
+  <div class="state" id="state-already-done">
+    <div class="done-wrap">
+      <div class="done-icon">✓</div>
+      <h2>Already complete.</h2>
+      <p>This job was already confirmed and payment released. Nothing more to do.</p>
+    </div>
+  </div>
+
+  <div class="state" id="state-error">
+    <div class="error-wrap">
+      <h2>Link invalid</h2>
+      <p>This confirmation link is invalid or has expired.<br>Email gr8@yskaipe.com with your confirmation number if you need help.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function fmt(n){return n?'$'+Math.round(n).toLocaleString('en-US'):'$—'}
+function show(id){document.querySelectorAll('.state').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+
+const token=new URLSearchParams(window.location.search).get('token')
+
+async function init(){
+  if(!token){show('state-error');return}
+  try{
+    const res=await fetch('/api/job-complete?token='+encodeURIComponent(token))
+    const data=await res.json()
+    if(!res.ok){show('state-error');return}
+    if(data.already_complete){show('state-already-done');return}
+
+    const j=data.job
+    document.getElementById('job-title').textContent=j.label
+    document.getElementById('job-desc').textContent=j.description
+    document.getElementById('job-confirm').textContent=j.confirm_number
+    document.getElementById('job-price').textContent=fmt(j.book_price)
+    document.getElementById('worker-name').textContent=data.worker.name
+    document.getElementById('legal-price').textContent=fmt(j.book_price)
+    document.getElementById('done-amount').textContent=fmt(j.worker_payout)
+    document.getElementById('worker-payout-note').textContent=
+      `${data.worker.name} receives ${fmt(j.worker_payout)} after YSKAIPE's 15% fee.`
+    document.getElementById('confirm-btn').textContent=
+      `Yes — release ${fmt(j.book_price)} →`
+
+    show('state-confirm')
+  }catch(e){
+    console.error(e)
+    show('state-error')
+  }
+}
+
+async function confirmComplete(){
+  const btn=document.getElementById('confirm-btn')
+  btn.textContent='Processing…'
+  btn.disabled=true
+  try{
+    const res=await fetch('/api/job-complete?token='+encodeURIComponent(token),{method:'POST'})
+    const data=await res.json()
+    if(!res.ok) throw new Error(data.error||'Something went wrong.')
+    if(data.already_paid){show('state-already-done');return}
+    show('state-done')
+  }catch(err){
+    btn.textContent='Yes — release payment →'
+    btn.disabled=false
+    alert(err.message)
+  }
+}
+
+init()
+</script>
+</body>
+</html>
