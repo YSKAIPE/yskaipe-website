@@ -272,8 +272,9 @@ async function dispatchWorkers({
   // Query workers
   const { data: workers, error } = await supabase
     .from('workers')
-    .select('id, first_name, last_name, email, age_tier, zip_code, skills, status')
+    .select('id, first_name, last_name, email, age_tier, zip_code, skills, status, stripe_onboarded')
     .eq('status', 'qualified')
+    .eq('stripe_onboarded', true)
 
   if (error || !workers?.length) {
     console.error('[dispatch] Workers query error or empty:', error)
@@ -357,12 +358,29 @@ async function dispatchWorkers({
           <p style="margin:4px 0 0;font-size:11px;color:#666">After 15% YSKAIPE fee · Job total: ${fmt(bookPrice)}</p>
         </div>
         ${taskPermit ? '<p style="color:#b8860b;font-size:13px">⚠️ This job may require a permit — advise the homeowner.</p>' : ''}
-        <div style="margin:18px 0;text-align:center">
-          <a href="${claimUrl}" style="display:inline-block;background:#b8f073;color:#0d0e0c;font-family:sans-serif;font-size:15px;font-weight:700;padding:14px 32px;border-radius:40px;text-decoration:none;letter-spacing:.01em">Claim this job →</a>
-        </div>
-        <div style="background:#fff8e1;border-radius:8px;padding:14px 18px;margin:18px 0;border:1px solid #f0c473">
+        <!-- Gmail-safe button using table -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0">
+          <tr>
+            <td align="center">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" bgcolor="#b8f073" style="border-radius:8px;padding:0">
+                    <a href="${claimUrl}" target="_blank"
+                       style="display:inline-block;background:#b8f073;color:#0d0e0c;font-family:sans-serif;font-size:16px;font-weight:700;padding:16px 36px;text-decoration:none;border-radius:8px;mso-padding-alt:16px 36px">
+                      &#x2714; Claim this job
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <p style="font-size:12px;color:#888;text-align:center;margin:8px 0 16px">
+          Or copy this link: <a href="${claimUrl}" style="color:#b8f073;word-break:break-all">${claimUrl}</a>
+        </p>
+        <div style="background:#fff8e1;border-left:3px solid #f0c473;padding:12px 16px;margin:16px 0">
           <p style="margin:0;font-size:13px;color:#7a5800;line-height:1.6">
-            First worker to click wins. Homeowner contact revealed immediately on claim. Link valid 48 hours.
+            <strong>First worker to click wins.</strong> Homeowner contact revealed immediately. Link valid 48 hours.
           </p>
         </div>
         <p style="font-size:11px;color:#999;margin-top:20px">Ref: <span style="font-family:monospace">${confirmNumber}</span> · YSKAIPE · Cornelius, NC</p>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worker Dashboard — YSKAIPE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0d0e0c;--off:#111210;--dim:#1a1c18;--mid:#2a2e27;--border:rgba(255,255,255,0.08);--text:#e8ede0;--muted:#7a8070;--faint:#4a4e45;--green:#b8f073;--blue:#73c8f0;--amber:#f0c473;--coral:#e07a60;--serif:'Fraunces',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--black);color:var(--text);min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 5%;background:rgba(13,14,12,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--serif);font-size:1.3rem;font-weight:900;color:var(--green);text-decoration:none}
+.nav-worker{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nav-worker span{color:var(--text)}
+
+/* LOADING / AUTH STATES */
+.fullscreen-state{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:5%}
+.fullscreen-state.hidden{display:none}
+.dots{display:flex;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;animation:db 1.2s ease-in-out infinite}
+.dot:nth-child(1){background:var(--green)}
+.dot:nth-child(2){background:var(--blue);animation-delay:.2s}
+.dot:nth-child(3){background:var(--amber);animation-delay:.4s}
+@keyframes db{0%,80%,100%{opacity:.1}40%{opacity:1}}
+.state-msg{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--muted)}
+.state-title{font-family:var(--serif);font-size:2rem;font-weight:700;text-align:center}
+.state-sub{font-size:.9rem;color:var(--muted);text-align:center;line-height:1.7;max-width:400px}
+.state-btn{background:var(--green);color:var(--black);border:none;border-radius:40px;padding:13px 28px;font-family:var(--sans);font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.state-btn:hover{opacity:.88;transform:translateY(-1px)}
+.state-btn.secondary{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.state-btn.secondary:hover{color:var(--text);border-color:var(--text)}
+
+/* ONBOARDING BANNER */
+.onboard-banner{background:rgba(240,196,115,.08);border-bottom:1px solid rgba(240,196,115,.15);padding:14px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.onboard-banner.hidden{display:none}
+.onboard-msg{font-size:.85rem;color:var(--amber);line-height:1.5}
+.onboard-msg strong{font-weight:600}
+.onboard-btn{background:var(--amber);color:var(--black);border:none;border-radius:40px;padding:9px 20px;font-family:var(--sans);font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.onboard-btn:hover{opacity:.88}
+
+/* DASHBOARD LAYOUT */
+.dashboard{max-width:900px;margin:0 auto;padding:80px 5% 80px;display:none}
+.dashboard.active{display:block}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:32px;border-radius:4px;overflow:hidden}
+.stat{background:var(--off);padding:20px;text-align:center}
+.stat-num{font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--green);line-height:1;letter-spacing:-.03em}
+.stat-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px}
+.tab{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 20px;cursor:pointer;color:var(--faint);border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--muted)}
+.tab.active{color:var(--green);border-bottom-color:var(--green)}
+
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* JOB CARDS */
+.job-list{display:flex;flex-direction:column;gap:12px}
+.job-card{background:var(--off);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color .2s}
+.job-card:hover{border-color:rgba(184,240,115,.2)}
+.job-card-inner{padding:18px 20px;display:flex;align-items:flex-start;gap:16px}
+.job-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.job-info{flex:1;min-width:0}
+.job-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.job-desc{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.job-meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.job-tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;padding:3px 8px;border-radius:20px;border:1px solid var(--border);color:var(--faint)}
+.job-tag.zip{border-color:rgba(184,240,115,.2);color:var(--green)}
+.job-tag.timing{border-color:rgba(115,200,240,.2);color:var(--blue)}
+.job-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+.job-payout{font-family:var(--serif);font-size:1.6rem;font-weight:900;color:var(--green);line-height:1;letter-spacing:-.02em}
+.job-payout-sub{font-family:var(--mono);font-size:.58rem;color:var(--faint);text-align:right}
+.claim-btn{background:var(--green);color:var(--black);border:none;border-radius:40px;padding:9px 20px;font-family:var(--sans);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.claim-btn:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 4px 16px rgba(184,240,115,.2)}
+.claim-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Status badges */
+.status-badge{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.status-badge.claimed{background:rgba(115,200,240,.1);color:var(--blue);border:1px solid rgba(115,200,240,.2)}
+.status-badge.paid{background:rgba(184,240,115,.1);color:var(--green);border:1px solid rgba(184,240,115,.2)}
+.status-badge.posted{background:rgba(240,196,115,.1);color:var(--amber);border:1px solid rgba(240,196,115,.2)}
+
+.empty-state{text-align:center;padding:48px 24px;color:var(--faint);font-family:var(--mono);font-size:.72rem;letter-spacing:.08em}
+.empty-state .icon{font-size:2.5rem;margin-bottom:12px;opacity:.4}
+
+@media(max-width:600px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .job-card-inner{flex-direction:column}
+  .job-right{align-items:flex-start;flex-direction:row;justify-content:space-between;width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">YSKAIPE</a>
+  <div class="nav-worker">Worker Portal · <span id="nav-name">—</span></div>
+</nav>
+
+<!-- LOADING -->
+<div class="fullscreen-state" id="state-loading">
+  <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <div class="state-msg">Loading your dashboard…</div>
+</div>
+
+<!-- LOGIN REQUIRED -->
+<div class="fullscreen-state hidden" id="state-login">
+  <div class="state-title">Worker Dashboard</div>
+  <div class="state-sub">Enter your email to receive a secure login link — no password needed.</div>
+  <div style="display:flex;gap:10px;margin-top:8px;width:100%;max-width:380px">
+    <input type="email" id="login-email" placeholder="your@email.com"
+      style="flex:1;padding:12px 14px;background:var(--dim);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:var(--sans);font-size:.88rem;outline:none">
+    <button class="state-btn" onclick="sendLoginLink()">Send link</button>
+  </div>
+  <div id="login-sent" style="display:none;font-family:var(--mono);font-size:.7rem;color:var(--green);letter-spacing:.08em">✓ Check your email</div>
+  <a href="/yskaipe-workers.html" class="state-btn secondary" style="margin-top:8px">Not signed up yet? →</a>
+</div>
+
+<!-- ONBOARDING REQUIRED -->
+<div class="fullscreen-state hidden" id="state-onboard">
+  <div class="state-title">Almost there.</div>
+  <div class="state-sub">Connect your payout account to start claiming jobs. Takes about 2 minutes.</div>
+  <button class="state-btn" id="onboard-btn" onclick="startOnboarding()">Set up payout account →</button>
+  <div style="font-family:var(--mono);font-size:.6rem;color:var(--faint);margin-top:8px">Powered by Stripe · Bank-level security</div>
+</div>
+
+<!-- ONBOARDING BANNER (shown when on dashboard but not yet onboarded) -->
+<div class="onboard-banner hidden" id="onboard-banner">
+  <div class="onboard-msg"><strong>⚠ Payout account not connected.</strong> You need to complete Stripe setup before you can claim jobs and receive payment.</div>
+  <button class="onboard-btn" onclick="startOnboarding()">Complete setup →</button>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num" id="stat-completed">0</div><div class="stat-label">Jobs completed</div></div>
+    <div class="stat"><div class="stat-num" id="stat-earned">$0</div><div class="stat-label">Total earned</div></div>
+    <div class="stat"><div class="stat-num" id="stat-available">0</div><div class="stat-label">Jobs available</div></div>
+    <div class="stat"><div class="stat-num" id="stat-rating">—</div><div class="stat-label">Rating</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('available',this)">Available Jobs</button>
+    <button class="tab" onclick="switchTab('myjobs',this)">My Jobs</button>
+    <button class="tab" onclick="switchTab('earnings',this)">Earnings</button>
+  </div>
+
+  <!-- AVAILABLE JOBS -->
+  <div class="tab-panel active" id="tab-available">
+    <div class="job-list" id="available-list">
+      <div class="empty-state"><div class="icon">📭</div>No jobs available right now.<br>Check back soon — new jobs are posted daily.</div>
+    </div>
+  </div>
+
+  <!-- MY JOBS -->
+  <div class="tab-panel" id="tab-myjobs">
+    <div class="job-list" id="myjobs-list">
+      <div class="empty-state"><div class="icon">🔧</div>No jobs claimed yet.<br>Check the Available Jobs tab to find work near you.</div>
+    </div>
+  </div>
+
+  <!-- EARNINGS -->
+  <div class="tab-panel" id="tab-earnings">
+    <div style="background:var(--off);border:1px solid var(--border);border-radius:4px;padding:28px;margin-bottom:16px">
+      <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Total earned (all time)</div>
+      <div style="font-family:var(--serif);font-size:3rem;font-weight:900;color:var(--green);letter-spacing:-.04em" id="earnings-total">$0</div>
+      <div style="font-family:var(--mono);font-size:.62rem;color:var(--faint);margin-top:6px">After 15% YSKAIPE platform fee</div>
+    </div>
+    <div style="background:var(--off);border:1px solid var(--border);border-radius:4px;padding:24px" id="stripe-panel">
+      <div style="font-family:var(--serif);font-size:1.1rem;font-weight:700;margin-bottom:6px">Stripe Express Dashboard</div>
+      <div style="font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.6">View your payout history, bank details, and tax documents in your Stripe dashboard.</div>
+      <button class="state-btn" onclick="openStripeDashboard()" id="stripe-btn">Open Stripe dashboard →</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let workerData = null
+let authToken = null
+
+function fmt(n){return n?'$'+Math.round(n).toLocaleString('en-US'):'$0'}
+function show(id){
+  ['state-loading','state-login','state-onboard','dashboard'].forEach(s=>{
+    const el=document.getElementById(s)
+    if(el) el.classList.toggle('hidden', s!==id)
+    if(s==='dashboard') el.classList.toggle('active', s===id)
+  })
+}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'))
+  btn.classList.add('active')
+  document.getElementById('tab-'+name).classList.add('active')
+}
+
+async function init(){
+  const params = new URLSearchParams(window.location.search)
+  const token  = params.get('token')
+  const onboard = params.get('onboard')
+  const workerId = params.get('worker_id')
+
+  // Handle Stripe onboarding callback
+  if(onboard === 'complete' && workerId){
+    // Mark onboarded in DB via API
+    await fetch('/api/worker/onboard-complete', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({worker_id: workerId})
+    }).catch(()=>{})
+    // Clean URL
+    window.history.replaceState({}, '', '/worker-dashboard.html')
+  }
+
+  // Try stored token first
+  authToken = token || localStorage.getItem('yskaipe_worker_token')
+
+  if(!authToken){
+    show('state-login')
+    return
+  }
+
+  // Load worker data
+  try{
+    const res = await fetch('/api/worker/auth?token='+encodeURIComponent(authToken))
+    const data = await res.json()
+
+    if(!res.ok){
+      localStorage.removeItem('yskaipe_worker_token')
+      show('state-login')
+      return
+    }
+
+    // Store token
+    localStorage.setItem('yskaipe_worker_token', authToken)
+    workerData = data
+
+    const w = data.worker
+
+    // Check onboarding
+    if(!w.stripe_onboarded){
+      show('state-onboard')
+      return
+    }
+
+    // Show dashboard
+    renderDashboard(data)
+    show('dashboard')
+
+    // Clean URL
+    if(token) window.history.replaceState({}, '', '/worker-dashboard.html')
+
+  }catch(e){
+    console.error(e)
+    localStorage.removeItem('yskaipe_worker_token')
+    show('state-login')
+  }
+}
+
+function renderDashboard(data){
+  const w = data.worker
+  document.getElementById('nav-name').textContent = w.first_name
+
+  // Stats
+  document.getElementById('stat-completed').textContent = w.jobs_completed || 0
+  document.getElementById('stat-earned').textContent = fmt(w.total_earned)
+  document.getElementById('stat-available').textContent = (data.available_jobs||[]).length
+  document.getElementById('stat-rating').textContent = w.rating ? w.rating.toFixed(1) : '—'
+  document.getElementById('earnings-total').textContent = fmt(w.total_earned)
+
+  // Available jobs
+  const avList = document.getElementById('available-list')
+  const jobs = data.available_jobs || []
+  if(jobs.length){
+    avList.innerHTML = jobs.map(j => `
+      <div class="job-card">
+        <div class="job-card-inner">
+          <div class="job-icon">🔧</div>
+          <div class="job-info">
+            <div class="job-title">${j.task_label||'Home Service'}</div>
+            <div class="job-desc">${j.description||''}</div>
+            <div class="job-meta">
+              ${j.zip_code?`<span class="job-tag zip">ZIP ${j.zip_code}</span>`:''}
+              ${j.timing?`<span class="job-tag timing">${j.timing}</span>`:''}
+              ${j.permit_likely?`<span class="job-tag" style="border-color:rgba(240,196,115,.2);color:var(--amber)">Permit likely</span>`:''}
+            </div>
+          </div>
+          <div class="job-right">
+            <div>
+              <div class="job-payout">${fmt(j.worker_payout)}</div>
+              <div class="job-payout-sub">your payout</div>
+            </div>
+            <button class="claim-btn" onclick="claimJob('${j.id}',this)">Claim →</button>
+          </div>
+        </div>
+      </div>`).join('')
+  }
+
+  // My jobs
+  const myList = document.getElementById('myjobs-list')
+  const myJobs = data.my_jobs || []
+  if(myJobs.length){
+    myList.innerHTML = myJobs.map(j => `
+      <div class="job-card">
+        <div class="job-card-inner">
+          <div class="job-icon">🔧</div>
+          <div class="job-info">
+            <div class="job-title">${j.task_label||'Home Service'}</div>
+            <div class="job-desc">${j.description||''}</div>
+            <div class="job-meta">
+              <span class="status-badge ${j.status}">${j.status}</span>
+              <span class="job-tag">${j.confirm_number||''}</span>
+              ${j.zip_code?`<span class="job-tag zip">ZIP ${j.zip_code}</span>`:''}
+            </div>
+          </div>
+          <div class="job-right">
+            <div class="job-payout">${fmt(j.worker_payout)}</div>
+            <div class="job-payout-sub">${j.status==='paid'?'paid out':'pending'}</div>
+          </div>
+        </div>
+      </div>`).join('')
+  }
+}
+
+async function claimJob(jobId, btn){
+  if(!authToken){ alert('Session expired — please log in again.'); return }
+  // We need a claim token — for dashboard claiming we call a different endpoint
+  // that generates a token server-side given the auth token
+  btn.textContent='Claiming…'
+  btn.disabled=true
+
+  try{
+    const res = await fetch('/api/worker/claim-from-dashboard', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ job_id: jobId, auth_token: authToken })
+    })
+    const data = await res.json()
+    if(!res.ok) throw new Error(data.error||'Could not claim job.')
+    if(data.reason==='already_claimed'){
+      btn.closest('.job-card').remove()
+      alert('Someone else claimed this job first — that\'s the YSKAIPE model. More jobs coming soon.')
+      return
+    }
+    // Won — refresh dashboard
+    btn.closest('.job-card').remove()
+    alert(`Job claimed! Check your email for homeowner contact details.`)
+    // Refresh stats
+    location.reload()
+  }catch(err){
+    btn.textContent='Claim →'
+    btn.disabled=false
+    alert(err.message)
+  }
+}
+
+async function startOnboarding(){
+  const btn = document.getElementById('onboard-btn') || document.querySelector('.onboard-btn')
+  if(btn){ btn.textContent='Setting up…'; btn.disabled=true }
+
+  const workerId = workerData?.worker?.id
+  if(!workerId){ window.location.href='/yskaipe-workers.html'; return }
+
+  try{
+    const res = await fetch('/api/stripe/connect-onboard',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({worker_id: workerId})
+    })
+    const data = await res.json()
+    if(data.already_onboarded){ location.reload(); return }
+    if(data.url) window.location.href = data.url
+    else throw new Error('Could not generate onboarding link.')
+  }catch(err){
+    if(btn){ btn.textContent='Set up payout account →'; btn.disabled=false }
+    alert(err.message)
+  }
+}
+
+async function openStripeDashboard(){
+  const workerId = workerData?.worker?.id
+  if(!workerId) return
+  const btn = document.getElementById('stripe-btn')
+  btn.textContent='Opening…'
+  try{
+    const res = await fetch('/api/stripe/connect-onboard',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({worker_id: workerId})
+    })
+    const data = await res.json()
+    if(data.already_onboarded && data.account_id){
+      // Generate express dashboard login link
+      const loginRes = await fetch('/api/stripe/express-login',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({account_id: data.account_id})
+      })
+      const loginData = await loginRes.json()
+      if(loginData.url) window.open(loginData.url,'_blank')
+    }
+    btn.textContent='Open Stripe dashboard →'
+  }catch(e){
+    btn.textContent='Open Stripe dashboard →'
+    alert('Could not open Stripe dashboard.')
+  }
+}
+
+async function sendLoginLink(){
+  const email = document.getElementById('login-email').value.trim()
+  if(!email) return
+  await fetch('/api/worker/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})})
+  document.getElementById('login-sent').style.display='block'
+}
+
+init()
+</script>
+</body>
+</html>
