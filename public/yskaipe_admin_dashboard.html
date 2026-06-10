@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--color-background-tertiary);color:var(--color-text-primary);font-size:13px;display:flex;min-height:100vh}
+.sidebar{width:200px;flex-shrink:0;background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;padding:0}
+.logo{padding:16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.logo-name{font-family:var(--font-serif);font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.logo-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px;font-family:var(--font-mono)}
+.nav-section{padding:14px 12px 6px;font-size:10px;font-family:var(--font-mono);color:var(--color-text-tertiary);letter-spacing:.1em;text-transform:uppercase}
+.nav-btn{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;color:var(--color-text-secondary);font-size:13px;background:none;border:none;width:100%;text-align:left;border-radius:var(--border-radius-md);margin:1px 6px;width:calc(100% - 12px)}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.active{background:var(--color-background-info);color:var(--color-text-info)}
+.nav-btn i{font-size:15px}
+.main{flex:1;overflow:auto;padding:20px 24px}
+.view{display:none}.view.active{display:block}
+.page-title{font-size:20px;font-weight:500;margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px}
+.kpi-row{display:grid;gap:10px;margin-bottom:20px}
+.kpi-5{grid-template-columns:repeat(5,1fr)}.kpi-4{grid-template-columns:repeat(4,1fr)}
+.kpi{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px 16px}
+.kpi-val{font-size:22px;font-weight:500;margin-bottom:4px;font-family:var(--font-mono)}
+.kpi-val.green{color:#3B6D11}.kpi-val.blue{color:#185FA5}.kpi-val.amber{color:#854F0B}.kpi-val.coral{color:#993C1D}.kpi-val.purple{color:#534AB7}
+@media (prefers-color-scheme:dark){
+.kpi-val.green{color:#C0DD97}.kpi-val.blue{color:#B5D4F4}.kpi-val.amber{color:#FAC775}.kpi-val.coral{color:#F0997B}.kpi-val.purple{color:#AFA9EC}
+}
+.kpi-label{font-size:11px;font-family:var(--font-mono);color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.08em}
+.kpi-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:16px}
+.card-hdr{padding:12px 16px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.card-title{font-size:11px;font-family:var(--font-mono);color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.1em}
+.card-actions{display:flex;gap:8px}
+input.fi,select.fi{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:5px 9px;font-size:12px;font-family:var(--font-mono);color:var(--color-text-primary);outline:none}
+input.fi{width:180px}input.fi:focus,select.fi:focus{border-color:var(--color-border-info)}
+table{width:100%;border-collapse:collapse}
+th{padding:8px 12px;text-align:left;font-size:10px;font-family:var(--font-mono);color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.08em;border-bottom:0.5px solid var(--color-border-tertiary);white-space:nowrap}
+td{padding:9px 12px;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px;color:var(--color-text-secondary);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--color-background-secondary)}
+.tp{color:var(--color-text-primary);font-weight:500}
+.tm{font-family:var(--font-mono);font-size:11px}
+.tg{color:#3B6D11;font-family:var(--font-mono);font-size:12px}
+.tb{color:#185FA5;font-family:var(--font-mono);font-size:12px}
+.ta{color:#854F0B;font-family:var(--font-mono);font-size:12px}
+.tp2{color:#534AB7;font-family:var(--font-mono);font-size:12px}
+.tf{color:var(--color-text-tertiary);font-size:11px;font-family:var(--font-mono)}
+@media (prefers-color-scheme:dark){
+.tg{color:#C0DD97}.tb{color:#B5D4F4}.ta{color:#FAC775}.tp2{color:#AFA9EC}
+}
+.badge{font-family:var(--font-mono);font-size:10px;padding:2px 7px;border-radius:20px;border:0.5px solid;display:inline-block;white-space:nowrap}
+.b-posted{background:#FAEEDA;color:#854F0B;border-color:#FAC775}
+.b-claimed{background:#E6F1FB;color:#185FA5;border-color:#B5D4F4}
+.b-paid{background:#EAF3DE;color:#3B6D11;border-color:#C0DD97}
+.b-cancelled,.b-disputed{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
+.b-adult,.b-qualified{background:#EAF3DE;color:#3B6D11;border-color:#C0DD97}
+.b-standard{background:#E6F1FB;color:#185FA5;border-color:#B5D4F4}
+.b-junior,.b-applied{background:#FAEEDA;color:#854F0B;border-color:#FAC775}
+.b-yes{background:#EAF3DE;color:#3B6D11;border-color:#C0DD97}
+.b-no{background:#FCEBEB;color:#A32D2D;border-color:#F7C1C1}
+.b-primary{background:#EEEDFE;color:#534AB7;border-color:#AFA9EC}
+.b-licensed{background:#E6F1FB;color:#185FA5;border-color:#B5D4F4}
+.b-youth{background:#FAEEDA;color:#854F0B;border-color:#FAC775}
+@media (prefers-color-scheme:dark){
+.b-posted{background:#412402;color:#FAC775;border-color:#854F0B}
+.b-claimed{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+.b-paid{background:#173404;color:#C0DD97;border-color:#3B6D11}
+.b-cancelled,.b-disputed{background:#501313;color:#F09595;border-color:#A32D2D}
+.b-adult,.b-qualified{background:#173404;color:#C0DD97;border-color:#3B6D11}
+.b-standard{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+.b-junior,.b-applied{background:#412402;color:#FAC775;border-color:#854F0B}
+.b-yes{background:#173404;color:#C0DD97;border-color:#3B6D11}
+.b-no{background:#501313;color:#F09595;border-color:#A32D2D}
+.b-primary{background:#26215C;color:#AFA9EC;border-color:#534AB7}
+.b-licensed{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+.b-youth{background:#412402;color:#FAC775;border-color:#854F0B}
+}
+.btn{font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer}
+.btn:hover{background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.alert{border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:14px;display:flex;gap:8px;font-size:12px;line-height:1.5;align-items:flex-start}
+.a-amber{background:#FAEEDA;color:#854F0B;border:0.5px solid #FAC775}
+.a-red{background:#FCEBEB;color:#A32D2D;border:0.5px solid #F7C1C1}
+.a-green{background:#EAF3DE;color:#3B6D11;border:0.5px solid #C0DD97}
+@media (prefers-color-scheme:dark){
+.a-amber{background:#412402;color:#FAC775;border-color:#854F0B}
+.a-red{background:#501313;color:#F09595;border-color:#A32D2D}
+.a-green{background:#173404;color:#C0DD97;border-color:#3B6D11}
+}
+.loading{padding:32px;text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--color-text-tertiary);letter-spacing:.1em}
+.empty{padding:28px;text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--color-text-tertiary)}
+.modal-bg{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:50;min-height:600px;align-items:flex-start;justify-content:center;padding-top:40px}
+.modal-bg.open{display:flex}
+.modal{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);width:540px;max-height:80vh;overflow-y:auto}
+.modal-hdr{padding:14px 18px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;justify-content:space-between;align-items:center}
+.modal-hdr-title{font-size:15px;font-weight:500}
+.modal-close{background:none;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:18px;line-height:1;padding:2px}
+.modal-bdy{padding:18px}
+.dr{display:flex;gap:8px;margin-bottom:8px;font-size:12px}
+.dk{font-family:var(--font-mono);font-size:11px;color:var(--color-text-tertiary);min-width:120px;flex-shrink:0;padding-top:1px}
+.dv{color:var(--color-text-primary);line-height:1.5;word-break:break-all}
+.sep{height:0.5px;background:var(--color-border-tertiary);margin:12px 0}
+.wrap{position:relative;min-height:100vh;display:flex;width:100%}
+.setup{padding:60px 40px;text-align:center;flex:1}
+.setup h2{font-size:18px;font-weight:500;margin-bottom:8px}
+.setup p{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px;line-height:1.6}
+.setup input{width:400px;padding:10px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-primary);background:var(--color-background-secondary);color:var(--color-text-primary);font-family:var(--font-mono);font-size:13px;outline:none;display:block;margin:0 auto 12px}
+.setup button{background:var(--color-background-info);color:var(--color-text-info);border:none;padding:10px 24px;border-radius:var(--border-radius-md);font-size:13px;cursor:pointer}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+</head>
+<body>
+<div class="wrap" id="wrap">
+
+<div class="setup" id="setup-screen">
+  <h2>YSKAIPE Admin</h2>
+  <p>Enter your Supabase anon key to load live data.<br>Find it in Supabase → Settings → API → anon public key.</p>
+  <input type="password" id="key-input" placeholder="eyJhbGciOiJIUzI1NiI...">
+  <button onclick="initDash()">Load dashboard</button>
+  <p style="margin-top:10px;font-size:11px;color:var(--color-text-tertiary)">Key is only used in your browser — never sent anywhere except Supabase.</p>
+</div>
+
+<div id="dash" style="display:none;display:flex;width:100%">
+<div class="sidebar">
+  <div class="logo"><div class="logo-name">YSKAIPE</div><div class="logo-sub">Admin · Command Center</div></div>
+  <div class="nav-section">Platform</div>
+  <button class="nav-btn active" onclick="nav('overview',this)"><i class="ti ti-bolt" aria-hidden="true"></i>Overview</button>
+  <button class="nav-btn" onclick="nav('jobs',this)"><i class="ti ti-tool" aria-hidden="true"></i>Jobs Pipeline</button>
+  <button class="nav-btn" onclick="nav('money',this)"><i class="ti ti-cash" aria-hidden="true"></i>Money & Escrow</button>
+  <div class="nav-section">People</div>
+  <button class="nav-btn" onclick="nav('homeowners',this)"><i class="ti ti-home" aria-hidden="true"></i>Homeowners</button>
+  <button class="nav-btn" onclick="nav('workers',this)"><i class="ti ti-users" aria-hidden="true"></i>Workers</button>
+  <div class="nav-section">Ops</div>
+  <button class="nav-btn" onclick="nav('dispatch',this)"><i class="ti ti-antenna" aria-hidden="true"></i>Dispatch Health</button>
+  <button class="nav-btn" onclick="nav('disputes',this)"><i class="ti ti-alert-triangle" aria-hidden="true"></i>Disputes</button>
+  <div style="margin-top:auto;padding:12px;border-top:0.5px solid var(--color-border-tertiary)">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--color-text-tertiary)" id="conn-status">Connecting…</div>
+  </div>
+</div>
+
+<div class="main">
+
+<div class="view active" id="view-overview">
+  <div class="page-title">Command Center</div>
+  <div class="page-sub" id="ts">Loading…</div>
+  <div class="kpi-row kpi-5">
+    <div class="kpi"><div class="kpi-val green" id="k-gmv">—</div><div class="kpi-label">Gross Revenue</div><div class="kpi-sub">all captured</div></div>
+    <div class="kpi"><div class="kpi-val purple" id="k-rev">—</div><div class="kpi-label">YSKAIPE Revenue</div><div class="kpi-sub">15% platform fee</div></div>
+    <div class="kpi"><div class="kpi-val blue" id="k-jobs">—</div><div class="kpi-label">Total Jobs</div><div class="kpi-sub">all time</div></div>
+    <div class="kpi"><div class="kpi-val amber" id="k-escrow">—</div><div class="kpi-label">In Escrow</div><div class="kpi-sub">authorized, held</div></div>
+    <div class="kpi"><div class="kpi-val green" id="k-workers">—</div><div class="kpi-label">Active Workers</div><div class="kpi-sub">onboarded + qualified</div></div>
+  </div>
+  <div id="alerts"></div>
+  <div class="card">
+    <div class="card-hdr"><div class="card-title">Recent Jobs</div></div>
+    <table><thead><tr><th>Confirm #</th><th>Job</th><th>Homeowner</th><th>Phone</th><th>Worker</th><th>Price</th><th>Fee</th><th>Status</th><th>Age</th></tr></thead>
+    <tbody id="t-recent"><tr><td colspan="9" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><div class="card-title">Workers Needing Stripe Onboarding</div></div>
+    <table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Tier</th><th>ZIP</th><th>Status</th></tr></thead>
+    <tbody id="t-onboard"><tr><td colspan="6" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-jobs">
+  <div class="page-title">Jobs Pipeline</div>
+  <div class="page-sub">Full lifecycle — booking to payment</div>
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title">All Jobs</div>
+      <div class="card-actions">
+        <input class="fi" id="j-s" placeholder="Search…" oninput="filterJobs()">
+        <select class="fi" id="j-st" onchange="filterJobs()">
+          <option value="">All statuses</option><option>posted</option><option>claimed</option><option>paid</option><option>cancelled</option>
+        </select>
+        <select class="fi" id="j-ti" onchange="filterJobs()">
+          <option value="">All tiers</option><option>youth</option><option>primary</option><option>licensed</option>
+        </select>
+      </div>
+    </div>
+    <table><thead><tr><th>Confirm #</th><th>Job</th><th>Tier</th><th>Homeowner</th><th>Phone</th><th>Worker</th><th>ZIP</th><th>Price</th><th>Fee</th><th>Status</th><th>→Claim</th><th></th></tr></thead>
+    <tbody id="t-jobs"><tr><td colspan="12" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-money">
+  <div class="page-title">Money & Escrow</div>
+  <div class="page-sub">Every dollar in and out of YSKAIPE</div>
+  <div class="kpi-row kpi-4">
+    <div class="kpi"><div class="kpi-val green" id="m-cap">—</div><div class="kpi-label">Captured</div><div class="kpi-sub">homeowner charged</div></div>
+    <div class="kpi"><div class="kpi-val amber" id="m-auth">—</div><div class="kpi-label">In Escrow</div><div class="kpi-sub">authorized, not captured</div></div>
+    <div class="kpi"><div class="kpi-val blue" id="m-tx">—</div><div class="kpi-label">Paid to Workers</div><div class="kpi-sub">Stripe transfers</div></div>
+    <div class="kpi"><div class="kpi-val purple" id="m-fee">—</div><div class="kpi-label">Platform Revenue</div><div class="kpi-sub">YSKAIPE 15%</div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><div class="card-title">Payment Ledger</div></div>
+    <table><thead><tr><th>Confirm #</th><th>Job</th><th>Homeowner</th><th>Worker</th><th>Charged</th><th>Worker Gets</th><th>YSKAIPE</th><th>Status</th><th>Stripe ID</th></tr></thead>
+    <tbody id="t-money"><tr><td colspan="9" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-homeowners">
+  <div class="page-title">Homeowners</div>
+  <div class="page-sub">Every homeowner who has booked through YSKAIPE</div>
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title">Homeowner Roster</div>
+      <input class="fi" id="ho-s" placeholder="Search…" oninput="filterHO()">
+    </div>
+    <table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>ZIP</th><th>Jobs</th><th>Total Spend</th><th>Avg Job</th><th>Last Activity</th><th></th></tr></thead>
+    <tbody id="t-ho"><tr><td colspan="9" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-workers">
+  <div class="page-title">Workers</div>
+  <div class="page-sub">All tiers — Primary, Licensed, Youth</div>
+  <div class="kpi-row kpi-4">
+    <div class="kpi"><div class="kpi-val green" id="w-tot">—</div><div class="kpi-label">Total Workers</div></div>
+    <div class="kpi"><div class="kpi-val blue" id="w-ob">—</div><div class="kpi-label">Stripe Onboarded</div></div>
+    <div class="kpi"><div class="kpi-val amber" id="w-pend">—</div><div class="kpi-label">Pending Onboarding</div></div>
+    <div class="kpi"><div class="kpi-val purple" id="w-youth">—</div><div class="kpi-label">Youth Workers</div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr">
+      <div class="card-title">Worker Roster</div>
+      <div class="card-actions">
+        <input class="fi" id="w-s" placeholder="Search…" oninput="filterW()">
+        <select class="fi" id="w-ti" onchange="filterW()"><option value="">All tiers</option><option value="adult">Adult</option><option value="standard">Standard</option><option value="junior">Youth</option></select>
+        <select class="fi" id="w-ob2" onchange="filterW()"><option value="">All</option><option value="1">Onboarded</option><option value="0">Not onboarded</option></select>
+      </div>
+    </div>
+    <table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Tier</th><th>ZIP</th><th>Skills</th><th>Status</th><th>Stripe</th><th>Jobs</th><th>Earned</th><th></th></tr></thead>
+    <tbody id="t-workers"><tr><td colspan="11" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-dispatch">
+  <div class="page-title">Dispatch Health</div>
+  <div class="page-sub">Supply vs demand — where are the gaps?</div>
+  <div class="kpi-row kpi-4">
+    <div class="kpi"><div class="kpi-val green" id="d-rate">—</div><div class="kpi-label">Claim Rate</div><div class="kpi-sub">jobs claimed / posted</div></div>
+    <div class="kpi"><div class="kpi-val blue" id="d-time">—</div><div class="kpi-label">Avg Time to Claim</div><div class="kpi-sub">minutes</div></div>
+    <div class="kpi"><div class="kpi-val amber" id="d-open">—</div><div class="kpi-label">Unclaimed Now</div><div class="kpi-sub">broadcasting</div></div>
+    <div class="kpi"><div class="kpi-val coral" id="d-stuck">—</div><div class="kpi-label">Stuck 2h+</div><div class="kpi-sub">needs manual assign</div></div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><div class="card-title">Unclaimed Jobs</div></div>
+    <table><thead><tr><th>Confirm #</th><th>Job</th><th>Tier</th><th>ZIP</th><th>Price</th><th>Posted</th><th>Workers Notified</th></tr></thead>
+    <tbody id="t-disp"><tr><td colspan="7" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><div class="card-title">Worker Coverage by ZIP</div></div>
+    <table><thead><tr><th>ZIP</th><th>Workers</th><th>Onboarded</th><th>Youth</th><th>Primary</th><th>Jobs Posted</th><th>Status</th></tr></thead>
+    <tbody id="t-cov"><tr><td colspan="7" class="loading">Loading…</td></tr></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-disputes">
+  <div class="page-title">Disputes & Flags</div>
+  <div class="page-sub">Jobs requiring manual intervention</div>
+  <div id="d-alert" class="alert a-green"><i class="ti ti-check" aria-hidden="true"></i><span>Loading…</span></div>
+  <div class="card">
+    <div class="card-hdr"><div class="card-title">Disputed / Flagged Jobs</div></div>
+    <table><thead><tr><th>Confirm #</th><th>Job</th><th>Homeowner</th><th>Worker</th><th>Amount</th><th>Status</th></tr></thead>
+    <tbody id="t-disputes"><tr><td colspan="6" class="empty">No disputes — all clear ✓</td></tr></tbody></table>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-hdr-title" id="m-title">Details</div><button class="modal-close" onclick="closeM()">✕</button></div>
+    <div class="modal-bdy" id="m-body"></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const SB='https://ygfhaoksicgtazcmqdfk.supabase.co'
+let KEY=''
+let jobs=[],hrs=[],workers=[],hm={},wm={}
+const $=id=>document.getElementById(id)
+const fmt=n=>n?'$'+Math.round(n).toLocaleString('en-US'):'$0'
+const ago=d=>{if(!d)return'—';const m=Math.round((Date.now()-new Date(d))/60000);return m<60?m+'m':m<1440?Math.round(m/60)+'h':Math.round(m/1440)+'d'}
+const fmtD=d=>{if(!d)return'—';return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+const bdg=(t,c)=>`<span class="badge b-${c||t}">${esc(t)}</span>`
+
+async function sb(table,qs=''){
+  const r=await fetch(`${SB}/rest/v1/${table}${qs}`,{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY}})
+  return r.ok?r.json():[]
+}
+
+async function initDash(){
+  KEY=$('key-input').value.trim()
+  if(!KEY)return
+  $('setup-screen').style.display='none'
+  $('dash').style.display='flex'
+  await loadAll()
+  $('conn-status').textContent='Live · '+new Date().toLocaleTimeString()
+}
+
+async function loadAll(){
+  $('ts').textContent='Updated: '+new Date().toLocaleTimeString();
+  [jobs,hrs,workers]=await Promise.all([
+    sb('jobs','?select=id,confirm_number,task_label,tier_min,status,book_price,worker_payout,posted_at,claimed_at,paid_at,homeowner_request_id,assigned_worker_id,zip_code,stripe_payment_intent_id,description'),
+    sb('homeowner_requests','?select=id,homeowner_name,homeowner_email,homeowner_phone,zip_code,created_at'),
+    sb('workers','?select=id,first_name,last_name,email,phone,age_tier,zip_code,skills,status,stripe_onboarded,stripe_account_id,rating,jobs_completed,service_radius_miles,created_at'),
+  ])
+  hrs.forEach(h=>hm[h.id]=h)
+  workers.forEach(w=>wm[w.id]=w)
+  renderOverview()
+}
+
+function renderOverview(){
+  const paid=jobs.filter(j=>j.status==='paid')
+  const held=jobs.filter(j=>j.status==='claimed')
+  const gmv=paid.reduce((s,j)=>s+(j.book_price||0),0)
+  const escrow=held.reduce((s,j)=>s+(j.book_price||0),0)
+  const active=workers.filter(w=>w.stripe_onboarded&&w.status==='qualified').length
+  $('k-gmv').textContent=fmt(gmv)
+  $('k-rev').textContent=fmt(gmv*.15)
+  $('k-jobs').textContent=jobs.length
+  $('k-escrow').textContent=fmt(escrow)
+  $('k-workers').textContent=active
+
+  const posted=jobs.filter(j=>j.status==='posted')
+  const stuck=posted.filter(j=>(Date.now()-new Date(j.posted_at))/60000>120)
+  let ah=''
+  if(stuck.length)ah+=`<div class="alert a-red"><i class="ti ti-alert-triangle"></i><span>${stuck.length} job${stuck.length>1?'s':''} unclaimed 2+ hours — needs manual assignment</span></div>`
+  if(posted.length&&!stuck.length)ah+=`<div class="alert a-amber"><i class="ti ti-antenna"></i><span>${posted.length} job${posted.length>1?'s':''} broadcasting to workers now</span></div>`
+  if(!posted.length)ah+=`<div class="alert a-green"><i class="ti ti-check"></i><span>All jobs claimed — pipeline clear</span></div>`
+  $('alerts').innerHTML=ah
+
+  const recent=jobs.slice().sort((a,b)=>new Date(b.posted_at)-new Date(a.posted_at)).slice(0,8)
+  $('t-recent').innerHTML=recent.length?recent.map(j=>{
+    const hr=hm[j.homeowner_request_id]||{};const w=wm[j.assigned_worker_id]||{}
+    return`<tr>
+      <td class="tm tg" style="cursor:pointer" onclick="showJob('${j.id}')">${esc(j.confirm_number)}</td>
+      <td class="tp">${esc(j.task_label||'—')}</td>
+      <td>${esc(hr.homeowner_name||'—')}</td>
+      <td class="tm tf">${esc(hr.homeowner_phone||'—')}</td>
+      <td>${j.assigned_worker_id?esc((w.first_name||'')+' '+(w.last_name||'')):'<span style="color:var(--color-text-tertiary)">—</span>'}</td>
+      <td class="tg">${fmt(j.book_price)}</td>
+      <td class="tp2">${fmt(Math.round((j.book_price||0)*.15))}</td>
+      <td>${bdg(j.status)}</td>
+      <td class="tf">${ago(j.posted_at)}</td>
+    </tr>`
+  }).join(''):'<tr><td colspan="9" class="empty">No jobs yet</td></tr>'
+
+  const need=workers.filter(w=>!w.stripe_onboarded)
+  $('t-onboard').innerHTML=need.length?need.map(w=>`<tr>
+    <td class="tp">${esc(w.first_name+' '+w.last_name)}</td>
+    <td class="tm tf">${esc(w.email||'—')}</td>
+    <td class="tm tf">${esc(w.phone||'—')}</td>
+    <td>${bdg(w.age_tier)}</td>
+    <td class="tm">${esc(w.zip_code||'—')}</td>
+    <td>${bdg(w.status)}</td>
+  </tr>`).join(''):'<tr><td colspan="6" class="empty">All workers onboarded ✓</td></tr>'
+}
+
+let allJ=[]
+function renderJobsView(){
+  allJ=jobs.slice().sort((a,b)=>new Date(b.posted_at)-new Date(a.posted_at))
+  filterJobs()
+}
+function filterJobs(){
+  const s=$('j-s').value.toLowerCase(),st=$('j-st').value,ti=$('j-ti').value
+  const rows=allJ.filter(j=>{
+    const hr=hm[j.homeowner_request_id]||{}
+    const txt=[j.confirm_number,j.task_label,hr.homeowner_name,hr.homeowner_email,j.zip_code].join(' ').toLowerCase()
+    return(!s||txt.includes(s))&&(!st||j.status===st)&&(!ti||j.tier_min===ti)
+  })
+  $('t-jobs').innerHTML=rows.length?rows.map(j=>{
+    const hr=hm[j.homeowner_request_id]||{};const w=wm[j.assigned_worker_id]||{}
+    const mins=j.claimed_at&&j.posted_at?Math.round((new Date(j.claimed_at)-new Date(j.posted_at))/60000):null
+    return`<tr>
+      <td class="tm tg" style="cursor:pointer" onclick="showJob('${j.id}')">${esc(j.confirm_number)}</td>
+      <td class="tp" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(j.task_label||'—')}</td>
+      <td>${bdg(j.tier_min||'primary')}</td>
+      <td><div class="tp">${esc(hr.homeowner_name||'—')}</div></td>
+      <td class="tm tf">${esc(hr.homeowner_phone||'—')}</td>
+      <td class="tf">${j.assigned_worker_id?esc((w.first_name||'')+' '+(w.last_name||'')):'—'}</td>
+      <td class="tm">${esc(j.zip_code||'—')}</td>
+      <td class="tg">${fmt(j.book_price)}</td>
+      <td class="tp2">${fmt(Math.round((j.book_price||0)*.15))}</td>
+      <td>${bdg(j.status)}</td>
+      <td class="tf">${mins!==null?mins+'m':ago(j.posted_at)}</td>
+      <td><button class="btn" onclick="showJob('${j.id}')">View</button></td>
+    </tr>`
+  }).join(''):'<tr><td colspan="12" class="empty">No jobs found</td></tr>'
+}
+
+function renderMoney(){
+  const paid=jobs.filter(j=>j.status==='paid'),held=jobs.filter(j=>j.status==='claimed')
+  const cap=paid.reduce((s,j)=>s+(j.book_price||0),0)
+  const auth=held.reduce((s,j)=>s+(j.book_price||0),0)
+  const tx=paid.reduce((s,j)=>s+(j.worker_payout||0),0)
+  const fee=paid.reduce((s,j)=>s+((j.book_price||0)-(j.worker_payout||0)),0)
+  $('m-cap').textContent=fmt(cap);$('m-auth').textContent=fmt(auth);$('m-tx').textContent=fmt(tx);$('m-fee').textContent=fmt(fee)
+  const sorted=jobs.slice().sort((a,b)=>new Date(b.posted_at)-new Date(a.posted_at))
+  $('t-money').innerHTML=sorted.length?sorted.map(j=>{
+    const hr=hm[j.homeowner_request_id]||{};const w=wm[j.assigned_worker_id]||{}
+    return`<tr>
+      <td class="tm tg">${esc(j.confirm_number)}</td>
+      <td class="tp">${esc(j.task_label||'—')}</td>
+      <td>${esc(hr.homeowner_name||'—')}</td>
+      <td>${j.assigned_worker_id?esc((w.first_name||'')+' '+(w.last_name||'')):'—'}</td>
+      <td class="tg">${fmt(j.book_price)}</td>
+      <td class="tb">${fmt(j.worker_payout)}</td>
+      <td class="tp2">${fmt(Math.round(((j.book_price||0)-(j.worker_payout||0))))}</td>
+      <td>${bdg(j.status)}</td>
+      <td class="tf" style="max-width:100px;overflow:hidden;text-overflow:ellipsis">${j.stripe_payment_intent_id?esc(j.stripe_payment_intent_id.slice(0,18))+'…':'—'}</td>
+    </tr>`
+  }).join(''):'<tr><td colspan="9" class="empty">No payments yet</td></tr>'
+}
+
+let allHO=[]
+function renderHOView(){
+  const stats={}
+  jobs.forEach(j=>{
+    if(!stats[j.homeowner_request_id])stats[j.homeowner_request_id]={c:0,t:0,last:null}
+    stats[j.homeowner_request_id].c++
+    stats[j.homeowner_request_id].t+=(j.book_price||0)
+    const d=j.paid_at||j.claimed_at||j.posted_at
+    if(!stats[j.homeowner_request_id].last||d>stats[j.homeowner_request_id].last)stats[j.homeowner_request_id].last=d
+  })
+  allHO=hrs.map(h=>({...h,s:stats[h.id]||{c:0,t:0,last:null}}))
+  filterHO()
+}
+function filterHO(){
+  const s=$('ho-s').value.toLowerCase()
+  const rows=allHO.filter(h=>[h.homeowner_name,h.homeowner_email,h.zip_code].join(' ').toLowerCase().includes(s))
+  $('t-ho').innerHTML=rows.length?rows.map(h=>`<tr>
+    <td class="tp">${esc(h.homeowner_name||'—')}</td>
+    <td class="tm tf">${esc(h.homeowner_email||'—')}</td>
+    <td class="tm tf">${esc(h.homeowner_phone||'—')}</td>
+    <td class="tm">${esc(h.zip_code||'—')}</td>
+    <td class="tb">${h.s.c}</td>
+    <td class="tg">${fmt(h.s.t)}</td>
+    <td class="tm" style="color:var(--color-text-secondary)">${h.s.c?fmt(h.s.t/h.s.c):'—'}</td>
+    <td class="tf">${ago(h.s.last||h.created_at)}</td>
+    <td><button class="btn" onclick="showHO('${h.id}')">View</button></td>
+  </tr>`).join(''):'<tr><td colspan="9" class="empty">No homeowners yet</td></tr>'
+}
+
+let allW=[]
+function renderWorkersView(){
+  const earned={}
+  jobs.filter(j=>j.status==='paid'&&j.assigned_worker_id).forEach(j=>{earned[j.assigned_worker_id]=(earned[j.assigned_worker_id]||0)+(j.worker_payout||0)})
+  allW=workers.map(w=>({...w,te:earned[w.id]||0}))
+  $('w-tot').textContent=workers.length
+  $('w-ob').textContent=workers.filter(w=>w.stripe_onboarded).length
+  $('w-pend').textContent=workers.filter(w=>!w.stripe_onboarded).length
+  $('w-youth').textContent=workers.filter(w=>w.age_tier==='junior').length
+  filterW()
+}
+function filterW(){
+  const s=$('w-s').value.toLowerCase(),ti=$('w-ti').value,ob=$('w-ob2').value
+  const rows=allW.filter(w=>{
+    const txt=[w.first_name,w.last_name,w.email,w.zip_code].join(' ').toLowerCase()
+    const obOk=ob===''?true:ob==='1'?w.stripe_onboarded:!w.stripe_onboarded
+    return(!s||txt.includes(s))&&(!ti||w.age_tier===ti)&&obOk
+  })
+  $('t-workers').innerHTML=rows.length?rows.map(w=>`<tr>
+    <td class="tp">${esc(w.first_name+' '+w.last_name)}</td>
+    <td class="tm tf">${esc(w.email||'—')}</td>
+    <td class="tm tf">${esc(w.phone||'—')}</td>
+    <td>${bdg(w.age_tier)}</td>
+    <td class="tm">${esc(w.zip_code||'—')}</td>
+    <td class="tf">${(w.skills||[]).length} skills</td>
+    <td>${bdg(w.status)}</td>
+    <td>${bdg(w.stripe_onboarded?'yes':'no',w.stripe_onboarded?'yes':'no')}</td>
+    <td class="tb">${w.jobs_completed||0}</td>
+    <td class="tg">${fmt(w.te)}</td>
+    <td><button class="btn" onclick="showW('${w.id}')">View</button></td>
+  </tr>`).join(''):'<tr><td colspan="11" class="empty">No workers found</td></tr>'
+}
+
+function renderDispatch(){
+  const posted=jobs.filter(j=>j.status==='posted')
+  const claimed=jobs.filter(j=>j.status!=='posted'&&j.claimed_at)
+  const times=claimed.filter(j=>j.posted_at&&j.claimed_at).map(j=>Math.round((new Date(j.claimed_at)-new Date(j.posted_at))/60000))
+  const avg=times.length?Math.round(times.reduce((a,b)=>a+b,0)/times.length):0
+  const rate=jobs.length?Math.round((jobs.length-posted.length)/jobs.length*100):0
+  const stuck=posted.filter(j=>(Date.now()-new Date(j.posted_at))/60000>120)
+  $('d-rate').textContent=rate+'%';$('d-time').textContent=avg||'—';$('d-open').textContent=posted.length;$('d-stuck').textContent=stuck.length
+  $('t-disp').innerHTML=posted.length?posted.map(j=>`<tr>
+    <td class="tm ta">${esc(j.confirm_number)}</td>
+    <td class="tp">${esc(j.task_label||'—')}</td>
+    <td>${bdg(j.tier_min||'primary')}</td>
+    <td class="tm">${esc(j.zip_code||'—')}</td>
+    <td class="tg">${fmt(j.book_price)}</td>
+    <td class="tf">${ago(j.posted_at)}</td>
+    <td class="tb">—</td>
+  </tr>`).join(''):'<tr><td colspan="7" class="empty">No unclaimed jobs ✓</td></tr>'
+  const zw={},zj={}
+  workers.forEach(w=>{if(!w.zip_code)return;if(!zw[w.zip_code])zw[w.zip_code]={t:0,ob:0,y:0,p:0};zw[w.zip_code].t++;if(w.stripe_onboarded)zw[w.zip_code].ob++;if(w.age_tier==='junior')zw[w.zip_code].y++;else zw[w.zip_code].p++})
+  jobs.forEach(j=>{if(j.zip_code)zj[j.zip_code]=(zj[j.zip_code]||0)+1})
+  const zips=[...new Set([...Object.keys(zw),...Object.keys(zj)])]
+  $('t-cov').innerHTML=zips.length?zips.sort().map(z=>{
+    const s=zw[z]||{t:0,ob:0,y:0,p:0};const gap=s.t>0&&s.ob===0
+    return`<tr>
+      <td class="tm ${gap?'ta':''}">${z}</td>
+      <td class="tb">${s.t}</td>
+      <td class="tg">${s.ob}</td>
+      <td class="ta">${s.y}</td>
+      <td class="tg">${s.p}</td>
+      <td class="tf">${zj[z]||0}</td>
+      <td>${gap?bdg('gap','no'):bdg('ok','yes')}</td>
+    </tr>`
+  }).join(''):'<tr><td colspan="7" class="empty">No data</td></tr>'
+}
+
+function renderDisputes(){
+  const d=jobs.filter(j=>j.status==='disputed')
+  $('d-alert').className='alert '+(d.length?'a-red':'a-green')
+  $('d-alert').innerHTML=(d.length?'<i class="ti ti-alert-triangle"></i>':'<i class="ti ti-check"></i>')+'<span>'+(d.length?d.length+' dispute(s) require attention':'No disputes — all jobs clean')+'</span>'
+  $('t-disputes').innerHTML=d.length?d.map(j=>{
+    const hr=hm[j.homeowner_request_id]||{};const w=wm[j.assigned_worker_id]||{}
+    return`<tr>
+      <td class="tm" style="color:#A32D2D">${esc(j.confirm_number)}</td>
+      <td class="tp">${esc(j.task_label)}</td>
+      <td>${esc(hr.homeowner_name||'—')}</td>
+      <td>${j.assigned_worker_id?esc((w.first_name||'')+' '+(w.last_name||'')):'—'}</td>
+      <td class="tg">${fmt(j.book_price)}</td>
+      <td>${bdg('disputed')}</td>
+    </tr>`
+  }).join(''):'<tr><td colspan="6" class="empty">No disputes — all clear ✓</td></tr>'
+}
+
+const viewFns={overview:renderOverview,jobs:renderJobsView,money:renderMoney,homeowners:renderHOView,workers:renderWorkersView,dispatch:renderDispatch,disputes:renderDisputes}
+const loaded={}
+function nav(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'))
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'))
+  $('view-'+id).classList.add('active')
+  if(btn)btn.classList.add('active')
+  if(!loaded[id]&&KEY){loaded[id]=1;viewFns[id]&&viewFns[id]()}
+}
+
+function showJob(id){
+  const j=jobs.find(x=>x.id===id);if(!j)return
+  const hr=hm[j.homeowner_request_id]||{};const w=wm[j.assigned_worker_id]||{}
+  $('m-title').textContent=esc(j.confirm_number)+' · '+esc(j.task_label)
+  $('m-body').innerHTML=`
+    <div class="dr"><div class="dk">Status</div><div class="dv">${bdg(j.status)}</div></div>
+    <div class="dr"><div class="dk">Task</div><div class="dv">${esc(j.task_label)} · ${bdg(j.tier_min||'primary')}</div></div>
+    <div class="dr"><div class="dk">Description</div><div class="dv">${esc(j.description||'—')}</div></div>
+    <div class="dr"><div class="dk">ZIP</div><div class="dv">${esc(j.zip_code||'—')}</div></div>
+    <div class="sep"></div>
+    <div class="dr"><div class="dk">Homeowner</div><div class="dv" style="font-weight:500">${esc(hr.homeowner_name||'—')}</div></div>
+    <div class="dr"><div class="dk">Email</div><div class="dv">${esc(hr.homeowner_email||'—')}</div></div>
+    <div class="dr"><div class="dk">Phone</div><div class="dv">${esc(hr.homeowner_phone||'—')}</div></div>
+    <div class="sep"></div>
+    <div class="dr"><div class="dk">Worker</div><div class="dv" style="font-weight:500">${j.assigned_worker_id?esc((w.first_name||'')+' '+(w.last_name||'')):'Unassigned'}</div></div>
+    ${j.assigned_worker_id?`<div class="dr"><div class="dk">Worker email</div><div class="dv">${esc(w.email||'—')}</div></div><div class="dr"><div class="dk">Worker phone</div><div class="dv">${esc(w.phone||'—')}</div></div>`:''}
+    <div class="sep"></div>
+    <div class="dr"><div class="dk">Book price</div><div class="dv tg">${fmt(j.book_price)}</div></div>
+    <div class="dr"><div class="dk">Worker payout</div><div class="dv tb">${fmt(j.worker_payout)}</div></div>
+    <div class="dr"><div class="dk">YSKAIPE fee (15%)</div><div class="dv tp2">${fmt(Math.round(((j.book_price||0)-(j.worker_payout||0))))}</div></div>
+    <div class="dr"><div class="dk">Stripe Intent</div><div class="dv tm tf">${esc(j.stripe_payment_intent_id||'—')}</div></div>
+    <div class="sep"></div>
+    <div class="dr"><div class="dk">Posted</div><div class="dv tm">${fmtD(j.posted_at)}</div></div>
+    <div class="dr"><div class="dk">Claimed</div><div class="dv tm">${fmtD(j.claimed_at)}</div></div>
+    <div class="dr"><div class="dk">Paid</div><div class="dv tm">${fmtD(j.paid_at)}</div></div>
+  `
+  $('modal').classList.add('open')
+}
+
+function showHO(id){
+  const h=hrs.find(x=>x.id===id);if(!h)return
+  const hj=jobs.filter(j=>j.homeowner_request_id===id)
+  const tot=hj.reduce((s,j)=>s+(j.book_price||0),0)
+  $('m-title').textContent=esc(h.homeowner_name||'Homeowner')
+  $('m-body').innerHTML=`
+    <div class="dr"><div class="dk">Email</div><div class="dv">${esc(h.homeowner_email||'—')}</div></div>
+    <div class="dr"><div class="dk">Phone</div><div class="dv">${esc(h.homeowner_phone||'—')}</div></div>
+    <div class="dr"><div class="dk">ZIP</div><div class="dv">${esc(h.zip_code||'—')}</div></div>
+    <div class="dr"><div class="dk">Total jobs</div><div class="dv tb">${hj.length}</div></div>
+    <div class="dr"><div class="dk">Total spend</div><div class="dv tg">${fmt(tot)}</div></div>
+    <div class="sep"></div>
+    ${hj.sort((a,b)=>new Date(b.posted_at)-new Date(a.posted_at)).map(j=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px"><div><span class="tp">${esc(j.task_label)}</span> <span class="tf">${esc(j.confirm_number)}</span></div><div style="display:flex;align-items:center;gap:8px">${bdg(j.status)}<span class="tg">${fmt(j.book_price)}</span></div></div>`).join('')||'<div class="tf">No jobs yet</div>'}
+  `
+  $('modal').classList.add('open')
+}
+
+function showW(id){
+  const w=workers.find(x=>x.id===id);if(!w)return
+  const wj=jobs.filter(j=>j.assigned_worker_id===id)
+  const earned=wj.filter(j=>j.status==='paid').reduce((s,j)=>s+(j.worker_payout||0),0)
+  $('m-title').textContent=esc(w.first_name+' '+w.last_name)
+  $('m-body').innerHTML=`
+    <div class="dr"><div class="dk">Email</div><div class="dv">${esc(w.email||'—')}</div></div>
+    <div class="dr"><div class="dk">Phone</div><div class="dv">${esc(w.phone||'—')}</div></div>
+    <div class="dr"><div class="dk">Tier</div><div class="dv">${bdg(w.age_tier)}</div></div>
+    <div class="dr"><div class="dk">ZIP / Radius</div><div class="dv">${esc(w.zip_code||'—')} · ${w.service_radius_miles||'—'} mi</div></div>
+    <div class="dr"><div class="dk">Status</div><div class="dv">${bdg(w.status)}</div></div>
+    <div class="dr"><div class="dk">Stripe</div><div class="dv">${bdg(w.stripe_onboarded?'yes':'no',w.stripe_onboarded?'yes':'no')}</div></div>
+    <div class="dr"><div class="dk">Stripe Account</div><div class="dv tm tf">${esc(w.stripe_account_id||'—')}</div></div>
+    <div class="dr"><div class="dk">Skills (${(w.skills||[]).length})</div><div class="dv tf" style="line-height:1.6">${(w.skills||[]).join(', ')||'—'}</div></div>
+    <div class="dr"><div class="dk">Total earned</div><div class="dv tg">${fmt(earned)}</div></div>
+    <div class="dr"><div class="dk">Jobs done</div><div class="dv">${wj.filter(j=>j.status==='paid').length}</div></div>
+    <div class="sep"></div>
+    ${wj.sort((a,b)=>new Date(b.posted_at)-new Date(a.posted_at)).map(j=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px"><div><span class="tp">${esc(j.task_label)}</span> <span class="tf">${esc(j.confirm_number)}</span></div><div style="display:flex;align-items:center;gap:8px">${bdg(j.status)}<span class="tg">${fmt(j.worker_payout)}</span></div></div>`).join('')||'<div class="tf">No jobs yet</div>'}
+  `
+  $('modal').classList.add('open')
+}
+
+function closeM(){$('modal').classList.remove('open')}
+document.getElementById('key-input').addEventListener('keydown',e=>{if(e.key==='Enter')initDash()})
+</script>
+</body>
+</html>
