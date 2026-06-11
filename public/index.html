@@ -3,7 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>YSKAIPE — The Home Services Platform</title>
+        <title>
+            YSKAIPE — Every Home Service. One Marketplace. Everyone Wins.
+        </title>
+        <meta
+            name="description"
+            content="Instant AI quote. YSKAIPE Qualified worker. Payment protected until the job's done. The home services marketplace where everyone wins."
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
             href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -11,16 +17,26 @@
         />
         <style>
             :root {
-                --green: #b8f073;
-                --black: #0d0e0c;
-                --off: #111210;
-                --dim: #1a1c18;
-                --mid: #2a2e27;
-                --text: #e8ede0;
-                --muted: #7a8070;
-                --primary-col: #b8f073;
-                --licensed-col: #73c8f0;
-                --youth-col: #f0c473;
+                --cream: #f7f2ea;
+                --paper: #fffdf9;
+                --ink: #211f1c;
+                --muted: #76726b;
+                --teal: #1e8270;
+                --teal-deep: #14554a;
+                --teal-bright: #2aa183;
+                --teal-wash: #e9f2ee;
+                --teal-pale: #cfe3dd;
+                --gold: #b08d4f;
+                --noir: #1c1b19;
+                --noir-deep: #000000;
+                --noir-bright: #3a3835;
+                --noir-wash: #eeeae2;
+                --line: rgba(33, 31, 28, 0.12);
+                --primary-col: #1c1b19;
+                --licensed-col: #1e8270;
+                --youth-col: #b07c2c;
+                --shadow-soft: 0 6px 24px rgba(33, 31, 28, 0.07);
+                --shadow-lift: 0 18px 48px rgba(33, 31, 28, 0.12);
             }
 
             * {
@@ -33,20 +49,19 @@
             }
             body {
                 font-family: "DM Sans", sans-serif;
-                background: var(--black);
-                color: var(--text);
+                background: var(--cream);
+                color: var(--ink);
                 overflow-x: hidden;
-                cursor: default;
             }
 
             body::before {
                 content: "";
                 position: fixed;
                 inset: 0;
-                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
                 pointer-events: none;
                 z-index: 9999;
-                opacity: 0.4;
+                opacity: 0.35;
             }
 
             nav {
@@ -58,16 +73,16 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 1.25rem 3rem;
-                border-bottom: 1px solid rgba(184, 240, 115, 0.08);
-                background: rgba(13, 14, 12, 0.85);
-                backdrop-filter: blur(16px);
+                padding: 1.1rem 3rem;
+                border-bottom: 1px solid var(--line);
+                background: rgba(247, 242, 234, 0.85);
+                backdrop-filter: blur(14px);
             }
             .nav-logo {
                 font-family: "Fraunces", serif;
-                font-size: 1.5rem;
+                font-size: 1.45rem;
                 font-weight: 900;
-                color: var(--green);
+                color: var(--ink);
                 letter-spacing: -0.02em;
                 text-decoration: none;
             }
@@ -77,210 +92,188 @@
                 list-style: none;
             }
             .nav-links a {
-                font-size: 0.8rem;
+                font-size: 0.78rem;
                 font-weight: 500;
-                letter-spacing: 0.12em;
+                letter-spacing: 0.14em;
                 text-transform: uppercase;
                 color: var(--muted);
                 text-decoration: none;
                 transition: color 0.2s;
             }
             .nav-links a:hover {
-                color: var(--green);
+                color: var(--noir);
             }
             .nav-cta {
-                background: var(--green);
-                color: var(--black);
-                font-size: 0.78rem;
+                background: var(--noir);
+                color: #fff;
+                font-size: 0.88rem;
                 font-weight: 600;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                padding: 0.6rem 1.4rem;
+                padding: 0.65rem 1.5rem;
                 border: none;
+                border-radius: 999px;
                 cursor: pointer;
-                transition: opacity 0.2s;
+                transition:
+                    background 0.2s,
+                    transform 0.2s;
                 text-decoration: none;
                 display: inline-block;
             }
             .nav-cta:hover {
-                opacity: 0.85;
+                background: var(--noir-deep);
             }
 
             .hero {
-                min-height: 100vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
                 text-align: center;
-                padding: 8rem 2rem 4rem;
+                padding: 10rem 2rem 0;
                 position: relative;
-                overflow: hidden;
-            }
-            .hero-grid {
-                position: absolute;
-                inset: 0;
-                background-image:
-                    linear-gradient(
-                        rgba(184, 240, 115, 0.04) 1px,
-                        transparent 1px
-                    ),
-                    linear-gradient(
-                        90deg,
-                        rgba(184, 240, 115, 0.04) 1px,
-                        transparent 1px
-                    );
-                background-size: 80px 80px;
-                animation: gridDrift 40s linear infinite;
-            }
-            @keyframes gridDrift {
-                0% {
-                    transform: translateY(0);
-                }
-                100% {
-                    transform: translateY(80px);
-                }
-            }
-            .hero-glow {
-                position: absolute;
-                width: 900px;
-                height: 900px;
-                border-radius: 50%;
-                background: radial-gradient(
-                    ellipse,
-                    rgba(184, 240, 115, 0.06) 0%,
-                    transparent 70%
-                );
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                animation: breathe 8s ease-in-out infinite;
-            }
-            @keyframes breathe {
-                0%,
-                100% {
-                    transform: translate(-50%, -50%) scale(1);
-                    opacity: 0.6;
-                }
-                50% {
-                    transform: translate(-50%, -50%) scale(1.1);
-                    opacity: 1;
-                }
             }
             .hero-eyebrow {
                 font-family: "DM Mono", monospace;
                 font-size: 0.7rem;
                 letter-spacing: 0.22em;
                 text-transform: uppercase;
-                color: var(--green);
-                margin-bottom: 1.5rem;
-                position: relative;
+                color: var(--noir);
+                margin-bottom: 1.75rem;
                 animation: fadeUp 0.8s ease both;
             }
             .hero-eyebrow::before,
             .hero-eyebrow::after {
                 content: "——";
-                opacity: 0.4;
+                color: var(--gold);
+                opacity: 0.55;
                 margin: 0 0.8rem;
             }
             .hero-headline {
                 font-family: "Fraunces", serif;
-                font-size: clamp(3.5rem, 8vw, 8rem);
+                font-size: clamp(3.2rem, 7.5vw, 7rem);
                 font-weight: 900;
-                line-height: 0.92;
+                line-height: 0.98;
                 letter-spacing: -0.03em;
-                position: relative;
+                color: var(--ink);
                 animation: fadeUp 0.8s 0.1s ease both;
                 max-width: 1000px;
             }
             .hero-headline em {
                 font-style: italic;
                 font-weight: 300;
-                color: var(--green);
+                color: var(--noir);
             }
             .hero-sub {
                 font-size: 1.15rem;
                 font-weight: 300;
                 color: var(--muted);
-                max-width: 600px;
+                max-width: 580px;
                 margin: 2rem auto 0;
                 line-height: 1.7;
-                position: relative;
                 animation: fadeUp 0.8s 0.2s ease both;
             }
             .hero-actions {
                 display: flex;
                 gap: 1rem;
-                margin-top: 3rem;
-                position: relative;
+                margin-top: 2.75rem;
                 animation: fadeUp 0.8s 0.3s ease both;
                 flex-wrap: wrap;
                 justify-content: center;
             }
             .btn-primary {
-                background: var(--green);
-                color: var(--black);
-                font-size: 0.82rem;
+                background: var(--noir);
+                color: #fff;
+                font-size: 0.95rem;
                 font-weight: 600;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                padding: 1rem 2.5rem;
+                padding: 0.95rem 2.2rem;
                 border: none;
+                border-radius: 999px;
                 cursor: pointer;
                 transition: all 0.2s;
                 text-decoration: none;
                 display: inline-block;
             }
             .btn-primary:hover {
+                background: var(--noir-deep);
                 transform: translateY(-2px);
-                box-shadow: 0 12px 40px rgba(184, 240, 115, 0.25);
+                box-shadow: 0 14px 36px rgba(28, 27, 25, 0.28);
             }
             .btn-ghost {
                 background: transparent;
-                color: var(--text);
-                font-size: 0.82rem;
+                color: var(--ink);
+                font-size: 0.95rem;
                 font-weight: 500;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                padding: 1rem 2.5rem;
-                border: 1px solid rgba(255, 255, 255, 0.15);
+                padding: 0.95rem 2.2rem;
+                border: 1px solid var(--line);
+                border-radius: 999px;
                 cursor: pointer;
                 transition: all 0.2s;
                 text-decoration: none;
                 display: inline-block;
             }
             .btn-ghost:hover {
-                border-color: var(--green);
-                color: var(--green);
+                border-color: var(--noir);
+                color: var(--noir);
+            }
+            .hero-media {
+                width: 100%;
+                max-width: 1080px;
+                margin: 4.5rem auto 0;
+                border-radius: 28px;
+                overflow: hidden;
+                border: 1px solid var(--line);
+                box-shadow: var(--shadow-lift);
+                animation: fadeUp 0.9s 0.4s ease both;
+                aspect-ratio: 16 / 8;
+                transform: translateY(3.5rem);
+            }
+            .hero-media img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center 35%;
+                display: block;
             }
             @keyframes fadeUp {
                 from {
                     opacity: 0;
-                    transform: translateY(30px);
+                    transform: translateY(26px);
                 }
                 to {
                     opacity: 1;
                     transform: translateY(0);
                 }
             }
+            .hero-media {
+                animation-name: fadeUpMedia;
+            }
+            @keyframes fadeUpMedia {
+                from {
+                    opacity: 0;
+                    transform: translateY(calc(3.5rem + 26px));
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(3.5rem);
+                }
+            }
 
             .ticker {
-                border-top: 1px solid rgba(184, 240, 115, 0.12);
-                border-bottom: 1px solid rgba(184, 240, 115, 0.12);
-                padding: 0.9rem 0;
+                border-top: 1px solid var(--line);
+                border-bottom: 1px solid var(--line);
+                padding: 0.95rem 0;
                 overflow: hidden;
-                background: var(--off);
+                background: var(--paper);
+                margin-top: 3.5rem;
             }
             .ticker-track {
                 display: flex;
                 gap: 0;
-                animation: tickerScroll 30s linear infinite;
+                animation: tickerScroll 32s linear infinite;
                 white-space: nowrap;
             }
             .ticker-item {
                 font-family: "DM Mono", monospace;
-                font-size: 0.68rem;
-                letter-spacing: 0.15em;
+                font-size: 0.66rem;
+                letter-spacing: 0.16em;
                 text-transform: uppercase;
                 color: var(--muted);
                 padding: 0 3rem;
@@ -293,7 +286,7 @@
                 width: 5px;
                 height: 5px;
                 border-radius: 50%;
-                background: var(--green);
+                background: var(--noir);
                 display: inline-block;
             }
             @keyframes tickerScroll {
@@ -311,341 +304,142 @@
             .section-label {
                 font-family: "DM Mono", monospace;
                 font-size: 0.65rem;
-                letter-spacing: 0.2em;
+                letter-spacing: 0.22em;
                 text-transform: uppercase;
-                color: var(--green);
-                margin-bottom: 1rem;
+                color: var(--noir);
+                margin-bottom: 1.1rem;
             }
             .section-headline {
                 font-family: "Fraunces", serif;
-                font-size: clamp(2.5rem, 5vw, 4.5rem);
+                font-size: clamp(2.4rem, 5vw, 4.2rem);
                 font-weight: 900;
-                line-height: 1;
+                line-height: 1.02;
                 letter-spacing: -0.02em;
+                color: var(--ink);
                 max-width: 700px;
             }
             .section-headline em {
                 font-style: italic;
                 font-weight: 300;
-                color: var(--green);
+                color: var(--noir);
             }
 
-            .pillars {
-                background: var(--off);
-                text-align: center;
-            }
-            .pillars-intro {
-                max-width: 700px;
-                margin: 0 auto 5rem;
-            }
-            .pillars-intro p {
-                color: var(--muted);
-                font-size: 1.1rem;
-                line-height: 1.7;
-                margin-top: 1.5rem;
-            }
-            .pillars-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2px;
-                max-width: 1300px;
-                margin: 0 auto;
-            }
-            .pillar {
-                background: var(--dim);
-                padding: 3.5rem 2.5rem;
-                position: relative;
-                overflow: hidden;
-                transition: transform 0.3s;
-            }
-            .pillar:hover {
-                transform: translateY(-4px);
-            }
-            .pillar::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 3px;
-            }
-            .pillar.primary::before {
-                background: var(--primary-col);
-            }
-            .pillar.licensed::before {
-                background: var(--licensed-col);
-            }
-            .pillar.youth::before {
-                background: var(--youth-col);
-            }
-            .pillar-glow {
-                position: absolute;
-                width: 300px;
-                height: 300px;
-                border-radius: 50%;
-                top: -100px;
-                left: 50%;
-                transform: translateX(-50%);
-                opacity: 0;
-                transition: opacity 0.4s;
-            }
-            .pillar:hover .pillar-glow {
-                opacity: 1;
-            }
-            .pillar.primary .pillar-glow {
-                background: radial-gradient(
-                    ellipse,
-                    rgba(184, 240, 115, 0.08) 0%,
-                    transparent 70%
-                );
-            }
-            .pillar.licensed .pillar-glow {
-                background: radial-gradient(
-                    ellipse,
-                    rgba(115, 200, 240, 0.08) 0%,
-                    transparent 70%
-                );
-            }
-            .pillar.youth .pillar-glow {
-                background: radial-gradient(
-                    ellipse,
-                    rgba(240, 196, 115, 0.08) 0%,
-                    transparent 70%
-                );
-            }
-            .pillar-badge {
-                display: inline-block;
-                font-family: "DM Mono", monospace;
-                font-size: 0.6rem;
-                letter-spacing: 0.18em;
-                text-transform: uppercase;
-                padding: 0.35rem 0.9rem;
-                margin-bottom: 2rem;
-                border: 1px solid;
-            }
-            .pillar.primary .pillar-badge {
-                color: var(--primary-col);
-                border-color: rgba(184, 240, 115, 0.3);
-            }
-            .pillar.licensed .pillar-badge {
-                color: var(--licensed-col);
-                border-color: rgba(115, 200, 240, 0.3);
-            }
-            .pillar.youth .pillar-badge {
-                color: var(--youth-col);
-                border-color: rgba(240, 196, 115, 0.3);
-            }
-            .pillar-icon {
-                font-size: 3rem;
-                margin-bottom: 1.5rem;
-                display: block;
-                line-height: 1;
-            }
-            .pillar-title {
-                font-family: "Fraunces", serif;
-                font-size: 2rem;
-                font-weight: 700;
-                margin-bottom: 0.5rem;
-                letter-spacing: -0.02em;
-            }
-            .pillar-tagline {
-                font-family: "DM Mono", monospace;
-                font-size: 0.68rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                margin-bottom: 1.5rem;
-            }
-            .pillar.primary .pillar-tagline {
-                color: var(--primary-col);
-            }
-            .pillar.licensed .pillar-tagline {
-                color: var(--licensed-col);
-            }
-            .pillar.youth .pillar-tagline {
-                color: var(--youth-col);
-            }
-            .pillar-desc {
-                color: var(--muted);
-                font-size: 0.95rem;
-                line-height: 1.7;
-                margin-bottom: 2rem;
-            }
-            .pillar-perks {
-                list-style: none;
-                text-align: left;
-                display: flex;
-                flex-direction: column;
-                gap: 0.6rem;
-            }
-            .pillar-perks li {
-                font-size: 0.85rem;
-                color: var(--text);
-                display: flex;
-                align-items: flex-start;
-                gap: 0.75rem;
-            }
-            .pillar-perks li::before {
-                content: "→";
-                flex-shrink: 0;
-                margin-top: 1px;
-            }
-            .pillar.primary .pillar-perks li::before {
-                color: var(--primary-col);
-            }
-            .pillar.licensed .pillar-perks li::before {
-                color: var(--licensed-col);
-            }
-            .pillar.youth .pillar-perks li::before {
-                color: var(--youth-col);
-            }
-            .pillar-cta {
-                display: inline-block;
-                margin-top: 2rem;
-                font-size: 0.75rem;
-                font-weight: 600;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                padding: 0.75rem 1.5rem;
-                border: 1px solid;
-                text-decoration: none;
-                transition: all 0.2s;
-            }
-            .pillar.primary .pillar-cta {
-                color: var(--primary-col);
-                border-color: rgba(184, 240, 115, 0.3);
-            }
-            .pillar.primary .pillar-cta:hover {
-                background: rgba(184, 240, 115, 0.1);
-            }
-            .pillar.licensed .pillar-cta {
-                color: var(--licensed-col);
-                border-color: rgba(115, 200, 240, 0.3);
-            }
-            .pillar.licensed .pillar-cta:hover {
-                background: rgba(115, 200, 240, 0.1);
-            }
-            .pillar.youth .pillar-cta {
-                color: var(--youth-col);
-                border-color: rgba(240, 196, 115, 0.3);
-            }
-            .pillar.youth .pillar-cta:hover {
-                background: rgba(240, 196, 115, 0.1);
-            }
-
-            .stats {
-                background: var(--black);
+            .verbs {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-            .stats-grid {
+            .verbs-grid {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
-                gap: 1px;
+                gap: 1.25rem;
                 max-width: 1200px;
                 width: 100%;
                 margin: 4rem auto 0;
-                background: rgba(184, 240, 115, 0.1);
             }
-            .stat-cell {
-                background: var(--off);
-                padding: 3rem 2rem;
-                text-align: center;
+            .verb-cell {
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 22px;
+                padding: 2.5rem 2rem;
+                text-align: left;
+                box-shadow: var(--shadow-soft);
+                transition:
+                    transform 0.25s,
+                    box-shadow 0.25s;
             }
-            .stat-num {
-                font-family: "Fraunces", serif;
-                font-size: 3.5rem;
-                font-weight: 900;
-                color: var(--green);
-                line-height: 1;
-                letter-spacing: -0.03em;
+            .verb-cell:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-lift);
             }
-            .stat-label {
+            .verb-step {
                 font-family: "DM Mono", monospace;
-                font-size: 0.65rem;
+                font-size: 0.62rem;
                 letter-spacing: 0.18em;
-                text-transform: uppercase;
-                color: var(--muted);
-                margin-top: 0.75rem;
+                color: var(--gold);
+                margin-bottom: 1.25rem;
             }
-
-            .how {
-                background: var(--dim);
-                position: relative;
-                overflow: hidden;
-            }
-            .how::before {
-                content: "";
-                position: absolute;
-                right: -200px;
-                top: -200px;
-                width: 700px;
-                height: 700px;
-                border-radius: 50%;
-                background: radial-gradient(
-                    ellipse,
-                    rgba(184, 240, 115, 0.04) 0%,
-                    transparent 70%
-                );
-            }
-            .how-inner {
-                max-width: 1200px;
-                margin: 0 auto;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 6rem;
-                align-items: start;
-            }
-            .how-steps {
-                display: flex;
-                flex-direction: column;
-                gap: 0;
-                margin-top: 3rem;
-            }
-            .how-step {
-                display: flex;
-                gap: 2rem;
-                padding: 2rem 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-                position: relative;
-                transition: padding-left 0.3s;
-                cursor: default;
-            }
-            .how-step:hover {
-                padding-left: 0.5rem;
-            }
-            .step-num {
+            .verb-title {
                 font-family: "Fraunces", serif;
-                font-size: 3rem;
-                font-weight: 900;
-                color: rgba(184, 240, 115, 0.15);
-                line-height: 1;
-                flex-shrink: 0;
-                width: 60px;
-                transition: color 0.3s;
-            }
-            .how-step:hover .step-num {
-                color: var(--green);
-            }
-            .step-content h3 {
-                font-family: "Fraunces", serif;
-                font-size: 1.4rem;
+                font-size: 1.65rem;
                 font-weight: 700;
-                margin-bottom: 0.5rem;
+                letter-spacing: -0.02em;
+                line-height: 1.05;
+                color: var(--ink);
+                margin-bottom: 0.55rem;
             }
-            .step-content p {
+            .verb-tag {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--noir);
+                margin-bottom: 1rem;
+            }
+            .verb-desc {
                 color: var(--muted);
                 font-size: 0.9rem;
                 line-height: 1.7;
             }
-            .how-visual {
-                position: sticky;
-                top: 8rem;
+
+            .worker {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                border-top: 1px solid var(--line);
             }
+            .worker-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+                max-width: 1200px;
+                width: 100%;
+                margin: 4rem auto 0;
+            }
+            .worker-guarantee {
+                max-width: 1200px;
+                width: 100%;
+                margin: 1.25rem auto 0;
+                background: var(--noir-wash);
+                border: 1px solid rgba(28, 27, 25, 0.18);
+                border-radius: 22px;
+                padding: 2.25rem 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+            .guarantee-badge {
+                font-family: "DM Mono", monospace;
+                font-size: 0.62rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: #fff;
+                background: var(--noir);
+                padding: 0.45rem 1.1rem;
+                border-radius: 999px;
+                flex-shrink: 0;
+            }
+            .guarantee-text {
+                color: var(--muted);
+                font-size: 0.95rem;
+                line-height: 1.65;
+                max-width: 640px;
+                text-align: left;
+            }
+            .guarantee-text strong {
+                color: var(--ink);
+                font-weight: 600;
+            }
+
             .dispatch-card {
-                background: var(--off);
-                border: 1px solid rgba(184, 240, 115, 0.12);
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 22px;
+                box-shadow: var(--shadow-soft);
                 padding: 2rem;
                 margin-top: 3rem;
             }
@@ -660,7 +454,7 @@
                 font-size: 0.65rem;
                 letter-spacing: 0.18em;
                 text-transform: uppercase;
-                color: var(--green);
+                color: var(--noir);
             }
             .dispatch-live {
                 display: flex;
@@ -674,7 +468,7 @@
                 width: 6px;
                 height: 6px;
                 border-radius: 50%;
-                background: #4ade80;
+                background: #2aa183;
                 animation: pulse 2s ease-in-out infinite;
             }
             @keyframes pulse {
@@ -697,25 +491,27 @@
                 display: flex;
                 align-items: center;
                 gap: 1rem;
-                padding: 1rem;
-                background: var(--dim);
-                border-left: 2px solid transparent;
+                padding: 1rem 1.25rem;
+                background: var(--cream);
+                border: 1px solid var(--line);
+                border-left: 3px solid transparent;
+                border-radius: 14px;
                 transition: all 0.3s;
             }
             .dispatch-job:nth-child(1) {
-                border-left-color: var(--primary-col);
+                border-left-color: var(--licensed-col);
                 animation: jobPop 0.5s 0.5s both;
             }
             .dispatch-job:nth-child(2) {
-                border-left-color: var(--licensed-col);
+                border-left-color: var(--youth-col);
                 animation: jobPop 0.5s 0.8s both;
             }
             .dispatch-job:nth-child(3) {
-                border-left-color: var(--youth-col);
+                border-left-color: var(--primary-col);
                 animation: jobPop 0.5s 1.1s both;
             }
             .dispatch-job:nth-child(4) {
-                border-left-color: var(--primary-col);
+                border-left-color: var(--licensed-col);
                 animation: jobPop 0.5s 1.4s both;
             }
             @keyframes jobPop {
@@ -728,16 +524,14 @@
                     transform: translateX(0);
                 }
             }
-            .job-emoji {
-                font-size: 1.3rem;
-                flex-shrink: 0;
-            }
             .job-info {
                 flex: 1;
+                text-align: left;
             }
             .job-name {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 font-weight: 500;
+                color: var(--ink);
                 margin-bottom: 0.2rem;
             }
             .job-meta {
@@ -748,42 +542,56 @@
             }
             .job-rate {
                 font-family: "Fraunces", serif;
-                font-size: 1.1rem;
+                font-size: 1.15rem;
                 font-weight: 700;
-                color: var(--green);
+                color: var(--noir);
+                text-align: right;
             }
             .job-tier {
                 font-family: "DM Mono", monospace;
                 font-size: 0.55rem;
                 letter-spacing: 0.12em;
-                padding: 0.2rem 0.6rem;
+                padding: 0.22rem 0.65rem;
+                border-radius: 999px;
             }
             .tier-p {
-                background: rgba(184, 240, 115, 0.12);
-                color: var(--primary-col);
+                background: rgba(28, 27, 25, 0.1);
+                color: var(--noir-deep);
             }
             .tier-l {
-                background: rgba(115, 200, 240, 0.12);
+                background: rgba(30, 130, 112, 0.1);
                 color: var(--licensed-col);
             }
             .tier-y {
-                background: rgba(240, 196, 115, 0.12);
+                background: rgba(176, 124, 44, 0.12);
                 color: var(--youth-col);
             }
 
             .fri {
-                background: var(--black);
+                background: var(--noir-wash);
                 text-align: center;
+                border-top: 1px solid var(--line);
+                border-bottom: 1px solid var(--line);
             }
             .fri-inner {
                 max-width: 1100px;
                 margin: 0 auto;
             }
+            .fri-shield {
+                width: 158px;
+                height: auto;
+                display: block;
+                margin: 3rem auto 0;
+                filter: drop-shadow(0 16px 40px rgba(30, 130, 112, 0.28));
+                animation: fadeUp 0.8s ease both;
+            }
             .fri-card {
-                background: var(--off);
-                border: 1px solid rgba(184, 240, 115, 0.12);
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 26px;
+                box-shadow: var(--shadow-soft);
                 padding: 4rem;
-                margin-top: 4rem;
+                margin-top: 3rem;
                 position: relative;
                 overflow: hidden;
             }
@@ -791,31 +599,30 @@
                 content: "FAIR RATE INDEX™";
                 position: absolute;
                 top: 2rem;
-                right: 2rem;
+                right: 2.25rem;
                 font-family: "DM Mono", monospace;
                 font-size: 0.6rem;
                 letter-spacing: 0.2em;
-                color: rgba(184, 240, 115, 0.25);
+                color: var(--gold);
+                opacity: 0.7;
             }
             .fri-trades {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
                 gap: 1px;
-                background: rgba(255, 255, 255, 0.05);
+                background: var(--line);
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                overflow: hidden;
             }
             .fri-trade {
-                background: var(--dim);
-                padding: 1.5rem 1rem;
+                background: var(--paper);
+                padding: 1.6rem 1rem;
                 text-align: center;
                 transition: background 0.2s;
             }
             .fri-trade:hover {
-                background: var(--mid);
-            }
-            .fri-trade-icon {
-                font-size: 1.5rem;
-                margin-bottom: 0.5rem;
-                display: block;
+                background: var(--noir-wash);
             }
             .fri-trade-name {
                 font-family: "DM Mono", monospace;
@@ -823,215 +630,194 @@
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
                 color: var(--muted);
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.55rem;
             }
             .fri-trade-rate {
                 font-family: "Fraunces", serif;
                 font-size: 1.3rem;
                 font-weight: 700;
-                color: var(--green);
+                color: var(--noir);
             }
             .fri-trade-range {
                 font-size: 0.7rem;
-                color: rgba(184, 240, 115, 0.5);
+                color: var(--muted);
                 margin-top: 0.2rem;
             }
 
-            .network {
-                background: var(--dim);
+            .pillars {
+                text-align: center;
+            }
+            .pillars-intro {
+                max-width: 700px;
+                margin: 0 auto 4.5rem;
+            }
+            .pillars-intro p {
+                color: var(--muted);
+                font-size: 1.08rem;
+                line-height: 1.7;
+                margin-top: 1.5rem;
+            }
+            .pillars-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+                max-width: 1300px;
+                margin: 0 auto;
+            }
+            .pillar {
+                background: var(--paper);
+                border: 1px solid var(--line);
+                border-radius: 24px;
+                box-shadow: var(--shadow-soft);
+                padding: 3.25rem 2.5rem;
                 position: relative;
                 overflow: hidden;
+                transition:
+                    transform 0.25s,
+                    box-shadow 0.25s;
             }
-            .network-inner {
-                max-width: 1200px;
-                margin: 0 auto;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 5rem;
-                align-items: center;
+            .pillar:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-lift);
             }
-            .network-visual {
-                position: relative;
-                height: 500px;
-            }
-            .node-map {
+            .pillar::before {
+                content: "";
                 position: absolute;
-                inset: 0;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
             }
-            .node {
-                position: absolute;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.9rem;
+            .pillar.primary::before {
+                background: var(--primary-col);
             }
-            .node-center {
-                width: 80px;
-                height: 80px;
-                background: var(--green);
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 1.5rem;
-                animation: nodePulse 3s ease-in-out infinite;
-                z-index: 2;
+            .pillar.licensed::before {
+                background: var(--licensed-col);
             }
-            @keyframes nodePulse {
-                0%,
-                100% {
-                    box-shadow: 0 0 0 0 rgba(184, 240, 115, 0.4);
-                }
-                50% {
-                    box-shadow: 0 0 0 30px rgba(184, 240, 115, 0);
-                }
+            .pillar.youth::before {
+                background: var(--youth-col);
             }
-            .orbit {
-                position: absolute;
-                border-radius: 50%;
-                border: 1px dashed rgba(184, 240, 115, 0.1);
-                top: 50%;
-                left: 50%;
-            }
-            .orbit-1 {
-                width: 180px;
-                height: 180px;
-                transform: translate(-50%, -50%);
-                animation: spin 20s linear infinite;
-            }
-            .orbit-2 {
-                width: 300px;
-                height: 300px;
-                transform: translate(-50%, -50%);
-                animation: spin 35s linear infinite reverse;
-            }
-            .orbit-3 {
-                width: 430px;
-                height: 430px;
-                transform: translate(-50%, -50%);
-                animation: spin 50s linear infinite;
-            }
-            @keyframes spin {
-                from {
-                    rotate: 0deg;
-                }
-                to {
-                    rotate: 360deg;
-                }
-            }
-            .orbit-node {
-                position: absolute;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.75rem;
-                background: var(--off);
-                border: 1px solid;
-                color: var(--text);
-                width: 40px;
-                height: 40px;
-            }
-            .orbit-node.p {
-                border-color: rgba(184, 240, 115, 0.4);
-                color: var(--primary-col);
-            }
-            .orbit-node.l {
-                border-color: rgba(115, 200, 240, 0.4);
-                color: var(--licensed-col);
-            }
-            .orbit-node.y {
-                border-color: rgba(240, 196, 115, 0.4);
-                color: var(--youth-col);
-            }
-            .o1-n1 {
-                top: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .o1-n2 {
-                bottom: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .o2-n1 {
-                top: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .o2-n2 {
-                right: -20px;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            .o2-n3 {
-                bottom: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .o2-n4 {
-                left: -20px;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            .o3-n1 {
-                top: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .o3-n2 {
-                top: 25%;
-                right: -20px;
-            }
-            .o3-n3 {
-                bottom: 25%;
-                right: -20px;
-            }
-            .o3-n4 {
-                bottom: -20px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .o3-n5 {
-                bottom: 25%;
-                left: -20px;
-            }
-            .o3-n6 {
-                top: 25%;
-                left: -20px;
-            }
-            .network-content {
-                position: relative;
-            }
-            .network-feature {
-                padding: 1.5rem 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            }
-            .network-feature-title {
-                font-family: "Fraunces", serif;
-                font-size: 1.3rem;
-                font-weight: 700;
-                margin-bottom: 0.4rem;
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-            }
-            .network-feature-title span {
+            .pillar-badge {
+                display: inline-block;
                 font-family: "DM Mono", monospace;
                 font-size: 0.6rem;
-                letter-spacing: 0.12em;
-                padding: 0.25rem 0.6rem;
-                background: rgba(184, 240, 115, 0.1);
-                color: var(--green);
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                padding: 0.38rem 0.95rem;
+                margin-bottom: 1.75rem;
+                border: 1px solid;
+                border-radius: 999px;
             }
-            .network-feature p {
+            .pillar.primary .pillar-badge {
+                color: var(--primary-col);
+                border-color: rgba(28, 27, 25, 0.35);
+            }
+            .pillar.licensed .pillar-badge {
+                color: var(--licensed-col);
+                border-color: rgba(30, 130, 112, 0.35);
+            }
+            .pillar.youth .pillar-badge {
+                color: var(--youth-col);
+                border-color: rgba(176, 124, 44, 0.4);
+            }
+            .pillar-title {
+                font-family: "Fraunces", serif;
+                font-size: 1.9rem;
+                font-weight: 700;
+                color: var(--ink);
+                margin-bottom: 0.45rem;
+                letter-spacing: -0.02em;
+            }
+            .pillar-tagline {
+                font-family: "DM Mono", monospace;
+                font-size: 0.66rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 1.4rem;
+            }
+            .pillar.primary .pillar-tagline {
+                color: var(--primary-col);
+            }
+            .pillar.licensed .pillar-tagline {
+                color: var(--licensed-col);
+            }
+            .pillar.youth .pillar-tagline {
+                color: var(--youth-col);
+            }
+            .pillar-desc {
                 color: var(--muted);
-                font-size: 0.9rem;
-                line-height: 1.65;
+                font-size: 0.93rem;
+                line-height: 1.7;
+                margin-bottom: 1.9rem;
+            }
+            .pillar-perks {
+                list-style: none;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .pillar-perks li {
+                font-size: 0.86rem;
+                color: var(--ink);
+                display: flex;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            .pillar-perks li::before {
+                content: "→";
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+            .pillar.primary .pillar-perks li::before {
+                color: var(--primary-col);
+            }
+            .pillar.licensed .pillar-perks li::before {
+                color: var(--licensed-col);
+            }
+            .pillar.youth .pillar-perks li::before {
+                color: var(--youth-col);
+            }
+            .pillar-cta {
+                display: inline-block;
+                margin-top: 2rem;
+                font-size: 0.82rem;
+                font-weight: 600;
+                padding: 0.7rem 1.5rem;
+                border: 1px solid;
+                border-radius: 999px;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+            .pillar.primary .pillar-cta {
+                color: var(--primary-col);
+                border-color: rgba(28, 27, 25, 0.35);
+            }
+            .pillar.primary .pillar-cta:hover {
+                background: rgba(28, 27, 25, 0.08);
+            }
+            .pillar.licensed .pillar-cta {
+                color: var(--licensed-col);
+                border-color: rgba(30, 130, 112, 0.35);
+            }
+            .pillar.licensed .pillar-cta:hover {
+                background: rgba(30, 130, 112, 0.08);
+            }
+            .pillar.youth .pillar-cta {
+                color: var(--youth-col);
+                border-color: rgba(176, 124, 44, 0.4);
+            }
+            .pillar.youth .pillar-cta:hover {
+                background: rgba(176, 124, 44, 0.08);
             }
 
             .vision {
-                background: var(--green);
+                background: linear-gradient(
+                    165deg,
+                    #3a3835 0%,
+                    #1c1b19 55%,
+                    #000000 100%
+                );
                 padding: 7rem 3rem;
                 text-align: center;
                 position: relative;
@@ -1043,22 +829,22 @@
                 inset: 0;
                 background-image:
                     linear-gradient(
-                        rgba(13, 14, 12, 0.06) 1px,
+                        rgba(255, 255, 255, 0.05) 1px,
                         transparent 1px
                     ),
                     linear-gradient(
                         90deg,
-                        rgba(13, 14, 12, 0.06) 1px,
+                        rgba(255, 255, 255, 0.05) 1px,
                         transparent 1px
                     );
                 background-size: 40px 40px;
             }
             .vision h2 {
                 font-family: "Fraunces", serif;
-                font-size: clamp(3rem, 6vw, 6rem);
+                font-size: clamp(2.8rem, 5.5vw, 5.5rem);
                 font-weight: 900;
-                color: var(--black);
-                line-height: 0.95;
+                color: #ffffff;
+                line-height: 1;
                 letter-spacing: -0.03em;
                 position: relative;
                 max-width: 900px;
@@ -1066,7 +852,7 @@
             }
             .vision p {
                 font-size: 1.1rem;
-                color: rgba(13, 14, 12, 0.65);
+                color: rgba(255, 255, 255, 0.85);
                 max-width: 580px;
                 margin: 0 auto 3rem;
                 line-height: 1.7;
@@ -1080,43 +866,42 @@
                 flex-wrap: wrap;
             }
             .btn-dark {
-                background: var(--black);
-                color: var(--green);
-                font-size: 0.82rem;
+                background: #ffffff;
+                color: var(--noir-deep);
+                font-size: 0.95rem;
                 font-weight: 600;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                padding: 1rem 2.5rem;
+                padding: 0.95rem 2.2rem;
                 border: none;
+                border-radius: 999px;
                 cursor: pointer;
                 transition: all 0.2s;
                 text-decoration: none;
                 display: inline-block;
             }
             .btn-dark:hover {
-                opacity: 0.85;
+                transform: translateY(-2px);
+                box-shadow: 0 14px 36px rgba(10, 30, 26, 0.25);
             }
             .btn-outline-dark {
                 background: transparent;
-                color: var(--black);
-                font-size: 0.82rem;
+                color: #ffffff;
+                font-size: 0.95rem;
                 font-weight: 600;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                padding: 1rem 2.5rem;
-                border: 2px solid rgba(13, 14, 12, 0.3);
+                padding: 0.95rem 2.2rem;
+                border: 1.5px solid rgba(255, 255, 255, 0.5);
+                border-radius: 999px;
                 cursor: pointer;
                 transition: all 0.2s;
                 text-decoration: none;
                 display: inline-block;
             }
             .btn-outline-dark:hover {
-                border-color: var(--black);
+                border-color: #ffffff;
             }
 
             footer {
-                background: var(--off);
-                border-top: 1px solid rgba(184, 240, 115, 0.08);
+                background: var(--cream);
+                border-top: 1px solid var(--line);
                 padding: 3rem;
                 display: flex;
                 justify-content: space-between;
@@ -1128,7 +913,7 @@
                 font-family: "Fraunces", serif;
                 font-size: 1.2rem;
                 font-weight: 900;
-                color: var(--green);
+                color: var(--ink);
             }
             .footer-copy {
                 font-family: "DM Mono", monospace;
@@ -1142,13 +927,13 @@
                 list-style: none;
             }
             .footer-links a {
-                font-size: 0.75rem;
+                font-size: 0.78rem;
                 color: var(--muted);
                 text-decoration: none;
                 transition: color 0.2s;
             }
             .footer-links a:hover {
-                color: var(--green);
+                color: var(--noir);
             }
 
             @media (max-width: 900px) {
@@ -1161,24 +946,41 @@
                 section {
                     padding: 5rem 1.5rem;
                 }
+                .hero {
+                    padding: 8rem 1.25rem 0;
+                }
+                .hero-media {
+                    border-radius: 18px;
+                    aspect-ratio: 4 / 3;
+                    transform: translateY(2.5rem);
+                }
+                @keyframes fadeUpMedia {
+                    from {
+                        opacity: 0;
+                        transform: translateY(calc(2.5rem + 26px));
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(2.5rem);
+                    }
+                }
+                .ticker {
+                    margin-top: 2.5rem;
+                }
+                .verbs-grid {
+                    grid-template-columns: 1fr;
+                }
+                .worker-grid {
+                    grid-template-columns: 1fr;
+                }
+                .worker-guarantee {
+                    padding: 1.75rem 1.5rem;
+                }
                 .pillars-grid {
                     grid-template-columns: 1fr;
                 }
-                .stats-grid {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-                .how-inner {
-                    grid-template-columns: 1fr;
-                    gap: 3rem;
-                }
-                .how-visual {
-                    position: static;
-                }
-                .network-inner {
-                    grid-template-columns: 1fr;
-                }
-                .network-visual {
-                    height: 350px;
+                .fri-card {
+                    padding: 2rem 1.25rem;
                 }
                 .fri-trades {
                     grid-template-columns: repeat(2, 1fr);
@@ -1198,28 +1000,26 @@
         <nav>
             <a href="/index.html" class="nav-logo">YSKAIPE</a>
             <ul class="nav-links">
-                <li><a href="#workers">For Workers</a></li>
-                <li><a href="#how">How It Works</a></li>
+                <li><a href="#homeowner-wins">For Homeowners</a></li>
+                <li><a href="#worker-wins">For Workers</a></li>
                 <li><a href="#fair-rate">Fair Rate Index</a></li>
-                <li><a href="#platform">Platform</a></li>
             </ul>
             <a href="/instant-quote.html" class="nav-cta">Get a Free Quote →</a>
         </nav>
 
         <!-- HERO -->
         <section class="hero">
-            <div class="hero-grid"></div>
-            <div class="hero-glow"></div>
             <div class="hero-eyebrow">
-                The Home Services Platform · Est. 2026 · Lake Norman, NC
+                The Home Services Marketplace · Est. 2026 · Lake Norman, NC
             </div>
             <h1 class="hero-headline">
-                Every Home.<br /><em>Every Worker.</em><br />One Network.
+                Every Home Service.<br />One Marketplace.<br /><em
+                    >Everyone Wins.</em
+                >
             </h1>
             <p class="hero-sub">
-                Primary workers. Licensed pros. Youth crews. YSKAIPE deploys the
-                right person at the right rate — automatically — across every
-                home service in America.
+                Instant AI quote. YSKAIPE Qualified worker. Payment protected
+                until the job's done.
             </p>
             <div class="hero-actions">
                 <a href="/instant-quote.html" class="btn-primary"
@@ -1228,6 +1028,12 @@
                 <a href="/yskaipe-workers.html" class="btn-ghost"
                     >Join the Network →</a
                 >
+            </div>
+            <div class="hero-media">
+                <img
+                    src="/images/hero-lakeside.jpg"
+                    alt="A homeowner and a YSKAIPE pro shake hands by the lake under the Fair Rate Index shield"
+                />
             </div>
         </section>
 
@@ -1262,7 +1068,7 @@
                     <span class="ticker-dot"></span> Fair Rate Guaranteed
                 </div>
                 <div class="ticker-item">
-                    <span class="ticker-dot"></span> ZIP-Code Territories
+                    <span class="ticker-dot"></span> Payment Protected
                 </div>
                 <div class="ticker-item">
                     <span class="ticker-dot"></span> AutoQuote Pricing
@@ -1299,7 +1105,7 @@
                     <span class="ticker-dot"></span> Fair Rate Guaranteed
                 </div>
                 <div class="ticker-item">
-                    <span class="ticker-dot"></span> ZIP-Code Territories
+                    <span class="ticker-dot"></span> Payment Protected
                 </div>
                 <div class="ticker-item">
                     <span class="ticker-dot"></span> AutoQuote Pricing
@@ -1310,254 +1116,54 @@
             </div>
         </div>
 
-        <!-- THREE PILLARS -->
-        <section class="pillars" id="workers">
-            <div class="pillars-intro">
-                <div class="section-label">The Worker Network</div>
-                <h2 class="section-headline">
-                    Three Tiers.<br /><em>One Platform.</em>
-                </h2>
-                <p>
-                    YSKAIPE is the first home services marketplace to recognize
-                    that not every job needs a licensed contractor — and not
-                    every crew member has to wait years to earn. We match task
-                    complexity to worker tier, automatically.
-                </p>
-            </div>
-            <div class="pillars-grid">
-                <div class="pillar primary">
-                    <div class="pillar-glow"></div>
-                    <div class="pillar-badge">Tier 01</div>
-                    <span class="pillar-icon">🔧</span>
-                    <div class="pillar-title">Primary Workers</div>
-                    <div class="pillar-tagline">The Core Workforce</div>
-                    <p class="pillar-desc">
-                        Skilled tradespeople and handymen with verified
-                        experience across our 8 Pro Core trades. The backbone of
-                        YSKAIPE — vetted, rated, and dispatched daily.
-                    </p>
-                    <ul class="pillar-perks">
-                        <li>
-                            Verified trade experience across all 8 core
-                            categories
-                        </li>
-                        <li>ZIP-code exclusive territory protection</li>
-                        <li>AutoQuote pricing — no more haggling</li>
-                        <li>Direct lead delivery, no shared bids</li>
-                        <li>Fair Rate Index protects your earning floor</li>
-                    </ul>
-                    <a href="/yskaipe-workers.html" class="pillar-cta"
-                        >Join as Primary Worker →</a
-                    >
-                </div>
-                <div class="pillar licensed">
-                    <div class="pillar-glow"></div>
-                    <div class="pillar-badge">Tier 02</div>
-                    <span class="pillar-icon">⚡</span>
-                    <div class="pillar-title">Licensed Pros</div>
-                    <div class="pillar-tagline">
-                        Certified. Insured. Premium.
-                    </div>
-                    <p class="pillar-desc">
-                        State-licensed contractors for complex, code-required
-                        work. Electricians, master plumbers, HVAC engineers,
-                        structural roofers. The jobs that demand credentials.
-                    </p>
-                    <ul class="pillar-perks">
-                        <li>License + insurance verification on file</li>
-                        <li>
-                            Premium pricing tier — command what you're worth
-                        </li>
-                        <li>Priority dispatch on high-value permits</li>
-                        <li>Contractor dashboard with full lead lifecycle</li>
-                        <li>Founding member program — lock your territory</li>
-                    </ul>
-                    <a href="/founding.html" class="pillar-cta"
-                        >Apply as Founding Pro →</a
-                    >
-                </div>
-                <div class="pillar youth">
-                    <div class="pillar-glow"></div>
-                    <div class="pillar-badge">Tier 03</div>
-                    <span class="pillar-icon">🌱</span>
-                    <div class="pillar-title">Youth Workers</div>
-                    <div class="pillar-tagline">First Paycheck. Real Work.</div>
-                    <p class="pillar-desc">
-                        Teens and young adults earning through lawn care, moving
-                        help, light landscaping, and home prep. YSKAIPE gives
-                        first-time workers a legitimate, safe entry into the
-                        trades economy.
-                    </p>
-                    <ul class="pillar-perks">
-                        <li>Supervised job categories sized for entry-level</li>
-                        <li>Transparent, fair wages — no exploitation</li>
-                        <li>
-                            Skill-building ratings that follow them up tiers
-                        </li>
-                        <li>Parent-approved job flow for minors</li>
-                        <li>The on-ramp to the primary worker network</li>
-                    </ul>
-                    <a href="/yskaipe-workers.html#youth" class="pillar-cta"
-                        >Enroll a Youth Worker →</a
-                    >
-                </div>
-            </div>
-        </section>
-
-        <!-- STATS -->
-        <section class="stats">
-            <div class="section-label">Platform Scale</div>
+        <!-- HOW THE HOMEOWNER WINS -->
+        <section class="verbs" id="homeowner-wins">
+            <div class="section-label">The Homeowner Side</div>
             <h2
                 class="section-headline"
                 style="margin: 0 auto; text-align: center"
             >
-                Built to <em>Move</em> at Scale
+                How the Homeowner<br /><em>Wins.</em>
             </h2>
-            <div class="stats-grid">
-                <div class="stat-cell">
-                    <div class="stat-num">8</div>
-                    <div class="stat-label">Pro Core Trades</div>
+            <div class="verbs-grid">
+                <div class="verb-cell">
+                    <div class="verb-step">01</div>
+                    <div class="verb-title">Instantly Priced</div>
+                    <div class="verb-tag">Fair Rate Index™</div>
+                    <p class="verb-desc">
+                        AI reads your job and prices it against real market
+                        data. A fair number in seconds — before anyone calls
+                        you.
+                    </p>
                 </div>
-                <div class="stat-cell">
-                    <div class="stat-num">3</div>
-                    <div class="stat-label">Worker Tiers</div>
+                <div class="verb-cell">
+                    <div class="verb-step">02</div>
+                    <div class="verb-title">Worker-Matched</div>
+                    <div class="verb-tag">YSKAIPE Qualified</div>
+                    <p class="verb-desc">
+                        Dispatched to vetted, rated, tier-matched workers — with
+                        licensed pros whenever the work requires it.
+                    </p>
                 </div>
-                <div class="stat-cell">
-                    <div class="stat-num">1</div>
-                    <div class="stat-label">Pro per ZIP per Trade</div>
+                <div class="verb-cell">
+                    <div class="verb-step">03</div>
+                    <div class="verb-title">Paid</div>
+                    <div class="verb-tag">Stripe Escrow</div>
+                    <p class="verb-desc">
+                        Your card is authorized at booking and captured only at
+                        completion. Workers get paid fast. You never pay for
+                        unfinished work.
+                    </p>
                 </div>
-                <div class="stat-cell">
-                    <div class="stat-num">$0</div>
-                    <div class="stat-label">Shared Leads. Ever.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HOW IT WORKS -->
-        <section class="how" id="how">
-            <div class="how-inner">
-                <div>
-                    <div class="section-label">The Engine</div>
-                    <h2 class="section-headline">
-                        Amazon Logistics.<br /><em>Uber Speed.</em>
-                    </h2>
-                    <div class="how-steps">
-                        <div class="how-step">
-                            <div class="step-num">01</div>
-                            <div class="step-content">
-                                <h3>Homeowner Describes the Job</h3>
-                                <p>
-                                    AutoQuote captures the scope — instantly
-                                    generating a fair-rate price range before a
-                                    single pro is contacted. No surprises. No
-                                    negotiation theater.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="how-step">
-                            <div class="step-num">02</div>
-                            <div class="step-content">
-                                <h3>The Engine Selects the Tier</h3>
-                                <p>
-                                    Job complexity logic routes to the right
-                                    worker tier — youth for light work, primary
-                                    for skilled trades, licensed for
-                                    code-required projects.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="how-step">
-                            <div class="step-num">03</div>
-                            <div class="step-content">
-                                <h3>The Right Pro Gets the Lead</h3>
-                                <p>
-                                    One vetted, territory-owning pro receives
-                                    the lead. Not 4 contractors competing. Not a
-                                    shared auction. Theirs.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="how-step">
-                            <div class="step-num">04</div>
-                            <div class="step-content">
-                                <h3>Job Completed. Rate Confirmed.</h3>
-                                <p>
-                                    After completion, the Fair Rate Index
-                                    updates. Every job makes the pricing data
-                                    smarter for the entire North Carolina
-                                    market.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="how-visual">
-                    <div class="dispatch-card">
-                        <div class="dispatch-header">
-                            <div class="dispatch-title">
-                                Live Dispatch Queue
-                            </div>
-                            <div class="dispatch-live">
-                                <span class="live-dot"></span> 4 Jobs Active
-                            </div>
-                        </div>
-                        <div class="dispatch-jobs">
-                            <div class="dispatch-job">
-                                <div class="job-emoji">❄️</div>
-                                <div class="job-info">
-                                    <div class="job-name">AC Unit Tune-Up</div>
-                                    <div class="job-meta">
-                                        Cornelius, NC · HVAC / Aria · 2.4mi
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="job-rate">$189</div>
-                                    <div class="job-tier tier-l">Licensed</div>
-                                </div>
-                            </div>
-                            <div class="dispatch-job">
-                                <div class="job-emoji">🌿</div>
-                                <div class="job-info">
-                                    <div class="job-name">Weekly Lawn Care</div>
-                                    <div class="job-meta">
-                                        Davidson, NC · Terra · 1.1mi
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="job-rate">$65</div>
-                                    <div class="job-tier tier-y">Youth</div>
-                                </div>
-                            </div>
-                            <div class="dispatch-job">
-                                <div class="job-emoji">🎨</div>
-                                <div class="job-info">
-                                    <div class="job-name">
-                                        Interior Bedroom Paint
-                                    </div>
-                                    <div class="job-meta">
-                                        Mooresville, NC · Hue · 3.8mi
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="job-rate">$420</div>
-                                    <div class="job-tier tier-p">Primary</div>
-                                </div>
-                            </div>
-                            <div class="dispatch-job">
-                                <div class="job-emoji">💧</div>
-                                <div class="job-info">
-                                    <div class="job-name">Pipe Leak Repair</div>
-                                    <div class="job-meta">
-                                        Huntersville, NC · River · 5.2mi
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="job-rate">$275</div>
-                                    <div class="job-tier tier-l">Licensed</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="verb-cell">
+                    <div class="verb-step">04</div>
+                    <div class="verb-title">Guaranteed</div>
+                    <div class="verb-tag">The Promise</div>
+                    <p class="verb-desc">
+                        Payment releases only when you confirm the work. The
+                        loop closes when you're satisfied — that's how everyone
+                        wins.
+                    </p>
                 </div>
             </div>
         </section>
@@ -1585,36 +1191,107 @@
                 >
                     Real pricing data from real completed jobs across North
                     Carolina. Every homeowner sees it. Every pro earns it. No
-                    guessing. No gouging.
+                    guessing. No gouging. And every completed job makes the
+                    index smarter.
                 </p>
+                <svg
+                    class="fri-shield"
+                    viewBox="0 0 200 236"
+                    xmlns="http://www.w3.org/2000/svg"
+                    role="img"
+                    aria-label="Fair Rate Index shield — yskaipe.com"
+                >
+                    <!-- outer pale rim -->
+                    <path
+                        d="M100 2 L186 26 V116 C186 172 150 210 100 234 C50 210 14 172 14 116 V26 Z"
+                        fill="var(--teal-pale)"
+                    />
+                    <!-- deep teal border -->
+                    <path
+                        d="M100 12 L177 33 V115 C177 165 145 200 100 222 C55 200 23 165 23 115 V33 Z"
+                        fill="var(--teal-deep)"
+                    />
+                    <!-- main teal face -->
+                    <path
+                        d="M100 20 L169 39 V114 C169 160 141 192 100 213 C59 192 31 160 31 114 V39 Z"
+                        fill="var(--teal)"
+                    />
+                    <!-- right-half fold shading -->
+                    <path
+                        d="M100 20 L169 39 V114 C169 160 141 192 100 213 Z"
+                        fill="rgba(10, 16, 14, 0.14)"
+                    />
+                    <text
+                        x="100"
+                        y="84"
+                        text-anchor="middle"
+                        font-family="'DM Sans', sans-serif"
+                        font-weight="600"
+                        font-size="33"
+                        letter-spacing="1"
+                        fill="#ffffff"
+                    >
+                        FAIR
+                    </text>
+                    <text
+                        x="100"
+                        y="121"
+                        text-anchor="middle"
+                        font-family="'DM Sans', sans-serif"
+                        font-weight="600"
+                        font-size="33"
+                        letter-spacing="1"
+                        fill="#ffffff"
+                    >
+                        RATE
+                    </text>
+                    <text
+                        x="100"
+                        y="158"
+                        text-anchor="middle"
+                        font-family="'DM Sans', sans-serif"
+                        font-weight="600"
+                        font-size="33"
+                        letter-spacing="1"
+                        fill="#ffffff"
+                    >
+                        INDEX
+                    </text>
+                    <text
+                        x="100"
+                        y="186"
+                        text-anchor="middle"
+                        font-family="'DM Mono', monospace"
+                        font-size="12.5"
+                        letter-spacing="1.5"
+                        fill="rgba(255, 255, 255, 0.85)"
+                    >
+                        YSKAIPE.COM
+                    </text>
+                </svg>
                 <div class="fri-card">
                     <div class="fri-trades">
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">❄️</span>
                             <div class="fri-trade-name">HVAC / Aria</div>
                             <div class="fri-trade-rate">$145–$380</div>
                             <div class="fri-trade-range">per service call</div>
                         </div>
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">💧</span>
                             <div class="fri-trade-name">Plumbing / River</div>
                             <div class="fri-trade-rate">$120–$290</div>
                             <div class="fri-trade-range">per service call</div>
                         </div>
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">⚡</span>
                             <div class="fri-trade-name">Electrical / Volt</div>
                             <div class="fri-trade-rate">$95–$320</div>
                             <div class="fri-trade-range">per service call</div>
                         </div>
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">🏠</span>
                             <div class="fri-trade-name">Roofing / Ridge</div>
                             <div class="fri-trade-rate">$350–$900</div>
                             <div class="fri-trade-range">per project</div>
                         </div>
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">🌿</span>
                             <div class="fri-trade-name">
                                 Landscaping / Terra
                             </div>
@@ -1622,13 +1299,11 @@
                             <div class="fri-trade-range">per visit</div>
                         </div>
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">🎨</span>
                             <div class="fri-trade-name">Painting / Hue</div>
                             <div class="fri-trade-rate">$280–$700</div>
                             <div class="fri-trade-range">per room</div>
                         </div>
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">🔨</span>
                             <div class="fri-trade-name">
                                 Contracting / Forge
                             </div>
@@ -1636,7 +1311,6 @@
                             <div class="fri-trade-range">per project</div>
                         </div>
                         <div class="fri-trade">
-                            <span class="fri-trade-icon">🚗</span>
                             <div class="fri-trade-name">Automotive / Axle</div>
                             <div class="fri-trade-rate">$75–$220</div>
                             <div class="fri-trade-range">per service</div>
@@ -1651,94 +1325,230 @@
             </div>
         </section>
 
-        <!-- NETWORK -->
-        <section class="network" id="platform">
-            <div class="network-inner">
-                <div class="network-visual">
-                    <div class="node-map">
-                        <div class="node node-center">⚡</div>
-                        <div class="orbit orbit-1">
-                            <div class="orbit-node p o1-n1">🔧</div>
-                            <div class="orbit-node l o1-n2">⚡</div>
+        <!-- HOW THE WORKER WINS -->
+        <section class="worker" id="worker-wins">
+            <div class="section-label">The Worker Side</div>
+            <h2
+                class="section-headline"
+                style="margin: 0 auto; text-align: center"
+            >
+                How the Worker<br /><em>Wins.</em>
+            </h2>
+            <div class="worker-grid">
+                <div class="verb-cell">
+                    <div class="verb-step">01</div>
+                    <div class="verb-title">Claim the Job</div>
+                    <div class="verb-tag">One Tap</div>
+                    <p class="verb-desc">
+                        Jobs arrive priced and ready. Tap to claim the ones you
+                        want — first to claim gets the work. No bids, no quotes,
+                        no sales calls.
+                    </p>
+                </div>
+                <div class="verb-cell">
+                    <div class="verb-step">02</div>
+                    <div class="verb-title">Do It Well</div>
+                    <div class="verb-tag">Ratings Travel</div>
+                    <p class="verb-desc">
+                        Show up, do the job right, earn the rating. Your track
+                        record moves you up tiers and puts you first in line for
+                        better work.
+                    </p>
+                </div>
+                <div class="verb-cell">
+                    <div class="verb-step">03</div>
+                    <div class="verb-title">Get Paid</div>
+                    <div class="verb-tag">On Completion</div>
+                    <p class="verb-desc">
+                        The money was secured before you left the house.
+                        Homeowner confirms, payment moves. No invoices, no
+                        chasing, no excuses.
+                    </p>
+                </div>
+            </div>
+            <div
+                style="
+                    max-width: 640px;
+                    width: 100%;
+                    margin: 0 auto;
+                    text-align: left;
+                "
+            >
+                <div class="dispatch-card">
+                    <div class="dispatch-header">
+                        <div class="dispatch-title">Live Dispatch Queue</div>
+                        <div class="dispatch-live">
+                            <span class="live-dot"></span> 4 Jobs Active
                         </div>
-                        <div class="orbit orbit-2">
-                            <div class="orbit-node y o2-n1">🌱</div>
-                            <div class="orbit-node p o2-n2">🎨</div>
-                            <div class="orbit-node l o2-n3">💧</div>
-                            <div class="orbit-node y o2-n4">🌿</div>
+                    </div>
+                    <div class="dispatch-jobs">
+                        <div class="dispatch-job">
+                            <div class="job-info">
+                                <div class="job-name">AC Unit Tune-Up</div>
+                                <div class="job-meta">
+                                    Cornelius, NC · HVAC / Aria · 2.4mi
+                                </div>
+                            </div>
+                            <div>
+                                <div class="job-rate">$189</div>
+                                <div class="job-tier tier-l">Licensed</div>
+                            </div>
                         </div>
-                        <div class="orbit orbit-3">
-                            <div class="orbit-node p o3-n1">❄️</div>
-                            <div class="orbit-node l o3-n2">🔌</div>
-                            <div class="orbit-node y o3-n3">🌱</div>
-                            <div class="orbit-node p o3-n4">🏠</div>
-                            <div class="orbit-node l o3-n5">🔨</div>
-                            <div class="orbit-node y o3-n6">🚗</div>
+                        <div class="dispatch-job">
+                            <div class="job-info">
+                                <div class="job-name">Weekly Lawn Care</div>
+                                <div class="job-meta">
+                                    Davidson, NC · Terra · 1.1mi
+                                </div>
+                            </div>
+                            <div>
+                                <div class="job-rate">$65</div>
+                                <div class="job-tier tier-y">Youth</div>
+                            </div>
+                        </div>
+                        <div class="dispatch-job">
+                            <div class="job-info">
+                                <div class="job-name">
+                                    Interior Bedroom Paint
+                                </div>
+                                <div class="job-meta">
+                                    Mooresville, NC · Hue · 3.8mi
+                                </div>
+                            </div>
+                            <div>
+                                <div class="job-rate">$420</div>
+                                <div class="job-tier tier-p">Primary</div>
+                            </div>
+                        </div>
+                        <div class="dispatch-job">
+                            <div class="job-info">
+                                <div class="job-name">Pipe Leak Repair</div>
+                                <div class="job-meta">
+                                    Huntersville, NC · River · 5.2mi
+                                </div>
+                            </div>
+                            <div>
+                                <div class="job-rate">$275</div>
+                                <div class="job-tier tier-l">Licensed</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="network-content">
-                    <div class="section-label">Platform Architecture</div>
-                    <h2 class="section-headline">
-                        A Living<br /><em>Network.</em>
-                    </h2>
-                    <div style="margin-top: 3rem">
-                        <div class="network-feature">
-                            <div class="network-feature-title">
-                                AutoMatch Engine <span>AI-Powered</span>
-                            </div>
-                            <p>
-                                Tier selection, territory matching, and instant
-                                lead routing happen in milliseconds. No
-                                dispatcher. No call center. Pure algorithmic
-                                precision.
-                            </p>
-                        </div>
-                        <div class="network-feature">
-                            <div class="network-feature-title">
-                                Territory Ownership <span>ZIP-Exclusive</span>
-                            </div>
-                            <p>
-                                Each licensed trade pro owns their ZIP code. One
-                                contractor per trade per ZIP. Your territory,
-                                your leads, your business.
-                            </p>
-                        </div>
-                        <div class="network-feature">
-                            <div class="network-feature-title">
-                                Youth Pipeline <span>New</span>
-                            </div>
-                            <p>
-                                Youth workers earning experience and ratings
-                                today become primary workers tomorrow. The
-                                platform builds its own supply chain from the
-                                ground up.
-                            </p>
-                        </div>
-                        <div class="network-feature">
-                            <div class="network-feature-title">
-                                Fair Rate Flywheel <span>Proprietary Data</span>
-                            </div>
-                            <p>
-                                Every completed job feeds the Fair Rate Index.
-                                The data moat deepens with every transaction —
-                                making YSKAIPE harder to replicate by the day.
-                            </p>
-                        </div>
+            </div>
+            <div class="worker-guarantee">
+                <div class="guarantee-badge">Work Guaranteed</div>
+                <p class="guarantee-text">
+                    Every job is backed.
+                    <strong
+                        >If a homeowner isn't satisfied, another YSKAIPE
+                        Qualified worker steps in to make it right.</strong
+                    >
+                    High standards keep rates fair and the work flowing — for
+                    everyone.
+                </p>
+            </div>
+            <div style="margin-top: 2.5rem; text-align: center">
+                <a href="/yskaipe-workers.html" class="btn-primary"
+                    >Join the Network →</a
+                >
+            </div>
+        </section>
+
+        <!-- THREE PILLARS -->
+        <section class="pillars" id="workers">
+            <div class="pillars-intro">
+                <div class="section-label">The Worker Network</div>
+                <h2 class="section-headline">
+                    Three Tiers.<br /><em>One Marketplace.</em>
+                </h2>
+                <p>
+                    YSKAIPE is the first home services marketplace to recognize
+                    that not every job needs a licensed contractor — and not
+                    every crew member has to wait years to earn. We match task
+                    complexity to worker tier, automatically.
+                </p>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar primary">
+                    <div class="pillar-badge">Tier 01</div>
+                    <div class="pillar-title">Primary Workers</div>
+                    <div class="pillar-tagline">The Core Workforce</div>
+                    <p class="pillar-desc">
+                        Skilled tradespeople and handymen with verified
+                        experience across our 8 Pro Core trades. The backbone of
+                        YSKAIPE — vetted, rated, and dispatched daily.
+                    </p>
+                    <ul class="pillar-perks">
+                        <li>
+                            Verified trade experience across all 8 core
+                            categories
+                        </li>
+                        <li>First-to-claim dispatch — no bidding wars</li>
+                        <li>AutoQuote pricing — no more haggling</li>
+                        <li>Direct lead delivery, no shared bids</li>
+                        <li>Fair Rate Index protects your earning floor</li>
+                    </ul>
+                    <a href="/yskaipe-workers.html" class="pillar-cta"
+                        >Join as Primary Worker →</a
+                    >
+                </div>
+                <div class="pillar licensed">
+                    <div class="pillar-badge">Tier 02</div>
+                    <div class="pillar-title">Licensed Pros</div>
+                    <div class="pillar-tagline">
+                        Certified. Insured. Premium.
                     </div>
+                    <p class="pillar-desc">
+                        State-licensed contractors for complex, code-required
+                        work. Electricians, master plumbers, HVAC engineers,
+                        structural roofers. The jobs that demand credentials.
+                    </p>
+                    <ul class="pillar-perks">
+                        <li>License + insurance verification on file</li>
+                        <li>
+                            Premium pricing tier — command what you're worth
+                        </li>
+                        <li>Priority dispatch on high-value permits</li>
+                        <li>Contractor dashboard with full lead lifecycle</li>
+                        <li>Founding member program — first month free</li>
+                    </ul>
+                    <a href="/founding.html" class="pillar-cta"
+                        >Apply as Founding Pro →</a
+                    >
+                </div>
+                <div class="pillar youth">
+                    <div class="pillar-badge">Tier 03</div>
+                    <div class="pillar-title">Youth Workers</div>
+                    <div class="pillar-tagline">First Paycheck. Real Work.</div>
+                    <p class="pillar-desc">
+                        Teens and young adults earning through lawn care, moving
+                        help, light landscaping, and home prep. YSKAIPE gives
+                        first-time workers a legitimate, safe entry into the
+                        trades economy.
+                    </p>
+                    <ul class="pillar-perks">
+                        <li>Supervised job categories sized for entry-level</li>
+                        <li>Transparent, fair wages — no exploitation</li>
+                        <li>
+                            Skill-building ratings that follow them up tiers
+                        </li>
+                        <li>Parent-approved job flow for minors</li>
+                        <li>The on-ramp to the primary worker network</li>
+                    </ul>
+                    <a href="/yskaipe-workers.html#youth" class="pillar-cta"
+                        >Enroll a Youth Worker →</a
+                    >
                 </div>
             </div>
         </section>
 
         <!-- VISION BANNER -->
         <section class="vision">
-            <h2>
-                The Amazon + Uber of Home Services. It's Being Built Right Now.
-            </h2>
+            <h2>The Marketplace Where Everyone Wins. It's Live Right Now.</h2>
             <p>
-                Three worker tiers. Eight trades. One ZIP-code-protected
-                territory per pro. Fair pricing for every homeowner. This is
-                what the home services industry should have always been.
+                Three worker tiers. Eight trades. Payment protected on every
+                job. Fair pricing for every homeowner. This is what the home
+                services industry should have always been.
             </p>
             <div class="vision-btns">
                 <a href="/instant-quote.html" class="btn-dark"
