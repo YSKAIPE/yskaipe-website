@@ -17,18 +17,19 @@
         />
         <style>
             :root {
-                --black: #0d0e0c;
-                --off: #111210;
-                --dim: #1a1c18;
-                --mid: #2a2e27;
-                --border: rgba(255, 255, 255, 0.08);
-                --text: #e8ede0;
-                --muted: #7a8070;
-                --faint: #4a4e45;
-                --green: #b8f073;
-                --blue: #73c8f0;
-                --amber: #f0c473;
-                --coral: #e07a60;
+                /* noir-on-cream system (matches index.html) */
+                --black: #f7f2ea; /* page surface (was dark bg; keeps var wiring) */
+                --off: #fffdf9; /* card surface */
+                --dim: #f4eee5; /* input / inset surface */
+                --mid: #ece5d9;
+                --border: rgba(33, 31, 28, 0.12);
+                --text: #211f1c;
+                --muted: #76726b;
+                --faint: #a39d92;
+                --green: #1c1b19; /* noir — primary tier + accent */
+                --blue: #1e8270; /* teal — licensed tier */
+                --amber: #b07c2c; /* ochre — youth tier */
+                --coral: #c0533a;
                 --serif: "Fraunces", Georgia, serif;
                 --sans: "DM Sans", sans-serif;
                 --mono: "DM Mono", monospace;
@@ -54,10 +55,10 @@
                 content: "";
                 position: fixed;
                 inset: 0;
-                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
                 pointer-events: none;
                 z-index: 9999;
-                opacity: 0.4;
+                opacity: 0.35;
             }
 
             nav {
@@ -70,7 +71,7 @@
                 align-items: center;
                 justify-content: space-between;
                 padding: 18px 5%;
-                background: rgba(13, 14, 12, 0.88);
+                background: rgba(247, 242, 234, 0.85);
                 backdrop-filter: blur(16px);
                 border-bottom: 1px solid var(--border);
             }
@@ -181,21 +182,21 @@
             .pill:hover {
                 border-color: var(--green);
                 color: var(--green);
-                background: rgba(184, 240, 115, 0.06);
+                background: rgba(28, 27, 25, 0.06);
             }
             .pill.licensed {
-                border-color: rgba(115, 200, 240, 0.3);
+                border-color: rgba(30, 130, 112, 0.3);
                 color: var(--blue);
             }
             .pill.licensed:hover {
-                background: rgba(115, 200, 240, 0.06);
+                background: rgba(30, 130, 112, 0.06);
             }
             .pill.youth {
-                border-color: rgba(240, 196, 115, 0.3);
+                border-color: rgba(176, 124, 44, 0.3);
                 color: var(--amber);
             }
             .pill.youth:hover {
-                background: rgba(240, 196, 115, 0.06);
+                background: rgba(176, 124, 44, 0.06);
             }
             .pill-legend {
                 display: flex;
@@ -282,7 +283,7 @@
             .field textarea:focus,
             .field input:focus {
                 border-color: var(--green);
-                box-shadow: 0 0 0 3px rgba(184, 240, 115, 0.08);
+                box-shadow: 0 0 0 3px rgba(28, 27, 25, 0.08);
             }
             .field textarea::placeholder,
             .field input::placeholder {
@@ -321,7 +322,7 @@
             .submit-btn:hover {
                 opacity: 0.88;
                 transform: translateY(-1px);
-                box-shadow: 0 8px 32px rgba(184, 240, 115, 0.2);
+                box-shadow: 0 8px 32px rgba(28, 27, 25, 0.2);
             }
             .submit-btn:disabled {
                 opacity: 0.4;
@@ -401,8 +402,8 @@
             .error-box {
                 display: none;
                 padding: 11px 14px;
-                background: rgba(224, 122, 96, 0.1);
-                border: 1px solid rgba(224, 122, 96, 0.3);
+                background: rgba(192, 83, 58, 0.1);
+                border: 1px solid rgba(192, 83, 58, 0.3);
                 border-radius: 3px;
                 font-size: 0.83rem;
                 color: var(--coral);
@@ -446,16 +447,16 @@
                 flex-wrap: wrap;
             }
             .result-header.tier-licensed {
-                background: rgba(115, 200, 240, 0.07);
-                border-bottom: 1px solid rgba(115, 200, 240, 0.14);
+                background: rgba(30, 130, 112, 0.07);
+                border-bottom: 1px solid rgba(30, 130, 112, 0.14);
             }
             .result-header.tier-primary {
-                background: rgba(184, 240, 115, 0.05);
-                border-bottom: 1px solid rgba(184, 240, 115, 0.1);
+                background: rgba(28, 27, 25, 0.05);
+                border-bottom: 1px solid rgba(28, 27, 25, 0.1);
             }
             .result-header.tier-youth {
-                background: rgba(240, 196, 115, 0.06);
-                border-bottom: 1px solid rgba(240, 196, 115, 0.12);
+                background: rgba(176, 124, 44, 0.06);
+                border-bottom: 1px solid rgba(176, 124, 44, 0.12);
             }
             .rh-cat-label {
                 font-family: var(--mono);
@@ -488,18 +489,18 @@
             }
             .tier-badge.licensed {
                 color: var(--blue);
-                border-color: rgba(115, 200, 240, 0.35);
-                background: rgba(115, 200, 240, 0.08);
+                border-color: rgba(30, 130, 112, 0.35);
+                background: rgba(30, 130, 112, 0.08);
             }
             .tier-badge.primary {
                 color: var(--green);
-                border-color: rgba(184, 240, 115, 0.3);
-                background: rgba(184, 240, 115, 0.07);
+                border-color: rgba(28, 27, 25, 0.3);
+                background: rgba(28, 27, 25, 0.07);
             }
             .tier-badge.youth {
                 color: var(--amber);
-                border-color: rgba(240, 196, 115, 0.3);
-                background: rgba(240, 196, 115, 0.07);
+                border-color: rgba(176, 124, 44, 0.3);
+                background: rgba(176, 124, 44, 0.07);
             }
             .tier-badge-dot {
                 width: 5px;
@@ -512,7 +513,7 @@
                 font-family: var(--mono);
                 font-size: 0.6rem;
                 color: var(--faint);
-                background: rgba(255, 255, 255, 0.04);
+                background: rgba(33, 31, 28, 0.04);
                 padding: 5px 10px;
                 border-radius: 20px;
                 border: 1px solid var(--border);
@@ -529,19 +530,19 @@
                 gap: 9px;
             }
             .tier-strip.licensed {
-                background: rgba(115, 200, 240, 0.04);
-                border-bottom: 1px solid rgba(115, 200, 240, 0.09);
-                color: rgba(115, 200, 240, 0.8);
+                background: rgba(30, 130, 112, 0.04);
+                border-bottom: 1px solid rgba(30, 130, 112, 0.09);
+                color: var(--blue);
             }
             .tier-strip.primary {
-                background: rgba(184, 240, 115, 0.03);
-                border-bottom: 1px solid rgba(184, 240, 115, 0.08);
-                color: rgba(184, 240, 115, 0.72);
+                background: rgba(28, 27, 25, 0.03);
+                border-bottom: 1px solid rgba(28, 27, 25, 0.08);
+                color: rgba(33, 31, 28, 0.75);
             }
             .tier-strip.youth {
-                background: rgba(240, 196, 115, 0.04);
-                border-bottom: 1px solid rgba(240, 196, 115, 0.1);
-                color: rgba(240, 196, 115, 0.78);
+                background: rgba(176, 124, 44, 0.04);
+                border-bottom: 1px solid rgba(176, 124, 44, 0.1);
+                color: var(--amber);
             }
             .tier-icon {
                 font-size: 0.95rem;
@@ -552,8 +553,8 @@
             /* permit */
             .permit-strip {
                 padding: 9px 26px;
-                background: rgba(240, 196, 115, 0.05);
-                border-bottom: 1px solid rgba(240, 196, 115, 0.13);
+                background: rgba(176, 124, 44, 0.05);
+                border-bottom: 1px solid rgba(176, 124, 44, 0.13);
                 display: flex;
                 align-items: center;
                 gap: 7px;
@@ -632,7 +633,7 @@
                 font-size: 0.62rem;
                 letter-spacing: 0.08em;
                 color: var(--faint);
-                background: rgba(255, 255, 255, 0.03);
+                background: rgba(33, 31, 28, 0.03);
                 padding: 6px 12px;
                 border-radius: 20px;
                 border: 1px solid var(--border);
@@ -683,9 +684,9 @@
                 align-items: center;
                 gap: 9px;
                 font-size: 0.8rem;
-                color: rgba(184, 240, 115, 0.65);
-                background: rgba(184, 240, 115, 0.03);
-                border-bottom: 1px solid rgba(184, 240, 115, 0.08);
+                color: rgba(33, 31, 28, 0.78);
+                background: rgba(28, 27, 25, 0.03);
+                border-bottom: 1px solid rgba(28, 27, 25, 0.08);
             }
             .result-escrow strong {
                 color: var(--green);
@@ -744,7 +745,7 @@
             }
             .bf input:focus {
                 border-color: var(--green);
-                box-shadow: 0 0 0 3px rgba(184, 240, 115, 0.08);
+                box-shadow: 0 0 0 3px rgba(28, 27, 25, 0.08);
             }
             .bf input::placeholder {
                 color: var(--faint);
@@ -775,7 +776,7 @@
             .book-btn.licensed:hover {
                 opacity: 0.88;
                 transform: translateY(-1px);
-                box-shadow: 0 8px 28px rgba(115, 200, 240, 0.25);
+                box-shadow: 0 8px 28px rgba(30, 130, 112, 0.25);
             }
             .book-btn.primary {
                 background: var(--green);
@@ -784,7 +785,7 @@
             .book-btn.primary:hover {
                 opacity: 0.88;
                 transform: translateY(-1px);
-                box-shadow: 0 8px 28px rgba(184, 240, 115, 0.2);
+                box-shadow: 0 8px 28px rgba(28, 27, 25, 0.2);
             }
             .book-btn.youth {
                 background: var(--amber);
@@ -793,7 +794,7 @@
             .book-btn.youth:hover {
                 opacity: 0.88;
                 transform: translateY(-1px);
-                box-shadow: 0 8px 28px rgba(240, 196, 115, 0.2);
+                box-shadow: 0 8px 28px rgba(176, 124, 44, 0.2);
             }
             .book-btn:disabled {
                 opacity: 0.4;
@@ -838,13 +839,13 @@
                 font-size: 22px;
             }
             .booked-icon.licensed {
-                background: rgba(115, 200, 240, 0.14);
+                background: rgba(30, 130, 112, 0.14);
             }
             .booked-icon.primary {
-                background: rgba(184, 240, 115, 0.12);
+                background: rgba(28, 27, 25, 0.12);
             }
             .booked-icon.youth {
-                background: rgba(240, 196, 115, 0.12);
+                background: rgba(176, 124, 44, 0.12);
             }
             .booked-state h3 {
                 font-family: var(--serif);
@@ -980,6 +981,42 @@
                 margin-top: 8px;
                 line-height: 1.7;
             }
+
+            /* ── noir-on-cream refinements (matches index.html) ── */
+            .form-card,
+            .loading,
+            .result {
+                border-radius: 22px;
+                box-shadow: 0 6px 24px rgba(33, 31, 28, 0.07);
+            }
+            .error-box,
+            .booked-next {
+                border-radius: 12px;
+            }
+            .field textarea,
+            .field input,
+            .bf input,
+            #stripe-card-element {
+                border-radius: 10px;
+            }
+            .tier-badge {
+                border-radius: 999px;
+            }
+            .tier-icon {
+                display: none;
+            }
+            .booked-icon {
+                color: var(--green);
+                font-weight: 700;
+            }
+            .submit-btn,
+            .book-btn {
+                color: #fffdf9;
+            }
+            .form-footnote {
+                color: var(--gold-note, #b08d4f);
+                opacity: 0.85;
+            }
         </style>
     </head>
     <body>
@@ -1054,8 +1091,8 @@
                     ><span
                         class="pip"
                         style="
-                            background: rgba(115, 200, 240, 0.25);
-                            border: 1px solid rgba(115, 200, 240, 0.4);
+                            background: rgba(30, 130, 112, 0.25);
+                            border: 1px solid rgba(30, 130, 112, 0.4);
                         "
                     ></span
                     ><span style="color: var(--blue)"
@@ -1066,8 +1103,8 @@
                     ><span
                         class="pip"
                         style="
-                            background: rgba(184, 240, 115, 0.2);
-                            border: 1px solid rgba(184, 240, 115, 0.3);
+                            background: rgba(28, 27, 25, 0.2);
+                            border: 1px solid rgba(28, 27, 25, 0.3);
                         "
                     ></span
                     ><span style="color: var(--green)"
@@ -1078,8 +1115,8 @@
                     ><span
                         class="pip"
                         style="
-                            background: rgba(240, 196, 115, 0.2);
-                            border: 1px solid rgba(240, 196, 115, 0.3);
+                            background: rgba(176, 124, 44, 0.2);
+                            border: 1px solid rgba(176, 124, 44, 0.3);
                         "
                     ></span
                     ><span style="color: var(--amber)">Youth worker</span></span
@@ -1216,7 +1253,6 @@
                 </div>
 
                 <div class="result-escrow">
-                    <span style="font-size: 1rem">🔒</span>
                     <div>
                         Payment held in <strong>escrow</strong> — released only
                         when the job is confirmed complete. Worker contact
@@ -1315,7 +1351,7 @@
                             >
                         </button>
                         <p class="stripe-secure">
-                            🔒 Secured by Stripe · Card held, not charged ·
+                            Secured by Stripe · Card held, not charged ·
                             Released only after job completion
                         </p>
                     </div>
@@ -1846,14 +1882,14 @@
                     const s = getStripe();
                     const els = s.elements({
                         appearance: {
-                            theme: "night",
+                            theme: "stripe",
                             variables: {
-                                colorPrimary: "#b8f073",
-                                colorBackground: "#1a1c18",
-                                colorText: "#e8ede0",
-                                colorDanger: "#e07a60",
+                                colorPrimary: "#1c1b19",
+                                colorBackground: "#f4eee5",
+                                colorText: "#211f1c",
+                                colorDanger: "#c0533a",
                                 fontFamily: "DM Sans, sans-serif",
-                                borderRadius: "3px",
+                                borderRadius: "10px",
                             },
                         },
                     });
@@ -1861,8 +1897,8 @@
                         style: {
                             base: {
                                 fontSize: "14px",
-                                color: "#e8ede0",
-                                "::placeholder": { color: "#4a4e45" },
+                                color: "#211f1c",
+                                "::placeholder": { color: "#a39d92" },
                             },
                         },
                     });
