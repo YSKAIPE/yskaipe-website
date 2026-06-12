@@ -1,374 +1,968 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Join YSKAIPE — Earn on Your Terms</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{--black:#0d0e0c;--off:#111210;--dim:#1a1c18;--border:rgba(255,255,255,0.08);--text:#e8ede0;--muted:#7a8070;--faint:#4a4e45;--green:#b8f073;--blue:#73c8f0;--amber:#f0c473;--coral:#e07a60;--serif:'Fraunces',serif;--sans:'DM Sans',sans-serif;--mono:'DM Mono',monospace}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--black);color:var(--text);min-height:100vh}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Join YSKAIPE — Earn on Your Terms</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --black: #f7f2ea;
+                --off: #fffdf9;
+                --dim: #f4eee5;
+                --border: rgba(33, 31, 28, 0.12);
+                --text: #211f1c;
+                --muted: #76726b;
+                --faint: #a39d92;
+                --green: #1c1b19;
+                --blue: #1e8270;
+                --amber: #b07c2c;
+                --coral: #c0533a;
+                --serif: "Fraunces", serif;
+                --sans: "DM Sans", sans-serif;
+                --mono: "DM Mono", monospace;
+            }
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: var(--sans);
+                background: var(--black);
+                color: var(--text);
+                min-height: 100vh;
+            }
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+                pointer-events: none;
+                z-index: 9999;
+                opacity: 0.35;
+            }
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(13,14,12,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--green);text-decoration:none;letter-spacing:-.02em}
-.nav-back{font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
-.nav-back:hover{color:var(--green)}
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 18px 5%;
+                background: rgba(247, 242, 234, 0.85);
+                backdrop-filter: blur(16px);
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-logo {
+                font-family: var(--serif);
+                font-size: 1.4rem;
+                font-weight: 900;
+                color: var(--green);
+                text-decoration: none;
+                letter-spacing: -0.02em;
+            }
+            .nav-back {
+                font-size: 0.75rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--muted);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+            .nav-back:hover {
+                color: var(--green);
+            }
 
-/* HERO */
-.hero{padding:120px 5% 60px;max-width:800px;margin:0 auto;text-align:center}
-.hero-eyebrow{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
-.hero h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,4.5rem);font-weight:900;line-height:.95;letter-spacing:-.03em;margin-bottom:16px}
-.hero h1 em{font-style:italic;font-weight:300;color:var(--green)}
-.hero-sub{font-size:1rem;color:var(--muted);line-height:1.75;max-width:520px;margin:0 auto 40px}
+            /* HERO */
+            .hero {
+                padding: 120px 5% 60px;
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .hero-eyebrow {
+                font-family: var(--mono);
+                font-size: 0.65rem;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--green);
+                margin-bottom: 16px;
+            }
+            .hero h1 {
+                font-family: var(--serif);
+                font-size: clamp(2.8rem, 6vw, 4.5rem);
+                font-weight: 900;
+                line-height: 0.95;
+                letter-spacing: -0.03em;
+                margin-bottom: 16px;
+            }
+            .hero h1 em {
+                font-style: italic;
+                font-weight: 300;
+                color: var(--green);
+            }
+            .hero-sub {
+                font-size: 1rem;
+                color: var(--muted);
+                line-height: 1.75;
+                max-width: 520px;
+                margin: 0 auto 40px;
+            }
 
-/* TIER CARDS */
-.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:900px;margin:0 auto 80px;background:var(--border)}
-.tier-card{background:var(--off);padding:28px 24px;position:relative;overflow:hidden}
-.tier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.tier-card.primary::before{background:var(--green)}
-.tier-card.licensed::before{background:var(--blue)}
-.tier-card.youth::before{background:var(--amber)}
-.tier-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
-.tier-card.primary .tier-label{color:var(--green)}
-.tier-card.licensed .tier-label{color:var(--blue)}
-.tier-card.youth .tier-label{color:var(--amber)}
-.tier-icon{font-size:1.8rem;margin-bottom:10px;display:block}
-.tier-name{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:6px}
-.tier-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+            /* TIER CARDS */
+            .tiers {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2px;
+                max-width: 900px;
+                margin: 0 auto 80px;
+                background: var(--border);
+            }
+            .tier-card {
+                background: var(--off);
+                padding: 28px 24px;
+                position: relative;
+                overflow: hidden;
+            }
+            .tier-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+            }
+            .tier-card.primary::before {
+                background: var(--green);
+            }
+            .tier-card.licensed::before {
+                background: var(--blue);
+            }
+            .tier-card.youth::before {
+                background: var(--amber);
+            }
+            .tier-label {
+                font-family: var(--mono);
+                font-size: 0.58rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+            }
+            .tier-card.primary .tier-label {
+                color: var(--green);
+            }
+            .tier-card.licensed .tier-label {
+                color: var(--blue);
+            }
+            .tier-card.youth .tier-label {
+                color: var(--amber);
+            }
+            .tier-icon {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+                display: block;
+            }
+            .tier-name {
+                font-family: var(--serif);
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin-bottom: 6px;
+            }
+            .tier-desc {
+                font-size: 0.82rem;
+                color: var(--muted);
+                line-height: 1.6;
+            }
 
-/* SIGNUP FORM */
-.signup-wrap{max-width:600px;margin:0 auto;padding:0 5% 80px}
-.signup-card{background:var(--off);border:1px solid var(--border);border-radius:4px;overflow:hidden}
-.signup-header{padding:24px 28px;border-bottom:1px solid var(--border);background:rgba(184,240,115,.04)}
-.signup-header h2{font-family:var(--serif);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
-.signup-header p{font-size:.85rem;color:var(--muted);line-height:1.6}
-.signup-body{padding:28px}
+            /* SIGNUP FORM */
+            .signup-wrap {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 5% 80px;
+            }
+            .signup-card {
+                background: var(--off);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            .signup-header {
+                padding: 24px 28px;
+                border-bottom: 1px solid var(--border);
+                background: rgba(28, 27, 25, 0.04);
+            }
+            .signup-header h2 {
+                font-family: var(--serif);
+                font-size: 1.6rem;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                margin-bottom: 4px;
+            }
+            .signup-header p {
+                font-size: 0.85rem;
+                color: var(--muted);
+                line-height: 1.6;
+            }
+            .signup-body {
+                padding: 28px;
+            }
 
-.sf{margin-bottom:14px}
-.sf label{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.sf label .req{color:var(--green);margin-left:2px}
-.sf input,.sf select{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:3px;font-family:var(--sans);font-size:.88rem;color:var(--text);background:var(--dim);outline:none;transition:border-color .2s,box-shadow .2s;appearance:none}
-.sf input:focus,.sf select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(184,240,115,.08)}
-.sf input::placeholder{color:var(--faint)}
-.sf select option{background:var(--dim);color:var(--text)}
-.sf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+            .sf {
+                margin-bottom: 14px;
+            }
+            .sf label {
+                display: block;
+                font-family: var(--mono);
+                font-size: 0.6rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 6px;
+            }
+            .sf label .req {
+                color: var(--green);
+                margin-left: 2px;
+            }
+            .sf input,
+            .sf select {
+                width: 100%;
+                padding: 11px 13px;
+                border: 1px solid var(--border);
+                border-radius: 3px;
+                font-family: var(--sans);
+                font-size: 0.88rem;
+                color: var(--text);
+                background: var(--dim);
+                outline: none;
+                transition:
+                    border-color 0.2s,
+                    box-shadow 0.2s;
+                appearance: none;
+            }
+            .sf input:focus,
+            .sf select:focus {
+                border-color: var(--green);
+                box-shadow: 0 0 0 3px rgba(28, 27, 25, 0.08);
+            }
+            .sf input::placeholder {
+                color: var(--faint);
+            }
+            .sf select option {
+                background: var(--dim);
+                color: var(--text);
+            }
+            .sf-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
 
-/* Skills selector */
-.skills-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.skill-chip{font-size:.72rem;padding:5px 12px;border-radius:20px;border:1px solid var(--border);color:var(--muted);background:transparent;cursor:pointer;transition:all .15s;font-family:var(--sans);user-select:none}
-.skill-chip:hover{border-color:var(--green);color:var(--green)}
-.skill-chip.selected{background:rgba(184,240,115,.12);border-color:rgba(184,240,115,.4);color:var(--green)}
-.skill-chip.licensed-skill{border-color:rgba(115,200,240,.25);color:var(--blue)}
-.skill-chip.licensed-skill.selected{background:rgba(115,200,240,.1);border-color:rgba(115,200,240,.4)}
+            /* Skills selector */
+            .skills-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-top: 6px;
+            }
+            .skill-chip {
+                font-size: 0.72rem;
+                padding: 5px 12px;
+                border-radius: 20px;
+                border: 1px solid var(--border);
+                color: var(--muted);
+                background: transparent;
+                cursor: pointer;
+                transition: all 0.15s;
+                font-family: var(--sans);
+                user-select: none;
+            }
+            .skill-chip:hover {
+                border-color: var(--green);
+                color: var(--green);
+            }
+            .skill-chip.selected {
+                background: rgba(28, 27, 25, 0.12);
+                border-color: rgba(28, 27, 25, 0.4);
+                color: var(--green);
+            }
+            .skill-chip.licensed-skill {
+                border-color: rgba(30, 130, 112, 0.25);
+                color: var(--blue);
+            }
+            .skill-chip.licensed-skill.selected {
+                background: rgba(30, 130, 112, 0.1);
+                border-color: rgba(30, 130, 112, 0.4);
+            }
 
-/* Terms */
-.terms-box{background:var(--dim);border:1px solid var(--border);border-radius:3px;padding:14px;font-size:.78rem;color:var(--muted);line-height:1.7;max-height:140px;overflow-y:auto;margin-bottom:12px;font-family:var(--mono)}
-.terms-box a{color:var(--green);text-decoration:none}
-.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;cursor:pointer}
-.checkbox-row input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--green);cursor:pointer}
-.checkbox-row span{font-size:.82rem;color:var(--muted);line-height:1.6}
-.checkbox-row a{color:var(--green);text-decoration:none}
+            /* Terms */
+            .terms-box {
+                background: var(--dim);
+                border: 1px solid var(--border);
+                border-radius: 3px;
+                padding: 14px;
+                font-size: 0.78rem;
+                color: var(--muted);
+                line-height: 1.7;
+                max-height: 140px;
+                overflow-y: auto;
+                margin-bottom: 12px;
+                font-family: var(--mono);
+            }
+            .terms-box a {
+                color: var(--green);
+                text-decoration: none;
+            }
+            .checkbox-row {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 20px;
+                cursor: pointer;
+            }
+            .checkbox-row input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+                margin-top: 2px;
+                accent-color: var(--green);
+                cursor: pointer;
+            }
+            .checkbox-row span {
+                font-size: 0.82rem;
+                color: var(--muted);
+                line-height: 1.6;
+            }
+            .checkbox-row a {
+                color: var(--green);
+                text-decoration: none;
+            }
 
-.submit-btn{width:100%;background:var(--green);color:var(--black);border:none;border-radius:40px;padding:16px;font-family:var(--sans);font-size:1rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.submit-btn:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 8px 32px rgba(184,240,115,.2)}
-.submit-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.submit-note{font-family:var(--mono);font-size:.6rem;color:var(--faint);text-align:center;margin-top:10px;line-height:1.7}
+            .submit-btn {
+                width: 100%;
+                background: var(--green);
+                color: var(--black);
+                border: none;
+                border-radius: 40px;
+                padding: 16px;
+                font-family: var(--sans);
+                font-size: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.2s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+            .submit-btn:hover {
+                opacity: 0.88;
+                transform: translateY(-1px);
+                box-shadow: 0 8px 32px rgba(28, 27, 25, 0.2);
+            }
+            .submit-btn:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+            .submit-note {
+                font-family: var(--mono);
+                font-size: 0.6rem;
+                color: var(--faint);
+                text-align: center;
+                margin-top: 10px;
+                line-height: 1.7;
+            }
 
-.err{display:none;padding:10px 14px;background:rgba(224,122,96,.1);border:1px solid rgba(224,122,96,.3);border-radius:3px;font-size:.83rem;color:var(--coral);margin-bottom:14px}
-.err.active{display:block}
+            .err {
+                display: none;
+                padding: 10px 14px;
+                background: rgba(192, 83, 58, 0.1);
+                border: 1px solid rgba(192, 83, 58, 0.3);
+                border-radius: 3px;
+                font-size: 0.83rem;
+                color: var(--coral);
+                margin-bottom: 14px;
+            }
+            .err.active {
+                display: block;
+            }
 
-/* Login section */
-.login-section{padding:40px 5% 60px;max-width:600px;margin:0 auto;text-align:center}
-.login-divider{font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:24px;display:flex;align-items:center;gap:12px}
-.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.login-card{background:var(--off);border:1px solid var(--border);border-radius:4px;padding:28px;text-align:left}
-.login-card h3{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:6px}
-.login-card p{font-size:.85rem;color:var(--muted);margin-bottom:18px;line-height:1.6}
-.login-row{display:flex;gap:10px}
-.login-input{flex:1;padding:11px 13px;border:1px solid var(--border);border-radius:3px;font-family:var(--sans);font-size:.88rem;color:var(--text);background:var(--dim);outline:none;transition:border-color .2s}
-.login-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(184,240,115,.08)}
-.login-input::placeholder{color:var(--faint)}
-.login-btn{background:var(--dim);color:var(--green);border:1px solid rgba(184,240,115,.3);border-radius:3px;padding:11px 18px;font-family:var(--sans);font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
-.login-btn:hover{background:rgba(184,240,115,.08)}
-.login-sent{display:none;text-align:center;padding:12px;font-family:var(--mono);font-size:.72rem;color:var(--green);letter-spacing:.06em}
+            /* Login section */
+            .login-section {
+                padding: 40px 5% 60px;
+                max-width: 600px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .login-divider {
+                font-family: var(--mono);
+                font-size: 0.65rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--faint);
+                margin-bottom: 24px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .login-divider::before,
+            .login-divider::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: var(--border);
+            }
+            .login-card {
+                background: var(--off);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                padding: 28px;
+                text-align: left;
+            }
+            .login-card h3 {
+                font-family: var(--serif);
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin-bottom: 6px;
+            }
+            .login-card p {
+                font-size: 0.85rem;
+                color: var(--muted);
+                margin-bottom: 18px;
+                line-height: 1.6;
+            }
+            .login-row {
+                display: flex;
+                gap: 10px;
+            }
+            .login-input {
+                flex: 1;
+                padding: 11px 13px;
+                border: 1px solid var(--border);
+                border-radius: 3px;
+                font-family: var(--sans);
+                font-size: 0.88rem;
+                color: var(--text);
+                background: var(--dim);
+                outline: none;
+                transition: border-color 0.2s;
+            }
+            .login-input:focus {
+                border-color: var(--green);
+                box-shadow: 0 0 0 3px rgba(28, 27, 25, 0.08);
+            }
+            .login-input::placeholder {
+                color: var(--faint);
+            }
+            .login-btn {
+                background: var(--dim);
+                color: var(--green);
+                border: 1px solid rgba(28, 27, 25, 0.3);
+                border-radius: 3px;
+                padding: 11px 18px;
+                font-family: var(--sans);
+                font-size: 0.85rem;
+                font-weight: 600;
+                cursor: pointer;
+                white-space: nowrap;
+                transition: all 0.2s;
+            }
+            .login-btn:hover {
+                background: rgba(28, 27, 25, 0.08);
+            }
+            .login-sent {
+                display: none;
+                text-align: center;
+                padding: 12px;
+                font-family: var(--mono);
+                font-size: 0.72rem;
+                color: var(--green);
+                letter-spacing: 0.06em;
+            }
 
-@media(max-width:700px){
-  .tiers{grid-template-columns:1fr}
-  .sf-row{grid-template-columns:1fr}
-  .login-row{flex-direction:column}
-}
-</style>
-</head>
-<body>
-<nav>
-  <a href="/index.html" class="nav-logo">YSKAIPE</a>
-  <a href="/index.html" class="nav-back">← Home</a>
-</nav>
+            @media (max-width: 700px) {
+                .tiers {
+                    grid-template-columns: 1fr;
+                }
+                .sf-row {
+                    grid-template-columns: 1fr;
+                }
+                .login-row {
+                    flex-direction: column;
+                }
+            }
 
-<div class="hero">
-  <div class="hero-eyebrow">Join the Network · Lake Norman + Beyond</div>
-  <h1>Earn on your terms.<br><em>Real work. Fair pay.</em></h1>
-  <p class="hero-sub">YSKAIPE connects qualified workers to homeowners in their area. Jobs delivered directly to your inbox. First to claim gets it. Paid via Stripe within 2 business days.</p>
-</div>
+            /* noir-on-cream refinements (matches index.html) */
+            .tiers {
+                gap: 14px;
+                background: transparent;
+            }
+            .tier-card {
+                border-radius: 18px;
+                border: 1px solid var(--border);
+                box-shadow: 0 6px 24px rgba(33, 31, 28, 0.07);
+            }
+            .tier-card::before {
+                height: 4px;
+            }
+            .signup-card,
+            .login-card {
+                border-radius: 22px;
+                box-shadow: 0 6px 24px rgba(33, 31, 28, 0.07);
+            }
+            .sf input,
+            .sf select,
+            .login-input,
+            .login-btn {
+                border-radius: 10px;
+            }
+            .terms-box,
+            .err {
+                border-radius: 12px;
+            }
+            .tier-icon {
+                display: none;
+            }
+            .submit-btn {
+                color: #fffdf9;
+            }
+            .submit-note {
+                color: #b08d4f;
+                opacity: 0.85;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="/index.html" class="nav-logo">YSKAIPE</a>
+            <a href="/index.html" class="nav-back">← Home</a>
+        </nav>
 
-<div class="tiers">
-  <div class="tier-card primary">
-    <div class="tier-label">Primary Worker</div>
-    <span class="tier-icon">🔧</span>
-    <div class="tier-name">Skilled Trades</div>
-    <p class="tier-desc">Experienced in one or more trades — painting, landscaping, moving, cleaning, handyman, automotive. Vetted and dispatched daily.</p>
-  </div>
-  <div class="tier-card licensed">
-    <div class="tier-label">Licensed Pro</div>
-    <span class="tier-icon">⚡</span>
-    <div class="tier-name">Certified &amp; Insured</div>
-    <p class="tier-desc">State-licensed contractors for HVAC, plumbing, electrical, roofing. Premium jobs, premium pay. License verification required.</p>
-  </div>
-  <div class="tier-card youth" id="youth">
-    <div class="tier-label">Youth Worker</div>
-    <span class="tier-icon">🌱</span>
-    <div class="tier-name">First Paycheck</div>
-    <p class="tier-desc">Teens and young adults earning real money through lawn care, cleaning, moving help, and event setup. Safe, supervised job categories.</p>
-  </div>
-</div>
-
-<div class="signup-wrap">
-  <div class="signup-card">
-    <div class="signup-header">
-      <h2>Apply to join YSKAIPE</h2>
-      <p>Complete your profile and connect your payout account. Takes about 5 minutes.</p>
-    </div>
-    <div class="signup-body">
-      <div class="err" id="err"></div>
-
-      <div class="sf-row">
-        <div class="sf"><label>First name <span class="req">*</span></label><input type="text" id="fname" placeholder="Deb" autocomplete="given-name"></div>
-        <div class="sf"><label>Last name <span class="req">*</span></label><input type="text" id="lname" placeholder="Conenna" autocomplete="family-name"></div>
-      </div>
-      <div class="sf"><label>Email <span class="req">*</span></label><input type="email" id="email" placeholder="you@email.com" autocomplete="email"></div>
-      <div class="sf-row">
-        <div class="sf"><label>Phone <span class="req">*</span></label><input type="tel" id="phone" placeholder="(704) 555-0100" autocomplete="tel"></div>
-        <div class="sf"><label>ZIP code <span class="req">*</span></label><input type="text" id="zip" placeholder="28031" maxlength="5" inputmode="numeric"></div>
-      </div>
-
-      <div class="sf">
-        <label>Worker type <span class="req">*</span></label>
-        <select id="age_tier" onchange="updateSkills()">
-          <option value="">Select your type…</option>
-          <option value="adult">Adult — Primary Worker (18+)</option>
-          <option value="standard">Young Adult — Primary Worker (16–17)</option>
-          <option value="junior">Youth Worker (13–15, parent approval required)</option>
-        </select>
-      </div>
-
-      <div class="sf" id="skills-section" style="display:none">
-        <label>Your skills <span style="color:var(--faint);font-weight:400">(select all that apply)</span></label>
-        <div class="skills-grid" id="skills-grid"></div>
-      </div>
-
-      <div class="sf" style="margin-top:20px">
-        <div class="terms-box">
-          <strong>Independent Contractor Agreement</strong><br><br>
-          By joining YSKAIPE, you agree to operate as an independent contractor under Peaking Waters LLC. You are responsible for your own tools, transportation, and taxes. YSKAIPE does not provide employment benefits. Jobs are assigned on a first-claim basis at rates set by the Fair Rate Index. YSKAIPE collects a 15% platform fee on each completed job. Payment is processed via Stripe Express and typically arrives within 2 business days of job completion confirmation. You agree to complete accepted jobs to a professional standard. Disputes are handled through YSKAIPE's resolution process. Full terms at <a href="/legal/terms.html" target="_blank">yskaipe.com/legal/terms</a>.
+        <div class="hero">
+            <div class="hero-eyebrow">
+                Join the Network · Lake Norman + Beyond
+            </div>
+            <h1>Earn on your terms.<br /><em>Real work. Fair pay.</em></h1>
+            <p class="hero-sub">
+                YSKAIPE connects qualified workers to homeowners in their area.
+                Jobs delivered directly to your inbox. First to claim gets it.
+                Paid via Stripe within 2 business days.
+            </p>
         </div>
-        <label class="checkbox-row">
-          <input type="checkbox" id="agreed">
-          <span>I agree to the <a href="/legal/terms.html" target="_blank">Terms of Service</a>, <a href="/legal/fair-rate-disclaimer.html" target="_blank">Fair Rate Disclaimer</a>, and Independent Contractor Agreement above.</span>
-        </label>
-      </div>
 
-      <button class="submit-btn" id="submit-btn" onclick="submitSignup()">
-        <span id="submit-text">Apply &amp; set up payout account →</span>
-      </button>
-      <p class="submit-note">Next step: connect your Stripe payout account (takes 2 min) · Required to receive payments</p>
-    </div>
-  </div>
-</div>
+        <div class="tiers">
+            <div class="tier-card primary">
+                <div class="tier-label">Primary Worker</div>
+                <span class="tier-icon">🔧</span>
+                <div class="tier-name">Skilled Trades</div>
+                <p class="tier-desc">
+                    Experienced in one or more trades — painting, landscaping,
+                    moving, cleaning, handyman, automotive. Vetted and
+                    dispatched daily.
+                </p>
+            </div>
+            <div class="tier-card licensed">
+                <div class="tier-label">Licensed Pro</div>
+                <span class="tier-icon">⚡</span>
+                <div class="tier-name">Certified &amp; Insured</div>
+                <p class="tier-desc">
+                    State-licensed contractors for HVAC, plumbing, electrical,
+                    roofing. Premium jobs, premium pay. License verification
+                    required.
+                </p>
+            </div>
+            <div class="tier-card youth" id="youth">
+                <div class="tier-label">Youth Worker</div>
+                <span class="tier-icon">🌱</span>
+                <div class="tier-name">First Paycheck</div>
+                <p class="tier-desc">
+                    Teens and young adults earning real money through lawn care,
+                    cleaning, moving help, and event setup. Safe, supervised job
+                    categories.
+                </p>
+            </div>
+        </div>
 
-<div class="login-section">
-  <div class="login-divider">Already a YSKAIPE worker?</div>
-  <div class="login-card">
-    <h3>Access your dashboard</h3>
-    <p>Enter your email and we'll send you a secure login link — no password needed.</p>
-    <div class="login-row">
-      <input type="email" class="login-input" id="login-email" placeholder="your@email.com">
-      <button class="login-btn" onclick="sendLogin()">Send link →</button>
-    </div>
-    <div class="login-sent" id="login-sent">✓ Check your email for the dashboard link</div>
-  </div>
-</div>
+        <div class="signup-wrap">
+            <div class="signup-card">
+                <div class="signup-header">
+                    <h2>Apply to join YSKAIPE</h2>
+                    <p>
+                        Complete your profile and connect your payout account.
+                        Takes about 5 minutes.
+                    </p>
+                </div>
+                <div class="signup-body">
+                    <div class="err" id="err"></div>
 
-<script>
-const SKILLS = {
-  adult: [
-    {slug:'land_lawn_mow',label:'Lawn mowing'},
-    {slug:'land_mulch',label:'Mulching'},
-    {slug:'land_tree_trim',label:'Tree trimming'},
-    {slug:'land_hardscape',label:'Hardscaping'},
-    {slug:'clean_power_wash',label:'Power washing'},
-    {slug:'clean_deep_house',label:'House cleaning'},
-    {slug:'clean_airbnb_turnover',label:'Airbnb turnover'},
-    {slug:'clean_post_construction',label:'Post-construction clean'},
-    {slug:'paint_interior_full',label:'Interior painting'},
-    {slug:'paint_exterior_full',label:'Exterior painting'},
-    {slug:'paint_single_room',label:'Room painting'},
-    {slug:'gc_drywall_patch',label:'Drywall repair'},
-    {slug:'gc_tv_mount',label:'TV mounting'},
-    {slug:'gc_furniture_assembly',label:'Furniture assembly'},
-    {slug:'gc_flooring_install',label:'Flooring'},
-    {slug:'gc_deck_repair',label:'Deck repair'},
-    {slug:'move_full_local',label:'Moving help'},
-    {slug:'move_junk_removal',label:'Junk removal'},
-    {slug:'auto_detail_full',label:'Auto detailing'},
-    {slug:'auto_oil_change',label:'Oil change'},
-    {slug:'life_event_setup',label:'Event setup'},
-    {slug:'life_pool_clean',label:'Pool cleaning'},
-    {slug:'life_handyman_misc',label:'General handyman'},
-  ],
-  standard: [
-    {slug:'land_lawn_mow',label:'Lawn mowing'},
-    {slug:'land_mulch',label:'Mulching'},
-    {slug:'clean_power_wash',label:'Power washing'},
-    {slug:'clean_deep_house',label:'House cleaning'},
-    {slug:'clean_airbnb_turnover',label:'Airbnb turnover'},
-    {slug:'paint_single_room',label:'Room painting'},
-    {slug:'gc_furniture_assembly',label:'Furniture assembly'},
-    {slug:'gc_tv_mount',label:'TV mounting'},
-    {slug:'move_load_unload',label:'Moving help'},
-    {slug:'move_junk_removal',label:'Junk removal'},
-    {slug:'auto_wash_basic',label:'Car wash'},
-    {slug:'life_event_setup',label:'Event setup'},
-    {slug:'life_holiday_lights',label:'Holiday lights'},
-    {slug:'life_handyman_misc',label:'General handyman'},
-  ],
-  junior: [
-    {slug:'land_lawn_mow',label:'Lawn mowing'},
-    {slug:'land_mulch',label:'Mulching'},
-    {slug:'clean_power_wash',label:'Power washing'},
-    {slug:'clean_window_ext',label:'Window cleaning'},
-    {slug:'clean_deep_house',label:'House cleaning'},
-    {slug:'clean_airbnb_turnover',label:'Airbnb turnover'},
-    {slug:'gc_furniture_assembly',label:'Furniture assembly'},
-    {slug:'move_load_unload',label:'Loading/unloading'},
-    {slug:'auto_wash_basic',label:'Car wash'},
-    {slug:'auto_battery',label:'Car battery'},
-    {slug:'life_event_setup',label:'Event setup'},
-    {slug:'life_holiday_lights',label:'Holiday lights'},
-    {slug:'life_pet_sit',label:'Pet sitting'},
-    {slug:'life_errands',label:'Errands'},
-  ],
-}
+                    <div class="sf-row">
+                        <div class="sf">
+                            <label>First name <span class="req">*</span></label
+                            ><input
+                                type="text"
+                                id="fname"
+                                placeholder="Deb"
+                                autocomplete="given-name"
+                            />
+                        </div>
+                        <div class="sf">
+                            <label>Last name <span class="req">*</span></label
+                            ><input
+                                type="text"
+                                id="lname"
+                                placeholder="Conenna"
+                                autocomplete="family-name"
+                            />
+                        </div>
+                    </div>
+                    <div class="sf">
+                        <label>Email <span class="req">*</span></label
+                        ><input
+                            type="email"
+                            id="email"
+                            placeholder="you@email.com"
+                            autocomplete="email"
+                        />
+                    </div>
+                    <div class="sf-row">
+                        <div class="sf">
+                            <label>Phone <span class="req">*</span></label
+                            ><input
+                                type="tel"
+                                id="phone"
+                                placeholder="(704) 555-0100"
+                                autocomplete="tel"
+                            />
+                        </div>
+                        <div class="sf">
+                            <label>ZIP code <span class="req">*</span></label
+                            ><input
+                                type="text"
+                                id="zip"
+                                placeholder="28031"
+                                maxlength="5"
+                                inputmode="numeric"
+                            />
+                        </div>
+                    </div>
 
-let selectedSkills = new Set()
+                    <div class="sf">
+                        <label>Worker type <span class="req">*</span></label>
+                        <select id="age_tier" onchange="updateSkills()">
+                            <option value="">Select your type…</option>
+                            <option value="adult">
+                                Adult — Primary Worker (18+)
+                            </option>
+                            <option value="standard">
+                                Young Adult — Primary Worker (16–17)
+                            </option>
+                            <option value="junior">
+                                Youth Worker (13–15, parent approval required)
+                            </option>
+                        </select>
+                    </div>
 
-function updateSkills(){
-  const tier = document.getElementById('age_tier').value
-  const section = document.getElementById('skills-section')
-  const grid = document.getElementById('skills-grid')
-  if(!tier){ section.style.display='none'; return }
-  section.style.display='block'
-  grid.innerHTML=''
-  selectedSkills.clear()
-  const list = SKILLS[tier] || SKILLS.adult
-  list.forEach(s => {
-    const chip = document.createElement('span')
-    chip.className='skill-chip'
-    chip.textContent=s.label
-    chip.dataset.slug=s.slug
-    chip.onclick=()=>{
-      chip.classList.toggle('selected')
-      if(chip.classList.contains('selected')) selectedSkills.add(s.slug)
-      else selectedSkills.delete(s.slug)
-    }
-    grid.appendChild(chip)
-  })
-}
+                    <div class="sf" id="skills-section" style="display: none">
+                        <label
+                            >Your skills
+                            <span style="color: var(--faint); font-weight: 400"
+                                >(select all that apply)</span
+                            ></label
+                        >
+                        <div class="skills-grid" id="skills-grid"></div>
+                    </div>
 
-function setErr(msg){ const e=document.getElementById('err'); e.textContent=msg; e.classList.add('active') }
-function clearErr(){ document.getElementById('err').classList.remove('active') }
+                    <div class="sf" style="margin-top: 20px">
+                        <div class="terms-box">
+                            <strong>Independent Contractor Agreement</strong
+                            ><br /><br />
+                            By joining YSKAIPE, you agree to operate as an
+                            independent contractor under Peaking Waters LLC. You
+                            are responsible for your own tools, transportation,
+                            and taxes. YSKAIPE does not provide employment
+                            benefits. Jobs are assigned on a first-claim basis
+                            at rates set by the Fair Rate Index. YSKAIPE
+                            collects a 15% platform fee on each completed job.
+                            Payment is processed via Stripe Express and
+                            typically arrives within 2 business days of job
+                            completion confirmation. You agree to complete
+                            accepted jobs to a professional standard. Disputes
+                            are handled through YSKAIPE's resolution process.
+                            Full terms at
+                            <a href="/legal/terms.html" target="_blank"
+                                >yskaipe.com/legal/terms</a
+                            >.
+                        </div>
+                        <label class="checkbox-row">
+                            <input type="checkbox" id="agreed" />
+                            <span
+                                >I agree to the
+                                <a href="/legal/terms.html" target="_blank"
+                                    >Terms of Service</a
+                                >,
+                                <a
+                                    href="/legal/fair-rate-disclaimer.html"
+                                    target="_blank"
+                                    >Fair Rate Disclaimer</a
+                                >, and Independent Contractor Agreement
+                                above.</span
+                            >
+                        </label>
+                    </div>
 
-async function submitSignup(){
-  clearErr()
-  const fname    = document.getElementById('fname').value.trim()
-  const lname    = document.getElementById('lname').value.trim()
-  const email    = document.getElementById('email').value.trim()
-  const phone    = document.getElementById('phone').value.trim()
-  const zip      = document.getElementById('zip').value.trim()
-  const age_tier = document.getElementById('age_tier').value
-  const agreed   = document.getElementById('agreed').checked
+                    <button
+                        class="submit-btn"
+                        id="submit-btn"
+                        onclick="submitSignup()"
+                    >
+                        <span id="submit-text"
+                            >Apply &amp; set up payout account →</span
+                        >
+                    </button>
+                    <p class="submit-note">
+                        Next step: connect your Stripe payout account (takes 2
+                        min) · Required to receive payments
+                    </p>
+                </div>
+            </div>
+        </div>
 
-  if(!fname||!lname) return setErr('Please enter your full name.')
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setErr('Please enter a valid email.')
-  if(!phone||phone.replace(/\D/g,'').length<10) return setErr('Please enter a valid phone number.')
-  if(!zip||!/^\d{5}$/.test(zip)) return setErr('Please enter a valid ZIP code.')
-  if(!age_tier) return setErr('Please select your worker type.')
-  if(!agreed) return setErr('You must agree to the terms to continue.')
+        <div class="login-section">
+            <div class="login-divider">Already a YSKAIPE worker?</div>
+            <div class="login-card">
+                <h3>Access your dashboard</h3>
+                <p>
+                    Enter your email and we'll send you a secure login link — no
+                    password needed.
+                </p>
+                <div class="login-row">
+                    <input
+                        type="email"
+                        class="login-input"
+                        id="login-email"
+                        placeholder="your@email.com"
+                    />
+                    <button class="login-btn" onclick="sendLogin()">
+                        Send link →
+                    </button>
+                </div>
+                <div class="login-sent" id="login-sent">
+                    ✓ Check your email for the dashboard link
+                </div>
+            </div>
+        </div>
 
-  const btn = document.getElementById('submit-btn')
-  const txt = document.getElementById('submit-text')
-  btn.disabled=true
-  txt.textContent='Setting up your account…'
+        <script>
+            const SKILLS = {
+                adult: [
+                    { slug: "land_lawn_mow", label: "Lawn mowing" },
+                    { slug: "land_mulch", label: "Mulching" },
+                    { slug: "land_tree_trim", label: "Tree trimming" },
+                    { slug: "land_hardscape", label: "Hardscaping" },
+                    { slug: "clean_power_wash", label: "Power washing" },
+                    { slug: "clean_deep_house", label: "House cleaning" },
+                    { slug: "clean_airbnb_turnover", label: "Airbnb turnover" },
+                    {
+                        slug: "clean_post_construction",
+                        label: "Post-construction clean",
+                    },
+                    { slug: "paint_interior_full", label: "Interior painting" },
+                    { slug: "paint_exterior_full", label: "Exterior painting" },
+                    { slug: "paint_single_room", label: "Room painting" },
+                    { slug: "gc_drywall_patch", label: "Drywall repair" },
+                    { slug: "gc_tv_mount", label: "TV mounting" },
+                    {
+                        slug: "gc_furniture_assembly",
+                        label: "Furniture assembly",
+                    },
+                    { slug: "gc_flooring_install", label: "Flooring" },
+                    { slug: "gc_deck_repair", label: "Deck repair" },
+                    { slug: "move_full_local", label: "Moving help" },
+                    { slug: "move_junk_removal", label: "Junk removal" },
+                    { slug: "auto_detail_full", label: "Auto detailing" },
+                    { slug: "auto_oil_change", label: "Oil change" },
+                    { slug: "life_event_setup", label: "Event setup" },
+                    { slug: "life_pool_clean", label: "Pool cleaning" },
+                    { slug: "life_handyman_misc", label: "General handyman" },
+                ],
+                standard: [
+                    { slug: "land_lawn_mow", label: "Lawn mowing" },
+                    { slug: "land_mulch", label: "Mulching" },
+                    { slug: "clean_power_wash", label: "Power washing" },
+                    { slug: "clean_deep_house", label: "House cleaning" },
+                    { slug: "clean_airbnb_turnover", label: "Airbnb turnover" },
+                    { slug: "paint_single_room", label: "Room painting" },
+                    {
+                        slug: "gc_furniture_assembly",
+                        label: "Furniture assembly",
+                    },
+                    { slug: "gc_tv_mount", label: "TV mounting" },
+                    { slug: "move_load_unload", label: "Moving help" },
+                    { slug: "move_junk_removal", label: "Junk removal" },
+                    { slug: "auto_wash_basic", label: "Car wash" },
+                    { slug: "life_event_setup", label: "Event setup" },
+                    { slug: "life_holiday_lights", label: "Holiday lights" },
+                    { slug: "life_handyman_misc", label: "General handyman" },
+                ],
+                junior: [
+                    { slug: "land_lawn_mow", label: "Lawn mowing" },
+                    { slug: "land_mulch", label: "Mulching" },
+                    { slug: "clean_power_wash", label: "Power washing" },
+                    { slug: "clean_window_ext", label: "Window cleaning" },
+                    { slug: "clean_deep_house", label: "House cleaning" },
+                    { slug: "clean_airbnb_turnover", label: "Airbnb turnover" },
+                    {
+                        slug: "gc_furniture_assembly",
+                        label: "Furniture assembly",
+                    },
+                    { slug: "move_load_unload", label: "Loading/unloading" },
+                    { slug: "auto_wash_basic", label: "Car wash" },
+                    { slug: "auto_battery", label: "Car battery" },
+                    { slug: "life_event_setup", label: "Event setup" },
+                    { slug: "life_holiday_lights", label: "Holiday lights" },
+                    { slug: "life_pet_sit", label: "Pet sitting" },
+                    { slug: "life_errands", label: "Errands" },
+                ],
+            };
 
-  try{
-    const res = await fetch('/api/worker/signup', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        first_name:     fname,
-        last_name:      lname,
-        email,
-        phone,
-        zip_code:       zip,
-        age_tier,
-        worker_type:    age_tier==='junior' ? 'junior' : 'solo',
-        skills:         Array.from(selectedSkills),
-        agreed_to_terms: agreed,
-      })
-    })
-    const data = await res.json()
-    if(!res.ok) throw new Error(data.error||'Signup failed.')
-    if(data.already_onboarded){
-      window.location.href='/worker-dashboard.html'
-      return
-    }
-    // Redirect to Stripe Express onboarding
-    window.location.href = data.onboarding_url
+            let selectedSkills = new Set();
 
-  }catch(err){
-    setErr(err.message)
-    btn.disabled=false
-    txt.textContent='Apply & set up payout account →'
-  }
-}
+            function updateSkills() {
+                const tier = document.getElementById("age_tier").value;
+                const section = document.getElementById("skills-section");
+                const grid = document.getElementById("skills-grid");
+                if (!tier) {
+                    section.style.display = "none";
+                    return;
+                }
+                section.style.display = "block";
+                grid.innerHTML = "";
+                selectedSkills.clear();
+                const list = SKILLS[tier] || SKILLS.adult;
+                list.forEach((s) => {
+                    const chip = document.createElement("span");
+                    chip.className = "skill-chip";
+                    chip.textContent = s.label;
+                    chip.dataset.slug = s.slug;
+                    chip.onclick = () => {
+                        chip.classList.toggle("selected");
+                        if (chip.classList.contains("selected"))
+                            selectedSkills.add(s.slug);
+                        else selectedSkills.delete(s.slug);
+                    };
+                    grid.appendChild(chip);
+                });
+            }
 
-async function sendLogin(){
-  const email = document.getElementById('login-email').value.trim()
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-    alert('Please enter a valid email address.')
-    return
-  }
-  const btn = document.querySelector('.login-btn')
-  btn.textContent='Sending…'
-  btn.disabled=true
+            function setErr(msg) {
+                const e = document.getElementById("err");
+                e.textContent = msg;
+                e.classList.add("active");
+            }
+            function clearErr() {
+                document.getElementById("err").classList.remove("active");
+            }
 
-  try{
-    await fetch('/api/worker/auth',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({email})
-    })
-    document.getElementById('login-sent').style.display='block'
-    btn.textContent='Sent ✓'
-  }catch(e){
-    btn.textContent='Send link →'
-    btn.disabled=false
-    alert('Something went wrong. Try again.')
-  }
-}
-</script>
-</body>
+            async function submitSignup() {
+                clearErr();
+                const fname = document.getElementById("fname").value.trim();
+                const lname = document.getElementById("lname").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const zip = document.getElementById("zip").value.trim();
+                const age_tier = document.getElementById("age_tier").value;
+                const agreed = document.getElementById("agreed").checked;
+
+                if (!fname || !lname)
+                    return setErr("Please enter your full name.");
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+                    return setErr("Please enter a valid email.");
+                if (!phone || phone.replace(/\D/g, "").length < 10)
+                    return setErr("Please enter a valid phone number.");
+                if (!zip || !/^\d{5}$/.test(zip))
+                    return setErr("Please enter a valid ZIP code.");
+                if (!age_tier) return setErr("Please select your worker type.");
+                if (!agreed)
+                    return setErr("You must agree to the terms to continue.");
+
+                const btn = document.getElementById("submit-btn");
+                const txt = document.getElementById("submit-text");
+                btn.disabled = true;
+                txt.textContent = "Setting up your account…";
+
+                try {
+                    const res = await fetch("/api/worker/signup", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            first_name: fname,
+                            last_name: lname,
+                            email,
+                            phone,
+                            zip_code: zip,
+                            age_tier,
+                            worker_type:
+                                age_tier === "junior" ? "junior" : "solo",
+                            skills: Array.from(selectedSkills),
+                            agreed_to_terms: agreed,
+                        }),
+                    });
+                    const data = await res.json();
+                    if (!res.ok)
+                        throw new Error(data.error || "Signup failed.");
+                    if (data.already_onboarded) {
+                        window.location.href = "/worker-dashboard.html";
+                        return;
+                    }
+                    // Redirect to Stripe Express onboarding
+                    window.location.href = data.onboarding_url;
+                } catch (err) {
+                    setErr(err.message);
+                    btn.disabled = false;
+                    txt.textContent = "Apply & set up payout account →";
+                }
+            }
+
+            async function sendLogin() {
+                const email = document
+                    .getElementById("login-email")
+                    .value.trim();
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    alert("Please enter a valid email address.");
+                    return;
+                }
+                const btn = document.querySelector(".login-btn");
+                btn.textContent = "Sending…";
+                btn.disabled = true;
+
+                try {
+                    await fetch("/api/worker/auth", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email }),
+                    });
+                    document.getElementById("login-sent").style.display =
+                        "block";
+                    btn.textContent = "Sent ✓";
+                } catch (e) {
+                    btn.textContent = "Send link →";
+                    btn.disabled = false;
+                    alert("Something went wrong. Try again.");
+                }
+            }
+        </script>
+    </body>
 </html>
